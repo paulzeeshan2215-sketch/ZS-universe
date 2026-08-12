@@ -5,6 +5,16 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+const express = require("express");
+const path = require("path"); // 1. You must import the path module
+const app = express();
+
+// 2. Your route code works perfectly here
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
 
 const PORT = process.env.PORT || 3000;
 const STORE = path.join(__dirname, "orders.json");
