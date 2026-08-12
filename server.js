@@ -5,9 +5,7 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-const express = require("express");
-const path = require("path"); // 1. You must import the path module
-const app = express();
+
 
 // 2. Your route code works perfectly here
 app.get("/", (req, res) => {
