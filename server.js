@@ -1,9 +1,9 @@
-const express = require("express");
+const app = express();
 const fs = require("fs");
 const path = require("path");
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -34,12 +34,82 @@ async function notifyTelegram(text){
   return {sent:r.ok,body:await r.text()};
 }
 
-app.post("/api/orders",async(req,res)=>{
-  const {package:pkg,name,username,profile,utr}=req.body||{};
-  if(!pkg||!name||!username||!profile||!utr) return res.status(400).json({error:"Please complete all fields."});
-  if(/password|passcode/i.test(JSON.stringify(req.body))) return res.status(400).json({error:"Passwords are not accepted."});
-  const order={orderId:id(),status:"PENDING",package:pkg,name,username,profile,utr,createdAt:new Date().toISOString()};
-  const orders=readOrders(); orders.unshift(order); writeOrders(orders);
+app.post("/api/orders", async (req, res) => {
+  try {
+    const {
+      package: pkg,
+      name,
+      username,
+      profile,
+      coupon,
+      amount,
+      screenshot
+    } = req.body || {};
+
+    if (!pkg || !name || !username || !profile || !screenshot) {
+      return res.status(400).json({
+        error: "Please complete all fields and upload your payment screenshot."
+      });
+    }
+
+    if (/password|passcode/i.test(JSON.stringify(req.body))) {
+      return res.status(400).json({
+        error: "Passwords are not accepted."
+      });
+    }
+
+    const order = {
+      orderId: id(),
+      status: "PENDING",
+      package: pkg,
+      name,
+      username,
+      profile,
+      coupon: coupon || "",
+      amount: amount || "",
+      screenshot,
+      createdAt: new Date().toISOString()
+    };
+
+    const orders = readOrders();
+    orders.unshift(order);
+    writeOrders(orders);
+
+    const msg =
+`🔔 NEW ORDER ${order.orderId}
+
+Name: ${name}
+Instagram: ${username}
+Profile: ${profile}
+Package: ${pkg}
+Amount: ₹${amount || "Not specified"}
+Coupon: ${coupon || "None"}
+
+Payment screenshot has been submitted.
+Please verify the payment before accepting the order.
+
+Admin: ${process.env.ADMIN_URL || "Set ADMIN_URL"}`;
+
+    try {
+      await notifyTelegram(msg);
+    } catch (e) {
+      console.error("Telegram notification error:", e);
+    }
+
+    res.json({
+      ok: true,
+      orderId: order.orderId,
+      status: order.status
+    });
+
+  } catch (error) {
+    console.error("Order error:", error);
+
+    res.status(500).json({
+      error: "Unable to process order. Please try again."
+    });
+  }
+});
   const msg=`🔔 NEW ORDER ${order.orderId}\n\nName: ${name}\nInstagram: ${username}\nProfile: ${profile}\nPackage: ${pkg}\nUTR: ${utr}\n\nAdmin: ${process.env.ADMIN_URL||"Set ADMIN_URL"}\nAccept/Reject from your admin dashboard.`;
   try{await notifyTelegram(msg);}catch(e){console.error(e);}
   res.json({ok:true,orderId:order.orderId,status:order.status});
