@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SehrAn Media — Place Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#05020a;--pink:#ff007f;--purple:#7928ca;--gold:#ffcc00;--line:#ffffff18}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#351044,#05020a 45%);color:#fff;font-family:Poppins,sans-serif}
+nav{position:sticky;top:0;z-index:5;background:#05020add;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:auto;height:72px;padding:0 20px;display:flex;align-items:center;justify-content:space-between}.logo{font:900 21px Montserrat}.logo span{color:var(--pink)}.nav a{color:#fff;text-decoration:none}
+.wrap{max-width:1050px;margin:auto;padding:65px 20px}.hero{text-align:center;margin-bottom:38px}.mini{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:2px}.hero h1{font:900 clamp(38px,6vw,65px) Montserrat;margin:10px 0}.hero h1 span{color:var(--pink)}.hero p{color:#aaa;max-width:650px;margin:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.box{background:#100817e8;border:1px solid #ff007f44;border-radius:22px;padding:24px}.box h2{font:900 19px Montserrat;color:var(--gold)}
+.row{display:grid;grid-template-columns:1fr 30px 1fr;padding:15px;margin:8px 0;border:1px solid #ffffff0d;border-radius:12px;background:#ffffff05;cursor:pointer}.row:hover,.row.active{border-color:var(--pink);background:#ff007f16}.price{text-align:right;font-weight:900}.pink{color:var(--pink)}
+label{font-size:11px;color:#aaa;font-weight:700;display:block;margin:13px 0 5px}input{width:100%;padding:13px;background:#000;border:1px solid #333;border-radius:9px;color:#fff;outline:0}input:focus{border-color:var(--pink)}
+.selected{color:var(--pink);font-weight:800}.upi{padding:14px;text-align:center;background:#000;border:1px dashed var(--pink);border-radius:11px;color:#00e5ff;font-weight:800;margin:15px 0}
+button{width:100%;padding:15px;border:0;border-radius:11px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:900;font-size:16px;cursor:pointer}
+.note{margin-top:12px;color:#777;font-size:11px;line-height:1.6}.status{display:none;margin-top:15px;padding:14px;border-radius:12px;background:#00ff6610;border:1px solid #00ff6640;color:#9cffbd}.status b{color:#fff}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="nav"><a class="logo" href="/index.html">SEHR<span>AN</span> MEDIA</a><a href="/index.html">Home</a></div></nav>
+<div class="wrap">
+<div class="hero"><div class="mini">SECURE ORDER SYSTEM</div><h1>Place Your <span>Order</span></h1><p>Select your package, enter your details and submit. You will receive an Order ID after submission.</p></div>
+<div class="grid">
+<section class="box">
+<h2>Choose Package</h2>
+<div class="row" onclick="selectPkg(this,'200 Followers',30)"><b>200</b><span>→</span><span class="price">₹30</span></div>
+<div class="row" onclick="selectPkg(this,'500 Followers',50)"><b>500</b><span>→</span><span class="price">₹50</span></div>
+<div class="row" onclick="selectPkg(this,'1000 Followers',90)"><b>1000</b><span>→</span><span class="price">₹90</span></div>
+<div class="row" onclick="selectPkg(this,'1500 Followers',130)"><b>1500</b><span>→</span><span class="price">₹130</span></div>
+<div class="row" onclick="selectPkg(this,'2000 Followers',150)"><b>2000</b><span>→</span><span class="price">₹150</span></div>
+<div class="row" onclick="selectPkg(this,'3000 Followers',200)"><b>3000</b><span>→</span><span class="price">₹200</span></div>
+<div class="row" onclick="selectPkg(this,'5000 Followers',300)"><b>5000</b><span>→</span><span class="price">₹300</span></div>
+<div class="row" onclick="selectPkg(this,'10000 Followers',600)"><b>10000</b><span>→</span><span class="price">₹600</span></div>
+</section>
+<section class="box">
+<h2>Checkout</h2>
+<div class="upi"><i class="fa-solid fa-qrcode"></i> UPI: 7889777143@fam</div>
+<form id="orderForm">
+<label>SELECTED PACKAGE</label><input class="selected" id="pkg" value="1000 Followers - ₹90" readonly>
+<label>YOUR NAME</label><input id="name" placeholder="Enter your name" required>
+<label>INSTAGRAM USERNAME</label><input id="username" placeholder="@yourusername" required>
+<label>INSTAGRAM PROFILE LINK</label><input id="profile" placeholder="https://instagram.com/yourusername" required>
+<label>UPI TRANSACTION / UTR ID</label><input id="utr" placeholder="Enter UTR after payment" required>
+<p class="note">For security, this website will <b>never ask for your Instagram password</b>. Only your public username/profile link is needed.</p>
+<button type="submit">PLACE ORDER 🚀</button>
+<div class="status" id="status"></div>
+</form>
+</section>
+</div></div>
+<script>
+function selectPkg(el,name,price){document.querySelectorAll('.row').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('pkg').value=name+' - ₹'+price;document.getElementById('orderForm').scrollIntoView({behavior:'smooth',block:'center'});}
+document.getElementById('orderForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const btn=e.target.querySelector('button'); btn.disabled=true; btn.textContent='SUBMITTING...';
+ const data={package:document.getElementById('pkg').value,name:document.getElementById('name').value.trim(),username:document.getElementById('username').value.trim(),profile:document.getElementById('profile').value.trim(),utr:document.getElementById('utr').value.trim()};
+ try{
+  const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  const j=await r.json(); if(!r.ok) throw new Error(j.error||'Order failed');
+  const s=document.getElementById('status'); s.style.display='block'; s.innerHTML='✅ Order submitted!<br>Order ID: <b>'+j.orderId+'</b><br>Status: <b>PENDING</b>';
+  e.target.reset(); document.getElementById('pkg').value=data.package;
+ }catch(err){alert(err.message)}finally{btn.disabled=false;btn.textContent='PLACE ORDER 🚀'}
+});
+</script>
+</body></html>

@@ -1,0 +1,54 @@
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+
+const app = express();
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+const PORT = process.env.PORT || 3000;
+const STORE = path.join(__dirname, "orders.json");
+const ADMIN_KEY = process.env.ADMIN_KEY || "CHANGE_THIS_ADMIN_KEY";
+const TG_BOT_TOKEN = process.env.TG_BOT_TOKEN || "";
+const TG_CHAT_ID = process.env.TG_CHAT_ID || "7006568699";
+
+function readOrders(){ try{return JSON.parse(fs.readFileSync(STORE,"utf8"));}catch{return [];} }
+function writeOrders(x){fs.writeFileSync(STORE,JSON.stringify(x,null,2));}
+function id(){return "SM"+Date.now().toString().slice(-8);}
+
+async function notifyTelegram(text){
+  if(!TG_BOT_TOKEN) return {sent:false,reason:"Telegram bot token not configured"};
+  const r=await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({chat_id:TG_CHAT_ID,text})
+  });
+  return {sent:r.ok,body:await r.text()};
+}
+
+app.post("/api/orders",async(req,res)=>{
+  const {package:pkg,name,username,profile,utr}=req.body||{};
+  if(!pkg||!name||!username||!profile||!utr) return res.status(400).json({error:"Please complete all fields."});
+  if(/password|passcode/i.test(JSON.stringify(req.body))) return res.status(400).json({error:"Passwords are not accepted."});
+  const order={orderId:id(),status:"PENDING",package:pkg,name,username,profile,utr,createdAt:new Date().toISOString()};
+  const orders=readOrders(); orders.unshift(order); writeOrders(orders);
+  const msg=`🔔 NEW ORDER ${order.orderId}\n\nName: ${name}\nInstagram: ${username}\nProfile: ${profile}\nPackage: ${pkg}\nUTR: ${utr}\n\nAdmin: ${process.env.ADMIN_URL||"Set ADMIN_URL"}\nAccept/Reject from your admin dashboard.`;
+  try{await notifyTelegram(msg);}catch(e){console.error(e);}
+  res.json({ok:true,orderId:order.orderId,status:order.status});
+});
+
+function admin(req,res,next){if(req.headers["x-admin-key"]!==ADMIN_KEY)return res.status(401).json({error:"Unauthorized"});next();}
+app.get("/api/admin/orders",admin,(req,res)=>res.json(readOrders()));
+app.post("/api/admin/orders/:id/status",admin,(req,res)=>{
+ const allowed=["ACCEPTED","REJECTED"]; const status=req.body?.status;
+ if(!allowed.includes(status)) return res.status(400).json({error:"Invalid status"});
+ const orders=readOrders(); const o=orders.find(x=>x.orderId===req.params.id);
+ if(!o)return res.status(404).json({error:"Order not found"});
+ o.status=status;o.updatedAt=new Date().toISOString();writeOrders(orders);res.json({ok:true,order:o});
+});
+app.get("/api/orders/:id",(req,res)=>{
+ const o=readOrders().find(x=>x.orderId===req.params.id);
+ if(!o)return res.status(404).json({error:"Order not found"});
+ res.json({orderId:o.orderId,status:o.status,package:o.package,createdAt:o.createdAt});
+});
+app.listen(PORT,()=>console.log(`SehrAn Media server running on port ${PORT}`));
