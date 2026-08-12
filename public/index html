@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SehrAn Media — Social Media Growth</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+    --bg:#05020a;
+    --card:#100817;
+    --pink:#ff007f;
+    --purple:#7928ca;
+    --gold:#ffcc00;
+    --muted:#aaa;
+    --line:#ffffff18;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Poppins,sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,#301044 0,#05020a 40%);
+    color:#fff;
+    min-height:100vh;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:#05020add;
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+}
+
+.navin{
+    max-width:1200px;
+    margin:auto;
+    height:76px;
+    padding:0 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font:900 22px Montserrat;
+    color:#fff;
+    text-decoration:none;
+}
+
+.logo span{
+    color:var(--pink);
+}
+
+.links{
+    display:flex;
+    gap:30px;
+}
+
+.links a{
+    color:#ddd;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.links a:hover{
+    color:#ff4ca5;
+}
+
+.navbtn{
+    padding:11px 18px;
+    border-radius:30px;
+    background:linear-gradient(90deg,var(--pink),var(--purple));
+    color:#fff!important;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* HERO */
+
+.hero{
+    max-width:1200px;
+    margin:auto;
+    min-height:700px;
+    padding:90px 24px;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:50px;
+    align-items:center;
+}
+
+.kicker{
+    display:inline-flex;
+    padding:8px 14px;
+    border:1px solid #ff007f55;
+    border-radius:30px;
+    background:#ff007f0d;
+    color:#ff7bbb;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+h1{
+    font:900 clamp(48px,7vw,88px)/.95 Montserrat;
+    letter-spacing:-3px;
+}
+
+h1 span{
+    color:var(--pink);
+    text-shadow:0 0 35px #ff007f66;
+}
+
+.hero p{
+    color:#bcb5c2;
+    font-size:18px;
+    line-height:1.8;
+    max-width:650px;
+    margin:25px 0;
+}
+
+.ctas{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:15px 23px;
+    border-radius:13px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.primary{
+    background:linear-gradient(90deg,var(--pink),var(--purple));
+    color:#fff;
+    box-shadow:0 12px 35px #ff007f30;
+}
+
+.secondary{
+    border:1px solid #ffffff22;
+    color:#fff;
+    background:#ffffff08;
+}
+
+/* VISUAL */
+
+.visual{
+    position:relative;
+}
+
+.phone{
+    max-width:360px;
+    margin:auto;
+    border:1px solid #ff007f55;
+    border-radius:40px;
+    padding:22px;
+    background:linear-gradient(160deg,#180a22,#08050c);
+    box-shadow:0 0 70px #ff007f22;
+}
+
+.phone .ig{
+    font-size:90px;
+    text-align:center;
+    background:linear-gradient(
+        45deg,
+        #f09433,
+        #dc2743,
+        #bc1888
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+    margin:25px;
+}
+
+.phone h2{
+    text-align:center;
+    font:900 28px Montserrat;
+}
+
+.phone .big{
+    font-size:52px;
+    font-weight:900;
+    color:var(--pink);
+    text-align:center;
+    margin:15px;
+}
+
+.statgrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:20px;
+}
+
+.stat{
+    padding:14px 7px;
+    text-align:center;
+    background:#ffffff08;
+    border-radius:12px;
+}
+
+.stat strong{
+    display:block;
+}
+
+.stat small{
+    color:#999;
+}
+
+/* SECTIONS */
+
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:95px 24px;
+}
+
+.sectionhead{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.sectionhead .mini{
+    color:var(--gold);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:12px;
+}
+
+.sectionhead h2{
+    font:900 clamp(32px,5vw,52px) Montserrat;
+    margin:9px 0;
+}
+
+.sectionhead p{
+    color:#999;
+    max-width:650px;
+    margin:auto;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    position:relative;
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:linear-gradient(145deg,#120a19,#09050d);
+    transition:.25s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:#ff007f66;
+    box-shadow:0 20px 50px #000;
+}
+
+.icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(
+        135deg,
+        var(--pink),
+        var(--purple)
+    );
+    font-size:21px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#999;
+    line-height:1.7;
+}
+
+/* COMING SOON */
+
+.soon{
+    position:absolute;
+    top:18px;
+    right:18px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#ffcc0015;
+    border:1px solid #ffcc0055;
+    color:var(--gold);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.coming{
+    opacity:.88;
+}
+
+/* CTA */
+
+.band{
+    max-width:1150px;
+    margin:20px auto 100px;
+    padding:40px 30px;
+    border:1px solid #ffcc0040;
+    border-radius:25px;
+    background:
+        linear-gradient(110deg,#ffcc0010,#ff007f12);
+}
+
+.bandin{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.band h2{
+    font:900 30px Montserrat;
+}
+
+.band p{
+    color:#aaa;
+    margin-top:8px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:35px 24px;
+    text-align:center;
+    color:#777;
+}
+
+.social{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:15px;
+}
+
+.social a{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#ffffff09;
+    color:#fff;
+    text-decoration:none;
+}
+
+.social a:hover{
+    background:linear-gradient(
+        135deg,
+        var(--pink),
+        var(--purple)
+    );
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding-top:60px;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .ctas{
+        justify-content:center;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .bandin{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+<div class="navin">
+
+<a class="logo" href="index.html">
+SEHR<span>AN</span> MEDIA
+</a>
+
+<div class="links">
+<a href="index.html">Home</a>
+<a href="#services">Services</a>
+<a href="#platforms">Platforms</a>
+<a href="#why">Why Us</a>
+<a href="order.html">Pricing</a>
+</div>
+
+<a class="navbtn" href="order.html">
+Order Now
+</a>
+
+</div>
+</nav>
+
+
+<!-- HERO -->
+
+<main>
+
+<div class="hero">
+
+<div>
+
+<div class="kicker">
+<i class="fa-solid fa-bolt"></i>
+&nbsp; PREMIUM SOCIAL MEDIA SERVICES
+</div>
+
+<h1>
+Grow Your
+<span>Instagram.</span>
+<br>
+Build Your Presence.
+</h1>
+
+<p>
+Professional social media services designed for creators,
+brands and growing profiles. Explore our services and choose
+the option that fits your needs.
+</p>
+
+<div class="ctas">
+
+<a class="btn primary" href="order.html">
+View Packages
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<a class="btn secondary" href="#services">
+Explore Services
+</a>
+
+</div>
+
+</div>
+
+
+<div class="visual">
+
+<div class="phone">
+
+<div class="ig">
+<i class="fa-brands fa-instagram"></i>
+</div>
+
+<h2>
+INSTAGRAM
+<br>
+GROWTH
+</h2>
+
+<div class="big">
+10K+
+</div>
+
+<div class="statgrid">
+
+<div class="stat">
+<strong>Fast</strong>
+<small>Start</small>
+</div>
+
+<div class="stat">
+<strong>Secure</strong>
+<small>Process</small>
+</div>
+
+<div class="stat">
+<strong>24/7</strong>
+<small>Support</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+<div class="sectionhead">
+
+<div class="mini">
+What We Offer
+</div>
+
+<h2>
+Everything You Need
+</h2>
+
+<p>
+A clean and simple ordering experience built for modern
+social media services.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-brands fa-instagram"></i>
+</div>
+
+<h3>
+Instagram Services
+</h3>
+
+<p>
+Explore our available Instagram packages and continue
+to the dedicated order page.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-rocket"></i>
+</div>
+
+<h3>
+Fast Start
+</h3>
+
+<p>
+A simple ordering flow designed to make submitting
+your request quick and straightforward.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-headset"></i>
+</div>
+
+<h3>
+Customer Support
+</h3>
+
+<p>
+Need help with your order? Contact our support team
+through the available channels.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PLATFORMS -->
+
+<section id="platforms">
+
+<div class="sectionhead">
+
+<div class="mini">
+More Platforms
+</div>
+
+<h2>
+More Services Coming Soon
+</h2>
+
+<p>
+We are preparing additional platform services for
+future releases.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+
+<!-- SNAPCHAT -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-snapchat"></i>
+</div>
+
+<h3>
+Snapchat
+</h3>
+
+<p>
+Snapchat-related services are currently being prepared
+and will be available in a future update.
+</p>
+
+</div>
+
+
+<!-- YOUTUBE -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-youtube"></i>
+</div>
+
+<h3>
+YouTube
+</h3>
+
+<p>
+YouTube services are coming soon. Stay tuned for the
+official launch.
+</p>
+
+</div>
+
+
+<!-- FACEBOOK -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-facebook"></i>
+</div>
+
+<h3>
+Facebook
+</h3>
+
+<p>
+Facebook services are currently under development.
+</p>
+
+</div>
+
+
+<!-- X -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-x-twitter"></i>
+</div>
+
+<h3>
+X / Twitter
+</h3>
+
+<p>
+X services will be added in a future release.
+</p>
+
+</div>
+
+
+<!-- TELEGRAM -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-telegram"></i>
+</div>
+
+<h3>
+Telegram
+</h3>
+
+<p>
+Telegram services are being prepared and will be
+available soon.
+</p>
+
+</div>
+
+
+<!-- WHATSAPP -->
+
+<div class="card coming">
+
+<div class="soon">
+COMING SOON
+</div>
+
+<div class="icon">
+<i class="fa-brands fa-whatsapp"></i>
+</div>
+
+<h3>
+WhatsApp
+</h3>
+
+<p>
+WhatsApp-related services are planned for a future
+release.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WHY US -->
+
+<section id="why">
+
+<div class="sectionhead">
+
+<div class="mini">
+Why SehrAn Media
+</div>
+
+<h2>
+Simple. Fast. Professional.
+</h2>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<h3>
+No Password Required
+</h3>
+
+<p>
+We do not ask customers to provide their social media
+password.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-lock"></i>
+</div>
+
+<h3>
+Simple Checkout
+</h3>
+
+<p>
+Choose an available package and continue to the
+dedicated order page.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-mobile-screen"></i>
+</div>
+
+<h3>
+Mobile Friendly
+</h3>
+
+<p>
+The website is designed to work smoothly across
+phones, tablets and desktop devices.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+
+<div class="band">
+
+<div class="bandin">
+
+<div>
+
+<h2>
+Ready to place your order?
+</h2>
+
+<p>
+View the currently available Instagram packages.
+</p>
+
+</div>
+
+<a class="btn primary" href="order.html">
+Go to Pricing
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div>
+SEHRAN MEDIA
+</div>
+
+<div class="social">
+
+<a href="https://t.me/SehrAnMediaOrdersBot"
+target="_blank"
+aria-label="Telegram">
+<i class="fa-brands fa-telegram"></i>
+</a>
+
+<a href="mailto:zpaul5567@gmail.com"
+aria-label="Email">
+<i class="fa-solid fa-envelope"></i>
+</a>
+
+</div>
+
+<small>
+© 2026 SehrAn Media. All rights reserved.
+</small>
+
+</footer>
+
+</body>
+</html>
