@@ -4,906 +4,1059 @@ const path = require("path");
 
 const app = express();
 
-app.use(express.json({ limit: "12mb" }));
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, "public")));
-
-const UPLOADS = path.join(
-__dirname,
-"public",
-"uploads"
-);
-
-if (!fs.existsSync(UPLOADS)) {
-fs.mkdirSync(UPLOADS, { recursive: true });
-}
-
-app.use(
-"/uploads",
-express.static(UPLOADS)
-);
-
-const PORT =
-process.env.PORT || 3000;
-
-const STORE = path.join(
-__dirname,
-"orders.json"
-);
+const STORE = path.join(__dirname, "orders.json");
+const PUBLIC_DIR = path.join(__dirname, "public");
+const UPLOADS_DIR = path.join(PUBLIC_DIR, "uploads");
 
 const ADMIN_KEY =
-process.env.ADMIN_KEY ||
-"CHANGE_THIS_ADMIN_KEY";
+  process.env.ADMIN_KEY || "CHANGE_THIS_ADMIN_KEY";
 
 const TG_BOT_TOKEN =
-process.env.TG_BOT_TOKEN || "";
+  process.env.TG_BOT_TOKEN || "";
 
 const TG_CHAT_ID =
-process.env.TG_CHAT_ID ||
-"7006568699";
+  process.env.TG_CHAT_ID || "7006568699";
+
+
+/* -----------------------------
+   DIRECTORIES
+----------------------------- */
+
+if (!fs.existsSync(PUBLIC_DIR)) {
+  fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+}
+
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+
+if (!fs.existsSync(STORE)) {
+  fs.writeFileSync(STORE, "[]", "utf8");
+}
+
+
+/* -----------------------------
+   MIDDLEWARE
+----------------------------- */
+
+app.use(
+  express.json({
+    limit: "12mb"
+  })
+);
+
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "12mb"
+  })
+);
+
+app.use(
+  express.static(PUBLIC_DIR)
+);
+
+
+/* -----------------------------
+   ORDERS STORAGE
+----------------------------- */
 
 function readOrders() {
-try {
-if (!fs.existsSync(STORE)) {
-return [];
-}
-
-```
-const data =
-  fs.readFileSync(
-    STORE,
-    "utf8"
-  );
-
-if (!data.trim()) {
-  return [];
-}
-
-const parsed =
-  JSON.parse(data);
-
-return Array.isArray(parsed)
-  ? parsed
-  : [];
-```
-
-} catch (error) {
-
-```
-console.error(
-  "Unable to read orders.json:",
-  error
-);
-
-return [];
-```
-
-}
-}
-
-function writeOrders(orders) {
-
-fs.writeFileSync(
-STORE,
-JSON.stringify(
-orders,
-null,
-2
-)
-);
-}
-
-function createOrderId() {
-
-return (
-"SM" +
-Date.now()
-.toString()
-.slice(-8)
-);
-}
-
-/* TELEGRAM */
-
-async function notifyTelegram(text) {
-
-if (!TG_BOT_TOKEN) {
-
-```
-console.log(
-  "Telegram bot token is not configured."
-);
-
-return {
-  sent: false,
-  reason:
-    "Telegram bot token not configured"
-};
-```
-
-}
-
-try {
-
-```
-const telegramUrl =
-  "https://api.telegram.org/bot" +
-  TG_BOT_TOKEN +
-  "/sendMessage";
-
-const response =
-  await fetch(
-    telegramUrl,
-    {
-      method: "POST",
-
-      headers: {
-        "Content-Type":
-          "application/json"
-      },
-
-      body: JSON.stringify({
-        chat_id:
-          TG_CHAT_ID,
-
-        text:
-          text
-      })
-    }
-  );
-
-return {
-  sent:
-    response.ok,
-
-  body:
-    await response.text()
-};
-```
-
-} catch (error) {
-
-```
-console.error(
-  "Telegram request failed:",
-  error
-);
-
-return {
-  sent: false,
-  reason:
-    "Telegram request failed"
-};
-```
-
-}
-}
-
-/* VALIDATION */
-
-function cleanText(
-value,
-maxLength = 200
-) {
-
-if (
-typeof value !==
-"string"
-) {
-return "";
-}
-
-return value
-.trim()
-.replace(/\s+/g, " ")
-.slice(
-0,
-maxLength
-);
-}
-
-function validName(name) {
-
-if (
-name.length < 2 ||
-name.length > 60
-) {
-return false;
-}
-
-if (
-/^(.)\1{4,}$/i.test(
-name
-)
-) {
-return false;
-}
-
-return /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(
-name
-);
-}
-
-function cleanUsername(
-username
-) {
-
-let value =
-cleanText(
-username,
-35
-);
-
-value =
-value.replace(
-/^@+/,
-""
-);
-
-return value;
-}
-
-function validUsername(
-username
-) {
-
-return (
-/^[A-Za-z0-9._]{1,30}$/.test(
-username
-) &&
-/[A-Za-z0-9]/.test(
-username
-)
-);
-}
-
-function validInstagramProfile(
-profile
-) {
-
-if (
-typeof profile !==
-"string" ||
-profile.length > 300
-) {
-return false;
-}
-
-try {
-
-```
-const url =
-  new URL(profile);
-
-const hostname =
-  url.hostname
-    .toLowerCase()
-    .replace(
-      /^www\./,
-      ""
+  try {
+    const data = fs.readFileSync(
+      STORE,
+      "utf8"
     );
 
-if (
-  hostname !==
-    "instagram.com" &&
-  hostname !==
-    "instagr.am"
+    if (!data.trim()) {
+      return [];
+    }
+
+    const orders = JSON.parse(data);
+
+    if (!Array.isArray(orders)) {
+      return [];
+    }
+
+    return orders;
+
+  } catch (error) {
+    console.error(
+      "Error reading orders.json:",
+      error
+    );
+
+    return [];
+  }
+}
+
+
+function writeOrders(orders) {
+  fs.writeFileSync(
+    STORE,
+    JSON.stringify(
+      orders,
+      null,
+      2
+    ),
+    "utf8"
+  );
+}
+
+
+function createOrderId() {
+  return (
+    "SM" +
+    Date.now()
+      .toString()
+      .slice(-8)
+  );
+}
+
+
+/* -----------------------------
+   TEXT CLEANING
+----------------------------- */
+
+function cleanText(
+  value,
+  maxLength
 ) {
-  return false;
+  if (
+    typeof value !== "string"
+  ) {
+    return "";
+  }
+
+  return value
+    .trim()
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
 }
 
-return /^\/[A-Za-z0-9._]+\/?$/.test(
-  url.pathname
-);
-```
 
-} catch {
+/* -----------------------------
+   NAME VALIDATION
+----------------------------- */
 
-```
-return false;
-```
+function validName(name) {
+  if (
+    name.length < 2 ||
+    name.length > 60
+  ) {
+    return false;
+  }
 
+  if (
+    /^(.)\1{4,}$/.test(name)
+  ) {
+    return false;
+  }
+
+  return /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(
+    name
+  );
 }
+
+
+/* -----------------------------
+   INSTAGRAM USERNAME
+----------------------------- */
+
+function cleanUsername(username) {
+  let value = cleanText(
+    username,
+    30
+  );
+
+  value = value.replace(
+    /^@+/,
+    ""
+  );
+
+  return value;
 }
+
+
+function validUsername(username) {
+  return /^[A-Za-z0-9._]{1,30}$/.test(
+    username
+  );
+}
+
+
+/* -----------------------------
+   INSTAGRAM PROFILE
+----------------------------- */
+
+function validInstagramProfile(profile) {
+  if (
+    typeof profile !== "string" ||
+    profile.length > 300
+  ) {
+    return false;
+  }
+
+  try {
+    const url = new URL(profile);
+
+    const hostname =
+      url.hostname
+        .toLowerCase()
+        .replace(/^www\./, "");
+
+    if (
+      hostname !== "instagram.com" &&
+      hostname !== "instagr.am"
+    ) {
+      return false;
+    }
+
+    return /^\/[A-Za-z0-9._]+\/?$/.test(
+      url.pathname
+    );
+
+  } catch (error) {
+    return false;
+  }
+}
+
+
+/* -----------------------------
+   UTR VALIDATION
+----------------------------- */
 
 function validUTR(utr) {
+  if (
+    typeof utr !== "string"
+  ) {
+    return false;
+  }
 
-if (
-typeof utr !==
-"string"
+  const value = utr.trim();
+
+  if (
+    value.length < 6 ||
+    value.length > 80
+  ) {
+    return false;
+  }
+
+  return /^[A-Za-z0-9._-]+$/.test(
+    value
+  );
+}
+
+
+/* -----------------------------
+   PAYMENT SCREENSHOT
+----------------------------- */
+
+function saveScreenshot(
+  screenshot,
+  orderId
 ) {
-return false;
-}
-
-const value =
-utr.trim();
-
-return (
-value.length >= 6 &&
-value.length <= 80 &&
-/^[A-Za-z0-9._-]+$/.test(
-value
-)
-);
-}
-
-/* SCREENSHOT */
-
-function saveScreenshot(screenshot, orderId) {
   if (
     typeof screenshot !== "string" ||
-    !screenshot
+    screenshot.length === 0
   ) {
     return null;
   }
 
-  const prefixJPEG = "data:image/jpeg;base64,";
-  const prefixPNG = "data:image/png;base64,";
-  const prefixWEBP = "data:image/webp;base64,";
-
-  let mimeType = "";
+  let extension = "";
   let base64Data = "";
 
-  if (screenshot.startsWith(prefixJPEG)) {
-    mimeType = "image/jpeg";
-    base64Data = screenshot.slice(prefixJPEG.length);
-  } else if (screenshot.startsWith(prefixPNG)) {
-    mimeType = "image/png";
-    base64Data = screenshot.slice(prefixPNG.length);
-  } else if (screenshot.startsWith(prefixWEBP)) {
-    mimeType = "image/webp";
-    base64Data = screenshot.slice(prefixWEBP.length);
+  const jpegPrefix =
+    "data:image/jpeg;base64,";
+
+  const pngPrefix =
+    "data:image/png;base64,";
+
+  const webpPrefix =
+    "data:image/webp;base64,";
+
+  if (
+    screenshot.startsWith(
+      jpegPrefix
+    )
+  ) {
+    extension = "jpg";
+
+    base64Data =
+      screenshot.slice(
+        jpegPrefix.length
+      );
+
+  } else if (
+    screenshot.startsWith(
+      pngPrefix
+    )
+  ) {
+    extension = "png";
+
+    base64Data =
+      screenshot.slice(
+        pngPrefix.length
+      );
+
+  } else if (
+    screenshot.startsWith(
+      webpPrefix
+    )
+  ) {
+    extension = "webp";
+
+    base64Data =
+      screenshot.slice(
+        webpPrefix.length
+      );
+
   } else {
     throw new Error(
       "Invalid payment screenshot format."
     );
   }
 
-  if (base64Data.length > 8 * 1024 * 1024) {
+
+  if (
+    base64Data.length >
+    8 * 1024 * 1024
+  ) {
     throw new Error(
       "Payment screenshot is too large."
     );
   }
 
-  const buffer = Buffer.from(
-    base64Data,
-    "base64"
-  );
 
-  if (buffer.length > 5 * 1024 * 1024) {
+  const buffer =
+    Buffer.from(
+      base64Data,
+      "base64"
+    );
+
+
+  if (
+    buffer.length >
+    5 * 1024 * 1024
+  ) {
     throw new Error(
       "Payment screenshot must be 5 MB or smaller."
     );
   }
 
-  let extension = "jpg";
-
-  if (mimeType === "image/png") {
-    extension = "png";
-  }
-
-  if (mimeType === "image/webp") {
-    extension = "webp";
-  }
 
   const filename =
-    String(orderId) + "." + extension;
+    orderId +
+    "." +
+    extension;
 
-  const filepath = path.join(
-    UPLOADS,
-    filename
-  );
+
+  const filepath =
+    path.join(
+      UPLOADS_DIR,
+      filename
+    );
+
 
   fs.writeFileSync(
     filepath,
     buffer
   );
 
-  return "/uploads/" + filename;
+
+  return (
+    "/uploads/" +
+    filename
+  );
 }
-/* CREATE ORDER */
 
-app.post(
-"/api/orders",
-async (req, res) => {
 
-```
-try {
+/* -----------------------------
+   TELEGRAM
+----------------------------- */
 
-  const body =
-    req.body || {};
+async function notifyTelegram(text) {
 
-  const pkg =
-    cleanText(
-      body.package,
-      100
+  if (!TG_BOT_TOKEN) {
+    console.log(
+      "Telegram bot token is not configured."
     );
 
-  const name =
-    cleanText(
-      body.name,
-      60
-    );
-
-  const username =
-    cleanUsername(
-      body.username
-    );
-
-  const profile =
-    cleanText(
-      body.profile,
-      300
-    );
-
-  const utr =
-    cleanText(
-      body.utr,
-      80
-    );
-
-  const promoCode =
-    cleanText(
-      body.promoCode ||
-      body.coupon,
-      30
-    ).toUpperCase();
-
-
-  if (
-    /password|passcode/i.test(
-      JSON.stringify(body)
-    )
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Passwords are not accepted."
-    });
+    return {
+      sent: false,
+      reason:
+        "Telegram bot token not configured"
+    };
   }
-
-
-  if (
-    !pkg ||
-    !name ||
-    !username ||
-    !profile ||
-    !utr
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Please complete all required fields."
-    });
-  }
-
-
-  if (
-    !validName(name)
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Please enter a valid name."
-    });
-  }
-
-
-  if (
-    !validUsername(
-      username
-    )
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Please enter a valid Instagram username."
-    });
-  }
-
-
-  if (
-    !validInstagramProfile(
-      profile
-    )
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Please enter a valid Instagram profile link."
-    });
-  }
-
-
-  if (
-    !validUTR(utr)
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Please enter a valid payment UTR."
-    });
-  }
-
-
-  if (
-    promoCode !==
-    "ZEESHAN10"
-  ) {
-
-    return res.status(400).json({
-      error:
-        "Invalid promo code."
-    });
-  }
-
-
-  const screenshot =
-    body.screenshot ||
-    "";
-
-
-  const orderId =
-    createOrderId();
-
-
-  let screenshotPath =
-    null;
-
-
-  if (screenshot) {
-
-    screenshotPath =
-      saveScreenshot(
-        screenshot,
-        orderId
-      );
-  }
-
-
-  const order = {
-
-    orderId:
-      orderId,
-
-    status:
-      "PENDING",
-
-    package:
-      pkg,
-
-    name:
-      name,
-
-    username:
-      username,
-
-    profile:
-      profile,
-
-    utr:
-      utr,
-
-    promoCode:
-      promoCode,
-
-    screenshot:
-      screenshotPath,
-
-    createdAt:
-      new Date()
-        .toISOString()
-  };
-
-
-  const orders =
-    readOrders();
-
-  orders.unshift(
-    order
-  );
-
-  writeOrders(
-    orders
-  );
-
-
-  const screenshotText =
-    screenshotPath
-      ? "Screenshot: " +
-        (process.env.ADMIN_URL || "") +
-        screenshotPath
-      : "Screenshot: Not attached";
-
-
-  const message =
-    "🔔 NEW ORDER " +
-    order.orderId +
-    "\n\n" +
-
-    "Name: " +
-    name +
-    "\n" +
-
-    "Instagram: @" +
-    username +
-    "\n" +
-
-    "Profile: " +
-    profile +
-    "\n" +
-
-    "Package: " +
-    pkg +
-    "\n" +
-
-    "UTR: " +
-    utr +
-    "\n" +
-
-    "Promo Code: " +
-    promoCode +
-    "\n\n" +
-
-    screenshotText +
-    "\n\n" +
-
-    "⚠️ VERIFY PAYMENT BEFORE ACCEPTING." +
-    "\n\n" +
-
-    "Admin:\n" +
-
-    (
-      process.env.ADMIN_URL ||
-      "Set ADMIN_URL"
-    );
 
 
   try {
 
-    await notifyTelegram(
-      message
-    );
+    const telegramUrl =
+      "https://api.telegram.org/bot" +
+      TG_BOT_TOKEN +
+      "/sendMessage";
 
-  } catch (
-    telegramError
-  ) {
+
+    const response =
+      await fetch(
+        telegramUrl,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              chat_id:
+                TG_CHAT_ID,
+
+              text:
+                text
+            })
+        }
+      );
+
+
+    const body =
+      await response.text();
+
+
+    return {
+      sent:
+        response.ok,
+
+      body:
+        body
+    };
+
+
+  } catch (error) {
 
     console.error(
-      "Telegram notification error:",
-      telegramError
+      "Telegram error:",
+      error
     );
+
+    return {
+      sent: false,
+      reason:
+        "Telegram request failed"
+    };
+  }
+}
+
+
+/* -----------------------------
+   CREATE ORDER
+----------------------------- */
+
+app.post(
+  "/api/orders",
+  async function (req, res) {
+
+    try {
+
+      const body =
+        req.body || {};
+
+
+      const pkg =
+        cleanText(
+          body.package,
+          100
+        );
+
+
+      const name =
+        cleanText(
+          body.name,
+          60
+        );
+
+
+      const username =
+        cleanUsername(
+          body.username
+        );
+
+
+      const profile =
+        cleanText(
+          body.profile,
+          300
+        );
+
+
+      const utr =
+        cleanText(
+          body.utr,
+          80
+        );
+
+
+      const promoCode =
+        cleanText(
+          body.promoCode ||
+          body.coupon ||
+          "",
+          30
+        ).toUpperCase();
+
+
+      const amount =
+        cleanText(
+          String(
+            body.amount || ""
+          ),
+          30
+        );
+
+
+      const screenshot =
+        body.screenshot ||
+        "";
+
+
+      /* PASSWORD PROTECTION */
+
+      if (
+        /password|passcode/i.test(
+          JSON.stringify(body)
+        )
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Passwords are not accepted."
+        });
+      }
+
+
+      /* REQUIRED FIELDS */
+
+      if (
+        !pkg ||
+        !name ||
+        !username ||
+        !profile ||
+        !utr ||
+        !screenshot
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Please complete all fields and upload your payment screenshot."
+        });
+      }
+
+
+      /* NAME */
+
+      if (
+        !validName(name)
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Please enter a valid name."
+        });
+      }
+
+
+      /* USERNAME */
+
+      if (
+        !validUsername(
+          username
+        )
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Please enter a valid Instagram username."
+        });
+      }
+
+
+      /* PROFILE */
+
+      if (
+        !validInstagramProfile(
+          profile
+        )
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Please enter a valid Instagram profile link."
+        });
+      }
+
+
+      /* UTR */
+
+      if (
+        !validUTR(utr)
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Please enter a valid payment UTR."
+        });
+      }
+
+
+      /* PROMO CODE */
+
+      if (
+        promoCode !==
+        "ZEESHAN10"
+      ) {
+
+        return res.status(400).json({
+          error:
+            "Invalid promo code. Please enter ZEESHAN10."
+        });
+      }
+
+
+      /* ORDER ID */
+
+      const orderId =
+        createOrderId();
+
+
+      /* SCREENSHOT */
+
+      let screenshotPath =
+        null;
+
+
+      try {
+
+        screenshotPath =
+          saveScreenshot(
+            screenshot,
+            orderId
+          );
+
+      } catch (screenshotError) {
+
+        return res.status(400).json({
+          error:
+            screenshotError.message
+        });
+      }
+
+
+      /* ORDER OBJECT */
+
+      const order = {
+
+        orderId:
+          orderId,
+
+        status:
+          "PENDING",
+
+        package:
+          pkg,
+
+        name:
+          name,
+
+        username:
+          username,
+
+        profile:
+          profile,
+
+        utr:
+          utr,
+
+        promoCode:
+          promoCode,
+
+        amount:
+          amount,
+
+        screenshot:
+          screenshotPath,
+
+        createdAt:
+          new Date().toISOString()
+      };
+
+
+      /* SAVE ORDER */
+
+      const orders =
+        readOrders();
+
+
+      orders.unshift(
+        order
+      );
+
+
+      writeOrders(
+        orders
+      );
+
+
+      /* TELEGRAM MESSAGE */
+
+      const adminUrl =
+        process.env.ADMIN_URL ||
+        "";
+
+
+      const screenshotUrl =
+        screenshotPath &&
+        adminUrl
+          ? adminUrl +
+            screenshotPath
+          : "Saved on server";
+
+
+      const message =
+        "🔔 NEW ORDER " +
+        order.orderId +
+        "\n\n" +
+
+        "Name: " +
+        name +
+        "\n" +
+
+        "Instagram: @" +
+        username +
+        "\n" +
+
+        "Profile: " +
+        profile +
+        "\n" +
+
+        "Package: " +
+        pkg +
+        "\n" +
+
+        "Amount: ₹" +
+        (amount || "Not specified") +
+        "\n" +
+
+        "UTR: " +
+        utr +
+        "\n" +
+
+        "Promo Code: " +
+        promoCode +
+        "\n\n" +
+
+        "Payment screenshot: " +
+        screenshotUrl +
+        "\n\n" +
+
+        "⚠️ Verify payment before accepting the order.";
+
+
+      try {
+
+        await notifyTelegram(
+          message
+        );
+
+      } catch (
+        telegramError
+      ) {
+
+        console.error(
+          "Telegram notification error:",
+          telegramError
+        );
+      }
+
+
+      /* SUCCESS */
+
+      return res.json({
+
+        ok:
+          true,
+
+        orderId:
+          order.orderId,
+
+        status:
+          order.status
+      });
+
+
+    } catch (error) {
+
+      console.error(
+        "Order processing error:",
+        error
+      );
+
+
+      return res.status(500).json({
+
+        error:
+          "Unable to process order. Please try again."
+      });
+    }
+  }
+);
+
+
+/* -----------------------------
+   ADMIN AUTHENTICATION
+----------------------------- */
+
+function admin(
+  req,
+  res,
+  next
+) {
+
+  const key =
+    req.headers[
+      "x-admin-key"
+    ];
+
+
+  if (
+    key !== ADMIN_KEY
+  ) {
+
+    return res.status(401).json({
+
+      error:
+        "Unauthorized"
+    });
   }
 
 
-  return res.json({
-
-    ok:
-      true,
-
-    orderId:
-      order.orderId,
-
-    status:
-      order.status
-
-  });
-
-
-} catch (error) {
-
-  console.error(
-    "Order processing error:",
-    error
-  );
-
-  return res.status(500).json({
-
-    error:
-      error.message ||
-      "Unable to process order. Please try again."
-
-  });
-}
-```
-
-}
-);
-
-/* ADMIN AUTHENTICATION */
-
-function admin(
-req,
-res,
-next
-) {
-
-if (
-req.headers[
-"x-admin-key"
-] !== ADMIN_KEY
-) {
-
-```
-return res.status(401).json({
-
-  error:
-    "Unauthorized"
-
-});
-```
-
+  next();
 }
 
-next();
-}
 
-/* GET ALL ORDERS */
+/* -----------------------------
+   GET ALL ORDERS
+----------------------------- */
 
 app.get(
-"/api/admin/orders",
-admin,
-(req, res) => {
+  "/api/admin/orders",
+  admin,
+  function (req, res) {
 
-```
-res.json(
-  readOrders()
-);
-```
-
-}
+    return res.json(
+      readOrders()
+    );
+  }
 );
 
-/* ACCEPT / REJECT */
+
+/* -----------------------------
+   ACCEPT / REJECT ORDER
+----------------------------- */
 
 app.post(
-"/api/admin/orders/:id/status",
-admin,
-(req, res) => {
+  "/api/admin/orders/:id/status",
+  admin,
+  function (req, res) {
 
-```
-const allowed = [
-  "ACCEPTED",
-  "REJECTED"
-];
+    const allowed = [
+      "ACCEPTED",
+      "REJECTED"
+    ];
 
-const status =
-  req.body?.status;
 
-if (
-  !allowed.includes(
-    status
-  )
-) {
+    const status =
+      req.body &&
+      req.body.status;
 
-  return res.status(400).json({
 
-    error:
-      "Invalid status"
+    if (
+      !allowed.includes(
+        status
+      )
+    ) {
 
-  });
-}
+      return res.status(400).json({
 
-const orders =
-  readOrders();
+        error:
+          "Invalid status"
+      });
+    }
 
-const order =
-  orders.find(
-    item =>
-      item.orderId ===
-      req.params.id
-  );
 
-if (!order) {
+    const orders =
+      readOrders();
 
-  return res.status(404).json({
 
-    error:
-      "Order not found"
+    const order =
+      orders.find(
+        function (item) {
 
-  });
-}
+          return (
+            item.orderId ===
+            req.params.id
+          );
 
-order.status =
-  status;
+        }
+      );
 
-order.updatedAt =
-  new Date()
-    .toISOString();
 
-writeOrders(
-  orders
+    if (!order) {
+
+      return res.status(404).json({
+
+        error:
+          "Order not found"
+      });
+    }
+
+
+    order.status =
+      status;
+
+
+    order.updatedAt =
+      new Date().toISOString();
+
+
+    writeOrders(
+      orders
+    );
+
+
+    return res.json({
+
+      ok:
+        true,
+
+      order:
+        order
+    });
+  }
 );
 
-res.json({
 
-  ok:
-    true,
-
-  order:
-    order
-
-});
-```
-
-}
-);
-
-/* CUSTOMER ORDER STATUS */
+/* -----------------------------
+   CUSTOMER ORDER STATUS
+----------------------------- */
 
 app.get(
-"/api/orders/:id",
-(req, res) => {
+  "/api/orders/:id",
+  function (req, res) {
 
-```
-const order =
-  readOrders().find(
-    item =>
-      item.orderId ===
-      req.params.id
-  );
+    const orders =
+      readOrders();
 
-if (!order) {
 
-  return res.status(404).json({
+    const order =
+      orders.find(
+        function (item) {
 
-    error:
-      "Order not found"
+          return (
+            item.orderId ===
+            req.params.id
+          );
 
-  });
-}
+        }
+      );
 
-res.json({
 
-  orderId:
-    order.orderId,
+    if (!order) {
 
-  status:
-    order.status,
+      return res.status(404).json({
 
-  package:
-    order.package,
+        error:
+          "Order not found"
+      });
+    }
 
-  createdAt:
-    order.createdAt
 
-});
-```
+    return res.json({
 
-}
+      orderId:
+        order.orderId,
+
+      status:
+        order.status,
+
+      package:
+        order.package,
+
+      createdAt:
+        order.createdAt
+    });
+  }
 );
 
-/* HOME PAGE */
+
+/* -----------------------------
+   HOME PAGE
+----------------------------- */
 
 app.get(
-"/",
-(req, res) => {
+  "/",
+  function (req, res) {
 
-```
-res.sendFile(
-  path.join(
-    __dirname,
-    "public",
-    "index.html"
-  )
-);
-```
-
-}
+    res.sendFile(
+      path.join(
+        PUBLIC_DIR,
+        "index.html"
+      )
+    );
+  }
 );
 
-/* START SERVER */
+
+/* -----------------------------
+   404 API
+----------------------------- */
+
+app.use(
+  function (req, res, next) {
+
+    if (
+      req.path.startsWith(
+        "/api/"
+      )
+    ) {
+
+      return res.status(404).json({
+
+        error:
+          "API endpoint not found"
+      });
+    }
+
+    next();
+  }
+);
+
+
+/* -----------------------------
+   START SERVER
+----------------------------- */
 
 app.listen(
-PORT,
-() => {
+  PORT,
+  function () {
 
-```
-console.log(
-  "SehrAn Media server running on port " +
-  PORT
-);
-```
+    console.log(
+      "SehrAn Media server running on port " +
+      PORT
+    );
 
-}
+  }
 );
