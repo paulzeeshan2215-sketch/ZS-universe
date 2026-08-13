@@ -8,931 +8,1569 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 :root{
-    --bg:#05020a;
-    --card:#100817;
-    --pink:#ff007f;
-    --purple:#7928ca;
-    --gold:#ffcc00;
-    --muted:#aaa;
-    --line:#ffffff18;
+  --bg:#05030a;
+  --bg2:#0b0612;
+  --card:#110a1b;
+  --pink:#ff1688;
+  --purple:#7b2cff;
+  --blue:#248cff;
+  --gold:#ffc928;
+  --text:#fff;
+  --muted:#a9a3b0;
+  --line:rgba(255,255,255,.10);
 }
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    font-family:Poppins,sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%,#301044 0,#05020a 40%);
-    color:#fff;
-    min-height:100vh;
+  font-family:Poppins,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -15%,#41145f 0%,transparent 38%),
+    radial-gradient(circle at 0% 45%,#1d0d36 0%,transparent 30%),
+    var(--bg);
+  overflow-x:hidden;
 }
 
-nav{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:#05020add;
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--line);
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-.navin{
-    max-width:1200px;
-    margin:auto;
-    height:76px;
-    padding:0 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+button{
+  font-family:inherit;
+}
+
+/* ================= NAV ================= */
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,3,10,.82);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  width:min(1180px,calc(100% - 30px));
+  height:72px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .logo{
-    font:900 22px Montserrat;
-    color:#fff;
-    text-decoration:none;
+  font-family:Montserrat,sans-serif;
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-1px;
 }
 
 .logo span{
-    color:var(--pink);
+  color:var(--pink);
 }
 
-.links{
-    display:flex;
-    gap:30px;
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:25px;
 }
 
-.links a{
-    color:#ddd;
-    text-decoration:none;
-    font-weight:600;
+.nav-links a{
+  color:#d7d1dd;
+  font-weight:600;
+  font-size:14px;
 }
 
-.links a:hover{
-    color:#ff4ca5;
+.nav-links a:hover{
+  color:#fff;
 }
 
-.navbtn{
-    padding:11px 18px;
-    border-radius:30px;
-    background:linear-gradient(90deg,var(--pink),var(--purple));
-    color:#fff!important;
-    text-decoration:none;
-    font-weight:700;
+.nav-order{
+  padding:11px 18px;
+  border-radius:30px;
+  background:linear-gradient(100deg,var(--pink),var(--purple));
+  box-shadow:0 8px 30px rgba(255,22,136,.22);
 }
 
-/* HERO */
+.menu-btn{
+  display:none;
+  border:0;
+  background:#ffffff0c;
+  color:#fff;
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  font-size:19px;
+}
+
+/* ================= HERO ================= */
 
 .hero{
-    max-width:1200px;
-    margin:auto;
-    min-height:700px;
-    padding:90px 24px;
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:50px;
-    align-items:center;
+  width:min(1180px,calc(100% - 30px));
+  margin:auto;
+  min-height:680px;
+  padding:75px 0 60px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:50px;
 }
 
-.kicker{
-    display:inline-flex;
-    padding:8px 14px;
-    border:1px solid #ff007f55;
-    border-radius:30px;
-    background:#ff007f0d;
-    color:#ff7bbb;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:20px;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  border-radius:30px;
+  border:1px solid rgba(255,22,136,.30);
+  background:rgba(255,22,136,.08);
+  color:#ff8dc2;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
-h1{
-    font:900 clamp(48px,7vw,88px)/.95 Montserrat;
-    letter-spacing:-3px;
+.hero h1{
+  margin-top:20px;
+  font-family:Montserrat,sans-serif;
+  font-weight:900;
+  font-size:clamp(45px,6vw,78px);
+  line-height:.98;
+  letter-spacing:-3px;
 }
 
-h1 span{
-    color:var(--pink);
-    text-shadow:0 0 35px #ff007f66;
+.hero h1 span{
+  background:linear-gradient(90deg,#ff1688,#a855f7,#5b8cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
-.hero p{
-    color:#bcb5c2;
-    font-size:18px;
-    line-height:1.8;
-    max-width:650px;
-    margin:25px 0;
+.hero-text{
+  max-width:650px;
+  margin-top:24px;
+  color:#bcb6c5;
+  line-height:1.8;
+  font-size:17px;
 }
 
-.ctas{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:28px;
 }
 
 .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    padding:15px 23px;
-    border-radius:13px;
-    text-decoration:none;
-    font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:52px;
+  padding:0 21px;
+  border-radius:15px;
+  font-weight:800;
+  border:1px solid transparent;
+  transition:.25s ease;
 }
 
-.primary{
-    background:linear-gradient(90deg,var(--pink),var(--purple));
-    color:#fff;
-    box-shadow:0 12px 35px #ff007f30;
+.btn:hover{
+  transform:translateY(-3px);
 }
 
-.secondary{
-    border:1px solid #ffffff22;
-    color:#fff;
-    background:#ffffff08;
+.btn-primary{
+  background:linear-gradient(100deg,var(--pink),var(--purple));
+  box-shadow:0 14px 40px rgba(255,22,136,.25);
 }
 
-/* VISUAL */
-
-.visual{
-    position:relative;
+.btn-secondary{
+  background:#ffffff08;
+  border-color:var(--line);
 }
 
-.phone{
-    max-width:360px;
-    margin:auto;
-    border:1px solid #ff007f55;
-    border-radius:40px;
-    padding:22px;
-    background:linear-gradient(160deg,#180a22,#08050c);
-    box-shadow:0 0 70px #ff007f22;
+/* ================= HERO IMAGE CARD ================= */
+
+.hero-visual{
+  position:relative;
 }
 
-.phone .ig{
-    font-size:90px;
-    text-align:center;
-    background:linear-gradient(
-        45deg,
-        #f09433,
-        #dc2743,
-        #bc1888
-    );
-    -webkit-background-clip:text;
-    color:transparent;
-    margin:25px;
+.profile-card{
+  position:relative;
+  max-width:470px;
+  margin:auto;
+  padding:14px;
+  border-radius:30px;
+  background:linear-gradient(145deg,#ffffff16,#ffffff04);
+  border:1px solid #ffffff18;
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.45),
+    0 0 80px rgba(255,22,136,.12);
+  overflow:hidden;
 }
 
-.phone h2{
-    text-align:center;
-    font:900 28px Montserrat;
+.profile-image{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:23px;
+  object-fit:cover;
+  display:block;
+  background:
+    radial-gradient(circle at 50% 20%,#ff2d91,#5422a8 45%,#08050e);
 }
 
-.phone .big{
-    font-size:52px;
-    font-weight:900;
-    color:var(--pink);
-    text-align:center;
-    margin:15px;
+/*
+  Later, when you send your final image,
+  replace the image URL above with your image.
+*/
+
+.profile-overlay{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:28px;
+  padding:17px;
+  border-radius:19px;
+  background:rgba(5,3,10,.75);
+  backdrop-filter:blur(14px);
+  border:1px solid #ffffff20;
 }
 
-.statgrid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-    margin-top:20px;
+.profile-overlay strong{
+  font-size:17px;
 }
 
-.stat{
-    padding:14px 7px;
-    text-align:center;
-    background:#ffffff08;
-    border-radius:12px;
+.profile-overlay p{
+  margin-top:3px;
+  color:#aaa;
+  font-size:12px;
 }
 
-.stat strong{
-    display:block;
+/* ================= SOCIAL PLATFORM SECTION ================= */
+
+.section{
+  width:min(1180px,calc(100% - 30px));
+  margin:auto;
+  padding:85px 0;
 }
 
-.stat small{
-    color:#999;
+.section-heading{
+  text-align:center;
+  max-width:700px;
+  margin:0 auto 45px;
 }
 
-/* SECTIONS */
-
-section{
-    max-width:1200px;
-    margin:auto;
-    padding:95px 24px;
+.eyebrow{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:900;
 }
 
-.sectionhead{
-    text-align:center;
-    margin-bottom:45px;
+.section-heading h2{
+  margin-top:10px;
+  font-family:Montserrat,sans-serif;
+  font-size:clamp(32px,5vw,50px);
+  font-weight:900;
+  letter-spacing:-1.5px;
 }
 
-.sectionhead .mini{
-    color:var(--gold);
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:12px;
+.section-heading p{
+  margin-top:12px;
+  color:#96909d;
+  line-height:1.7;
 }
 
-.sectionhead h2{
-    font:900 clamp(32px,5vw,52px) Montserrat;
-    margin:9px 0;
+/* ================= FLOATING PLATFORM CARDS ================= */
+
+.platform-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
 }
 
-.sectionhead p{
-    color:#999;
-    max-width:650px;
-    margin:auto;
+.platform{
+  position:relative;
+  min-height:145px;
+  padding:25px;
+  border-radius:24px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:.3s ease;
+  animation:floatCard 4.5s ease-in-out infinite;
 }
 
-/* CARDS */
+.platform:nth-child(2){animation-delay:.5s}
+.platform:nth-child(3){animation-delay:1s}
+.platform:nth-child(4){animation-delay:1.5s}
+.platform:nth-child(5){animation-delay:2s}
+.platform:nth-child(6){animation-delay:2.5s}
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+@keyframes floatCard{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
 }
 
-.card{
-    position:relative;
-    padding:30px;
-    border:1px solid var(--line);
-    border-radius:22px;
-    background:linear-gradient(145deg,#120a19,#09050d);
-    transition:.25s;
-    overflow:hidden;
+.platform:hover{
+  transform:translateY(-10px) scale(1.01);
+  border-color:#ff168855;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
 }
 
-.card:hover{
-    transform:translateY(-7px);
-    border-color:#ff007f66;
-    box-shadow:0 20px 50px #000;
+.platform-icon{
+  width:53px;
+  height:53px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  margin-bottom:17px;
 }
 
-.icon{
-    width:52px;
-    height:52px;
-    border-radius:15px;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        var(--purple)
-    );
-    font-size:21px;
-    margin-bottom:20px;
+.platform h3{
+  font-size:19px;
 }
 
-.card h3{
-    font-size:20px;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#999;
-    line-height:1.7;
-}
-
-/* COMING SOON */
-
-.soon{
-    position:absolute;
-    top:18px;
-    right:18px;
-    padding:5px 9px;
-    border-radius:20px;
-    background:#ffcc0015;
-    border:1px solid #ffcc0055;
-    color:var(--gold);
-    font-size:9px;
-    font-weight:800;
-    letter-spacing:1px;
+.platform p{
+  margin-top:4px;
+  color:#8f8997;
+  font-size:12px;
 }
 
 .coming{
-    opacity:.88;
+  position:absolute;
+  top:18px;
+  right:18px;
+  padding:6px 9px;
+  border-radius:20px;
+  background:#ffc92812;
+  border:1px solid #ffc92830;
+  color:#ffd86a;
+  font-size:9px;
+  font-weight:900;
 }
 
-/* CTA */
+/* ================= INSTAGRAM SERVICES ================= */
 
-.band{
-    max-width:1150px;
-    margin:20px auto 100px;
-    padding:40px 30px;
-    border:1px solid #ffcc0040;
-    border-radius:25px;
-    background:
-        linear-gradient(110deg,#ffcc0010,#ff007f12);
+.instagram-services{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
-.bandin{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
+.service-card{
+  position:relative;
+  padding:32px;
+  border-radius:25px;
+  background:linear-gradient(145deg,#160b20,#0c0612);
+  border:1px solid var(--line);
+  overflow:hidden;
 }
 
-.band h2{
-    font:900 30px Montserrat;
+.service-card h3{
+  font-family:Montserrat,sans-serif;
+  font-size:25px;
 }
 
-.band p{
-    color:#aaa;
-    margin-top:8px;
+.service-card p{
+  color:#97919d;
+  line-height:1.7;
+  margin:9px 0 22px;
 }
 
-/* FOOTER */
+.service-card.likes{
+  opacity:.78;
+}
+
+.service-icon{
+  width:55px;
+  height:55px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  background:linear-gradient(135deg,#ff1688,#7b2cff);
+  margin-bottom:20px;
+  font-size:22px;
+}
+
+.service-card .soon{
+  position:absolute;
+  top:24px;
+  right:24px;
+  color:#ffd45a;
+  font-size:10px;
+  font-weight:900;
+  padding:7px 10px;
+  border-radius:20px;
+  background:#ffc92812;
+  border:1px solid #ffc92830;
+}
+
+/* ================= PACKAGES ================= */
+
+.package-area{
+  margin-top:30px;
+  scroll-margin-top:85px;
+}
+
+.package-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.package{
+  position:relative;
+  padding:25px;
+  border-radius:23px;
+  background:linear-gradient(145deg,#15091f,#0c0611);
+  border:1px solid var(--line);
+  transition:.25s ease;
+}
+
+.package:hover{
+  transform:translateY(-5px);
+  border-color:#ff168855;
+}
+
+.package.popular{
+  border-color:#ff1688aa;
+  box-shadow:0 0 35px rgba(255,22,136,.10);
+}
+
+.popular-label{
+  position:absolute;
+  top:15px;
+  right:15px;
+  padding:6px 9px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--pink),var(--purple));
+  font-size:9px;
+  font-weight:900;
+}
+
+.package h3{
+  font-family:Montserrat,sans-serif;
+  font-size:24px;
+}
+
+.package-sub{
+  color:#8d8793;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.price{
+  margin-top:20px;
+}
+
+.old-price{
+  color:#77717d;
+  text-decoration:line-through;
+  font-size:14px;
+}
+
+.new-price{
+  display:block;
+  margin-top:1px;
+  font-family:Montserrat,sans-serif;
+  font-size:35px;
+  font-weight:900;
+  color:#fff;
+}
+
+.save{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 9px;
+  border-radius:20px;
+  background:#22c55e14;
+  border:1px solid #22c55e30;
+  color:#6ee7a0;
+  font-size:10px;
+  font-weight:900;
+}
+
+.package-btn{
+  width:100%;
+  margin-top:20px;
+  min-height:48px;
+  border:0;
+  cursor:pointer;
+  border-radius:13px;
+  color:#fff;
+  background:linear-gradient(100deg,var(--pink),var(--purple));
+  font-weight:900;
+  transition:.25s ease;
+}
+
+.package-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(255,22,136,.25);
+}
+
+/* ================= TRUST ================= */
+
+.trust{
+  padding:25px;
+  border-radius:25px;
+  border:1px solid #ffffff10;
+  background:linear-gradient(120deg,#101d31,#0a111e);
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:25px;
+  align-items:center;
+}
+
+.trust h2{
+  font-family:Montserrat,sans-serif;
+  font-size:30px;
+}
+
+.trust p{
+  color:#9a9ca5;
+  line-height:1.7;
+  margin-top:9px;
+}
+
+.trust-list{
+  display:grid;
+  gap:10px;
+}
+
+.trust-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#d9d9df;
+  font-size:13px;
+}
+
+.trust-item i{
+  color:#4da3ff;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+  margin:20px auto 80px;
+  width:min(1120px,calc(100% - 30px));
+  padding:50px 30px;
+  text-align:center;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 0%,#ff168830,transparent 55%),
+    linear-gradient(120deg,#16091f,#0b0612);
+  border:1px solid #ff168833;
+}
+
+.cta h2{
+  font-family:Montserrat,sans-serif;
+  font-size:clamp(29px,5vw,44px);
+}
+
+.cta p{
+  color:#99919f;
+  margin:10px auto 24px;
+}
+
+/* ================= FOOTER ================= */
 
 footer{
-    border-top:1px solid var(--line);
-    padding:35px 24px;
-    text-align:center;
-    color:#777;
+  border-top:1px solid var(--line);
+  padding:35px 20px;
+  text-align:center;
+  color:#77717e;
 }
 
 .social{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin:15px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:17px 0;
 }
 
 .social a{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:#ffffff09;
-    color:#fff;
-    text-decoration:none;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#ffffff08;
+  border:1px solid #ffffff0c;
 }
 
-.social a:hover{
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        var(--purple)
-    );
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    padding-top:55px;
+  }
+
+  .hero-text{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .profile-card{
+    max-width:400px;
+  }
+
+  .platform-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .package-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .trust{
+    grid-template-columns:1fr;
+  }
 }
 
-/* MOBILE */
+@media(max-width:650px){
 
-@media(max-width:800px){
+  .nav-inner{
+    height:64px;
+  }
 
-    .links{
-        display:none;
-    }
+  .nav-links{
+    display:none;
+  }
 
-    .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-        padding-top:60px;
-    }
+  .menu-btn{
+    display:block;
+  }
 
-    .hero p{
-        margin-left:auto;
-        margin-right:auto;
-    }
+  .nav-order{
+    display:none;
+  }
 
-    .ctas{
-        justify-content:center;
-    }
+  .hero{
+    min-height:auto;
+    padding:45px 0 35px;
+  }
 
-    .cards{
-        grid-template-columns:1fr;
-    }
+  .hero h1{
+    font-size:45px;
+    letter-spacing:-2px;
+  }
 
-    .bandin{
-        flex-direction:column;
-        text-align:center;
-    }
+  .hero-text{
+    font-size:14px;
+  }
 
-    h1{
-        letter-spacing:-2px;
-    }
+  .hero-buttons{
+    flex-direction:column;
+  }
+
+  .hero-buttons .btn{
+    width:100%;
+  }
+
+  .section{
+    padding:65px 0;
+  }
+
+  .section-heading{
+    margin-bottom:30px;
+  }
+
+  .platform-grid{
+    grid-template-columns:1fr;
+  }
+
+  .platform{
+    min-height:125px;
+  }
+
+  .instagram-services{
+    grid-template-columns:1fr;
+  }
+
+  .package-grid{
+    grid-template-columns:1fr;
+  }
+
+  .package{
+    padding:23px;
+  }
+
+  .new-price{
+    font-size:32px;
+  }
+
+  .trust{
+    padding:25px 20px;
+  }
+
+  .cta{
+    padding:40px 20px;
+  }
+}
+
+/* accessibility */
+
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+<!-- ================= NAV ================= -->
 
-<nav>
-<div class="navin">
+<nav class="nav">
+  <div class="nav-inner">
 
-<a class="logo" href="index.html">
-SEHR<span>AN</span> MEDIA
-</a>
+    <a href="index.html" class="logo">
+      SEHR<span>AN</span> MEDIA
+    </a>
 
-<div class="links">
-<a href="index.html">Home</a>
-<a href="#services">Services</a>
-<a href="#platforms">Platforms</a>
-<a href="#why">Why Us</a>
-<a href="order.html">Pricing</a>
-</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#packages">Packages</a>
+    </div>
 
-<a class="navbtn" href="order.html">
-Order Now
-</a>
+    <a href="#platforms" class="nav-order">
+      Explore
+    </a>
 
-</div>
+    <button class="menu-btn" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </div>
 </nav>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
-<main>
+<main id="home">
 
-<div class="hero">
+<section class="hero">
 
-<div>
+  <div>
 
-<div class="kicker">
-<i class="fa-solid fa-bolt"></i>
-&nbsp; PREMIUM SOCIAL MEDIA SERVICES
-</div>
+    <div class="badge">
+      <i class="fa-solid fa-bolt"></i>
+      SOCIAL MEDIA GROWTH
+    </div>
 
-<h1>
-Grow Your
-<span>Instagram.</span>
-<br>
-Build Your Presence.
-</h1>
+    <h1>
+      Grow Your
+      <span>Social Media.</span>
+    </h1>
 
-<p>
-Professional social media services designed for creators,
-brands and growing profiles. Explore our services and choose
-the option that fits your needs.
-</p>
+    <p class="hero-text">
+      Explore simple and affordable social media packages
+      from SehrAn Media. Choose a platform, select a service,
+      and start your order in just a few steps.
+    </p>
 
-<div class="ctas">
+    <div class="hero-buttons">
 
-<a class="btn primary" href="order.html">
-View Packages
-<i class="fa-solid fa-arrow-right"></i>
-</a>
+      <a href="#platforms" class="btn btn-primary">
+        Explore Packages
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
 
-<a class="btn secondary" href="#services">
-Explore Services
-</a>
+      <a href="#trust" class="btn btn-secondary">
+        <i class="fa-solid fa-shield-halved"></i>
+        Why SehrAn?
+      </a>
 
-</div>
+    </div>
 
-</div>
-
-
-<div class="visual">
-
-<div class="phone">
-
-<div class="ig">
-<i class="fa-brands fa-instagram"></i>
-</div>
-
-<h2>
-INSTAGRAM
-<br>
-GROWTH
-</h2>
-
-<div class="big">
-10K+
-</div>
-
-<div class="statgrid">
-
-<div class="stat">
-<strong>Fast</strong>
-<small>Start</small>
-</div>
-
-<div class="stat">
-<strong>Secure</strong>
-<small>Process</small>
-</div>
-
-<div class="stat">
-<strong>24/7</strong>
-<small>Support</small>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 
-<!-- SERVICES -->
+  <div class="hero-visual">
 
-<section id="services">
+    <div class="profile-card">
 
-<div class="sectionhead">
+      <!-- TEMPORARY VISUAL -->
+      <!-- Replace this image with your final Instagram image later -->
 
-<div class="mini">
-What We Offer
-</div>
+      <div class="profile-image"
+           style="
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           flex-direction:column;
+           ">
+        <i class="fa-brands fa-instagram"
+           style="font-size:100px;color:white"></i>
 
-<h2>
-Everything You Need
-</h2>
+        <strong style="
+          margin-top:18px;
+          font-family:Montserrat;
+          font-size:25px;
+        ">
+          INSTAGRAM
+        </strong>
+      </div>
 
-<p>
-A clean and simple ordering experience built for modern
-social media services.
-</p>
+      <div class="profile-overlay">
 
-</div>
+        <strong>
+          Build Your Presence
+        </strong>
 
+        <p>
+          Simple ordering • Clear pricing • Mobile friendly
+        </p>
 
-<div class="cards">
+      </div>
 
-<div class="card">
+    </div>
 
-<div class="icon">
-<i class="fa-brands fa-instagram"></i>
-</div>
-
-<h3>
-Instagram Services
-</h3>
-
-<p>
-Explore our available Instagram packages and continue
-to the dedicated order page.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">
-<i class="fa-solid fa-rocket"></i>
-</div>
-
-<h3>
-Fast Start
-</h3>
-
-<p>
-A simple ordering flow designed to make submitting
-your request quick and straightforward.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">
-<i class="fa-solid fa-headset"></i>
-</div>
-
-<h3>
-Customer Support
-</h3>
-
-<p>
-Need help with your order? Contact our support team
-through the available channels.
-</p>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- PLATFORMS -->
+<!-- ================= PLATFORMS ================= -->
 
-<section id="platforms">
+<section class="section" id="platforms">
 
-<div class="sectionhead">
+  <div class="section-heading">
 
-<div class="mini">
-More Platforms
-</div>
+    <div class="eyebrow">
+      Choose a platform
+    </div>
 
-<h2>
-More Services Coming Soon
-</h2>
+    <h2>
+      Your Social Media,
+      Your Choice.
+    </h2>
 
-<p>
-We are preparing additional platform services for
-future releases.
-</p>
+    <p>
+      Select a platform below. Instagram services are available now.
+      Other services are coming soon.
+    </p>
 
-</div>
-
-
-<div class="cards">
+  </div>
 
 
-<!-- SNAPCHAT -->
-
-<div class="card coming">
-
-<div class="soon">
-COMING SOON
-</div>
-
-<div class="icon">
-<i class="fa-brands fa-snapchat"></i>
-</div>
-
-<h3>
-Snapchat
-</h3>
-
-<p>
-Snapchat-related services are currently being prepared
-and will be available in a future update.
-</p>
-
-</div>
+  <div class="platform-grid">
 
 
-<!-- YOUTUBE -->
+    <!-- INSTAGRAM -->
 
-<div class="card coming">
+    <a href="#instagram" class="platform">
 
-<div class="soon">
-COMING SOON
-</div>
+      <div class="platform-icon">
+        <i class="fa-brands fa-instagram"></i>
+      </div>
 
-<div class="icon">
-<i class="fa-brands fa-youtube"></i>
-</div>
+      <h3>Instagram</h3>
 
-<h3>
-YouTube
-</h3>
+      <p>
+        Followers & upcoming services
+      </p>
 
-<p>
-YouTube services are coming soon. Stay tuned for the
-official launch.
-</p>
-
-</div>
+    </a>
 
 
-<!-- FACEBOOK -->
+    <!-- SNAPCHAT -->
 
-<div class="card coming">
+    <div class="platform">
 
-<div class="soon">
-COMING SOON
-</div>
+      <span class="coming">
+        COMING SOON
+      </span>
 
-<div class="icon">
-<i class="fa-brands fa-facebook"></i>
-</div>
+      <div class="platform-icon">
+        <i class="fa-brands fa-snapchat"></i>
+      </div>
 
-<h3>
-Facebook
-</h3>
+      <h3>Snapchat</h3>
 
-<p>
-Facebook services are currently under development.
-</p>
+      <p>
+        Services coming soon
+      </p>
 
-</div>
+    </div>
 
 
-<!-- X -->
+    <!-- YOUTUBE -->
 
-<div class="card coming">
+    <div class="platform">
 
-<div class="soon">
-COMING SOON
-</div>
+      <span class="coming">
+        COMING SOON
+      </span>
 
-<div class="icon">
-<i class="fa-brands fa-x-twitter"></i>
-</div>
+      <div class="platform-icon">
+        <i class="fa-brands fa-youtube"></i>
+      </div>
 
-<h3>
-X / Twitter
-</h3>
+      <h3>YouTube</h3>
 
-<p>
-X services will be added in a future release.
-</p>
+      <p>
+        Services coming soon
+      </p>
 
-</div>
+    </div>
 
 
-<!-- TELEGRAM -->
+    <!-- FACEBOOK -->
 
-<div class="card coming">
+    <div class="platform">
 
-<div class="soon">
-COMING SOON
-</div>
+      <span class="coming">
+        COMING SOON
+      </span>
 
-<div class="icon">
-<i class="fa-brands fa-telegram"></i>
-</div>
+      <div class="platform-icon">
+        <i class="fa-brands fa-facebook-f"></i>
+      </div>
 
-<h3>
-Telegram
-</h3>
+      <h3>Facebook</h3>
 
-<p>
-Telegram services are being prepared and will be
-available soon.
-</p>
+      <p>
+        Services coming soon
+      </p>
 
-</div>
+    </div>
 
 
-<!-- WHATSAPP -->
+    <!-- X -->
 
-<div class="card coming">
+    <div class="platform">
 
-<div class="soon">
-COMING SOON
-</div>
+      <span class="coming">
+        COMING SOON
+      </span>
 
-<div class="icon">
-<i class="fa-brands fa-whatsapp"></i>
-</div>
+      <div class="platform-icon">
+        <i class="fa-brands fa-x-twitter"></i>
+      </div>
 
-<h3>
-WhatsApp
-</h3>
+      <h3>X / Twitter</h3>
 
-<p>
-WhatsApp-related services are planned for a future
-release.
-</p>
+      <p>
+        Services coming soon
+      </p>
 
-</div>
+    </div>
 
-</div>
+
+    <!-- WHATSAPP -->
+
+    <div class="platform">
+
+      <span class="coming">
+        COMING SOON
+      </span>
+
+      <div class="platform-icon">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+
+      <h3>WhatsApp</h3>
+
+      <p>
+        Services coming soon
+      </p>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- WHY US -->
+<!-- ================= INSTAGRAM ================= -->
 
-<section id="why">
+<section class="section" id="instagram">
 
-<div class="sectionhead">
+  <div class="section-heading">
 
-<div class="mini">
-Why SehrAn Media
-</div>
+    <div class="eyebrow">
+      Instagram
+    </div>
 
-<h2>
-Simple. Fast. Professional.
-</h2>
+    <h2>
+      Choose Your Service
+    </h2>
 
-</div>
+    <p>
+      Followers are currently available.
+      Likes are coming soon.
+    </p>
 
-
-<div class="cards">
-
-<div class="card">
-
-<div class="icon">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
-
-<h3>
-No Password Required
-</h3>
-
-<p>
-We do not ask customers to provide their social media
-password.
-</p>
-
-</div>
+  </div>
 
 
-<div class="card">
-
-<div class="icon">
-<i class="fa-solid fa-lock"></i>
-</div>
-
-<h3>
-Simple Checkout
-</h3>
-
-<p>
-Choose an available package and continue to the
-dedicated order page.
-</p>
-
-</div>
+  <div class="instagram-services">
 
 
-<div class="card">
+    <!-- FOLLOWERS -->
 
-<div class="icon">
-<i class="fa-solid fa-mobile-screen"></i>
-</div>
+    <div class="service-card">
 
-<h3>
-Mobile Friendly
-</h3>
+      <div class="service-icon">
+        <i class="fa-solid fa-users"></i>
+      </div>
 
-<p>
-The website is designed to work smoothly across
-phones, tablets and desktop devices.
-</p>
+      <h3>
+        Instagram Followers
+      </h3>
 
-</div>
+      <p>
+        Choose the package that fits your profile
+        and continue to the order section.
+      </p>
 
-</div>
+      <a href="#packages" class="btn btn-primary">
+        View Followers
+        <i class="fa-solid fa-arrow-down"></i>
+      </a>
+
+    </div>
+
+
+    <!-- LIKES -->
+
+    <div class="service-card likes">
+
+      <span class="soon">
+        COMING SOON
+      </span>
+
+      <div class="service-icon">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+
+      <h3>
+        Instagram Likes
+      </h3>
+
+      <p>
+        Instagram Likes service will be available soon.
+      </p>
+
+      <button class="btn btn-secondary" disabled>
+        Coming Soon
+      </button>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- FINAL CTA -->
+<!-- ================= PACKAGES ================= -->
 
-<div class="band">
+<section class="section package-area" id="packages">
 
-<div class="bandin">
+  <div class="section-heading">
 
-<div>
+    <div class="eyebrow">
+      Instagram Followers
+    </div>
 
-<h2>
-Ready to place your order?
-</h2>
+    <h2>
+      Choose Your Package
+    </h2>
 
-<p>
-View the currently available Instagram packages.
-</p>
+    <p>
+      Current special pricing. Original prices are shown
+      with a strike-through so your discount is clear.
+    </p>
 
-</div>
+  </div>
 
-<a class="btn primary" href="order.html">
-Go to Pricing
-<i class="fa-solid fa-arrow-right"></i>
-</a>
 
-</div>
+  <div class="package-grid">
+
+
+    <!-- 200 -->
+
+    <div class="package">
+
+      <h3>200 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹50</span>
+        <span class="new-price">₹30</span>
+        <span class="save">SAVE ₹20</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=200&price=30">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 500 -->
+
+    <div class="package">
+
+      <h3>500 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹100</span>
+        <span class="new-price">₹50</span>
+        <span class="save">SAVE ₹50</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=500&price=50">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 1000 -->
+
+    <div class="package popular">
+
+      <span class="popular-label">
+        POPULAR
+      </span>
+
+      <h3>1,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹150</span>
+        <span class="new-price">₹90</span>
+        <span class="save">SAVE ₹60</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=1000&price=90">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 1500 -->
+
+    <div class="package">
+
+      <h3>1,500 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹200</span>
+        <span class="new-price">₹130</span>
+        <span class="save">SAVE ₹70</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=1500&price=130">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 2000 -->
+
+    <div class="package">
+
+      <h3>2,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹200</span>
+        <span class="new-price">₹150</span>
+        <span class="save">SAVE ₹50</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=2000&price=150">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 3000 -->
+
+    <div class="package">
+
+      <h3>3,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹300</span>
+        <span class="new-price">₹200</span>
+        <span class="save">SAVE ₹100</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=3000&price=200">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 4000 -->
+
+    <div class="package">
+
+      <h3>4,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹350</span>
+        <span class="new-price">₹250</span>
+        <span class="save">SAVE ₹100</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=4000&price=250">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 5000 -->
+
+    <div class="package">
+
+      <h3>5,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹450</span>
+        <span class="new-price">₹300</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=5000&price=300">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 6000 -->
+
+    <div class="package">
+
+      <h3>6,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹500</span>
+        <span class="new-price">₹350</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=6000&price=350">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 7000 -->
+
+    <div class="package">
+
+      <h3>7,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹600</span>
+        <span class="new-price">₹450</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=7000&price=450">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 8000 -->
+
+    <div class="package">
+
+      <h3>8,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹650</span>
+        <span class="new-price">₹500</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=8000&price=500">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 9000 -->
+
+    <div class="package">
+
+      <h3>9,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹700</span>
+        <span class="new-price">₹550</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=9000&price=550">
+        Get This Package →
+      </a>
+
+    </div>
+
+
+    <!-- 10000 -->
+
+    <div class="package popular">
+
+      <span class="popular-label">
+        BEST VALUE
+      </span>
+
+      <h3>10,000 Followers</h3>
+
+      <div class="package-sub">
+        Instagram Followers
+      </div>
+
+      <div class="price">
+        <span class="old-price">₹750</span>
+        <span class="new-price">₹600</span>
+        <span class="save">SAVE ₹150</span>
+      </div>
+
+      <a
+        class="package-btn"
+        href="order.html?package=10000&price=600">
+        Get This Package →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= TRUST ================= -->
+
+<section class="section" id="trust">
+
+  <div class="trust">
+
+    <div>
+
+      <div class="eyebrow">
+        Why SehrAn Media
+      </div>
+
+      <h2>
+        Simple. Clear. Mobile First.
+      </h2>
+
+      <p>
+        We keep the ordering experience straightforward,
+        with clear package pricing and a simple checkout flow.
+      </p>
+
+    </div>
+
+    <div class="trust-list">
+
+      <div class="trust-item">
+        <i class="fa-solid fa-circle-check"></i>
+        Clear package pricing
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-circle-check"></i>
+        No Instagram password required
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-circle-check"></i>
+        Payment screenshot submission
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-circle-check"></i>
+        Customer support available
+      </div>
+
+      <div class="trust-item">
+        <i class="fa-solid fa-circle-check"></i>
+        Designed for mobile users
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<div class="cta">
+
+  <h2>
+    Ready to grow your presence?
+  </h2>
+
+  <p>
+    Choose Instagram and select your package.
+  </p>
+
+  <a href="#packages" class="btn btn-primary">
+    View Instagram Packages
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
 
 </div>
 
 </main>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<div>
-SEHRAN MEDIA
-</div>
+  <div class="logo">
+    SEHR<span>AN</span> MEDIA
+  </div>
 
-<div class="social">
+  <div class="social">
 
-<a href="https://t.me/SehrAnMediaOrdersBot"
-target="_blank"
-aria-label="Telegram">
-<i class="fa-brands fa-telegram"></i>
-</a>
+    <a href="https://wa.me/917889777143"
+       aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-<a href="mailto:zpaul5567@gmail.com"
-aria-label="Email">
-<i class="fa-solid fa-envelope"></i>
-</a>
+    <a href="mailto:zpaul5567@gmail.com"
+       aria-label="Email">
+      <i class="fa-solid fa-envelope"></i>
+    </a>
 
-</div>
+  </div>
 
-<small>
-© 2026 SehrAn Media. All rights reserved.
-</small>
+  <small>
+    © 2026 SehrAn Media. All rights reserved.
+  </small>
 
 </footer>
 
