@@ -329,113 +329,78 @@ value
 
 /* SCREENSHOT */
 
-function saveScreenshot(
-screenshot,
-orderId
-) {
+function saveScreenshot(screenshot, orderId) {
+  if (
+    typeof screenshot !== "string" ||
+    !screenshot
+  ) {
+    return null;
+  }
 
-if (
-typeof screenshot !==
-"string" ||
-!screenshot
-) {
-return null;
+  const prefixJPEG = "data:image/jpeg;base64,";
+  const prefixPNG = "data:image/png;base64,";
+  const prefixWEBP = "data:image/webp;base64,";
+
+  let mimeType = "";
+  let base64Data = "";
+
+  if (screenshot.startsWith(prefixJPEG)) {
+    mimeType = "image/jpeg";
+    base64Data = screenshot.slice(prefixJPEG.length);
+  } else if (screenshot.startsWith(prefixPNG)) {
+    mimeType = "image/png";
+    base64Data = screenshot.slice(prefixPNG.length);
+  } else if (screenshot.startsWith(prefixWEBP)) {
+    mimeType = "image/webp";
+    base64Data = screenshot.slice(prefixWEBP.length);
+  } else {
+    throw new Error(
+      "Invalid payment screenshot format."
+    );
+  }
+
+  if (base64Data.length > 8 * 1024 * 1024) {
+    throw new Error(
+      "Payment screenshot is too large."
+    );
+  }
+
+  const buffer = Buffer.from(
+    base64Data,
+    "base64"
+  );
+
+  if (buffer.length > 5 * 1024 * 1024) {
+    throw new Error(
+      "Payment screenshot must be 5 MB or smaller."
+    );
+  }
+
+  let extension = "jpg";
+
+  if (mimeType === "image/png") {
+    extension = "png";
+  }
+
+  if (mimeType === "image/webp") {
+    extension = "webp";
+  }
+
+  const filename =
+    String(orderId) + "." + extension;
+
+  const filepath = path.join(
+    UPLOADS,
+    filename
+  );
+
+  fs.writeFileSync(
+    filepath,
+    buffer
+  );
+
+  return "/uploads/" + filename;
 }
-
-const match =
-screenshot.match(
-/^data:(image/jpeg|image/png|image/webp);base64,(.+)$/s
-);
-
-if (!match) {
-
-```
-throw new Error(
-  "Invalid payment screenshot format."
-);
-```
-
-}
-
-const mimeType =
-match[1];
-
-const base64Data =
-match[2];
-
-if (
-base64Data.length >
-8 * 1024 * 1024
-) {
-
-```
-throw new Error(
-  "Payment screenshot is too large."
-);
-```
-
-}
-
-const buffer =
-Buffer.from(
-base64Data,
-"base64"
-);
-
-if (
-buffer.length >
-5 * 1024 * 1024
-) {
-
-```
-throw new Error(
-  "Payment screenshot must be 5 MB or smaller."
-);
-```
-
-}
-
-let extension =
-"jpg";
-
-if (
-mimeType ===
-"image/png"
-) {
-extension =
-"png";
-}
-
-if (
-mimeType ===
-"image/webp"
-) {
-extension =
-"webp";
-}
-
-const filename =
-String(orderId) +
-"." +
-extension;
-
-const filepath =
-path.join(
-UPLOADS,
-filename
-);
-
-fs.writeFileSync(
-filepath,
-buffer
-);
-
-return (
-"/uploads/" +
-filename
-);
-}
-
 /* CREATE ORDER */
 
 app.post(
