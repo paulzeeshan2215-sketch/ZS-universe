@@ -1,3 +1,4 @@
+```javascript
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -81,7 +82,6 @@ function readOrders() {
     }
 
     return orders;
-
   } catch (error) {
     console.error(
       "Error reading orders.json:",
@@ -217,7 +217,6 @@ function validInstagramProfile(profile) {
     return /^\/[A-Za-z0-9._]+\/?$/.test(
       url.pathname
     );
-
   } catch (error) {
     return false;
   }
@@ -226,6 +225,7 @@ function validInstagramProfile(profile) {
 
 /* -----------------------------
    UTR VALIDATION
+   UTR IS OPTIONAL
 ----------------------------- */
 
 function validUTR(utr) {
@@ -276,6 +276,7 @@ function saveScreenshot(
 
   const webpPrefix =
     "data:image/webp;base64,";
+
 
   if (
     screenshot.startsWith(
@@ -378,7 +379,6 @@ function saveScreenshot(
 ----------------------------- */
 
 async function notifyTelegram(text) {
-
   if (!TG_BOT_TOKEN) {
     console.log(
       "Telegram bot token is not configured."
@@ -391,14 +391,11 @@ async function notifyTelegram(text) {
     };
   }
 
-
   try {
-
     const telegramUrl =
       "https://api.telegram.org/bot" +
       TG_BOT_TOKEN +
       "/sendMessage";
-
 
     const response =
       await fetch(
@@ -422,10 +419,8 @@ async function notifyTelegram(text) {
         }
       );
 
-
     const body =
       await response.text();
-
 
     return {
       sent:
@@ -434,10 +429,7 @@ async function notifyTelegram(text) {
       body:
         body
     };
-
-
   } catch (error) {
-
     console.error(
       "Telegram error:",
       error
@@ -459,12 +451,9 @@ async function notifyTelegram(text) {
 app.post(
   "/api/orders",
   async function (req, res) {
-
     try {
-
       const body =
         req.body || {};
-
 
       const pkg =
         cleanText(
@@ -472,19 +461,16 @@ app.post(
           100
         );
 
-
       const name =
         cleanText(
           body.name,
           60
         );
 
-
       const username =
         cleanUsername(
           body.username
         );
-
 
       const profile =
         cleanText(
@@ -492,13 +478,11 @@ app.post(
           300
         );
 
-
       const utr =
         cleanText(
           body.utr,
           80
         );
-
 
       const promoCode =
         cleanText(
@@ -508,7 +492,6 @@ app.post(
           30
         ).toUpperCase();
 
-
       const amount =
         cleanText(
           String(
@@ -516,7 +499,6 @@ app.post(
           ),
           30
         );
-
 
       const screenshot =
         body.screenshot ||
@@ -530,7 +512,6 @@ app.post(
           JSON.stringify(body)
         )
       ) {
-
         return res.status(400).json({
           error:
             "Passwords are not accepted."
@@ -538,17 +519,16 @@ app.post(
       }
 
 
-      /* REQUIRED FIELDS */
+      /* REQUIRED FIELDS
+         UTR IS NOT REQUIRED */
 
       if (
         !pkg ||
         !name ||
         !username ||
         !profile ||
-        !utr ||
         !screenshot
       ) {
-
         return res.status(400).json({
           error:
             "Please complete all fields and upload your payment screenshot."
@@ -561,7 +541,6 @@ app.post(
       if (
         !validName(name)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid name."
@@ -576,7 +555,6 @@ app.post(
           username
         )
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid Instagram username."
@@ -591,7 +569,6 @@ app.post(
           profile
         )
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid Instagram profile link."
@@ -599,15 +576,17 @@ app.post(
       }
 
 
-      /* UTR */
+      /* UTR
+         OPTIONAL:
+         Validate only when customer entered one */
 
       if (
+        utr &&
         !validUTR(utr)
       ) {
-
         return res.status(400).json({
           error:
-            "Please enter a valid payment UTR."
+            "Please enter a valid payment UTR or leave it empty."
         });
       }
 
@@ -618,7 +597,6 @@ app.post(
         promoCode !==
         "ZEESHAN10"
       ) {
-
         return res.status(400).json({
           error:
             "Invalid promo code. Please enter ZEESHAN10."
@@ -637,17 +615,13 @@ app.post(
       let screenshotPath =
         null;
 
-
       try {
-
         screenshotPath =
           saveScreenshot(
             screenshot,
             orderId
           );
-
       } catch (screenshotError) {
-
         return res.status(400).json({
           error:
             screenshotError.message
@@ -658,7 +632,6 @@ app.post(
       /* ORDER OBJECT */
 
       const order = {
-
         orderId:
           orderId,
 
@@ -678,7 +651,7 @@ app.post(
           profile,
 
         utr:
-          utr,
+          utr || "",
 
         promoCode:
           promoCode,
@@ -699,11 +672,9 @@ app.post(
       const orders =
         readOrders();
 
-
       orders.unshift(
         order
       );
-
 
       writeOrders(
         orders
@@ -715,7 +686,6 @@ app.post(
       const adminUrl =
         process.env.ADMIN_URL ||
         "";
-
 
       const screenshotUrl =
         screenshotPath &&
@@ -747,11 +717,13 @@ app.post(
         "\n" +
 
         "Amount: ₹" +
-        (amount || "Not specified") +
+        (amount ||
+          "Not specified") +
         "\n" +
 
         "UTR: " +
-        utr +
+        (utr ||
+          "Not provided") +
         "\n" +
 
         "Promo Code: " +
@@ -766,15 +738,12 @@ app.post(
 
 
       try {
-
         await notifyTelegram(
           message
         );
-
       } catch (
         telegramError
       ) {
-
         console.error(
           "Telegram notification error:",
           telegramError
@@ -785,7 +754,6 @@ app.post(
       /* SUCCESS */
 
       return res.json({
-
         ok:
           true,
 
@@ -796,17 +764,13 @@ app.post(
           order.status
       });
 
-
     } catch (error) {
-
       console.error(
         "Order processing error:",
         error
       );
 
-
       return res.status(500).json({
-
         error:
           "Unable to process order. Please try again."
       });
@@ -824,24 +788,19 @@ function admin(
   res,
   next
 ) {
-
   const key =
     req.headers[
       "x-admin-key"
     ];
 
-
   if (
     key !== ADMIN_KEY
   ) {
-
     return res.status(401).json({
-
       error:
         "Unauthorized"
     });
   }
-
 
   next();
 }
@@ -855,7 +814,6 @@ app.get(
   "/api/admin/orders",
   admin,
   function (req, res) {
-
     return res.json(
       readOrders()
     );
@@ -871,74 +829,57 @@ app.post(
   "/api/admin/orders/:id/status",
   admin,
   function (req, res) {
-
     const allowed = [
       "ACCEPTED",
       "REJECTED"
     ];
 
-
     const status =
       req.body &&
       req.body.status;
-
 
     if (
       !allowed.includes(
         status
       )
     ) {
-
       return res.status(400).json({
-
         error:
           "Invalid status"
       });
     }
 
-
     const orders =
       readOrders();
-
 
     const order =
       orders.find(
         function (item) {
-
           return (
             item.orderId ===
             req.params.id
           );
-
         }
       );
 
-
     if (!order) {
-
       return res.status(404).json({
-
         error:
           "Order not found"
       });
     }
 
-
     order.status =
       status;
 
-
     order.updatedAt =
       new Date().toISOString();
-
 
     writeOrders(
       orders
     );
 
-
     return res.json({
-
       ok:
         true,
 
@@ -956,36 +897,27 @@ app.post(
 app.get(
   "/api/orders/:id",
   function (req, res) {
-
     const orders =
       readOrders();
-
 
     const order =
       orders.find(
         function (item) {
-
           return (
             item.orderId ===
             req.params.id
           );
-
         }
       );
 
-
     if (!order) {
-
       return res.status(404).json({
-
         error:
           "Order not found"
       });
     }
 
-
     return res.json({
-
       orderId:
         order.orderId,
 
@@ -1009,7 +941,6 @@ app.get(
 app.get(
   "/",
   function (req, res) {
-
     res.sendFile(
       path.join(
         PUBLIC_DIR,
@@ -1026,15 +957,12 @@ app.get(
 
 app.use(
   function (req, res, next) {
-
     if (
       req.path.startsWith(
         "/api/"
       )
     ) {
-
       return res.status(404).json({
-
         error:
           "API endpoint not found"
       });
@@ -1052,11 +980,10 @@ app.use(
 app.listen(
   PORT,
   function () {
-
     console.log(
       "SehrAn Media server running on port " +
       PORT
     );
-
   }
 );
+```
