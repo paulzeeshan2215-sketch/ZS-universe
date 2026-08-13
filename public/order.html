@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -43,16 +42,16 @@ body {
 }
 
 .card {
-  background: rgba(20,18,34,.94);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(20, 18, 34, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 24px;
-  padding: 20px;
+  padding: 24px;
   margin-bottom: 16px;
-  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
 .package-card {
-  border-color: rgba(161,92,255,.35);
+  border-color: rgba(161, 92, 255, 0.35);
 }
 
 .package-label,
@@ -95,36 +94,36 @@ body {
   margin-bottom: 5px;
 }
 
-/* QR AREA */
-
+/* FIX: PERFECT QR CONTAINER FOR DESKTOP & MOBILE */
 .qr-box {
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 15px;
   background: #ffffff;
-  border-radius: 22px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
-  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
 #qrCode {
-  width: 240px;
-  height: 240px;
+  width: 230px;
+  height: 230px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
 }
 
-#qrCode canvas {
-  width: 240px !important;
-  height: 240px !important;
+#qrCode canvas,
+#qrCode img {
+  width: 230px !important;
+  height: 230px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
   display: block !important;
-  image-rendering: pixelated;
 }
 
 .amount-box {
@@ -147,7 +146,7 @@ body {
 
 .upi-box {
   background: #0d0c16;
-  border: 1px solid rgba(255,255,255,.09);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 15px;
   padding: 12px;
   text-align: center;
@@ -162,6 +161,7 @@ body {
   font-size: 16px;
   font-weight: 800;
   word-break: break-all;
+  color: #d39cff;
 }
 
 .button-row {
@@ -184,7 +184,7 @@ button {
 }
 
 .btn-upi {
-  background: linear-gradient(135deg,#8d35ff,#c75cff);
+  background: linear-gradient(135deg, #8d35ff, #c75cff);
   color: #fff;
 }
 
@@ -236,7 +236,7 @@ input {
   width: 100%;
   padding: 14px;
   border-radius: 13px;
-  border: 1px solid rgba(255,255,255,.10);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   background: #0e0d16;
   color: #fff;
   outline: none;
@@ -278,7 +278,7 @@ input::placeholder {
   border: 1.5px dashed #73508e;
   border-radius: 16px;
   padding: 18px;
-  background: rgba(115,80,142,.07);
+  background: rgba(115, 80, 142, 0.07);
   text-align: center;
 }
 
@@ -305,10 +305,11 @@ input::placeholder {
   width: 100%;
   padding: 17px;
   border-radius: 16px;
-  background: linear-gradient(135deg,#9a3fff,#d15bff);
+  background: linear-gradient(135deg, #9a3fff, #d15bff);
   color: #fff;
   font-size: 16px;
   font-weight: 900;
+  margin-top: 10px;
 }
 
 .submit-btn:disabled {
@@ -324,8 +325,8 @@ input::placeholder {
 }
 
 .error {
-  background: rgba(255,55,75,.10);
-  border: 1px solid rgba(255,55,75,.25);
+  background: rgba(255, 55, 75, 0.10);
+  border: 1px solid rgba(255, 55, 75, 0.25);
   color: #ff9ca7;
 }
 
@@ -334,7 +335,7 @@ input::placeholder {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at center,#301257,#0a0810 65%);
+  background: radial-gradient(circle at center, #301257, #0a0810 65%);
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -342,7 +343,7 @@ input::placeholder {
 
 .success-content {
   text-align: center;
-  width: min(92%,450px);
+  width: min(92%, 450px);
 }
 
 .success-tick {
@@ -350,11 +351,11 @@ input::placeholder {
   height: 105px;
   margin: 0 auto 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg,#8f35ff,#d763ff);
+  background: linear-gradient(135deg, #8f35ff, #d763ff);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 70px rgba(190,85,255,.55);
+  box-shadow: 0 0 70px rgba(190, 85, 255, 0.55);
 }
 
 .success-tick::after {
@@ -379,12 +380,11 @@ input::placeholder {
   margin-top: 15px;
   padding: 12px;
   border-radius: 13px;
-  background: rgba(255,255,255,.07);
+  background: rgba(255, 255, 255, 0.07);
   font-weight: 900;
 }
 
 @media (max-width: 480px) {
-
   .container {
     width: 94%;
   }
@@ -394,15 +394,16 @@ input::placeholder {
   }
 
   .qr-box {
-    width: min(290px, 88vw);
-    height: min(290px, 88vw);
-    padding: 18px;
+    width: 240px;
+    height: 240px;
+    padding: 12px;
   }
 
   #qrCode,
-  #qrCode canvas {
-    width: min(250px, 72vw) !important;
-    height: min(250px, 72vw) !important;
+  #qrCode canvas,
+  #qrCode img {
+    width: 210px !important;
+    height: 210px !important;
   }
 
   .button-row {
@@ -419,909 +420,358 @@ input::placeholder {
   }
 }
 </style>
-
 </head>
 
 <body>
 
 <main class="container">
 
-<div class="brand">
-  <h1>SehrAn Media</h1>
-  <p>Fast • Simple • Secure Social Media Services</p>
-</div>
-
-<section class="card package-card">
-
-  <div class="package-label">
-    Selected Package
+  <div class="brand">
+    <h1>SehrAn Media</h1>
+    <p>Fast • Simple • Secure Social Media Services</p>
   </div>
 
-  <div class="package-name" id="packageName">
-    Instagram Followers
-  </div>
-
-  <div class="package-price" id="packagePrice">
-    ₹30
-  </div>
-
-  <div class="package-note">
-    Your selected package amount is shown below.
-  </div>
-
-</section>
-
-<section class="card">
-
-  <div class="payment-title">
-    Pay Securely
-  </div>
-
-  <div class="payment-subtitle">
-    Scan the QR code with any UPI app.
-  </div>
-
-  <div class="qr-box">
-    <div id="qrCode"></div>
-  </div>
-
-  <div class="amount-box">
-
-```
-<div class="amount-label">
-  Payment Amount
-</div>
-
-<div class="amount" id="amountText">
-  ₹30
-</div>
-```
-
-  </div>
-
-  <div class="upi-box">
-
-```
-<div class="upi-label">
-  UPI ID
-</div>
-
-<div class="upi-id">
-  7889777143@fam
-</div>
-```
-
-  </div>
-
-  <div class="button-row">
-
-```
-<button
-  type="button"
-  class="btn btn-upi"
-  id="upiButton"
->
-  Pay with UPI
-</button>
-
-<button
-  type="button"
-  class="btn btn-copy"
-  id="copyButton"
->
-  Copy UPI ID
-</button>
-```
-
-  </div>
-
-</section>
-
-<section class="card">
-
-  <div class="payment-title">
-    How to Pay
-  </div>
-
-  <div class="step">
-    <div class="step-number">1</div>
-    <div>Scan the QR code with Google Pay, PhonePe or another UPI app.</div>
-  </div>
-
-  <div class="step">
-    <div class="step-number">2</div>
-    <div>Pay the exact amount shown above.</div>
-  </div>
-
-  <div class="step">
-    <div class="step-number">3</div>
-    <div>Take a clear screenshot of your successful payment.</div>
-  </div>
-
-  <div class="step">
-    <div class="step-number">4</div>
-    <div>Fill the details below and upload the payment screenshot.</div>
-  </div>
-
-</section>
-
-<form class="card" id="orderForm">
-
-  <div class="form-title">
-    Complete Your Order
-  </div>
-
-  <div class="form-subtitle">
-    Enter your details so your order can be processed correctly.
-  </div>
-
-  <div class="field">
-
-```
-<label for="name">
-  Your Name
-</label>
-
-<input
-  id="name"
-  type="text"
-  placeholder="Enter your real name"
-  maxlength="60"
-  required
->
-```
-
-  </div>
-
-  <div class="field">
-
-```
-<label for="username">
-  Instagram Username
-</label>
-
-<input
-  id="username"
-  type="text"
-  placeholder="@yourusername"
-  maxlength="30"
-  required
->
-```
-
-  </div>
-
-  <div class="field">
-
-```
-<label for="profile">
-  Instagram Profile Link
-</label>
-
-<input
-  id="profile"
-  type="url"
-  placeholder="https://instagram.com/yourusername"
-  maxlength="300"
-  required
->
-```
-
-  </div>
-
-  <div class="field">
-
-```
-<label for="promoCode">
-  Promo Code
-</label>
-
-<div class="promo-box">
-
-  <input
-    id="promoCode"
-    type="text"
-    placeholder="Enter promo code"
-    maxlength="30"
-  >
-
-  <button
-    type="button"
-    class="promo-btn"
-    id="promoButton"
-  >
-    Apply
-  </button>
-
-</div>
-
-<div
-  class="promo-message"
-  id="promoMessage"
-></div>
-```
-
-  </div>
-
-  <div class="field">
-
-```
-<label for="utr">
-  Payment UTR
-  <span class="optional">(Optional)</span>
-</label>
-
-<input
-  id="utr"
-  type="text"
-  placeholder="Enter UTR if available"
-  maxlength="80"
->
-```
-
-  </div>
-
-  <div class="field">
-
-```
-<label for="screenshot">
-  Payment Screenshot
-  <span style="color:#ff7585">*</span>
-</label>
-
-<div class="file-box">
-
-  <input
-    id="screenshot"
-    type="file"
-    accept="image/jpeg,image/png,image/webp"
-    required
-  >
-
-  <div class="file-help">
-    Only JPG, PNG or WEBP. Maximum 5 MB.
-  </div>
-
-  <img
-    id="preview"
-    class="preview"
-    alt="Payment screenshot preview"
-  >
-
-</div>
-```
-
-  </div>
-
-<button
-type="submit"
-class="submit-btn"
-id="submitButton"
-
->
-
-```
-Submit Order
-```
-
-  </button>
-
-  <div
-    class="message error"
-    id="errorMessage"
-  ></div>
-
-</form>
+  <section class="card package-card">
+    <div class="package-label">Selected Package</div>
+    <div class="package-name" id="packageName">Instagram Followers</div>
+    <div class="package-price" id="packagePrice">₹30</div>
+    <div class="package-note">Your selected package amount is shown below.</div>
+  </section>
+
+  <section class="card">
+    <div class="payment-title">Pay Securely</div>
+    <div class="payment-subtitle">Scan the QR code with any UPI app.</div>
+
+    <div class="qr-box">
+      <div id="qrCode"></div>
+    </div>
+
+    <div class="amount-box">
+      <div class="amount-label">Payment Amount</div>
+      <div class="amount" id="amountText">₹30</div>
+    </div>
+
+    <div class="upi-box">
+      <div class="upi-label">UPI ID</div>
+      <div class="upi-id">7889777143@fam</div>
+    </div>
+
+    <div class="button-row">
+      <button type="button" class="btn btn-upi" id="upiButton">Pay with UPI</button>
+      <button type="button" class="btn btn-copy" id="copyButton">Copy UPI ID</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="payment-title">How to Pay</div>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div>Scan the QR code with Google Pay, PhonePe or another UPI app.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div>Pay the exact amount shown above.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div>Take a clear screenshot of your successful payment.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div>Fill the details below and upload the payment screenshot.</div>
+    </div>
+  </section>
+
+  <form class="card" id="orderForm">
+    <div class="form-title">Complete Your Order</div>
+    <div class="form-subtitle">Enter your details so your order can be processed correctly.</div>
+
+    <div class="field">
+      <label for="name">Your Name</label>
+      <input id="name" type="text" placeholder="Enter your real name" maxlength="60" required>
+    </div>
+
+    <div class="field">
+      <label for="username">Instagram Username</label>
+      <input id="username" type="text" placeholder="@yourusername" maxlength="30" required>
+    </div>
+
+    <div class="field">
+      <label for="profile">Instagram Profile Link</label>
+      <input id="profile" type="url" placeholder="https://instagram.com/yourusername" maxlength="300" required>
+    </div>
+
+    <div class="field">
+      <label for="promoCode">Promo Code</label>
+      <div class="promo-box">
+        <input id="promoCode" type="text" placeholder="Enter promo code" maxlength="30">
+        <button type="button" class="promo-btn" id="promoButton">Apply</button>
+      </div>
+      <div class="promo-message" id="promoMessage"></div>
+    </div>
+
+    <div class="field">
+      <label for="utr">Payment UTR <span class="optional">(Optional)</span></label>
+      <input id="utr" type="text" placeholder="Enter UTR if available" maxlength="80">
+    </div>
+
+    <div class="field">
+      <label for="screenshot">Payment Screenshot <span style="color:#ff7585">*</span></label>
+      <div class="file-box">
+        <input id="screenshot" type="file" accept="image/jpeg,image/png,image/webp" required>
+        <div class="file-help">Only JPG, PNG or WEBP. Maximum 5 MB.</div>
+        <img id="preview" class="preview" alt="Payment screenshot preview">
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitButton">Submit Order</button>
+    <div class="message error" id="errorMessage"></div>
+  </form>
 
 </main>
 
-<div
-  class="success-screen"
-  id="successScreen"
->
-
+<div class="success-screen" id="successScreen">
   <div class="success-content">
-
-```
-<div class="success-tick"></div>
-
-<div class="success-title">
-  Order Submitted!
-</div>
-
-<div class="success-text">
-  Your payment screenshot has been received.
-  Your order will be reviewed and processed shortly.
-</div>
-
-<div
-  class="order-id"
-  id="successOrderId"
-></div>
-```
-
+    <div class="success-tick"></div>
+    <div class="success-title">Order Submitted!</div>
+    <div class="success-text">Your payment screenshot has been received. Your order will be reviewed and processed shortly.</div>
+    <div class="order-id" id="successOrderId"></div>
   </div>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-
 const UPI_ID = "7889777143@fam";
-
 const PROMO_CODE = "ZEESHAN10";
-
 const PACKAGE_NAME = "Instagram Followers";
-
 const ORIGINAL_AMOUNT = 30;
-
 const DISCOUNTED_AMOUNT = 27;
 
 let currentAmount = ORIGINAL_AMOUNT;
-
 let promoApplied = false;
 
-
-const qrCode =
-  document.getElementById("qrCode");
-
-const packagePrice =
-  document.getElementById("packagePrice");
-
-const amountText =
-  document.getElementById("amountText");
-
+const qrCode = document.getElementById("qrCode");
+const packagePrice = document.getElementById("packagePrice");
+const amountText = document.getElementById("amountText");
 
 function getUPILink() {
-
   return (
     "upi://pay" +
-    "?pa=" +
-    encodeURIComponent(UPI_ID) +
-    "&pn=" +
-    encodeURIComponent("SehrAn Media") +
-    "&am=" +
-    encodeURIComponent(currentAmount.toFixed(2)) +
+    "?pa=" + encodeURIComponent(UPI_ID) +
+    "&pn=" + encodeURIComponent("SehrAn Media") +
+    "&am=" + encodeURIComponent(currentAmount.toFixed(2)) +
     "&cu=INR" +
-    "&tn=" +
-    encodeURIComponent(PACKAGE_NAME)
+    "&tn=" + encodeURIComponent(PACKAGE_NAME)
   );
-
 }
 
-
 function createQR() {
-
   qrCode.innerHTML = "";
 
-  if (
-    typeof QRCode === "undefined"
-  ) {
-
-    qrCode.innerHTML =
-      "<div style='color:#111;text-align:center;font-size:13px;'>QR could not load.<br>Please use the UPI ID below.</div>";
-
+  if (typeof QRCode === "undefined") {
+    qrCode.innerHTML = "<div style='color:#111;text-align:center;font-size:13px;'>QR could not load.<br>Please use the UPI ID below.</div>";
     return;
   }
 
-  new QRCode(
-    qrCode,
-    {
-      text: getUPILink(),
-
-      width: 240,
-
-      height: 240,
-
-      colorDark: "#000000",
-
-      colorLight: "#ffffff",
-
-      correctLevel:
-        QRCode.CorrectLevel.H
-    }
-  );
-
+  new QRCode(qrCode, {
+    text: getUPILink(),
+    width: 230,
+    height: 230,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
 }
-
 
 createQR();
 
+document.getElementById("upiButton").addEventListener("click", function() {
+  window.location.href = getUPILink();
+});
 
-document
-  .getElementById("upiButton")
-  .addEventListener(
-    "click",
-    function() {
-
-      window.location.href =
-        getUPILink();
-
-    }
-  );
-
-
-document
-  .getElementById("copyButton")
-  .addEventListener(
-    "click",
-    async function() {
-
-      try {
-
-        await navigator.clipboard.writeText(
-          UPI_ID
-        );
-
-        this.textContent =
-          "Copied ✓";
-
-        setTimeout(
-          () => {
-            this.textContent =
-              "Copy UPI ID";
-          },
-          1800
-        );
-
-      } catch {
-
-        alert(
-          "UPI ID: " + UPI_ID
-        );
-
-      }
-
-    }
-  );
-
-
-const promoInput =
-  document.getElementById("promoCode");
-
-const promoButton =
-  document.getElementById("promoButton");
-
-const promoMessage =
-  document.getElementById("promoMessage");
-
-
-promoButton.addEventListener(
-  "click",
-  function() {
-
-    const code =
-      promoInput.value
-        .trim()
-        .toUpperCase();
-
-    if (
-      code === PROMO_CODE
-    ) {
-
-      currentAmount =
-        DISCOUNTED_AMOUNT;
-
-      promoApplied = true;
-
-      packagePrice.innerHTML =
-        '<span class="old-amount">₹30</span> ₹27';
-
-      amountText.innerHTML =
-        '<span class="old-amount">₹30</span> ₹27';
-
-      promoMessage.textContent =
-        "✓ Promo code applied. You save ₹3.";
-
-      promoMessage.style.color =
-        "#8ff0b0";
-
-      createQR();
-
-    } else {
-
-      currentAmount =
-        ORIGINAL_AMOUNT;
-
-      promoApplied = false;
-
-      packagePrice.textContent =
-        "₹30";
-
-      amountText.textContent =
-        "₹30";
-
-      promoMessage.textContent =
-        "Invalid promo code.";
-
-      promoMessage.style.color =
-        "#ff8995";
-
-      createQR();
-
-    }
-
+document.getElementById("copyButton").addEventListener("click", async function() {
+  try {
+    await navigator.clipboard.writeText(UPI_ID);
+    this.textContent = "Copied ✓";
+    setTimeout(() => {
+      this.textContent = "Copy UPI ID";
+    }, 1800);
+  } catch {
+    alert("UPI ID: " + UPI_ID);
   }
-);
+});
 
+const promoInput = document.getElementById("promoCode");
+const promoButton = document.getElementById("promoButton");
+const promoMessage = document.getElementById("promoMessage");
 
-const screenshotInput =
-  document.getElementById("screenshot");
+promoButton.addEventListener("click", function() {
+  const code = promoInput.value.trim().toUpperCase();
 
-const preview =
-  document.getElementById("preview");
-
-
-screenshotInput.addEventListener(
-  "change",
-  function() {
-
-    const file =
-      this.files &&
-      this.files[0];
-
-    if (!file) {
-      preview.style.display = "none";
-      return;
-    }
-
-    const allowed = [
-      "image/jpeg",
-      "image/png",
-      "image/webp"
-    ];
-
-    if (
-      !allowed.includes(file.type)
-    ) {
-
-      this.value = "";
-
-      preview.style.display =
-        "none";
-
-      alert(
-        "Please select a JPG, PNG or WEBP image."
-      );
-
-      return;
-    }
-
-    if (
-      file.size >
-      5 * 1024 * 1024
-    ) {
-
-      this.value = "";
-
-      preview.style.display =
-        "none";
-
-      alert(
-        "Screenshot must be 5 MB or smaller."
-      );
-
-      return;
-    }
-
-    const reader =
-      new FileReader();
-
-    reader.onload =
-      function(e) {
-
-        preview.src =
-          e.target.result;
-
-        preview.style.display =
-          "block";
-
-      };
-
-    reader.readAsDataURL(file);
-
+  if (code === PROMO_CODE) {
+    currentAmount = DISCOUNTED_AMOUNT;
+    promoApplied = true;
+    packagePrice.innerHTML = '<span class="old-amount">₹30</span> ₹27';
+    amountText.innerHTML = '<span class="old-amount">₹30</span> ₹27';
+    promoMessage.textContent = "✓ Promo code applied. You save ₹3.";
+    promoMessage.style.color = "#8ff0b0";
+    createQR();
+  } else {
+    currentAmount = ORIGINAL_AMOUNT;
+    promoApplied = false;
+    packagePrice.textContent = "₹30";
+    amountText.textContent = "₹30";
+    promoMessage.textContent = "Invalid promo code.";
+    promoMessage.style.color = "#ff8995";
+    createQR();
   }
-);
+});
 
+const screenshotInput = document.getElementById("screenshot");
+const preview = document.getElementById("preview");
 
-const form =
-  document.getElementById("orderForm");
+screenshotInput.addEventListener("change", function() {
+  const file = this.files && this.files[0];
 
-const submitButton =
-  document.getElementById("submitButton");
-
-const errorMessage =
-  document.getElementById("errorMessage");
-
-
-form.addEventListener(
-  "submit",
-  async function(event) {
-
-    event.preventDefault();
-
-    errorMessage.style.display =
-      "none";
-
-    const name =
-      document
-        .getElementById("name")
-        .value
-        .trim();
-
-    const username =
-      document
-        .getElementById("username")
-        .value
-        .trim()
-        .replace(/^@+/, "");
-
-    const profile =
-      document
-        .getElementById("profile")
-        .value
-        .trim();
-
-    const promoCode =
-      promoInput.value
-        .trim()
-        .toUpperCase();
-
-    const utr =
-      document
-        .getElementById("utr")
-        .value
-        .trim();
-
-    const file =
-      screenshotInput.files &&
-      screenshotInput.files[0];
-
-
-    if (
-      name.length < 2 ||
-      !/^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(name)
-    ) {
-
-      showError(
-        "Please enter a valid name."
-      );
-
-      return;
-    }
-
-
-    if (
-      !/^[A-Za-z0-9._]{1,30}$/.test(username)
-    ) {
-
-      showError(
-        "Please enter a valid Instagram username."
-      );
-
-      return;
-    }
-
-
-    let profileUrl;
-
-    try {
-
-      profileUrl =
-        new URL(profile);
-
-    } catch {
-
-      showError(
-        "Please enter a valid Instagram profile link."
-      );
-
-      return;
-    }
-
-
-    const hostname =
-      profileUrl.hostname
-        .toLowerCase()
-        .replace(/^www\./,"");
-
-
-    if (
-      hostname !== "instagram.com" &&
-      hostname !== "instagr.am"
-    ) {
-
-      showError(
-        "Please enter a valid Instagram profile link."
-      );
-
-      return;
-    }
-
-
-    if (
-      promoCode !== PROMO_CODE ||
-      !promoApplied
-    ) {
-
-      showError(
-        "Please apply the promo code ZEESHAN10."
-      );
-
-      return;
-    }
-
-
-    if (!file) {
-
-      showError(
-        "Please upload your payment screenshot."
-      );
-
-      return;
-    }
-
-
-    submitButton.disabled =
-      true;
-
-    submitButton.textContent =
-      "Submitting Order...";
-
-
-    try {
-
-      const screenshot =
-        await fileToDataURL(file);
-
-
-      const response =
-        await fetch(
-          "/api/orders",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify({
-
-                package:
-                  PACKAGE_NAME +
-                  " — ₹" +
-                  currentAmount,
-
-                name:
-                  name,
-
-                username:
-                  username,
-
-                profile:
-                  profile,
-
-                promoCode:
-                  PROMO_CODE,
-
-                amount:
-                  currentAmount,
-
-                utr:
-                  utr,
-
-                screenshot:
-                  screenshot
-
-              })
-          }
-        );
-
-
-      const data =
-        await response
-          .json()
-          .catch(
-            () => ({})
-          );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.error ||
-          "Unable to submit order."
-        );
-
-      }
-
-
-      document.getElementById(
-        "successOrderId"
-      ).textContent =
-        "Order ID: " +
-        (data.orderId || "Received");
-
-
-      document.getElementById(
-        "successScreen"
-      ).style.display =
-        "flex";
-
-
-    } catch(error) {
-
-      showError(
-        error.message ||
-        "Unable to submit order."
-      );
-
-      submitButton.disabled =
-        false;
-
-      submitButton.textContent =
-        "Submit Order";
-
-    }
-
+  if (!file) {
+    preview.style.display = "none";
+    return;
   }
-);
 
+  const allowed = ["image/jpeg", "image/png", "image/webp"];
+
+  if (!allowed.includes(file.type)) {
+    this.value = "";
+    preview.style.display = "none";
+    alert("Please select a JPG, PNG or WEBP image.");
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    this.value = "";
+    preview.style.display = "none";
+    alert("Screenshot must be 5 MB or smaller.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.src = e.target.result;
+    preview.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+});
+
+const form = document.getElementById("orderForm");
+const submitButton = document.getElementById("submitButton");
+const errorMessage = document.getElementById("errorMessage");
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  errorMessage.style.display = "none";
+
+  const name = document.getElementById("name").value.trim();
+  const username = document.getElementById("username").value.trim().replace(/^@+/, "");
+  const profile = document.getElementById("profile").value.trim();
+  const promoCode = promoInput.value.trim().toUpperCase();
+  const utr = document.getElementById("utr").value.trim();
+  const file = screenshotInput.files && screenshotInput.files[0];
+
+  if (name.length < 2 || !/^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(name)) {
+    showError("Please enter a valid name.");
+    return;
+  }
+
+  if (!/^[A-Za-z0-9._]{1,30}$/.test(username)) {
+    showError("Please enter a valid Instagram username.");
+    return;
+  }
+
+  let profileUrl;
+  try {
+    profileUrl = new URL(profile);
+  } catch {
+    showError("Please enter a valid Instagram profile link.");
+    return;
+  }
+
+  const hostname = profileUrl.hostname.toLowerCase().replace(/^www\./, "");
+  if (hostname !== "instagram.com" && hostname !== "instagr.am") {
+    showError("Please enter a valid Instagram profile link.");
+    return;
+  }
+
+  if (!file) {
+    showError("Please upload your payment screenshot.");
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting Order...";
+
+  try {
+    const screenshot = await fileToDataURL(file);
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        package: PACKAGE_NAME + " — ₹" + currentAmount,
+        name: name,
+        username: username,
+        profile: profile,
+        promoCode: promoApplied ? PROMO_CODE : "",
+        amount: currentAmount,
+        utr: utr,
+        screenshot: screenshot
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.error || "Unable to submit order.");
+    }
+
+    document.getElementById("successOrderId").textContent = "Order ID: " + (data.orderId || "Received");
+    document.getElementById("successScreen").style.display = "flex";
+
+  } catch(error) {
+    showError(error.message || "Unable to submit order.");
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit Order";
+  }
+});
 
 function fileToDataURL(file) {
-
-  return new Promise(
-    function(resolve,reject) {
-
-      const reader =
-        new FileReader();
-
-      reader.onload =
-        function() {
-          resolve(
-            reader.result
-          );
-        };
-
-      reader.onerror =
-        function() {
-
-          reject(
-            new Error(
-              "Unable to read screenshot."
-            )
-          );
-
-        };
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
+  return new Promise(function(resolve, reject) {
+    const reader = new FileReader();
+    reader.onload = function() {
+      resolve(reader.result);
+    };
+    reader.onerror = function() {
+      reject(new Error("Unable to read screenshot."));
+    };
+    reader.readAsDataURL(file);
+  });
 }
-
 
 function showError(message) {
-
-  errorMessage.textContent =
-    message;
-
-  errorMessage.style.display =
-    "block";
-
+  errorMessage.textContent = message;
+  errorMessage.style.display = "block";
   window.scrollTo({
-    top:
-      document.body.scrollHeight,
-    behavior:
-      "smooth"
+    top: document.body.scrollHeight,
+    behavior: "smooth"
   });
-
 }
-
 </script>
 
 </body>
