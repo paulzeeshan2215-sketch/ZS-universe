@@ -1,740 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SehrAn Media</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #050507;
-      color: white;
-    }
-
-    /* =========================
-       MAIN INTRO
-    ========================== */
-
-    .intro {
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      background:
-        radial-gradient(
-          circle at center,
-          #35105e 0%,
-          #160b27 35%,
-          #07070b 75%,
-          #030305 100%
-        );
-
-      animation: introFade 1s ease forwards;
-    }
-
-    .logo {
-      font-size: clamp(42px, 10vw, 90px);
-      font-weight: 1000;
-      letter-spacing: -4px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff,
-          #d79aff,
-          #8e35ff
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-
-      text-shadow:
-        0 0 25px rgba(168, 76, 255, 0.35);
-
-      animation:
-        logoEnter 1.2s cubic-bezier(.2,1.4,.4,1)
-        forwards;
-    }
-
-    .tagline {
-      margin-top: 12px;
-
-      font-size: clamp(12px, 3vw, 17px);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-
-      color: #aaa4b8;
-
-      opacity: 0;
-
-      animation:
-        taglineEnter 1s ease 0.55s
-        forwards;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .loading-line {
-      width: min(260px, 65%);
-      height: 3px;
+<title>SehrAn Media</title>
 
-      margin-top: 30px;
-
-      border-radius: 20px;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      background: rgba(255,255,255,0.10);
-      overflow: hidden;
-
-      opacity: 0;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
 
-      animation:
-        loadingAppear 0.5s ease 0.9s
-        forwards;
-    }
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .loading-line::after {
-      content: "";
+  background:
+    radial-gradient(
+      circle at center,
+      #160d20 0%,
+      #050507 45%,
+      #000000 100%
+    );
+
+  overflow: hidden;
+}
 
-      display: block;
+.finger-container {
+  position: relative;
 
-      width: 0%;
-      height: 100%;
+  width: 100vw;
+  height: 100vh;
 
-      border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      background:
-        linear-gradient(
-          90deg,
-          #8e35ff,
-          #d45cff,
-          #ffffff
-        );
+  perspective: 1000px;
+}
 
-      animation:
-        loading 2.1s ease 1s
-        forwards;
-    }
+.glow {
+  position: absolute;
 
-    /* =========================
-       PRANK SCREEN
-    ========================== */
+  width: 55vw;
+  height: 55vw;
 
-    .prank {
-      position: fixed;
-      inset: 0;
+  max-width: 500px;
+  max-height: 500px;
 
-      z-index: 20;
+  border-radius: 50%;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+  background:
+    radial-gradient(
+      circle,
+      rgba(185, 55, 255, 0.45) 0%,
+      rgba(125, 25, 255, 0.20) 35%,
+      transparent 72%
+    );
 
-      background:
-        radial-gradient(
-          circle at center,
-          #35103d 0%,
-          #130914 42%,
-          #030304 100%
-        );
+  filter: blur(45px);
 
-      opacity: 0;
-      visibility: hidden;
+  opacity: 0;
 
-      transform: scale(1.08);
+  transform: scale(0.2);
 
-      transition:
-        opacity 0.55s ease,
-        transform 0.55s ease,
-        visibility 0.55s;
-    }
+  animation:
+    glowIn 1.3s
+    cubic-bezier(.15,1.4,.3,1)
+    0.7s
+    forwards;
+}
 
-    .prank.active {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-    }
+.finger {
+  position: relative;
 
-    .prank-brand {
-      position: absolute;
+  font-size: min(65vw, 440px);
 
-      top: 30px;
+  line-height: 1;
 
-      font-size: 16px;
-      font-weight: 900;
+  user-select: none;
+  -webkit-user-select: none;
 
-      letter-spacing: 2px;
+  opacity: 0;
 
-      color: rgba(255,255,255,0.7);
+  transform:
+    scale(0.05)
+    rotate(-35deg)
+    translateY(80px);
 
-      text-transform: uppercase;
-    }
+  filter:
+    blur(12px)
+    drop-shadow(
+      0 0 25px
+      rgba(255,255,255,0.18)
+    );
 
-    .finger-wrapper {
-      position: relative;
+  animation:
+    fingerReveal
+    1.35s
+    cubic-bezier(.12,1.55,.28,1)
+    0.9s
+    forwards;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+/* Cinematic light flash */
 
-      width: min(78vw, 470px);
-      height: min(78vw, 470px);
+.flash {
+  position: absolute;
+  inset: 0;
 
-      animation:
-        fingerPop 1s cubic-bezier(.15,1.5,.35,1)
-        forwards;
-    }
-
-    .finger-glow {
-      position: absolute;
-
-      width: 80%;
-      height: 80%;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(213, 74, 255, 0.42),
-          transparent 68%
-        );
-
-      filter: blur(25px);
-
-      animation:
-        glowPulse 1.7s ease-in-out infinite;
-    }
-
-    .finger {
-      position: relative;
-
-      font-size: min(58vw, 340px);
-      line-height: 1;
-
-      filter:
-        drop-shadow(0 0 15px rgba(255,255,255,0.15))
-        drop-shadow(0 0 45px rgba(204,70,255,0.45));
-
-      transform-origin: center;
-
-      animation:
-        fingerShake 0.8s ease 0.75s;
-    }
-
-    .prank-title {
-      margin-top: 8px;
-
-      font-size: clamp(24px, 7vw, 48px);
-      font-weight: 1000;
-
-      text-align: center;
-
-      color: white;
-
-      opacity: 0;
-
-      animation:
-        titleAppear 0.7s ease 1s
-        forwards;
-    }
-
-    .prank-subtitle {
-      margin-top: 9px;
-
-      color: #aaa4b5;
-
-      font-size: 13px;
-
-      letter-spacing: 1px;
-
-      opacity: 0;
-
-      animation:
-        titleAppear 0.7s ease 1.25s
-        forwards;
-    }
-
-    .prank-button {
-      margin-top: 25px;
-
-      padding: 13px 25px;
-
-      border: 1px solid rgba(255,255,255,0.12);
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #8e35ff,
-          #c954ff
-        );
-
-      color: white;
-
-      font-size: 14px;
-      font-weight: 900;
-
-      cursor: pointer;
-
-      opacity: 0;
-
-      box-shadow:
-        0 10px 30px rgba(153, 55, 255, 0.25);
-
-      animation:
-        titleAppear 0.7s ease 1.45s
-        forwards;
-
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-    }
-
-    .prank-button:hover {
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 14px 35px rgba(153, 55, 255, 0.4);
-    }
-
-    .prank-button:active {
-      transform: scale(0.96);
-    }
-
-    /* =========================
-       PARTICLES
-    ========================== */
-
-    .particles {
-      position: absolute;
-      inset: 0;
-
-      overflow: hidden;
-
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
-      background: white;
-
-      opacity: 0;
-
-      animation:
-        particleFloat 3s linear infinite;
-    }
-
-    /* =========================
-       ANIMATIONS
-    ========================== */
-
-    @keyframes introFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes logoEnter {
-      0% {
-        opacity: 0;
-        transform:
-          translateY(35px)
-          scale(0.75);
-      }
-
-      70% {
-        transform:
-          translateY(-5px)
-          scale(1.04);
-      }
-
-      100% {
-        opacity: 1;
-        transform:
-          translateY(0)
-          scale(1);
-      }
-    }
-
-    @keyframes taglineEnter {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes loadingAppear {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes loading {
-      from {
-        width: 0%;
-      }
-
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes fingerPop {
-      0% {
-        opacity: 0;
-        transform:
-          scale(0.1)
-          rotate(-18deg);
-      }
-
-      55% {
-        opacity: 1;
-        transform:
-          scale(1.12)
-          rotate(5deg);
-      }
-
-      75% {
-        transform:
-          scale(0.94)
-          rotate(-2deg);
-      }
-
-      100% {
-        opacity: 1;
-        transform:
-          scale(1)
-          rotate(0deg);
-      }
-    }
-
-    @keyframes fingerShake {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      25% {
-        transform: rotate(-7deg);
-      }
-
-      50% {
-        transform: rotate(7deg);
-      }
-
-      75% {
-        transform: rotate(-4deg);
-      }
-
-      100% {
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes glowPulse {
-      0%,
-      100% {
-        transform: scale(0.9);
-        opacity: 0.45;
-      }
-
-      50% {
-        transform: scale(1.12);
-        opacity: 0.8;
-      }
-    }
-
-    @keyframes titleAppear {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes particleFloat {
-      0% {
-        transform:
-          translateY(105vh)
-          scale(0);
-        opacity: 0;
-      }
-
-      15% {
-        opacity: 0.8;
-      }
-
-      100% {
-        transform:
-          translateY(-10vh)
-          scale(1.4);
-        opacity: 0;
-      }
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media (max-width: 480px) {
-
-      .logo {
-        letter-spacing: -2px;
-      }
-
-      .prank-brand {
-        top: 22px;
-        font-size: 13px;
-      }
-
-      .finger-wrapper {
-        width: 90vw;
-        height: 90vw;
-      }
-
-      .finger {
-        font-size: 68vw;
-      }
-
-      .prank-title {
-        padding: 0 15px;
-      }
-
-      .prank-subtitle {
-        padding: 0 20px;
-        text-align: center;
-      }
-    }
-  </style>
+  background: white;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  animation:
+    flashEffect
+    0.7s
+    ease
+    1.05s
+    forwards;
+}
+
+/* Final subtle pulse */
+
+.finger-container::after {
+  content: "";
+
+  position: absolute;
+
+  width: 25vw;
+  height: 25vw;
+
+  max-width: 220px;
+  max-height: 220px;
+
+  border-radius: 50%;
+
+  border: 2px solid
+    rgba(210, 90, 255, 0.25);
+
+  opacity: 0;
+
+  transform: scale(0.2);
+
+  pointer-events: none;
+
+  animation:
+    pulseRing
+    1.5s
+    ease-out
+    1.45s
+    forwards;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fingerReveal {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.05)
+      rotate(-35deg)
+      translateY(80px);
+
+    filter:
+      blur(12px)
+      drop-shadow(
+        0 0 0
+        rgba(255,255,255,0)
+      );
+  }
+
+  35% {
+    opacity: 1;
+
+    transform:
+      scale(1.18)
+      rotate(8deg)
+      translateY(-8px);
+
+    filter:
+      blur(2px)
+      drop-shadow(
+        0 0 45px
+        rgba(190,70,255,0.55)
+      );
+  }
+
+  55% {
+    transform:
+      scale(0.92)
+      rotate(-4deg)
+      translateY(3px);
+  }
+
+  72% {
+    transform:
+      scale(1.06)
+      rotate(2deg)
+      translateY(-2px);
+  }
+
+  88% {
+    transform:
+      scale(0.98)
+      rotate(-1deg);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      rotate(0deg)
+      translateY(0);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 0 35px
+        rgba(190,70,255,0.45)
+      );
+  }
+}
+
+@keyframes glowIn {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  45% {
+    opacity: 0.85;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+
+@keyframes flashEffect {
+
+  0% {
+    opacity: 0;
+  }
+
+  45% {
+    opacity: 0.16;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulseRing {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  30% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+  .finger {
+    font-size: 72vw;
+  }
+
+  .glow {
+    width: 75vw;
+    height: 75vw;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       SEHRAN MEDIA INTRO
-  ========================== -->
+<div class="screen">
 
-  <div class="intro" id="intro">
+  <div class="finger-container">
 
-    <div class="logo">
-      SehrAn Media
+    <div class="glow"></div>
+
+    <div class="flash"></div>
+
+    <div class="finger">
+      🖕
     </div>
-
-    <div class="tagline">
-      Fast • Simple • Secure
-    </div>
-
-    <div class="loading-line"></div>
 
   </div>
 
-
-  <!-- =========================
-       PRANK SCREEN
-  ========================== -->
-
-  <div class="prank" id="prank">
-
-    <div class="particles" id="particles"></div>
-
-    <div class="prank-brand">
-      SehrAn Media
-    </div>
-
-
-    <div class="finger-wrapper">
-
-      <div class="finger-glow"></div>
-
-      <div class="finger">
-        🖕
-      </div>
-
-    </div>
-
-
-    <div class="prank-title">
-      GOT PRANKED 😈
-    </div>
-
-
-    <div class="prank-subtitle">
-      Don't worry bro... it's just a prank 😂
-    </div>
-
-
-    <button
-      class="prank-button"
-      id="continueButton"
-      type="button"
-    >
-      Continue to SehrAn Media
-    </button>
-
-  </div>
-
-
-  <script>
-
-    const intro =
-      document.getElementById("intro");
-
-    const prank =
-      document.getElementById("prank");
-
-    const particles =
-      document.getElementById("particles");
-
-    const continueButton =
-      document.getElementById("continueButton");
-
-
-    /* =========================
-       CREATE PARTICLES
-    ========================== */
-
-    function createParticles() {
-
-      particles.innerHTML = "";
-
-      for (
-        let i = 0;
-        i < 45;
-        i++
-      ) {
-
-        const particle =
-          document.createElement("div");
-
-        particle.className =
-          "particle";
-
-        particle.style.left =
-          Math.random() * 100 + "%";
-
-        particle.style.animationDelay =
-          Math.random() * 3 + "s";
-
-        particle.style.animationDuration =
-          2.5 + Math.random() * 3 + "s";
-
-        particle.style.width =
-          2 + Math.random() * 4 + "px";
-
-        particle.style.height =
-          particle.style.width;
-
-        particles.appendChild(
-          particle
-        );
-      }
-    }
-
-
-    /* =========================
-       SHOW PRANK
-    ========================== */
-
-    setTimeout(
-      function () {
-
-        intro.style.opacity = "0";
-
-        setTimeout(
-          function () {
-
-            intro.style.display =
-              "none";
-
-            prank.classList.add(
-              "active"
-            );
-
-            createParticles();
-
-          },
-          550
-        );
-
-      },
-      3200
-    );
-
-
-    /* =========================
-       CONTINUE BUTTON
-    ========================== */
-
-    continueButton.addEventListener(
-      "click",
-      function () {
-
-        prank.style.opacity = "0";
-
-        prank.style.transform =
-          "scale(1.05)";
-
-        setTimeout(
-          function () {
-
-            /*
-              अगर आपकी असली homepage
-              index.html में है, तो
-              prank के बाद उसे reload
-              किया जा सकता है।
-            */
-
-            window.location.href =
-              "/order.html";
-
-          },
-          550
-        );
-
-      }
-    );
-
-  </script>
+</div>
 
 </body>
 </html>
