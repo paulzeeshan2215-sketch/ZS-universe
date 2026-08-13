@@ -101,8 +101,8 @@
     }
 
     .qr-box {
-      width: 230px;
-      height: 230px;
+      width: min(230px, 72vw);
+      aspect-ratio: 1 / 1;
       margin: 0 auto 15px;
       background: #ffffff;
       border-radius: 20px;
@@ -110,11 +110,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     #qrCode {
       width: 100%;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #qrCode canvas,
+    #qrCode img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: contain;
     }
 
     .amount-box {
@@ -131,6 +146,14 @@
       font-size: 30px;
       font-weight: 900;
       color: #ffffff;
+    }
+
+    .old-amount {
+      color: #777080;
+      text-decoration: line-through;
+      font-size: 15px;
+      margin-right: 7px;
+      font-weight: 600;
     }
 
     .upi-box {
@@ -284,7 +307,7 @@
 
     .preview {
       display: none;
-      margin-top: 12px;
+      margin: 12px auto 0;
       border-radius: 14px;
       max-width: 100%;
       max-height: 260px;
@@ -428,9 +451,11 @@
         transform: scale(0.2);
         opacity: 0;
       }
+
       70% {
         transform: scale(1.12);
       }
+
       100% {
         transform: scale(1);
         opacity: 1;
@@ -441,9 +466,11 @@
       0% {
         transform: scale(0) rotate(-30deg);
       }
+
       70% {
         transform: scale(1.2) rotate(8deg);
       }
+
       100% {
         transform: scale(1) rotate(0);
       }
@@ -454,9 +481,11 @@
         transform: translateY(-50px) rotate(0deg);
         opacity: 0;
       }
+
       15% {
         opacity: 1;
       }
+
       100% {
         transform: translateY(110vh) rotate(360deg);
         opacity: 0;
@@ -478,12 +507,21 @@
       }
 
       .qr-box {
-        width: 205px;
-        height: 205px;
+        width: min(205px, 78vw);
+        padding: 10px;
       }
 
       .success-title {
         font-size: 26px;
+      }
+
+      .promo-box {
+        flex-direction: column;
+      }
+
+      .promo-btn {
+        width: 100%;
+        padding: 14px;
       }
     }
   </style>
@@ -499,7 +537,6 @@
   <h1>SehrAn Media</h1>
   <p>Fast • Simple • Secure Social Media Services</p>
 </div>
-
 
 <section class="card package-card">
 
@@ -527,7 +564,6 @@
 
 </section>
 
-
 <section class="card">
 
   <div class="payment-title">
@@ -538,11 +574,9 @@
     Scan the QR code or use the UPI button below.
   </div>
 
-
   <div class="qr-box">
     <div id="qrCode"></div>
   </div>
-
 
   <div class="amount-box">
 
@@ -559,7 +593,6 @@
 
   </div>
 
-
   <div class="upi-box">
 
     <div class="upi-label">
@@ -571,7 +604,6 @@
     </div>
 
   </div>
-
 
   <div class="button-row">
 
@@ -594,7 +626,6 @@
   </div>
 
 </section>
-
 
 <section class="card">
 
@@ -632,7 +663,6 @@
 
 </section>
 
-
 <form
   class="card"
   id="orderForm"
@@ -645,7 +675,6 @@
   <div class="form-subtitle">
     Enter real account details so your order can be processed correctly.
   </div>
-
 
   <div class="field">
 
@@ -665,7 +694,6 @@
 
   </div>
 
-
   <div class="field">
 
     <label for="username">
@@ -682,7 +710,6 @@
     >
 
   </div>
-
 
   <div class="field">
 
@@ -701,7 +728,6 @@
 
   </div>
 
-
   <div class="field">
 
     <label for="promoCode">
@@ -716,7 +742,6 @@
         type="text"
         placeholder="Enter promo code"
         maxlength="30"
-        required
       >
 
       <button
@@ -736,7 +761,6 @@
 
   </div>
 
-
   <div class="field">
 
     <label for="utr">
@@ -755,7 +779,6 @@
     >
 
   </div>
-
 
   <div class="field">
 
@@ -788,7 +811,6 @@
 
   </div>
 
-
   <button
     type="submit"
     class="submit-btn"
@@ -796,7 +818,6 @@
   >
     Submit Order
   </button>
-
 
   <div
     class="message error"
@@ -846,127 +867,144 @@
 
   <script>
 
-    const UPI_ID =
-      "7889777143@fam";
+    const UPI_ID = "7889777143@fam";
 
-    const PROMO_CODE =
-      "ZEESHAN10";
+    const PROMO_CODE = "ZEESHAN10";
 
-    const packageName =
-      "Instagram Followers";
+    const packageName = "Instagram Followers";
 
-    const packageAmount =
-      30;
+    const originalAmount = 30;
+
+    const discountedAmount = 27;
+
+    let currentAmount = originalAmount;
+
+    let promoApplied = false;
 
 
     const packageNameElement =
-      document.getElementById(
-        "packageName"
-      );
+      document.getElementById("packageName");
 
     const packagePriceElement =
-      document.getElementById(
-        "packagePrice"
-      );
+      document.getElementById("packagePrice");
 
     const amountText =
-      document.getElementById(
-        "amountText"
-      );
+      document.getElementById("amountText");
 
     const qrCode =
-      document.getElementById(
-        "qrCode"
-      );
+      document.getElementById("qrCode");
+
+    const upiButton =
+      document.getElementById("upiButton");
 
 
     packageNameElement.textContent =
       packageName;
 
     packagePriceElement.textContent =
-      "₹" + packageAmount;
+      "₹" + originalAmount;
 
-    amountText.textContent =
-      "₹" + packageAmount;
+    amountText.innerHTML =
+      "₹" + originalAmount;
 
 
-    /* UPI PAYMENT LINK */
+    function generateUPILink() {
 
-    const upiLink =
-      "upi://pay" +
-      "?pa=" +
-      encodeURIComponent(
-        UPI_ID
-      ) +
-      "&pn=" +
-      encodeURIComponent(
-        "SehrAn Media"
-      ) +
-      "&am=" +
-      encodeURIComponent(
-        packageAmount.toFixed(2)
-      ) +
-      "&cu=INR" +
-      "&tn=" +
-      encodeURIComponent(
-        packageName
+      return (
+        "upi://pay" +
+        "?pa=" +
+        encodeURIComponent(UPI_ID) +
+        "&pn=" +
+        encodeURIComponent("SehrAn Media") +
+        "&am=" +
+        encodeURIComponent(
+          currentAmount.toFixed(2)
+        ) +
+        "&cu=INR" +
+        "&tn=" +
+        encodeURIComponent(packageName)
       );
 
-
-    /* QR CODE */
-
-    if (
-      typeof QRCode !==
-      "undefined"
-    ) {
-
-      new QRCode(
-        qrCode,
-        {
-          text:
-            upiLink,
-
-          width:
-            200,
-
-          height:
-            200,
-
-          correctLevel:
-            QRCode.CorrectLevel.H
-        }
-      );
-
-    } else {
-
-      qrCode.innerHTML =
-        "<p style='color:#111;text-align:center;font-size:12px;'>QR unavailable. Use UPI ID below.</p>";
     }
 
 
-    /* PAY WITH UPI */
+    function generateQRCode() {
+
+      qrCode.innerHTML = "";
+
+      const upiLink =
+        generateUPILink();
+
+      if (
+        typeof QRCode !== "undefined"
+      ) {
+
+        new QRCode(
+          qrCode,
+          {
+            text: upiLink,
+            width: 180,
+            height: 180,
+            correctLevel:
+              QRCode.CorrectLevel.H
+          }
+        );
+
+        setTimeout(
+          function () {
+
+            const qrCanvas =
+              qrCode.querySelector("canvas");
+
+            const qrImage =
+              qrCode.querySelector("img");
+
+            if (qrCanvas) {
+              qrCanvas.style.width = "100%";
+              qrCanvas.style.height = "100%";
+              qrCanvas.style.maxWidth = "100%";
+              qrCanvas.style.maxHeight = "100%";
+              qrCanvas.style.objectFit = "contain";
+            }
+
+            if (qrImage) {
+              qrImage.style.width = "100%";
+              qrImage.style.height = "100%";
+              qrImage.style.maxWidth = "100%";
+              qrImage.style.maxHeight = "100%";
+              qrImage.style.objectFit = "contain";
+            }
+
+          },
+          50
+        );
+
+      } else {
+
+        qrCode.innerHTML =
+          "<p style='color:#111;text-align:center;font-size:12px;'>QR unavailable. Please use the UPI ID below.</p>";
+
+      }
+
+    }
+
+
+    generateQRCode();
+
+
+    upiButton.addEventListener(
+      "click",
+      function () {
+
+        window.location.href =
+          generateUPILink();
+
+      }
+    );
+
 
     document
-      .getElementById(
-        "upiButton"
-      )
-      .addEventListener(
-        "click",
-        function () {
-
-          window.location.href =
-            upiLink;
-
-        }
-      );
-
-
-    /* COPY UPI */
-
-    document
-      .getElementById(
-        "copyButton"
-      )
+      .getElementById("copyButton")
       .addEventListener(
         "click",
         async function () {
@@ -994,73 +1032,120 @@
               "UPI ID: " +
               UPI_ID
             );
+
           }
 
         }
       );
 
-
-    /* PROMO */
 
     const promoInput =
-      document.getElementById(
-        "promoCode"
-      );
+      document.getElementById("promoCode");
 
     const promoMessage =
-      document.getElementById(
-        "promoMessage"
-      );
+      document.getElementById("promoMessage");
+
+    const promoButton =
+      document.getElementById("promoButton");
 
 
-    document
-      .getElementById(
-        "promoButton"
-      )
-      .addEventListener(
-        "click",
-        function () {
+    promoButton.addEventListener(
+      "click",
+      function () {
 
-          const value =
-            promoInput.value
-              .trim()
-              .toUpperCase();
+        const value =
+          promoInput.value
+            .trim()
+            .toUpperCase();
 
-          if (
-            value ===
-            PROMO_CODE
-          ) {
+        if (
+          value === PROMO_CODE
+        ) {
 
-            promoMessage.textContent =
-              "✓ Promo code applied.";
+          promoApplied = true;
 
-            promoMessage.style.color =
-              "#8ff0b0";
+          currentAmount =
+            discountedAmount;
 
-          } else {
+          packagePriceElement.innerHTML =
+            '<span class="old-amount">₹30</span> ₹27';
 
-            promoMessage.textContent =
-              "Invalid promo code.";
+          amountText.innerHTML =
+            '<span class="old-amount">₹30</span> ₹27';
 
-            promoMessage.style.color =
-              "#ff8995";
-          }
+          promoMessage.textContent =
+            "✓ Promo code applied. You save ₹3.";
+
+          promoMessage.style.color =
+            "#8ff0b0";
+
+          generateQRCode();
+
+        } else {
+
+          promoApplied = false;
+
+          currentAmount =
+            originalAmount;
+
+          packagePriceElement.textContent =
+            "₹30";
+
+          amountText.textContent =
+            "₹30";
+
+          promoMessage.textContent =
+            "Invalid promo code.";
+
+          promoMessage.style.color =
+            "#ff8995";
+
+          generateQRCode();
 
         }
-      );
+
+      }
+    );
 
 
-    /* SCREENSHOT PREVIEW */
+    promoInput.addEventListener(
+      "input",
+      function () {
+
+        if (
+          promoApplied &&
+          this.value
+            .trim()
+            .toUpperCase() !== PROMO_CODE
+        ) {
+
+          promoApplied = false;
+
+          currentAmount =
+            originalAmount;
+
+          packagePriceElement.textContent =
+            "₹30";
+
+          amountText.textContent =
+            "₹30";
+
+          promoMessage.textContent =
+            "";
+
+          generateQRCode();
+
+        }
+
+      }
+    );
+
 
     const screenshotInput =
-      document.getElementById(
-        "screenshot"
-      );
+      document.getElementById("screenshot");
 
     const preview =
-      document.getElementById(
-        "preview"
-      );
+      document.getElementById("preview");
 
 
     screenshotInput.addEventListener(
@@ -1080,6 +1165,7 @@
             "";
 
           return;
+
         }
 
 
@@ -1096,8 +1182,7 @@
           )
         ) {
 
-          this.value =
-            "";
+          this.value = "";
 
           preview.style.display =
             "none";
@@ -1107,6 +1192,7 @@
           );
 
           return;
+
         }
 
 
@@ -1115,8 +1201,7 @@
           5 * 1024 * 1024
         ) {
 
-          this.value =
-            "";
+          this.value = "";
 
           preview.style.display =
             "none";
@@ -1126,6 +1211,7 @@
           );
 
           return;
+
         }
 
 
@@ -1141,33 +1227,24 @@
 
             preview.style.display =
               "block";
+
           };
 
 
-        reader.readAsDataURL(
-          file
-        );
+        reader.readAsDataURL(file);
 
       }
     );
 
 
-    /* FORM */
-
     const form =
-      document.getElementById(
-        "orderForm"
-      );
+      document.getElementById("orderForm");
 
     const submitButton =
-      document.getElementById(
-        "submitButton"
-      );
+      document.getElementById("submitButton");
 
     const errorMessage =
-      document.getElementById(
-        "errorMessage"
-      );
+      document.getElementById("errorMessage");
 
 
     form.addEventListener(
@@ -1175,7 +1252,6 @@
       async function (event) {
 
         event.preventDefault();
-
 
         errorMessage.style.display =
           "none";
@@ -1186,31 +1262,22 @@
 
         const name =
           document
-            .getElementById(
-              "name"
-            )
+            .getElementById("name")
             .value
             .trim();
 
 
-        let username =
+        const username =
           document
-            .getElementById(
-              "username"
-            )
+            .getElementById("username")
             .value
             .trim()
-            .replace(
-              /^@+/,
-              ""
-            );
+            .replace(/^@+/, "");
 
 
         const profile =
           document
-            .getElementById(
-              "profile"
-            )
+            .getElementById("profile")
             .value
             .trim();
 
@@ -1223,9 +1290,7 @@
 
         const utr =
           document
-            .getElementById(
-              "utr"
-            )
+            .getElementById("utr")
             .value
             .trim();
 
@@ -1244,6 +1309,7 @@
           );
 
           return;
+
         }
 
 
@@ -1258,6 +1324,7 @@
           );
 
           return;
+
         }
 
 
@@ -1272,6 +1339,7 @@
           );
 
           return;
+
         }
 
 
@@ -1280,9 +1348,7 @@
         try {
 
           profileUrl =
-            new URL(
-              profile
-            );
+            new URL(profile);
 
         } catch {
 
@@ -1291,23 +1357,19 @@
           );
 
           return;
+
         }
 
 
         const hostname =
           profileUrl.hostname
             .toLowerCase()
-            .replace(
-              /^www\./,
-              ""
-            );
+            .replace(/^www\./, "");
 
 
         if (
-          hostname !==
-            "instagram.com" &&
-          hostname !==
-            "instagr.am"
+          hostname !== "instagram.com" &&
+          hostname !== "instagr.am"
         ) {
 
           showError(
@@ -1315,19 +1377,33 @@
           );
 
           return;
+
         }
 
 
         if (
-          promoCode !==
-          PROMO_CODE
+          promoCode !== PROMO_CODE
         ) {
 
           showError(
-            "Please enter the correct promo code: ZEESHAN10"
+            "Please enter and apply the promo code ZEESHAN10."
           );
 
           return;
+
+        }
+
+
+        if (
+          !promoApplied
+        ) {
+
+          showError(
+            "Please click Apply for promo code ZEESHAN10."
+          );
+
+          return;
+
         }
 
 
@@ -1338,6 +1414,7 @@
           );
 
           return;
+
         }
 
 
@@ -1351,6 +1428,7 @@
           );
 
           return;
+
         }
 
 
@@ -1364,17 +1442,14 @@
         try {
 
           const screenshot =
-            await fileToDataURL(
-              file
-            );
+            await fileToDataURL(file);
 
 
           const response =
             await fetch(
               "/api/orders",
               {
-                method:
-                  "POST",
+                method: "POST",
 
                 headers: {
                   "Content-Type":
@@ -1386,7 +1461,7 @@
                     package:
                       packageName +
                       " — ₹" +
-                      packageAmount,
+                      currentAmount,
 
                     name:
                       name,
@@ -1398,10 +1473,10 @@
                       profile,
 
                     promoCode:
-                      promoCode,
+                      PROMO_CODE,
 
                     amount:
-                      packageAmount,
+                      currentAmount,
 
                     utr:
                       utr,
@@ -1428,6 +1503,7 @@
               data.error ||
               "Unable to submit order."
             );
+
           }
 
 
@@ -1443,21 +1519,19 @@
             "Something went wrong. Please try again."
           );
 
-
           submitButton.disabled =
             false;
 
           submitButton.textContent =
             "Submit Order";
+
         }
 
       }
     );
 
 
-    function fileToDataURL(
-      file
-    ) {
+    function fileToDataURL(file) {
 
       return new Promise(
         function (
@@ -1479,26 +1553,25 @@
 
           reader.onerror =
             function () {
+
               reject(
                 new Error(
                   "Unable to read screenshot."
                 )
               );
+
             };
 
 
-          reader.readAsDataURL(
-            file
-          );
+          reader.readAsDataURL(file);
 
         }
       );
+
     }
 
 
-    function showError(
-      message
-    ) {
+    function showError(message) {
 
       errorMessage.textContent =
         message;
@@ -1512,12 +1585,11 @@
         behavior:
           "smooth"
       });
+
     }
 
 
-    function showSuccess(
-      orderId
-    ) {
+    function showSuccess(orderId) {
 
       const successScreen =
         document.getElementById(
@@ -1528,6 +1600,7 @@
         document.getElementById(
           "successOrderId"
         );
+
 
       successOrderId.textContent =
         "Order ID: " +
@@ -1546,9 +1619,7 @@
     function createStars() {
 
       const stars =
-        document.getElementById(
-          "stars"
-        );
+        document.getElementById("stars");
 
       stars.innerHTML =
         "";
@@ -1570,9 +1641,7 @@
       ) {
 
         const star =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         star.className =
           "star";
@@ -1586,24 +1655,18 @@
           ];
 
         star.style.left =
-          Math.random() *
-          100 +
-          "%";
+          Math.random() * 100 + "%";
 
         star.style.animationDelay =
-          Math.random() *
-          1.5 +
-          "s";
+          Math.random() * 1.5 + "s";
 
         star.style.fontSize =
           10 +
-          Math.random() *
-          18 +
+          Math.random() * 18 +
           "px";
 
-        stars.appendChild(
-          star
-        );
+        stars.appendChild(star);
+
       }
 
     }
