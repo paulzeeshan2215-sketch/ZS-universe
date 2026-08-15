@@ -1,1872 +1,4435 @@
-<!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Place Order | SehrAn Media</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(124, 58, 237, 0.20), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.16), transparent 35%),
-        #080812;
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .header {
-      width: 100%;
-      padding: 18px 22px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8,8,18,0.88);
-      backdrop-filter: blur(14px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    .nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      font-family: "Montserrat", sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .brand span {
-      color: #a855f7;
-    }
-
-    .back-home {
-      color: #c9c9d8;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .back-home:hover {
-      color: #fff;
-    }
-
-    .container {
-      width: min(760px, calc(100% - 30px));
-      margin: 42px auto 70px;
-    }
-
-    .heading {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .heading h1 {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .heading p {
-      color: #a9a9bb;
-      font-size: 14px;
-    }
-
-    /* Progress */
-
-    .progress {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 28px;
-      max-width: 500px;
-    }
-
-    .progress-step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #777789;
-      font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .progress-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #1b1b29;
-      border: 1px solid #333344;
-      color: #9999aa;
-      font-weight: 700;
-    }
-
-    .progress-step.active {
-      color: #fff;
-    }
-
-    .progress-step.active .progress-circle {
-      background: linear-gradient(135deg, #9333ea, #ec4899);
-      border-color: transparent;
-      color: white;
-      box-shadow: 0 0 22px rgba(168,85,247,0.25);
-    }
-
-    .progress-line {
-      height: 1px;
-      width: 70px;
-      background: #30303d;
-      margin: 0 12px;
-    }
-
-    .card {
-      background: rgba(18,18,30,0.94);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 20px 70px rgba(0,0,0,0.30);
-    }
-
-    .step {
-      display: none;
-    }
-
-    .step.active {
-      display: block;
-      animation: fadeIn 0.25s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .step-title {
-      font-family: "Montserrat", sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-
-    .step-subtitle {
-      color: #9292a5;
-      font-size: 13px;
-      margin-bottom: 25px;
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #e5e5ed;
-    }
-
-    .required {
-      color: #f472b6;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      height: 50px;
-      padding: 0 15px;
-      border-radius: 12px;
-      border: 1px solid #303041;
-      background: #10101b;
-      color: #fff;
-      outline: none;
-      font-family: "Poppins", sans-serif;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .field input::placeholder {
-      color: #666678;
-    }
-
-    .field input:focus,
-    .field select:focus {
-      border-color: #9b5de5;
-      box-shadow: 0 0 0 3px rgba(155,93,229,0.10);
-    }
-
-    .field select option {
-      background: #10101b;
-      color: #fff;
-    }
-
-    .two-fields {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    button {
-      font-family: "Poppins", sans-serif;
-      cursor: pointer;
-    }
-
-    .btn {
-      border: 0;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn-primary {
-      flex: 1;
-      color: #fff;
-      background: linear-gradient(135deg, #9333ea, #ec4899);
-      box-shadow: 0 12px 30px rgba(168,85,247,0.20);
-    }
-
-    .btn-secondary {
-      color: #fff;
-      background: #252535;
-      border: 1px solid #39394b;
-    }
-
-    /* Payment */
-
-    .payment-box {
-      text-align: center;
-      background: #0d0d18;
-      border: 1px solid #2c2c3b;
-      border-radius: 18px;
-      padding: 22px 15px;
-      margin-bottom: 22px;
-    }
-
-    .payment-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .payment-subtitle {
-      color: #9292a5;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-
-    /* IMPORTANT:
-       Fixed QR wrapper prevents giant QR on desktop.
-    */
-
-    .qr-wrapper {
-      width: 230px;
-      height: 230px;
-      max-width: 100%;
-      margin: 0 auto 16px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #qrcode {
-      width: 210px;
-      height: 210px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #qrcode canvas,
-    #qrcode img {
-      width: 210px !important;
-      height: 210px !important;
-      max-width: 210px !important;
-      max-height: 210px !important;
-      display: block;
-    }
-
-    .upi-label {
-      color: #9292a5;
-      font-size: 12px;
-      margin-bottom: 4px;
-    }
-
-    .upi-id {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      word-break: break-all;
-    }
-
-    .amount-box {
-      margin: 15px auto 0;
-      max-width: 300px;
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(168,85,247,0.08);
-      border: 1px solid rgba(168,85,247,0.20);
-    }
-
-    .amount-label {
-      color: #9999aa;
-      font-size: 11px;
-      margin-bottom: 2px;
-    }
-
-    .amount-value {
-      font-size: 23px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .instructions {
-      background: rgba(34,197,94,0.06);
-      border: 1px solid rgba(34,197,94,0.16);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
-    }
-
-    .instructions h3 {
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .instructions ol {
-      padding-left: 18px;
-      color: #aaaabc;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    /* Upload */
-
-    .upload-box {
-      position: relative;
-      border: 1px dashed #454556;
-      border-radius: 14px;
-      background: #10101b;
-      padding: 18px;
-      text-align: center;
-      transition: 0.2s;
-    }
-
-    .upload-box:hover {
-      border-color: #9b5de5;
-    }
-
-    .upload-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-
-    .upload-title {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .upload-info {
-      color: #777789;
-      font-size: 11px;
-      margin-top: 4px;
-      margin-bottom: 12px;
-    }
-
-    .upload-box input[type="file"] {
-      width: 100%;
-      font-size: 12px;
-      color: #aaaabc;
-    }
-
-    .preview {
-      display: none;
-      margin: 14px auto 0;
-      max-width: 260px;
-      max-height: 260px;
-      border-radius: 10px;
-      border: 1px solid #383849;
-      object-fit: contain;
-    }
-
-    .preview.show {
-      display: block;
-    }
-
-    .security-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      padding: 12px;
-      margin-top: 18px;
-      border-radius: 12px;
-      background: #11111d;
-      border: 1px solid #272737;
-      color: #858597;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .error-message,
-    .success-message {
-      display: none;
-      padding: 13px 14px;
-      border-radius: 12px;
-      margin-bottom: 17px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .error-message {
-      color: #fecaca;
-      background: rgba(239,68,68,0.08);
-      border: 1px solid rgba(239,68,68,0.20);
-    }
-
-    .success-message {
-      color: #bbf7d0;
-      background: rgba(34,197,94,0.08);
-      border: 1px solid rgba(34,197,94,0.20);
-      text-align: center;
-    }
-
-    .error-message.show,
-    .success-message.show {
-      display: block;
-    }
-
-    .order-result {
-      display: none;
-      text-align: center;
-      padding: 20px 5px 5px;
-    }
-
-    .order-result.show {
-      display: block;
-    }
-
-    .success-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.25);
-      font-size: 30px;
-    }
-
-    .order-result h2 {
-      font-family: "Montserrat", sans-serif;
-      margin-bottom: 8px;
-    }
-
-    .order-result p {
-      color: #9d9daf;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .order-id-box {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 12px 20px;
-      background: #10101b;
-      border: 1px solid #333344;
-      border-radius: 12px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #666678;
-      font-size: 11px;
-      padding: 0 20px 35px;
-    }
-
-    @media (max-width: 600px) {
-
-      .header {
-        padding: 15px 16px;
-      }
-
-      .container {
-        width: min(100% - 20px, 760px);
-        margin-top: 28px;
-      }
-
-      .card {
-        padding: 20px 16px;
-        border-radius: 18px;
-      }
-
-      .two-fields {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .button-row {
-        flex-direction: column-reverse;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .progress-line {
-        width: 35px;
-        margin: 0 7px;
-      }
-
-      .progress-step {
-        font-size: 10px;
-      }
-
-      .progress-circle {
-        width: 30px;
-        height: 30px;
-        font-size: 11px;
-      }
-
-      .qr-wrapper {
-        width: 220px;
-        height: 220px;
-      }
-
-      #qrcode {
-        width: 200px;
-        height: 200px;
-      }
-
-      #qrcode canvas,
-      #qrcode img {
-        width: 200px !important;
-        height: 200px !important;
-        max-width: 200px !important;
-        max-height: 200px !important;
-      }
-    }
-  </style>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>SehrAn Media — Place Order</title>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+  font-family:"Poppins",sans-serif;
+
+  min-height:100vh;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #20284a 0%,
+      #0b1020 45%,
+      #05070e 100%
+    );
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+
+  width:100%;
+
+  max-width:900px;
+
+  margin:auto;
+
+  padding:28px 18px 60px;
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+
+  text-align:center;
+
+  margin-bottom:28px;
+
+}
+
+.brand h1{
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:32px;
+
+  font-weight:800;
+
+  letter-spacing:-1px;
+
+}
+
+.brand h1 span{
+
+  color:#ff3d81;
+
+}
+
+.brand p{
+
+  margin-top:7px;
+
+  color:#aeb6d0;
+
+  font-size:14px;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  margin-bottom:25px;
+
+}
+
+.step{
+
+  width:36px;
+
+  height:36px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#1b2239;
+
+  border:1px solid #39425f;
+
+  color:#8e98b8;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  transition:.3s;
+
+}
+
+.step.active{
+
+  background:#ff3d81;
+
+  border-color:#ff3d81;
+
+  color:#fff;
+
+  box-shadow:
+    0 0 22px rgba(255,61,129,.35);
+
+}
+
+.line{
+
+  width:65px;
+
+  height:2px;
+
+  background:#303952;
+
+  transition:.3s;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+  background:rgba(15,21,40,.94);
+
+  border:1px solid #29324d;
+
+  border-radius:24px;
+
+  padding:28px;
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.35);
+
+  backdrop-filter:blur(12px);
+
+}
+
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
+.screen{
+
+  display:none;
+
+}
+
+.screen.active{
+
+  display:block;
+
+  animation:fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+
+    transform:translateY(10px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+
+/* =========================================================
+   TITLES
+========================================================= */
+
+.title{
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:24px;
+
+  font-weight:800;
+
+  margin-bottom:8px;
+
+}
+
+.subtitle{
+
+  color:#9fa8c1;
+
+  font-size:14px;
+
+  margin-bottom:24px;
+
+  line-height:1.6;
+
+}
+
+
+/* =========================================================
+   SELECTED PACKAGE
+========================================================= */
+
+.selected-package{
+
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,61,129,.14),
+      rgba(111,92,255,.10)
+    );
+
+  border:1px solid rgba(255,61,129,.25);
+
+  margin-bottom:22px;
+
+}
+
+.selected-package .label{
+
+  color:#9fa8c1;
+
+  font-size:12px;
+
+  margin-bottom:5px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+}
+
+.package-name{
+
+  font-size:18px;
+
+  font-weight:700;
+
+}
+
+.package-price{
+
+  margin-top:5px;
+
+  color:#ff5f98;
+
+  font-size:21px;
+
+  font-weight:800;
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group{
+
+  margin-bottom:18px;
+
+}
+
+label{
+
+  display:block;
+
+  font-size:13px;
+
+  color:#dce1f0;
+
+  font-weight:600;
+
+  margin-bottom:8px;
+
+}
+
+.required{
+
+  color:#ff5f98;
+
+}
+
+.optional{
+
+  color:#77819e;
+
+  font-size:11px;
+
+  font-weight:500;
+
+  margin-left:5px;
+
+}
+
+
+input{
+
+  width:100%;
+
+  height:52px;
+
+  padding:0 15px;
+
+  border-radius:13px;
+
+  border:1px solid #303a57;
+
+  outline:none;
+
+  background:#0b1020;
+
+  color:white;
+
+  font-family:inherit;
+
+  font-size:14px;
+
+  transition:.2s;
+
+}
+
+input:focus{
+
+  border-color:#ff3d81;
+
+  box-shadow:
+    0 0 0 3px rgba(255,61,129,.10);
+
+}
+
+input::placeholder{
+
+  color:#68728f;
+
+}
+
+
+/* =========================================================
+   CONTACT CHOICE
+========================================================= */
+
+.contact-choice{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-bottom:12px;
+
+}
+
+.contact-option{
+
+  flex:1;
+
+  height:42px;
+
+  border-radius:11px;
+
+  border:1px solid #303a57;
+
+  background:#11172a;
+
+  color:#9fa8c1;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  transition:.2s;
+
+}
+
+.contact-option.active{
+
+  border-color:#ff3d81;
+
+  background:
+    rgba(255,61,129,.12);
+
+  color:#fff;
+
+}
+
+.contact-help{
+
+  color:#77819e;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  margin-top:6px;
+
+}
+
+
+/* =========================================================
+   PROMO
+========================================================= */
+
+.promo-box{
+
+  display:flex;
+
+  gap:10px;
+
+}
+
+.promo-box input{
+
+  flex:1;
+
+}
+
+.promo-btn{
+
+  width:120px;
+
+  border-radius:13px;
+
+  color:#fff;
+
+  background:#252d48;
+
+  border:1px solid #39425f;
+
+  font-family:inherit;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+.promo-btn:hover{
+
+  border-color:#ff3d81;
+
+}
+
+.promo-success{
+
+  display:none;
+
+  margin-top:10px;
+
+  padding:13px 14px;
+
+  border-radius:12px;
+
+  background:rgba(53,211,153,.10);
+
+  border:1px solid rgba(53,211,153,.35);
+
+  color:#72e6b8;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  animation:promoPop .45s ease;
+
+}
+
+.promo-success.show{
+
+  display:block;
+
+}
+
+@keyframes promoPop{
+
+  0%{
+
+    opacity:0;
+
+    transform:scale(.8);
+
+  }
+
+  60%{
+
+    transform:scale(1.05);
+
+  }
+
+  100%{
+
+    opacity:1;
+
+    transform:scale(1);
+
+  }
+
+}
+
+
+/* =========================================================
+   PRICE BOX
+========================================================= */
+
+.price-box{
+
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  background:#0a0f1d;
+
+  border:1px solid #29324d;
+
+}
+
+.price-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:7px 0;
+
+  color:#aeb6d0;
+
+  font-size:14px;
+
+}
+
+.price-row.total{
+
+  margin-top:8px;
+
+  padding-top:14px;
+
+  border-top:1px solid #29324d;
+
+  color:#fff;
+
+  font-size:19px;
+
+  font-weight:800;
+
+}
+
+.discount{
+
+  color:#64e0a9;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons{
+
+  display:flex;
+
+  gap:12px;
+
+  margin-top:25px;
+
+}
+
+button{
+
+  border:none;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-weight:700;
+
+}
+
+button:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
+
+}
+
+.btn{
+
+  flex:1;
+
+  height:52px;
+
+  border-radius:13px;
+
+  font-size:14px;
+
+  transition:.2s;
+
+}
+
+.btn-primary{
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff3d81,
+      #7c4dff
+    );
+
+  box-shadow:
+    0 12px 30px rgba(255,61,129,.18);
+
+}
+
+.btn-primary:hover:not(:disabled){
+
+  transform:translateY(-2px);
+
+}
+
+.btn-secondary{
+
+  color:#dce1f0;
+
+  background:#171e34;
+
+  border:1px solid #303a57;
+
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+.payment-summary{
+
+  text-align:center;
+
+  margin-bottom:20px;
+
+}
+
+.payment-summary .small{
+
+  color:#99a3bd;
+
+  font-size:13px;
+
+}
+
+.payment-amount{
+
+  margin-top:4px;
+
+  font-size:40px;
+
+  font-weight:800;
+
+  color:#fff;
+
+  letter-spacing:-1px;
+
+}
+
+.upi-note{
+
+  margin-top:5px;
+
+  color:#7f8aa8;
+
+  font-size:12px;
+
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
+.qr-wrapper{
+
+  width:320px;
+
+  height:320px;
+
+  max-width:calc(100vw - 70px);
+
+  max-height:calc(100vw - 70px);
+
+  margin:22px auto;
+
+  padding:10px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.30);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+}
+
+#qrCode{
+
+  width:300px;
+
+  height:300px;
+
+  max-width:100%;
+
+  max-height:100%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#fff;
+
+}
+
+#qrCode img,
+#qrCode canvas{
+
+  display:block !important;
+
+  width:300px !important;
+
+  height:300px !important;
+
+  max-width:100% !important;
+
+  max-height:100% !important;
+
+  object-fit:contain !important;
+
+  image-rendering:pixelated;
+
+}
+
+
+/* =========================================================
+   UPI ACTIONS
+========================================================= */
+
+.upi-actions{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:11px;
+
+  max-width:500px;
+
+  margin:18px auto 8px;
+
+}
+
+.pay-upi-btn{
+
+  width:100%;
+
+  min-height:54px;
+
+  border-radius:14px;
+
+  border:1px solid rgba(255,61,129,.45);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff3d81,
+      #7c4dff
+    );
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 12px 30px rgba(255,61,129,.20);
+
+  transition:.2s;
+
+}
+
+.pay-upi-btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+.pay-upi-btn:active{
+
+  transform:scale(.98);
+
+}
+
+.copy-upi-btn{
+
+  width:100%;
+
+  min-height:50px;
+
+  border-radius:14px;
+
+  border:1px solid #39425f;
+
+  background:#171e34;
+
+  color:#dce1f0;
+
+  font-size:14px;
+
+}
+
+.copy-upi-btn:hover{
+
+  border-color:#ff3d81;
+
+}
+
+.copy-success{
+
+  display:none;
+
+  text-align:center;
+
+  color:#64e0a9;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  margin-top:3px;
+
+}
+
+.copy-success.show{
+
+  display:block;
+
+}
+
+.mobile-upi-note{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:9px;
+
+  color:#7f8aa8;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+}
+
+
+/* =========================================================
+   SCAN HELP
+========================================================= */
+
+.scan-help{
+
+  text-align:center;
+
+  color:#aeb6d0;
+
+  font-size:13px;
+
+  line-height:1.6;
+
+  margin:15px auto 20px;
+
+  max-width:550px;
+
+}
+
+.upi-id{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:8px;
+
+  padding:9px 13px;
+
+  border-radius:10px;
+
+  background:#171e34;
+
+  color:#fff;
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-box{
+
+  margin-top:22px;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  border:1px dashed #46516f;
+
+  background:#0a0f1d;
+
+}
+
+.upload-box input[type="file"]{
+
+  height:auto;
+
+  padding:12px;
+
+  background:#11172a;
+
+}
+
+.file-name{
+
+  color:#8f9ab8;
+
+  font-size:12px;
+
+  margin-top:8px;
+
+}
+
+.file-valid{
+
+  color:#64e0a9;
+
+}
+
+.file-warning{
+
+  color:#ff8798;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error{
+
+  display:none;
+
+  margin-bottom:15px;
+
+  padding:12px 14px;
+
+  border-radius:12px;
+
+  background:rgba(255,65,87,.10);
+
+  border:1px solid rgba(255,65,87,.3);
+
+  color:#ff8798;
+
+  font-size:13px;
+
+}
+
+.error.show{
+
+  display:block;
+
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.secure-note{
+
+  margin-top:18px;
+
+  text-align:center;
+
+  color:#75809f;
+
+  font-size:11px;
+
+  line-height:1.6;
+
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.success-screen{
+
+  text-align:center;
+
+  padding:20px 0;
+
+}
+
+.success-icon{
+
+  width:100px;
+
+  height:100px;
+
+  margin:0 auto 22px;
+
+  border-radius:50%;
+
+  background:#20c77a;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  box-shadow:
+    0 0 0 12px rgba(32,199,122,.10),
+    0 0 50px rgba(32,199,122,.35);
+
+  animation:successPop .55s ease;
+
+}
+
+.success-icon::after{
+
+  content:"✓";
+
+  font-size:58px;
+
+  font-weight:800;
+
+  color:#fff;
+
+  line-height:1;
+
+}
+
+@keyframes successPop{
+
+  0%{
+
+    transform:scale(.2);
+
+    opacity:0;
+
+  }
+
+  70%{
+
+    transform:scale(1.12);
+
+  }
+
+  100%{
+
+    transform:scale(1);
+
+    opacity:1;
+
+  }
+
+}
+
+.order-id{
+
+  display:inline-block;
+
+  margin-top:14px;
+
+  padding:11px 16px;
+
+  border-radius:12px;
+
+  background:#171e34;
+
+  border:1px solid #303a57;
+
+  font-weight:700;
+
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+#celebration{
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:9999;
+
+}
+
+.star{
+
+  position:absolute;
+
+  top:-40px;
+
+  animation:fall linear forwards;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.7);
+
+}
+
+@keyframes fall{
+
+  from{
+
+    transform:
+      translateY(-40px)
+      rotate(0deg);
+
+    opacity:1;
+
+  }
+
+  to{
+
+    transform:
+      translateY(110vh)
+      rotate(720deg);
+
+    opacity:0;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+  .page{
+
+    padding:20px 12px 40px;
+
+  }
+
+  .card{
+
+    padding:20px 16px;
+
+    border-radius:20px;
+
+  }
+
+  .brand h1{
+
+    font-size:27px;
+
+  }
+
+  .title{
+
+    font-size:21px;
+
+  }
+
+  .payment-amount{
+
+    font-size:34px;
+
+  }
+
+  .qr-wrapper{
+
+    width:285px;
+
+    height:285px;
+
+    padding:9px;
+
+  }
+
+  #qrCode{
+
+    width:267px;
+
+    height:267px;
+
+  }
+
+  #qrCode img,
+  #qrCode canvas{
+
+    width:267px !important;
+
+    height:267px !important;
+
+  }
+
+  .buttons{
+
+    flex-direction:column;
+
+  }
+
+  .promo-box{
+
+    flex-direction:column;
+
+  }
+
+  .promo-btn{
+
+    width:100%;
+
+    height:48px;
+
+  }
+
+  .contact-choice{
+
+    gap:7px;
+
+  }
+
+  .mobile-upi-note{
+
+    display:block;
+
+  }
+
+}
+
+
+/* =========================================================
+   DESKTOP UPI NOTE
+========================================================= */
+
+@media(min-width:601px){
+
+  .mobile-upi-note{
+
+    display:block;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <header class="header">
-    <div class="nav">
-      <a href="/" class="brand">
-        SehrAn<span> Media</span>
-      </a>
 
-      <a href="/" class="back-home">
-        ← Back to Home
-      </a>
+<div id="celebration"></div>
+
+
+<div class="page">
+
+
+  <!-- =====================================================
+       BRAND
+  ====================================================== -->
+
+  <div class="brand">
+
+    <h1>
+      SehrAn <span>Media</span>
+    </h1>
+
+    <p>
+      Instagram Growth • Fast • Secure • Reliable
+    </p>
+
+  </div>
+
+
+  <!-- =====================================================
+       PROGRESS
+  ====================================================== -->
+
+  <div class="progress">
+
+    <div
+      class="step active"
+      id="step1"
+    >
+      1
     </div>
-  </header>
 
+    <div
+      class="line"
+      id="line1"
+    ></div>
 
-  <main class="container">
-
-    <div class="heading">
-      <h1>Place Your Order</h1>
-      <p>Complete your order in two simple steps.</p>
+    <div
+      class="step"
+      id="step2"
+    >
+      2
     </div>
 
+    <div
+      class="line"
+      id="line2"
+    ></div>
 
-    <!-- PROGRESS -->
+    <div
+      class="step"
+      id="step3"
+    >
+      3
+    </div>
 
-    <div class="progress">
+  </div>
 
-      <div class="progress-step active" id="progress1">
-        <div class="progress-circle">1</div>
-        <span>Details</span>
+
+  <!-- =====================================================
+       MAIN CARD
+  ====================================================== -->
+
+  <div class="card">
+
+
+    <!-- ===================================================
+         STEP 1
+    ==================================================== -->
+
+    <section
+      class="screen active"
+      id="screen1"
+    >
+
+      <h2 class="title">
+        Your Details
+      </h2>
+
+      <p class="subtitle">
+        Enter your Instagram details and at least one
+        contact method. We may use your mobile number
+        or email for order updates.
+      </p>
+
+
+      <!-- PACKAGE -->
+
+      <div class="selected-package">
+
+        <div class="label">
+          Selected Package
+        </div>
+
+        <div
+          class="package-name"
+          id="packageName"
+        >
+          Loading package...
+        </div>
+
+        <div
+          class="package-price"
+          id="packagePrice"
+        >
+          ₹0
+        </div>
+
       </div>
 
-      <div class="progress-line"></div>
 
-      <div class="progress-step" id="progress2">
-        <div class="progress-circle">2</div>
-        <span>Payment</span>
+      <!-- ERROR -->
+
+      <div
+        id="error1"
+        class="error"
+      ></div>
+
+
+      <!-- =================================================
+           CONTACT METHOD
+      ================================================== -->
+
+      <div class="form-group">
+
+        <label>
+          Contact Details
+          <span class="required">*</span>
+        </label>
+
+        <div class="contact-choice">
+
+          <button
+            type="button"
+            class="contact-option active"
+            id="mobileOption"
+            onclick="selectContact('mobile')"
+          >
+            📱 Mobile Number
+          </button>
+
+          <button
+            type="button"
+            class="contact-option"
+            id="emailOption"
+            onclick="selectContact('email')"
+          >
+            ✉️ Email
+          </button>
+
+        </div>
+
+
+        <!-- MOBILE -->
+
+        <div id="mobileField">
+
+          <input
+            id="mobile"
+            type="tel"
+            inputmode="numeric"
+            maxlength="15"
+            placeholder="Enter mobile number"
+            autocomplete="tel"
+          >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div
+          id="emailField"
+          style="display:none;"
+        >
+
+          <input
+            id="email"
+            type="email"
+            maxlength="150"
+            placeholder="Enter email address"
+            autocomplete="email"
+          >
+
+        </div>
+
+
+        <div class="contact-help">
+          You can provide either your mobile number or
+          email address. At least one is required.
+        </div>
+
       </div>
 
-    </div>
+
+      <!-- =================================================
+           INSTAGRAM USERNAME
+      ================================================== -->
+
+      <div class="form-group">
+
+        <label for="username">
+          Instagram Username
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="username"
+          type="text"
+          maxlength="30"
+          placeholder="@yourusername"
+          autocomplete="off"
+        >
+
+      </div>
 
 
-    <div class="card">
+      <!-- =================================================
+           PROFILE
+      ================================================== -->
 
-      <!-- =========================================
-           STEP 1
-      ========================================== -->
+      <div class="form-group">
 
-      <section class="step active" id="step1">
+        <label for="profile">
+          Instagram Profile Link
+          <span class="required">*</span>
+        </label>
 
-        <h2 class="step-title">Order Details</h2>
+        <input
+          id="profile"
+          type="url"
+          maxlength="300"
+          placeholder="https://instagram.com/yourusername"
+          autocomplete="off"
+        >
 
-        <p class="step-subtitle">
-          Enter the details for your Instagram order.
-        </p>
-
-
-        <div class="error-message" id="error1"></div>
-
-
-        <!-- Package -->
-
-        <div class="field">
-
-          <label for="package">
-            Select Package <span class="required">*</span>
-          </label>
-
-          <select id="package" required>
-
-            <option value="">
-              Select a package
-            </option>
-
-            <option value="Instagram Followers - 1000">
-              Instagram Followers - 1,000
-            </option>
-
-            <option value="Instagram Followers - 2500">
-              Instagram Followers - 2,500
-            </option>
-
-            <option value="Instagram Followers - 5000">
-              Instagram Followers - 5,000
-            </option>
-
-            <option value="Instagram Followers - 10000">
-              Instagram Followers - 10,000
-            </option>
-
-            <option value="Instagram Likes - 1000">
-              Instagram Likes - 1,000
-            </option>
-
-            <option value="Instagram Likes - 2500">
-              Instagram Likes - 2,500
-            </option>
-
-            <option value="Instagram Comments - 100">
-              Instagram Comments - 100
-            </option>
-
-            <option value="Instagram Shares / Reposts - 1000">
-              Instagram Shares / Reposts - 1,000
-            </option>
-
-          </select>
-
-        </div>
+      </div>
 
 
-        <!-- Name -->
+      <!-- =================================================
+           PROMO
+      ================================================== -->
 
-        <div class="field">
+      <div class="form-group">
 
-          <label for="name">
-            Full Name <span class="required">*</span>
-          </label>
+        <label for="promoCode">
+          Promo Code
+          <span class="optional">
+            Optional
+          </span>
+        </label>
+
+        <div class="promo-box">
 
           <input
-            type="text"
-            id="name"
-            maxlength="60"
-            placeholder="Enter your full name"
-            autocomplete="name"
-            required
-          >
-
-        </div>
-
-
-        <!-- Username + Profile -->
-
-        <div class="field">
-
-          <label for="username">
-            Instagram Username <span class="required">*</span>
-          </label>
-
-          <input
-            type="text"
-            id="username"
-            maxlength="30"
-            placeholder="@yourusername"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="profile">
-            Instagram Profile Link <span class="required">*</span>
-          </label>
-
-          <input
-            type="url"
-            id="profile"
-            maxlength="300"
-            placeholder="https://instagram.com/yourusername"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-
-        <!-- Promo -->
-
-        <div class="field">
-
-          <label for="promoCode">
-            Promo Code <span style="color:#777789;">(Optional)</span>
-          </label>
-
-          <input
-            type="text"
             id="promoCode"
+            type="text"
             maxlength="30"
             placeholder="Enter promo code"
             autocomplete="off"
           >
 
-        </div>
-
-
-        <div class="button-row">
-
           <button
             type="button"
-            class="btn btn-primary"
-            id="nextButton"
+            class="promo-btn"
+            onclick="applyPromo()"
           >
-            Next →
+            Apply
           </button>
 
         </div>
 
-      </section>
+
+        <div
+          id="promoSuccess"
+          class="promo-success"
+        >
+          ⭐ ZEESHAN10 applied! 10% discount unlocked.
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           PRICE
+      ================================================== -->
+
+      <div class="price-box">
+
+        <div class="price-row">
+
+          <span>
+            Package Price
+          </span>
+
+          <strong id="summaryOriginal">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+          <span>
+            Discount
+          </span>
+
+          <strong
+            class="discount"
+            id="summaryDiscount"
+          >
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div class="price-row total">
+
+          <span>
+            Total to Pay
+          </span>
+
+          <strong id="summaryTotal">
+            ₹0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           BUTTONS
+      ================================================== -->
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="goHome()"
+        >
+          ← Back
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="goToPayment()"
+        >
+          Continue to Payment →
+        </button>
+
+      </div>
+
+
+    </section>
 
 
 
-      <!-- =========================================
-           STEP 2
-      ========================================== -->
+    <!-- ===================================================
+         STEP 2
+    ==================================================== -->
 
-      <section class="step" id="step2">
+    <section
+      class="screen"
+      id="screen2"
+    >
 
-        <h2 class="step-title">Payment</h2>
+      <h2 class="title">
+        Complete Payment
+      </h2>
 
-        <p class="step-subtitle">
-          Scan the QR code, complete your payment, then upload the payment screenshot.
+      <p class="subtitle">
+        Scan the QR code with your UPI app, or tap
+        <strong>Pay with UPI</strong> on your phone.
+      </p>
+
+
+      <!-- PAYMENT AMOUNT -->
+
+      <div class="payment-summary">
+
+        <div class="small">
+          Exact Amount to Pay
+        </div>
+
+        <div
+          class="payment-amount"
+          id="paymentAmount"
+        >
+          ₹0
+        </div>
+
+        <div class="upi-note">
+          The exact payable amount is included in the QR.
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           QR
+      ================================================== -->
+
+      <div class="qr-wrapper">
+
+        <div id="qrCode"></div>
+
+      </div>
+
+
+      <!-- =================================================
+           UPI ACTIONS
+      ================================================== -->
+
+      <div class="upi-actions">
+
+
+        <button
+          type="button"
+          class="pay-upi-btn"
+          onclick="payWithUPI()"
+        >
+          💳 Pay with UPI
+        </button>
+
+
+        <button
+          type="button"
+          class="copy-upi-btn"
+          onclick="copyUPI()"
+        >
+          📋 Copy UPI ID
+        </button>
+
+
+        <div
+          id="copySuccess"
+          class="copy-success"
+        >
+          ✓ UPI ID copied successfully
+        </div>
+
+
+      </div>
+
+
+      <div class="mobile-upi-note">
+
+        On supported mobile browsers,
+        <strong>Pay with UPI</strong> will open a
+        compatible UPI payment app.
+
+        <br>
+
+        On a PC, scan the QR code using your phone.
+
+      </div>
+
+
+      <!-- =================================================
+           UPI ID
+      ================================================== -->
+
+      <div class="scan-help">
+
+        <strong>
+          UPI ID
+        </strong>
+
+        <br>
+
+        <span class="upi-id">
+          7889777143@fam
+        </span>
+
+        <br>
+
+        Scan the QR or use the UPI button above.
+
+      </div>
+
+
+      <!-- ERROR -->
+
+      <div
+        id="error2"
+        class="error"
+      ></div>
+
+
+      <!-- =================================================
+           UTR
+      ================================================== -->
+
+      <div class="form-group">
+
+        <label for="utr">
+          UTR / Transaction ID
+          <span class="optional">
+            Optional
+          </span>
+        </label>
+
+        <input
+          id="utr"
+          type="text"
+          maxlength="80"
+          placeholder="Enter UTR if available"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- =================================================
+           SCREENSHOT
+      ================================================== -->
+
+      <div class="upload-box">
+
+        <label for="screenshot">
+
+          Payment Screenshot
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="screenshot"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+        >
+
+
+        <div
+          id="fileName"
+          class="file-name"
+        >
+          No screenshot selected
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           SUBMIT
+      ================================================== -->
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="showScreen(1)"
+        >
+          ← Back
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="submitBtn"
+          onclick="submitOrder()"
+        >
+          Submit Order ✓
+        </button>
+
+      </div>
+
+
+      <div class="secure-note">
+
+        🔒 Your payment screenshot is securely submitted
+        with your order.
+
+        <br>
+
+        Never share your Instagram password.
+        SehrAn Media does not require your Instagram password.
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================================
+         STEP 3
+    ==================================================== -->
+
+    <section
+      class="screen"
+      id="screen3"
+    >
+
+      <div class="success-screen">
+
+
+        <div class="success-icon"></div>
+
+
+        <h2 class="title">
+          Order Submitted!
+        </h2>
+
+
+        <p class="subtitle">
+
+          Your order has been received successfully.
+
+          <br>
+
+          Please keep your Order ID for reference.
+
         </p>
 
 
-        <div class="error-message" id="error2"></div>
+        <div class="order-id">
 
-        <div class="success-message" id="successMessage"></div>
+          Order ID:
 
-
-        <!-- PAYMENT QR -->
-
-        <div class="payment-box">
-
-          <div class="payment-title">
-            Pay using UPI
-          </div>
-
-          <div class="payment-subtitle">
-            Scan this QR code with your UPI app.
-          </div>
-
-
-          <div class="qr-wrapper">
-
-            <div id="qrcode"></div>
-
-          </div>
-
-
-          <div class="upi-label">
-            UPI ID
-          </div>
-
-          <div class="upi-id">
-            7889777143@fam
-          </div>
-
-
-          <div class="amount-box">
-
-            <div class="amount-label">
-              Order Amount
-            </div>
-
-            <div class="amount-value" id="amountDisplay">
-              ₹0
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PAYMENT INSTRUCTIONS -->
-
-        <div class="instructions">
-
-          <h3>How to pay</h3>
-
-          <ol>
-            <li>Scan the QR code using your UPI app.</li>
-            <li>Pay the displayed order amount.</li>
-            <li>After payment, copy your UTR / transaction ID.</li>
-            <li>Upload your payment screenshot below.</li>
-            <li>Press Submit Order.</li>
-          </ol>
-
-        </div>
-
-
-        <!-- UTR -->
-
-        <div class="field">
-
-          <label for="utr">
-            UTR / Transaction ID
-            <span style="color:#777789;">(Optional)</span>
-          </label>
-
-          <input
-            type="text"
-            id="utr"
-            maxlength="80"
-            placeholder="Enter UTR / transaction ID"
-            autocomplete="off"
-          >
-
-        </div>
-
-
-        <!-- SCREENSHOT -->
-
-        <div class="field">
-
-          <label for="screenshot">
-            Payment Screenshot <span class="required">*</span>
-          </label>
-
-
-          <div class="upload-box">
-
-            <div class="upload-icon">
-              📷
-            </div>
-
-            <div class="upload-title">
-              Upload Payment Screenshot
-            </div>
-
-            <div class="upload-info">
-              JPG, PNG or WEBP • Maximum 5 MB
-            </div>
-
-            <input
-              type="file"
-              id="screenshot"
-              accept="image/jpeg,image/jpg,image/png,image/webp"
-              required
-            >
-
-            <img
-              id="preview"
-              class="preview"
-              alt="Payment screenshot preview"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="security-note">
-          <span>🔒</span>
-          <span>
-            Your payment screenshot is used only to verify your order.
-            Never enter or send your Instagram password.
+          <span id="successOrderId">
+            ---
           </span>
+
         </div>
 
 
-        <!-- BUTTONS -->
+        <div
+          class="price-box"
+          style="
+            margin-top:22px;
+            text-align:left;
+          "
+        >
 
-        <div class="button-row">
+          <div class="price-row">
 
-          <button
-            type="button"
-            class="btn btn-secondary"
-            id="backButton"
-          >
-            ← Back
-          </button>
+            <span>
+              Status
+            </span>
+
+            <strong
+              style="color:#ffd166;"
+            >
+              PENDING
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Amount Paid
+            </span>
+
+            <strong id="successAmount">
+              ₹0
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Package
+            </span>
+
+            <strong id="successPackage">
+              ---
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="buttons">
 
           <button
             type="button"
             class="btn btn-primary"
-            id="submitButton"
+            onclick="goHome()"
           >
-            Submit Order
+            Back to Home
           </button>
 
         </div>
 
 
-        <!-- SUCCESS -->
+      </div>
 
-        <div class="order-result" id="orderResult">
-
-          <div class="success-icon">
-            ✓
-          </div>
-
-          <h2>Order Submitted!</h2>
-
-          <p>
-            Your order has been successfully submitted.
-            Please keep your Order ID for reference.
-          </p>
-
-          <div class="order-id-box" id="orderIdBox">
-            SM00000000
-          </div>
-
-          <div style="margin-top:20px;">
-
-            <a
-              href="/"
-              class="btn btn-primary"
-              style="
-                display:inline-flex;
-                align-items:center;
-                justify-content:center;
-                min-width:180px;
-              "
-            >
-              Back to Home
-            </a>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </div>
-
-  </main>
+    </section>
 
 
-  <div class="footer">
-    © 2026 SehrAn Media. All rights reserved.
   </div>
 
+</div>
 
 
-  <!-- QR CODE LIBRARY -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- =======================================================
+     QR CODE LIBRARY
+======================================================== -->
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+></script>
 
 
-  <script>
+
+<script>
+
+/* ==========================================================
+   SETTINGS
+========================================================== */
+
+const UPI_ID =
+  "7889777143@fam";
+
+const UPI_NAME =
+  "SehrAn Media";
+
+const PROMO_CODE =
+  "ZEESHAN10";
+
+const DISCOUNT_PERCENT =
+  10;
+
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+let packageName =
+  "";
+
+let originalAmount =
+  0;
+
+let finalAmount =
+  0;
+
+let discountAmount =
+  0;
+
+let promoApplied =
+  false;
+
+let contactMethod =
+  "mobile";
+
+
+/* ==========================================================
+   NUMBER CLEANER
+========================================================== */
+
+function extractNumber(
+  value
+){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return 0;
+  }
+
+  const text =
+    String(value);
+
+  const cleaned =
+    text
+      .replace(/,/g,"")
+      .replace(/₹/g,"")
+      .replace(/INR/gi,"")
+      .replace(/Rs\.?/gi,"")
+      .replace(/Rupees?/gi,"")
+      .trim();
+
+  const match =
+    cleaned.match(
+      /(\d+(?:\.\d{1,2})?)/
+    );
+
+  if(!match){
+    return 0;
+  }
+
+  const number =
+    parseFloat(
+      match[1]
+    );
+
+  return Number.isFinite(number)
+    ? number
+    : 0;
+
+}
+
+
+/* ==========================================================
+   PACKAGE FROM URL
+========================================================== */
+
+function getPackageFromURL(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  packageName =
+    params.get("package") ||
+    params.get("pkg") ||
+    params.get("service") ||
+    params.get("product") ||
+    params.get("name") ||
+    "";
+
+
+  const possiblePrices = [
+
+    params.get("amount"),
+
+    params.get("price"),
+
+    params.get("cost"),
+
+    params.get("rate"),
+
+    params.get("total"),
+
+    params.get("packagePrice"),
+
+    params.get("package_price"),
+
+    params.get("value")
+
+  ];
+
+
+  for(
+    const value of possiblePrices
+  ){
+
+    const detected =
+      extractNumber(value);
+
+    if(
+      detected > 0
+    ){
+
+      originalAmount =
+        detected;
+
+      break;
+
+    }
+
+  }
+
+
+  /*
+    Look for price inside
+    package name.
+  */
+
+  if(
+    originalAmount <= 0
+  ){
+
+    const source =
+      packageName ||
+      params.toString();
+
+
+    const moneyMatch =
+      source.match(
+        /(?:₹|rs\.?|inr)\s*([0-9]+(?:\.[0-9]{1,2})?)/i
+      );
+
+
+    if(
+      moneyMatch
+    ){
+
+      originalAmount =
+        parseFloat(
+          moneyMatch[1]
+        );
+
+    }
+
+  }
+
+
+  /*
+    Last fallback.
+  */
+
+  if(
+    originalAmount <= 0
+  ){
+
+    const ignoredKeys = [
+
+      "package",
+      "pkg",
+      "service",
+      "product",
+      "name",
+      "followers",
+      "likes",
+      "comments",
+      "shares",
+      "quantity"
+
+    ];
+
+
+    for(
+      const [key,value]
+      of params.entries()
+    ){
+
+      if(
+        ignoredKeys.includes(
+          key.toLowerCase()
+        )
+      ){
+        continue;
+      }
+
+
+      const detected =
+        extractNumber(value);
+
+
+      if(
+        detected > 0 &&
+        detected < 100000
+      ){
+
+        originalAmount =
+          detected;
+
+        break;
+
+      }
+
+    }
+
+  }
+
+
+  if(
+    !packageName
+  ){
+
+    packageName =
+      "Selected Package";
+
+  }
+
+
+  finalAmount =
+    originalAmount;
+
+  discountAmount =
+    0;
+
+  promoApplied =
+    false;
+
+
+  updatePriceUI();
+
+}
+
+
+/* ==========================================================
+   MONEY
+========================================================== */
+
+function money(
+  value
+){
+
+  const number =
+    Number(value) || 0;
+
+
+  if(
+    Number.isInteger(number)
+  ){
+
+    return "₹" +
+      number.toString();
+
+  }
+
+
+  return "₹" +
+    number.toFixed(2);
+
+}
+
+
+/* ==========================================================
+   PRICE UI
+========================================================== */
+
+function updatePriceUI(){
+
+  document.getElementById(
+    "packageName"
+  ).textContent =
+    packageName;
+
+
+  document.getElementById(
+    "packagePrice"
+  ).textContent =
+    money(
+      originalAmount
+    );
+
+
+  document.getElementById(
+    "summaryOriginal"
+  ).textContent =
+    money(
+      originalAmount
+    );
+
+
+  document.getElementById(
+    "summaryDiscount"
+  ).textContent =
+    discountAmount > 0
+      ? "- " +
+        money(
+          discountAmount
+        )
+      : money(0);
+
+
+  document.getElementById(
+    "summaryTotal"
+  ).textContent =
+    money(
+      finalAmount
+    );
+
+
+  document.getElementById(
+    "paymentAmount"
+  ).textContent =
+    money(
+      finalAmount
+    );
+
+}
+
+
+/* ==========================================================
+   CONTACT METHOD
+========================================================== */
+
+function selectContact(
+  method
+){
+
+  contactMethod =
+    method;
+
+
+  const mobileOption =
+    document.getElementById(
+      "mobileOption"
+    );
+
+
+  const emailOption =
+    document.getElementById(
+      "emailOption"
+    );
+
+
+  const mobileField =
+    document.getElementById(
+      "mobileField"
+    );
+
+
+  const emailField =
+    document.getElementById(
+      "emailField"
+    );
+
+
+  if(
+    method === "mobile"
+  ){
+
+    mobileOption.classList.add(
+      "active"
+    );
+
+    emailOption.classList.remove(
+      "active"
+    );
+
+    mobileField.style.display =
+      "block";
+
+    emailField.style.display =
+      "none";
+
+  }else{
+
+    emailOption.classList.add(
+      "active"
+    );
+
+    mobileOption.classList.remove(
+      "active"
+    );
+
+    mobileField.style.display =
+      "none";
+
+    emailField.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* ==========================================================
+   PROMO
+========================================================== */
+
+function applyPromo(){
+
+  clearErrors();
+
+
+  const input =
+    document.getElementById(
+      "promoCode"
+    );
+
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if(
+    !code
+  ){
+
+    showError(
+      "error1",
+      "Please enter a promo code."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    code !==
+    PROMO_CODE
+  ){
+
+    document
+      .getElementById(
+        "promoSuccess"
+      )
+      .classList.remove(
+        "show"
+      );
+
+
+    showError(
+      "error1",
+      "Invalid promo code."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    originalAmount <= 0
+  ){
+
+    showError(
+      "error1",
+      "Package price could not be detected."
+    );
+
+    return;
+
+  }
+
+
+  discountAmount =
+    Number(
+      (
+        originalAmount *
+        DISCOUNT_PERCENT /
+        100
+      ).toFixed(2)
+    );
+
+
+  finalAmount =
+    Number(
+      (
+        originalAmount -
+        discountAmount
+      ).toFixed(2)
+    );
+
+
+  promoApplied =
+    true;
+
+
+  updatePriceUI();
+
+
+  document
+    .getElementById(
+      "promoSuccess"
+    )
+    .classList.add(
+      "show"
+    );
+
+
+  createStars(35);
+
+}
+
+
+/* ==========================================================
+   SHOW SCREEN
+========================================================== */
+
+function showScreen(
+  number
+){
+
+  document
+    .querySelectorAll(
+      ".screen"
+    )
+    .forEach(
+      screen =>
+        screen.classList.remove(
+          "active"
+        )
+    );
+
+
+  document
+    .getElementById(
+      "screen" + number
+    )
+    .classList.add(
+      "active"
+    );
+
+
+  for(
+    let i = 1;
+    i <= 3;
+    i++
+  ){
+
+    const step =
+      document.getElementById(
+        "step" + i
+      );
+
+
+    if(
+      i <= number
+    ){
+
+      step.classList.add(
+        "active"
+      );
+
+    }else{
+
+      step.classList.remove(
+        "active"
+      );
+
+    }
+
+  }
+
+
+  document.getElementById(
+    "line1"
+  ).style.background =
+    number >= 2
+      ? "#ff3d81"
+      : "#303952";
+
+
+  document.getElementById(
+    "line2"
+  ).style.background =
+    number >= 3
+      ? "#ff3d81"
+      : "#303952";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* ==========================================================
+   VALIDATE CONTACT
+========================================================== */
+
+function getContactData(){
+
+  const mobile =
+    document.getElementById(
+      "mobile"
+    ).value
+      .trim()
+      .replace(/[^\d+]/g,"");
+
+
+  const email =
+    document.getElementById(
+      "email"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  return {
+    mobile,
+    email
+  };
+
+}
+
+
+/* ==========================================================
+   STEP 1 -> PAYMENT
+========================================================== */
+
+function goToPayment(){
+
+  clearErrors();
+
+
+  if(
+    originalAmount <= 0
+  ){
+
+    showError(
+      "error1",
+      "Package price is ₹0 or could not be detected. Please return to the pricing page and select the package again."
+    );
+
+    return;
+
+  }
+
+
+  const contact =
+    getContactData();
+
+
+  /*
+    At least one contact method.
+  */
+
+  if(
+    !contact.mobile &&
+    !contact.email
+  ){
+
+    showError(
+      "error1",
+      "Please provide either your mobile number or email address."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Mobile validation.
+  */
+
+  if(
+    contact.mobile
+  ){
+
+    const normalized =
+      contact.mobile
+        .replace(
+          /^\+91/,
+          ""
+        )
+        .replace(
+          /^91(?=\d{10}$)/,
+          ""
+        );
+
+
+    if(
+      !/^[6-9]\d{9}$/.test(
+        normalized
+      )
+    ){
+
+      showError(
+        "error1",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+    Email validation.
+  */
+
+  if(
+    contact.email
+  ){
+
+    if(
+      !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(
+        contact.email
+      )
+    ){
+
+      showError(
+        "error1",
+        "Please enter a valid email address."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value
+      .trim()
+      .replace(
+        /^@+/,
+        ""
+      );
+
+
+  const profile =
+    document.getElementById(
+      "profile"
+    ).value.trim();
+
+
+  if(
+    !username
+  ){
+
+    showError(
+      "error1",
+      "Please enter your Instagram username."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[A-Za-z0-9._]{1,30}$/.test(
+      username
+    )
+  ){
+
+    showError(
+      "error1",
+      "Please enter a valid Instagram username."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !profile
+  ){
+
+    showError(
+      "error1",
+      "Please enter your Instagram profile link."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const url =
+      new URL(profile);
+
+
+    const hostname =
+      url.hostname
+        .toLowerCase()
+        .replace(
+          /^www\./,
+          ""
+        );
+
+
+    if(
+      hostname !==
+        "instagram.com" &&
+      hostname !==
+        "instagr.am"
+    ){
+
+      throw new Error();
+
+    }
+
+
+    if(
+      !/^\/[A-Za-z0-9._]+\/?$/.test(
+        url.pathname
+      )
+    ){
+
+      throw new Error();
+
+    }
+
+  }catch{
+
+    showError(
+      "error1",
+      "Please enter a valid Instagram profile link."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Recalculate exact amount.
+  */
+
+  if(
+    promoApplied
+  ){
+
+    discountAmount =
+      Number(
+        (
+          originalAmount *
+          DISCOUNT_PERCENT /
+          100
+        ).toFixed(2)
+      );
+
+
+    finalAmount =
+      Number(
+        (
+          originalAmount -
+          discountAmount
+        ).toFixed(2)
+      );
+
+  }else{
+
+    finalAmount =
+      originalAmount;
+
+  }
+
+
+  if(
+    finalAmount <= 0
+  ){
+
+    showError(
+      "error1",
+      "Invalid payable amount."
+    );
+
+    return;
+
+  }
+
+
+  updatePriceUI();
+
+
+  /*
+    Generate QR before showing payment.
+  */
+
+  generateUPIQR();
+
+
+  showScreen(2);
+
+}
+
+
+/* ==========================================================
+   BUILD UPI URL
+========================================================== */
+
+function buildUPIUrl(){
+
+  const amount =
+    Number(finalAmount)
+      .toFixed(2);
+
+
+  return (
+    "upi://pay" +
+
+    "?pa=" +
+    encodeURIComponent(
+      UPI_ID
+    ) +
+
+    "&pn=" +
+    encodeURIComponent(
+      UPI_NAME
+    ) +
+
+    "&am=" +
+    encodeURIComponent(
+      amount
+    ) +
+
+    "&cu=INR"
+  );
+
+}
+
+
+/* ==========================================================
+   GENERATE QR
+========================================================== */
+
+function generateUPIQR(){
+
+  const qrContainer =
+    document.getElementById(
+      "qrCode"
+    );
+
+
+  qrContainer.innerHTML =
+    "";
+
+
+  if(
+    finalAmount <= 0
+  ){
+
+    qrContainer.innerHTML =
+      "<p style='color:#111;text-align:center;font-weight:700;'>Invalid amount</p>";
+
+    return;
+
+  }
+
+
+  const upiUrl =
+    buildUPIUrl();
+
+
+  new QRCode(
+    qrContainer,
+    {
+
+      text:
+        upiUrl,
+
+      width:
+        300,
+
+      height:
+        300,
+
+      colorDark:
+        "#000000",
+
+      colorLight:
+        "#ffffff",
+
+      correctLevel:
+        QRCode.CorrectLevel.H
+
+    }
+  );
+
+}
+
+
+/* ==========================================================
+   PAY WITH UPI
+========================================================== */
+
+function payWithUPI(){
+
+  if(
+    finalAmount <= 0
+  ){
+
+    showError(
+      "error2",
+      "Invalid payment amount."
+    );
+
+    return;
+
+  }
+
+
+  const upiUrl =
+    buildUPIUrl();
+
+
+  /*
+    Important:
+
+    This uses the standard UPI deep-link.
+
+    On supported phones/browser combinations,
+    Android/iOS can hand the link to a
+    compatible UPI application.
+
+    Desktop browsers generally cannot launch
+    installed mobile UPI apps, so the QR remains
+    available above.
+  */
+
+  try{
+
+    window.location.href =
+      upiUrl;
+
+  }catch(error){
+
+    showError(
+      "error2",
+      "Your device could not open a UPI app. Please scan the QR code instead."
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   COPY UPI ID
+========================================================== */
+
+async function copyUPI(){
+
+  clearErrors();
+
+
+  const success =
+    document.getElementById(
+      "copySuccess"
+    );
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      UPI_ID
+    );
+
+
+    success.classList.add(
+      "show"
+    );
+
+
+    setTimeout(
+      () => {
+
+        success.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
+
+
+  }catch{
 
     /*
-      ============================================
-      SEHRAN MEDIA ORDER SYSTEM
-      ============================================
+      Fallback for older browsers.
     */
 
-
-    const UPI_ID = "7889777143@fam";
-
-
-    /* ------------------------------------------
-       Elements
-    ------------------------------------------ */
-
-    const step1 = document.getElementById("step1");
-    const step2 = document.getElementById("step2");
-
-    const progress1 = document.getElementById("progress1");
-    const progress2 = document.getElementById("progress2");
-
-    const nextButton = document.getElementById("nextButton");
-    const backButton = document.getElementById("backButton");
-    const submitButton = document.getElementById("submitButton");
-
-    const error1 = document.getElementById("error1");
-    const error2 = document.getElementById("error2");
-
-    const successMessage =
-      document.getElementById("successMessage");
-
-    const screenshotInput =
-      document.getElementById("screenshot");
-
-    const preview =
-      document.getElementById("preview");
-
-    const amountDisplay =
-      document.getElementById("amountDisplay");
-
-    const qrcode =
-      document.getElementById("qrcode");
-
-    const orderResult =
-      document.getElementById("orderResult");
-
-    const orderIdBox =
-      document.getElementById("orderIdBox");
+    const temp =
+      document.createElement(
+        "textarea"
+      );
 
 
-    /* ------------------------------------------
-       Package Prices
-       
-       IMPORTANT:
-       Change these amounts if your actual prices
-       are different.
-    ------------------------------------------ */
+    temp.value =
+      UPI_ID;
 
-    const packagePrices = {
 
-      "Instagram Followers - 1000": 99,
+    document.body.appendChild(
+      temp
+    );
 
-      "Instagram Followers - 2500": 199,
 
-      "Instagram Followers - 5000": 349,
+    temp.select();
 
-      "Instagram Followers - 10000": 599,
 
-      "Instagram Likes - 1000": 49,
+    try{
 
-      "Instagram Likes - 2500": 99,
+      document.execCommand(
+        "copy"
+      );
 
-      "Instagram Comments - 100": 99,
 
-      "Instagram Shares / Reposts - 1000": 149
+      success.classList.add(
+        "show"
+      );
+
+
+      setTimeout(
+        () => {
+
+          success.classList.remove(
+            "show"
+          );
+
+        },
+        2500
+      );
+
+    }catch{
+
+      showError(
+        "error2",
+        "Could not copy the UPI ID. Please copy it manually: " +
+        UPI_ID
+      );
+
+    }
+
+
+    temp.remove();
+
+  }
+
+}
+
+
+/* ==========================================================
+   SUBMIT ORDER
+========================================================== */
+
+async function submitOrder(){
+
+  clearErrors();
+
+
+  if(
+    finalAmount <= 0
+  ){
+
+    showError(
+      "error2",
+      "Invalid payment amount."
+    );
+
+    return;
+
+  }
+
+
+  const contact =
+    getContactData();
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value
+      .trim()
+      .replace(
+        /^@+/,
+        ""
+      );
+
+
+  const profile =
+    document.getElementById(
+      "profile"
+    ).value.trim();
+
+
+  const utr =
+    document.getElementById(
+      "utr"
+    ).value.trim();
+
+
+  const fileInput =
+    document.getElementById(
+      "screenshot"
+    );
+
+
+  /*
+    CONTACT
+  */
+
+  if(
+    !contact.mobile &&
+    !contact.email
+  ){
+
+    showError(
+      "error2",
+      "Please provide either your mobile number or email address."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    MOBILE
+  */
+
+  if(
+    contact.mobile
+  ){
+
+    const normalized =
+      contact.mobile
+        .replace(
+          /^\+91/,
+          ""
+        )
+        .replace(
+          /^91(?=\d{10}$)/,
+          ""
+        );
+
+
+    if(
+      !/^[6-9]\d{9}$/.test(
+        normalized
+      )
+    ){
+
+      showError(
+        "error2",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+    EMAIL
+  */
+
+  if(
+    contact.email
+  ){
+
+    if(
+      !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(
+        contact.email
+      )
+    ){
+
+      showError(
+        "error2",
+        "Please enter a valid email address."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+    USERNAME
+  */
+
+  if(
+    !username
+  ){
+
+    showError(
+      "error2",
+      "Please enter your Instagram username."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[A-Za-z0-9._]{1,30}$/.test(
+      username
+    )
+  ){
+
+    showError(
+      "error2",
+      "Please enter a valid Instagram username."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    PROFILE
+  */
+
+  if(
+    !profile
+  ){
+
+    showError(
+      "error2",
+      "Please enter your Instagram profile link."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const url =
+      new URL(profile);
+
+
+    const hostname =
+      url.hostname
+        .toLowerCase()
+        .replace(
+          /^www\./,
+          ""
+        );
+
+
+    if(
+      hostname !==
+        "instagram.com" &&
+      hostname !==
+        "instagr.am"
+    ){
+
+      throw new Error();
+
+    }
+
+
+    if(
+      !/^\/[A-Za-z0-9._]+\/?$/.test(
+        url.pathname
+      )
+    ){
+
+      throw new Error();
+
+    }
+
+  }catch{
+
+    showError(
+      "error2",
+      "Please enter a valid Instagram profile link."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    UTR OPTIONAL
+  */
+
+  if(
+    utr
+  ){
+
+    if(
+      utr.length < 6 ||
+      utr.length > 80 ||
+      !/^[A-Za-z0-9._-]+$/.test(
+        utr
+      )
+    ){
+
+      showError(
+        "error2",
+        "Please enter a valid UTR or leave it empty."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+    SCREENSHOT
+  */
+
+  if(
+    !fileInput.files ||
+    !fileInput.files[0]
+  ){
+
+    showError(
+      "error2",
+      "Please upload your actual payment screenshot."
+    );
+
+    return;
+
+  }
+
+
+  const file =
+    fileInput.files[0];
+
+
+  const allowedTypes = [
+
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+
+  ];
+
+
+  if(
+    !allowedTypes.includes(
+      file.type
+    )
+  ){
+
+    showError(
+      "error2",
+      "Only JPG, PNG or WEBP payment screenshots are allowed."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    file.size <= 0
+  ){
+
+    showError(
+      "error2",
+      "The selected screenshot is empty."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    file.size >
+    5 * 1024 * 1024
+  ){
+
+    showError(
+      "error2",
+      "Payment screenshot must be 5 MB or smaller."
+    );
+
+    return;
+
+  }
+
+
+  const submitBtn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+
+  submitBtn.disabled =
+    true;
+
+
+  submitBtn.textContent =
+    "Submitting...";
+
+
+  try{
+
+    /*
+      Convert actual image file
+      into Data URL.
+    */
+
+    const screenshot =
+      await fileToBase64(
+        file
+      );
+
+
+    const payload = {
+
+      package:
+        packageName,
+
+      mobile:
+        contact.mobile,
+
+      email:
+        contact.email,
+
+      username:
+        username,
+
+      profile:
+        profile,
+
+      utr:
+        utr,
+
+      promoCode:
+        promoApplied
+          ? PROMO_CODE
+          : "",
+
+      amount:
+        Number(finalAmount)
+          .toFixed(2),
+
+      screenshot:
+        screenshot
 
     };
 
 
-    /* ------------------------------------------
-       Helpers
-    ------------------------------------------ */
-
-    function showError(element, message) {
-
-      element.textContent = message;
-
-      element.classList.add("show");
-
-    }
-
-
-    function hideError(element) {
-
-      element.textContent = "";
-
-      element.classList.remove("show");
-
-    }
-
-
-    function cleanUsername(value) {
-
-      return value
-        .trim()
-        .replace(/^@+/, "");
-
-    }
-
-
-    function validUsername(value) {
-
-      return /^[A-Za-z0-9._]{1,30}$/.test(value);
-
-    }
-
-
-    function validProfile(value) {
-
-      try {
-
-        const url = new URL(value);
-
-        const hostname =
-          url.hostname
-            .toLowerCase()
-            .replace(/^www\./, "");
-
-        if (
-          hostname !== "instagram.com" &&
-          hostname !== "instagr.am"
-        ) {
-          return false;
-        }
-
-        return /^\/[A-Za-z0-9._]+\/?$/.test(
-          url.pathname
-        );
-
-      } catch (error) {
-
-        return false;
-
-      }
-
-    }
-
-
-    /* ------------------------------------------
-       Get selected amount
-    ------------------------------------------ */
-
-    function getAmount() {
-
-      const selectedPackage =
-        document.getElementById("package").value;
-
-      return packagePrices[selectedPackage] || 0;
-
-    }
-
-
-    /* ------------------------------------------
-       Generate UPI QR
-    ------------------------------------------ */
-
-    function generateQR() {
-
-      const amount = getAmount();
-
-      qrcode.innerHTML = "";
-
-      const upiUrl =
-        "upi://pay" +
-        "?pa=" + encodeURIComponent(UPI_ID) +
-        "&pn=" + encodeURIComponent("SehrAn Media") +
-        "&am=" + encodeURIComponent(amount.toFixed(2)) +
-        "&cu=INR";
-
-
-      if (typeof QRCode === "undefined") {
-
-        qrcode.innerHTML =
-          '<div style="color:#111;font-size:12px;text-align:center;padding:20px;">QR unavailable</div>';
-
-        return;
-
-      }
-
-
-      new QRCode(qrcode, {
-
-        text: upiUrl,
-
-        width: 210,
-
-        height: 210,
-
-        colorDark: "#000000",
-
-        colorLight: "#ffffff",
-
-        correctLevel: QRCode.CorrectLevel.H
-
-      });
-
-
-      amountDisplay.textContent =
-        "₹" + amount;
-
-    }
-
-
-    /* ------------------------------------------
-       STEP 1 → STEP 2
-    ------------------------------------------ */
-
-    nextButton.addEventListener("click", function() {
-
-      hideError(error1);
-
-      const packageValue =
-        document.getElementById("package").value;
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const username =
-        cleanUsername(
-          document.getElementById("username").value
-        );
-
-      const profile =
-        document.getElementById("profile").value.trim();
-
-
-      if (!packageValue) {
-
-        showError(
-          error1,
-          "Please select a package."
-        );
-
-        return;
-
-      }
-
-
-      if (!name || name.length < 2) {
-
-        showError(
-          error1,
-          "Please enter your full name."
-        );
-
-        return;
-
-      }
-
-
-      if (!validUsername(username)) {
-
-        showError(
-          error1,
-          "Please enter a valid Instagram username."
-        );
-
-        return;
-
-      }
-
-
-      if (!validProfile(profile)) {
-
-        showError(
-          error1,
-          "Please enter a valid Instagram profile link, for example: https://instagram.com/username"
-        );
-
-        return;
-
-      }
-
-
-      /* Put cleaned username back */
-
-      document.getElementById("username").value =
-        username;
-
-
-      generateQR();
-
-
-      step1.classList.remove("active");
-      step2.classList.add("active");
-
-      progress1.classList.remove("active");
-      progress2.classList.add("active");
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    });
-
-
-    /* ------------------------------------------
-       STEP 2 → STEP 1
-    ------------------------------------------ */
-
-    backButton.addEventListener("click", function() {
-
-      hideError(error2);
-
-      step2.classList.remove("active");
-      step1.classList.add("active");
-
-      progress2.classList.remove("active");
-      progress1.classList.add("active");
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    });
-
-
-    /* ------------------------------------------
-       Screenshot Preview
-    ------------------------------------------ */
-
-    screenshotInput.addEventListener(
-      "change",
-      function() {
-
-        hideError(error2);
-
-        const file =
-          screenshotInput.files[0];
-
-
-        if (!file) {
-
-          preview.src = "";
-
-          preview.classList.remove("show");
-
-          return;
+    const response =
+      await fetch(
+        "/api/orders",
+        {
+
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
 
         }
+      );
 
 
-        const allowedTypes = [
-
-          "image/jpeg",
-
-          "image/jpg",
-
-          "image/png",
-
-          "image/webp"
-
-        ];
+    let data =
+      {};
 
 
-        if (
-          !allowedTypes.includes(
-            file.type
+    try{
+
+      data =
+        await response.json();
+
+    }catch{
+
+      data =
+        {};
+
+    }
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        data.error ||
+        "Unable to submit order."
+      );
+
+    }
+
+
+    /*
+      SUCCESS
+    */
+
+    document.getElementById(
+      "successOrderId"
+    ).textContent =
+      data.orderId ||
+      "---";
+
+
+    document.getElementById(
+      "successAmount"
+    ).textContent =
+      money(
+        finalAmount
+      );
+
+
+    document.getElementById(
+      "successPackage"
+    ).textContent =
+      packageName;
+
+
+    /*
+      Attractive confirmation
+    */
+
+    playSuccessSound();
+
+
+    createStars(
+      140
+    );
+
+
+    showScreen(
+      3
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Submit error:",
+      error
+    );
+
+
+    showError(
+      "error2",
+      error.message ||
+      "Unable to submit order. Please try again."
+    );
+
+
+    submitBtn.disabled =
+      false;
+
+
+    submitBtn.textContent =
+      "Submit Order ✓";
+
+  }
+
+}
+
+
+/* ==========================================================
+   FILE TO BASE64
+========================================================== */
+
+function fileToBase64(
+  file
+){
+
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+
+      reader.onerror =
+        () => {
+
+          reject(
+            new Error(
+              "Could not read payment screenshot."
+            )
+          );
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+
+/* ==========================================================
+   FILE NAME / VALIDATION
+========================================================== */
+
+document
+  .getElementById(
+    "screenshot"
+  )
+  .addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files &&
+        this.files[0];
+
+
+      const fileName =
+        document.getElementById(
+          "fileName"
+        );
+
+
+      if(
+        !file
+      ){
+
+        fileName.textContent =
+          "No screenshot selected";
+
+        fileName.className =
+          "file-name";
+
+        return;
+
+      }
+
+
+      const allowedTypes = [
+
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+
+      ];
+
+
+      if(
+        !allowedTypes.includes(
+          file.type
+        )
+      ){
+
+        fileName.textContent =
+          "✕ Invalid file type";
+
+        fileName.className =
+          "file-name file-warning";
+
+        return;
+
+      }
+
+
+      if(
+        file.size >
+        5 * 1024 * 1024
+      ){
+
+        fileName.textContent =
+          "✕ File is larger than 5 MB";
+
+        fileName.className =
+          "file-name file-warning";
+
+        return;
+
+      }
+
+
+      const sizeMB =
+        (
+          file.size /
+          (
+            1024 *
+            1024
           )
-        ) {
-
-          screenshotInput.value = "";
-
-          preview.src = "";
-
-          preview.classList.remove("show");
-
-          showError(
-            error2,
-            "Please upload a JPG, PNG or WEBP image."
-          );
-
-          return;
-
-        }
+        ).toFixed(2);
 
 
-        if (
-          file.size >
-          5 * 1024 * 1024
-        ) {
-
-          screenshotInput.value = "";
-
-          preview.src = "";
-
-          preview.classList.remove("show");
-
-          showError(
-            error2,
-            "Payment screenshot must be 5 MB or smaller."
-          );
-
-          return;
-
-        }
+      fileName.textContent =
+        "✓ " +
+        file.name +
+        " • " +
+        sizeMB +
+        " MB";
 
 
-        const reader =
-          new FileReader();
+      fileName.className =
+        "file-name file-valid";
+
+    }
+  );
 
 
-        reader.onload =
-          function(event) {
+/* ==========================================================
+   STAR CELEBRATION
+========================================================== */
 
-            preview.src =
-              event.target.result;
+function createStars(
+  count
+){
 
-            preview.classList.add("show");
-
-          };
-
-
-        reader.readAsDataURL(file);
-
-      }
+  const container =
+    document.getElementById(
+      "celebration"
     );
 
 
-    /* ------------------------------------------
-       Convert file to Base64
-    ------------------------------------------ */
+  const symbols = [
 
-    function fileToBase64(file) {
+    "★",
+    "✦",
+    "✧",
+    "⭐",
+    "✨"
 
-      return new Promise(
-        function(resolve, reject) {
-
-          const reader =
-            new FileReader();
+  ];
 
 
-          reader.onload =
-            function() {
+  for(
+    let i = 0;
+    i < count;
+    i++
+  ){
 
-              resolve(
-                reader.result
-              );
-
-            };
-
-
-          reader.onerror =
-            function() {
-
-              reject(
-                new Error(
-                  "Unable to read screenshot."
-                )
-              );
-
-            };
-
-
-          reader.readAsDataURL(file);
-
-        }
+    const star =
+      document.createElement(
+        "div"
       );
+
+
+    star.className =
+      "star";
+
+
+    star.textContent =
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
+
+
+    star.style.left =
+      Math.random() *
+      100 +
+      "%";
+
+
+    star.style.fontSize =
+      (
+        12 +
+        Math.random() *
+        20
+      ) +
+      "px";
+
+
+    star.style.animationDuration =
+      (
+        2 +
+        Math.random() *
+        3
+      ) +
+      "s";
+
+
+    star.style.animationDelay =
+      (
+        Math.random() *
+        .7
+      ) +
+      "s";
+
+
+    container.appendChild(
+      star
+    );
+
+
+    setTimeout(
+      () => {
+
+        star.remove();
+
+      },
+      5500
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   SUCCESS SOUND
+========================================================== */
+
+function playSuccessSound(){
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+
+    if(
+      !AudioContext
+    ){
+
+      return;
 
     }
 
 
-    /* ------------------------------------------
-       SUBMIT ORDER
-    ------------------------------------------ */
+    const ctx =
+      new AudioContext();
 
-    submitButton.addEventListener(
-      "click",
-      async function() {
 
-        hideError(error2);
+    if(
+      ctx.state ===
+      "suspended"
+    ){
 
-        successMessage.classList.remove("show");
+      ctx.resume();
 
+    }
 
-        const packageValue =
-          document.getElementById("package").value;
 
-        const name =
-          document.getElementById("name").value.trim();
+    const now =
+      ctx.currentTime;
 
-        const username =
-          cleanUsername(
-            document.getElementById("username").value
-          );
 
-        const profile =
-          document.getElementById("profile").value.trim();
+    /*
+      Master gain
+    */
 
-        const utr =
-          document.getElementById("utr").value.trim();
+    const master =
+      ctx.createGain();
 
-        const promoCode =
-          document.getElementById("promoCode").value
-            .trim()
-            .toUpperCase();
 
-        const screenshotFile =
-          screenshotInput.files[0];
+    master.gain.setValueAtTime(
+      0.0001,
+      now
+    );
 
 
-        /* Validate */
+    master.gain.exponentialRampToValueAtTime(
+      0.22,
+      now + .025
+    );
 
-        if (!packageValue) {
 
-          showError(
-            error2,
-            "Package information is missing. Please go back and select a package."
-          );
+    master.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + 1.25
+    );
 
-          return;
 
-        }
+    master.connect(
+      ctx.destination
+    );
 
 
-        if (!name) {
+    /*
+      Airtel-style inspired
+      confirmation sequence,
+      but original tones.
+    */
 
-          showError(
-            error2,
-            "Name is required."
-          );
+    const notes = [
 
-          return;
+      {
+        frequency:523.25,
+        start:0,
+        duration:.22
+      },
 
-        }
+      {
+        frequency:659.25,
+        start:.10,
+        duration:.25
+      },
 
+      {
+        frequency:783.99,
+        start:.22,
+        duration:.30
+      },
 
-        if (!validUsername(username)) {
+      {
+        frequency:1046.50,
+        start:.38,
+        duration:.55
+      }
 
-          showError(
-            error2,
-            "Please enter a valid Instagram username."
-          );
+    ];
 
-          return;
 
-        }
+    notes.forEach(
+      note => {
 
+        const osc =
+          ctx.createOscillator();
 
-        if (!validProfile(profile)) {
 
-          showError(
-            error2,
-            "Please enter a valid Instagram profile link."
-          );
+        const gain =
+          ctx.createGain();
 
-          return;
 
-        }
+        osc.type =
+          "sine";
 
 
-        if (!screenshotFile) {
+        osc.frequency.setValueAtTime(
+          note.frequency,
+          now +
+          note.start
+        );
 
-          showError(
-            error2,
-            "Please upload your payment screenshot."
-          );
 
-          return;
+        gain.gain.setValueAtTime(
+          0.0001,
+          now +
+          note.start
+        );
 
-        }
 
+        gain.gain.exponentialRampToValueAtTime(
+          0.20,
+          now +
+          note.start +
+          .025
+        );
 
-        if (
-          screenshotFile.size >
-          5 * 1024 * 1024
-        ) {
 
-          showError(
-            error2,
-            "Payment screenshot must be 5 MB or smaller."
-          );
+        gain.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now +
+          note.start +
+          note.duration
+        );
 
-          return;
 
-        }
+        osc.connect(
+          gain
+        );
 
 
-        /* Check promo code */
+        gain.connect(
+          master
+        );
 
-        if (
-          promoCode &&
-          promoCode !== "ZEESHAN10"
-        ) {
 
-          showError(
-            error2,
-            "Invalid promo code. Please use ZEESHAN10."
-          );
+        osc.start(
+          now +
+          note.start
+        );
 
-          return;
 
-        }
-
-
-        /* Get amount */
-
-        const amount =
-          getAmount();
-
-
-        if (!amount) {
-
-          showError(
-            error2,
-            "Unable to determine the order amount."
-          );
-
-          return;
-
-        }
-
-
-        /* Convert screenshot */
-
-        let screenshotBase64;
-
-
-        try {
-
-          screenshotBase64 =
-            await fileToBase64(
-              screenshotFile
-            );
-
-        } catch (error) {
-
-          showError(
-            error2,
-            "Unable to read the payment screenshot. Please try again."
-          );
-
-          return;
-
-        }
-
-
-        /* Disable button */
-
-        submitButton.disabled = true;
-
-        submitButton.textContent =
-          "Submitting Order...";
-
-
-        try {
-
-          const response =
-            await fetch(
-              "/api/orders",
-              {
-
-                method: "POST",
-
-                headers: {
-
-                  "Content-Type":
-                    "application/json"
-
-                },
-
-                body:
-                  JSON.stringify({
-
-                    package:
-                      packageValue,
-
-                    name:
-                      name,
-
-                    username:
-                      username,
-
-                    profile:
-                      profile,
-
-                    utr:
-                      utr,
-
-                    promoCode:
-                      promoCode,
-
-                    amount:
-                      String(amount),
-
-                    screenshot:
-                      screenshotBase64
-
-                  })
-
-              }
-            );
-
-
-          let data = {};
-
-
-          try {
-
-            data =
-              await response.json();
-
-          } catch (error) {
-
-            data = {};
-
-          }
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              data.error ||
-              "Unable to submit your order."
-            );
-
-          }
-
-
-          if (!data.ok) {
-
-            throw new Error(
-              data.error ||
-              "Order could not be submitted."
-            );
-
-          }
-
-
-          /* SUCCESS */
-
-          step2.classList.remove("active");
-
-          progress2.classList.add("active");
-
-          orderResult.classList.add("show");
-
-
-          orderIdBox.textContent =
-            data.orderId ||
-            "ORDER SUBMITTED";
-
-
-          window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-          });
-
-
-        } catch (error) {
-
-          console.error(
-            "Order submit error:",
-            error
-          );
-
-
-          showError(
-            error2,
-            error.message ||
-            "Unable to submit order. Please try again."
-          );
-
-
-          submitButton.disabled = false;
-
-          submitButton.textContent =
-            "Submit Order";
-
-        }
+        osc.stop(
+          now +
+          note.start +
+          note.duration
+        );
 
       }
     );
 
 
-    /* ------------------------------------------
-       Package change → update amount/QR
-    ------------------------------------------ */
+    /*
+      Soft final confirmation tone
+    */
 
-    document
-      .getElementById("package")
-      .addEventListener(
-        "change",
-        function() {
-
-          if (
-            step2.classList.contains("active")
-          ) {
-
-            generateQR();
-
-          }
-
-        }
-      );
+    const finalOsc =
+      ctx.createOscillator();
 
 
-  </script>
+    const finalGain =
+      ctx.createGain();
+
+
+    finalOsc.type =
+      "triangle";
+
+
+    finalOsc.frequency.setValueAtTime(
+      1046.50,
+      now + .65
+    );
+
+
+    finalOsc.frequency.exponentialRampToValueAtTime(
+      1318.51,
+      now + 1.02
+    );
+
+
+    finalGain.gain.setValueAtTime(
+      0.0001,
+      now + .65
+    );
+
+
+    finalGain.gain.exponentialRampToValueAtTime(
+      0.13,
+      now + .68
+    );
+
+
+    finalGain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + 1.20
+    );
+
+
+    finalOsc.connect(
+      finalGain
+    );
+
+
+    finalGain.connect(
+      master
+    );
+
+
+    finalOsc.start(
+      now + .65
+    );
+
+
+    finalOsc.stop(
+      now + 1.20
+    );
+
+
+    /*
+      Close context after sound.
+    */
+
+    setTimeout(
+      () => {
+
+        try{
+
+          ctx.close();
+
+        }catch{}
+
+      },
+      1600
+    );
+
+
+  }catch(error){
+
+    console.log(
+      "Success sound unavailable."
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   ERRORS
+========================================================== */
+
+function showError(
+  id,
+  message
+){
+
+  const box =
+    document.getElementById(
+      id
+    );
+
+
+  box.textContent =
+    message;
+
+
+  box.classList.add(
+    "show"
+  );
+
+}
+
+
+function clearErrors(){
+
+  document
+    .querySelectorAll(
+      ".error"
+    )
+    .forEach(
+      box =>
+        box.classList.remove(
+          "show"
+        )
+    );
+
+}
+
+
+/* ==========================================================
+   HOME
+========================================================== */
+
+function goHome(){
+
+  window.location.href =
+    "/index.html";
+
+}
+
+
+/* ==========================================================
+   INITIALIZE
+========================================================== */
+
+getPackageFromURL();
+
+</script>
 
 </body>
 </html>
