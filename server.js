@@ -28,6 +28,17 @@ const ADMIN_URL =
 
 
 /* =========================================================
+   CONSTANTS
+========================================================= */
+
+const MAX_SCREENSHOT_SIZE =
+  5 * 1024 * 1024;
+
+const VALID_PROMO_CODE =
+  "ZEESHAN10";
+
+
+/* =========================================================
    CREATE REQUIRED DIRECTORIES / FILES
 ========================================================= */
 
@@ -85,16 +96,18 @@ app.use(
 
 function readOrders() {
   try {
-    const data = fs.readFileSync(
-      STORE,
-      "utf8"
-    );
+    const data =
+      fs.readFileSync(
+        STORE,
+        "utf8"
+      );
 
     if (!data.trim()) {
       return [];
     }
 
-    const orders = JSON.parse(data);
+    const orders =
+      JSON.parse(data);
 
     if (!Array.isArray(orders)) {
       return [];
@@ -103,6 +116,7 @@ function readOrders() {
     return orders;
 
   } catch (error) {
+
     console.error(
       "Orders read error:",
       error
@@ -131,6 +145,7 @@ function writeOrders(orders) {
 ========================================================= */
 
 function createOrderId() {
+
   return (
     "SM" +
     Date.now()
@@ -148,6 +163,7 @@ function cleanText(
   value,
   maxLength
 ) {
+
   if (
     typeof value !== "string"
   ) {
@@ -165,25 +181,92 @@ function cleanText(
 
 
 /* =========================================================
-   NAME VALIDATION
+   MOBILE NUMBER
 ========================================================= */
 
-function validName(name) {
+function cleanMobile(
+  value
+) {
+
   if (
-    name.length < 2 ||
-    name.length > 60
+    typeof value !== "string"
   ) {
+    return "";
+  }
+
+  return value
+    .trim()
+    .replace(/[^\d+]/g, "")
+    .slice(0, 20);
+}
+
+
+function validMobile(
+  mobile
+) {
+
+  if (!mobile) {
     return false;
   }
 
+  /*
+    Indian mobile number:
+
+    10 digits:
+    9876543210
+
+    Or:
+
+    +919876543210
+    919876543210
+  */
+
+  const normalized =
+    mobile.replace(
+      /^\+91/,
+      ""
+    ).replace(
+      /^91(?=\d{10}$)/,
+      ""
+    );
+
+  return /^[6-9]\d{9}$/.test(
+    normalized
+  );
+}
+
+
+/* =========================================================
+   EMAIL
+========================================================= */
+
+function cleanEmail(
+  value
+) {
+
   if (
-    /^(.)\1{4,}$/i.test(name)
+    typeof value !== "string"
   ) {
+    return "";
+  }
+
+  return value
+    .trim()
+    .toLowerCase()
+    .slice(0, 150);
+}
+
+
+function validEmail(
+  email
+) {
+
+  if (!email) {
     return false;
   }
 
-  return /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(
-    name
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(
+    email
   );
 }
 
@@ -192,7 +275,10 @@ function validName(name) {
    INSTAGRAM USERNAME
 ========================================================= */
 
-function cleanUsername(username) {
+function cleanUsername(
+  username
+) {
+
   return cleanText(
     username,
     30
@@ -203,7 +289,10 @@ function cleanUsername(username) {
 }
 
 
-function validUsername(username) {
+function validUsername(
+  username
+) {
+
   return /^[A-Za-z0-9._]{1,30}$/.test(
     username
   );
@@ -214,15 +303,20 @@ function validUsername(username) {
    INSTAGRAM PROFILE URL
 ========================================================= */
 
-function validInstagramProfile(profile) {
+function validInstagramProfile(
+  profile
+) {
+
   if (
     typeof profile !== "string" ||
+    !profile ||
     profile.length > 300
   ) {
     return false;
   }
 
   try {
+
     const url =
       new URL(profile);
 
@@ -243,11 +337,21 @@ function validInstagramProfile(profile) {
       return false;
     }
 
+    /*
+      Only allow a normal Instagram
+      profile path.
+
+      Example:
+      /username
+      /username/
+    */
+
     return /^\/[A-Za-z0-9._]+\/?$/.test(
       url.pathname
     );
 
   } catch (error) {
+
     return false;
   }
 }
@@ -255,9 +359,13 @@ function validInstagramProfile(profile) {
 
 /* =========================================================
    UTR VALIDATION
+   OPTIONAL
 ========================================================= */
 
-function validUTR(utr) {
+function validUTR(
+  utr
+) {
+
   if (!utr) {
     return true;
   }
@@ -276,13 +384,58 @@ function validUTR(utr) {
 
 
 /* =========================================================
-   PAYMENT SCREENSHOT SAVE
+   AMOUNT VALIDATION
 ========================================================= */
 
-function saveScreenshot(
-  screenshot,
-  orderId
+function cleanAmount(
+  value
 ) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "";
+  }
+
+  const text =
+    String(value)
+      .replace(/,/g, "")
+      .replace(/₹/g, "")
+      .trim();
+
+  const match =
+    text.match(
+      /^\d+(?:\.\d{1,2})?$/
+    );
+
+  if (!match) {
+    return "";
+  }
+
+  const number =
+    Number(text);
+
+  if (
+    !Number.isFinite(number) ||
+    number <= 0 ||
+    number > 100000
+  ) {
+    return "";
+  }
+
+  return number.toFixed(2);
+}
+
+
+/* =========================================================
+   SCREENSHOT DATA URL PARSER
+========================================================= */
+
+function parseScreenshot(
+  screenshot
+) {
+
   if (
     typeof screenshot !== "string" ||
     !screenshot
@@ -292,73 +445,40 @@ function saveScreenshot(
     );
   }
 
-  let extension = "";
-  let base64Data = "";
 
-  const jpegPrefix =
-    "data:image/jpeg;base64,";
+  const match =
+    screenshot.match(
+      /^data:(image\/jpeg|image\/jpg|image\/png|image\/webp);base64,(.+)$/i
+    );
 
-  const jpgPrefix =
-    "data:image/jpg;base64,";
 
-  const pngPrefix =
-    "data:image/png;base64,";
+  if (!match) {
 
-  const webpPrefix =
-    "data:image/webp;base64,";
+    throw new Error(
+      "Please upload a valid JPG, PNG or WEBP payment screenshot."
+    );
+  }
 
+
+  const mimeType =
+    match[1].toLowerCase();
+
+  const base64Data =
+    match[2];
+
+
+  /*
+    Base64 sanity check
+  */
 
   if (
-    screenshot.startsWith(
-      jpegPrefix
+    !/^[A-Za-z0-9+/]+={0,2}$/.test(
+      base64Data
     )
   ) {
-    extension = "jpg";
 
-    base64Data =
-      screenshot.slice(
-        jpegPrefix.length
-      );
-
-  } else if (
-    screenshot.startsWith(
-      jpgPrefix
-    )
-  ) {
-    extension = "jpg";
-
-    base64Data =
-      screenshot.slice(
-        jpgPrefix.length
-      );
-
-  } else if (
-    screenshot.startsWith(
-      pngPrefix
-    )
-  ) {
-    extension = "png";
-
-    base64Data =
-      screenshot.slice(
-        pngPrefix.length
-      );
-
-  } else if (
-    screenshot.startsWith(
-      webpPrefix
-    )
-  ) {
-    extension = "webp";
-
-    base64Data =
-      screenshot.slice(
-        webpPrefix.length
-      );
-
-  } else {
     throw new Error(
-      "Please upload a valid JPG, PNG or WEBP screenshot."
+      "The payment screenshot data is invalid."
     );
   }
 
@@ -371,8 +491,10 @@ function saveScreenshot(
 
 
   if (
+    !buffer ||
     buffer.length === 0
   ) {
+
     throw new Error(
       "The payment screenshot could not be read."
     );
@@ -381,11 +503,202 @@ function saveScreenshot(
 
   if (
     buffer.length >
-    5 * 1024 * 1024
+    MAX_SCREENSHOT_SIZE
   ) {
+
     throw new Error(
       "Payment screenshot must be 5 MB or smaller."
     );
+  }
+
+
+  return {
+    mimeType,
+    buffer
+  };
+}
+
+
+/* =========================================================
+   REAL IMAGE SIGNATURE CHECK
+========================================================= */
+
+function detectImageType(
+  buffer
+) {
+
+  if (
+    !Buffer.isBuffer(buffer) ||
+    buffer.length < 12
+  ) {
+    return null;
+  }
+
+
+  /*
+    JPEG
+
+    FF D8 FF
+  */
+
+  if (
+    buffer[0] === 0xff &&
+    buffer[1] === 0xd8 &&
+    buffer[2] === 0xff
+  ) {
+
+    return "image/jpeg";
+  }
+
+
+  /*
+    PNG
+
+    89 50 4E 47 0D 0A 1A 0A
+  */
+
+  if (
+    buffer[0] === 0x89 &&
+    buffer[1] === 0x50 &&
+    buffer[2] === 0x4e &&
+    buffer[3] === 0x47 &&
+    buffer[4] === 0x0d &&
+    buffer[5] === 0x0a &&
+    buffer[6] === 0x1a &&
+    buffer[7] === 0x0a
+  ) {
+
+    return "image/png";
+  }
+
+
+  /*
+    WEBP
+
+    RIFF .... WEBP
+  */
+
+  if (
+    buffer.toString(
+      "ascii",
+      0,
+      4
+    ) === "RIFF" &&
+    buffer.toString(
+      "ascii",
+      8,
+      12
+    ) === "WEBP"
+  ) {
+
+    return "image/webp";
+  }
+
+
+  return null;
+}
+
+
+/* =========================================================
+   PAYMENT SCREENSHOT SAVE
+========================================================= */
+
+function saveScreenshot(
+  screenshot,
+  orderId
+) {
+
+  const {
+    mimeType,
+    buffer
+  } =
+    parseScreenshot(
+      screenshot
+    );
+
+
+  /*
+    Check actual binary image
+    signature.
+
+    This prevents someone from
+    simply renaming a random file
+    to .jpg / .png.
+  */
+
+  const detectedType =
+    detectImageType(
+      buffer
+    );
+
+
+  if (!detectedType) {
+
+    throw new Error(
+      "The uploaded file is not a valid image."
+    );
+  }
+
+
+  /*
+    Make sure MIME type matches
+    actual file type.
+  */
+
+  const compatible =
+    (
+      mimeType ===
+        "image/jpeg" &&
+      detectedType ===
+        "image/jpeg"
+    ) ||
+    (
+      mimeType ===
+        "image/jpg" &&
+      detectedType ===
+        "image/jpeg"
+    ) ||
+    (
+      mimeType ===
+        "image/png" &&
+      detectedType ===
+        "image/png"
+    ) ||
+    (
+      mimeType ===
+        "image/webp" &&
+      detectedType ===
+        "image/webp"
+    );
+
+
+  if (!compatible) {
+
+    throw new Error(
+      "The screenshot file type does not match its actual image format."
+    );
+  }
+
+
+  let extension;
+
+  if (
+    detectedType ===
+    "image/jpeg"
+  ) {
+
+    extension = "jpg";
+
+  } else if (
+    detectedType ===
+    "image/png"
+  ) {
+
+    extension = "png";
+
+  } else {
+
+    extension = "webp";
   }
 
 
@@ -408,24 +721,36 @@ function saveScreenshot(
   );
 
 
-  return (
-    "/uploads/" +
-    filename
-  );
+  return {
+    path:
+      "/uploads/" +
+      filename,
+
+    filepath:
+      filepath,
+
+    buffer:
+      buffer,
+
+    mimeType:
+      detectedType
+  };
 }
 
 
 /* =========================================================
-   TELEGRAM NOTIFICATION
+   TELEGRAM SEND MESSAGE
 ========================================================= */
 
 async function notifyTelegram(
   text
 ) {
+
   if (
     !TG_BOT_TOKEN ||
     !TG_CHAT_ID
   ) {
+
     console.log(
       "Telegram bot token or chat ID is not configured."
     );
@@ -435,6 +760,7 @@ async function notifyTelegram(
 
 
   try {
+
     const telegramUrl =
       "https://api.telegram.org/bot" +
       TG_BOT_TOKEN +
@@ -454,6 +780,7 @@ async function notifyTelegram(
 
           body:
             JSON.stringify({
+
               chat_id:
                 TG_CHAT_ID,
 
@@ -462,14 +789,16 @@ async function notifyTelegram(
 
               disable_web_page_preview:
                 false
+
             })
         }
       );
 
 
     if (!response.ok) {
+
       console.error(
-        "Telegram response:",
+        "Telegram message response:",
         await response.text()
       );
 
@@ -480,8 +809,112 @@ async function notifyTelegram(
     return true;
 
   } catch (error) {
+
     console.error(
-      "Telegram notification error:",
+      "Telegram message error:",
+      error
+    );
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   TELEGRAM SEND ACTUAL SCREENSHOT
+========================================================= */
+
+async function sendTelegramScreenshot(
+  screenshotInfo,
+  caption
+) {
+
+  if (
+    !TG_BOT_TOKEN ||
+    !TG_CHAT_ID
+  ) {
+
+    return false;
+  }
+
+
+  try {
+
+    /*
+      Node.js 18+ provides:
+      FormData + Blob
+    */
+
+    const form =
+      new FormData();
+
+
+    form.append(
+      "chat_id",
+      TG_CHAT_ID
+    );
+
+
+    form.append(
+      "caption",
+      caption
+    );
+
+
+    const blob =
+      new Blob(
+        [
+          screenshotInfo.buffer
+        ],
+        {
+          type:
+            screenshotInfo.mimeType
+        }
+      );
+
+
+    form.append(
+      "photo",
+      blob,
+      "payment-screenshot"
+    );
+
+
+    const telegramUrl =
+      "https://api.telegram.org/bot" +
+      TG_BOT_TOKEN +
+      "/sendPhoto";
+
+
+    const response =
+      await fetch(
+        telegramUrl,
+        {
+          method: "POST",
+
+          body:
+            form
+        }
+      );
+
+
+    if (!response.ok) {
+
+      console.error(
+        "Telegram screenshot response:",
+        await response.text()
+      );
+
+      return false;
+    }
+
+
+    return true;
+
+  } catch (error) {
+
+    console.error(
+      "Telegram screenshot error:",
       error
     );
 
@@ -505,7 +938,7 @@ app.post(
 
 
       /* ---------------------------------------------------
-         SECURITY: NEVER ACCEPT PASSWORDS
+         NEVER ACCEPT PASSWORDS
       --------------------------------------------------- */
 
       if (
@@ -513,9 +946,12 @@ app.post(
           JSON.stringify(body)
         )
       ) {
+
         return res.status(400).json({
+
           error:
             "Passwords are not accepted."
+
         });
       }
 
@@ -531,10 +967,15 @@ app.post(
         );
 
 
-      const name =
-        cleanText(
-          body.name,
-          60
+      const mobile =
+        cleanMobile(
+          body.mobile
+        );
+
+
+      const email =
+        cleanEmail(
+          body.email
         );
 
 
@@ -568,52 +1009,103 @@ app.post(
 
 
       const amount =
-        cleanText(
-          String(
-            body.amount || ""
-          ),
-          30
+        cleanAmount(
+          body.amount
         );
 
 
       const screenshot =
-        body.screenshot || "";
+        body.screenshot ||
+        "";
 
 
       /* ---------------------------------------------------
          REQUIRED FIELDS
+         
+         Contact:
+         MOBILE OR EMAIL
+
+         Instagram:
+         USERNAME + PROFILE
+
+         Screenshot:
+         REQUIRED
       --------------------------------------------------- */
 
       if (
         !pkg ||
-        !name ||
         !username ||
         !profile ||
         !screenshot
       ) {
+
         return res.status(400).json({
+
           error:
-            "Please complete all required fields and upload your payment screenshot."
+            "Please complete the required fields and upload your payment screenshot."
+
         });
       }
 
 
       /* ---------------------------------------------------
-         VALIDATE NAME
+         MOBILE OR EMAIL
       --------------------------------------------------- */
 
       if (
-        !validName(name)
+        !mobile &&
+        !email
       ) {
+
         return res.status(400).json({
+
           error:
-            "Please enter a valid name."
+            "Please provide either your mobile number or email address."
+
         });
       }
 
 
       /* ---------------------------------------------------
-         VALIDATE INSTAGRAM USERNAME
+         IF MOBILE IS PROVIDED
+         VALIDATE IT
+      --------------------------------------------------- */
+
+      if (
+        mobile &&
+        !validMobile(mobile)
+      ) {
+
+        return res.status(400).json({
+
+          error:
+            "Please enter a valid Indian mobile number."
+
+        });
+      }
+
+
+      /* ---------------------------------------------------
+         IF EMAIL IS PROVIDED
+         VALIDATE IT
+      --------------------------------------------------- */
+
+      if (
+        email &&
+        !validEmail(email)
+      ) {
+
+        return res.status(400).json({
+
+          error:
+            "Please enter a valid email address."
+
+        });
+      }
+
+
+      /* ---------------------------------------------------
+         INSTAGRAM USERNAME
       --------------------------------------------------- */
 
       if (
@@ -621,15 +1113,18 @@ app.post(
           username
         )
       ) {
+
         return res.status(400).json({
+
           error:
             "Please enter a valid Instagram username."
+
         });
       }
 
 
       /* ---------------------------------------------------
-         VALIDATE INSTAGRAM PROFILE
+         INSTAGRAM PROFILE
       --------------------------------------------------- */
 
       if (
@@ -637,39 +1132,67 @@ app.post(
           profile
         )
       ) {
+
         return res.status(400).json({
+
           error:
             "Please enter a valid Instagram profile link."
+
         });
       }
 
 
       /* ---------------------------------------------------
-         VALIDATE UTR
+         UTR
+         
+         OPTIONAL
       --------------------------------------------------- */
 
       if (
         !validUTR(utr)
       ) {
+
         return res.status(400).json({
+
           error:
             "Please enter a valid UTR or leave it empty."
+
         });
       }
 
 
       /* ---------------------------------------------------
-         PROMO CODE
+         PROMO
+         
+         OPTIONAL
       --------------------------------------------------- */
 
       if (
         promoCode &&
         promoCode !==
-          "ZEESHAN10"
+          VALID_PROMO_CODE
       ) {
+
         return res.status(400).json({
+
           error:
-            "Invalid promo code. Please use ZEESHAN10."
+            "Invalid promo code."
+
+        });
+      }
+
+
+      /* ---------------------------------------------------
+         AMOUNT
+      --------------------------------------------------- */
+
+      if (!amount) {
+
+        return res.status(400).json({
+
+          error:
+            "Invalid payment amount."
+
         });
       }
 
@@ -686,12 +1209,11 @@ app.post(
          SAVE SCREENSHOT
       --------------------------------------------------- */
 
-      let screenshotPath;
-
+      let screenshotInfo;
 
       try {
 
-        screenshotPath =
+        screenshotInfo =
           saveScreenshot(
             screenshot,
             orderId
@@ -700,8 +1222,10 @@ app.post(
       } catch (error) {
 
         return res.status(400).json({
+
           error:
             error.message
+
         });
       }
 
@@ -721,8 +1245,11 @@ app.post(
         package:
           pkg,
 
-        name:
-          name,
+        mobile:
+          mobile,
+
+        email:
+          email,
 
         username:
           username,
@@ -740,10 +1267,11 @@ app.post(
           amount,
 
         screenshot:
-          screenshotPath,
+          screenshotInfo.path,
 
         createdAt:
           new Date().toISOString()
+
       };
 
 
@@ -766,11 +1294,11 @@ app.post(
 
 
       /* ---------------------------------------------------
-         CREATE SCREENSHOT URL
+         SCREENSHOT URL
       --------------------------------------------------- */
 
       let screenshotUrl =
-        screenshotPath;
+        screenshotInfo.path;
 
 
       if (ADMIN_URL) {
@@ -780,12 +1308,41 @@ app.post(
             /\/$/,
             ""
           ) +
-          screenshotPath;
+          screenshotInfo.path;
+
       }
 
 
       /* ---------------------------------------------------
-         TELEGRAM MESSAGE
+         CONTACT DISPLAY
+      --------------------------------------------------- */
+
+      let contactText =
+        "";
+
+
+      if (mobile) {
+
+        contactText +=
+          "Mobile: " +
+          mobile +
+          "\n";
+
+      }
+
+
+      if (email) {
+
+        contactText +=
+          "Email: " +
+          email +
+          "\n";
+
+      }
+
+
+      /* ---------------------------------------------------
+         TELEGRAM ORDER MESSAGE
       --------------------------------------------------- */
 
       const message =
@@ -793,56 +1350,78 @@ app.post(
         orderId +
         "\n\n" +
 
-        "Name: " +
-        name +
-        "\n" +
-
-        "Instagram: @" +
-        username +
-        "\n" +
-
-        "Profile: " +
-        profile +
-        "\n" +
-
-        "Package: " +
+        "📦 Package: " +
         pkg +
         "\n" +
 
-        "Amount: ₹" +
-        (
-          amount ||
-          "Not specified"
-        ) +
+        "💰 Amount: ₹" +
+        amount +
+        "\n\n" +
+
+        "📱 Contact\n" +
+        contactText +
+
         "\n" +
 
-        "UTR: " +
+        "📸 Instagram: @" +
+        username +
+        "\n" +
+
+        "🔗 Profile: " +
+        profile +
+        "\n\n" +
+
+        "🧾 UTR: " +
         (
           utr ||
           "Not provided"
         ) +
         "\n" +
 
-        "Promo Code: " +
+        "🎟 Promo Code: " +
         (
           promoCode ||
           "Not used"
         ) +
         "\n\n" +
 
-        "Payment Screenshot:\n" +
+        "🖼 Screenshot URL:\n" +
         screenshotUrl +
         "\n\n" +
 
-        "⚠️ Verify payment before accepting.";
+        "⚠️ VERIFY THE PAYMENT BEFORE ACCEPTING THE ORDER.";
 
 
       /* ---------------------------------------------------
-         SEND TELEGRAM
+         SEND TELEGRAM MESSAGE
       --------------------------------------------------- */
 
       await notifyTelegram(
         message
+      );
+
+
+      /* ---------------------------------------------------
+         SEND ACTUAL SCREENSHOT TO TELEGRAM
+      --------------------------------------------------- */
+
+      const screenshotCaption =
+        "💳 PAYMENT SCREENSHOT\n" +
+        "Order ID: " +
+        orderId +
+        "\n" +
+        "Amount: ₹" +
+        amount +
+        "\n" +
+        "Instagram: @" +
+        username +
+        "\n\n" +
+        "⚠️ Verify payment before accepting.";
+
+
+      await sendTelegramScreenshot(
+        screenshotInfo,
+        screenshotCaption
       );
 
 
@@ -878,7 +1457,9 @@ app.post(
           "Unable to process order. Please try again."
 
       });
+
     }
+
   }
 );
 
@@ -905,14 +1486,17 @@ function admin(
   ) {
 
     return res.status(401).json({
+
       error:
         "Unauthorized"
+
     });
 
   }
 
 
   next();
+
 }
 
 
@@ -960,8 +1544,10 @@ app.post(
     ) {
 
       return res.status(400).json({
+
         error:
           "Invalid status"
+
       });
 
     }
@@ -982,8 +1568,10 @@ app.post(
     if (!order) {
 
       return res.status(404).json({
+
         error:
           "Order not found"
+
       });
 
     }
@@ -1039,8 +1627,10 @@ app.get(
     if (!order) {
 
       return res.status(404).json({
+
         error:
           "Order not found"
+
       });
 
     }
@@ -1068,7 +1658,6 @@ app.get(
 
 /* =========================================================
    EXPLICIT HTML ROUTES
-   These help prevent "Cannot GET /order.html"
 ========================================================= */
 
 app.get(
@@ -1083,7 +1672,9 @@ app.get(
 
 
     if (
-      fs.existsSync(orderPage)
+      fs.existsSync(
+        orderPage
+      )
     ) {
 
       return res.sendFile(
@@ -1096,6 +1687,7 @@ app.get(
     return res.status(404).send(
       "order.html was not found inside the public folder."
     );
+
   }
 );
 
@@ -1112,7 +1704,9 @@ app.get(
 
 
     if (
-      fs.existsSync(adminPage)
+      fs.existsSync(
+        adminPage
+      )
     ) {
 
       return res.sendFile(
@@ -1125,6 +1719,7 @@ app.get(
     return res.status(404).send(
       "admin.html was not found inside the public folder."
     );
+
   }
 );
 
@@ -1145,7 +1740,9 @@ app.get(
 
 
     if (
-      fs.existsSync(indexPage)
+      fs.existsSync(
+        indexPage
+      )
     ) {
 
       return res.sendFile(
@@ -1177,8 +1774,10 @@ app.use(
     ) {
 
       return res.status(404).json({
+
         error:
           "API endpoint not found"
+
       });
 
     }
