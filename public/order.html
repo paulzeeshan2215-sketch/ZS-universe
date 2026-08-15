@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>Place Order | SehrAn Media</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
-  >
+  />
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     * {
@@ -21,14 +33,41 @@
       padding: 0;
     }
 
+    :root {
+      --primary: #7c3aed;
+      --primary2: #a855f7;
+      --pink: #ec4899;
+      --green: #16a34a;
+      --red: #ef4444;
+      --dark: #0b0713;
+      --card: rgba(255, 255, 255, 0.075);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+      --muted: #aaa6b5;
+    }
+
     body {
-      font-family: "Poppins", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(124, 58, 237, 0.20), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.16), transparent 35%),
-        #080812;
-      color: #fff;
       min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(124, 58, 237, 0.22),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(236, 72, 153, 0.15),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #08050e,
+          #10091a 50%,
+          #08050e
+        );
+      color: var(--text);
+      font-family: "Poppins", sans-serif;
+      overflow-x: hidden;
     }
 
     a {
@@ -36,141 +75,179 @@
       text-decoration: none;
     }
 
-    .header {
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
       width: 100%;
-      padding: 18px 22px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8,8,18,0.88);
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(7,4,12,0.75);
       backdrop-filter: blur(14px);
       position: sticky;
       top: 0;
       z-index: 50;
     }
 
-    .nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
+    .logo {
       font-family: "Montserrat", sans-serif;
-      font-size: 22px;
       font-weight: 800;
+      font-size: 24px;
       letter-spacing: -0.5px;
     }
 
-    .brand span {
-      color: #a855f7;
+    .logo span {
+      color: var(--primary2);
     }
 
-    .back-home {
-      color: #c9c9d8;
-      font-size: 14px;
-      font-weight: 600;
+    .back-btn {
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #ddd;
+      transition: 0.25s;
     }
 
-    .back-home:hover {
-      color: #fff;
+    .back-btn:hover {
+      border-color: var(--primary2);
+      background: rgba(124,58,237,0.12);
     }
 
-    .container {
-      width: min(760px, calc(100% - 30px));
-      margin: 42px auto 70px;
+    /* =========================
+       MAIN
+    ========================== */
+
+    .page {
+      width: min(920px, 92%);
+      margin: 45px auto 80px;
     }
 
     .heading {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 35px;
+    }
+
+    .heading .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(124,58,237,0.14);
+      border: 1px solid rgba(168,85,247,0.3);
+      color: #c084fc;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 15px;
     }
 
     .heading h1 {
       font-family: "Montserrat", sans-serif;
-      font-size: clamp(28px, 5vw, 42px);
+      font-size: clamp(30px, 5vw, 48px);
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .heading p {
-      color: #a9a9bb;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    /* Progress */
+    /* =========================
+       PROGRESS
+    ========================== */
 
-    .progress {
+    .steps {
       display: flex;
-      align-items: center;
       justify-content: center;
-      margin: 0 auto 28px;
-      max-width: 500px;
-    }
-
-    .progress-step {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      color: #777789;
-      font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .progress-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #1b1b29;
-      border: 1px solid #333344;
-      color: #9999aa;
-      font-weight: 700;
-    }
-
-    .progress-step.active {
-      color: #fff;
-    }
-
-    .progress-step.active .progress-circle {
-      background: linear-gradient(135deg, #9333ea, #ec4899);
-      border-color: transparent;
-      color: white;
-      box-shadow: 0 0 22px rgba(168,85,247,0.25);
-    }
-
-    .progress-line {
-      height: 1px;
-      width: 70px;
-      background: #30303d;
-      margin: 0 12px;
-    }
-
-    .card {
-      background: rgba(18,18,30,0.94);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 20px 70px rgba(0,0,0,0.30);
+      margin: 0 auto 32px;
+      max-width: 650px;
     }
 
     .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      min-width: 90px;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 800;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+      color: #999;
+      transition: 0.35s;
+    }
+
+    .step.active .step-circle,
+    .step.done .step-circle {
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--pink)
+      );
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 0 25px rgba(124,58,237,0.35);
+    }
+
+    .step span {
+      font-size: 10px;
+      color: #777;
+      white-space: nowrap;
+    }
+
+    .step.active span,
+    .step.done span {
+      color: #ddd;
+    }
+
+    .step-line {
+      height: 1px;
+      flex: 1;
+      max-width: 100px;
+      background: rgba(255,255,255,0.12);
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       CARD
+    ========================== */
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+      backdrop-filter: blur(18px);
+    }
+
+    .section {
       display: none;
+      animation: sectionIn 0.35s ease;
     }
 
-    .step.active {
+    .section.active {
       display: block;
-      animation: fadeIn 0.25s ease;
     }
 
-    @keyframes fadeIn {
+    @keyframes sectionIn {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(12px);
       }
 
       to {
@@ -179,397 +256,681 @@
       }
     }
 
-    .step-title {
+    .section-title {
       font-family: "Montserrat", sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
-      margin-bottom: 5px;
+      margin-bottom: 7px;
     }
 
-    .step-subtitle {
-      color: #9292a5;
+    .section-subtitle {
+      color: var(--muted);
       font-size: 13px;
       margin-bottom: 25px;
+    }
+
+    /* =========================
+       FORM
+    ========================== */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
     .field {
       margin-bottom: 18px;
     }
 
-    .field label {
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
+      color: #ddd;
       margin-bottom: 8px;
-      color: #e5e5ed;
     }
 
     .required {
-      color: #f472b6;
+      color: #f87171;
     }
 
-    .field input,
-    .field select {
+    input,
+    textarea {
       width: 100%;
-      height: 50px;
-      padding: 0 15px;
-      border-radius: 12px;
-      border: 1px solid #303041;
-      background: #10101b;
-      color: #fff;
+      border: 1px solid rgba(255,255,255,0.13);
       outline: none;
+      background: rgba(0,0,0,0.25);
+      color: white;
+      border-radius: 13px;
+      padding: 13px 14px;
       font-family: "Poppins", sans-serif;
-      font-size: 14px;
+      font-size: 13px;
+      transition: 0.25s;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary2);
+      box-shadow: 0 0 0 3px rgba(168,85,247,0.08);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #666;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: #777;
+      margin-top: 6px;
+    }
+
+    /* =========================
+       PACKAGE SUMMARY
+       =========================
+       Package cards are NOT here.
+       Selected package comes from index.html.
+    ========================== */
+
+    .selected-package {
+      border: 1px solid rgba(168,85,247,0.28);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,0.13),
+          rgba(236,72,153,0.06)
+        );
+      border-radius: 16px;
+      padding: 17px;
+      margin-bottom: 22px;
+    }
+
+    .selected-package small {
+      color: #a9a4b3;
+      font-size: 10px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .selected-package strong {
+      font-size: 17px;
+    }
+
+    /* =========================
+       PROMO
+    ========================== */
+
+    .promo-box {
+      display: flex;
+      gap: 9px;
+    }
+
+    .promo-box input {
+      flex: 1;
+      text-transform: uppercase;
+    }
+
+    .promo-btn {
+      border: 0;
+      padding: 0 19px;
+      border-radius: 12px;
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--pink)
+      );
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
       transition: 0.2s;
     }
 
-    .field input::placeholder {
-      color: #666678;
+    .promo-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(124,58,237,0.28);
     }
 
-    .field input:focus,
-    .field select:focus {
-      border-color: #9b5de5;
-      box-shadow: 0 0 0 3px rgba(155,93,229,0.10);
+    .promo-result {
+      min-height: 20px;
+      margin-top: 9px;
+      font-size: 11px;
     }
 
-    .field select option {
-      background: #10101b;
-      color: #fff;
+    .promo-result.success {
+      color: #4ade80;
     }
 
-    .two-fields {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
+    .promo-result.error {
+      color: #f87171;
     }
 
-    .button-row {
+    /* =========================
+       PROMO SUCCESS ANIMATION
+    ========================== */
+
+    .promo-success {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      width: min(390px, 88%);
+      background: rgba(15, 9, 23, 0.96);
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 24px;
+      padding: 30px 25px;
+      text-align: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.65);
+    }
+
+    .promo-success.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .promo-icon {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 13px;
+      border-radius: 50%;
       display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+      font-size: 28px;
+      animation: pop 0.55s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .promo-success h3 {
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .promo-success p {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
       gap: 12px;
       margin-top: 25px;
     }
 
-    button {
-      font-family: "Poppins", sans-serif;
-      cursor: pointer;
-    }
-
     .btn {
       border: 0;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 12px;
+      border-radius: 13px;
+      padding: 14px 22px;
+      font-family: "Poppins", sans-serif;
+      font-size: 13px;
       font-weight: 700;
-      font-size: 14px;
-      transition: transform 0.2s, opacity 0.2s;
+      cursor: pointer;
+      transition: 0.25s;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
+    .btn-primary {
+      margin-left: auto;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--pink)
+      );
+      box-shadow: 0 10px 30px rgba(124,58,237,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(124,58,237,0.32);
+    }
+
+    .btn-secondary {
+      color: #ddd;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.09);
     }
 
     .btn:disabled {
       opacity: 0.55;
       cursor: not-allowed;
-      transform: none;
+      transform: none !important;
     }
 
-    .btn-primary {
-      flex: 1;
-      color: #fff;
-      background: linear-gradient(135deg, #9333ea, #ec4899);
-      box-shadow: 0 12px 30px rgba(168,85,247,0.20);
+    /* =========================
+       PAYMENT
+    ========================== */
+
+    .payment-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
     }
 
-    .btn-secondary {
-      color: #fff;
-      background: #252535;
-      border: 1px solid #39394b;
-    }
-
-    /* Payment */
-
-    .payment-box {
-      text-align: center;
-      background: #0d0d18;
-      border: 1px solid #2c2c3b;
-      border-radius: 18px;
+    .qr-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 22px 15px;
-      margin-bottom: 22px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .payment-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .payment-subtitle {
-      color: #9292a5;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-
-    /* IMPORTANT:
-       Fixed QR wrapper prevents giant QR on desktop.
+    /*
+      IMPORTANT:
+      QR container is deliberately fixed.
+      This prevents the huge rectangle problem on desktop/laptop.
     */
 
-    .qr-wrapper {
-      width: 230px;
-      height: 230px;
-      max-width: 100%;
-      margin: 0 auto 16px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
     #qrcode {
-      width: 210px;
-      height: 210px;
+      width: 260px;
+      height: 260px;
+      min-width: 260px;
+      min-height: 260px;
+      max-width: 260px;
+      max-height: 260px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+
+      background: white;
+      padding: 10px;
+      border-radius: 16px;
+
+      box-shadow:
+        0 15px 45px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.2);
     }
 
-    #qrcode canvas,
-    #qrcode img {
-      width: 210px !important;
-      height: 210px !important;
-      max-width: 210px !important;
-      max-height: 210px !important;
+    #qrcode img,
+    #qrcode canvas {
+      width: 240px !important;
+      height: 240px !important;
+      max-width: 240px !important;
+      max-height: 240px !important;
       display: block;
     }
 
-    .upi-label {
-      color: #9292a5;
-      font-size: 12px;
-      margin-bottom: 4px;
+    .scan-title {
+      margin-top: 16px;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .scan-text {
+      margin-top: 5px;
+      color: #999;
+      font-size: 10px;
+      text-align: center;
+      max-width: 280px;
     }
 
     .upi-id {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
+      margin-top: 13px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(168,85,247,0.28);
+      background: rgba(124,58,237,0.08);
+      color: #c084fc;
+      font-size: 11px;
+      font-weight: 700;
       word-break: break-all;
     }
 
-    .amount-box {
-      margin: 15px auto 0;
-      max-width: 300px;
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(168,85,247,0.08);
-      border: 1px solid rgba(168,85,247,0.20);
-    }
-
-    .amount-label {
-      color: #9999aa;
-      font-size: 11px;
-      margin-bottom: 2px;
-    }
-
-    .amount-value {
-      font-size: 23px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .instructions {
-      background: rgba(34,197,94,0.06);
-      border: 1px solid rgba(34,197,94,0.16);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
-    }
-
-    .instructions h3 {
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .instructions ol {
-      padding-left: 18px;
-      color: #aaaabc;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    /* Upload */
-
-    .upload-box {
-      position: relative;
-      border: 1px dashed #454556;
-      border-radius: 14px;
-      background: #10101b;
-      padding: 18px;
-      text-align: center;
-      transition: 0.2s;
-    }
-
-    .upload-box:hover {
-      border-color: #9b5de5;
-    }
-
-    .upload-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-
-    .upload-title {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .upload-info {
-      color: #777789;
-      font-size: 11px;
-      margin-top: 4px;
-      margin-bottom: 12px;
-    }
-
-    .upload-box input[type="file"] {
-      width: 100%;
-      font-size: 12px;
-      color: #aaaabc;
-    }
-
-    .preview {
-      display: none;
-      margin: 14px auto 0;
-      max-width: 260px;
-      max-height: 260px;
-      border-radius: 10px;
-      border: 1px solid #383849;
-      object-fit: contain;
-    }
-
-    .preview.show {
-      display: block;
-    }
-
-    .security-note {
+    .payment-info {
       display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      padding: 12px;
-      margin-top: 18px;
-      border-radius: 12px;
-      background: #11111d;
-      border: 1px solid #272737;
-      color: #858597;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .payment-box {
+      border-radius: 15px;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.035);
+    }
+
+    .payment-box strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .payment-box span {
+      color: #999;
       font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .error-message,
-    .success-message {
-      display: none;
-      padding: 13px 14px;
-      border-radius: 12px;
-      margin-bottom: 17px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .error-message {
-      color: #fecaca;
-      background: rgba(239,68,68,0.08);
-      border: 1px solid rgba(239,68,68,0.20);
-    }
-
-    .success-message {
-      color: #bbf7d0;
-      background: rgba(34,197,94,0.08);
-      border: 1px solid rgba(34,197,94,0.20);
-      text-align: center;
-    }
-
-    .error-message.show,
-    .success-message.show {
-      display: block;
-    }
-
-    .order-result {
-      display: none;
-      text-align: center;
-      padding: 20px 5px 5px;
-    }
-
-    .order-result.show {
-      display: block;
-    }
-
-    .success-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.25);
-      font-size: 30px;
-    }
-
-    .order-result h2 {
-      font-family: "Montserrat", sans-serif;
-      margin-bottom: 8px;
-    }
-
-    .order-result p {
-      color: #9d9daf;
-      font-size: 13px;
       line-height: 1.6;
     }
 
-    .order-id-box {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 12px 20px;
-      background: #10101b;
-      border: 1px solid #333344;
-      border-radius: 12px;
+    .amount {
+      font-size: 25px;
       font-weight: 800;
-      letter-spacing: 1px;
+      color: #4ade80;
     }
 
-    .footer {
+    /* =========================
+       FILE UPLOAD
+    ========================== */
+
+    .file-upload {
+      position: relative;
+      border: 1px dashed rgba(168,85,247,0.38);
+      background: rgba(124,58,237,0.045);
+      border-radius: 15px;
+      padding: 18px;
       text-align: center;
-      color: #666678;
-      font-size: 11px;
-      padding: 0 20px 35px;
+      transition: 0.25s;
     }
 
-    @media (max-width: 600px) {
+    .file-upload:hover {
+      border-color: var(--primary2);
+      background: rgba(124,58,237,0.08);
+    }
 
-      .header {
-        padding: 15px 16px;
+    .file-upload input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-icon {
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .file-upload strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .file-upload small {
+      color: #777;
+      font-size: 10px;
+    }
+
+    .file-name {
+      margin-top: 8px;
+      color: #4ade80;
+      font-size: 10px;
+      word-break: break-all;
+    }
+
+    /* =========================
+       LOADING
+    ========================== */
+
+    .loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 11px;
+    }
+
+    .loading.show {
+      display: flex;
+    }
+
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #c084fc;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       ERROR
+    ========================== */
+
+    .error-box {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.22);
+      color: #fca5a5;
+      font-size: 11px;
+    }
+
+    .error-box.show {
+      display: block;
+    }
+
+    /* =========================
+       SUCCESS
+    ========================== */
+
+    #successSection {
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    .success-circle {
+      width: 105px;
+      height: 105px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(34,197,94,0.1);
+      border: 2px solid rgba(74,222,128,0.35);
+      box-shadow:
+        0 0 0 10px rgba(34,197,94,0.04),
+        0 0 55px rgba(34,197,94,0.12);
+      animation: successPop 0.7s ease;
+    }
+
+    @keyframes successPop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
       }
 
-      .container {
-        width: min(100% - 20px, 760px);
-        margin-top: 28px;
+      60% {
+        transform: scale(1.12);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .tick {
+      width: 43px;
+      height: 24px;
+      border-left: 5px solid #4ade80;
+      border-bottom: 5px solid #4ade80;
+      transform: rotate(-45deg);
+      margin-top: -8px;
+      animation: tickDraw 0.55s 0.3s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes tickDraw {
+      from {
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+
+      to {
+        width: 43px;
+        height: 24px;
+        opacity: 1;
+      }
+    }
+
+    #successSection h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 29px;
+      margin-bottom: 8px;
+    }
+
+    #successSection p {
+      color: #aaa;
+      font-size: 13px;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .order-number {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(168,85,247,0.25);
+      color: #c084fc;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       CONFETTI / STARS
+    ========================== */
+
+    .celebration {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .star {
+      position: absolute;
+      top: -30px;
+      font-size: 17px;
+      animation: fall linear forwards;
+      opacity: 0.95;
+    }
+
+    @keyframes fall {
+      0% {
+        transform:
+          translateY(-30px)
+          rotate(0deg)
+          scale(0.7);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform:
+          translateY(110vh)
+          rotate(720deg)
+          scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 760px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      .page {
+        width: 94%;
+        margin-top: 30px;
       }
 
       .card {
-        padding: 20px 16px;
-        border-radius: 18px;
+        padding: 20px;
+        border-radius: 20px;
       }
 
-      .two-fields {
+      .grid {
         grid-template-columns: 1fr;
         gap: 0;
       }
 
-      .button-row {
+      .field.full {
+        grid-column: auto;
+      }
+
+      .payment-layout {
+        grid-template-columns: 1fr;
+      }
+
+      #qrcode {
+        width: 260px;
+        height: 260px;
+        min-width: 260px;
+        min-height: 260px;
+        max-width: 260px;
+        max-height: 260px;
+      }
+
+      .steps {
+        transform: scale(0.92);
+      }
+
+      .step-line {
+        max-width: 55px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .logo {
+        font-size: 20px;
+      }
+
+      .back-btn {
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+
+      .buttons {
         flex-direction: column-reverse;
       }
 
@@ -577,37 +938,29 @@
         width: 100%;
       }
 
-      .progress-line {
-        width: 35px;
-        margin: 0 7px;
+      .promo-box {
+        flex-direction: column;
       }
 
-      .progress-step {
-        font-size: 10px;
-      }
-
-      .progress-circle {
-        width: 30px;
-        height: 30px;
-        font-size: 11px;
-      }
-
-      .qr-wrapper {
-        width: 220px;
-        height: 220px;
+      .promo-btn {
+        height: 46px;
       }
 
       #qrcode {
-        width: 200px;
-        height: 200px;
+        width: 240px;
+        height: 240px;
+        min-width: 240px;
+        min-height: 240px;
+        max-width: 240px;
+        max-height: 240px;
       }
 
-      #qrcode canvas,
-      #qrcode img {
-        width: 200px !important;
-        height: 200px !important;
-        max-width: 200px !important;
-        max-height: 200px !important;
+      #qrcode img,
+      #qrcode canvas {
+        width: 220px !important;
+        height: 220px !important;
+        max-width: 220px !important;
+        max-height: 220px !important;
       }
     }
   </style>
@@ -615,41 +968,52 @@
 
 <body>
 
-  <header class="header">
-    <div class="nav">
-      <a href="/" class="brand">
-        SehrAn<span> Media</span>
-      </a>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      SehrAn <span>Media</span>
+    </a>
 
-      <a href="/" class="back-home">
-        ← Back to Home
-      </a>
-    </div>
+    <a href="index.html" class="back-btn">
+      ← Back to Home
+    </a>
   </header>
 
 
-  <main class="container">
+  <main class="page">
 
+    <!-- HEADING -->
     <div class="heading">
+      <div class="badge">SECURE ORDER SYSTEM</div>
+
       <h1>Place Your Order</h1>
-      <p>Complete your order in two simple steps.</p>
+
+      <p>
+        Complete your details, make payment and submit your order.
+      </p>
     </div>
 
 
     <!-- PROGRESS -->
+    <div class="steps">
 
-    <div class="progress">
-
-      <div class="progress-step active" id="progress1">
-        <div class="progress-circle">1</div>
+      <div class="step active" id="step1">
+        <div class="step-circle">1</div>
         <span>Details</span>
       </div>
 
-      <div class="progress-line"></div>
+      <div class="step-line"></div>
 
-      <div class="progress-step" id="progress2">
-        <div class="progress-circle">2</div>
+      <div class="step" id="step2">
+        <div class="step-circle">2</div>
         <span>Payment</span>
+      </div>
+
+      <div class="step-line"></div>
+
+      <div class="step" id="step3">
+        <div class="step-circle">3</div>
+        <span>Complete</span>
       </div>
 
     </div>
@@ -657,156 +1021,146 @@
 
     <div class="card">
 
-      <!-- =========================================
+      <!-- ==================================================
            STEP 1
-      ========================================== -->
+      =================================================== -->
 
-      <section class="step active" id="step1">
+      <section
+        class="section active"
+        id="detailsSection"
+      >
 
-        <h2 class="step-title">Order Details</h2>
+        <div class="section-title">
+          Your Details
+        </div>
 
-        <p class="step-subtitle">
-          Enter the details for your Instagram order.
-        </p>
+        <div class="section-subtitle">
+          Enter the details required to process your order.
+        </div>
 
 
-        <div class="error-message" id="error1"></div>
+        <!-- SELECTED PACKAGE SUMMARY -->
+        <div class="selected-package">
 
+          <small>SELECTED PACKAGE</small>
 
-        <!-- Package -->
-
-        <div class="field">
-
-          <label for="package">
-            Select Package <span class="required">*</span>
-          </label>
-
-          <select id="package" required>
-
-            <option value="">
-              Select a package
-            </option>
-
-            <option value="Instagram Followers - 1000">
-              Instagram Followers - 1,000
-            </option>
-
-            <option value="Instagram Followers - 2500">
-              Instagram Followers - 2,500
-            </option>
-
-            <option value="Instagram Followers - 5000">
-              Instagram Followers - 5,000
-            </option>
-
-            <option value="Instagram Followers - 10000">
-              Instagram Followers - 10,000
-            </option>
-
-            <option value="Instagram Likes - 1000">
-              Instagram Likes - 1,000
-            </option>
-
-            <option value="Instagram Likes - 2500">
-              Instagram Likes - 2,500
-            </option>
-
-            <option value="Instagram Comments - 100">
-              Instagram Comments - 100
-            </option>
-
-            <option value="Instagram Shares / Reposts - 1000">
-              Instagram Shares / Reposts - 1,000
-            </option>
-
-          </select>
+          <strong id="packageName">
+            Loading package...
+          </strong>
 
         </div>
 
 
-        <!-- Name -->
+        <div class="grid">
 
-        <div class="field">
+          <!-- NAME -->
+          <div class="field">
 
-          <label for="name">
-            Full Name <span class="required">*</span>
-          </label>
+            <label>
+              Full Name
+              <span class="required">*</span>
+            </label>
 
-          <input
-            type="text"
-            id="name"
-            maxlength="60"
-            placeholder="Enter your full name"
-            autocomplete="name"
-            required
-          >
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              maxlength="60"
+              autocomplete="name"
+            />
+
+          </div>
+
+
+          <!-- INSTAGRAM USERNAME -->
+          <div class="field">
+
+            <label>
+              Instagram Username
+              <span class="required">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="@yourusername"
+              maxlength="30"
+              autocomplete="off"
+            />
+
+            <div class="hint">
+              Do not enter your Instagram password.
+            </div>
+
+          </div>
+
+
+          <!-- PROFILE -->
+          <div class="field full">
+
+            <label>
+              Instagram Profile Link
+              <span class="required">*</span>
+            </label>
+
+            <input
+              type="url"
+              id="profile"
+              placeholder="https://instagram.com/yourusername"
+              maxlength="300"
+            />
+
+          </div>
+
+
+          <!-- PROMO -->
+          <div class="field full">
+
+            <label>
+              Promo Code
+            </label>
+
+            <div class="promo-box">
+
+              <input
+                type="text"
+                id="promoCode"
+                placeholder="Enter promo code"
+                maxlength="30"
+              />
+
+              <button
+                type="button"
+                class="promo-btn"
+                id="promoBtn"
+              >
+                Apply
+              </button>
+
+            </div>
+
+            <div
+              class="promo-result"
+              id="promoResult"
+            ></div>
+
+          </div>
 
         </div>
 
 
-        <!-- Username + Profile -->
-
-        <div class="field">
-
-          <label for="username">
-            Instagram Username <span class="required">*</span>
-          </label>
-
-          <input
-            type="text"
-            id="username"
-            maxlength="30"
-            placeholder="@yourusername"
-            autocomplete="off"
-            required
-          >
-
-        </div>
+        <div
+          class="error-box"
+          id="detailsError"
+        ></div>
 
 
-        <div class="field">
-
-          <label for="profile">
-            Instagram Profile Link <span class="required">*</span>
-          </label>
-
-          <input
-            type="url"
-            id="profile"
-            maxlength="300"
-            placeholder="https://instagram.com/yourusername"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-
-        <!-- Promo -->
-
-        <div class="field">
-
-          <label for="promoCode">
-            Promo Code <span style="color:#777789;">(Optional)</span>
-          </label>
-
-          <input
-            type="text"
-            id="promoCode"
-            maxlength="30"
-            placeholder="Enter promo code"
-            autocomplete="off"
-          >
-
-        </div>
-
-
-        <div class="button-row">
+        <div class="buttons">
 
           <button
             type="button"
             class="btn btn-primary"
-            id="nextButton"
+            id="nextBtn"
           >
             Next →
           </button>
@@ -816,62 +1170,135 @@
       </section>
 
 
+      <!-- ==================================================
+           STEP 2 PAYMENT
+      =================================================== -->
 
-      <!-- =========================================
-           STEP 2
-      ========================================== -->
+      <section
+        class="section"
+        id="paymentSection"
+      >
 
-      <section class="step" id="step2">
+        <div class="section-title">
+          Complete Payment
+        </div>
 
-        <h2 class="step-title">Payment</h2>
-
-        <p class="step-subtitle">
-          Scan the QR code, complete your payment, then upload the payment screenshot.
-        </p>
-
-
-        <div class="error-message" id="error2"></div>
-
-        <div class="success-message" id="successMessage"></div>
-
-
-        <!-- PAYMENT QR -->
-
-        <div class="payment-box">
-
-          <div class="payment-title">
-            Pay using UPI
-          </div>
-
-          <div class="payment-subtitle">
-            Scan this QR code with your UPI app.
-          </div>
+        <div class="section-subtitle">
+          Scan the QR code using Google Pay, PhonePe, Paytm or any UPI app.
+        </div>
 
 
-          <div class="qr-wrapper">
+        <div class="payment-layout">
+
+          <!-- QR -->
+          <div class="qr-panel">
 
             <div id="qrcode"></div>
 
-          </div>
-
-
-          <div class="upi-label">
-            UPI ID
-          </div>
-
-          <div class="upi-id">
-            7889777143@fam
-          </div>
-
-
-          <div class="amount-box">
-
-            <div class="amount-label">
-              Order Amount
+            <div class="scan-title">
+              Scan & Pay
             </div>
 
-            <div class="amount-value" id="amountDisplay">
-              ₹0
+            <div class="scan-text">
+              Use your phone's UPI app to scan this QR code.
+            </div>
+
+            <div class="upi-id">
+              7889777143@fam
+            </div>
+
+          </div>
+
+
+          <!-- PAYMENT DETAILS -->
+          <div class="payment-info">
+
+            <div class="payment-box">
+
+              <strong>
+                Amount to Pay
+              </strong>
+
+              <div
+                class="amount"
+                id="amountDisplay"
+              >
+                ₹0
+              </div>
+
+            </div>
+
+
+            <div class="payment-box">
+
+              <strong>
+                Payment Instructions
+              </strong>
+
+              <span>
+                1. Scan the QR code.<br />
+                2. Complete your UPI payment.<br />
+                3. Take a screenshot of successful payment.<br />
+                4. Enter the UTR/Transaction ID below.<br />
+                5. Upload the payment screenshot.
+              </span>
+
+            </div>
+
+
+            <!-- UTR -->
+            <div class="field">
+
+              <label>
+                UTR / Transaction ID
+              </label>
+
+              <input
+                type="text"
+                id="utr"
+                placeholder="Enter UTR / Transaction ID"
+                maxlength="80"
+                autocomplete="off"
+              />
+
+            </div>
+
+
+            <!-- SCREENSHOT -->
+            <div class="field">
+
+              <label>
+                Payment Screenshot
+                <span class="required">*</span>
+              </label>
+
+              <div class="file-upload">
+
+                <div class="file-icon">
+                  📸
+                </div>
+
+                <strong>
+                  Upload Payment Screenshot
+                </strong>
+
+                <small>
+                  JPG, PNG or WEBP — Maximum 5 MB
+                </small>
+
+                <input
+                  type="file"
+                  id="screenshot"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                />
+
+                <div
+                  class="file-name"
+                  id="fileName"
+                ></div>
+
+              </div>
+
             </div>
 
           </div>
@@ -879,101 +1306,29 @@
         </div>
 
 
-        <!-- PAYMENT INSTRUCTIONS -->
-
-        <div class="instructions">
-
-          <h3>How to pay</h3>
-
-          <ol>
-            <li>Scan the QR code using your UPI app.</li>
-            <li>Pay the displayed order amount.</li>
-            <li>After payment, copy your UTR / transaction ID.</li>
-            <li>Upload your payment screenshot below.</li>
-            <li>Press Submit Order.</li>
-          </ol>
-
-        </div>
+        <div
+          class="error-box"
+          id="paymentError"
+        ></div>
 
 
-        <!-- UTR -->
+        <div class="loading" id="loading">
 
-        <div class="field">
+          <div class="spinner"></div>
 
-          <label for="utr">
-            UTR / Transaction ID
-            <span style="color:#777789;">(Optional)</span>
-          </label>
-
-          <input
-            type="text"
-            id="utr"
-            maxlength="80"
-            placeholder="Enter UTR / transaction ID"
-            autocomplete="off"
-          >
-
-        </div>
-
-
-        <!-- SCREENSHOT -->
-
-        <div class="field">
-
-          <label for="screenshot">
-            Payment Screenshot <span class="required">*</span>
-          </label>
-
-
-          <div class="upload-box">
-
-            <div class="upload-icon">
-              📷
-            </div>
-
-            <div class="upload-title">
-              Upload Payment Screenshot
-            </div>
-
-            <div class="upload-info">
-              JPG, PNG or WEBP • Maximum 5 MB
-            </div>
-
-            <input
-              type="file"
-              id="screenshot"
-              accept="image/jpeg,image/jpg,image/png,image/webp"
-              required
-            >
-
-            <img
-              id="preview"
-              class="preview"
-              alt="Payment screenshot preview"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="security-note">
-          <span>🔒</span>
           <span>
-            Your payment screenshot is used only to verify your order.
-            Never enter or send your Instagram password.
+            Submitting your order...
           </span>
+
         </div>
 
 
-        <!-- BUTTONS -->
-
-        <div class="button-row">
+        <div class="buttons">
 
           <button
             type="button"
             class="btn btn-secondary"
-            id="backButton"
+            id="backBtn"
           >
             ← Back
           </button>
@@ -981,49 +1336,56 @@
           <button
             type="button"
             class="btn btn-primary"
-            id="submitButton"
+            id="submitBtn"
           >
-            Submit Order
+            Submit Order ✓
           </button>
 
         </div>
 
+      </section>
 
-        <!-- SUCCESS -->
 
-        <div class="order-result" id="orderResult">
+      <!-- ==================================================
+           STEP 3 SUCCESS
+      =================================================== -->
 
-          <div class="success-icon">
-            ✓
-          </div>
+      <section
+        class="section"
+        id="successSection"
+      >
 
-          <h2>Order Submitted!</h2>
+        <div class="success-circle">
 
-          <p>
-            Your order has been successfully submitted.
-            Please keep your Order ID for reference.
-          </p>
+          <div class="tick"></div>
 
-          <div class="order-id-box" id="orderIdBox">
-            SM00000000
-          </div>
+        </div>
 
-          <div style="margin-top:20px;">
+        <h2>
+          Order Submitted!
+        </h2>
 
-            <a
-              href="/"
-              class="btn btn-primary"
-              style="
-                display:inline-flex;
-                align-items:center;
-                justify-content:center;
-                min-width:180px;
-              "
-            >
-              Back to Home
-            </a>
+        <p>
+          Your payment details and order have been received successfully.
+          Please keep your Order ID safe. Our team will verify your payment
+          before processing the order.
+        </p>
 
-          </div>
+        <div
+          class="order-number"
+          id="orderNumber"
+        >
+          Order ID: —
+        </div>
+
+        <div class="buttons">
+
+          <a
+            href="index.html"
+            class="btn btn-primary"
+          >
+            Back to Home
+          </a>
 
         </div>
 
@@ -1034,156 +1396,402 @@
   </main>
 
 
-  <div class="footer">
-    © 2026 SehrAn Media. All rights reserved.
+  <!-- PROMO SUCCESS POPUP -->
+  <div
+    class="promo-success"
+    id="promoSuccess"
+  >
+
+    <div class="promo-icon">
+      ✓
+    </div>
+
+    <h3>
+      Promo Code Applied!
+    </h3>
+
+    <p>
+      ZEESHAN10 has been successfully applied to your order.
+    </p>
+
   </div>
 
 
-
-  <!-- QR CODE LIBRARY -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- CELEBRATION CONTAINER -->
+  <div
+    class="celebration"
+    id="celebration"
+  ></div>
 
 
   <script>
 
-    /*
-      ============================================
-      SEHRAN MEDIA ORDER SYSTEM
-      ============================================
-    */
-
+    /* =====================================================
+       CONFIG
+    ====================================================== */
 
     const UPI_ID = "7889777143@fam";
 
+    const PROMO_CODE = "ZEESHAN10";
 
-    /* ------------------------------------------
-       Elements
-    ------------------------------------------ */
 
-    const step1 = document.getElementById("step1");
-    const step2 = document.getElementById("step2");
+    /* =====================================================
+       DOM
+    ====================================================== */
 
-    const progress1 = document.getElementById("progress1");
-    const progress2 = document.getElementById("progress2");
+    const detailsSection =
+      document.getElementById("detailsSection");
 
-    const nextButton = document.getElementById("nextButton");
-    const backButton = document.getElementById("backButton");
-    const submitButton = document.getElementById("submitButton");
+    const paymentSection =
+      document.getElementById("paymentSection");
 
-    const error1 = document.getElementById("error1");
-    const error2 = document.getElementById("error2");
+    const successSection =
+      document.getElementById("successSection");
 
-    const successMessage =
-      document.getElementById("successMessage");
+    const step1 =
+      document.getElementById("step1");
+
+    const step2 =
+      document.getElementById("step2");
+
+    const step3 =
+      document.getElementById("step3");
+
+
+    const nameInput =
+      document.getElementById("name");
+
+    const usernameInput =
+      document.getElementById("username");
+
+    const profileInput =
+      document.getElementById("profile");
+
+    const promoInput =
+      document.getElementById("promoCode");
+
+    const promoBtn =
+      document.getElementById("promoBtn");
+
+    const promoResult =
+      document.getElementById("promoResult");
+
+    const nextBtn =
+      document.getElementById("nextBtn");
+
+    const backBtn =
+      document.getElementById("backBtn");
+
+    const submitBtn =
+      document.getElementById("submitBtn");
 
     const screenshotInput =
       document.getElementById("screenshot");
 
-    const preview =
-      document.getElementById("preview");
+    const fileName =
+      document.getElementById("fileName");
+
+    const utrInput =
+      document.getElementById("utr");
+
+    const detailsError =
+      document.getElementById("detailsError");
+
+    const paymentError =
+      document.getElementById("paymentError");
+
+    const loading =
+      document.getElementById("loading");
+
+    const packageName =
+      document.getElementById("packageName");
 
     const amountDisplay =
       document.getElementById("amountDisplay");
 
-    const qrcode =
-      document.getElementById("qrcode");
+    const orderNumber =
+      document.getElementById("orderNumber");
 
-    const orderResult =
-      document.getElementById("orderResult");
+    const celebration =
+      document.getElementById("celebration");
 
-    const orderIdBox =
-      document.getElementById("orderIdBox");
-
-
-    /* ------------------------------------------
-       Package Prices
-       
-       IMPORTANT:
-       Change these amounts if your actual prices
-       are different.
-    ------------------------------------------ */
-
-    const packagePrices = {
-
-      "Instagram Followers - 1000": 99,
-
-      "Instagram Followers - 2500": 199,
-
-      "Instagram Followers - 5000": 349,
-
-      "Instagram Followers - 10000": 599,
-
-      "Instagram Likes - 1000": 49,
-
-      "Instagram Likes - 2500": 99,
-
-      "Instagram Comments - 100": 99,
-
-      "Instagram Shares / Reposts - 1000": 149
-
-    };
+    const promoSuccess =
+      document.getElementById("promoSuccess");
 
 
-    /* ------------------------------------------
-       Helpers
-    ------------------------------------------ */
+    /* =====================================================
+       PACKAGE INFORMATION
+       =====================================================
 
-    function showError(element, message) {
+       Packages are NOT displayed here.
 
-      element.textContent = message;
+       This page reads the selected package from:
+       1. URL parameters
+       2. localStorage
 
-      element.classList.add("show");
+       So your index.html can send the package here.
+    ====================================================== */
+
+    let selectedPackage = "";
+    let selectedAmount = "";
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    selectedPackage =
+      params.get("package") ||
+      localStorage.getItem("selectedPackage") ||
+      "";
+
+    selectedAmount =
+      params.get("amount") ||
+      localStorage.getItem("selectedAmount") ||
+      "";
+
+    if (!selectedPackage) {
+
+      selectedPackage =
+        "Selected Package";
+
+    }
+
+    packageName.textContent =
+      selectedPackage;
+
+    if (selectedAmount) {
+
+      amountDisplay.textContent =
+        "₹" +
+        String(selectedAmount)
+          .replace(/[₹,\s]/g, "");
 
     }
 
 
-    function hideError(element) {
+    /* =====================================================
+       SAVE SELECTED PACKAGE
+    ====================================================== */
+
+    try {
+
+      localStorage.setItem(
+        "selectedPackage",
+        selectedPackage
+      );
+
+      if (selectedAmount) {
+
+        localStorage.setItem(
+          "selectedAmount",
+          selectedAmount
+        );
+
+      }
+
+    } catch (error) {
+
+      console.log(
+        "Local storage unavailable."
+      );
+
+    }
+
+
+    /* =====================================================
+       QR CODE
+    ====================================================== */
+
+    function createQRCode() {
+
+      const qrContainer =
+        document.getElementById(
+          "qrcode"
+        );
+
+      qrContainer.innerHTML = "";
+
+      /*
+        UPI payment URL.
+
+        Amount is included when available.
+      */
+
+      let cleanAmount =
+        String(selectedAmount || "")
+          .replace(/[₹,\s]/g, "");
+
+      let upiURL =
+        "upi://pay" +
+        "?pa=" +
+        encodeURIComponent(UPI_ID) +
+        "&pn=" +
+        encodeURIComponent("SehrAn Media") +
+        "&cu=INR";
+
+      if (
+        cleanAmount &&
+        !isNaN(Number(cleanAmount))
+      ) {
+
+        upiURL +=
+          "&am=" +
+          encodeURIComponent(
+            cleanAmount
+          );
+
+      }
+
+      if (
+        typeof QRCode !==
+        "undefined"
+      ) {
+
+        new QRCode(
+          qrContainer,
+          {
+            text: upiURL,
+
+            width: 240,
+
+            height: 240,
+
+            colorDark: "#111111",
+
+            colorLight: "#ffffff",
+
+            correctLevel:
+              QRCode.CorrectLevel.H
+          }
+        );
+
+      } else {
+
+        qrContainer.innerHTML =
+          "<div style='color:#111;text-align:center;font-size:12px;padding:20px'>QR could not load. Please refresh the page.</div>";
+
+      }
+
+    }
+
+    createQRCode();
+
+
+    /* =====================================================
+       ERROR HELPERS
+    ====================================================== */
+
+    function showError(
+      element,
+      message
+    ) {
+
+      element.textContent =
+        message;
+
+      element.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function hideError(
+      element
+    ) {
 
       element.textContent = "";
 
-      element.classList.remove("show");
+      element.classList.remove(
+        "show"
+      );
 
     }
 
 
-    function cleanUsername(value) {
+    /* =====================================================
+       NAME VALIDATION
+    ====================================================== */
 
-      return value
+    function validName(name) {
+
+      if (
+        name.length < 2 ||
+        name.length > 60
+      ) {
+
+        return false;
+
+      }
+
+      if (
+        /^(.)\1{4,}$/i.test(
+          name
+        )
+      ) {
+
+        return false;
+
+      }
+
+      return /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/
+        .test(name);
+
+    }
+
+
+    /* =====================================================
+       USERNAME CLEANING
+    ====================================================== */
+
+    function cleanUsername(
+      username
+    ) {
+
+      return username
         .trim()
         .replace(/^@+/, "");
 
     }
 
 
-    function validUsername(value) {
+    /* =====================================================
+       INSTAGRAM PROFILE
+    ====================================================== */
 
-      return /^[A-Za-z0-9._]{1,30}$/.test(value);
-
-    }
-
-
-    function validProfile(value) {
+    function validInstagramProfile(
+      profile
+    ) {
 
       try {
 
-        const url = new URL(value);
+        const url =
+          new URL(profile);
 
         const hostname =
           url.hostname
             .toLowerCase()
-            .replace(/^www\./, "");
+            .replace(
+              /^www\./,
+              ""
+            );
 
         if (
-          hostname !== "instagram.com" &&
-          hostname !== "instagr.am"
+          hostname !==
+            "instagram.com" &&
+          hostname !==
+            "instagr.am"
         ) {
+
           return false;
+
         }
 
-        return /^\/[A-Za-z0-9._]+\/?$/.test(
-          url.pathname
-        );
+        return /^\/[A-Za-z0-9._]+\/?$/
+          .test(
+            url.pathname
+          );
 
       } catch (error) {
 
@@ -1194,248 +1802,458 @@
     }
 
 
-    /* ------------------------------------------
-       Get selected amount
-    ------------------------------------------ */
+    /* =====================================================
+       NEXT BUTTON
+    ====================================================== */
 
-    function getAmount() {
+    nextBtn.addEventListener(
+      "click",
+      function () {
 
-      const selectedPackage =
-        document.getElementById("package").value;
-
-      return packagePrices[selectedPackage] || 0;
-
-    }
-
-
-    /* ------------------------------------------
-       Generate UPI QR
-    ------------------------------------------ */
-
-    function generateQR() {
-
-      const amount = getAmount();
-
-      qrcode.innerHTML = "";
-
-      const upiUrl =
-        "upi://pay" +
-        "?pa=" + encodeURIComponent(UPI_ID) +
-        "&pn=" + encodeURIComponent("SehrAn Media") +
-        "&am=" + encodeURIComponent(amount.toFixed(2)) +
-        "&cu=INR";
-
-
-      if (typeof QRCode === "undefined") {
-
-        qrcode.innerHTML =
-          '<div style="color:#111;font-size:12px;text-align:center;padding:20px;">QR unavailable</div>';
-
-        return;
-
-      }
-
-
-      new QRCode(qrcode, {
-
-        text: upiUrl,
-
-        width: 210,
-
-        height: 210,
-
-        colorDark: "#000000",
-
-        colorLight: "#ffffff",
-
-        correctLevel: QRCode.CorrectLevel.H
-
-      });
-
-
-      amountDisplay.textContent =
-        "₹" + amount;
-
-    }
-
-
-    /* ------------------------------------------
-       STEP 1 → STEP 2
-    ------------------------------------------ */
-
-    nextButton.addEventListener("click", function() {
-
-      hideError(error1);
-
-      const packageValue =
-        document.getElementById("package").value;
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const username =
-        cleanUsername(
-          document.getElementById("username").value
+        hideError(
+          detailsError
         );
 
-      const profile =
-        document.getElementById("profile").value.trim();
+        const name =
+          nameInput.value.trim();
+
+        const username =
+          cleanUsername(
+            usernameInput.value
+          );
+
+        const profile =
+          profileInput.value.trim();
 
 
-      if (!packageValue) {
+        if (
+          !name ||
+          !username ||
+          !profile
+        ) {
 
-        showError(
-          error1,
-          "Please select a package."
-        );
-
-        return;
-
-      }
-
-
-      if (!name || name.length < 2) {
-
-        showError(
-          error1,
-          "Please enter your full name."
-        );
-
-        return;
-
-      }
-
-
-      if (!validUsername(username)) {
-
-        showError(
-          error1,
-          "Please enter a valid Instagram username."
-        );
-
-        return;
-
-      }
-
-
-      if (!validProfile(profile)) {
-
-        showError(
-          error1,
-          "Please enter a valid Instagram profile link, for example: https://instagram.com/username"
-        );
-
-        return;
-
-      }
-
-
-      /* Put cleaned username back */
-
-      document.getElementById("username").value =
-        username;
-
-
-      generateQR();
-
-
-      step1.classList.remove("active");
-      step2.classList.add("active");
-
-      progress1.classList.remove("active");
-      progress2.classList.add("active");
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    });
-
-
-    /* ------------------------------------------
-       STEP 2 → STEP 1
-    ------------------------------------------ */
-
-    backButton.addEventListener("click", function() {
-
-      hideError(error2);
-
-      step2.classList.remove("active");
-      step1.classList.add("active");
-
-      progress2.classList.remove("active");
-      progress1.classList.add("active");
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    });
-
-
-    /* ------------------------------------------
-       Screenshot Preview
-    ------------------------------------------ */
-
-    screenshotInput.addEventListener(
-      "change",
-      function() {
-
-        hideError(error2);
-
-        const file =
-          screenshotInput.files[0];
-
-
-        if (!file) {
-
-          preview.src = "";
-
-          preview.classList.remove("show");
+          showError(
+            detailsError,
+            "Please complete all required fields."
+          );
 
           return;
 
         }
 
 
-        const allowedTypes = [
+        if (
+          !validName(name)
+        ) {
 
-          "image/jpeg",
+          showError(
+            detailsError,
+            "Please enter a valid name."
+          );
 
-          "image/jpg",
+          return;
 
-          "image/png",
-
-          "image/webp"
-
-        ];
+        }
 
 
         if (
-          !allowedTypes.includes(
-            file.type
+          !/^[A-Za-z0-9._]{1,30}$/
+            .test(username)
+        ) {
+
+          showError(
+            detailsError,
+            "Please enter a valid Instagram username."
+          );
+
+          return;
+
+        }
+
+
+        if (
+          !validInstagramProfile(
+            profile
           )
         ) {
 
-          screenshotInput.value = "";
+          showError(
+            detailsError,
+            "Please enter a valid Instagram profile link."
+          );
 
-          preview.src = "";
+          return;
 
-          preview.classList.remove("show");
+        }
+
+
+        usernameInput.value =
+          username;
+
+
+        detailsSection.classList.remove(
+          "active"
+        );
+
+        paymentSection.classList.add(
+          "active"
+        );
+
+
+        step1.classList.add(
+          "done"
+        );
+
+        step2.classList.add(
+          "active"
+        );
+
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* =====================================================
+       BACK BUTTON
+    ====================================================== */
+
+    backBtn.addEventListener(
+      "click",
+      function () {
+
+        paymentSection.classList.remove(
+          "active"
+        );
+
+        detailsSection.classList.add(
+          "active"
+        );
+
+        step2.classList.remove(
+          "active"
+        );
+
+        step1.classList.add(
+          "active"
+        );
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* =====================================================
+       PROMO CODE
+    ====================================================== */
+
+    promoBtn.addEventListener(
+      "click",
+      function () {
+
+        const code =
+          promoInput.value
+            .trim()
+            .toUpperCase();
+
+
+        promoResult.className =
+          "promo-result";
+
+
+        if (
+          code !== PROMO_CODE
+        ) {
+
+          promoResult.textContent =
+            "Invalid promo code.";
+
+          promoResult.classList.add(
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /*
+          If amount exists, calculate
+          10% discount.
+        */
+
+        if (
+          selectedAmount &&
+          !isNaN(
+            Number(
+              String(
+                selectedAmount
+              ).replace(
+                /[₹,\s]/g,
+                ""
+              )
+            )
+          )
+        ) {
+
+          const original =
+            Number(
+              String(
+                selectedAmount
+              ).replace(
+                /[₹,\s]/g,
+                ""
+              )
+            );
+
+          const discounted =
+            Math.round(
+              original * 0.90
+            );
+
+          selectedAmount =
+            String(
+              discounted
+            );
+
+          amountDisplay.textContent =
+            "₹" +
+            discounted;
+
+          try {
+
+            localStorage.setItem(
+              "selectedAmount",
+              selectedAmount
+            );
+
+          } catch (error) {}
+
+          createQRCode();
+
+        }
+
+
+        promoResult.textContent =
+          "✓ ZEESHAN10 applied — 10% discount.";
+
+        promoResult.classList.add(
+          "success"
+        );
+
+
+        /*
+          Show animated popup.
+        */
+
+        promoSuccess.classList.add(
+          "show"
+        );
+
+
+        createStars(35);
+
+
+        setTimeout(
+          function () {
+
+            promoSuccess.classList.remove(
+              "show"
+            );
+
+          },
+          2400
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       PROMO ENTER KEY
+    ====================================================== */
+
+    promoInput.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          event.preventDefault();
+
+          promoBtn.click();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       FILE SELECT
+    ====================================================== */
+
+    screenshotInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          screenshotInput.files[0];
+
+        if (!file) {
+
+          fileName.textContent =
+            "";
+
+          return;
+
+        }
+
+
+        if (
+          file.size >
+          5 * 1024 * 1024
+        ) {
+
+          fileName.textContent =
+            "File is larger than 5 MB.";
+
+          fileName.style.color =
+            "#f87171";
+
+          screenshotInput.value =
+            "";
+
+          return;
+
+        }
+
+
+        fileName.style.color =
+          "#4ade80";
+
+        fileName.textContent =
+          "✓ " +
+          file.name;
+
+      }
+    );
+
+
+    /* =====================================================
+       IMAGE TO BASE64
+    ====================================================== */
+
+    function fileToBase64(
+      file
+    ) {
+
+      return new Promise(
+        function (
+          resolve,
+          reject
+        ) {
+
+          const reader =
+            new FileReader();
+
+          reader.onload =
+            function () {
+
+              resolve(
+                reader.result
+              );
+
+            };
+
+          reader.onerror =
+            function () {
+
+              reject(
+                new Error(
+                  "Unable to read screenshot."
+                )
+              );
+
+            };
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       SUBMIT ORDER
+    ====================================================== */
+
+    submitBtn.addEventListener(
+      "click",
+      async function () {
+
+        hideError(
+          paymentError
+        );
+
+
+        const name =
+          nameInput.value.trim();
+
+        const username =
+          cleanUsername(
+            usernameInput.value
+          );
+
+        const profile =
+          profileInput.value.trim();
+
+        const utr =
+          utrInput.value.trim();
+
+        const promoCode =
+          promoInput.value
+            .trim()
+            .toUpperCase();
+
+        const file =
+          screenshotInput.files[0];
+
+
+        if (
+          !name ||
+          !username ||
+          !profile
+        ) {
 
           showError(
-            error2,
-            "Please upload a JPG, PNG or WEBP image."
+            paymentError,
+            "Your details are incomplete. Please go back and complete them."
+          );
+
+          return;
+
+        }
+
+
+        if (!file) {
+
+          showError(
+            paymentError,
+            "Please upload your payment screenshot."
           );
 
           return;
@@ -1448,14 +2266,8 @@
           5 * 1024 * 1024
         ) {
 
-          screenshotInput.value = "";
-
-          preview.src = "";
-
-          preview.classList.remove("show");
-
           showError(
-            error2,
+            paymentError,
             "Payment screenshot must be 5 MB or smaller."
           );
 
@@ -1464,304 +2276,100 @@
         }
 
 
-        const reader =
-          new FileReader();
+        const validTypes = [
+          "image/jpeg",
+          "image/jpg",
+          "image/png",
+          "image/webp"
+        ];
 
 
-        reader.onload =
-          function(event) {
+        if (
+          !validTypes.includes(
+            file.type
+          )
+        ) {
 
-            preview.src =
-              event.target.result;
+          showError(
+            paymentError,
+            "Please upload a JPG, PNG or WEBP screenshot."
+          );
 
-            preview.classList.add("show");
+          return;
+
+        }
+
+
+        submitBtn.disabled =
+          true;
+
+        backBtn.disabled =
+          true;
+
+        loading.classList.add(
+          "show"
+        );
+
+
+        try {
+
+          const screenshot =
+            await fileToBase64(
+              file
+            );
+
+
+          const payload = {
+
+            package:
+              selectedPackage,
+
+            name:
+              name,
+
+            username:
+              username,
+
+            profile:
+              profile,
+
+            utr:
+              utr,
+
+            promoCode:
+              promoCode,
+
+            amount:
+              String(
+                selectedAmount || ""
+              ),
+
+            screenshot:
+              screenshot
 
           };
 
-
-        reader.readAsDataURL(file);
-
-      }
-    );
-
-
-    /* ------------------------------------------
-       Convert file to Base64
-    ------------------------------------------ */
-
-    function fileToBase64(file) {
-
-      return new Promise(
-        function(resolve, reject) {
-
-          const reader =
-            new FileReader();
-
-
-          reader.onload =
-            function() {
-
-              resolve(
-                reader.result
-              );
-
-            };
-
-
-          reader.onerror =
-            function() {
-
-              reject(
-                new Error(
-                  "Unable to read screenshot."
-                )
-              );
-
-            };
-
-
-          reader.readAsDataURL(file);
-
-        }
-      );
-
-    }
-
-
-    /* ------------------------------------------
-       SUBMIT ORDER
-    ------------------------------------------ */
-
-    submitButton.addEventListener(
-      "click",
-      async function() {
-
-        hideError(error2);
-
-        successMessage.classList.remove("show");
-
-
-        const packageValue =
-          document.getElementById("package").value;
-
-        const name =
-          document.getElementById("name").value.trim();
-
-        const username =
-          cleanUsername(
-            document.getElementById("username").value
-          );
-
-        const profile =
-          document.getElementById("profile").value.trim();
-
-        const utr =
-          document.getElementById("utr").value.trim();
-
-        const promoCode =
-          document.getElementById("promoCode").value
-            .trim()
-            .toUpperCase();
-
-        const screenshotFile =
-          screenshotInput.files[0];
-
-
-        /* Validate */
-
-        if (!packageValue) {
-
-          showError(
-            error2,
-            "Package information is missing. Please go back and select a package."
-          );
-
-          return;
-
-        }
-
-
-        if (!name) {
-
-          showError(
-            error2,
-            "Name is required."
-          );
-
-          return;
-
-        }
-
-
-        if (!validUsername(username)) {
-
-          showError(
-            error2,
-            "Please enter a valid Instagram username."
-          );
-
-          return;
-
-        }
-
-
-        if (!validProfile(profile)) {
-
-          showError(
-            error2,
-            "Please enter a valid Instagram profile link."
-          );
-
-          return;
-
-        }
-
-
-        if (!screenshotFile) {
-
-          showError(
-            error2,
-            "Please upload your payment screenshot."
-          );
-
-          return;
-
-        }
-
-
-        if (
-          screenshotFile.size >
-          5 * 1024 * 1024
-        ) {
-
-          showError(
-            error2,
-            "Payment screenshot must be 5 MB or smaller."
-          );
-
-          return;
-
-        }
-
-
-        /* Check promo code */
-
-        if (
-          promoCode &&
-          promoCode !== "ZEESHAN10"
-        ) {
-
-          showError(
-            error2,
-            "Invalid promo code. Please use ZEESHAN10."
-          );
-
-          return;
-
-        }
-
-
-        /* Get amount */
-
-        const amount =
-          getAmount();
-
-
-        if (!amount) {
-
-          showError(
-            error2,
-            "Unable to determine the order amount."
-          );
-
-          return;
-
-        }
-
-
-        /* Convert screenshot */
-
-        let screenshotBase64;
-
-
-        try {
-
-          screenshotBase64 =
-            await fileToBase64(
-              screenshotFile
-            );
-
-        } catch (error) {
-
-          showError(
-            error2,
-            "Unable to read the payment screenshot. Please try again."
-          );
-
-          return;
-
-        }
-
-
-        /* Disable button */
-
-        submitButton.disabled = true;
-
-        submitButton.textContent =
-          "Submitting Order...";
-
-
-        try {
 
           const response =
             await fetch(
               "/api/orders",
               {
-
                 method: "POST",
 
                 headers: {
-
                   "Content-Type":
                     "application/json"
-
                 },
 
                 body:
-                  JSON.stringify({
-
-                    package:
-                      packageValue,
-
-                    name:
-                      name,
-
-                    username:
-                      username,
-
-                    profile:
-                      profile,
-
-                    utr:
-                      utr,
-
-                    promoCode:
-                      promoCode,
-
-                    amount:
-                      String(amount),
-
-                    screenshot:
-                      screenshotBase64
-
-                  })
-
+                  JSON.stringify(
+                    payload
+                  )
               }
             );
 
 
           let data = {};
-
 
           try {
 
@@ -1775,46 +2383,64 @@
           }
 
 
-          if (!response.ok) {
+          if (
+            !response.ok
+          ) {
 
             throw new Error(
               data.error ||
-              "Unable to submit your order."
+              "Unable to submit order."
             );
 
           }
 
 
-          if (!data.ok) {
+          /*
+            SUCCESS
+          */
 
-            throw new Error(
-              data.error ||
-              "Order could not be submitted."
+          paymentSection.classList.remove(
+            "active"
+          );
+
+          successSection.classList.add(
+            "active"
+          );
+
+
+          step2.classList.remove(
+            "active"
+          );
+
+          step2.classList.add(
+            "done"
+          );
+
+          step3.classList.add(
+            "active"
+          );
+
+
+          orderNumber.textContent =
+            "Order ID: " +
+            (
+              data.orderId ||
+              "Submitted"
             );
 
-          }
 
+          /*
+            Success sound + celebration
+          */
 
-          /* SUCCESS */
+          playSuccessSound();
 
-          step2.classList.remove("active");
-
-          progress2.classList.add("active");
-
-          orderResult.classList.add("show");
-
-
-          orderIdBox.textContent =
-            data.orderId ||
-            "ORDER SUBMITTED";
+          createStars(100);
 
 
           window.scrollTo({
-
             top: 0,
-
             behavior: "smooth"
-
           });
 
 
@@ -1827,16 +2453,23 @@
 
 
           showError(
-            error2,
+            paymentError,
             error.message ||
             "Unable to submit order. Please try again."
           );
 
 
-          submitButton.disabled = false;
+          submitBtn.disabled =
+            false;
 
-          submitButton.textContent =
-            "Submit Order";
+          backBtn.disabled =
+            false;
+
+        } finally {
+
+          loading.classList.remove(
+            "show"
+          );
 
         }
 
@@ -1844,27 +2477,257 @@
     );
 
 
-    /* ------------------------------------------
-       Package change → update amount/QR
-    ------------------------------------------ */
+    /* =====================================================
+       STAR / CONFETTI EFFECT
+    ====================================================== */
 
-    document
-      .getElementById("package")
-      .addEventListener(
-        "change",
-        function() {
+    function createStars(
+      count
+    ) {
 
-          if (
-            step2.classList.contains("active")
-          ) {
+      const symbols = [
+        "★",
+        "✦",
+        "✧",
+        "✦",
+        "★"
+      ];
 
-            generateQR();
 
-          }
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
+
+        const star =
+          document.createElement(
+            "div"
+          );
+
+        star.className =
+          "star";
+
+        star.textContent =
+          symbols[
+            Math.floor(
+              Math.random() *
+              symbols.length
+            )
+          ];
+
+
+        star.style.left =
+          Math.random() *
+            100 +
+          "%";
+
+
+        star.style.fontSize =
+          10 +
+          Math.random() * 17 +
+          "px";
+
+
+        star.style.animationDuration =
+          2.2 +
+          Math.random() * 2.7 +
+          "s";
+
+
+        star.style.animationDelay =
+          Math.random() *
+            0.8 +
+          "s";
+
+
+        celebration.appendChild(
+          star
+        );
+
+
+        setTimeout(
+          function () {
+
+            star.remove();
+
+          },
+          5500
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       SUCCESS SOUND
+       ======================================================
+
+       Uses Web Audio API instead of an external
+       audio file, so you don't need to upload an mp3.
+    ====================================================== */
+
+    function playSuccessSound() {
+
+      try {
+
+        const AudioContext =
+          window.AudioContext ||
+          window.webkitAudioContext;
+
+        if (
+          !AudioContext
+        ) {
+
+          return;
 
         }
-      );
 
+
+        const ctx =
+          new AudioContext();
+
+
+        const now =
+          ctx.currentTime;
+
+
+        /*
+          First soft tone
+        */
+
+        const osc1 =
+          ctx.createOscillator();
+
+        const gain1 =
+          ctx.createGain();
+
+
+        osc1.type =
+          "sine";
+
+        osc1.frequency.setValueAtTime(
+          523.25,
+          now
+        );
+
+        osc1.frequency.exponentialRampToValueAtTime(
+          783.99,
+          now + 0.16
+        );
+
+
+        gain1.gain.setValueAtTime(
+          0.0001,
+          now
+        );
+
+        gain1.gain.exponentialRampToValueAtTime(
+          0.22,
+          now + 0.025
+        );
+
+        gain1.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now + 0.35
+        );
+
+
+        osc1.connect(
+          gain1
+        );
+
+        gain1.connect(
+          ctx.destination
+        );
+
+
+        osc1.start(now);
+
+        osc1.stop(
+          now + 0.36
+        );
+
+
+        /*
+          Second confirmation tone
+        */
+
+        const osc2 =
+          ctx.createOscillator();
+
+        const gain2 =
+          ctx.createGain();
+
+
+        osc2.type =
+          "sine";
+
+        osc2.frequency.setValueAtTime(
+          659.25,
+          now + 0.11
+        );
+
+        osc2.frequency.exponentialRampToValueAtTime(
+          1046.5,
+          now + 0.28
+        );
+
+
+        gain2.gain.setValueAtTime(
+          0.0001,
+          now + 0.1
+        );
+
+        gain2.gain.exponentialRampToValueAtTime(
+          0.18,
+          now + 0.13
+        );
+
+        gain2.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now + 0.55
+        );
+
+
+        osc2.connect(
+          gain2
+        );
+
+        gain2.connect(
+          ctx.destination
+        );
+
+
+        osc2.start(
+          now + 0.1
+        );
+
+        osc2.stop(
+          now + 0.56
+        );
+
+
+        setTimeout(
+          function () {
+
+            ctx.close();
+
+          },
+          900
+        );
+
+      } catch (error) {
+
+        console.log(
+          "Sound unavailable:",
+          error
+        );
+
+      }
+
+    }
 
   </script>
 
