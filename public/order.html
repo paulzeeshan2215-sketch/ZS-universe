@@ -1,2137 +1,2300 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SehrAn Media — Complete Order</title>
+<title>SehrAn Media — Order</title>
 
 <style>
-*{
-    box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    color:#fff;
-    min-height:100vh;
-    background:
-        radial-gradient(circle at top left,#32105d 0%,transparent 35%),
-        radial-gradient(circle at top right,#3a103e 0%,transparent 30%),
-        linear-gradient(145deg,#07070d,#100b18 55%,#08070d);
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #24104d, #0d0b18 48%, #07070d);
+  color: #fff;
+  min-height: 100vh;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    width:350px;
-    height:350px;
-    border-radius:50%;
-    background:#8d35ff;
-    filter:blur(140px);
-    opacity:.10;
-    top:-160px;
-    left:-120px;
-    pointer-events:none;
+button,
+input {
+  font: inherit;
 }
 
-body::after{
-    content:"";
-    position:fixed;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:#ff3c9d;
-    filter:blur(140px);
-    opacity:.08;
-    right:-120px;
-    bottom:-100px;
-    pointer-events:none;
+button {
+  cursor: pointer;
 }
 
-.container{
-    width:min(94%,650px);
-    margin:auto;
-    padding:22px 0 60px;
+.container {
+  width: min(94%, 650px);
+  margin: auto;
+  padding: 22px 0 60px;
 }
 
-.brand{
-    text-align:center;
-    margin-bottom:20px;
+.brand {
+  text-align: center;
+  margin-bottom: 18px;
 }
 
-.brand h1{
-    margin:0;
-    font-size:31px;
-    font-weight:900;
-    letter-spacing:-.7px;
+.brand h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
 }
 
-.brand h1 span{
-    background:linear-gradient(90deg,#bd75ff,#ff4caf,#68d9ff);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+.brand p {
+  margin: 7px 0 0;
+  color: #bdb7ce;
+  font-size: 14px;
 }
 
-.brand p{
-    margin:7px 0 0;
-    color:#aaa3b8;
-    font-size:13px;
+/* CARD */
+
+.card {
+  background: rgba(20, 18, 34, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
-.card{
-    background:rgba(19,17,31,.94);
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:24px;
-    padding:24px;
-    margin-bottom:16px;
-    box-shadow:0 20px 55px rgba(0,0,0,.30);
+.package-card {
+  border-color: rgba(161, 92, 255, 0.35);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(155, 69, 255, 0.12),
+      rgba(20, 18, 34, 0.96)
+    );
 }
 
-.package-card{
-    border-color:rgba(177,96,255,.35);
-    background:
-        linear-gradient(145deg,
-        rgba(139,53,255,.14),
-        rgba(255,255,255,.035));
+.package-label,
+.amount-label,
+.upi-label {
+  color: #aaa3ba;
+  font-size: 12px;
 }
 
-.package-label{
-    color:#aaa3b8;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:7px;
+.package-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
 }
 
-.package-name{
-    font-size:24px;
-    font-weight:900;
+.package-name {
+  font-size: 23px;
+  font-weight: 900;
 }
 
-.followers{
-    color:#c782ff;
-    font-size:14px;
-    font-weight:800;
-    margin-top:6px;
+.package-details {
+  color: #c5bdd2;
+  font-size: 13px;
+  margin-top: 5px;
 }
 
-.package-price{
-    margin-top:10px;
-    font-size:34px;
-    font-weight:900;
+.package-price {
+  margin-top: 7px;
+  font-size: 32px;
+  font-weight: 900;
+  color: #d39cff;
 }
 
-.package-note{
-    color:#8f899c;
-    font-size:12px;
-    margin-top:7px;
+.package-note {
+  color: #aaa4b6;
+  font-size: 13px;
+  margin-top: 6px;
 }
 
-.section-title{
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:5px;
+/* TITLES */
+
+.payment-title,
+.form-title {
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 5px;
 }
 
-.section-subtitle{
-    color:#9e97aa;
-    font-size:13px;
-    line-height:1.6;
-    margin-bottom:20px;
+.payment-subtitle,
+.form-subtitle {
+  color: #aaa4b6;
+  font-size: 13px;
+  margin-top: 6px;
 }
 
-/* STEPS */
+/* =========================
+   PERFECT QR
+========================= */
 
-.progress{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:16px;
+.qr-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 22px auto;
 }
 
-.progress-item{
-    padding:11px;
-    border-radius:13px;
-    background:#181522;
-    border:1px solid rgba(255,255,255,.07);
-    text-align:center;
-    color:#777183;
-    font-size:12px;
-    font-weight:900;
+.qr-box {
+  width: min(270px, 76vw);
+  aspect-ratio: 1 / 1;
+  height: auto;
+
+  padding: 14px;
+
+  background: #fff;
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35);
+
+  overflow: hidden;
 }
 
-.progress-item.active{
-    color:#fff;
-    background:linear-gradient(135deg,#7430d5,#a744db);
-    border-color:transparent;
-}
+#qrCode {
+  width: 100%;
+  aspect-ratio: 1 / 1;
 
-.progress-item.done{
-    color:#8ff4b3;
-    background:rgba(40,180,95,.08);
-    border-color:rgba(80,220,130,.20);
-}
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-/* FORM */
-
-.field{
-    margin-bottom:16px;
-}
-
-label{
-    display:block;
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:8px;
-    color:#ded8e8;
-}
-
-.required{
-    color:#ff7185;
-}
-
-.optional{
-    color:#777181;
-    font-size:11px;
-    font-weight:500;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border-radius:13px;
-    border:1px solid rgba(255,255,255,.10);
-    background:#0d0c14;
-    color:#fff;
-    outline:none;
-    font-size:15px;
-    transition:.2s;
-}
-
-input:focus{
-    border-color:#a352f0;
-    box-shadow:0 0 0 3px rgba(163,82,240,.10);
-}
-
-input::placeholder{
-    color:#625c6d;
-}
-
-/* PROMO */
-
-.promo-box{
-    display:grid;
-    grid-template-columns:1fr 110px;
-    gap:8px;
-}
-
-.promo-btn{
-    border:0;
-    border-radius:13px;
-    background:#292432;
-    color:#fff;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.promo-btn:hover{
-    background:#382e46;
-}
-
-.promo-message{
-    min-height:18px;
-    margin-top:7px;
-    font-size:12px;
-}
-
-/* PAYMENT */
-
-.payment-card{
-    display:none;
-}
-
-.payment-card.show{
-    display:block;
-    animation:fadeUp .4s ease;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.qr-box{
-    width:280px;
-    height:280px;
-    max-width:100%;
-    margin:20px auto;
-    padding:15px;
-    background:#fff;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 12px 40px rgba(0,0,0,.35);
-}
-
-#qrCode{
-    width:250px;
-    height:250px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  overflow: hidden;
 }
 
 #qrCode canvas,
-#qrCode img{
-    width:250px!important;
-    height:250px!important;
-    max-width:100%!important;
-    max-height:100%!important;
-    object-fit:contain!important;
-    display:block!important;
+#qrCode img {
+  width: 100% !important;
+  height: 100% !important;
+
+  max-width: 100% !important;
+  max-height: 100% !important;
+
+  object-fit: contain !important;
+  display: block !important;
 }
 
-.amount-box{
-    text-align:center;
-    padding:16px;
-    border-radius:18px;
-    background:rgba(139,53,255,.09);
-    border:1px solid rgba(177,96,255,.18);
-    margin:15px 0;
+/* PAYMENT AMOUNT */
+
+.amount-box {
+  text-align: center;
+  margin: 12px 0 18px;
 }
 
-.amount-label{
-    color:#9992a6;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+.amount {
+  margin-top: 5px;
+  font-size: 34px;
+  font-weight: 900;
 }
 
-.amount{
-    font-size:36px;
-    font-weight:900;
-    margin-top:5px;
+.old-amount {
+  color: #777080;
+  text-decoration: line-through;
+  font-size: 16px;
+  margin-right: 7px;
 }
 
-.old-amount{
-    color:#6d6876;
-    text-decoration:line-through;
-    font-size:16px;
-    margin-right:8px;
+/* UPI */
+
+.upi-box {
+  background: #0d0c16;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 15px;
+  padding: 13px;
+  text-align: center;
+  margin-bottom: 12px;
 }
 
-.saving{
-    color:#7ff0a6;
-    font-size:12px;
-    font-weight:800;
-    margin-top:4px;
+.upi-label {
+  margin-bottom: 5px;
 }
 
-.upi-box{
-    background:#0d0c14;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:15px;
-    padding:13px;
-    text-align:center;
-    margin-bottom:12px;
-}
-
-.upi-label{
-    color:#888194;
-    font-size:11px;
-    margin-bottom:5px;
-}
-
-.upi-id{
-    color:#d18cff;
-    font-size:17px;
-    font-weight:900;
-    word-break:break-all;
-}
-
-.button-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.btn{
-    border:0;
-    width:100%;
-    padding:14px;
-    border-radius:14px;
-    font-weight:900;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.btn-upi{
-    color:#fff;
-    background:linear-gradient(135deg,#8535ff,#d257ff);
-}
-
-.btn-copy{
-    color:#fff;
-    background:#292432;
-}
-
-.steps{
-    margin-top:20px;
-}
-
-.step{
-    display:flex;
-    gap:11px;
-    margin:12px 0;
-    color:#cbc5d4;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.step-number{
-    flex-shrink:0;
-    width:27px;
-    height:27px;
-    border-radius:50%;
-    background:#843be0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:900;
-}
-
-/* FILE */
-
-.file-box{
-    border:1.5px dashed #76508f;
-    border-radius:16px;
-    padding:18px;
-    background:rgba(115,80,142,.07);
-    text-align:center;
-}
-
-.file-box input{
-    border:0;
-    background:transparent;
-    padding:8px 0;
-}
-
-.file-help{
-    color:#858092;
-    font-size:11px;
-    line-height:1.5;
-}
-
-.preview{
-    display:none;
-    margin:13px auto 0;
-    width:100%;
-    max-height:300px;
-    object-fit:contain;
-    border-radius:14px;
+.upi-id {
+  font-size: 16px;
+  font-weight: 800;
+  word-break: break-all;
+  color: #d39cff;
 }
 
 /* BUTTONS */
 
-.next-btn,
-.submit-btn{
-    width:100%;
-    padding:17px;
-    border:0;
-    border-radius:16px;
-    color:#fff;
-    font-size:16px;
-    font-weight:900;
-    cursor:pointer;
-    background:linear-gradient(135deg,#913cff,#d95cff);
-    box-shadow:0 12px 30px rgba(151,55,255,.22);
-    transition:.2s;
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.next-btn:hover,
-.submit-btn:hover{
-    transform:translateY(-2px);
+.btn {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 14px;
+  font-weight: 900;
+  border: 0;
 }
 
-.back-btn{
-    width:100%;
-    padding:13px;
-    margin-top:10px;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:14px;
-    background:#211d2b;
-    color:#fff;
-    font-weight:800;
-    cursor:pointer;
+.btn-upi {
+  background: linear-gradient(135deg, #8d35ff, #c75cff);
+  color: #fff;
 }
 
-.submit-btn:disabled,
-.next-btn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-    transform:none;
+.btn-copy {
+  background: #292536;
+  color: #fff;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* STEPS */
+
+.step {
+  display: flex;
+  gap: 11px;
+  margin: 12px 0;
+  color: #d5d0df;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.step-number {
+  min-width: 27px;
+  height: 27px;
+  border-radius: 50%;
+
+  background: #8c42e8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 900;
+  font-size: 12px;
+}
+
+/* FORM */
+
+.field {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 7px;
+  color: #ddd8e7;
+}
+
+.required {
+  color: #ff7181;
+}
+
+.optional {
+  color: #888294;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="url"] {
+  width: 100%;
+  padding: 14px;
+
+  border-radius: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  background: #0e0d16;
+  color: #fff;
+
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: #9a52e9;
+  box-shadow: 0 0 0 3px rgba(154, 82, 233, 0.10);
+}
+
+input::placeholder {
+  color: #696474;
+}
+
+/* PROMO */
+
+.promo-box {
+  display: flex;
+  gap: 8px;
+}
+
+.promo-box input {
+  flex: 1;
+}
+
+.promo-btn {
+  min-width: 105px;
+
+  border: 0;
+  border-radius: 13px;
+
+  background: #2b2535;
+  color: #fff;
+
+  font-weight: 900;
+}
+
+.promo-btn.applied {
+  background: linear-gradient(135deg, #21b866, #39df85);
+}
+
+.promo-message {
+  font-size: 12px;
+  margin-top: 7px;
+  min-height: 16px;
+}
+
+/* FILE */
+
+.file-box {
+  border: 1.5px dashed #73508e;
+  border-radius: 16px;
+  padding: 18px;
+  background: rgba(115, 80, 142, 0.07);
+  text-align: center;
+}
+
+.file-box input[type="file"] {
+  width: 100%;
+  color: #c9c1d4;
+  font-size: 13px;
+}
+
+.file-help {
+  color: #9891a6;
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+.preview {
+  display: none;
+  margin: 12px auto 0;
+
+  width: auto;
+  max-width: 100%;
+  max-height: 280px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+/* SUBMIT */
+
+.submit-btn {
+  width: 100%;
+  padding: 17px;
+
+  border: 0;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9a3fff,
+      #d15bff
+    );
+
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 900;
+
+  margin-top: 10px;
+
+  box-shadow:
+    0 12px 35px rgba(153, 63, 255, 0.25);
+}
+
+.submit-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
 }
 
 /* MESSAGE */
 
-.message{
-    display:none;
-    margin-top:13px;
-    padding:13px;
-    border-radius:13px;
-    font-size:13px;
-    line-height:1.5;
+.message {
+  display: none;
+  margin-top: 13px;
+  padding: 13px;
+  border-radius: 13px;
+  font-size: 13px;
 }
 
-.error{
-    background:rgba(255,55,75,.10);
-    border:1px solid rgba(255,55,75,.25);
-    color:#ff9ca7;
+.error {
+  background: rgba(255, 55, 75, 0.10);
+  border: 1px solid rgba(255, 55, 75, 0.25);
+  color: #ff9ca7;
 }
 
-/* COUPON EFFECT */
+/* =========================
+   SUCCESS SCREEN
+========================= */
 
-#celebration{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:9998;
-    overflow:hidden;
+.success-screen {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #301257,
+      #0a0810 65%
+    );
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
 }
 
-.star{
-    position:absolute;
-    top:-30px;
-    color:#fff;
-    font-size:18px;
-    animation:starFall linear forwards;
-    text-shadow:0 0 12px #d28cff;
+.success-content {
+  text-align: center;
+  width: min(92%, 450px);
 }
 
-@keyframes starFall{
-    0%{
-        transform:translateY(-40px) rotate(0deg) scale(.5);
-        opacity:0;
-    }
-    15%{
-        opacity:1;
-    }
-    100%{
-        transform:translateY(110vh) rotate(720deg) scale(1.2);
-        opacity:0;
-    }
+.success-tick {
+  width: 110px;
+  height: 110px;
+
+  margin: 0 auto 22px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8f35ff,
+      #d763ff
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 0 70px rgba(190, 85, 255, 0.55);
+
+  animation: successPop .65s cubic-bezier(.2,1.5,.4,1);
 }
 
-/* SUCCESS */
+.success-tick::after {
+  content: "✓";
 
-.success-screen{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:10000;
-    background:
-        radial-gradient(circle at center,#321258,#09070e 68%);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+  font-size: 66px;
+  font-weight: 900;
+
+  animation: tickDraw .5s ease .2s both;
 }
 
-.success-content{
-    text-align:center;
-    width:min(92%,450px);
-    animation:successIn .5s ease;
+@keyframes successPop {
+  0% {
+    transform: scale(.2);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-@keyframes successIn{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
+@keyframes tickDraw {
+  from {
+    transform: scale(.4) rotate(-20deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
 }
 
-.success-tick{
-    width:110px;
-    height:110px;
-    margin:0 auto 22px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#8f35ff,#d763ff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:
-        0 0 35px rgba(190,85,255,.45),
-        0 0 90px rgba(190,85,255,.25);
-    animation:tickPop .6s cubic-bezier(.2,1.5,.5,1);
+.success-title {
+  font-size: 30px;
+  font-weight: 900;
 }
 
-@keyframes tickPop{
-    0%{
-        transform:scale(0);
-    }
-    75%{
-        transform:scale(1.12);
-    }
-    100%{
-        transform:scale(1);
-    }
+.success-text {
+  color: #c8c1d2;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
-.success-tick::after{
-    content:"✓";
-    font-size:66px;
-    font-weight:900;
+.order-id {
+  margin-top: 15px;
+  padding: 12px;
+
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  font-weight: 900;
 }
 
-.success-title{
-    font-size:30px;
-    font-weight:900;
+/* =========================
+   STAR / CONFETTI EFFECT
+========================= */
+
+.star-container {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 10000;
+
+  overflow: hidden;
 }
 
-.success-text{
-    color:#c7c0d2;
-    font-size:14px;
-    line-height:1.7;
-    margin-top:10px;
+.star {
+  position: absolute;
+
+  top: -30px;
+
+  font-size: 18px;
+
+  color: #fff;
+
+  text-shadow:
+    0 0 10px #fff,
+    0 0 20px #d66cff;
+
+  animation:
+    starFall linear forwards;
 }
 
-.order-id{
-    margin-top:17px;
-    padding:13px;
-    border-radius:13px;
-    background:rgba(255,255,255,.07);
-    font-weight:900;
+@keyframes starFall {
+  0% {
+    transform:
+      translateY(-30px)
+      rotate(0deg)
+      scale(.5);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateY(110vh)
+      rotate(720deg)
+      scale(1.1);
+
+    opacity: 0;
+  }
 }
 
-/* RESPONSIVE */
+/* LOADING */
 
-@media(max-width:520px){
-
-    .container{
-        width:94%;
-        padding-top:17px;
-    }
-
-    .card{
-        padding:18px;
-        border-radius:20px;
-    }
-
-    .brand h1{
-        font-size:27px;
-    }
-
-    .package-name{
-        font-size:21px;
-    }
-
-    .package-price{
-        font-size:30px;
-    }
-
-    .qr-box{
-        width:250px;
-        height:250px;
-        padding:13px;
-    }
-
-    #qrCode,
-    #qrCode canvas,
-    #qrCode img{
-        width:224px!important;
-        height:224px!important;
-    }
-
-    .button-row{
-        grid-template-columns:1fr;
-    }
-
-    .promo-box{
-        grid-template-columns:1fr;
-    }
-
-    .promo-btn{
-        padding:14px;
-    }
-
-    .amount{
-        font-size:32px;
-    }
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 5px;
 }
 
-@media(max-width:360px){
+.loading-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  animation: dot 1s infinite;
+}
 
-    .card{
-        padding:15px;
-    }
+.loading-dots span:nth-child(2) {
+  animation-delay: .15s;
+}
 
-    .qr-box{
-        width:225px;
-        height:225px;
-    }
+.loading-dots span:nth-child(3) {
+  animation-delay: .3s;
+}
 
-    #qrCode,
-    #qrCode canvas,
-    #qrCode img{
-        width:200px!important;
-        height:200px!important;
-    }
+@keyframes dot {
+  0%, 80%, 100% {
+    opacity: .3;
+    transform: translateY(0);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: 94%;
+    padding-top: 17px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .qr-box {
+    width: min(260px, 76vw);
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-box {
+    flex-direction: column;
+  }
+
+  .promo-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .package-name {
+    font-size: 21px;
+  }
+
+  .package-price {
+    font-size: 29px;
+  }
+
+  .amount {
+    font-size: 31px;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .card {
+    padding: 15px;
+  }
+
+  .qr-box {
+    width: 76vw;
+  }
+
+  .brand h1 {
+    font-size: 26px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="celebration"></div>
+<div class="star-container" id="starContainer"></div>
 
 <main class="container">
 
-    <div class="brand">
-        <h1>SehrAn <span>Media</span></h1>
-        <p>Fast • Simple • Secure Social Media Services</p>
+  <!-- BRAND -->
+
+  <div class="brand">
+    <h1>SehrAn Media</h1>
+    <p>Fast • Simple • Secure Social Media Services</p>
+  </div>
+
+
+  <!-- SELECTED PACKAGE -->
+
+  <section class="card package-card">
+
+    <div class="package-label">
+      Selected Package
     </div>
 
-    <div class="progress">
-        <div class="progress-item active" id="stepOne">1. Details</div>
-        <div class="progress-item" id="stepTwo">2. Payment</div>
+    <div
+      class="package-name"
+      id="packageName"
+    >
+      Instagram Followers
     </div>
 
-    <!-- PACKAGE -->
+    <div
+      class="package-details"
+      id="packageDetails"
+    >
+      200 Followers
+    </div>
 
-    <section class="card package-card">
+    <div
+      class="package-price"
+      id="packagePrice"
+    >
+      ₹30
+    </div>
 
-        <div class="package-label">Selected Package</div>
+    <div class="package-note">
+      Your selected package and price are shown below.
+    </div>
 
-        <div class="package-name" id="packageName">
-            Instagram Followers
-        </div>
+  </section>
 
-        <div class="followers" id="followersText">
-            200 Followers
-        </div>
 
-        <div class="package-price" id="packagePrice">
-            ₹30
-        </div>
+  <!-- PAYMENT -->
 
-        <div class="package-note">
-            Your selected package and original price are shown above.
-        </div>
+  <section class="card">
 
-    </section>
+    <div class="payment-title">
+      Pay Securely
+    </div>
 
-    <!-- STEP 1 -->
+    <div class="payment-subtitle">
+      Scan the QR code using Google Pay, PhonePe or another UPI app.
+    </div>
 
-    <section class="card" id="detailsCard">
 
-        <div class="section-title">
-            Complete Your Details
-        </div>
+    <!-- PERFECT SQUARE QR -->
 
-        <div class="section-subtitle">
-            Please enter correct information. Your real name, Instagram username,
-            profile link and payment screenshot are required.
-        </div>
+    <div class="qr-wrapper">
 
-        <form id="detailsForm">
+      <div class="qr-box">
 
-            <div class="field">
+        <div id="qrCode"></div>
 
-                <label for="name">
-                    Real Name <span class="required">*</span>
-                </label>
+      </div>
 
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your real name"
-                    maxlength="60"
-                    autocomplete="name"
-                    required
-                >
+    </div>
 
-            </div>
 
-            <div class="field">
+    <!-- AMOUNT -->
 
-                <label for="username">
-                    Instagram Username <span class="required">*</span>
-                </label>
+    <div class="amount-box">
 
-                <input
-                    id="username"
-                    type="text"
-                    placeholder="@yourusername"
-                    maxlength="30"
-                    autocomplete="off"
-                    required
-                >
+      <div class="amount-label">
+        Exact Payment Amount
+      </div>
 
-            </div>
+      <div
+        class="amount"
+        id="amountText"
+      >
+        ₹30
+      </div>
 
-            <div class="field">
+    </div>
 
-                <label for="profile">
-                    Instagram Profile Link <span class="required">*</span>
-                </label>
 
-                <input
-                    id="profile"
-                    type="url"
-                    placeholder="https://instagram.com/yourusername"
-                    maxlength="300"
-                    required
-                >
+    <!-- UPI ID -->
 
-            </div>
+    <div class="upi-box">
 
-            <div class="field">
+      <div class="upi-label">
+        UPI ID
+      </div>
 
-                <label for="promoCode">
-                    Promo Code
-                </label>
+      <div class="upi-id">
+        7889777143@fam
+      </div>
 
-                <div class="promo-box">
+    </div>
 
-                    <input
-                        id="promoCode"
-                        type="text"
-                        placeholder="Enter promo code"
-                        maxlength="30"
-                        autocomplete="off"
-                    >
 
-                    <button
-                        type="button"
-                        class="promo-btn"
-                        id="promoButton"
-                    >
-                        Apply
-                    </button>
+    <div class="button-row">
 
-                </div>
+      <button
+        type="button"
+        class="btn btn-upi"
+        id="upiButton"
+      >
+        Pay with UPI
+      </button>
 
-                <div
-                    class="promo-message"
-                    id="promoMessage"
-                ></div>
+      <button
+        type="button"
+        class="btn btn-copy"
+        id="copyButton"
+      >
+        Copy UPI ID
+      </button>
 
-            </div>
-
-            <div class="field">
-
-                <label for="utr">
-                    Payment UTR
-                    <span class="optional">(Optional)</span>
-                </label>
+    </div>
 
-                <input
-                    id="utr"
-                    type="text"
-                    placeholder="Enter UTR if available"
-                    maxlength="80"
-                    autocomplete="off"
-                >
+  </section>
 
-            </div>
-
-            <button
-                type="submit"
-                class="next-btn"
-                id="nextButton"
-            >
-                Next →
-            </button>
-
-            <div
-                class="message error"
-                id="detailsError"
-            ></div>
-
-        </form>
-
-    </section>
-
-    <!-- STEP 2 PAYMENT -->
-
-    <section class="card payment-card" id="paymentCard">
-
-        <div class="section-title">
-            Complete Payment
-        </div>
-
-        <div class="section-subtitle">
-            Scan the QR code or use your UPI app. Pay the exact amount shown below.
-        </div>
-
-        <div class="amount-box">
-
-            <div class="amount-label">
-                Final Payment Amount
-            </div>
-
-            <div
-                class="amount"
-                id="amountText"
-            >
-                ₹30
-            </div>
-
-            <div
-                class="saving"
-                id="savingText"
-            ></div>
-
-        </div>
-
-        <!-- QR -->
-
-        <div class="qr-box">
-            <div id="qrCode"></div>
-        </div>
-
-        <div class="upi-box">
-
-            <div class="upi-label">
-                UPI ID
-            </div>
-
-            <div class="upi-id">
-                7889777143@fam
-            </div>
-
-        </div>
-
-        <div class="button-row">
-
-            <button
-                type="button"
-                class="btn btn-upi"
-                id="upiButton"
-            >
-                Pay with UPI
-            </button>
-
-            <button
-                type="button"
-                class="btn btn-copy"
-                id="copyButton"
-            >
-                Copy UPI ID
-            </button>
-
-        </div>
-
-        <div class="steps">
-
-            <div class="step">
-                <div class="step-number">1</div>
-                <div>
-                    Scan the QR code with Google Pay, PhonePe or another UPI app.
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <div>
-                    Pay exactly <strong id="stepAmount">₹30</strong>.
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <div>
-                    After successful payment, take a clear screenshot.
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                <div>
-                    Upload the screenshot below and submit your order.
-                </div>
-            </div>
-
-        </div>
-
-        <div class="field" style="margin-top:22px;">
-
-            <label for="screenshot">
-                Payment Screenshot
-                <span class="required">*</span>
-            </label>
-
-            <div class="file-box">
-
-                <input
-                    id="screenshot"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    required
-                >
-
-                <div class="file-help">
-                    Payment screenshot is mandatory.<br>
-                    JPG, PNG or WEBP only • Maximum 5 MB.
-                </div>
-
-                <img
-                    id="preview"
-                    class="preview"
-                    alt="Payment screenshot preview"
-                >
-
-            </div>
-
-        </div>
+
+  <!-- HOW TO PAY -->
+
+  <section class="card">
+
+    <div class="payment-title">
+      How to Complete Payment
+    </div>
+
+    <div class="step">
+
+      <div class="step-number">
+        1
+      </div>
+
+      <div>
+        Scan the QR code with your preferred UPI application.
+      </div>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        2
+      </div>
+
+      <div>
+        Pay the exact amount displayed above.
+      </div>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        3
+      </div>
+
+      <div>
+        Save a clear screenshot of the successful payment.
+      </div>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        4
+      </div>
+
+      <div>
+        Complete your information below and upload the screenshot.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ORDER FORM -->
+
+  <form
+    class="card"
+    id="orderForm"
+  >
+
+    <div class="form-title">
+      Complete Your Order
+    </div>
+
+    <div class="form-subtitle">
+      Please provide accurate information. Required fields must be completed.
+    </div>
+
+
+    <!-- NAME -->
+
+    <div class="field">
+
+      <label for="name">
+        Real Name
+        <span class="required">*</span>
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        placeholder="Enter your real name"
+        maxlength="60"
+        autocomplete="name"
+        required
+      >
+
+    </div>
+
+
+    <!-- USERNAME -->
+
+    <div class="field">
+
+      <label for="username">
+        Instagram Username
+        <span class="required">*</span>
+      </label>
+
+      <input
+        id="username"
+        type="text"
+        placeholder="@yourusername"
+        maxlength="30"
+        autocomplete="off"
+        required
+      >
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div class="field">
+
+      <label for="profile">
+        Instagram Profile Link
+        <span class="required">*</span>
+      </label>
+
+      <input
+        id="profile"
+        type="url"
+        placeholder="https://instagram.com/yourusername"
+        maxlength="300"
+        required
+      >
+
+    </div>
+
+
+    <!-- PROMO -->
+
+    <div class="field">
+
+      <label for="promoCode">
+        Promo Code
+      </label>
+
+      <div class="promo-box">
+
+        <input
+          id="promoCode"
+          type="text"
+          placeholder="Enter promo code"
+          maxlength="30"
+          autocomplete="off"
+        >
 
         <button
-            type="button"
-            class="submit-btn"
-            id="submitButton"
+          type="button"
+          class="promo-btn"
+          id="promoButton"
         >
-            Submit Order ✓
+          Apply
         </button>
 
-        <button
-            type="button"
-            class="back-btn"
-            id="backButton"
+      </div>
+
+      <div
+        class="promo-message"
+        id="promoMessage"
+      ></div>
+
+    </div>
+
+
+    <!-- UTR -->
+
+    <div class="field">
+
+      <label for="utr">
+
+        Payment UTR
+
+        <span class="optional">
+          (Optional)
+        </span>
+
+      </label>
+
+      <input
+        id="utr"
+        type="text"
+        placeholder="Enter UTR if available"
+        maxlength="80"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <!-- SCREENSHOT -->
+
+    <div class="field">
+
+      <label for="screenshot">
+
+        Payment Screenshot
+
+        <span class="required">*</span>
+
+      </label>
+
+      <div class="file-box">
+
+        <input
+          id="screenshot"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          required
         >
-            ← Back to Details
-        </button>
 
-        <div
-            class="message error"
-            id="paymentError"
-        ></div>
+        <div class="file-help">
+          JPG, PNG or WEBP • Maximum 5 MB
+        </div>
 
-    </section>
+        <img
+          id="preview"
+          class="preview"
+          alt="Payment screenshot preview"
+        >
+
+      </div>
+
+    </div>
+
+
+    <!-- SUBMIT -->
+
+    <button
+      type="submit"
+      class="submit-btn"
+      id="submitButton"
+    >
+      Submit Order
+    </button>
+
+
+    <div
+      class="message error"
+      id="errorMessage"
+    ></div>
+
+  </form>
 
 </main>
+
 
 <!-- SUCCESS -->
 
 <div
-    class="success-screen"
-    id="successScreen"
+  class="success-screen"
+  id="successScreen"
 >
 
-    <div class="success-content">
+  <div class="success-content">
 
-        <div class="success-tick"></div>
+    <div class="success-tick"></div>
 
-        <div class="success-title">
-            Order Submitted!
-        </div>
-
-        <div class="success-text">
-            Your order and payment screenshot have been received.
-            Your order will be reviewed and processed shortly.
-        </div>
-
-        <div
-            class="order-id"
-            id="successOrderId"
-        >
-            Order ID: Received
-        </div>
-
+    <div class="success-title">
+      Order Submitted!
     </div>
+
+    <div class="success-text">
+      Your order has been received successfully.
+      Please keep your order ID for reference.
+    </div>
+
+    <div
+      class="order-id"
+      id="successOrderId"
+    ></div>
+
+  </div>
 
 </div>
 
+
+<!-- QR LIBRARY -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 
 <script>
 
-/* =========================================================
-   SEHRAN MEDIA ORDER SYSTEM
-   ========================================================= */
-
-/* UPI */
+/* =========================================
+   SETTINGS
+========================================= */
 
 const UPI_ID = "7889777143@fam";
-const MERCHANT_NAME = "SehrAn Media";
-
-/* PROMO */
 
 const PROMO_CODE = "ZEESHAN10";
-const DISCOUNT_PERCENT = 10;
 
-/* PACKAGE DATA
-   These prices match index.html
+const PROMO_DISCOUNT = 0.10;
+
+
+/*
+  Packages must match index.html
 */
 
 const PACKAGES = {
 
-    "200": {
-        followers: 200,
-        price: 30,
-        name: "Starter"
-    },
+  "200": {
+    name: "Instagram Followers",
+    followers: "200 Followers",
+    price: 30
+  },
 
-    "500": {
-        followers: 500,
-        price: 50,
-        name: "Starter Plus"
-    },
+  "500": {
+    name: "Instagram Followers",
+    followers: "500 Followers",
+    price: 50
+  },
 
-    "1000": {
-        followers: 1000,
-        price: 90,
-        name: "Popular"
-    },
+  "1000": {
+    name: "Instagram Followers",
+    followers: "1,000 Followers",
+    price: 90
+  },
 
-    "1500": {
-        followers: 1500,
-        price: 130,
-        name: "Growth"
-    },
+  "1500": {
+    name: "Instagram Followers",
+    followers: "1,500 Followers",
+    price: 130
+  },
 
-    "2000": {
-        followers: 2000,
-        price: 150,
-        name: "Growth Plus"
-    },
+  "2000": {
+    name: "Instagram Followers",
+    followers: "2,000 Followers",
+    price: 150
+  },
 
-    "3000": {
-        followers: 3000,
-        price: 200,
-        name: "Pro"
-    },
+  "3000": {
+    name: "Instagram Followers",
+    followers: "3,000 Followers",
+    price: 200
+  },
 
-    "4000": {
-        followers: 4000,
-        price: 250,
-        name: "Pro Plus"
-    },
+  "4000": {
+    name: "Instagram Followers",
+    followers: "4,000 Followers",
+    price: 250
+  },
 
-    "5000": {
-        followers: 5000,
-        price: 300,
-        name: "Premium"
-    },
+  "5000": {
+    name: "Instagram Followers",
+    followers: "5,000 Followers",
+    price: 300
+  },
 
-    "6000": {
-        followers: 6000,
-        price: 350,
-        name: "Premium Plus"
-    },
+  "6000": {
+    name: "Instagram Followers",
+    followers: "6,000 Followers",
+    price: 350
+  },
 
-    "7000": {
-        followers: 7000,
-        price: 450,
-        name: "Advanced"
-    },
+  "7000": {
+    name: "Instagram Followers",
+    followers: "7,000 Followers",
+    price: 450
+  },
 
-    "8000": {
-        followers: 8000,
-        price: 500,
-        name: "Advanced Plus"
-    },
+  "8000": {
+    name: "Instagram Followers",
+    followers: "8,000 Followers",
+    price: 500
+  },
 
-    "9000": {
-        followers: 9000,
-        price: 550,
-        name: "Elite"
-    },
+  "9000": {
+    name: "Instagram Followers",
+    followers: "9,000 Followers",
+    price: 550
+  },
 
-    "10000": {
-        followers: 10000,
-        price: 600,
-        name: "Elite Plus"
-    }
+  "10000": {
+    name: "Instagram Followers",
+    followers: "10,000 Followers",
+    price: 600
+  }
 
 };
 
 
-/* =========================================================
-   GET PACKAGE FROM INDEX.HTML
-   ========================================================= */
+/* =========================================
+   READ PACKAGE FROM INDEX.HTML
+========================================= */
 
-const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(
+  window.location.search
+);
 
-let selectedPackage = params.get("package") || "200";
-
-if (!PACKAGES[selectedPackage]) {
-    selectedPackage = "200";
-}
-
-const packageData = PACKAGES[selectedPackage];
-
-let originalAmount = packageData.price;
-let currentAmount = originalAmount;
-let promoApplied = false;
+const packageId =
+  params.get("package") || "200";
 
 
-/* =========================================================
+const selectedPackage =
+  PACKAGES[packageId] || PACKAGES["200"];
+
+
+const PACKAGE_NAME =
+  selectedPackage.name;
+
+
+const FOLLOWERS =
+  selectedPackage.followers;
+
+
+const ORIGINAL_AMOUNT =
+  selectedPackage.price;
+
+
+let currentAmount =
+  ORIGINAL_AMOUNT;
+
+
+let promoApplied =
+  false;
+
+
+/* =========================================
    ELEMENTS
-   ========================================================= */
+========================================= */
 
-const packageName = document.getElementById("packageName");
-const followersText = document.getElementById("followersText");
-const packagePrice = document.getElementById("packagePrice");
+const packageName =
+  document.getElementById("packageName");
 
-const amountText = document.getElementById("amountText");
-const stepAmount = document.getElementById("stepAmount");
-const savingText = document.getElementById("savingText");
+const packageDetails =
+  document.getElementById("packageDetails");
 
-const qrCode = document.getElementById("qrCode");
+const packagePrice =
+  document.getElementById("packagePrice");
 
-const detailsCard = document.getElementById("detailsCard");
-const paymentCard = document.getElementById("paymentCard");
+const amountText =
+  document.getElementById("amountText");
 
-const detailsForm = document.getElementById("detailsForm");
-
-const promoInput = document.getElementById("promoCode");
-const promoButton = document.getElementById("promoButton");
-const promoMessage = document.getElementById("promoMessage");
-
-const screenshotInput = document.getElementById("screenshot");
-const preview = document.getElementById("preview");
-
-const detailsError = document.getElementById("detailsError");
-const paymentError = document.getElementById("paymentError");
-
-const nextButton = document.getElementById("nextButton");
-const submitButton = document.getElementById("submitButton");
-
-const stepOne = document.getElementById("stepOne");
-const stepTwo = document.getElementById("stepTwo");
+const qrCode =
+  document.getElementById("qrCode");
 
 
-/* =========================================================
-   SHOW PACKAGE
-   ========================================================= */
+/* =========================================
+   DISPLAY PACKAGE
+========================================= */
 
 packageName.textContent =
-    "Instagram Followers — " + packageData.name;
+  PACKAGE_NAME;
 
-followersText.textContent =
-    packageData.followers.toLocaleString("en-IN") + " Followers";
+packageDetails.textContent =
+  FOLLOWERS;
 
 packagePrice.textContent =
-    "₹" + packageData.price.toLocaleString("en-IN");
+  "₹" + ORIGINAL_AMOUNT;
+
+amountText.textContent =
+  "₹" + ORIGINAL_AMOUNT;
 
 
-/* =========================================================
-   FORMAT MONEY
-   ========================================================= */
-
-function money(amount){
-
-    return "₹" + Number(amount).toLocaleString("en-IN");
-
-}
-
-
-/* =========================================================
-   CALCULATE DISCOUNT
-   ========================================================= */
-
-function calculateDiscountedAmount(){
-
-    return Math.round(
-        originalAmount * (1 - DISCOUNT_PERCENT / 100)
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE PAYMENT AMOUNT
-   ========================================================= */
-
-function updatePaymentAmount(){
-
-    if(promoApplied){
-
-        const discountAmount =
-            calculateDiscountedAmount();
-
-        currentAmount = discountAmount;
-
-        amountText.innerHTML =
-            '<span class="old-amount">' +
-            money(originalAmount) +
-            '</span>' +
-            money(currentAmount);
-
-        packagePrice.innerHTML =
-            '<span class="old-amount">' +
-            money(originalAmount) +
-            '</span>' +
-            money(currentAmount);
-
-        savingText.textContent =
-            "You save " +
-            money(originalAmount - currentAmount) +
-            " with " +
-            PROMO_CODE;
-
-    }else{
-
-        currentAmount = originalAmount;
-
-        amountText.textContent =
-            money(currentAmount);
-
-        packagePrice.textContent =
-            money(originalAmount);
-
-        savingText.textContent = "";
-
-    }
-
-    stepAmount.textContent =
-        money(currentAmount);
-
-    createQR();
-
-}
-
-
-/* =========================================================
+/* =========================================
    UPI PAYMENT LINK
-   ========================================================= */
+========================================= */
 
-function getUPILink(){
+function getUPILink() {
 
-    return (
-        "upi://pay" +
-        "?pa=" + encodeURIComponent(UPI_ID) +
-        "&pn=" + encodeURIComponent(MERCHANT_NAME) +
-        "&am=" + encodeURIComponent(currentAmount.toFixed(2)) +
-        "&cu=INR" +
-        "&tn=" +
-        encodeURIComponent(
-            "SehrAn Media - " +
-            packageData.followers +
-            " Followers"
-        )
-    );
+  return (
+    "upi://pay" +
+
+    "?pa=" +
+    encodeURIComponent(UPI_ID) +
+
+    "&pn=" +
+    encodeURIComponent("SehrAn Media") +
+
+    "&am=" +
+    encodeURIComponent(
+      currentAmount.toFixed(2)
+    ) +
+
+    "&cu=INR" +
+
+    "&tn=" +
+    encodeURIComponent(
+      PACKAGE_NAME +
+      " - " +
+      FOLLOWERS
+    )
+  );
 
 }
 
 
-/* =========================================================
+/* =========================================
    CREATE QR
-   ========================================================= */
+========================================= */
 
-function createQR(){
+function createQR() {
 
-    qrCode.innerHTML = "";
+  qrCode.innerHTML = "";
 
-    if(typeof QRCode === "undefined"){
+  if (
+    typeof QRCode ===
+    "undefined"
+  ) {
 
-        qrCode.innerHTML =
-            "<div style='color:#111;text-align:center;font-size:13px'>" +
-            "QR could not load.<br>" +
-            "Please use the UPI ID below." +
-            "</div>";
+    qrCode.innerHTML =
+      "<div style='color:#111;text-align:center;font-size:12px;padding:10px;'>QR could not load.<br>Please use the UPI ID below.</div>";
 
-        return;
+    return;
+  }
+
+
+  new QRCode(
+    qrCode,
+    {
+      text: getUPILink(),
+
+      width: 230,
+      height: 230,
+
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+
+      correctLevel:
+        QRCode.CorrectLevel.H
+    }
+  );
+
+}
+
+
+createQR();
+
+
+/* =========================================
+   PAY WITH UPI
+========================================= */
+
+document
+  .getElementById("upiButton")
+  .addEventListener(
+    "click",
+    function() {
+
+      window.location.href =
+        getUPILink();
 
     }
-
-    new QRCode(qrCode, {
-
-        text:getUPILink(),
-
-        width:250,
-        height:250,
-
-        colorDark:"#000000",
-        colorLight:"#ffffff",
-
-        correctLevel:QRCode.CorrectLevel.H
-
-    });
-
-}
+  );
 
 
-/* =========================================================
-   INITIAL QR
-   ========================================================= */
+/* =========================================
+   COPY UPI
+========================================= */
 
-updatePaymentAmount();
+document
+  .getElementById("copyButton")
+  .addEventListener(
+    "click",
+    async function() {
+
+      const button =
+        this;
+
+      try {
+
+        await navigator.clipboard.writeText(
+          UPI_ID
+        );
+
+        button.textContent =
+          "Copied ✓";
+
+        setTimeout(
+          function() {
+
+            button.textContent =
+              "Copy UPI ID";
+
+          },
+          1800
+        );
+
+      } catch {
+
+        alert(
+          "UPI ID: " +
+          UPI_ID
+        );
+
+      }
+
+    }
+  );
 
 
-/* =========================================================
-   PROMO CODE
-   ========================================================= */
+/* =========================================
+   PROMO
+========================================= */
 
-promoButton.addEventListener("click", function(){
+const promoInput =
+  document.getElementById(
+    "promoCode"
+  );
+
+const promoButton =
+  document.getElementById(
+    "promoButton"
+  );
+
+const promoMessage =
+  document.getElementById(
+    "promoMessage"
+  );
+
+
+promoButton.addEventListener(
+  "click",
+  function() {
 
     const code =
-        promoInput.value.trim().toUpperCase();
+      promoInput.value
+        .trim()
+        .toUpperCase();
 
-    if(code === PROMO_CODE){
 
-        if(promoApplied){
+    if (
+      code ===
+      PROMO_CODE
+    ) {
 
-            promoMessage.textContent =
-                "✓ Promo code is already applied.";
-
-            promoMessage.style.color =
-                "#8ff0b0";
-
-            return;
-
-        }
-
-        promoApplied = true;
-
-        updatePaymentAmount();
+      if (promoApplied) {
 
         promoMessage.textContent =
-            "✓ " +
-            DISCOUNT_PERCENT +
-            "% discount applied successfully!";
+          "Promo code is already applied.";
 
-        promoMessage.style.color =
-            "#8ff0b0";
+        return;
+      }
 
-        promoInput.disabled = true;
-        promoButton.disabled = true;
-        promoButton.textContent = "Applied ✓";
 
-        createStarCelebration();
+      currentAmount =
+        Math.round(
+          ORIGINAL_AMOUNT *
+          (1 - PROMO_DISCOUNT)
+        );
 
-    }else{
 
-        promoApplied = false;
+      promoApplied =
+        true;
 
-        updatePaymentAmount();
 
-        promoMessage.textContent =
-            "Invalid promo code.";
+      packagePrice.innerHTML =
+        '<span class="old-amount">₹' +
+        ORIGINAL_AMOUNT +
+        '</span> ₹' +
+        currentAmount;
 
-        promoMessage.style.color =
-            "#ff8995";
+
+      amountText.innerHTML =
+        '<span class="old-amount">₹' +
+        ORIGINAL_AMOUNT +
+        '</span> ₹' +
+        currentAmount;
+
+
+      promoMessage.textContent =
+        "✓ Promo code applied. You save ₹" +
+        (
+          ORIGINAL_AMOUNT -
+          currentAmount
+        );
+
+
+      promoMessage.style.color =
+        "#8ff0b0";
+
+
+      promoButton.textContent =
+        "Applied ✓";
+
+
+      promoButton.classList.add(
+        "applied"
+      );
+
+
+      createQR();
+
+      createStars();
+
+    } else {
+
+      currentAmount =
+        ORIGINAL_AMOUNT;
+
+      promoApplied =
+        false;
+
+
+      packagePrice.textContent =
+        "₹" +
+        ORIGINAL_AMOUNT;
+
+
+      amountText.textContent =
+        "₹" +
+        ORIGINAL_AMOUNT;
+
+
+      promoMessage.textContent =
+        "Invalid promo code.";
+
+      promoMessage.style.color =
+        "#ff8995";
+
+
+      promoButton.textContent =
+        "Apply";
+
+      promoButton.classList.remove(
+        "applied"
+      );
+
+
+      createQR();
 
     }
 
-});
+  }
+);
 
 
-/* =========================================================
-   STAR / COUPON CELEBRATION
-   ========================================================= */
+/* =========================================
+   STAR EFFECT
+========================================= */
 
-function createStarCelebration(){
+function createStars() {
 
-    const container =
-        document.getElementById("celebration");
+  const container =
+    document.getElementById(
+      "starContainer"
+    );
 
-    const symbols = [
-        "★",
-        "✦",
-        "✧",
-        "✶",
-        "✨"
-    ];
 
-    for(let i = 0; i < 45; i++){
+  container.innerHTML = "";
 
-        const star =
-            document.createElement("div");
 
-        star.className = "star";
+  const symbols = [
+    "★",
+    "✦",
+    "✧",
+    "✨"
+  ];
 
-        star.textContent =
-            symbols[
-                Math.floor(
-                    Math.random() * symbols.length
-                )
-            ];
 
-        star.style.left =
-            Math.random() * 100 + "%";
+  for (
+    let i = 0;
+    i < 70;
+    i++
+  ) {
 
-        star.style.animationDuration =
-            (2 + Math.random() * 2.5) + "s";
+    const star =
+      document.createElement(
+        "div"
+      );
 
-        star.style.animationDelay =
-            Math.random() * .8 + "s";
 
-        star.style.fontSize =
-            (12 + Math.random() * 18) + "px";
+    star.className =
+      "star";
 
-        container.appendChild(star);
 
-        setTimeout(function(){
+    star.textContent =
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
 
-            star.remove();
 
-        },5000);
+    star.style.left =
+      Math.random() *
+      100 +
+      "%";
 
-    }
+
+    star.style.fontSize =
+      (
+        10 +
+        Math.random() * 18
+      ) +
+      "px";
+
+
+    star.style.animationDuration =
+      (
+        1.8 +
+        Math.random() * 2.5
+      ) +
+      "s";
+
+
+    star.style.animationDelay =
+      Math.random() *
+      0.8 +
+      "s";
+
+
+    container.appendChild(
+      star
+    );
+
+  }
+
+
+  setTimeout(
+    function() {
+      container.innerHTML = "";
+    },
+    5000
+  );
 
 }
 
 
-/* =========================================================
-   NEXT BUTTON / VALIDATE DETAILS
-   ========================================================= */
+/* =========================================
+   SCREENSHOT PREVIEW
+========================================= */
 
-detailsForm.addEventListener("submit", function(event){
+const screenshotInput =
+  document.getElementById(
+    "screenshot"
+  );
+
+const preview =
+  document.getElementById(
+    "preview"
+  );
+
+
+screenshotInput.addEventListener(
+  "change",
+  function() {
+
+    const file =
+      this.files &&
+      this.files[0];
+
+
+    if (!file) {
+
+      preview.style.display =
+        "none";
+
+      return;
+    }
+
+
+    const allowed = [
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ];
+
+
+    if (
+      !allowed.includes(
+        file.type
+      )
+    ) {
+
+      this.value = "";
+
+      preview.style.display =
+        "none";
+
+      alert(
+        "Please select a JPG, PNG or WEBP image."
+      );
+
+      return;
+    }
+
+
+    if (
+      file.size >
+      5 * 1024 * 1024
+    ) {
+
+      this.value = "";
+
+      preview.style.display =
+        "none";
+
+      alert(
+        "Screenshot must be 5 MB or smaller."
+      );
+
+      return;
+    }
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function(e) {
+
+        preview.src =
+          e.target.result;
+
+        preview.style.display =
+          "block";
+
+      };
+
+
+    reader.readAsDataURL(
+      file
+    );
+
+  }
+);
+
+
+/* =========================================
+   FORM
+========================================= */
+
+const form =
+  document.getElementById(
+    "orderForm"
+  );
+
+const submitButton =
+  document.getElementById(
+    "submitButton"
+  );
+
+const errorMessage =
+  document.getElementById(
+    "errorMessage"
+  );
+
+
+form.addEventListener(
+  "submit",
+  async function(event) {
 
     event.preventDefault();
 
-    hideError(detailsError);
+
+    errorMessage.style.display =
+      "none";
+
 
     const name =
-        document.getElementById("name")
-        .value.trim();
+      document
+        .getElementById("name")
+        .value
+        .trim();
+
 
     const username =
-        document.getElementById("username")
-        .value.trim()
-        .replace(/^@+/,"");
-
-    const profile =
-        document.getElementById("profile")
-        .value.trim();
-
-    const utr =
-        document.getElementById("utr")
-        .value.trim();
-
-
-    /* REAL NAME */
-
-    if(
-        name.length < 2 ||
-        !/^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(name)
-    ){
-
-        showError(
-            detailsError,
-            "Please enter your real name."
+      document
+        .getElementById("username")
+        .value
+        .trim()
+        .replace(
+          /^@+/,
+          ""
         );
 
-        return;
 
+    const profile =
+      document
+        .getElementById("profile")
+        .value
+        .trim();
+
+
+    const promoCode =
+      promoInput.value
+        .trim()
+        .toUpperCase();
+
+
+    const utr =
+      document
+        .getElementById("utr")
+        .value
+        .trim();
+
+
+    const file =
+      screenshotInput.files &&
+      screenshotInput.files[0];
+
+
+    /* NAME */
+
+    if (
+      name.length < 2 ||
+      name.length > 60 ||
+      !/^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(
+        name
+      )
+    ) {
+
+      showError(
+        "Please enter a valid real name."
+      );
+
+      return;
     }
 
 
     /* USERNAME */
 
-    if(
-        !/^[A-Za-z0-9._]{1,30}$/.test(username)
-    ){
+    if (
+      !/^[A-Za-z0-9._]{1,30}$/.test(
+        username
+      )
+    ) {
 
-        showError(
-            detailsError,
-            "Please enter a valid Instagram username."
-        );
+      showError(
+        "Please enter a valid Instagram username."
+      );
 
-        return;
-
+      return;
     }
 
 
-    /* PROFILE URL */
+    /* PROFILE */
 
     let profileUrl;
 
-    try{
+    try {
 
-        profileUrl = new URL(profile);
+      profileUrl =
+        new URL(profile);
 
-    }catch{
+    } catch {
 
-        showError(
-            detailsError,
-            "Please enter a valid Instagram profile link."
-        );
+      showError(
+        "Please enter a valid Instagram profile link."
+      );
 
-        return;
-
+      return;
     }
 
 
     const hostname =
-        profileUrl.hostname
+      profileUrl.hostname
         .toLowerCase()
-        .replace(/^www\./,"");
-
-
-    if(
-        hostname !== "instagram.com" &&
-        hostname !== "instagr.am"
-    ){
-
-        showError(
-            detailsError,
-            "Please enter a valid Instagram profile link."
+        .replace(
+          /^www\./,
+          ""
         );
 
-        return;
 
+    if (
+      hostname !==
+        "instagram.com" &&
+      hostname !==
+        "instagr.am"
+    ) {
+
+      showError(
+        "Please enter a valid Instagram profile link."
+      );
+
+      return;
     }
 
 
-    /* STORE DETAILS */
+    /* UTR */
 
-    sessionStorage.setItem(
-        "sehran_name",
-        name
-    );
+    if (
+      utr &&
+      (
+        utr.length < 6 ||
+        utr.length > 80 ||
+        !/^[A-Za-z0-9._-]+$/.test(
+          utr
+        )
+      )
+    ) {
 
-    sessionStorage.setItem(
-        "sehran_username",
-        username
-    );
+      showError(
+        "Please enter a valid UTR or leave it empty."
+      );
 
-    sessionStorage.setItem(
-        "sehran_profile",
-        profile
-    );
-
-    sessionStorage.setItem(
-        "sehran_utr",
-        utr
-    );
-
-
-    /* MOVE TO PAYMENT */
-
-    detailsCard.style.display = "none";
-
-    paymentCard.classList.add("show");
-
-    stepOne.classList.remove("active");
-    stepOne.classList.add("done");
-
-    stepTwo.classList.add("active");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-});
-
-
-/* =========================================================
-   BACK BUTTON
-   ========================================================= */
-
-document.getElementById("backButton")
-.addEventListener("click", function(){
-
-    paymentCard.classList.remove("show");
-
-    detailsCard.style.display = "block";
-
-    stepTwo.classList.remove("active");
-
-    stepOne.classList.remove("done");
-    stepOne.classList.add("active");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-});
-
-
-/* =========================================================
-   PAY WITH UPI
-   ========================================================= */
-
-document.getElementById("upiButton")
-.addEventListener("click", function(){
-
-    window.location.href =
-        getUPILink();
-
-});
-
-
-/* =========================================================
-   COPY UPI
-   ========================================================= */
-
-document.getElementById("copyButton")
-.addEventListener("click", async function(){
-
-    const button = this;
-
-    try{
-
-        await navigator.clipboard.writeText(
-            UPI_ID
-        );
-
-        button.textContent =
-            "Copied ✓";
-
-        setTimeout(function(){
-
-            button.textContent =
-                "Copy UPI ID";
-
-        },1800);
-
-    }catch{
-
-        alert(
-            "UPI ID: " + UPI_ID
-        );
-
-    }
-
-});
-
-
-/* =========================================================
-   SCREENSHOT PREVIEW
-   ========================================================= */
-
-screenshotInput.addEventListener("change", function(){
-
-    const file =
-        this.files && this.files[0];
-
-    preview.style.display = "none";
-
-    if(!file){
-        return;
+      return;
     }
 
 
-    const allowed = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-    ];
+    /* PROMO */
 
+    if (
+      promoCode &&
+      promoCode !==
+        PROMO_CODE
+    ) {
 
-    if(!allowed.includes(file.type)){
+      showError(
+        "Invalid promo code."
+      );
 
-        this.value = "";
-
-        showError(
-            paymentError,
-            "Only JPG, PNG or WEBP images are allowed."
-        );
-
-        return;
-
+      return;
     }
 
 
-    if(file.size > 5 * 1024 * 1024){
+    /* SCREENSHOT */
 
-        this.value = "";
+    if (!file) {
 
-        showError(
-            paymentError,
-            "Payment screenshot must be 5 MB or smaller."
-        );
+      showError(
+        "Payment screenshot is required."
+      );
 
-        return;
-
+      return;
     }
 
 
-    hideError(paymentError);
+    if (
+      file.size >
+      5 * 1024 * 1024
+    ) {
+
+      showError(
+        "Payment screenshot must be 5 MB or smaller."
+      );
+
+      return;
+    }
 
 
-    const reader =
+    /* SUBMIT */
+
+    submitButton.disabled =
+      true;
+
+
+    submitButton.innerHTML =
+      'Submitting Order <span class="loading-dots"><span></span><span></span><span></span></span>';
+
+
+    try {
+
+      const screenshot =
+        await fileToDataURL(
+          file
+        );
+
+
+      const response =
+        await fetch(
+          "/api/orders",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+
+                package:
+                  PACKAGE_NAME +
+                  " — " +
+                  FOLLOWERS,
+
+                packageId:
+                  packageId,
+
+                followers:
+                  FOLLOWERS,
+
+                originalAmount:
+                  ORIGINAL_AMOUNT,
+
+                name:
+                  name,
+
+                username:
+                  username,
+
+                profile:
+                  profile,
+
+                promoCode:
+                  promoApplied
+                    ? PROMO_CODE
+                    : "",
+
+                amount:
+                  currentAmount,
+
+                utr:
+                  utr,
+
+                screenshot:
+                  screenshot
+
+              })
+
+          }
+        );
+
+
+      const data =
+        await response
+          .json()
+          .catch(
+            function() {
+              return {};
+            }
+          );
+
+
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          data.error ||
+          "Unable to submit order."
+        );
+
+      }
+
+
+      document
+        .getElementById(
+          "successOrderId"
+        )
+        .textContent =
+          "Order ID: " +
+          (
+            data.orderId ||
+            "Received"
+          );
+
+
+      document
+        .getElementById(
+          "successScreen"
+        )
+        .style.display =
+          "flex";
+
+
+      playSuccessSound();
+
+
+    } catch (error) {
+
+      showError(
+        error.message ||
+        "Unable to submit order."
+      );
+
+
+      submitButton.disabled =
+        false;
+
+
+      submitButton.textContent =
+        "Submit Order";
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   FILE -> DATA URL
+========================================= */
+
+function fileToDataURL(file) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const reader =
         new FileReader();
 
 
-    reader.onload = function(event){
+      reader.onload =
+        function() {
 
-        preview.src =
-            event.target.result;
+          resolve(
+            reader.result
+          );
 
-        preview.style.display =
-            "block";
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-});
+        };
 
 
-/* =========================================================
-   SUBMIT ORDER
-   ========================================================= */
+      reader.onerror =
+        function() {
 
-submitButton.addEventListener("click", async function(){
+          reject(
+            new Error(
+              "Unable to read screenshot."
+            )
+          );
 
-    hideError(paymentError);
-
-    const name =
-        sessionStorage.getItem("sehran_name") || "";
-
-    const username =
-        sessionStorage.getItem("sehran_username") || "";
-
-    const profile =
-        sessionStorage.getItem("sehran_profile") || "";
-
-    const utr =
-        sessionStorage.getItem("sehran_utr") || "";
-
-    const file =
-        screenshotInput.files &&
-        screenshotInput.files[0];
+        };
 
 
-    /* SAFETY CHECK */
+      reader.readAsDataURL(
+        file
+      );
 
-    if(!name || !username || !profile){
+    }
+  );
 
-        showError(
-            paymentError,
-            "Please go back and complete all required details."
-        );
+}
 
-        return;
 
+/* =========================================
+   SUCCESS SOUND
+========================================= */
+
+function playSuccessSound() {
+
+  try {
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+
+    if (!AudioContext) {
+      return;
     }
 
 
-    if(!file){
+    const ctx =
+      new AudioContext();
 
-        showError(
-            paymentError,
-            "Payment screenshot is mandatory. Please upload it before submitting."
-        );
 
-        return;
+    const oscillator =
+      ctx.createOscillator();
 
-    }
 
+    const gain =
+      ctx.createGain();
 
-    if(file.size > 5 * 1024 * 1024){
 
-        showError(
-            paymentError,
-            "Payment screenshot must be 5 MB or smaller."
-        );
+    oscillator.type =
+      "sine";
 
-        return;
 
-    }
-
-
-    submitButton.disabled = true;
-
-    submitButton.textContent =
-        "Submitting Order...";
-
-
-    try{
-
-        const screenshot =
-            await fileToDataURL(file);
-
-
-        const response =
-            await fetch("/api/orders", {
-
-                method:"POST",
-
-                headers:{
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body:JSON.stringify({
-
-                    package:
-                        "Instagram Followers — " +
-                        packageData.followers +
-                        " Followers",
-
-                    packageName:
-                        packageData.name,
-
-                    followers:
-                        packageData.followers,
-
-                    originalAmount:
-                        originalAmount,
-
-                    amount:
-                        currentAmount,
-
-                    promoCode:
-                        promoApplied
-                            ? PROMO_CODE
-                            : "",
-
-                    discount:
-                        promoApplied
-                            ? DISCOUNT_PERCENT
-                            : 0,
-
-                    name:name,
-
-                    username:username,
-
-                    profile:profile,
-
-                    utr:utr,
-
-                    screenshot:screenshot
-
-                })
-
-            });
-
-
-        const data =
-            await response
-            .json()
-            .catch(function(){
-                return {};
-            });
-
-
-        if(!response.ok){
-
-            throw new Error(
-                data.error ||
-                "Unable to submit order."
-            );
-
-        }
-
-
-        /* SUCCESS */
-
-        document.getElementById(
-            "successOrderId"
-        ).textContent =
-            "Order ID: " +
-            (data.orderId || "Received");
-
-
-        document.getElementById(
-            "successScreen"
-        ).style.display = "flex";
-
-
-        createStarCelebration();
-
-
-        /* OPTIONAL SOUND EFFECT */
-
-        playSuccessSound();
-
-
-        sessionStorage.clear();
-
-
-    }catch(error){
-
-        showError(
-            paymentError,
-            error.message ||
-            "Unable to submit order. Please try again."
-        );
-
-        submitButton.disabled = false;
-
-        submitButton.textContent =
-            "Submit Order ✓";
-
-    }
-
-});
-
-
-/* =========================================================
-   FILE TO DATA URL
-   ========================================================= */
-
-function fileToDataURL(file){
-
-    return new Promise(
-        function(resolve,reject){
-
-            const reader =
-                new FileReader();
-
-            reader.onload =
-                function(){
-
-                    resolve(
-                        reader.result
-                    );
-
-                };
-
-            reader.onerror =
-                function(){
-
-                    reject(
-                        new Error(
-                            "Unable to read payment screenshot."
-                        )
-                    );
-
-                };
-
-            reader.readAsDataURL(file);
-
-        }
+    oscillator.frequency.setValueAtTime(
+      520,
+      ctx.currentTime
     );
 
-}
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+      900,
+      ctx.currentTime + 0.18
+    );
 
 
-/* =========================================================
-   SUCCESS SOUND
-   Uses browser Web Audio API.
-   No external sound file required.
-   ========================================================= */
+    gain.gain.setValueAtTime(
+      0.0001,
+      ctx.currentTime
+    );
 
-function playSuccessSound(){
 
-    try{
+    gain.gain.exponentialRampToValueAtTime(
+      0.12,
+      ctx.currentTime + 0.02
+    );
 
-        const AudioContext =
-            window.AudioContext ||
-            window.webkitAudioContext;
 
-        if(!AudioContext){
-            return;
-        }
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      ctx.currentTime + 0.35
+    );
 
-        const audio =
-            new AudioContext();
 
-        const oscillator =
-            audio.createOscillator();
+    oscillator.connect(
+      gain
+    );
 
-        const gain =
-            audio.createGain();
 
-        oscillator.type = "sine";
+    gain.connect(
+      ctx.destination
+    );
 
-        oscillator.frequency.setValueAtTime(
-            523.25,
-            audio.currentTime
-        );
 
-        oscillator.frequency.exponentialRampToValueAtTime(
-            783.99,
-            audio.currentTime + .18
-        );
+    oscillator.start();
 
-        gain.gain.setValueAtTime(
-            .0001,
-            audio.currentTime
-        );
 
-        gain.gain.exponentialRampToValueAtTime(
-            .18,
-            audio.currentTime + .03
-        );
+    oscillator.stop(
+      ctx.currentTime + 0.35
+    );
 
-        gain.gain.exponentialRampToValueAtTime(
-            .0001,
-            audio.currentTime + .35
-        );
+  } catch (error) {
 
-        oscillator.connect(gain);
+    console.log(
+      "Success sound unavailable."
+    );
 
-        gain.connect(audio.destination);
-
-        oscillator.start();
-
-        oscillator.stop(
-            audio.currentTime + .35
-        );
-
-    }catch(error){
-
-        /* Sound is optional. */
-
-    }
+  }
 
 }
 
 
-/* =========================================================
-   ERROR HELPERS
-   ========================================================= */
+/* =========================================
+   ERROR
+========================================= */
 
-function showError(element,message){
+function showError(message) {
 
-    element.textContent =
-        message;
-
-    element.style.display =
-        "block";
-
-    element.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
-
-}
+  errorMessage.textContent =
+    message;
 
 
-function hideError(element){
+  errorMessage.style.display =
+    "block";
 
-    element.style.display =
-        "none";
 
-    element.textContent =
-        "";
+  errorMessage.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 
 }
-
-
-/* =========================================================
-   CLEAR OLD FORM DATA ON NEW PACKAGE
-   ========================================================= */
-
-window.addEventListener("pageshow",function(){
-
-    /* Do not automatically submit anything.
-       The customer must manually complete the order. */
-
-});
 
 </script>
 
 </body>
 </html>
-```
