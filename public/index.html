@@ -1,1342 +1,616 @@
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-  <title>SehrAn Media — Instagram Growth</title>
+const app = express();
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+const PORT = process.env.PORT || 3000;
+const PUBLIC_DIR = path.join(__dirname, "public");
+const UPLOADS_DIR = path.join(PUBLIC_DIR, "uploads");
+const STORE = path.join(__dirname, "orders.json");
 
-    html {
-      scroll-behavior: smooth;
-    }
+const ADMIN_KEY =
+process.env.ADMIN_KEY || "CHANGE_THIS_ADMIN_KEY";
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, #28104b 0%, transparent 35%),
-        radial-gradient(circle at top right, #41104e 0%, transparent 30%),
-        #07070d;
-      color: #ffffff;
-      overflow-x: hidden;
-    }
+const TG_BOT_TOKEN =
+process.env.TG_BOT_TOKEN || "";
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+const TG_CHAT_ID =
+process.env.TG_CHAT_ID || "7006568699";
 
-    /* =========================
-       NAVBAR
-    ========================== */
+if (!fs.existsSync(PUBLIC_DIR)) {
+fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+}
 
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+if (!fs.existsSync(UPLOADS_DIR)) {
+fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
 
-      width: 100%;
+if (!fs.existsSync(STORE)) {
+fs.writeFileSync(STORE, "[]", "utf8");
+}
 
-      background: rgba(7, 7, 13, 0.82);
-      backdrop-filter: blur(18px);
+app.use(express.json({ limit: "12mb" }));
+app.use(express.urlencoded({
+extended: true,
+limit: "12mb"
+}));
 
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+app.use(express.static(PUBLIC_DIR));
 
-    .nav-inner {
-      width: min(1160px, 92%);
-      margin: auto;
+function readOrders() {
+try {
+const data = fs.readFileSync(STORE, "utf8");
 
-      min-height: 72px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      font-size: 24px;
-      font-weight: 1000;
-      letter-spacing: -1px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff,
-          #d38cff,
-          #8d35ff
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-
-      color: #c3bdcf;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover {
-      color: #ffffff;
-    }
-
-    .nav-order {
-      padding: 11px 18px;
-
-      border-radius: 12px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #8f36ff,
-          #d35aff
-        );
-
-      color: #ffffff !important;
-
-      box-shadow:
-        0 8px 25px rgba(153,55,255,0.25);
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero {
-      width: min(1160px, 92%);
-      margin: auto;
-
-      min-height: 680px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      align-items: center;
-      gap: 55px;
-
-      padding: 75px 0 80px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 13px;
-
-      border: 1px solid rgba(196,102,255,0.25);
-      border-radius: 30px;
-
-      background: rgba(143,54,255,0.08);
-
-      color: #d8a6ff;
-
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 72px);
-
-      line-height: 0.98;
-
-      letter-spacing: -4px;
-
-      font-weight: 1000;
-
-      margin-bottom: 22px;
-    }
-
-    .gradient-text {
-      background:
-        linear-gradient(
-          90deg,
-          #9b3cff,
-          #e05cff,
-          #ff9bea
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 560px;
-
-      color: #aaa4b7;
-
-      font-size: 17px;
-      line-height: 1.7;
-
-      margin-bottom: 30px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 15px 22px;
-
-      border-radius: 14px;
-
-      font-weight: 900;
-      font-size: 14px;
-
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .primary-btn {
-      background:
-        linear-gradient(
-          135deg,
-          #9236ff,
-          #d45aff
-        );
-
-      box-shadow:
-        0 12px 35px rgba(153,55,255,0.28);
-    }
-
-    .secondary-btn {
-      background: rgba(255,255,255,0.05);
-
-      border: 1px solid rgba(255,255,255,0.10);
-
-      color: #e8e3ee;
-    }
-
-    .primary-btn:hover,
-    .secondary-btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* =========================
-       INSTAGRAM DEMO CARD
-    ========================== */
-
-    .visual {
-      position: relative;
-
-      min-height: 520px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .visual-glow {
-      position: absolute;
-
-      width: 440px;
-      height: 440px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(184,68,255,0.35),
-          transparent 68%
-        );
-
-      filter: blur(25px);
-    }
-
-    .growth-card {
-      position: relative;
-      z-index: 2;
-
-      width: min(100%, 470px);
-
-      padding: 25px;
-
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(38,31,52,0.97),
-          rgba(16,14,25,0.97)
-        );
-
-      border: 1px solid rgba(255,255,255,0.10);
-
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.45);
-    }
-
-    .demo-label {
-      color: #a99fb7;
-
-      font-size: 11px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-
-      margin-bottom: 18px;
-    }
-
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-
-      padding-bottom: 20px;
-
-      border-bottom:
-        1px solid rgba(255,255,255,0.08);
-    }
-
-    .avatar {
-      width: 66px;
-      height: 66px;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 28px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ff8a00,
-          #e1306c,
-          #833ab4
-        );
-
-      box-shadow:
-        0 0 0 5px rgba(255,255,255,0.04);
-    }
-
-    .profile-name {
-      font-size: 19px;
-      font-weight: 900;
-
-      margin-bottom: 4px;
-    }
-
-    .profile-handle {
-      color: #96909f;
-      font-size: 13px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 10px;
-
-      padding: 20px 0;
-    }
-
-    .stat {
-      text-align: center;
-
-      padding: 14px 5px;
-
-      border-radius: 15px;
-
-      background: rgba(255,255,255,0.045);
-    }
-
-    .stat strong {
-      display: block;
-
-      font-size: 20px;
-
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      color: #8f8999;
-      font-size: 11px;
-    }
-
-    .chart {
-      height: 165px;
-
-      padding: 18px;
-
-      border-radius: 18px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(150,60,255,0.10),
-          rgba(255,255,255,0.02)
-        );
-
-      border: 1px solid rgba(255,255,255,0.06);
-
-      position: relative;
-
-      overflow: hidden;
-    }
-
-    .chart-title {
-      font-size: 12px;
-      color: #9f98a9;
-      margin-bottom: 8px;
-    }
-
-    .chart-line {
-      position: absolute;
-
-      left: 20px;
-      right: 20px;
-      bottom: 25px;
-
-      height: 95px;
-    }
-
-    .chart-line svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .chart-line path {
-      fill: none;
-
-      stroke: #c052ff;
-
-      stroke-width: 4;
-
-      stroke-linecap: round;
-      stroke-linejoin: round;
-
-      filter:
-        drop-shadow(
-          0 0 8px
-          rgba(192,82,255,0.6)
-        );
-    }
-
-    .chart-fill {
-      fill:
-        url(#gradient);
-      opacity: 0.35;
-    }
-
-    .demo-note {
-      margin-top: 15px;
-
-      text-align: center;
-
-      color: #777180;
-
-      font-size: 10px;
-    }
-
-    /* =========================
-       SERVICES
-    ========================== */
-
-    .section {
-      width: min(1160px, 92%);
-      margin: auto;
-
-      padding: 80px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-
-      max-width: 650px;
-
-      margin: 0 auto 45px;
-    }
-
-    .section-heading span {
-      color: #b75cff;
-
-      font-size: 12px;
-
-      font-weight: 900;
-
-      text-transform: uppercase;
-
-      letter-spacing: 2px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(30px, 5vw, 46px);
-
-      margin: 10px 0 13px;
-
-      letter-spacing: -2px;
-    }
-
-    .section-heading p {
-      color: #918b9b;
-
-      line-height: 1.7;
-
-      font-size: 14px;
-    }
-
-    .services {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 17px;
-    }
-
-    .service {
-      padding: 25px;
-
-      border-radius: 22px;
-
-      background:
-        rgba(22,20,32,0.78);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease;
-    }
-
-    .service:hover {
-      transform: translateY(-7px);
-
-      border-color:
-        rgba(181,91,255,0.35);
-    }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 14px;
-
-      background:
-        rgba(157,57,255,0.13);
-
-      font-size: 22px;
-
-      margin-bottom: 18px;
-    }
-
-    .service h3 {
-      font-size: 18px;
-      margin-bottom: 9px;
-    }
-
-    .service p {
-      color: #8f8999;
-
-      font-size: 13px;
-
-      line-height: 1.65;
-    }
-
-    /* =========================
-       WHY US
-    ========================== */
-
-    .why {
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 20px;
-    }
-
-    .why-card {
-      padding: 30px;
-
-      border-radius: 22px;
-
-      background:
-        rgba(20,18,30,0.85);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-    }
-
-    .why-card h3 {
-      font-size: 22px;
-
-      margin-bottom: 18px;
-    }
-
-    .why-item {
-      display: flex;
-
-      gap: 12px;
-
-      margin: 15px 0;
-
-      color: #bbb4c6;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-    }
-
-    .check {
-      width: 25px;
-      height: 25px;
-
-      flex: 0 0 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background:
-        rgba(166,68,255,0.15);
-
-      color: #c66aff;
-
-      font-weight: 900;
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .cta {
-      text-align: center;
-
-      padding: 65px 25px;
-
-      border-radius: 28px;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(150,57,255,0.22),
-          rgba(22,18,32,0.9) 70%
-        );
-
-      border:
-        1px solid rgba(184,89,255,0.18);
-    }
-
-    .cta h2 {
-      font-size: clamp(30px, 5vw, 48px);
-
-      letter-spacing: -2px;
-
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      color: #96909e;
-
-      font-size: 14px;
-
-      margin-bottom: 25px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-      padding: 30px 20px 40px;
-
-      text-align: center;
-
-      color: #696371;
-
-      font-size: 12px;
-
-      border-top:
-        1px solid rgba(255,255,255,0.06);
-    }
-
-    footer strong {
-      color: #a994b8;
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media (max-width: 850px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 55px;
-
-        text-align: center;
-      }
-
-      .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .visual {
-        min-height: 480px;
-      }
-
-      .services {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .why {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-
-      .nav-inner {
-        min-height: 64px;
-      }
-
-      .brand {
-        font-size: 21px;
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 50px 0 40px;
-      }
-
-      .hero h1 {
-        letter-spacing: -2.5px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .visual {
-        min-height: 420px;
-      }
-
-      .growth-card {
-        padding: 19px;
-
-        border-radius: 22px;
-      }
-
-      .stats {
-        gap: 6px;
-      }
-
-      .stat strong {
-        font-size: 17px;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 60px 0;
-      }
-
-      .cta {
-        padding: 50px 18px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- =========================
-       NAVBAR
-  ========================== -->
-
-  <nav class="navbar">
-
-    <div class="nav-inner">
-
-      <a
-        href="/"
-        class="brand"
-      >
-        SehrAn Media
-      </a>
-
-      <div class="nav-links">
-
-        <a href="#services">
-          Services
-        </a>
-
-        <a href="#why">
-          Why Us
-        </a>
-
-        <a
-          href="/order.html"
-          class="nav-order"
-        >
-          Order Now
-        </a>
-
-      </div>
-
-    </div>
-
-  </nav>
-
-
-  <!-- =========================
-       HERO
-  ========================== -->
-
-  <section class="hero">
-
-    <div class="hero-content">
-
-      <div class="hero-badge">
-        ✦ Instagram Growth Services
-      </div>
-
-      <h1>
-        Grow Your
-        <span class="gradient-text">
-          Instagram
-        </span>
-        Presence.
-      </h1>
-
-      <p class="hero-description">
-        Simple and fast social media services
-        designed to help your Instagram profile
-        grow with flexible packages and easy
-        online ordering.
-      </p>
-
-      <div class="hero-buttons">
-
-        <a
-          href="/order.html"
-          class="primary-btn"
-        >
-          🚀 Order Now
-        </a>
-
-        <a
-          href="#services"
-          class="secondary-btn"
-        >
-          Explore Services
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         ILLUSTRATIVE DASHBOARD
-    ========================== -->
-
-    <div class="visual">
-
-      <div class="visual-glow"></div>
-
-      <div class="growth-card">
-
-        <div class="demo-label">
-          Instagram Growth Preview
-        </div>
-
-        <div class="profile-top">
-
-          <div class="avatar">
-            ◎
-          </div>
-
-          <div>
-
-            <div class="profile-name">
-              Your Instagram
-            </div>
-
-            <div class="profile-handle">
-              @yourusername
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="stats">
-
-          <div class="stat">
-            <strong>12.8K</strong>
-            <span>Followers</span>
-          </div>
-
-          <div class="stat">
-            <strong>486</strong>
-            <span>Following</span>
-          </div>
-
-          <div class="stat">
-            <strong>8.4K</strong>
-            <span>Likes</span>
-          </div>
-
-        </div>
-
-
-        <div class="chart">
-
-          <div class="chart-title">
-            Example growth overview
-          </div>
-
-          <div class="chart-line">
-
-            <svg
-              viewBox="0 0 400 100"
-              preserveAspectRatio="none"
-            >
-
-              <defs>
-
-                <linearGradient
-                  id="gradient"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
-
-                  <stop
-                    offset="0%"
-                    stop-color="#c052ff"
-                    stop-opacity="0.5"
-                  />
-
-                  <stop
-                    offset="100%"
-                    stop-color="#c052ff"
-                    stop-opacity="0"
-                  />
-
-                </linearGradient>
-
-              </defs>
-
-              <path
-                class="chart-fill"
-                d="
-                  M0,88
-                  L55,78
-                  L105,82
-                  L155,60
-                  L205,66
-                  L255,42
-                  L305,48
-                  L350,22
-                  L400,8
-                  L400,100
-                  L0,100
-                  Z
-                "
-              ></path>
-
-              <path
-                d="
-                  M0,88
-                  L55,78
-                  L105,82
-                  L155,60
-                  L205,66
-                  L255,42
-                  L305,48
-                  L350,22
-                  L400,8
-                "
-              ></path>
-
-            </svg>
-
-          </div>
-
-        </div>
-
-
-        <div class="demo-note">
-          Illustrative preview — not real account statistics.
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SERVICES
-  ========================== -->
-
-  <section
-    class="section"
-    id="services"
-  >
-
-    <div class="section-heading">
-
-      <span>
-        What We Offer
-      </span>
-
-      <h2>
-        Social Media Services
-      </h2>
-
-      <p>
-        Choose a package that fits your
-        Instagram growth goals.
-      </p>
-
-    </div>
-
-
-    <div class="services">
-
-      <div class="service">
-
-        <div class="service-icon">
-          👥
-        </div>
-
-        <h3>
-          Instagram Followers
-        </h3>
-
-        <p>
-          Select a follower package
-          and submit your order easily.
-        </p>
-
-      </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          ❤️
-        </div>
-
-        <h3>
-          Instagram Likes
-        </h3>
-
-        <p>
-          Flexible engagement packages
-          for your selected posts.
-        </p>
-
-      </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          💬
-        </div>
-
-        <h3>
-          Comments
-        </h3>
-
-        <p>
-          Add comment packages to help
-          increase visible engagement.
-        </p>
-
-      </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          🔁
-        </div>
-
-        <h3>
-          Shares & Reposts
-        </h3>
-
-        <p>
-          Choose social sharing packages
-          according to your needs.
-        </p>
-
-      </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          ▶️
-        </div>
-
-        <h3>
-          Reels Growth
-        </h3>
-
-        <p>
-          Packages designed around
-          Instagram Reels content.
-        </p>
-
-      </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          ⚡
-        </div>
-
-        <h3>
-          Fast Ordering
-        </h3>
-
-        <p>
-          Complete your order through
-          our simple payment and submission
-          process.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       WHY US
-  ========================== -->
-
-  <section
-    class="section"
-    id="why"
-  >
-
-    <div class="section-heading">
-
-      <span>
-        Why SehrAn Media
-      </span>
-
-      <h2>
-        Simple. Fast. Easy.
-      </h2>
-
-      <p>
-        Everything you need to place
-        a social media service order.
-      </p>
-
-    </div>
-
-
-    <div class="why">
-
-      <div class="why-card">
-
-        <h3>
-          Built For Simplicity
-        </h3>
-
-        <div class="why-item">
-
-          <div class="check">
-            ✓
-          </div>
-
-          <div>
-            Easy package selection
-            and straightforward ordering.
-          </div>
-
-        </div>
-
-        <div class="why-item">
-
-          <div class="check">
-            ✓
-          </div>
-
-          <div>
-            Clear pricing before
-            submitting your order.
-          </div>
-
-        </div>
-
-        <div class="why-item">
-
-          <div class="check">
-            ✓
-          </div>
-
-          <div>
-            Payment confirmation through
-            your submitted screenshot.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="why-card">
-
-        <h3>
-          Easy Process
-        </h3>
-
-        <div class="why-item">
-
-          <div class="check">
-            1
-          </div>
-
-          <div>
-            Select your preferred package.
-          </div>
-
-        </div>
-
-        <div class="why-item">
-
-          <div class="check">
-            2
-          </div>
-
-          <div>
-            Complete the UPI payment.
-          </div>
-
-        </div>
-
-        <div class="why-item">
-
-          <div class="check">
-            3
-          </div>
-
-          <div>
-            Submit your Instagram details
-            and payment screenshot.
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       CTA
-  ========================== -->
-
-  <section class="section">
-
-    <div class="cta">
-
-      <h2>
-        Ready to Get Started?
-      </h2>
-
-      <p>
-        Choose your package and place
-        your order in just a few steps.
-      </p>
-
-      <a
-        href="/order.html"
-        class="primary-btn"
-      >
-        🚀 Place Your Order
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <strong>
-      SehrAn Media
-    </strong>
-
-    <br><br>
-
-    Fast • Simple • Secure Social Media Services
-
-  </footer>
-
-
-</body>
-</html>
 ```
+if (!data.trim()) {
+  return [];
+}
+
+const orders = JSON.parse(data);
+
+return Array.isArray(orders) ? orders : [];
+```
+
+} catch (error) {
+console.error("Orders read error:", error);
+return [];
+}
+}
+
+function writeOrders(orders) {
+fs.writeFileSync(
+STORE,
+JSON.stringify(orders, null, 2),
+"utf8"
+);
+}
+
+function createOrderId() {
+return "SM" + Date.now().toString().slice(-8);
+}
+
+function cleanText(value, maxLength) {
+if (typeof value !== "string") {
+return "";
+}
+
+return value
+.trim()
+.replace(/\s+/g, " ")
+.slice(0, maxLength);
+}
+
+function validName(name) {
+if (name.length < 2 || name.length > 60) {
+return false;
+}
+
+if (/^(.)\1{4,}$/i.test(name)) {
+return false;
+}
+
+return /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]+$/.test(name);
+}
+
+function cleanUsername(username) {
+return cleanText(username, 30)
+.replace(/^@+/, "");
+}
+
+function validUsername(username) {
+return /^[A-Za-z0-9._]{1,30}$/.test(username);
+}
+
+function validInstagramProfile(profile) {
+if (
+typeof profile !== "string" ||
+profile.length > 300
+) {
+return false;
+}
+
+try {
+const url = new URL(profile);
+
+```
+const hostname = url.hostname
+  .toLowerCase()
+  .replace(/^www\./, "");
+
+if (
+  hostname !== "instagram.com" &&
+  hostname !== "instagr.am"
+) {
+  return false;
+}
+
+return /^\/[A-Za-z0-9._]+\/?$/.test(
+  url.pathname
+);
+```
+
+} catch (error) {
+return false;
+}
+}
+
+function validUTR(utr) {
+if (!utr) {
+return true;
+}
+
+if (utr.length < 6 || utr.length > 80) {
+return false;
+}
+
+return /^[A-Za-z0-9._-]+$/.test(utr);
+}
+
+function saveScreenshot(screenshot, orderId) {
+if (
+typeof screenshot !== "string" ||
+!screenshot
+) {
+throw new Error(
+"Payment screenshot is required."
+);
+}
+
+let extension = "";
+let base64Data = "";
+
+const jpegPrefix = "data:image/jpeg;base64,";
+const jpgPrefix = "data:image/jpg;base64,";
+const pngPrefix = "data:image/png;base64,";
+const webpPrefix = "data:image/webp;base64,";
+
+if (screenshot.startsWith(jpegPrefix)) {
+extension = "jpg";
+base64Data = screenshot.slice(jpegPrefix.length);
+} else if (screenshot.startsWith(jpgPrefix)) {
+extension = "jpg";
+base64Data = screenshot.slice(jpgPrefix.length);
+} else if (screenshot.startsWith(pngPrefix)) {
+extension = "png";
+base64Data = screenshot.slice(pngPrefix.length);
+} else if (screenshot.startsWith(webpPrefix)) {
+extension = "webp";
+base64Data = screenshot.slice(webpPrefix.length);
+} else {
+throw new Error(
+"Please upload a valid JPG, PNG or WEBP screenshot."
+);
+}
+
+const buffer = Buffer.from(
+base64Data,
+"base64"
+);
+
+if (buffer.length === 0) {
+throw new Error(
+"The payment screenshot could not be read."
+);
+}
+
+if (buffer.length > 5 * 1024 * 1024) {
+throw new Error(
+"Payment screenshot must be 5 MB or smaller."
+);
+}
+
+const filename =
+orderId + "." + extension;
+
+const filepath = path.join(
+UPLOADS_DIR,
+filename
+);
+
+fs.writeFileSync(filepath, buffer);
+
+return "/uploads/" + filename;
+}
+
+async function notifyTelegram(text) {
+if (!TG_BOT_TOKEN) {
+console.log(
+"Telegram bot token is not configured."
+);
+return false;
+}
+
+try {
+const telegramUrl =
+"https://api.telegram.org/bot" +
+TG_BOT_TOKEN +
+"/sendMessage";
+
+```
+const response = await fetch(
+  telegramUrl,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: TG_CHAT_ID,
+      text: text
+    })
+  }
+);
+
+if (!response.ok) {
+  console.error(
+    "Telegram response:",
+    await response.text()
+  );
+  return false;
+}
+
+return true;
+```
+
+} catch (error) {
+console.error(
+"Telegram notification error:",
+error
+);
+return false;
+}
+}
+
+app.post(
+"/api/orders",
+async (req, res) => {
+try {
+const body = req.body || {};
+
+```
+  if (
+    /password|passcode/i.test(
+      JSON.stringify(body)
+    )
+  ) {
+    return res.status(400).json({
+      error:
+        "Passwords are not accepted."
+    });
+  }
+
+  const pkg = cleanText(
+    body.package,
+    100
+  );
+
+  const name = cleanText(
+    body.name,
+    60
+  );
+
+  const username = cleanUsername(
+    body.username
+  );
+
+  const profile = cleanText(
+    body.profile,
+    300
+  );
+
+  const utr = cleanText(
+    body.utr,
+    80
+  );
+
+  const promoCode = cleanText(
+    body.promoCode ||
+    body.coupon ||
+    "",
+    30
+  ).toUpperCase();
+
+  const amount = cleanText(
+    String(body.amount || ""),
+    30
+  );
+
+  const screenshot =
+    body.screenshot || "";
+
+  if (
+    !pkg ||
+    !name ||
+    !username ||
+    !profile ||
+    !screenshot
+  ) {
+    return res.status(400).json({
+      error:
+        "Please complete all required fields and upload your payment screenshot."
+    });
+  }
+
+  if (!validName(name)) {
+    return res.status(400).json({
+      error:
+        "Please enter a valid name."
+    });
+  }
+
+  if (!validUsername(username)) {
+    return res.status(400).json({
+      error:
+        "Please enter a valid Instagram username."
+    });
+  }
+
+  if (!validInstagramProfile(profile)) {
+    return res.status(400).json({
+      error:
+        "Please enter a valid Instagram profile link."
+    });
+  }
+
+  if (!validUTR(utr)) {
+    return res.status(400).json({
+      error:
+        "Please enter a valid UTR or leave it empty."
+    });
+  }
+
+  if (
+    promoCode &&
+    promoCode !== "ZEESHAN10"
+  ) {
+    return res.status(400).json({
+      error:
+        "Invalid promo code. Please use ZEESHAN10."
+    });
+  }
+
+  const orderId = createOrderId();
+
+  let screenshotPath;
+
+  try {
+    screenshotPath =
+      saveScreenshot(
+        screenshot,
+        orderId
+      );
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message
+    });
+  }
+
+  const order = {
+    orderId: orderId,
+    status: "PENDING",
+    package: pkg,
+    name: name,
+    username: username,
+    profile: profile,
+    utr: utr,
+    promoCode: promoCode,
+    amount: amount,
+    screenshot: screenshotPath,
+    createdAt:
+      new Date().toISOString()
+  };
+
+  const orders = readOrders();
+
+  orders.unshift(order);
+
+  writeOrders(orders);
+
+  const adminUrl =
+    process.env.ADMIN_URL || "";
+
+  const screenshotUrl =
+    adminUrl
+      ? adminUrl + screenshotPath
+      : screenshotPath;
+
+  const message =
+    "🔔 NEW ORDER " +
+    orderId +
+    "\n\n" +
+    "Name: " +
+    name +
+    "\n" +
+    "Instagram: @" +
+    username +
+    "\n" +
+    "Profile: " +
+    profile +
+    "\n" +
+    "Package: " +
+    pkg +
+    "\n" +
+    "Amount: ₹" +
+    (amount || "Not specified") +
+    "\n" +
+    "UTR: " +
+    (utr || "Not provided") +
+    "\n" +
+    "Promo Code: " +
+    (promoCode || "Not used") +
+    "\n\n" +
+    "Payment Screenshot:\n" +
+    screenshotUrl +
+    "\n\n" +
+    "⚠️ Verify payment before accepting.";
+
+  await notifyTelegram(message);
+
+  return res.json({
+    ok: true,
+    orderId: orderId,
+    status: "PENDING"
+  });
+} catch (error) {
+  console.error(
+    "Order processing error:",
+    error
+  );
+
+  return res.status(500).json({
+    error:
+      "Unable to process order. Please try again."
+  });
+}
+```
+
+}
+);
+
+function admin(req, res, next) {
+const key =
+req.headers["x-admin-key"];
+
+if (key !== ADMIN_KEY) {
+return res.status(401).json({
+error: "Unauthorized"
+});
+}
+
+next();
+}
+
+app.get(
+"/api/admin/orders",
+admin,
+(req, res) => {
+return res.json(
+readOrders()
+);
+}
+);
+
+app.post(
+"/api/admin/orders/:id/status",
+admin,
+(req, res) => {
+const allowed = [
+"ACCEPTED",
+"REJECTED"
+];
+
+```
+const status =
+  req.body &&
+  req.body.status;
+
+if (!allowed.includes(status)) {
+  return res.status(400).json({
+    error:
+      "Invalid status"
+  });
+}
+
+const orders = readOrders();
+
+const order = orders.find(
+  item =>
+    item.orderId ===
+    req.params.id
+);
+
+if (!order) {
+  return res.status(404).json({
+    error:
+      "Order not found"
+  });
+}
+
+order.status = status;
+
+order.updatedAt =
+  new Date().toISOString();
+
+writeOrders(orders);
+
+return res.json({
+  ok: true,
+  order: order
+});
+```
+
+}
+);
+
+app.get(
+"/api/orders/:id",
+(req, res) => {
+const orders = readOrders();
+
+```
+const order = orders.find(
+  item =>
+    item.orderId ===
+    req.params.id
+);
+
+if (!order) {
+  return res.status(404).json({
+    error:
+      "Order not found"
+  });
+}
+
+return res.json({
+  orderId: order.orderId,
+  status: order.status,
+  package: order.package,
+  createdAt: order.createdAt
+});
+```
+
+}
+);
+
+app.get(
+"/",
+(req, res) => {
+res.sendFile(
+path.join(
+PUBLIC_DIR,
+"index.html"
+)
+);
+}
+);
+
+app.use(
+(req, res) => {
+if (
+req.path.startsWith("/api/")
+) {
+return res.status(404).json({
+error:
+"API endpoint not found"
+});
+}
+
+```
+return res.status(404).send(
+  "Not Found"
+);
+```
+
+}
+);
+
+app.listen(
+PORT,
+() => {
+console.log(
+"SehrAn Media server running on port " +
+PORT
+);
+}
+);
