@@ -84,10 +84,10 @@
       width: min(1180px, 92%);
       margin: 18px auto 0;
       padding: 14px 18px;
-
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      gap: 20px;
 
       background: rgba(15, 13, 28, .76);
       border: 1px solid rgba(255, 255, 255, .10);
@@ -143,6 +143,27 @@
 
     .logo-text span {
       color: #d78aff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: #d7d2e3;
+      text-decoration: none;
+      padding: 9px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .08);
     }
 
     /* HERO */
@@ -229,8 +250,7 @@
       gap: 12px;
     }
 
-    .primary-btn,
-    .secondary-btn {
+    .primary-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -243,10 +263,6 @@
       font-weight: 900;
       font-size: 14px;
 
-      transition: .25s;
-    }
-
-    .primary-btn {
       color: #fff;
 
       background: linear-gradient(
@@ -256,6 +272,8 @@
       );
 
       box-shadow: 0 14px 35px rgba(161, 52, 255, .28);
+
+      transition: .25s;
     }
 
     .primary-btn:hover {
@@ -268,7 +286,6 @@
     .hero-visual {
       position: relative;
       min-height: 470px;
-
       display: flex;
       align-items: center;
       justify-content: center;
@@ -396,6 +413,7 @@
     .growth-fill {
       height: 100%;
       width: 82%;
+
       border-radius: 99px;
 
       background: linear-gradient(
@@ -501,6 +519,7 @@
     .social-card {
       width: 210px;
       min-height: 105px;
+
       flex-shrink: 0;
 
       display: flex;
@@ -534,6 +553,7 @@
 
       color: #fff;
       font-size: 25px;
+
       flex-shrink: 0;
     }
 
@@ -790,6 +810,7 @@
       right: 14px;
 
       padding: 6px 9px;
+
       border-radius: 999px;
 
       background: linear-gradient(
@@ -852,9 +873,11 @@
       gap: 8px;
 
       padding: 12px;
+
       border-radius: 13px;
 
       text-decoration: none;
+
       color: #fff;
 
       background: linear-gradient(
@@ -936,7 +959,9 @@
       margin: 30px auto 80px;
 
       padding: 35px;
+
       border-radius: 28px;
+
       text-align: center;
 
       background: radial-gradient(
@@ -976,6 +1001,7 @@
       gap: 9px;
 
       padding: 12px 17px;
+
       border-radius: 13px;
 
       color: #fff;
@@ -1114,6 +1140,15 @@
         padding: 11px 13px;
       }
 
+      .nav-links {
+        gap: 3px;
+      }
+
+      .nav-links a {
+        padding: 8px 7px;
+        font-size: 11px;
+      }
+
       .hero {
         width: 94%;
         padding-top: 42px;
@@ -1192,7 +1227,6 @@
   <nav class="navbar">
 
     <a href="index.html" class="logo">
-
       <div class="logo-icon">
         <i class="fa-solid fa-bolt"></i>
       </div>
@@ -1200,8 +1234,23 @@
       <div class="logo-text">
         SehrAn <span>Media</span>
       </div>
-
     </a>
+
+    <div class="nav-links">
+
+      <a href="#services">
+        Services
+      </a>
+
+      <a href="#pricing">
+        Pricing
+      </a>
+
+      <a href="#trust">
+        Why Us
+      </a>
+
+    </div>
 
   </nav>
 
@@ -1233,7 +1282,10 @@
 
       <div class="hero-buttons">
 
-        <a href="#pricing" class="primary-btn">
+        <a
+          href="#pricing"
+          class="primary-btn"
+        >
           <i class="fa-solid fa-rocket"></i>
           Explore Packages
         </a>
@@ -1251,7 +1303,6 @@
         <i class="fa-brands fa-instagram"></i>
         Instagram Available
       </div>
-
 
       <div class="hero-card">
 
@@ -1277,7 +1328,6 @@
 
         </div>
 
-
         <div class="hero-stats">
 
           <div class="stat">
@@ -1297,7 +1347,6 @@
 
         </div>
 
-
         <div class="growth-text">
           <span>Profile Growth</span>
           <span>82%</span>
@@ -1314,7 +1363,6 @@
 
       </div>
 
-
       <div class="floating-mini mini-two">
         <i class="fa-solid fa-shield-halved"></i>
         Secure Ordering
@@ -1325,7 +1373,7 @@
   </section>
 
 
-  <!-- FLOATING SOCIAL PLATFORMS -->
+  <!-- SOCIAL PLATFORMS -->
 
   <section class="social-section">
 
@@ -1334,13 +1382,11 @@
       <!-- SET 1 -->
 
       <div class="social-card">
-
         <div class="social-icon instagram">
           <i class="fa-brands fa-instagram"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Instagram</strong>
           <span>Followers & more</span>
 
@@ -1348,100 +1394,80 @@
             <i class="fa-solid fa-circle"></i>
             Available Now
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon snapchat">
           <i class="fa-brands fa-snapchat"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Snapchat</strong>
           <span>Social services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon youtube">
           <i class="fa-brands fa-youtube"></i>
         </div>
 
         <div class="social-info">
-
           <strong>YouTube</strong>
           <span>Channel services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon facebook">
           <i class="fa-brands fa-facebook-f"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Facebook</strong>
           <span>Page services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon twitter">
           <i class="fa-brands fa-x-twitter"></i>
         </div>
 
         <div class="social-info">
-
           <strong>X / Twitter</strong>
           <span>Social services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon whatsapp">
           <i class="fa-brands fa-whatsapp"></i>
         </div>
 
         <div class="social-info">
-
           <strong>WhatsApp</strong>
           <span>Support</span>
 
@@ -1449,22 +1475,18 @@
             <i class="fa-solid fa-circle"></i>
             Support Available
           </div>
-
         </div>
-
       </div>
 
 
       <!-- DUPLICATE SET -->
 
       <div class="social-card">
-
         <div class="social-icon instagram">
           <i class="fa-brands fa-instagram"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Instagram</strong>
           <span>Followers & more</span>
 
@@ -1472,100 +1494,80 @@
             <i class="fa-solid fa-circle"></i>
             Available Now
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon snapchat">
           <i class="fa-brands fa-snapchat"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Snapchat</strong>
           <span>Social services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon youtube">
           <i class="fa-brands fa-youtube"></i>
         </div>
 
         <div class="social-info">
-
           <strong>YouTube</strong>
           <span>Channel services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon facebook">
           <i class="fa-brands fa-facebook-f"></i>
         </div>
 
         <div class="social-info">
-
           <strong>Facebook</strong>
           <span>Page services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon twitter">
           <i class="fa-brands fa-x-twitter"></i>
         </div>
 
         <div class="social-info">
-
           <strong>X / Twitter</strong>
           <span>Social services</span>
 
           <div class="available coming">
             Coming Soon
           </div>
-
         </div>
-
       </div>
 
 
       <div class="social-card">
-
         <div class="social-icon whatsapp">
           <i class="fa-brands fa-whatsapp"></i>
         </div>
 
         <div class="social-info">
-
           <strong>WhatsApp</strong>
           <span>Support</span>
 
@@ -1573,9 +1575,7 @@
             <i class="fa-solid fa-circle"></i>
             Support Available
           </div>
-
         </div>
-
       </div>
 
     </div>
@@ -1622,7 +1622,10 @@
           according to your requirement.
         </p>
 
-        <a href="#pricing" class="service-btn">
+        <a
+          href="#pricing"
+          class="service-btn"
+        >
           View Packages
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1678,7 +1681,9 @@
       <p>
         Choose the package that fits your requirement.
         Promo code
-        <strong style="color:#c67cff;">ZEESHAN10</strong>
+        <strong style="color:#c67cff;">
+          ZEESHAN10
+        </strong>
         can be used at checkout.
       </p>
 
@@ -1709,7 +1714,10 @@
           <strong>30</strong>
         </div>
 
-        <a href="order.html?package=200" class="price-btn">
+        <a
+          href="order.html?package=200&followers=200&price=30"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1738,7 +1746,10 @@
           <strong>50</strong>
         </div>
 
-        <a href="order.html?package=500" class="price-btn">
+        <a
+          href="order.html?package=500&followers=500&price=50"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1771,7 +1782,10 @@
           <strong>90</strong>
         </div>
 
-        <a href="order.html?package=1000" class="price-btn">
+        <a
+          href="order.html?package=1000&followers=1000&price=90"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1800,7 +1814,10 @@
           <strong>130</strong>
         </div>
 
-        <a href="order.html?package=1500" class="price-btn">
+        <a
+          href="order.html?package=1500&followers=1500&price=130"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1829,7 +1846,10 @@
           <strong>150</strong>
         </div>
 
-        <a href="order.html?package=2000" class="price-btn">
+        <a
+          href="order.html?package=2000&followers=2000&price=150"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1858,7 +1878,10 @@
           <strong>200</strong>
         </div>
 
-        <a href="order.html?package=3000" class="price-btn">
+        <a
+          href="order.html?package=3000&followers=3000&price=200"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1887,7 +1910,10 @@
           <strong>250</strong>
         </div>
 
-        <a href="order.html?package=4000" class="price-btn">
+        <a
+          href="order.html?package=4000&followers=4000&price=250"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1920,7 +1946,10 @@
           <strong>300</strong>
         </div>
 
-        <a href="order.html?package=5000" class="price-btn">
+        <a
+          href="order.html?package=5000&followers=5000&price=300"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1949,7 +1978,10 @@
           <strong>350</strong>
         </div>
 
-        <a href="order.html?package=6000" class="price-btn">
+        <a
+          href="order.html?package=6000&followers=6000&price=350"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -1978,7 +2010,10 @@
           <strong>450</strong>
         </div>
 
-        <a href="order.html?package=7000" class="price-btn">
+        <a
+          href="order.html?package=7000&followers=7000&price=450"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -2007,7 +2042,10 @@
           <strong>500</strong>
         </div>
 
-        <a href="order.html?package=8000" class="price-btn">
+        <a
+          href="order.html?package=8000&followers=8000&price=500"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -2036,7 +2074,10 @@
           <strong>550</strong>
         </div>
 
-        <a href="order.html?package=9000" class="price-btn">
+        <a
+          href="order.html?package=9000&followers=9000&price=550"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -2069,7 +2110,10 @@
           <strong>600</strong>
         </div>
 
-        <a href="order.html?package=10000" class="price-btn">
+        <a
+          href="order.html?package=10000&followers=10000&price=600"
+          class="price-btn"
+        >
           Get the Package
           <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -2176,7 +2220,6 @@
       Contact SehrAn Media support directly.
     </p>
 
-
     <div class="support-buttons">
 
       <a
@@ -2199,10 +2242,8 @@
       </a>
 
 
-      <!-- Replace SEHRANMEDIA with your real Telegram username -->
-
       <a
-        href="https://t.me/SEHRANMEDIA"
+        href="https://t.me/"
         target="_blank"
         rel="noopener noreferrer"
         class="support-btn telegram-btn"
@@ -2246,7 +2287,6 @@
 
 
   <script>
-
     function comingSoon(event) {
       event.preventDefault();
 
@@ -2254,7 +2294,6 @@
         "Instagram Likes are coming soon. Stay tuned!"
       );
     }
-
   </script>
 
 </body>
