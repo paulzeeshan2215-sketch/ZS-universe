@@ -1,10 +1,11 @@
-[18-08-2026 01:05 PM] Paul Zeeshan: <!DOCTYPE html>
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Order — SehrAn Media</title>
+  <title>Place Order — SehrAn Media</title>
 
   <style>
     * {
@@ -15,16 +16,16 @@
 
     body {
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #0b0b0f;
-      color: #fff;
+      color: #ffffff;
       padding: 20px;
     }
 
     .container {
       width: 100%;
       max-width: 620px;
-      margin: auto;
+      margin: 0 auto;
     }
 
     .card {
@@ -33,17 +34,18 @@
       border-radius: 18px;
       padding: 22px;
       margin-bottom: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
 
     h1 {
       text-align: center;
       margin-bottom: 8px;
+      font-size: 28px;
     }
 
     .subtitle {
       text-align: center;
-      color: #aaa;
+      color: #aaaaaa;
       margin-bottom: 22px;
     }
 
@@ -60,7 +62,7 @@
       border-radius: 10px;
       border: 1px solid #353542;
       background: #0e0e14;
-      color: #fff;
+      color: #ffffff;
       outline: none;
       font-size: 15px;
     }
@@ -68,6 +70,11 @@
     input:focus,
     select:focus {
       border-color: #7777ff;
+    }
+
+    select option {
+      background: #0e0e14;
+      color: #ffffff;
     }
 
     button {
@@ -80,11 +87,17 @@
       font-weight: 700;
       cursor: pointer;
       background: #ffffff;
-      color: #111;
+      color: #111111;
+      transition: 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      opacity: 0.92;
     }
 
     button:disabled {
-      opacity: .5;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
@@ -93,6 +106,7 @@
       background: #0f0f15;
       border-radius: 14px;
       padding: 15px;
+      margin-top: 18px;
       margin-bottom: 20px;
     }
 
@@ -102,6 +116,7 @@
       object-fit: contain;
       border-radius: 10px;
       margin-bottom: 12px;
+      background: #08080c;
     }
 
     .movie-title {
@@ -117,7 +132,7 @@
     }
 
     .movie-description {
-      color: #aaa;
+      color: #aaaaaa;
       margin-top: 8px;
       line-height: 1.5;
     }
@@ -141,7 +156,7 @@
     }
 
     .hint {
-      color: #999;
+      color: #999999;
       font-size: 13px;
       margin-top: 6px;
       line-height: 1.5;
@@ -172,7 +187,7 @@
 
     .loading {
       text-align: center;
-      color: #aaa;
+      color: #aaaaaa;
       padding: 15px;
     }
 
@@ -181,9 +196,29 @@
     }
 
     .small {
-      color: #888;
+      color: #888888;
       font-size: 12px;
       margin-top: 12px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .mode-badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #222231;
+      color: #c9c9ff;
+      font-size: 12px;
+      margin: 0 auto 18px;
+    }
+
+    .center {
       text-align: center;
     }
   </style>
@@ -193,66 +228,123 @@
 
 <div class="container">
 
+  <!-- ORDER CARD -->
   <div class="card" id="orderCard">
 
     <h1>Place Your Order</h1>
-    <div class="subtitle">SehrAn Media</div>
+
+    <div class="subtitle">
+      SehrAn Media
+    </div>
+
+    <div class="center">
+      <div id="modeBadge" class="mode-badge">
+        Loading...
+      </div>
+    </div>
 
     <div id="errorBox" class="error"></div>
 
-    <!-- MOVIE SELECTION -->
-    <div id="movieSection">
 
-      <label for="movieSelect">Select Movie</label>
+    <!-- =========================
+         MOVIE SECTION
+    ========================== -->
+
+    <div id="movieSection" class="hidden">
+
+      <div class="section-title">
+        Movie Order
+      </div>
+
+      <label for="movieSelect">
+        Select Movie
+      </label>
 
       <select id="movieSelect">
-        <option value="">Loading movies...</option>
+        <option value="">
+          Loading movies...
+        </option>
       </select>
 
       <div id="movieBox" class="movie-box">
 
-        <img id="moviePoster" alt="Movie poster">
+        <img
+          id="moviePoster"
+          alt="Movie poster"
+        >
 
-        <div id="movieTitle" class="movie-title"></div>
+        <div
+          id="movieTitle"
+          class="movie-title"
+        ></div>
 
-        <div id="moviePrice" class="movie-price"></div>
+        <div
+          id="moviePrice"
+          class="movie-price"
+        ></div>
 
-        <div id="movieDescription" class="movie-description"></div>
+        <div
+          id="movieDescription"
+          class="movie-description"
+        ></div>
 
       </div>
 
     </div>
 
 
-    <!-- INSTAGRAM SECTION -->
+    <!-- =========================
+         INSTAGRAM SECTION
+    ========================== -->
+
     <div id="instagramSection" class="hidden">
-[18-08-2026 01:05 PM] Paul Zeeshan: <label for="package">Instagram Package</label>
+
+      <div class="section-title">
+        Instagram Order
+      </div>
+
+      <label for="package">
+        Instagram Package
+      </label>
 
       <select id="package">
-        <option value="">Select package</option>
+        <option value="">
+          Loading packages...
+        </option>
       </select>
 
-      <label for="username">Instagram Username</label>
+      <label for="username">
+        Instagram Username
+      </label>
 
       <input
         id="username"
         type="text"
         placeholder="@username"
+        autocomplete="off"
       >
 
-      <label for="profile">Instagram Profile Link</label>
+      <label for="profile">
+        Instagram Profile Link
+      </label>
 
       <input
         id="profile"
         type="url"
         placeholder="https://instagram.com/username"
+        autocomplete="off"
       >
 
     </div>
 
 
-    <!-- CONTACT -->
-    <label for="mobile">Mobile Number</label>
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <label for="mobile">
+      Mobile Number
+    </label>
 
     <input
       id="mobile"
@@ -260,50 +352,74 @@
       inputmode="numeric"
       maxlength="10"
       placeholder="10 digit mobile number"
+      autocomplete="tel"
     >
 
 
-    <label for="email">Email</label>
+    <label for="email">
+      Email
+    </label>
 
     <input
       id="email"
       type="email"
       placeholder="your@email.com"
+      autocomplete="email"
     >
 
 
-    <!-- UTR -->
-    <label for="utr">UTR / Transaction ID</label>
+    <!-- =========================
+         UTR
+    ========================== -->
+
+    <label for="utr">
+      UTR / Transaction ID
+    </label>
 
     <input
       id="utr"
       type="text"
       maxlength="80"
       placeholder="Enter UTR if available"
+      autocomplete="off"
     >
 
 
-    <!-- PROMO -->
-    <label for="promoCode">Promo Code</label>
+    <!-- =========================
+         PROMO
+    ========================== -->
+
+    <label for="promoCode">
+      Promo Code
+    </label>
 
     <input
       id="promoCode"
       type="text"
       maxlength="30"
       placeholder="Optional"
+      autocomplete="off"
     >
 
 
-    <!-- PAYMENT -->
+    <!-- =========================
+         PAYMENT
+    ========================== -->
+
     <div class="payment-box">
 
-      <h3>Payment</h3>
+      <h3>
+        Payment
+      </h3>
 
       <div>
         Payable Amount
       </div>
 
-      <div id="amount" class="amount">
+      <div
+        id="amount"
+        class="amount"
+      >
         ₹0.00
       </div>
 
@@ -314,7 +430,10 @@
     </div>
 
 
-    <!-- SCREENSHOT -->
+    <!-- =========================
+         SCREENSHOT
+    ========================== -->
+
     <label for="screenshot">
       Payment Screenshot
     </label>
@@ -330,7 +449,14 @@
     </div>
 
 
-    <button id="submitBtn">
+    <!-- =========================
+         SUBMIT
+    ========================== -->
+
+    <button
+      id="submitBtn"
+      type="button"
+    >
       Submit Order
     </button>
 
@@ -341,10 +467,18 @@
   </div>
 
 
-  <!-- SUCCESS -->
-  <div id="successCard" class="card success">
+  <!-- =========================
+       SUCCESS CARD
+  ========================== -->
 
-    <h1>✅ Order Submitted</h1>
+  <div
+    id="successCard"
+    class="card success"
+  >
+
+    <h1>
+      ✅ Order Submitted
+    </h1>
 
     <p class="subtitle">
       Your order has been received successfully.
@@ -354,10 +488,14 @@
       Order ID
     </div>
 
-    <div id="successOrderId" class="order-id"></div>
+    <div
+      id="successOrderId"
+      class="order-id"
+    ></div>
 
     <p>
-      Status: <strong>PENDING</strong>
+      Status:
+      <strong>PENDING</strong>
     </p>
 
   </div>
@@ -367,7 +505,6 @@
 
 <script>
 "use strict";
-
 
 /* =========================================================
    CONFIG
@@ -379,6 +516,12 @@ const API_BASE = "";
 /* =========================================================
    ELEMENTS
 ========================================================= */
+
+const movieSection =
+  document.getElementById("movieSection");
+
+const instagramSection =
+  document.getElementById("instagramSection");
 
 const movieSelect =
   document.getElementById("movieSelect");
@@ -397,6 +540,15 @@ const moviePrice =
 
 const movieDescription =
   document.getElementById("movieDescription");
+
+const packageSelect =
+  document.getElementById("package");
+
+const usernameInput =
+  document.getElementById("username");
+
+const profileInput =
+  document.getElementById("profile");
 
 const mobileInput =
   document.getElementById("mobile");
@@ -431,17 +583,8 @@ const successCard =
 const successOrderId =
   document.getElementById("successOrderId");
 
-const instagramSection =
-  document.getElementById("instagramSection");
-
-const packageSelect =
-  document.getElementById("package");
-
-const usernameInput =
-  document.getElementById("username");
-
-const profileInput =
-  document.getElementById("profile");
+const modeBadge =
+  document.getElementById("modeBadge");
 
 
 /* =========================================================
@@ -450,8 +593,14 @@ const profileInput =
 
 let movies = [];
 
+let packages = [];
+
 let selectedMovie = null;
-[18-08-2026 01:05 PM] Paul Zeeshan: /* =========================================================
+
+let currentMode = "movie";
+
+
+/* =========================================================
    URL PARAMETERS
 ========================================================= */
 
@@ -465,6 +614,7 @@ const urlMovieId =
 
 const urlType =
   (params.get("type") || "")
+    .trim()
     .toLowerCase();
 
 const urlPackage =
@@ -472,13 +622,14 @@ const urlPackage =
 
 
 /* =========================================================
-   ERROR
+   ERROR FUNCTIONS
 ========================================================= */
 
 function showError(message) {
 
   errorBox.textContent =
-    message || "Something went wrong.";
+    message ||
+    "Something went wrong.";
 
   errorBox.style.display =
     "block";
@@ -500,7 +651,7 @@ function hideError() {
 
 
 /* =========================================================
-   FORMAT
+   MONEY
 ========================================================= */
 
 function money(value) {
@@ -518,26 +669,138 @@ function money(value) {
 
 
 /* =========================================================
+   MOBILE VALIDATION
+========================================================= */
+
+function validMobile(value) {
+
+  return /^[6-9]\d{9}$/.test(
+    value
+  );
+}
+
+
+/* =========================================================
+   EMAIL VALIDATION
+========================================================= */
+
+function validEmail(value) {
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(value);
+}
+
+
+/* =========================================================
+   FILE TO BASE64
+========================================================= */
+
+function fileToBase64(file) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        function () {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+      reader.onerror =
+        function () {
+
+          reject(
+            new Error(
+              "Unable to read payment screenshot."
+            )
+          );
+
+        };
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+}
+
+
+/* =========================================================
+   SHOW MODE
+========================================================= */
+
+function setMode(mode) {
+
+  currentMode = mode;
+
+  if (mode === "instagram") {
+
+    movieSection.classList.add(
+      "hidden"
+    );
+
+    instagramSection.classList.remove(
+      "hidden"
+    );
+
+    modeBadge.textContent =
+      "Instagram Order";
+
+    amountBox.textContent =
+      "₹0.00";
+
+  } else {
+
+    movieSection.classList.remove(
+      "hidden"
+    );
+
+    instagramSection.classList.add(
+      "hidden"
+    );
+
+    modeBadge.textContent =
+      "Movie Order";
+
+  }
+
+}
+
+
+/* =========================================================
    LOAD MOVIES
 ========================================================= */
 
 async function loadMovies() {
 
+  movieSelect.innerHTML =
+    '<option value="">Loading movies...</option>';
+
   try {
 
     const response =
       await fetch(
-        API_BASE + "/api/movies",
+        API_BASE +
+        "/api/movies",
         {
           method: "GET",
           headers: {
-            "Accept": "application/json"
+            "Accept":
+              "application/json"
           }
         }
       );
 
     const data =
-      await response.json();
+      await response.json()
+        .catch(
+          () => ({})
+        );
 
     if (!response.ok) {
 
@@ -545,6 +808,7 @@ async function loadMovies() {
         data.error ||
         "Unable to load movies."
       );
+
     }
 
     movies =
@@ -561,49 +825,59 @@ async function loadMovies() {
         '<option value="">No movies available</option>';
 
       return;
+
     }
 
-    movies.forEach(movie => {
+    movies.forEach(
+      function (movie) {
 
-      const option =
-        document.createElement("option");
+        const option =
+          document.createElement(
+            "option"
+          );
 
-      option.value =
-        movie.movieId;
+        option.value =
+          movie.movieId;
 
-      option.textContent =
-        movie.title +
-        " — " +
-        money(movie.price);
+        option.textContent =
+          (movie.title || "Untitled Movie") +
+          " — " +
+          money(movie.price);
 
-      movieSelect.appendChild(option);
+        movieSelect.appendChild(
+          option
+        );
 
-    });
+      }
+    );
 
 
-    /*
-      If homepage opened order.html with:
-      ?movieId=MOV123
-    */
+    /* Auto select movie from URL */
 
     if (urlMovieId) {
 
-      const exists =
-        movies.some(
-          movie =>
-            movie.movieId ===
-            urlMovieId
+      const found =
+        movies.find(
+          function (movie) {
+            return String(
+              movie.movieId
+            ) === String(
+              urlMovieId
+            );
+          }
         );
 
-      if (exists) {
+      if (found) {
 
         movieSelect.value =
-          urlMovieId;
+          found.movieId;
 
         selectMovie(
-          urlMovieId
+          found.movieId
         );
+
       }
+
     }
 
   } catch (error) {
@@ -613,12 +887,16 @@ async function loadMovies() {
       error
     );
 
+    movieSelect.innerHTML =
+      '<option value="">Unable to load movies</option>';
+
     showError(
       error.message ||
       "Unable to load movies."
     );
 
   }
+
 }
 
 
@@ -630,10 +908,17 @@ function selectMovie(movieId) {
 
   selectedMovie =
     movies.find(
-      movie =>
-        movie.movieId ===
-        movieId
+      function (movie) {
+
+        return String(
+          movie.movieId
+        ) === String(
+          movieId
+        );
+
+      }
     ) || null;
+
 
   if (!selectedMovie) {
 
@@ -644,14 +929,17 @@ function selectMovie(movieId) {
       "₹0.00";
 
     return;
+
   }
+
 
   movieBox.style.display =
     "block";
 
 
   movieTitle.textContent =
-    selectedMovie.title || "";
+    selectedMovie.title ||
+    "";
 
 
   moviePrice.textContent =
@@ -661,7 +949,8 @@ function selectMovie(movieId) {
 
 
   movieDescription.textContent =
-    selectedMovie.description || "";
+    selectedMovie.description ||
+    "";
 
 
   if (selectedMovie.poster) {
@@ -680,6 +969,7 @@ function selectMovie(movieId) {
 
     moviePoster.style.display =
       "none";
+
   }
 
 
@@ -687,6 +977,7 @@ function selectMovie(movieId) {
     money(
       selectedMovie.price
     );
+
 }
 
 
@@ -698,97 +989,261 @@ movieSelect.addEventListener(
   "change",
   function () {
 
+    hideError();
+
     selectMovie(
       this.value
     );
 
   }
 );
-[18-08-2026 01:05 PM] Paul Zeeshan: /* =========================================================
-   SCREENSHOT -> BASE64
+
+
+/* =========================================================
+   LOAD INSTAGRAM PACKAGES
 ========================================================= */
 
-function fileToBase64(file) {
+async function loadPackages() {
 
-  return new Promise(
-    (resolve, reject) => {
+  packageSelect.innerHTML =
+    '<option value="">Loading packages...</option>';
 
-      const reader =
-        new FileReader();
+  try {
 
-      reader.onload =
-        () => resolve(
-          reader.result
+    const response =
+      await fetch(
+        API_BASE +
+        "/api/packages",
+        {
+          method: "GET",
+          headers: {
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+    const data =
+      await response.json()
+        .catch(
+          () => ({})
         );
 
-      reader.onerror =
-        () => reject(
-          new Error(
-            "Unable to read payment screenshot."
-          )
-        );
 
-      reader.readAsDataURL(file);
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Unable to load Instagram packages."
+      );
+
     }
-  );
-}
 
 
-/* =========================================================
-   VALIDATION
-========================================================= */
-
-function validMobile(value) {
-
-  return /^[6-9]\d{9}$/.test(
-    value
-  );
-}
+    packages =
+      Array.isArray(data.packages)
+        ? data.packages
+        : [];
 
 
-function validEmail(value) {
-
-  if (!value) {
-    return false;
-  }
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    .test(value);
-}
+    packageSelect.innerHTML =
+      '<option value="">Select package</option>';
 
 
-/* =========================================================
-   SUBMIT MOVIE ORDER
-========================================================= */
+    if (!packages.length) {
 
-async function submitMovieOrder() {
+      packageSelect.innerHTML =
+        '<option value="">No packages available</option>';
 
-  if (!selectedMovie) {
+      return;
 
-    showError(
-      "Please select a movie."
+    }
+
+
+    packages.forEach(
+      function (pkg, index) {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+        /*
+          Support different package
+          formats from the server.
+        */
+
+        const packageValue =
+          pkg.id ??
+          pkg.package ??
+          pkg.value ??
+          pkg.name ??
+          index;
+
+        const packageName =
+          pkg.name ??
+          pkg.title ??
+          pkg.package ??
+          String(packageValue);
+
+        const packagePrice =
+          pkg.price ??
+          pkg.amount ??
+          0;
+
+
+        option.value =
+          String(
+            packageValue
+          );
+
+        option.textContent =
+          packageName +
+          " — " +
+          money(packagePrice);
+
+
+        option.dataset.price =
+          String(packagePrice);
+
+
+        packageSelect.appendChild(
+          option
+        );
+
+      }
     );
 
-    return;
+
+    if (urlPackage) {
+
+      const option =
+        Array.from(
+          packageSelect.options
+        ).find(
+          function (item) {
+
+            return (
+              item.value ===
+              urlPackage
+            );
+
+          }
+        );
+
+      if (option) {
+
+        packageSelect.value =
+          urlPackage;
+
+        updateInstagramAmount();
+
+      }
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Package loading error:",
+      error
+    );
+
+    packageSelect.innerHTML =
+      '<option value="">Unable to load packages</option>';
+
+    /*
+      Do not completely break the page.
+      The server can still validate the package.
+    */
+
+    if (urlPackage) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        urlPackage;
+
+      option.textContent =
+        urlPackage;
+
+      packageSelect.appendChild(
+        option
+      );
+
+      packageSelect.value =
+        urlPackage;
+
+    }
+
   }
 
+}
+
+
+/* =========================================================
+   INSTAGRAM AMOUNT
+========================================================= */
+
+function updateInstagramAmount() {
+
+  const option =
+    packageSelect.options[
+      packageSelect.selectedIndex
+    ];
+
+  if (!option) {
+
+    amountBox.textContent =
+      "₹0.00";
+
+    return;
+
+  }
+
+
+  const price =
+    Number(
+      option.dataset.price
+    );
+
+
+  if (Number.isFinite(price)) {
+
+    amountBox.textContent =
+      money(price);
+
+  }
+
+}
+
+
+packageSelect.addEventListener(
+  "change",
+  function () {
+
+    hideError();
+
+    updateInstagramAmount();
+
+  }
+);
+
+
+/* =========================================================
+   VALIDATE COMMON FIELDS
+========================================================= */
+
+function validateCommonFields() {
 
   const mobile =
     mobileInput.value.trim();
 
   const email =
     emailInput.value.trim();
-
-  const utr =
-    utrInput.value.trim();
-
-  const promoCode =
-    promoInput.value
-      .trim()
-      .toUpperCase();
-
-  const file =
-    screenshotInput.files[0];
 
 
   if (!mobile && !email) {
@@ -797,7 +1252,8 @@ async function submitMovieOrder() {
       "Please provide either your mobile number or email address."
     );
 
-    return;
+    return false;
+
   }
 
 
@@ -810,7 +1266,8 @@ async function submitMovieOrder() {
       "Please enter a valid Indian mobile number."
     );
 
-    return;
+    return false;
+
   }
 
 
@@ -823,8 +1280,24 @@ async function submitMovieOrder() {
       "Please enter a valid email address."
     );
 
-    return;
+    return false;
+
   }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   VALIDATE SCREENSHOT
+========================================================= */
+
+function validateScreenshot() {
+
+  const file =
+    screenshotInput.files[0];
 
 
   if (!file) {
@@ -833,7 +1306,8 @@ async function submitMovieOrder() {
       "Payment screenshot is required."
     );
 
-    return;
+    return null;
+
   }
 
 
@@ -846,7 +1320,8 @@ async function submitMovieOrder() {
       "Payment screenshot must be 5 MB or smaller."
     );
 
-    return;
+    return null;
+
   }
 
 
@@ -868,8 +1343,59 @@ async function submitMovieOrder() {
       "Please upload a valid JPG, PNG or WEBP payment screenshot."
     );
 
+    return null;
+
+  }
+
+
+  return file;
+
+}
+
+
+/* =========================================================
+   SUBMIT MOVIE ORDER
+========================================================= */
+
+async function submitMovieOrder() {
+
+  if (!selectedMovie) {
+
+    showError(
+      "Please select a movie."
+    );
+
+    return;
+
+  }
+
+
+  if (!validateCommonFields()) {
     return;
   }
+
+
+  const file =
+    validateScreenshot();
+
+  if (!file) {
+    return;
+  }
+
+
+  const mobile =
+    mobileInput.value.trim();
+
+  const email =
+    emailInput.value.trim();
+
+  const utr =
+    utrInput.value.trim();
+
+  const promoCode =
+    promoInput.value
+      .trim()
+      .toUpperCase();
 
 
   hideError();
@@ -878,20 +1404,16 @@ async function submitMovieOrder() {
     true;
 
   submitBtn.textContent =
-    "Submitting...";
+    "Submitting Movie Order...";
 
 
   try {
 
     const screenshot =
-      await fileToBase64(file);
+      await fileToBase64(
+        file
+      );
 
-
-    /*
-      IMPORTANT:
-      Movie orders MUST go to
-      /api/movie-orders
-    */
 
     const payload = {
 
@@ -912,26 +1434,30 @@ async function submitMovieOrder() {
 
       screenshot:
         screenshot
+
     };
 
 
     console.log(
-      "Movie order payload:",
+      "Submitting movie order:",
       {
         movieId:
           payload.movieId,
+
         mobile:
           payload.mobile,
+
         email:
           payload.email,
+
         utr:
           payload.utr,
+
         promoCode:
           payload.promoCode,
+
         screenshot:
-          payload.screenshot
-            ? "[uploaded]"
-            : ""
+          "[uploaded]"
       }
     );
 
@@ -946,6 +1472,7 @@ async function submitMovieOrder() {
           headers: {
             "Content-Type":
               "application/json",
+
             "Accept":
               "application/json"
           },
@@ -971,36 +1498,26 @@ async function submitMovieOrder() {
         data.error ||
         "Unable to process movie order."
       );
+
     }
 
 
-    if (!data.ok) {
+    if (
+      data.ok === false
+    ) {
 
       throw new Error(
         data.error ||
         "Movie order was not accepted."
       );
+
     }
 
 
-    /*
-      SUCCESS
-    */
-
-    successOrderId.textContent =
+    showSuccess(
       data.orderId ||
-      "Order submitted";
-[18-08-2026 01:05 PM] Paul Zeeshan: orderCard.style.display =
-      "none";
-
-    successCard.style.display =
-      "block";
-
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+      "Order submitted"
+    );
 
 
   } catch (error) {
@@ -1015,18 +1532,19 @@ async function submitMovieOrder() {
       "Unable to process movie order."
     );
 
-
     submitBtn.disabled =
       false;
 
     submitBtn.textContent =
       "Submit Order";
+
   }
+
 }
 
 
 /* =========================================================
-   INSTAGRAM ORDER
+   SUBMIT INSTAGRAM ORDER
 ========================================================= */
 
 async function submitInstagramOrder() {
@@ -1035,7 +1553,8 @@ async function submitInstagramOrder() {
     packageSelect.value.trim();
 
   const username =
-    usernameInput.value.trim()
+    usernameInput.value
+      .trim()
       .replace(/^@/, "");
 
   const profile =
@@ -1055,9 +1574,6 @@ async function submitInstagramOrder() {
       .trim()
       .toUpperCase();
 
-  const file =
-    screenshotInput.files[0];
-
 
   if (!pkg) {
 
@@ -1066,6 +1582,7 @@ async function submitInstagramOrder() {
     );
 
     return;
+
   }
 
 
@@ -1076,6 +1593,7 @@ async function submitInstagramOrder() {
     );
 
     return;
+
   }
 
 
@@ -1086,64 +1604,19 @@ async function submitInstagramOrder() {
     );
 
     return;
+
   }
 
 
-  if (!mobile && !email) {
-
-    showError(
-      "Please provide either your mobile number or email address."
-    );
-
+  if (!validateCommonFields()) {
     return;
   }
 
 
-  if (
-    mobile &&
-    !validMobile(mobile)
-  ) {
-
-    showError(
-      "Please enter a valid Indian mobile number."
-    );
-
-    return;
-  }
-
-
-  if (
-    email &&
-    !validEmail(email)
-  ) {
-
-    showError(
-      "Please enter a valid email address."
-    );
-
-    return;
-  }
-
+  const file =
+    validateScreenshot();
 
   if (!file) {
-
-    showError(
-      "Payment screenshot is required."
-    );
-
-    return;
-  }
-
-
-  if (
-    file.size >
-    5 * 1024 * 1024
-  ) {
-
-    showError(
-      "Payment screenshot must be 5 MB or smaller."
-    );
-
     return;
   }
 
@@ -1154,19 +1627,16 @@ async function submitInstagramOrder() {
     true;
 
   submitBtn.textContent =
-    "Submitting...";
+    "Submitting Instagram Order...";
 
 
   try {
 
     const screenshot =
-      await fileToBase64(file);
+      await fileToBase64(
+        file
+      );
 
-
-    /*
-      Instagram orders use
-      /api/orders
-    */
 
     const payload = {
 
@@ -1193,7 +1663,38 @@ async function submitInstagramOrder() {
 
       screenshot:
         screenshot
+
     };
+
+
+    console.log(
+      "Submitting Instagram order:",
+      {
+        package:
+          payload.package,
+
+        mobile:
+          payload.mobile,
+
+        email:
+          payload.email,
+
+        username:
+          payload.username,
+
+        profile:
+          payload.profile,
+
+        utr:
+          payload.utr,
+
+        promoCode:
+          payload.promoCode,
+
+        screenshot:
+          "[uploaded]"
+      }
+    );
 
 
     const response =
@@ -1206,6 +1707,7 @@ async function submitInstagramOrder() {
           headers: {
             "Content-Type":
               "application/json",
+
             "Accept":
               "application/json"
           },
@@ -1231,28 +1733,26 @@ async function submitInstagramOrder() {
         data.error ||
         "Unable to process Instagram order."
       );
+
     }
 
 
-    if (!data.ok) {
+    if (
+      data.ok === false
+    ) {
 
       throw new Error(
         data.error ||
         "Instagram order was not accepted."
       );
+
     }
 
 
-    successOrderId.textContent =
+    showSuccess(
       data.orderId ||
-      "Order submitted";
-
-
-    orderCard.style.display =
-      "none";
-
-    successCard.style.display =
-      "block";
+      "Order submitted"
+    );
 
 
   } catch (error) {
@@ -1267,15 +1767,136 @@ async function submitInstagramOrder() {
       "Unable to process Instagram order."
     );
 
-
     submitBtn.disabled =
       false;
 
     submitBtn.textContent =
       "Submit Order";
+
   }
+
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+function showSuccess(orderId) {
+
+  successOrderId.textContent =
+    orderId;
+
+  orderCard.style.display =
+    "none";
+
+  successCard.style.display =
+    "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 }
 
 
 /* =========================================================
    SUBMIT BUTTON
+========================================================= */
+
+submitBtn.addEventListener(
+  "click",
+  async function () {
+
+    if (
+      submitBtn.disabled
+    ) {
+      return;
+    }
+
+
+    if (
+      currentMode ===
+      "instagram"
+    ) {
+
+      await submitInstagramOrder();
+
+    } else {
+
+      await submitMovieOrder();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE PAGE
+========================================================= */
+
+async function initializePage() {
+
+  /*
+    If URL contains:
+    ?type=instagram
+    then open Instagram mode.
+  */
+
+  if (
+    urlType ===
+    "instagram"
+  ) {
+
+    setMode(
+      "instagram"
+    );
+
+    await loadPackages();
+
+    return;
+
+  }
+
+
+  /*
+    Default mode is Movie.
+  */
+
+  setMode(
+    "movie"
+  );
+
+  await loadMovies();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initializePage()
+  .catch(
+    function (error) {
+
+      console.error(
+        "Page initialization error:",
+        error
+      );
+
+      showError(
+        error.message ||
+        "Unable to initialize order page."
+      );
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
+```
