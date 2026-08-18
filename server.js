@@ -37,25 +37,13 @@ const ADMIN_URL =
    LIMITS
 ========================================================= */
 
-/*
-  JSON order requests:
-  12 MB
-
-  This is enough for payment screenshots encoded as
-  base64 inside JSON.
-
-  IMPORTANT:
-  Movie uploads DO NOT use this parser.
-  Movie uploads are streamed separately up to 5 GB.
-*/
-
 const JSON_BODY_LIMIT = "12mb";
 
 const MAX_SCREENSHOT_SIZE =
-  5 * 1024 * 1024; // 5 MB
+  5 * 1024 * 1024;
 
 const MAX_MOVIE_SIZE =
-  5 * 1024 * 1024 * 1024; // 5 GB
+  5 * 1024 * 1024 * 1024;
 
 
 /* =========================================================
@@ -156,36 +144,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-
-/* =========================================================
-   IMPORTANT:
-   MOVIE UPLOAD ROUTE MUST BE BEFORE JSON PARSER
-========================================================= */
-
-/*
-  Movie upload is a raw streamed request.
-
-  Expected request:
-
-  POST /api/admin/movies/upload
-
-  Headers:
-    x-admin-key
-    x-movie-title
-    x-movie-price
-    x-movie-description
-    x-movie-poster
-    x-movie-id (optional)
-
-  Body:
-    raw movie file
-
-  Example content-type:
-    video/mp4
-
-  The server never loads the whole movie into RAM.
-*/
 
 
 /* =========================================================
@@ -380,6 +338,104 @@ function calculateFinalAmount(
   }
 
   return amount.toFixed(2);
+}
+
+
+/* =========================================================
+   IMPORTANT INSTAGRAM PACKAGE FIX
+========================================================= */
+
+/*
+  Frontend कभी-कभी package को इन formats में भेज सकता है:
+
+  500 Followers
+  500 followers
+  500Followers
+  500
+  500 Followers 
+  ₹50 - 500 Followers
+
+  Server अब package को normalize करके पहचानने की
+  कोशिश करेगा।
+
+  Price हमेशा server catalog से आएगी।
+*/
+
+function normalizePackage(value) {
+  if (
+    typeof value !== "string"
+  ) {
+    return "";
+  }
+
+  let text = value
+    .trim()
+    .toLowerCase();
+
+  text = text
+    .replace(/₹/g, "")
+    .replace(/,/g, "")
+    .replace(/\s+/g, " ");
+
+  /*
+    पहले exact package name
+  */
+
+  for (const packageName of Object.keys(
+    INSTAGRAM_PACKAGES
+  )) {
+    if (
+      text ===
+      packageName
+        .toLowerCase()
+        .replace(/,/g, "")
+    ) {
+      return packageName;
+    }
+  }
+
+  /*
+    फिर केवल followers count निकालें
+  */
+
+  const countMatch = text.match(
+    /(\d+(?:\.\d+)?)\s*(?:followers?|follow|follower)?/i
+  );
+
+  if (!countMatch) {
+    return "";
+  }
+
+  const count = Number(
+    countMatch[1]
+  );
+
+  if (!Number.isFinite(count)) {
+    return "";
+  }
+
+  const wanted = Number(
+    String(count)
+      .replace(/,/g, "")
+  );
+
+  for (const packageName of Object.keys(
+    INSTAGRAM_PACKAGES
+  )) {
+    const packageCount = Number(
+      packageName
+        .replace(/,/g, "")
+        .match(/\d+/)[0]
+    );
+
+    if (
+      packageCount === wanted
+    ) {
+      return packageName;
+    }
+  }
+
+  return "";
 }
 
 
@@ -936,7 +992,6 @@ function saveScreenshot(
 
 /* =========================================================
    RAW MOVIE UPLOAD
-   5 GB MAX
 ========================================================= */
 
 app.post(
@@ -948,43 +1003,28 @@ app.post(
     let received = 0;
 
     try {
-      /* -----------------------------
-         ADMIN AUTH
-      ----------------------------- */
-
       if (!checkAdminKey(req)) {
         return res.status(401).json({
           error: "Unauthorized"
         });
       }
 
-
-      /* -----------------------------
-         MOVIE METADATA
-      ----------------------------- */
-
       const movieId =
         cleanText(
-          req.headers[
-            "x-movie-id"
-          ] ||
+          req.headers["x-movie-id"] ||
           createMovieId(),
           60
         );
 
       const title =
         cleanText(
-          req.headers[
-            "x-movie-title"
-          ],
+          req.headers["x-movie-title"],
           150
         );
 
       const price =
         cleanAmount(
-          req.headers[
-            "x-movie-price"
-          ]
+          req.headers["x-movie-price"]
         );
 
       const description =
@@ -1002,11 +1042,6 @@ app.post(
           ] || "",
           1000
         );
-
-
-      /* -----------------------------
-         VALIDATION
-      ----------------------------- */
 
       if (!title) {
         return res.status(400).json({
@@ -1032,11 +1067,6 @@ app.post(
             "Invalid movie ID."
         });
       }
-
-
-      /* -----------------------------
-         CONTENT TYPE
-      ----------------------------- */
 
       const contentType =
         String(
@@ -1064,19 +1094,11 @@ app.post(
         });
       }
 
-
-      /* -----------------------------
-         CONTENT LENGTH
-      ----------------------------- */
-
-      const contentLengthHeader =
-        req.headers[
-          "content-length"
-        ];
-
       const contentLength =
         Number(
-          contentLengthHeader
+          req.headers[
+            "content-length"
+          ]
         );
 
       if (
@@ -1102,11 +1124,6 @@ app.post(
         }
       }
 
-
-      /* -----------------------------
-         FILE PATH
-      ----------------------------- */
-
       const filename =
         movieId + ".mp4";
 
@@ -1128,11 +1145,6 @@ app.post(
         });
       }
 
-
-      /* -----------------------------
-         CREATE STREAM
-      ----------------------------- */
-
       writeStream =
         fs.createWriteStream(
           filepath,
@@ -1140,11 +1152,6 @@ app.post(
             flags: "w"
           }
         );
-
-
-      /* -----------------------------
-         STREAM UPLOAD
-      ----------------------------- */
 
       await new Promise(
         (resolve, reject) => {
@@ -1167,7 +1174,6 @@ app.post(
 
             reject(error);
           };
-
 
           req.on(
             "data",
@@ -1192,12 +1198,9 @@ app.post(
                 try {
                   req.destroy();
                 } catch {}
-
-                return;
               }
             }
           );
-
 
           req.on(
             "aborted",
@@ -1210,7 +1213,6 @@ app.post(
             }
           );
 
-
           req.on(
             "error",
             (error) => {
@@ -1218,14 +1220,12 @@ app.post(
             }
           );
 
-
           writeStream.on(
             "error",
             (error) => {
               fail(error);
             }
           );
-
 
           writeStream.on(
             "finish",
@@ -1237,17 +1237,11 @@ app.post(
             }
           );
 
-
           req.pipe(
             writeStream
           );
         }
       );
-
-
-      /* -----------------------------
-         FINAL VALIDATION
-      ----------------------------- */
 
       if (!finished) {
         throw new Error(
@@ -1272,11 +1266,6 @@ app.post(
         );
       }
 
-
-      /* -----------------------------
-         VERIFY FILE
-      ----------------------------- */
-
       if (
         !fs.existsSync(
           filepath
@@ -1300,11 +1289,6 @@ app.post(
           "MOVIE_FILE_INVALID"
         );
       }
-
-
-      /* -----------------------------
-         SAVE MOVIE DATABASE
-      ----------------------------- */
 
       const movies =
         readMovies();
@@ -1333,7 +1317,8 @@ app.post(
         description,
         poster,
         filename,
-        filesize: stats.size,
+        filesize:
+          stats.size,
         active: true,
 
         createdAt:
@@ -1361,11 +1346,6 @@ app.post(
         movies
       );
 
-
-      /* -----------------------------
-         TELEGRAM
-      ----------------------------- */
-
       await notifyTelegram(
         "🎬 MOVIE UPLOADED\n\n" +
         "Movie: " +
@@ -1385,11 +1365,6 @@ app.post(
         " MB"
       );
 
-
-      /* -----------------------------
-         RESPONSE
-      ----------------------------- */
-
       return res.json({
         ok: true,
         movie
@@ -1400,10 +1375,6 @@ app.post(
         "Movie upload error:",
         error
       );
-
-      /* -----------------------------
-         CLEAN INCOMPLETE FILE
-      ----------------------------- */
 
       if (
         filepath &&
@@ -1417,7 +1388,6 @@ app.post(
           );
         } catch {}
       }
-
 
       if (
         error.message ===
@@ -1460,8 +1430,6 @@ app.post(
 
 /* =========================================================
    JSON BODY PARSERS
-   IMPORTANT:
-   These come AFTER the movie upload route.
 ========================================================= */
 
 app.use(
@@ -1560,7 +1528,7 @@ app.get(
 
 
 /* =========================================================
-   ADMIN - DISABLE MOVIE
+   ADMIN MOVIE ENABLE / DISABLE
 ========================================================= */
 
 app.post(
@@ -1600,10 +1568,6 @@ app.post(
   }
 );
 
-
-/* =========================================================
-   ADMIN - ENABLE MOVIE
-========================================================= */
 
 app.post(
   "/api/admin/movies/:id/enable",
@@ -1654,11 +1618,6 @@ app.post(
       const body =
         req.body || {};
 
-
-      /* -----------------------------
-         PASSWORD REJECTION
-      ----------------------------- */
-
       if (
         /password|passcode/i.test(
           JSON.stringify(body)
@@ -1669,11 +1628,6 @@ app.post(
             "Passwords are not accepted."
         });
       }
-
-
-      /* -----------------------------
-         INPUTS
-      ----------------------------- */
 
       const movieId =
         cleanText(
@@ -1709,11 +1663,6 @@ app.post(
         body.screenshot ||
         "";
 
-
-      /* -----------------------------
-         FIND MOVIE
-      ----------------------------- */
-
       const movies =
         readMovies();
 
@@ -1731,11 +1680,6 @@ app.post(
             "Movie not found."
         });
       }
-
-
-      /* -----------------------------
-         CONTACT VALIDATION
-      ----------------------------- */
 
       if (
         !mobile &&
@@ -1767,11 +1711,6 @@ app.post(
         });
       }
 
-
-      /* -----------------------------
-         UTR
-      ----------------------------- */
-
       if (
         !validUTR(utr)
       ) {
@@ -1780,11 +1719,6 @@ app.post(
             "Please enter a valid UTR or leave it empty."
         });
       }
-
-
-      /* -----------------------------
-         PROMO
-      ----------------------------- */
 
       if (
         promoCode &&
@@ -1797,22 +1731,12 @@ app.post(
         });
       }
 
-
-      /* -----------------------------
-         SCREENSHOT
-      ----------------------------- */
-
       if (!screenshot) {
         return res.status(400).json({
           error:
             "Payment screenshot is required."
         });
       }
-
-
-      /* -----------------------------
-         SERVER-SIDE PRICE
-      ----------------------------- */
 
       const baseAmount =
         cleanAmount(
@@ -1832,21 +1756,11 @@ app.post(
           promoCode
         );
 
-
-      /* -----------------------------
-         ORDER
-      ----------------------------- */
-
       const orderId =
         createOrderId();
 
       const accessToken =
         createAccessToken();
-
-
-      /* -----------------------------
-         SAVE SCREENSHOT
-      ----------------------------- */
 
       let screenshotInfo;
 
@@ -1862,11 +1776,6 @@ app.post(
             error.message
         });
       }
-
-
-      /* -----------------------------
-         ORDER OBJECT
-      ----------------------------- */
 
       const order = {
         orderId,
@@ -1902,11 +1811,6 @@ app.post(
           new Date().toISOString()
       };
 
-
-      /* -----------------------------
-         SAVE ORDER
-      ----------------------------- */
-
       const orders =
         readOrders();
 
@@ -1917,11 +1821,6 @@ app.post(
       writeOrders(
         orders
       );
-
-
-      /* -----------------------------
-         TELEGRAM
-      ----------------------------- */
 
       const contact =
         [
@@ -1988,35 +1887,23 @@ app.post(
       await sendTelegramScreenshot(
         screenshotInfo,
         "💳 MOVIE PAYMENT SCREENSHOT\n" +
-
         "Order ID: " +
         orderId +
         "\n" +
-
         "Movie: " +
         movie.title +
         "\n" +
-
         "Amount: ₹" +
         amount +
         "\n\n" +
-
         "⚠️ Verify payment before accepting."
       );
 
-
-      /* -----------------------------
-         RESPONSE
-      ----------------------------- */
-
       res.json({
         ok: true,
-
         orderId,
-
         status:
           "PENDING",
-
         movieId:
           movie.movieId
       });
@@ -2047,11 +1934,6 @@ app.post(
       const body =
         req.body || {};
 
-
-      /* -----------------------------
-         PASSWORD REJECTION
-      ----------------------------- */
-
       if (
         /password|passcode/i.test(
           JSON.stringify(body)
@@ -2063,15 +1945,24 @@ app.post(
         });
       }
 
+      /*
+        Get package exactly as sent by frontend.
+      */
 
-      /* -----------------------------
-         INPUTS
-      ----------------------------- */
-
-      const pkg =
+      const rawPackage =
         cleanText(
           body.package,
-          100
+          150
+        );
+
+      /*
+        NEW FIX:
+        Normalize the package before validation.
+      */
+
+      const pkg =
+        normalizePackage(
+          rawPackage
         );
 
       const mobile =
@@ -2119,7 +2010,7 @@ app.post(
       ----------------------------- */
 
       if (
-        !pkg ||
+        !rawPackage ||
         !username ||
         !profile ||
         !screenshot
@@ -2135,15 +2026,15 @@ app.post(
          PACKAGE VALIDATION
       ----------------------------- */
 
-      if (
-        !Object.prototype.hasOwnProperty.call(
-          INSTAGRAM_PACKAGES,
-          pkg
-        )
-      ) {
+      if (!pkg) {
+        console.log(
+          "Invalid Instagram package received:",
+          rawPackage
+        );
+
         return res.status(400).json({
           error:
-            "Invalid Instagram package."
+            "Invalid Instagram package. Please select a package from the available list."
         });
       }
 
@@ -2427,19 +2318,18 @@ app.post(
       await sendTelegramScreenshot(
         screenshotInfo,
         "💳 INSTAGRAM PAYMENT SCREENSHOT\n" +
-
         "Order ID: " +
         orderId +
         "\n" +
-
         "Instagram: @" +
         username +
         "\n" +
-
+        "Package: " +
+        pkg +
+        "\n" +
         "Amount: ₹" +
         amount +
         "\n\n" +
-
         "⚠️ Verify payment before accepting."
       );
 
@@ -2637,11 +2527,6 @@ app.post(
       });
     }
 
-
-    /* -----------------------------
-       UPDATE STATUS
-    ----------------------------- */
-
     order.status =
       status;
 
@@ -2651,11 +2536,6 @@ app.post(
     writeOrders(
       orders
     );
-
-
-    /* -----------------------------
-       TELEGRAM
-    ----------------------------- */
 
     const orderDescription =
       order.type === "MOVIE"
@@ -2673,29 +2553,20 @@ app.post(
     ) {
       await notifyTelegram(
         "✅ ORDER ACCEPTED\n\n" +
-
         "Order ID: " +
         order.orderId +
         "\n\n" +
-
         orderDescription
       );
     } else {
       await notifyTelegram(
         "❌ ORDER REJECTED\n\n" +
-
         "Order ID: " +
         order.orderId +
         "\n\n" +
-
         orderDescription
       );
     }
-
-
-    /* -----------------------------
-       RESPONSE
-    ----------------------------- */
 
     const safeOrder = {
       ...order
@@ -2876,7 +2747,6 @@ app.get(
 
 /* =========================================================
    PROTECTED MOVIE STREAM
-   RANGE / SEEK SUPPORT
 ========================================================= */
 
 app.get(
@@ -2894,11 +2764,6 @@ app.get(
       );
     }
 
-
-    /* -----------------------------
-       FIND ORDER
-    ----------------------------- */
-
     const orders =
       readOrders();
 
@@ -2915,11 +2780,6 @@ app.get(
       );
     }
 
-
-    /* -----------------------------
-       ORDER TYPE
-    ----------------------------- */
-
     if (
       order.type !==
       "MOVIE"
@@ -2928,11 +2788,6 @@ app.get(
         "Invalid movie order."
       );
     }
-
-
-    /* -----------------------------
-       APPROVAL
-    ----------------------------- */
 
     if (
       order.status !==
@@ -2943,11 +2798,6 @@ app.get(
       );
     }
 
-
-    /* -----------------------------
-       MOVIE MATCH
-    ----------------------------- */
-
     if (
       order.movieId !==
       req.params.movieId
@@ -2956,11 +2806,6 @@ app.get(
         "This order does not have access to this movie."
       );
     }
-
-
-    /* -----------------------------
-       FIND MOVIE
-    ----------------------------- */
 
     const movies =
       readMovies();
@@ -2977,11 +2822,6 @@ app.get(
         "Movie not found."
       );
     }
-
-
-    /* -----------------------------
-       FILE
-    ----------------------------- */
 
     const filename =
       path.basename(
@@ -3026,11 +2866,6 @@ app.get(
       );
     }
 
-
-    /* -----------------------------
-       FILE STAT
-    ----------------------------- */
-
     const stat =
       fs.statSync(
         filepath
@@ -3046,11 +2881,6 @@ app.get(
 
     const fileSize =
       stat.size;
-
-
-    /* -----------------------------
-       HEADERS
-    ----------------------------- */
 
     res.setHeader(
       "Content-Type",
@@ -3071,11 +2901,6 @@ app.get(
       "X-Content-Type-Options",
       "nosniff"
     );
-
-
-    /* -----------------------------
-       NO RANGE
-    ----------------------------- */
 
     const range =
       req.headers.range;
@@ -3114,11 +2939,6 @@ app.get(
       );
     }
 
-
-    /* -----------------------------
-       RANGE PARSING
-    ----------------------------- */
-
     const match =
       range.match(
         /^bytes=(\d*)-(\d*)$/
@@ -3136,7 +2956,6 @@ app.get(
       return res.end();
     }
 
-
     let start =
       match[1]
         ? parseInt(
@@ -3152,12 +2971,6 @@ app.get(
             10
           )
         : fileSize - 1;
-
-
-    /* -----------------------------
-       SUFFIX RANGE
-       Example: bytes=-500000
-    ----------------------------- */
 
     if (
       !match[1] &&
@@ -3196,11 +3009,6 @@ app.get(
       end =
         fileSize - 1;
     }
-
-
-    /* -----------------------------
-       VALIDATE RANGE
-    ----------------------------- */
 
     if (
       !Number.isInteger(start) ||
@@ -3245,11 +3053,6 @@ app.get(
       return res.end();
     }
 
-
-    /* -----------------------------
-       STREAM RANGE
-    ----------------------------- */
-
     const chunkSize =
       end - start + 1;
 
@@ -3269,7 +3072,6 @@ app.get(
       "Content-Length",
       chunkSize
     );
-
 
     const stream =
       fs.createReadStream(
@@ -3345,10 +3147,6 @@ function sendPublicPage(
 }
 
 
-/* -----------------------------
-   ORDER PAGE
------------------------------ */
-
 app.get(
   "/order.html",
   (req, res) => {
@@ -3359,10 +3157,6 @@ app.get(
   }
 );
 
-
-/* -----------------------------
-   ADMIN PAGE
------------------------------ */
 
 app.get(
   "/admin.html",
@@ -3375,10 +3169,6 @@ app.get(
 );
 
 
-/* -----------------------------
-   WATCH PAGE
------------------------------ */
-
 app.get(
   "/watch.html",
   (req, res) => {
@@ -3389,10 +3179,6 @@ app.get(
   }
 );
 
-
-/* -----------------------------
-   HOME
------------------------------ */
 
 app.get(
   "/",
