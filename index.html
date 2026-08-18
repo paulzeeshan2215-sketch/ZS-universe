@@ -1,940 +1,6210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zeeshan & SehrAn Studios — Movies, Games & Entertainment</title>
+<title>SehrAn Media — Social, Movies & Games</title>
+
+<meta
+  name="description"
+  content="SehrAn Media — Social media services, movies and PC games."
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
 <style>
-:root{
-    --bg:#05020a;
-    --card:#100817;
-    --pink:#ff007f;
-    --purple:#7928ca;
-    --gold:#ffcc00;
-    --muted:#aaa;
-    --line:#ffffff18;
-}
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    font-family:Poppins,sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%,#301044 0,#05020a 40%);
-    color:#fff;
-    min-height:100vh;
+  width:100%;
+  min-height:100vh;
+  overflow-x:hidden;
+
+  font-family:"Poppins",sans-serif;
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(130,45,255,.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(255,40,150,.15),
+      transparent 28%
+    ),
+    #07070d;
 }
 
-nav{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:#05020add;
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--line);
+button,
+input{
+  font-family:inherit;
 }
 
-.navin{
-    max-width:1200px;
-    margin:auto;
-    height:76px;
-    padding:0 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+}
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.glow{
+  position:fixed;
+
+  width:350px;
+  height:350px;
+
+  border-radius:50%;
+
+  filter:blur(110px);
+
+  opacity:.12;
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+
+.glow-1{
+  top:-150px;
+  left:-150px;
+  background:#8a2be2;
+}
+
+.glow-2{
+  right:-150px;
+  top:300px;
+  background:#ff1493;
+}
+
+.glow-3{
+  left:40%;
+  bottom:-200px;
+  background:#00bfff;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+  width:min(1120px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:18px auto 0;
+  padding:13px 16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+
+  background:rgba(15,13,28,.88);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:0 15px 45px rgba(0,0,0,.28);
+
+  position:sticky;
+  top:12px;
+
+  z-index:100;
 }
 
 .logo{
-    font:900 22px Montserrat;
-    color:#fff;
-    text-decoration:none;
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+
+  text-decoration:none;
 }
 
-.logo span{
-    color:var(--pink);
+.logo-icon{
+  width:42px;
+  height:42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7b2cff,
+      #ff3cac,
+      #ffb347
+    );
+
+  box-shadow:
+    0 8px 25px rgba(174,57,255,.3);
 }
 
-.links{
-    display:flex;
-    gap:30px;
+.logo-icon i{
+  font-size:19px;
 }
 
-.links a{
-    color:#ddd;
-    text-decoration:none;
-    font-weight:600;
+.logo-text{
+  font-size:17px;
+  font-weight:900;
 }
 
-.links a:hover{
-    color:#ff4ca5;
+.logo-text span{
+  color:#d78aff;
 }
 
-.navbtn{
-    padding:11px 18px;
-    border-radius:30px;
-    background:linear-gradient(90deg,var(--pink),var(--purple));
-    color:#fff!important;
-    text-decoration:none;
-    font-weight:700;
+/* =========================================================
+   MAIN TABS
+========================================================= */
+
+.main-tabs{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:24px auto 0;
+  padding:8px;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+
+  gap:8px;
+
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+
+  background:rgba(255,255,255,.035);
 }
 
-/* HERO */
+.main-tab{
+  min-width:0;
+
+  padding:14px 10px;
+
+  border:0;
+  border-radius:13px;
+
+  background:transparent;
+
+  color:#9992a8;
+
+  font-size:13px;
+  font-weight:800;
+
+  transition:.25s;
+}
+
+.main-tab i{
+  margin-right:7px;
+}
+
+.main-tab:hover{
+  color:#fff;
+  background:rgba(255,255,255,.06);
+}
+
+.main-tab.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7d32ff,
+      #ff329d
+    );
+
+  box-shadow:
+    0 10px 30px rgba(140,45,255,.22);
+}
+
+/* =========================================================
+   TAB CONTENT
+========================================================= */
+
+.tab-content{
+  display:none;
+
+  animation:fadeIn .3s ease;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
-    max-width:1200px;
-    margin:auto;
-    min-height:700px;
-    padding:90px 24px;
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:50px;
-    align-items:center;
+  width:min(1120px,calc(100% - 32px));
+
+  margin:0 auto;
+
+  padding:70px 0 55px;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,.85fr);
+
+  align-items:center;
+
+  gap:50px;
 }
 
-.kicker{
-    display:inline-flex;
-    padding:8px 14px;
-    border:1px solid #ff007f55;
-    border-radius:30px;
-    background:#ff007f0d;
-    color:#ff7bbb;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:20px;
+.hero-left{
+  min-width:0;
 }
 
-h1{
-    font:900 clamp(48px,7vw,88px)/.95 Montserrat;
-    letter-spacing:-3px;
+.badge{
+  display:inline-flex;
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 13px;
+
+  margin-bottom:18px;
+
+  border:1px solid rgba(188,113,255,.25);
+  border-radius:999px;
+
+  color:#e2c7ff;
+
+  background:rgba(146,60,255,.12);
+
+  font-size:11px;
+  font-weight:800;
 }
 
-h1 span{
-    color:var(--pink);
-    text-shadow:0 0 35px #ff007f66;
+.badge-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#65ffad;
+
+  box-shadow:0 0 12px #65ffad;
 }
 
-.hero p{
-    color:#bcb5c2;
-    font-size:18px;
-    line-height:1.8;
-    max-width:650px;
-    margin:25px 0;
+.hero h1{
+  max-width:650px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:clamp(40px,6vw,68px);
+
+  line-height:1.04;
+
+  letter-spacing:-3px;
+
+  font-weight:900;
+
+  margin-bottom:20px;
 }
 
-.ctas{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    padding:15px 23px;
-    border-radius:13px;
-    text-decoration:none;
-    font-weight:800;
-}
-
-.primary{
-    background:linear-gradient(90deg,var(--pink),var(--purple));
-    color:#fff;
-    box-shadow:0 12px 35px #ff007f30;
-}
-
-.secondary{
-    border:1px solid #ffffff22;
-    color:#fff;
-    background:#ffffff08;
-}
-
-/* VISUAL */
-
-.visual{
-    position:relative;
-}
-
-.phone{
-    max-width:360px;
-    margin:auto;
-    border:1px solid #ff007f55;
-    border-radius:40px;
-    padding:22px;
-    background:linear-gradient(160deg,#180a22,#08050c);
-    box-shadow:0 0 70px #ff007f22;
-}
-
-.phone .ig{
-    font-size:90px;
-    text-align:center;
-    background:linear-gradient(
-        45deg,
-        #f09433,
-        #dc2743,
-        #bc1888
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      #b56cff,
+      #ff4fb3,
+      #67d7ff
     );
-    -webkit-background-clip:text;
-    color:transparent;
-    margin:25px;
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
 }
 
-.phone h2{
-    text-align:center;
-    font:900 28px Montserrat;
+.hero-description{
+  max-width:610px;
+
+  color:#bcb6ca;
+
+  font-size:15px;
+  line-height:1.8;
+
+  margin-bottom:27px;
 }
 
-.phone .big{
-    font-size:52px;
-    font-weight:900;
-    color:var(--pink);
-    text-align:center;
-    margin:15px;
+.primary-btn{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  padding:13px 19px;
+
+  border:0;
+  border-radius:13px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8637ff,
+      #ff329d
+    );
+
+  font-size:13px;
+  font-weight:800;
+
+  box-shadow:
+    0 12px 30px rgba(161,52,255,.25);
+
+  transition:.25s;
 }
 
-.statgrid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-    margin-top:20px;
+.primary-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+   HERO CARD
+========================================================= */
+
+.hero-visual{
+  min-width:0;
+
+  display:flex;
+  justify-content:center;
+}
+
+.hero-card{
+  width:100%;
+  max-width:410px;
+
+  padding:24px;
+
+  border-radius:26px;
+
+  border:1px solid rgba(255,255,255,.11);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  backdrop-filter:blur(16px);
+
+  animation:floating 4s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+}
+
+.profile-head{
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.profile-icon{
+  width:54px;
+  height:54px;
+
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #833ab4,
+      #fd1d1d,
+      #fcb045
+    );
+
+  font-size:26px;
+}
+
+.profile-name{
+  font-size:15px;
+  font-weight:900;
+}
+
+.profile-handle{
+  margin-top:3px;
+
+  color:#938c9f;
+
+  font-size:10px;
+}
+
+.profile-status{
+  margin-left:auto;
+
+  color:#65ffad;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+.hero-stats{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:8px;
 }
 
 .stat{
-    padding:14px 7px;
-    text-align:center;
-    background:#ffffff08;
-    border-radius:12px;
+  padding:14px 7px;
+
+  text-align:center;
+
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+
+  background:rgba(0,0,0,.18);
 }
 
 .stat strong{
-    display:block;
+  display:block;
+
+  font-size:18px;
+  font-weight:900;
 }
 
-.stat small{
-    color:#999;
+.stat span{
+  display:block;
+
+  margin-top:3px;
+
+  color:#8e879b;
+
+  font-size:9px;
 }
 
-/* SECTIONS */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
-section{
-    max-width:1200px;
-    margin:auto;
-    padding:95px 24px;
+.section{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:0 auto;
+
+  padding:55px 0;
 }
 
-.sectionhead{
-    text-align:center;
-    margin-bottom:45px;
+.section-heading{
+  max-width:700px;
+
+  margin:0 auto 30px;
+
+  text-align:center;
 }
 
-.sectionhead .mini{
-    color:var(--gold);
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:12px;
+.section-heading .small{
+  margin-bottom:8px;
+
+  color:#c07aff;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
 }
 
-.sectionhead h2{
-    font:900 clamp(32px,5vw,52px) Montserrat;
-    margin:9px 0;
+.section-heading h2{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:clamp(28px,4vw,43px);
+
+  line-height:1.1;
+
+  letter-spacing:-1.5px;
+
+  margin-bottom:10px;
 }
 
-.sectionhead p{
-    color:#999;
-    max-width:650px;
-    margin:auto;
+.section-heading p{
+  color:#9992a5;
+
+  font-size:13px;
+
+  line-height:1.7;
 }
 
-/* CARDS */
+/* =========================================================
+   SEARCH
+========================================================= */
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+.search-box{
+  width:100%;
+  max-width:700px;
+
+  margin:0 auto 30px;
+
+  position:relative;
 }
 
-.card{
-    position:relative;
-    padding:30px;
-    border:1px solid var(--line);
-    border-radius:22px;
-    background:linear-gradient(145deg,#120a19,#09050d);
-    transition:.25s;
-    overflow:hidden;
+.search-box i{
+  position:absolute;
+
+  left:17px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#888196;
+
+  font-size:14px;
 }
 
-.card:hover{
-    transform:translateY(-7px);
-    border-color:#ff007f66;
-    box-shadow:0 20px 50px #000;
+.search-box input{
+  width:100%;
+  height:50px;
+
+  padding:0 18px 0 45px;
+
+  border:1px solid rgba(255,255,255,.09);
+
+  border-radius:15px;
+
+  outline:none;
+
+  color:#fff;
+
+  background:rgba(255,255,255,.045);
+
+  font-size:13px;
+
+  transition:.25s;
 }
 
-.icon{
-    width:52px;
-    height:52px;
-    border-radius:15px;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        var(--purple)
+.search-box input::placeholder{
+  color:#777080;
+}
+
+.search-box input:focus{
+  border-color:rgba(180,100,255,.55);
+
+  background:rgba(255,255,255,.06);
+
+  box-shadow:
+    0 0 0 3px rgba(150,60,255,.08);
+}
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.platform-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+
+  gap:14px;
+}
+
+.platform-card{
+  min-width:0;
+
+  padding:22px 14px;
+
+  text-align:center;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.025)
     );
-    font-size:21px;
-    margin-bottom:20px;
+
+  transition:.25s;
 }
 
-.card h3{
-    font-size:20px;
-    margin-bottom:10px;
+.platform-card:hover{
+  transform:translateY(-5px);
+
+  border-color:rgba(180,100,255,.4);
 }
 
-.card p{
-    color:#999;
-    line-height:1.7;
+.platform-icon{
+  width:60px;
+  height:60px;
+
+  margin:0 auto 13px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:18px;
+
+  font-size:27px;
 }
 
-/* COMING SOON */
+.instagram{
+  background:
+    linear-gradient(
+      135deg,
+      #833ab4,
+      #fd1d1d,
+      #fcb045
+    );
+}
+
+.youtube{
+  background:#f03;
+}
+
+.snapchat{
+  color:#111;
+  background:#ffdb00;
+}
+
+.facebook{
+  background:#1877f2;
+}
+
+.whatsapp{
+  background:#25d366;
+}
+
+.platform-card h3{
+  margin-bottom:6px;
+
+  font-size:15px;
+}
+
+.platform-card p{
+  min-height:34px;
+
+  color:#918a9d;
+
+  font-size:9px;
+
+  line-height:1.5;
+}
+
+.platform-link{
+  width:100%;
+
+  margin-top:12px;
+  padding:9px;
+
+  display:block;
+
+  border:0;
+  border-radius:10px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:rgba(255,255,255,.06);
+
+  font-size:10px;
+  font-weight:800;
+
+  transition:.2s;
+}
+
+.platform-link:hover{
+  background:
+    linear-gradient(
+      135deg,
+      #8337ff,
+      #ff3ba5
+    );
+}
+
+.status{
+  display:inline-block;
+
+  margin-top:10px;
+
+  padding:4px 8px;
+
+  border-radius:999px;
+
+  font-size:7px;
+  font-weight:900;
+
+  text-transform:uppercase;
+}
+
+.available{
+  color:#65ffad;
+
+  background:rgba(101,255,173,.08);
+}
 
 .soon{
-    position:absolute;
-    top:18px;
-    right:18px;
-    padding:5px 9px;
-    border-radius:20px;
-    background:#ffcc0015;
-    border:1px solid #ffcc0055;
-    color:var(--gold);
-    font-size:9px;
-    font-weight:800;
-    letter-spacing:1px;
+  color:#ffcf72;
+
+  background:rgba(255,207,114,.08);
 }
 
-.coming{
-    opacity:.88;
+/* =========================================================
+   INSTAGRAM PRICING
+========================================================= */
+
+#instagram-services{
+  scroll-margin-top:90px;
 }
 
-/* CTA */
+.service-title{
+  text-align:center;
 
-.band{
-    max-width:1150px;
-    margin:20px auto 100px;
-    padding:40px 30px;
-    border:1px solid #ffcc0040;
-    border-radius:25px;
-    background:
-        linear-gradient(110deg,#ffcc0010,#ff007f12);
+  margin-bottom:25px;
 }
 
-.bandin{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
+.service-title h2{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:30px;
+
+  margin-bottom:7px;
 }
 
-.band h2{
-    font:900 30px Montserrat;
+.service-title p{
+  color:#938c9f;
+
+  font-size:12px;
 }
 
-.band p{
-    color:#aaa;
-    margin-top:8px;
+.pricing-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:14px;
 }
 
-/* FOOTER */
+.price-card{
+  min-width:0;
 
-footer{
-    border-top:1px solid var(--line);
-    padding:35px 24px;
-    text-align:center;
-    color:#777;
+  padding:21px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.025)
+    );
+
+  transition:.25s;
+
+  position:relative;
 }
 
-.social{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin:15px;
+.price-card:hover{
+  transform:translateY(-5px);
+
+  border-color:rgba(180,100,255,.45);
 }
 
-.social a{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:#ffffff09;
-    color:#fff;
-    text-decoration:none;
+.price-card.popular{
+  border-color:rgba(255,70,170,.45);
 }
 
-.social a:hover{
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        var(--purple)
+.popular-badge{
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  padding:4px 7px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff3b9d,
+      #ff7b47
+    );
+
+  font-size:7px;
+  font-weight:900;
+
+  text-transform:uppercase;
+}
+
+.price-label{
+  margin-bottom:6px;
+
+  color:#a49cac;
+
+  font-size:9px;
+}
+
+.price-card h3{
+  margin-bottom:5px;
+
+  font-size:17px;
+}
+
+.followers-number{
+  margin-bottom:15px;
+
+  color:#c27dff;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+.price{
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:3px;
+
+  margin-bottom:16px;
+}
+
+.currency{
+  margin-bottom:5px;
+
+  color:#c8c1d2;
+
+  font-size:15px;
+}
+
+.price strong{
+  font-size:30px;
+
+  line-height:1;
+
+  font-weight:900;
+}
+
+.price-btn{
+  width:100%;
+
+  padding:11px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:7px;
+
+  border-radius:11px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8337ff,
+      #ff3ba5
+    );
+
+  font-size:10px;
+  font-weight:900;
+}
+
+/* =========================================================
+   CATEGORY HERO
+========================================================= */
+
+.category-hero{
+  width:min(900px,calc(100% - 32px));
+
+  margin:0 auto;
+
+  padding:55px 0 30px;
+
+  text-align:center;
+}
+
+.category-icon{
+  width:75px;
+  height:75px;
+
+  margin:0 auto 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:23px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff334e,
+      #8a2be2
+    );
+
+  box-shadow:
+    0 18px 45px rgba(160,45,255,.22);
+
+  font-size:31px;
+}
+
+.category-hero h1{
+  margin-bottom:10px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:clamp(38px,6vw,62px);
+
+  line-height:1;
+
+  letter-spacing:-2px;
+}
+
+.category-hero p{
+  max-width:650px;
+
+  margin:0 auto;
+
+  color:#9e97ab;
+
+  font-size:13px;
+
+  line-height:1.7;
+}
+
+.limited-offer{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:15px;
+
+  padding:8px 14px;
+
+  border:1px solid rgba(255,100,180,.3);
+
+  border-radius:999px;
+
+  color:#ffb7dd;
+
+  background:rgba(255,50,150,.09);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.2px;
+}
+
+.offer-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#ff4fae;
+
+  box-shadow:0 0 12px #ff4fae;
+
+  animation:offerPulse 1.5s infinite;
+}
+
+@keyframes offerPulse{
+
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:.45;
+    transform:scale(.75);
+  }
+
+}
+
+/* =========================================================
+   MOVIE GRID
+========================================================= */
+
+.movie-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:16px;
+}
+
+.media-card{
+  min-width:0;
+
+  overflow:hidden;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.025)
+    );
+
+  transition:.25s;
+}
+
+.media-card:hover{
+  transform:translateY(-5px);
+
+  border-color:rgba(180,100,255,.4);
+}
+
+.poster{
+  height:260px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.poster:before{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05) 25%,
+      rgba(0,0,0,.8) 100%
+    );
+
+  z-index:1;
+}
+
+.poster-content{
+  position:relative;
+
+  z-index:2;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  padding:20px;
+
+  text-align:left;
+}
+
+.poster-kicker{
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  color:#e7dfff;
+
+  margin-bottom:6px;
+}
+
+.poster-title{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:27px;
+
+  line-height:1.02;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+
+  text-shadow:0 5px 20px rgba(0,0,0,.5);
+}
+
+.poster-year{
+  margin-top:7px;
+
+  color:#d6cfdf;
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+/* =========================================================
+   MOVIE BACKGROUNDS
+========================================================= */
+
+.movie-bollywood{
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,180,60,.4),
+      transparent 22%
+    ),
+    linear-gradient(
+      145deg,
+      #26120c,
+      #9b3b18,
+      #12090a
     );
 }
 
-/* MOBILE */
-
-@media(max-width:800px){
-
-    .links{
-        display:none;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-        padding-top:60px;
-    }
-
-    .hero p{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .ctas{
-        justify-content:center;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .bandin{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    h1{
-        letter-spacing:-2px;
-    }
+.movie-hollywood{
+  background:
+    radial-gradient(
+      circle at 70% 25%,
+      rgba(70,150,255,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #07152b,
+      #174a88,
+      #050913
+    );
 }
+
+.movie-south{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(0,255,190,.35),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #061d19,
+      #087f67,
+      #03100e
+    );
+}
+
+.movie-hindi-dubbed{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255,100,200,.4),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #250719,
+      #8a174e,
+      #10030c
+    );
+}
+
+.movie-punjabi{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255,180,60,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #2b1804,
+      #b25d08,
+      #100802
+    );
+}
+
+.movie-new{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(180,90,255,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #16072d,
+      #6834a8,
+      #08040e
+    );
+}
+
+.movie-trending{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255,60,100,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #30070c,
+      #9e2634,
+      #100306
+    );
+}
+
+.movie-all{
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(80,180,255,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #061b2c,
+      #176e9e,
+      #030b12
+    );
+}
+
+/* =========================================================
+   MOVIE BADGES
+========================================================= */
+
+.movie-badge{
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  z-index:4;
+
+  padding:6px 10px;
+
+  border-radius:999px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff285f,
+      #ff147d
+    );
+
+  font-size:9px;
+
+  font-weight:900;
+
+  box-shadow:
+    0 8px 20px rgba(255,20,100,.25);
+}
+
+.movie-quality{
+  position:absolute;
+
+  left:12px;
+  top:12px;
+
+  z-index:4;
+
+  padding:5px 9px;
+
+  border-radius:7px;
+
+  color:#fff;
+
+  background:rgba(0,0,0,.68);
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.card-body{
+  padding:16px;
+}
+
+.card-body h3{
+  margin-bottom:6px;
+
+  font-size:15px;
+}
+
+.card-body p{
+  min-height:38px;
+
+  color:#918a9d;
+
+  font-size:9px;
+
+  line-height:1.6;
+}
+
+.movie-meta{
+  margin-bottom:7px;
+
+  color:#a79faf;
+
+  font-size:9px;
+
+  font-weight:700;
+}
+
+.movie-info{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:12px;
+}
+
+.movie-info span{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  padding:5px 8px;
+
+  border-radius:7px;
+
+  color:#c8c2d2;
+
+  background:rgba(255,255,255,.055);
+
+  font-size:8px;
+
+  font-weight:700;
+}
+
+.movie-info i{
+  color:#c57dff;
+}
+
+.movie-open-btn{
+  width:100%;
+
+  margin-top:12px;
+
+  padding:11px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:7px;
+
+  border:0;
+
+  border-radius:10px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8337ff,
+      #ff3ba5
+    );
+
+  font-size:10px;
+
+  font-weight:900;
+
+  box-shadow:
+    0 8px 20px rgba(145,45,255,.18);
+
+  transition:.2s;
+}
+
+.movie-open-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   =========================================================
+   PC GAMES SECTION
+   =========================================================
+========================================================= */
+
+.games-hero{
+  width:min(1000px,calc(100% - 32px));
+
+  margin:0 auto;
+
+  padding:60px 0 25px;
+
+  text-align:center;
+}
+
+.games-icon{
+  width:82px;
+  height:82px;
+
+  margin:0 auto 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #9333ea,
+      #ec4899
+    );
+
+  box-shadow:
+    0 20px 55px rgba(124,58,237,.35);
+
+  font-size:34px;
+
+  animation:gameIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes gameIconFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-7px);
+  }
+
+}
+
+.games-hero h1{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:clamp(40px,6vw,67px);
+
+  line-height:1;
+
+  letter-spacing:-3px;
+
+  margin-bottom:14px;
+}
+
+.games-hero p{
+  max-width:700px;
+
+  margin:auto;
+
+  color:#9e97ab;
+
+  font-size:13px;
+
+  line-height:1.8;
+}
+
+/* LIVE COLLECTION BAR */
+
+.games-live-bar{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:20px auto 15px;
+
+  padding:16px 18px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,58,237,.14),
+      rgba(236,72,153,.07)
+    );
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.18);
+}
+
+.games-live-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+}
+
+.live-pulse{
+  width:10px;
+  height:10px;
+
+  flex-shrink:0;
+
+  border-radius:50%;
+
+  background:#65ffad;
+
+  box-shadow:
+    0 0 15px #65ffad;
+}
+
+.games-live-title{
+  font-size:12px;
+  font-weight:900;
+}
+
+.games-live-sub{
+  margin-top:2px;
+
+  color:#817a8d;
+
+  font-size:8px;
+}
+
+.games-live-right{
+  display:flex;
+
+  gap:7px;
+
+  flex-wrap:wrap;
+}
+
+.game-stat{
+  padding:7px 10px;
+
+  border-radius:9px;
+
+  background:rgba(255,255,255,.05);
+
+  color:#c7c0d2;
+
+  font-size:8px;
+
+  font-weight:800;
+}
+
+/* GAME FILTERS */
+
+.game-filters{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:10px auto 25px;
+
+  display:flex;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+}
+
+.game-filter{
+  padding:9px 14px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:999px;
+
+  color:#938b9e;
+
+  background:rgba(255,255,255,.035);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  transition:.2s;
+}
+
+.game-filter:hover{
+  color:#fff;
+
+  border-color:rgba(170,80,255,.35);
+}
+
+.game-filter.active{
+  color:#fff;
+
+  border-color:transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7d32ff,
+      #ff329d
+    );
+
+  box-shadow:
+    0 8px 20px rgba(135,45,255,.2);
+}
+
+/* GAME SECTION HEADER */
+
+.game-section-heading{
+  display:flex;
+
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin:40px 0 17px;
+}
+
+.game-section-heading-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.game-section-icon{
+  width:38px;
+  height:38px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,58,237,.3),
+      rgba(236,72,153,.2)
+    );
+
+  color:#d18aff;
+
+  font-size:14px;
+}
+
+.game-section-heading h2{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:21px;
+
+  letter-spacing:-.5px;
+}
+
+.game-section-heading p{
+  margin-top:2px;
+
+  color:#777080;
+
+  font-size:8px;
+}
+
+.game-view-all{
+  padding:8px 11px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:9px;
+
+  color:#bcaeca;
+
+  background:rgba(255,255,255,.035);
+
+  font-size:8px;
+
+  font-weight:900;
+}
+
+/* GAME GRID */
+
+.game-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:16px;
+}
+
+/* GAME CARD */
+
+.game-card{
+  min-width:0;
+
+  overflow:hidden;
+
+  position:relative;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.075),
+      rgba(255,255,255,.025)
+    );
+
+  transition:
+    transform .25s,
+    border-color .25s,
+    box-shadow .25s;
+}
+
+.game-card:hover{
+  transform:translateY(-7px);
+
+  border-color:rgba(171,91,255,.48);
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.3);
+}
+
+/* GAME THUMBNAIL */
+
+.game-thumb{
+  height:245px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17122c,
+      #5b21b6
+    );
+}
+
+/*
+   OPTIONAL REAL THUMBNAIL
+
+   Put your own image here:
+
+   /uploads/games/mortal-shell-2.jpg
+
+   Example:
+
+   <img src="/uploads/games/example.jpg"
+        class="game-real-image">
+*/
+
+.game-real-image{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+    transform .45s ease,
+    filter .45s ease;
+}
+
+.game-card:hover .game-real-image{
+  transform:scale(1.07);
+
+  filter:brightness(1.08);
+}
+
+.game-thumb-overlay{
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05) 10%,
+      rgba(0,0,0,.2) 35%,
+      rgba(0,0,0,.92) 100%
+    );
+
+  z-index:2;
+}
+
+/* CSS ART FALLBACK */
+
+.game-art{
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  z-index:1;
+
+  overflow:hidden;
+}
+
+.game-art:before{
+  content:"";
+
+  position:absolute;
+
+  width:190px;
+  height:190px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.22),
+      transparent 65%
+    );
+
+  filter:blur(5px);
+}
+
+.game-art i{
+  position:relative;
+
+  z-index:2;
+
+  color:rgba(255,255,255,.8);
+
+  font-size:70px;
+
+  text-shadow:
+    0 12px 35px rgba(0,0,0,.55);
+}
+
+.art-purple{
+  background:
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(255,100,220,.35),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #10081f,
+      #5424a8,
+      #09050f
+    );
+}
+
+.art-blue{
+  background:
+    radial-gradient(
+      circle at 25% 20%,
+      rgba(60,180,255,.4),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #03111f,
+      #075985,
+      #020711
+    );
+}
+
+.art-red{
+  background:
+    radial-gradient(
+      circle at 65% 25%,
+      rgba(255,80,80,.42),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #210407,
+      #991b1b,
+      #090204
+    );
+}
+
+.art-green{
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(70,255,180,.35),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #021b16,
+      #047857,
+      #020b08
+    );
+}
+
+.art-orange{
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(255,190,60,.4),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #241004,
+      #c2410c,
+      #0c0502
+    );
+}
+
+/* GAME BADGES */
+
+.game-badge{
+  position:absolute;
+
+  top:12px;
+  left:12px;
+
+  z-index:5;
+
+  padding:6px 9px;
+
+  border-radius:8px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #ec4899
+    );
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:.6px;
+
+  text-transform:uppercase;
+
+  box-shadow:
+    0 8px 20px rgba(124,58,237,.25);
+}
+
+.game-year{
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  z-index:5;
+
+  padding:5px 8px;
+
+  border-radius:7px;
+
+  color:#ddd7e5;
+
+  background:rgba(0,0,0,.65);
+
+  backdrop-filter:blur(8px);
+
+  font-size:8px;
+
+  font-weight:800;
+}
+
+/* GAME THUMB TITLE */
+
+.game-thumb-info{
+  position:relative;
+
+  z-index:4;
+
+  width:100%;
+
+  padding:18px;
+}
+
+.game-thumb-info .game-category{
+  margin-bottom:5px;
+
+  color:#d7c6ef;
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:1.5px;
+
+  text-transform:uppercase;
+}
+
+.game-thumb-info h3{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:22px;
+
+  line-height:1.03;
+
+  letter-spacing:-.8px;
+
+  text-shadow:
+    0 5px 20px rgba(0,0,0,.65);
+}
+
+/* GAME BODY */
+
+.game-body{
+  padding:15px;
+}
+
+.game-meta{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:8px;
+
+  margin-bottom:8px;
+}
+
+.game-genre{
+  color:#b988ff;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+}
+
+.game-size{
+  color:#81798d;
+
+  font-size:8px;
+
+  font-weight:700;
+}
+
+.game-body p{
+  min-height:38px;
+
+  color:#918a9d;
+
+  font-size:9px;
+
+  line-height:1.55;
+}
+
+.game-tags{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:11px;
+}
+
+.game-tags span{
+  padding:5px 7px;
+
+  border-radius:7px;
+
+  color:#bcb4c9;
+
+  background:rgba(255,255,255,.045);
+
+  font-size:7px;
+
+  font-weight:800;
+}
+
+.game-open{
+  width:100%;
+
+  margin-top:13px;
+
+  padding:11px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:7px;
+
+  border:0;
+
+  border-radius:10px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #db2777
+    );
+
+  font-size:9px;
+
+  font-weight:900;
+
+  text-decoration:none;
+
+  box-shadow:
+    0 8px 22px rgba(124,58,237,.18);
+
+  transition:.2s;
+}
+
+.game-open:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 27px rgba(124,58,237,.32);
+}
+
+/* UPCOMING FEATURE */
+
+.upcoming-game{
+  width:100%;
+
+  margin-top:25px;
+
+  padding:20px;
+
+  display:grid;
+
+  grid-template-columns:120px minmax(0,1fr) auto;
+
+  align-items:center;
+
+  gap:18px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:
+    radial-gradient(
+      circle at left,
+      rgba(124,58,237,.17),
+      transparent 45%
+    ),
+    rgba(255,255,255,.025);
+}
+
+.upcoming-art{
+  width:120px;
+  height:90px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #7c3aed,
+      #ec4899
+    );
+
+  font-size:30px;
+}
+
+.upcoming-info .eyebrow{
+  margin-bottom:5px;
+
+  color:#bd7fff;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:1.5px;
+}
+
+.upcoming-info h3{
+  margin-bottom:5px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:19px;
+}
+
+.upcoming-info p{
+  color:#918a9d;
+
+  font-size:9px;
+
+  line-height:1.6;
+}
+
+.upcoming-button{
+  padding:10px 13px;
+
+  border-radius:10px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #ec4899
+    );
+
+  font-size:9px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+}
+
+/* GAME NOTE */
+
+.game-note{
+  width:min(800px,calc(100% - 32px));
+
+  margin:45px auto 65px;
+
+  padding:25px;
+
+  text-align:center;
+
+  border:1px solid rgba(255,255,255,.07);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.05),
+      rgba(255,255,255,.02)
+    );
+}
+
+.game-note i{
+  margin-bottom:10px;
+
+  color:#c579ff;
+
+  font-size:25px;
+}
+
+.game-note h3{
+  margin-bottom:6px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:18px;
+}
+
+.game-note p{
+  color:#8f8899;
+
+  font-size:10px;
+
+  line-height:1.7;
+}
+
+/* =========================================================
+   SUPPORT
+========================================================= */
+
+.support-section{
+  width:min(850px,calc(100% - 32px));
+
+  margin:15px auto 60px;
+
+  padding:32px 20px;
+
+  text-align:center;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:25px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(150,57,255,.18),
+      rgba(255,255,255,.02)
+    );
+}
+
+.support-section h2{
+  margin-bottom:7px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:27px;
+}
+
+.support-section p{
+  margin-bottom:18px;
+
+  color:#a29bad;
+
+  font-size:12px;
+}
+
+.support-buttons{
+  display:flex;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:9px;
+}
+
+.support-btn{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:7px;
+
+  padding:11px 15px;
+
+  border-radius:11px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.whatsapp-btn{
+  background:#25d366;
+}
+
+.email-btn{
+  background:#7c4dff;
+}
+
+.telegram-btn{
+  background:#229ed9;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:0 auto;
+
+  padding:25px 0 32px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  border-top:1px solid rgba(255,255,255,.07);
+}
+
+.footer-brand{
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.footer-brand span{
+  color:#c778ff;
+}
+
+footer p{
+  color:#777181;
+
+  font-size:9px;
+}
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden-item{
+  display:none!important;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+  .game-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:950px){
+
+  .hero{
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+    gap:35px;
+  }
+
+  .hero-description{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    display:flex;
+
+    justify-content:center;
+  }
+
+  .hero-visual{
+    width:100%;
+  }
+
+  .platform-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+  .pricing-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .movie-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .game-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .games-live-bar{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .container,
+  .navbar,
+  .main-tabs,
+  .hero,
+  .section,
+  footer{
+    width:calc(100% - 24px);
+  }
+
+  .navbar{
+    margin-top:10px;
+  }
+
+  .main-tabs{
+    grid-template-columns:1fr;
+
+    margin-top:15px;
+  }
+
+  .main-tab{
+    padding:12px;
+  }
+
+  .hero{
+    padding-top:45px;
+  }
+
+  .hero h1{
+    font-size:40px;
+
+    letter-spacing:-2px;
+  }
+
+  .hero-description{
+    font-size:12px;
+  }
+
+  .hero-card{
+    padding:18px;
+  }
+
+  .platform-grid,
+  .pricing-grid,
+  .movie-grid,
+  .game-grid{
+    grid-template-columns:1fr;
+  }
+
+  .category-hero,
+  .games-hero{
+    width:calc(100% - 24px);
+
+    padding-top:48px;
+  }
+
+  .poster{
+    height:300px;
+  }
+
+  .poster-title{
+    font-size:31px;
+  }
+
+  .games-hero h1{
+    font-size:43px;
+
+    letter-spacing:-2px;
+  }
+
+  .game-thumb{
+    height:290px;
+  }
+
+  .game-thumb-info h3{
+    font-size:30px;
+  }
+
+  .game-section-heading{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .upcoming-game{
+    grid-template-columns:1fr;
+
+    text-align:center;
+  }
+
+  .upcoming-art{
+    width:100%;
+    height:150px;
+  }
+
+  .upcoming-button{
+    display:block;
+
+    text-align:center;
+  }
+
+  .support-section,
+  .game-note{
+    width:calc(100% - 24px);
+  }
+
+  footer{
+    flex-direction:column;
+
+    text-align:center;
+  }
+
+}
+
+@media(max-width:380px){
+
+  .logo-text{
+    font-size:14px;
+  }
+
+  .logo-icon{
+    width:38px;
+    height:38px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero-stats{
+    grid-template-columns:1fr;
+  }
+
+  .game-thumb{
+    height:260px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="glow glow-3"></div>
 
-<nav>
-<div class="navin">
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
 
-<a class="logo" href="index.html">
-SEHR<span>AN</span> MEDIA
-</a>
+<nav class="navbar">
 
-<div class="links">
-<a href="index.html">Home</a>
-<a href="#services">Services</a>
-<a href="#platforms">Platforms</a>
-<a href="#why">Why Us</a>
-<a href="order.html">Pricing</a>
-</div>
+  <a href="index.html" class="logo">
 
-<a class="navbtn" href="order.html">
-Order Now
-</a>
+    <div class="logo-icon">
+      <i class="fa-solid fa-bolt"></i>
+    </div>
 
-</div>
+    <div class="logo-text">
+      SehrAn <span>Media</span>
+    </div>
+
+  </a>
+
 </nav>
 
+<!-- =======================================================
+     MAIN TABS
+======================================================= -->
 
-<!-- HERO -->
+<div class="main-tabs">
 
-<main>
+  <button
+    class="main-tab active"
+    onclick="showTab('social',this)"
+  >
+    <i class="fa-solid fa-share-nodes"></i>
+    Social Apps
+  </button>
 
-<div class="hero">
+  <button
+    class="main-tab"
+    onclick="showTab('movies',this)"
+  >
+    <i class="fa-solid fa-film"></i>
+    Movies
+  </button>
 
-<div>
-
-<div class="kicker">
-<i class="fa-solid fa-bolt"></i>
-&nbsp; PREMIUM SOCIAL MEDIA SERVICES
-</div>
-
-<h1>
-Grow Your
-<span>Instagram.</span>
-<br>
-Build Your Presence.
-</h1>
-
-<p>
-Professional social media services designed for creators,
-brands and growing profiles. Explore our services and choose
-the option that fits your needs.
-</p>
-
-<div class="ctas">
-
-<a class="btn primary" href="order.html">
-View Packages
-<i class="fa-solid fa-arrow-right"></i>
-</a>
-
-<a class="btn secondary" href="#services">
-Explore Services
-</a>
-
-</div>
+  <button
+    class="main-tab"
+    onclick="showTab('games',this)"
+  >
+    <i class="fa-solid fa-gamepad"></i>
+    Games
+  </button>
 
 </div>
 
 
-<div class="visual">
+<!-- =======================================================
+     SOCIAL TAB
+======================================================= -->
 
-<div class="phone">
+<main id="social" class="tab-content active">
 
-<div class="ig">
-<i class="fa-brands fa-instagram"></i>
-</div>
+<section class="hero">
 
-<h2>
-INSTAGRAM
-<br>
-GROWTH
-</h2>
+  <div class="hero-left">
 
-<div class="big">
-10K+
-</div>
+    <div class="badge">
 
-<div class="statgrid">
+      <span class="badge-dot"></span>
 
-<div class="stat">
-<strong>Fast</strong>
-<small>Start</small>
-</div>
+      Social Services Available
 
-<div class="stat">
-<strong>Secure</strong>
-<small>Process</small>
-</div>
+    </div>
 
-<div class="stat">
-<strong>24/7</strong>
-<small>Support</small>
-</div>
+    <h1>
 
-</div>
+      Grow Your
 
-</div>
+      <span class="gradient">
+        Social Presence
+      </span>
 
-</div>
+      Faster.
 
-</div>
+    </h1>
 
+    <p class="hero-description">
 
-<!-- SERVICES -->
+      Explore Instagram, YouTube, Snapchat,
+      Facebook and WhatsApp in one clean
+      and organized place.
 
-<section id="services">
+    </p>
 
-<div class="sectionhead">
+    <a
+      href="#social-platforms"
+      class="primary-btn"
+    >
 
-<div class="mini">
-What We Offer
-</div>
+      <i class="fa-solid fa-rocket"></i>
 
-<h2>
-Everything You Need
-</h2>
+      Explore Social Apps
 
-<p>
-A clean and simple ordering experience built for modern
-social media services.
-</p>
+    </a>
 
-</div>
+  </div>
 
 
-<div class="cards">
+  <div class="hero-visual">
 
-<div class="card">
+    <div class="hero-card">
 
-<div class="icon">
-<i class="fa-brands fa-instagram"></i>
-</div>
+      <div class="profile-head">
 
-<h3>
-Instagram Services
-</h3>
+        <div class="profile-icon">
 
-<p>
-Explore our available Instagram packages and continue
-to the dedicated order page.
-</p>
+          <i class="fa-brands fa-instagram"></i>
 
-</div>
+        </div>
 
+        <div>
 
-<div class="card">
+          <div class="profile-name">
+            SehrAn Media
+          </div>
 
-<div class="icon">
-<i class="fa-solid fa-rocket"></i>
-</div>
+          <div class="profile-handle">
+            Social Media Services
+          </div>
 
-<h3>
-Fast Start
-</h3>
+        </div>
 
-<p>
-A simple ordering flow designed to make submitting
-your request quick and straightforward.
-</p>
+        <div class="profile-status">
+          ● LIVE
+        </div>
 
-</div>
+      </div>
 
+      <div class="hero-stats">
 
-<div class="card">
+        <div class="stat">
+          <strong>5+</strong>
+          <span>Platforms</span>
+        </div>
 
-<div class="icon">
-<i class="fa-solid fa-headset"></i>
-</div>
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>Support</span>
+        </div>
 
-<h3>
-Customer Support
-</h3>
+        <div class="stat">
+          <strong>2026</strong>
+          <span>Active</span>
+        </div>
 
-<p>
-Need help with your order? Contact our support team
-through the available channels.
-</p>
+      </div>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
 </section>
 
 
-<!-- PLATFORMS -->
+<section
+  class="section"
+  id="social-platforms"
+>
 
-<section id="platforms">
+  <div class="section-heading">
 
-<div class="sectionhead">
+    <div class="small">
+      Social Applications
+    </div>
 
-<div class="mini">
-More Platforms
-</div>
+    <h2>
+      Choose Your Platform
+    </h2>
 
-<h2>
-More Services Coming Soon
-</h2>
+    <p>
+      Search for a platform or select one below.
+    </p>
 
-<p>
-We are preparing additional platform services for
-future releases.
-</p>
-
-</div>
-
-
-<div class="cards">
+  </div>
 
 
-<!-- SNAPCHAT -->
+  <div class="search-box">
 
-<div class="card coming">
+    <i class="fa-solid fa-magnifying-glass"></i>
 
-<div class="soon">
-COMING SOON
-</div>
+    <input
+      type="text"
+      id="socialSearch"
+      placeholder="Search Instagram, YouTube, Snapchat, Facebook..."
+      oninput="searchSocial()"
+    >
 
-<div class="icon">
-<i class="fa-brands fa-snapchat"></i>
-</div>
-
-<h3>
-Snapchat
-</h3>
-
-<p>
-Snapchat-related services are currently being prepared
-and will be available in a future update.
-</p>
-
-</div>
+  </div>
 
 
-<!-- YOUTUBE -->
+  <div
+    class="platform-grid"
+    id="socialGrid"
+  >
 
-<div class="card coming">
+    <div
+      class="platform-card social-item"
+      data-name="instagram"
+    >
 
-<div class="soon">
-COMING SOON
-</div>
+      <div class="platform-icon instagram">
 
-<div class="icon">
-<i class="fa-brands fa-youtube"></i>
-</div>
+        <i class="fa-brands fa-instagram"></i>
 
-<h3>
-YouTube
-</h3>
+      </div>
 
-<p>
-YouTube services are coming soon. Stay tuned for the
-official launch.
-</p>
+      <h3>Instagram</h3>
 
-</div>
+      <p>
+        Followers and social media services.
+      </p>
 
+      <span class="status available">
+        Available
+      </span>
 
-<!-- FACEBOOK -->
+      <button
+        class="platform-link"
+        onclick="openInstagram()"
+      >
+        View Services
+      </button>
 
-<div class="card coming">
-
-<div class="soon">
-COMING SOON
-</div>
-
-<div class="icon">
-<i class="fa-brands fa-facebook"></i>
-</div>
-
-<h3>
-Facebook
-</h3>
-
-<p>
-Facebook services are currently under development.
-</p>
-
-</div>
+    </div>
 
 
-<!-- X -->
+    <div
+      class="platform-card social-item"
+      data-name="youtube"
+    >
 
-<div class="card coming">
+      <div class="platform-icon youtube">
 
-<div class="soon">
-COMING SOON
-</div>
+        <i class="fa-brands fa-youtube"></i>
 
-<div class="icon">
-<i class="fa-brands fa-x-twitter"></i>
-</div>
+      </div>
 
-<h3>
-X / Twitter
-</h3>
+      <h3>YouTube</h3>
 
-<p>
-X services will be added in a future release.
-</p>
+      <p>
+        YouTube channel services.
+      </p>
 
-</div>
+      <span class="status soon">
+        Coming Soon
+      </span>
 
-
-<!-- TELEGRAM -->
-
-<div class="card coming">
-
-<div class="soon">
-COMING SOON
-</div>
-
-<div class="icon">
-<i class="fa-brands fa-telegram"></i>
-</div>
-
-<h3>
-Telegram
-</h3>
-
-<p>
-Telegram services are being prepared and will be
-available soon.
-</p>
-
-</div>
+    </div>
 
 
-<!-- WHATSAPP -->
+    <div
+      class="platform-card social-item"
+      data-name="snapchat"
+    >
 
-<div class="card coming">
+      <div class="platform-icon snapchat">
 
-<div class="soon">
-COMING SOON
-</div>
+        <i class="fa-brands fa-snapchat"></i>
 
-<div class="icon">
-<i class="fa-brands fa-whatsapp"></i>
-</div>
+      </div>
 
-<h3>
-WhatsApp
-</h3>
+      <h3>Snapchat</h3>
 
-<p>
-WhatsApp-related services are planned for a future
-release.
-</p>
+      <p>
+        Snapchat services and packages.
+      </p>
 
-</div>
+      <span class="status soon">
+        Coming Soon
+      </span>
 
-</div>
+    </div>
+
+
+    <div
+      class="platform-card social-item"
+      data-name="facebook"
+    >
+
+      <div class="platform-icon facebook">
+
+        <i class="fa-brands fa-facebook-f"></i>
+
+      </div>
+
+      <h3>Facebook</h3>
+
+      <p>
+        Facebook services.
+      </p>
+
+      <span class="status soon">
+        Coming Soon
+      </span>
+
+    </div>
+
+
+    <div
+      class="platform-card social-item"
+      data-name="whatsapp"
+    >
+
+      <div class="platform-icon whatsapp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+      </div>
+
+      <h3>WhatsApp</h3>
+
+      <p>
+        Direct customer support.
+      </p>
+
+      <span class="status available">
+        Support
+      </span>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- WHY US -->
+<!-- =======================================================
+     INSTAGRAM SERVICES
+======================================================= -->
 
-<section id="why">
+<section
+  class="section"
+  id="instagram-services"
+>
 
-<div class="sectionhead">
+  <div class="service-title">
 
-<div class="mini">
-Why Zeeshan & SehrAn Studios
-</div>
+    <h2>
 
-<h2>
-Simple. Fast. Professional.
-</h2>
+      <span class="gradient">
+        Instagram
+      </span>
 
-</div>
+      Services
 
+    </h2>
 
-<div class="cards">
+    <p>
+      Select a package to continue.
+    </p>
 
-<div class="card">
-
-<div class="icon">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
-
-<h3>
-No Password Required
-</h3>
-
-<p>
-We do not ask customers to provide their social media
-password.
-</p>
-
-</div>
+  </div>
 
 
-<div class="card">
+  <div class="pricing-grid">
 
-<div class="icon">
-<i class="fa-solid fa-lock"></i>
-</div>
+    <!-- 200 -->
 
-<h3>
-Simple Checkout
-</h3>
+    <div class="price-card">
 
-<p>
-Choose an available package and continue to the
-dedicated order page.
-</p>
+      <div class="price-label">
+        Instagram Followers
+      </div>
 
-</div>
+      <h3>Starter</h3>
+
+      <div class="followers-number">
+        200 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          30
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=200&followers=200&price=30"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
 
 
-<div class="card">
+    <!-- 500 -->
 
-<div class="icon">
-<i class="fa-solid fa-mobile-screen"></i>
-</div>
+    <div class="price-card">
 
-<h3>
-Mobile Friendly
-</h3>
+      <div class="price-label">
+        Instagram Followers
+      </div>
 
-<p>
-The website is designed to work smoothly across
-phones, tablets and desktop devices.
-</p>
+      <h3>Starter Plus</h3>
 
-</div>
+      <div class="followers-number">
+        500 Followers
+      </div>
 
-</div>
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          50
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=500&followers=500&price=50"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 1000 -->
+
+    <div class="price-card popular">
+
+      <div class="popular-badge">
+        Popular
+      </div>
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Popular</h3>
+
+      <div class="followers-number">
+        1,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          90
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=1000&followers=1000&price=90"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 1500 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Growth</h3>
+
+      <div class="followers-number">
+        1,500 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          130
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=1500&followers=1500&price=130"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 2000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Growth Plus</h3>
+
+      <div class="followers-number">
+        2,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          150
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=2000&followers=2000&price=150"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 3000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Pro</h3>
+
+      <div class="followers-number">
+        3,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          200
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=3000&followers=3000&price=200"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 4000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Pro Plus</h3>
+
+      <div class="followers-number">
+        4,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          250
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=4000&followers=4000&price=250"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 5000 -->
+
+    <div class="price-card popular">
+
+      <div class="popular-badge">
+        Best Value
+      </div>
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Premium</h3>
+
+      <div class="followers-number">
+        5,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          300
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=5000&followers=5000&price=300"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 6000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Premium Plus</h3>
+
+      <div class="followers-number">
+        6,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          350
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=6000&followers=6000&price=350"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 7000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Advanced</h3>
+
+      <div class="followers-number">
+        7,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          450
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=7000&followers=7000&price=450"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 8000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Advanced Plus</h3>
+
+      <div class="followers-number">
+        8,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          500
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=8000&followers=8000&price=500"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 9000 -->
+
+    <div class="price-card">
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Elite</h3>
+
+      <div class="followers-number">
+        9,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          550
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=9000&followers=9000&price=550"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- 10000 -->
+
+    <div class="price-card popular">
+
+      <div class="popular-badge">
+        Maximum
+      </div>
+
+      <div class="price-label">
+        Instagram Followers
+      </div>
+
+      <h3>Elite Plus</h3>
+
+      <div class="followers-number">
+        10,000 Followers
+      </div>
+
+      <div class="price">
+
+        <span class="currency">
+          ₹
+        </span>
+
+        <strong>
+          600
+        </strong>
+
+      </div>
+
+      <a
+        href="order.html?package=10000&followers=10000&price=600"
+        class="price-btn"
+      >
+        Get Package
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- FINAL CTA -->
+<!-- SOCIAL SUPPORT -->
 
-<div class="band">
+<section class="support-section">
 
-<div class="bandin">
+  <h2>
+    Need Help?
+  </h2>
 
-<div>
+  <p>
+    Contact SehrAn Media support.
+  </p>
 
-<h2>
-Ready to place your order?
-</h2>
+  <div class="support-buttons">
 
-<p>
-View the currently available Instagram packages.
-</p>
+    <a
+      href="https://wa.me/919103874044"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="support-btn whatsapp-btn"
+    >
 
-</div>
+      <i class="fa-brands fa-whatsapp"></i>
 
-<a class="btn primary" href="order.html">
-Go to Pricing
-<i class="fa-solid fa-arrow-right"></i>
-</a>
+      WhatsApp
 
-</div>
+    </a>
+
+
+    <a
+      href="mailto:zpaul5567@gmail.com"
+      class="support-btn email-btn"
+    >
+
+      <i class="fa-solid fa-envelope"></i>
+
+      Email
+
+    </a>
+
+
+    <a
+      href="https://t.me/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="support-btn telegram-btn"
+    >
+
+      <i class="fa-brands fa-telegram"></i>
+
+      Telegram
+
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     MOVIES TAB
+======================================================= -->
+
+<main id="movies" class="tab-content">
+
+<section class="category-hero">
+
+  <div class="category-icon">
+
+    <i class="fa-solid fa-film"></i>
+
+  </div>
+
+  <div class="limited-offer">
+
+    <span class="offer-dot"></span>
+
+    MOVIE COLLECTION
+
+  </div>
+
+  <h1>
+
+    <span class="gradient">
+      Movies
+    </span>
+
+  </h1>
+
+  <p>
+
+    Explore different movie categories,
+    including Bollywood, Hollywood, South Indian,
+    Hindi dubbed, Punjabi and latest releases.
+
+  </p>
+
+</section>
+
+
+<section class="section">
+
+  <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="movieSearch"
+      placeholder="Search Bollywood, Hollywood, South, Hindi..."
+      oninput="searchMovies()"
+    >
+
+  </div>
+
+
+  <div
+    class="movie-grid"
+    id="movieGrid"
+  >
+
+    <!-- BOLLYWOOD -->
+
+    <div
+      class="media-card movie-item"
+      data-name="bollywood hindi indian movies"
+    >
+
+      <div class="poster movie-bollywood">
+
+        <div class="movie-badge">
+          COLLECTION
+        </div>
+
+        <div class="movie-quality">
+          HINDI
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            HINDI CINEMA
+          </div>
+
+          <div class="poster-title">
+            BOLLYWOOD
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Hindi • Indian Cinema
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          BOLLYWOOD • HINDI
+        </div>
+
+        <h3>
+          Bollywood Movies
+        </h3>
+
+        <p>
+          Explore Bollywood and Hindi movie listings.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Bollywood
+          </span>
+
+          <span>
+            <i class="fa-solid fa-language"></i>
+            Hindi
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('Bollywood Movies')"
+        >
+
+          Explore Bollywood
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- HOLLYWOOD -->
+
+    <div
+      class="media-card movie-item"
+      data-name="hollywood english international movies"
+    >
+
+      <div class="poster movie-hollywood">
+
+        <div class="movie-badge">
+          COLLECTION
+        </div>
+
+        <div class="movie-quality">
+          ENGLISH
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            INTERNATIONAL
+          </div>
+
+          <div class="poster-title">
+            HOLLYWOOD
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            English • International
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          HOLLYWOOD • INTERNATIONAL
+        </div>
+
+        <h3>
+          Hollywood Movies
+        </h3>
+
+        <p>
+          Explore Hollywood and international movie listings.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Hollywood
+          </span>
+
+          <span>
+            <i class="fa-solid fa-globe"></i>
+            International
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('Hollywood Movies')"
+        >
+
+          Explore Hollywood
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOUTH -->
+
+    <div
+      class="media-card movie-item"
+      data-name="south indian tamil telugu malayalam kannada movies"
+    >
+
+      <div class="poster movie-south">
+
+        <div class="movie-badge">
+          COLLECTION
+        </div>
+
+        <div class="movie-quality">
+          SOUTH
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            SOUTH INDIAN
+          </div>
+
+          <div class="poster-title">
+            SOUTH
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Tamil • Telugu • Malayalam • Kannada
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          SOUTH INDIAN
+        </div>
+
+        <h3>
+          South Indian Movies
+        </h3>
+
+        <p>
+          Browse South Indian movie listings and releases.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            South
+          </span>
+
+          <span>
+            <i class="fa-solid fa-language"></i>
+            Multi Language
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('South Indian Movies')"
+        >
+
+          Explore South Movies
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- HINDI DUBBED -->
+
+    <div
+      class="media-card movie-item"
+      data-name="hindi dubbed movies dubbed movies"
+    >
+
+      <div class="poster movie-hindi-dubbed">
+
+        <div class="movie-badge">
+          POPULAR
+        </div>
+
+        <div class="movie-quality">
+          DUBBED
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            DUBBED COLLECTION
+          </div>
+
+          <div class="poster-title">
+            HINDI
+            <br>
+            DUBBED
+          </div>
+
+          <div class="poster-year">
+            Hindi Dubbed Movies
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          DUBBED • HINDI
+        </div>
+
+        <h3>
+          Hindi Dubbed Movies
+        </h3>
+
+        <p>
+          Explore Hindi dubbed movie listings and collections.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-language"></i>
+            Hindi Dubbed
+          </span>
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Movies
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('Hindi Dubbed Movies')"
+        >
+
+          Explore Dubbed Movies
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PUNJABI -->
+
+    <div
+      class="media-card movie-item"
+      data-name="punjabi movies punjabi"
+    >
+
+      <div class="poster movie-punjabi">
+
+        <div class="movie-badge">
+          COLLECTION
+        </div>
+
+        <div class="movie-quality">
+          PUNJABI
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            REGIONAL CINEMA
+          </div>
+
+          <div class="poster-title">
+            PUNJABI
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Punjabi Cinema
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          PUNJABI CINEMA
+        </div>
+
+        <h3>
+          Punjabi Movies
+        </h3>
+
+        <p>
+          Explore Punjabi movie listings and regional cinema.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Punjabi
+          </span>
+
+          <span>
+            <i class="fa-solid fa-language"></i>
+            Regional
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('Punjabi Movies')"
+        >
+
+          Explore Punjabi
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- NEW -->
+
+    <div
+      class="media-card movie-item"
+      data-name="new latest latest movies new releases"
+    >
+
+      <div class="poster movie-new">
+
+        <div class="movie-badge">
+          NEW
+        </div>
+
+        <div class="movie-quality">
+          LATEST
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            RECENT RELEASES
+          </div>
+
+          <div class="poster-title">
+            NEW
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Latest Movie Collection
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          LATEST • NEW RELEASES
+        </div>
+
+        <h3>
+          New Movies
+        </h3>
+
+        <p>
+          Discover recently added movie listings.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-bolt"></i>
+            Latest
+          </span>
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Movies
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('New Movies')"
+        >
+
+          Explore New Movies
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TRENDING -->
+
+    <div
+      class="media-card movie-item"
+      data-name="trending popular movies"
+    >
+
+      <div class="poster movie-trending">
+
+        <div class="movie-badge">
+          TRENDING
+        </div>
+
+        <div class="movie-quality">
+          POPULAR
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            POPULAR NOW
+          </div>
+
+          <div class="poster-title">
+            TRENDING
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Popular Movie Collection
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          TRENDING • POPULAR
+        </div>
+
+        <h3>
+          Trending Movies
+        </h3>
+
+        <p>
+          Explore currently popular movie listings.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-fire"></i>
+            Trending
+          </span>
+
+          <span>
+            <i class="fa-solid fa-star"></i>
+            Popular
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('Trending Movies')"
+        >
+
+          Explore Trending
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ALL -->
+
+    <div
+      class="media-card movie-item"
+      data-name="all movies complete collection"
+    >
+
+      <div class="poster movie-all">
+
+        <div class="movie-badge">
+          FULL COLLECTION
+        </div>
+
+        <div class="movie-quality">
+          ALL
+        </div>
+
+        <div class="poster-content">
+
+          <div class="poster-kicker">
+            COMPLETE COLLECTION
+          </div>
+
+          <div class="poster-title">
+            ALL
+            <br>
+            MOVIES
+          </div>
+
+          <div class="poster-year">
+            Complete Movie Collection
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="movie-meta">
+          COMPLETE MOVIE COLLECTION
+        </div>
+
+        <h3>
+          All Movies
+        </h3>
+
+        <p>
+          Browse the complete movie collection and available categories.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-layer-group"></i>
+            Collection
+          </span>
+
+          <span>
+            <i class="fa-solid fa-film"></i>
+            Movies
+          </span>
+
+        </div>
+
+        <button
+          class="movie-open-btn"
+          onclick="movieCategory('All Movies')"
+        >
+
+          Open Movie Collection
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="game-note">
+
+  <i class="fa-solid fa-clapperboard"></i>
+
+  <h3>
+    Explore More Movies
+  </h3>
+
+  <p>
+    Browse movie categories, latest releases
+    and available movie listings.
+  </p>
 
 </div>
 
 </main>
 
 
-<!-- FOOTER -->
+<!-- =======================================================
+     GAMES TAB
+======================================================= -->
+
+<main id="games" class="tab-content">
+
+<section class="games-hero">
+
+  <div class="games-icon">
+
+    <i class="fa-solid fa-gamepad"></i>
+
+  </div>
+
+  <div class="limited-offer">
+
+    <span class="offer-dot"></span>
+
+    PC GAMING COLLECTION
+
+  </div>
+
+  <h1>
+
+    <span class="gradient">
+      PC Games
+    </span>
+
+  </h1>
+
+  <p>
+
+    Discover trending, latest, popular and upcoming
+    PC games in one premium gaming collection.
+
+  </p>
+
+</section>
+
+
+<!-- LIVE BAR -->
+
+<div class="games-live-bar">
+
+  <div class="games-live-left">
+
+    <span class="live-pulse"></span>
+
+    <div>
+
+      <div class="games-live-title">
+        PC Games Collection
+      </div>
+
+      <div class="games-live-sub">
+        Updated gaming listings
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="games-live-right">
+
+    <span class="game-stat">
+      <i class="fa-solid fa-gamepad"></i>
+      PC
+    </span>
+
+    <span class="game-stat">
+      <i class="fa-solid fa-fire"></i>
+      Trending
+    </span>
+
+    <span class="game-stat">
+      <i class="fa-solid fa-bolt"></i>
+      Latest
+    </span>
+
+    <span class="game-stat">
+      <i class="fa-solid fa-star"></i>
+      Popular
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- GAME SEARCH -->
+
+<section class="section">
+
+  <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="gameSearch"
+      placeholder="Search games by name, genre or year..."
+      oninput="searchGames()"
+    >
+
+  </div>
+
+</section>
+
+
+<!-- FILTERS -->
+
+<div class="game-filters">
+
+  <button
+    class="game-filter active"
+    data-filter="all"
+    onclick="filterGames('all',this)"
+  >
+    <i class="fa-solid fa-layer-group"></i>
+    All Games
+  </button>
+
+  <button
+    class="game-filter"
+    data-filter="trending"
+    onclick="filterGames('trending',this)"
+  >
+    <i class="fa-solid fa-fire"></i>
+    Trending
+  </button>
+
+  <button
+    class="game-filter"
+    data-filter="latest"
+    onclick="filterGames('latest',this)"
+  >
+    <i class="fa-solid fa-bolt"></i>
+    Latest
+  </button>
+
+  <button
+    class="game-filter"
+    data-filter="popular"
+    onclick="filterGames('popular',this)"
+  >
+    <i class="fa-solid fa-star"></i>
+    Popular
+  </button>
+
+  <button
+    class="game-filter"
+    data-filter="upcoming"
+    onclick="filterGames('upcoming',this)"
+  >
+    <i class="fa-solid fa-rocket"></i>
+    Upcoming
+  </button>
+
+</div>
+
+
+<!-- =======================================================
+     TRENDING GAMES
+======================================================= -->
+
+<section class="section">
+
+  <div class="game-section-heading">
+
+    <div class="game-section-heading-left">
+
+      <div class="game-section-icon">
+
+        <i class="fa-solid fa-fire"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Trending Games
+        </h2>
+
+        <p>
+          Popular games right now
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="game-view-all">
+      HOT RIGHT NOW
+    </div>
+
+  </div>
+
+
+  <div class="game-grid">
+
+
+    <!-- MORTAL SHELL II -->
+
+    <article
+      class="game-card game-item"
+      data-name="mortal shell ii action rpg 2026"
+      data-category="trending latest upcoming"
+    >
+
+      <div class="game-thumb art-purple">
+
+        <!-- Optional image:
+        <img
+          src="/uploads/games/mortal-shell-ii.jpg"
+          class="game-real-image"
+          alt="Mortal Shell II"
+        >
+        -->
+
+        <div class="game-art">
+          <i class="fa-solid fa-skull"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          TRENDING
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Action RPG
+          </div>
+
+          <h3>
+            Mortal Shell II
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Action
+          </span>
+
+          <span class="game-size">
+            65.6 GB
+          </span>
+
+        </div>
+
+        <p>
+          Dark fantasy action RPG with intense combat and Shell-based gameplay.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            RPG
+          </span>
+
+          <span>
+            2026
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- RUINS OF DAWN -->
+
+    <article
+      class="game-card game-item"
+      data-name="ruins of dawn adventure 2026"
+      data-category="trending latest"
+    >
+
+      <div class="game-thumb art-blue">
+
+        <div class="game-art">
+          <i class="fa-solid fa-mountain-sun"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          TRENDING
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Adventure
+          </div>
+
+          <h3>
+            Ruins of Dawn
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Adventure
+          </span>
+
+          <span class="game-size">
+            2.1 GB
+          </span>
+
+        </div>
+
+        <p>
+          Explore a mysterious world filled with adventure and discovery.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Adventure
+          </span>
+
+          <span>
+            2026
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- DRAGONSWORD -->
+
+    <article
+      class="game-card game-item"
+      data-name="dragonsword awakening action rpg 2026"
+      data-category="trending latest popular"
+    >
+
+      <div class="game-thumb art-red">
+
+        <div class="game-art">
+          <i class="fa-solid fa-dragon"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          HOT
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Action RPG
+          </div>
+
+          <h3>
+            DragonSword:
+            Awakening
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Action
+          </span>
+
+          <span class="game-size">
+            16.4 GB
+          </span>
+
+        </div>
+
+        <p>
+          Fantasy action adventure with a young hero and a dangerous journey.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            RPG
+          </span>
+
+          <span>
+            2026
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- BLACK MYTH -->
+
+    <article
+      class="game-card game-item"
+      data-name="black myth wukong fantasy action rpg 2024"
+      data-category="trending popular"
+    >
+
+      <div class="game-thumb art-orange">
+
+        <div class="game-art">
+          <i class="fa-solid fa-staff-snake"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          POPULAR
+        </div>
+
+        <div class="game-year">
+          2024
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Fantasy Action
+          </div>
+
+          <h3>
+            Black Myth:
+            Wukong
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Fantasy
+          </span>
+
+          <span class="game-size">
+            133.1 GB
+          </span>
+
+        </div>
+
+        <p>
+          Mythical action RPG inspired by the legendary Monkey King.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            RPG
+          </span>
+
+          <span>
+            Popular
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- =====================================================
+       LATEST GAMES
+  ===================================================== -->
+
+  <div class="game-section-heading">
+
+    <div class="game-section-heading-left">
+
+      <div class="game-section-icon">
+
+        <i class="fa-solid fa-bolt"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Latest Games
+        </h2>
+
+        <p>
+          Recently added PC games
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="game-view-all">
+      NEW ARRIVALS
+    </div>
+
+  </div>
+
+
+  <div class="game-grid">
+
+
+    <!-- AFTER INC -->
+
+    <article
+      class="game-card game-item"
+      data-name="after inc revival simulation 2025"
+      data-category="latest"
+    >
+
+      <div class="game-thumb art-green">
+
+        <div class="game-art">
+          <i class="fa-solid fa-city"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          NEW
+        </div>
+
+        <div class="game-year">
+          2025
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Simulation
+          </div>
+
+          <h3>
+            After Inc:
+            Revival
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Simulation
+          </span>
+
+          <span class="game-size">
+            739.9 MB
+          </span>
+
+        </div>
+
+        <p>
+          Build, manage and survive in a challenging post-apocalyptic world.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Simulation
+          </span>
+
+          <span>
+            Latest
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- STONEMACHIA -->
+
+    <article
+      class="game-card game-item"
+      data-name="stonemachia action 2026"
+      data-category="latest"
+    >
+
+      <div class="game-thumb art-purple">
+
+        <div class="game-art">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          NEW
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Action
+          </div>
+
+          <h3>
+            Stonemachia
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Action
+          </span>
+
+          <span class="game-size">
+            11.0 GB
+          </span>
+
+        </div>
+
+        <p>
+          Enter a fantasy action world filled with combat and challenges.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Action
+          </span>
+
+          <span>
+            2026
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- SURVIVAL LOG -->
+
+    <article
+      class="game-card game-item"
+      data-name="survival log adventure survival 2026"
+      data-category="latest trending"
+    >
+
+      <div class="game-thumb art-blue">
+
+        <div class="game-art">
+          <i class="fa-solid fa-person-running"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          NEW
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Survival
+          </div>
+
+          <h3>
+            Survival Log
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Adventure
+          </span>
+
+          <span class="game-size">
+            3.7 GB
+          </span>
+
+        </div>
+
+        <p>
+          A compact adventure experience focused on exploration and survival.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Survival
+          </span>
+
+          <span>
+            Latest
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- SANDUSTRY -->
+
+    <article
+      class="game-card game-item"
+      data-name="sandustry adventure simulation 2026"
+      data-category="latest trending"
+    >
+
+      <div class="game-thumb art-orange">
+
+        <div class="game-art">
+          <i class="fa-solid fa-industry"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          NEW
+        </div>
+
+        <div class="game-year">
+          2026
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Adventure
+          </div>
+
+          <h3>
+            Sandustry
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Adventure
+          </span>
+
+          <span class="game-size">
+            358 MB
+          </span>
+
+        </div>
+
+        <p>
+          Discover a fresh adventure experience in a compact package.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Adventure
+          </span>
+
+          <span>
+            2026
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- =====================================================
+       POPULAR GAMES
+  ===================================================== -->
+
+  <div class="game-section-heading">
+
+    <div class="game-section-heading-left">
+
+      <div class="game-section-icon">
+
+        <i class="fa-solid fa-star"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Popular Games
+        </h2>
+
+        <p>
+          Well-known PC games
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="game-view-all">
+      FAN FAVORITES
+    </div>
+
+  </div>
+
+
+  <div class="game-grid">
+
+
+    <!-- GHOST RECON -->
+
+    <article
+      class="game-card game-item"
+      data-name="ghost recon wildlands tom clancy open world action 2017"
+      data-category="popular"
+    >
+
+      <div class="game-thumb art-blue">
+
+        <div class="game-art">
+          <i class="fa-solid fa-crosshairs"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          POPULAR
+        </div>
+
+        <div class="game-year">
+          2017
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Open World
+          </div>
+
+          <h3>
+            Ghost Recon
+            Wildlands
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Open World
+          </span>
+
+          <span class="game-size">
+            71.4 GB
+          </span>
+
+        </div>
+
+        <p>
+          Tactical open-world shooter set across a massive landscape.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Action
+          </span>
+
+          <span>
+            Open World
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- PROJECT ZOMBOID -->
+
+    <article
+      class="game-card game-item"
+      data-name="project zomboid survival simulation zombie 2013"
+      data-category="popular"
+    >
+
+      <div class="game-thumb art-red">
+
+        <div class="game-art">
+          <i class="fa-solid fa-skull-crossbones"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          POPULAR
+        </div>
+
+        <div class="game-year">
+          2013
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Survival
+          </div>
+
+          <h3>
+            Project
+            Zomboid
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Simulation
+          </span>
+
+          <span class="game-size">
+            4.9 GB
+          </span>
+
+        </div>
+
+        <p>
+          Hardcore zombie survival with crafting, building and exploration.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Zombie
+          </span>
+
+          <span>
+            Survival
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- MINECRAFT DUNGEONS -->
+
+    <article
+      class="game-card game-item"
+      data-name="minecraft dungeons action adventure 2020"
+      data-category="popular"
+    >
+
+      <div class="game-thumb art-green">
+
+        <div class="game-art">
+          <i class="fa-solid fa-cubes-stacked"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          POPULAR
+        </div>
+
+        <div class="game-year">
+          2020
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Action
+          </div>
+
+          <h3>
+            Minecraft
+            Dungeons
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Action
+          </span>
+
+          <span class="game-size">
+            2.2 GB
+          </span>
+
+        </div>
+
+        <p>
+          Dungeon-crawling action adventure set in the Minecraft universe.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            Action
+          </span>
+
+          <span>
+            Adventure
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- ELEX -->
+
+    <article
+      class="game-card game-item"
+      data-name="elex action rpg 2017"
+      data-category="popular"
+    >
+
+      <div class="game-thumb art-purple">
+
+        <div class="game-art">
+          <i class="fa-solid fa-wand-sparkles"></i>
+        </div>
+
+        <div class="game-thumb-overlay"></div>
+
+        <div class="game-badge">
+          POPULAR
+        </div>
+
+        <div class="game-year">
+          2017
+        </div>
+
+        <div class="game-thumb-info">
+
+          <div class="game-category">
+            Action RPG
+          </div>
+
+          <h3>
+            ELEX
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-body">
+
+        <div class="game-meta">
+
+          <span class="game-genre">
+            Action
+          </span>
+
+          <span class="game-size">
+            24.7 GB
+          </span>
+
+        </div>
+
+        <p>
+          Open-world action RPG combining science fiction and fantasy.
+        </p>
+
+        <div class="game-tags">
+
+          <span>
+            PC
+          </span>
+
+          <span>
+            RPG
+          </span>
+
+          <span>
+            Open World
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- =====================================================
+       UPCOMING
+  ===================================================== -->
+
+  <div class="game-section-heading">
+
+    <div class="game-section-heading-left">
+
+      <div class="game-section-icon">
+
+        <i class="fa-solid fa-rocket"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Upcoming Games
+        </h2>
+
+        <p>
+          Coming soon
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="game-view-all">
+      COMING SOON
+    </div>
+
+  </div>
+
+
+  <div class="upcoming-game">
+
+    <div class="upcoming-art">
+
+      <i class="fa-solid fa-skull"></i>
+
+    </div>
+
+
+    <div class="upcoming-info">
+
+      <div class="eyebrow">
+        UPCOMING PC RELEASE
+      </div>
+
+      <h3>
+        Mortal Shell II
+      </h3>
+
+      <p>
+        Action RPG • PC • Release scheduled for
+        August 20, 2026.
+      </p>
+
+    </div>
+
+
+    <a
+      href="https://ankergames.net/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="upcoming-button"
+    >
+
+      View Details
+
+      <i class="fa-solid fa-arrow-right"></i>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- GAME NOTE -->
+
+<div class="game-note">
+
+  <i class="fa-solid fa-gamepad"></i>
+
+  <h3>
+    More PC Games Coming
+  </h3>
+
+  <p>
+    This gaming section is designed so you can
+    easily add more titles, thumbnails, genres,
+    sizes and categories later.
+  </p>
+
+</div>
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer>
 
-<div>
-Zeeshan & SehrAn Studios
-</div>
+  <div class="footer-brand">
 
-<div class="social">
+    SehrAn
+    <span>
+      Media
+    </span>
 
-<a href="https://t.me/SehrAnMediaOrdersBot"
-target="_blank"
-aria-label="Telegram">
-<i class="fa-brands fa-telegram"></i>
-</a>
+  </div>
 
-<a href="mailto:zpaul5567@gmail.com"
-aria-label="Email">
-<i class="fa-solid fa-envelope"></i>
-</a>
-
-</div>
-
-<small>
-© 2026 Zeeshan & SehrAn Studios. All rights reserved.
-</small>
+  <p>
+    © 2026 SehrAn Media. All rights reserved.
+  </p>
 
 </footer>
+
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script>
+
+/* =========================================================
+   TAB SWITCHING
+========================================================= */
+
+function showTab(tabName,clickedButton){
+
+  document
+    .querySelectorAll(".tab-content")
+    .forEach(tab => {
+
+      tab.classList.remove("active");
+
+    });
+
+
+  document
+    .querySelectorAll(".main-tab")
+    .forEach(button => {
+
+      button.classList.remove("active");
+
+    });
+
+
+  const selectedTab =
+    document.getElementById(tabName);
+
+
+  if(selectedTab){
+
+    selectedTab.classList.add("active");
+
+  }
+
+
+  if(clickedButton){
+
+    clickedButton.classList.add("active");
+
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+function openInstagram(){
+
+  const services =
+    document.getElementById(
+      "instagram-services"
+    );
+
+
+  if(services){
+
+    services.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   GENERIC SEARCH
+========================================================= */
+
+function filterItems(inputId,itemSelector){
+
+  const input =
+    document.getElementById(inputId);
+
+
+  if(!input){
+    return;
+  }
+
+
+  const query =
+    input.value
+      .toLowerCase()
+      .trim();
+
+
+  document
+    .querySelectorAll(itemSelector)
+    .forEach(item => {
+
+      const name =
+        item.getAttribute("data-name") || "";
+
+
+      item.classList.toggle(
+        "hidden-item",
+        !name
+          .toLowerCase()
+          .includes(query)
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   SOCIAL SEARCH
+========================================================= */
+
+function searchSocial(){
+
+  filterItems(
+    "socialSearch",
+    ".social-item"
+  );
+
+}
+
+
+/* =========================================================
+   MOVIE SEARCH
+========================================================= */
+
+function searchMovies(){
+
+  filterItems(
+    "movieSearch",
+    ".movie-item"
+  );
+
+}
+
+
+/* =========================================================
+   GAME SEARCH
+========================================================= */
+
+let activeGameFilter = "all";
+
+
+function searchGames(){
+
+  const input =
+    document.getElementById("gameSearch");
+
+
+  if(!input){
+    return;
+  }
+
+
+  const query =
+    input.value
+      .toLowerCase()
+      .trim();
+
+
+  document
+    .querySelectorAll(".game-item")
+    .forEach(card => {
+
+      const name =
+        (
+          card.getAttribute("data-name") || ""
+        ).toLowerCase();
+
+
+      const categories =
+        (
+          card.getAttribute("data-category") || ""
+        ).toLowerCase();
+
+
+      const matchesSearch =
+        name.includes(query);
+
+
+      const matchesFilter =
+        activeGameFilter === "all" ||
+        categories.includes(activeGameFilter);
+
+
+      card.classList.toggle(
+        "hidden-item",
+        !(matchesSearch && matchesFilter)
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   GAME FILTER
+========================================================= */
+
+function filterGames(filter,button){
+
+  activeGameFilter = filter;
+
+
+  document
+    .querySelectorAll(".game-filter")
+    .forEach(btn => {
+
+      btn.classList.remove("active");
+
+    });
+
+
+  if(button){
+
+    button.classList.add("active");
+
+  }
+
+
+  searchGames();
+
+}
+
+
+/* =========================================================
+   MOVIE CATEGORY
+========================================================= */
+
+function movieCategory(name){
+
+  alert(
+    name +
+    " section is being prepared. Please check back soon!"
+  );
+
+}
+
+</script>
 
 </body>
 </html>
