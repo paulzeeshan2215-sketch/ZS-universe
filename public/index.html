@@ -1,1530 +1,1281 @@
-[18-08-2026 01:16 PM] Paul Zeeshan: <!DOCTYPE html>
+[18-08-2026 01:05 PM] Paul Zeeshan: <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SehrAn Media — Social, Movies & Games</title>
+  <title>Order — SehrAn Media</title>
 
-<meta name="description"
-content="SehrAn Media — Social media services, movies and games.">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #0b0b0f;
+      color: #fff;
+      padding: 20px;
+    }
 
-<link
-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
-rel="stylesheet">
+    .container {
+      width: 100%;
+      max-width: 620px;
+      margin: auto;
+    }
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
->
+    .card {
+      background: #15151c;
+      border: 1px solid #292936;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
 
-<style>
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 7px;
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #353542;
+      background: #0e0e14;
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #7777ff;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 11px;
+      padding: 14px;
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #ffffff;
+      color: #111;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .movie-box {
+      display: none;
+      background: #0f0f15;
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .movie-box img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .movie-title {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .movie-price {
+      margin-top: 6px;
+      color: #bdbdff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .movie-description {
+      color: #aaa;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .payment-box {
+      background: #101017;
+      border: 1px solid #292936;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 18px;
+    }
+
+    .payment-box h3 {
+      margin-bottom: 8px;
+    }
+
+    .amount {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .hint {
+      color: #999;
+      font-size: 13px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .error {
+      display: none;
+      background: #321719;
+      border: 1px solid #703338;
+      color: #ffb4b8;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+    }
+
+    .success .order-id {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 15px 0;
+      word-break: break-word;
+    }
+
+    .loading {
+      text-align: center;
+      color: #aaa;
+      padding: 15px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .small {
+      color: #888;
+      font-size: 12px;
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card" id="orderCard">
+
+    <h1>Place Your Order</h1>
+    <div class="subtitle">SehrAn Media</div>
+
+    <div id="errorBox" class="error"></div>
+
+    <!-- MOVIE SELECTION -->
+    <div id="movieSection">
+
+      <label for="movieSelect">Select Movie</label>
+
+      <select id="movieSelect">
+        <option value="">Loading movies...</option>
+      </select>
+
+      <div id="movieBox" class="movie-box">
+
+        <img id="moviePoster" alt="Movie poster">
+
+        <div id="movieTitle" class="movie-title"></div>
+
+        <div id="moviePrice" class="movie-price"></div>
+
+        <div id="movieDescription" class="movie-description"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INSTAGRAM SECTION -->
+    <div id="instagramSection" class="hidden">
+[18-08-2026 01:05 PM] Paul Zeeshan: <label for="package">Instagram Package</label>
+
+      <select id="package">
+        <option value="">Select package</option>
+      </select>
+
+      <label for="username">Instagram Username</label>
+
+      <input
+        id="username"
+        type="text"
+        placeholder="@username"
+      >
+
+      <label for="profile">Instagram Profile Link</label>
+
+      <input
+        id="profile"
+        type="url"
+        placeholder="https://instagram.com/username"
+      >
+
+    </div>
+
+
+    <!-- CONTACT -->
+    <label for="mobile">Mobile Number</label>
+
+    <input
+      id="mobile"
+      type="tel"
+      inputmode="numeric"
+      maxlength="10"
+      placeholder="10 digit mobile number"
+    >
+
+
+    <label for="email">Email</label>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="your@email.com"
+    >
+
+
+    <!-- UTR -->
+    <label for="utr">UTR / Transaction ID</label>
+
+    <input
+      id="utr"
+      type="text"
+      maxlength="80"
+      placeholder="Enter UTR if available"
+    >
+
+
+    <!-- PROMO -->
+    <label for="promoCode">Promo Code</label>
+
+    <input
+      id="promoCode"
+      type="text"
+      maxlength="30"
+      placeholder="Optional"
+    >
+
+
+    <!-- PAYMENT -->
+    <div class="payment-box">
+
+      <h3>Payment</h3>
+
+      <div>
+        Payable Amount
+      </div>
+
+      <div id="amount" class="amount">
+        ₹0.00
+      </div>
+
+      <div class="hint">
+        Complete your payment and upload the payment screenshot below.
+      </div>
+
+    </div>
+
+
+    <!-- SCREENSHOT -->
+    <label for="screenshot">
+      Payment Screenshot
+    </label>
+
+    <input
+      id="screenshot"
+      type="file"
+      accept="image/jpeg,image/jpg,image/png,image/webp"
+    >
+
+    <div class="hint">
+      JPG, PNG or WEBP only. Maximum size: 5 MB.
+    </div>
+
+
+    <button id="submitBtn">
+      Submit Order
+    </button>
+
+    <div class="small">
+      Please verify your payment details before submitting.
+    </div>
+
+  </div>
+
+
+  <!-- SUCCESS -->
+  <div id="successCard" class="card success">
+
+    <h1>✅ Order Submitted</h1>
+
+    <p class="subtitle">
+      Your order has been received successfully.
+    </p>
+
+    <div>
+      Order ID
+    </div>
+
+    <div id="successOrderId" class="order-id"></div>
+
+    <p>
+      Status: <strong>PENDING</strong>
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+"use strict";
+
 
 /* =========================================================
-   RESET
+   CONFIG
 ========================================================= */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+const API_BASE = "";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const movieSelect =
+  document.getElementById("movieSelect");
+
+const movieBox =
+  document.getElementById("movieBox");
+
+const moviePoster =
+  document.getElementById("moviePoster");
+
+const movieTitle =
+  document.getElementById("movieTitle");
+
+const moviePrice =
+  document.getElementById("moviePrice");
+
+const movieDescription =
+  document.getElementById("movieDescription");
+
+const mobileInput =
+  document.getElementById("mobile");
+
+const emailInput =
+  document.getElementById("email");
+
+const utrInput =
+  document.getElementById("utr");
+
+const promoInput =
+  document.getElementById("promoCode");
+
+const screenshotInput =
+  document.getElementById("screenshot");
+
+const amountBox =
+  document.getElementById("amount");
+
+const submitBtn =
+  document.getElementById("submitBtn");
+
+const errorBox =
+  document.getElementById("errorBox");
+
+const orderCard =
+  document.getElementById("orderCard");
+
+const successCard =
+  document.getElementById("successCard");
+
+const successOrderId =
+  document.getElementById("successOrderId");
+
+const instagramSection =
+  document.getElementById("instagramSection");
+
+const packageSelect =
+  document.getElementById("package");
+
+const usernameInput =
+  document.getElementById("username");
+
+const profileInput =
+  document.getElementById("profile");
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let movies = [];
+
+let selectedMovie = null;
+[18-08-2026 01:05 PM] Paul Zeeshan: /* =========================================================
+   URL PARAMETERS
+========================================================= */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const urlMovieId =
+  params.get("movieId");
+
+const urlType =
+  (params.get("type") || "")
+    .toLowerCase();
+
+const urlPackage =
+  params.get("package");
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(message) {
+
+  errorBox.textContent =
+    message || "Something went wrong.";
+
+  errorBox.style.display =
+    "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
-html{
-  scroll-behavior:smooth;
-}
 
-body{
-  width:100%;
-  min-height:100vh;
-  overflow-x:hidden;
+function hideError() {
 
-  font-family:"Poppins",sans-serif;
-  color:#fff;
+  errorBox.textContent = "";
 
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(130,45,255,.22),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(255,40,150,.15),
-      transparent 28%
-    ),
-    #07070d;
-}
-
-button,
-input{
-  font-family:inherit;
-}
-
-a{
-  color:inherit;
+  errorBox.style.display =
+    "none";
 }
 
 
 /* =========================================================
-   BACKGROUND GLOW
+   FORMAT
 ========================================================= */
 
-.glow{
-  position:fixed;
-  width:350px;
-  height:350px;
-  border-radius:50%;
-  filter:blur(110px);
-  opacity:.12;
-  pointer-events:none;
-  z-index:-1;
-}
+function money(value) {
 
-.glow-1{
-  top:-150px;
-  left:-150px;
-  background:#8a2be2;
-}
+  const number =
+    Number(value);
 
-.glow-2{
-  right:-150px;
-  top:300px;
-  background:#ff1493;
-}
-
-.glow-3{
-  left:40%;
-  bottom:-200px;
-  background:#00bfff;
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-  width:min(1120px,calc(100% - 32px));
-  margin:auto;
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-.navbar{
-  width:min(1120px,calc(100% - 32px));
-  margin:18px auto 0;
-
-  padding:13px 16px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:18px;
-
-  background:rgba(15,13,28,.88);
-
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.28);
-
-  position:sticky;
-  top:12px;
-  z-index:100;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-.logo-icon{
-  width:42px;
-  height:42px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7b2cff,
-      #ff3cac,
-      #ffb347
-    );
-
-  box-shadow:
-    0 8px 25px rgba(174,57,255,.3);
-}
-
-.logo-icon i{
-  font-size:19px;
-}
-
-.logo-text{
-  font-size:17px;
-  font-weight:900;
-}
-
-.logo-text span{
-  color:#d78aff;
-}
-
-
-/* =========================================================
-   MAIN TABS
-========================================================= */
-
-.main-tabs{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:24px auto 0;
-
-  padding:8px;
-
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-
-  background:rgba(255,255,255,.035);
-}
-
-.main-tab{
-  min-width:0;
-
-  padding:14px 10px;
-
-  border:0;
-  border-radius:13px;
-
-  background:transparent;
-  color:#9992a8;
-
-  font-size:13px;
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-.main-tab i{
-  margin-right:7px;
-}
-
-.main-tab:hover{
-  color:#fff;
-  background:rgba(255,255,255,.06);
-}
-
-.main-tab.active{
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7d32ff,
-      #ff329d
-    );
-
-  box-shadow:
-    0 10px 30px rgba(140,45,255,.22);
-}
-[18-08-2026 01:16 PM] Paul Zeeshan: /* =========================================================
-   TAB CONTENT
-========================================================= */
-
-.tab-content{
-  display:none;
-  animation:fadeIn .3s ease;
-}
-
-.tab-content.active{
-  display:block;
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
+  if (!Number.isFinite(number)) {
+    return "₹0.00";
   }
 
-  to{
-    opacity:1;
-    transform:translateY(0);
+  return "₹" +
+    number.toFixed(2);
+}
+
+
+/* =========================================================
+   LOAD MOVIES
+========================================================= */
+
+async function loadMovies() {
+
+  try {
+
+    const response =
+      await fetch(
+        API_BASE + "/api/movies",
+        {
+          method: "GET",
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Unable to load movies."
+      );
+    }
+
+    movies =
+      Array.isArray(data.movies)
+        ? data.movies
+        : [];
+
+    movieSelect.innerHTML =
+      '<option value="">Select a movie</option>';
+
+    if (!movies.length) {
+
+      movieSelect.innerHTML =
+        '<option value="">No movies available</option>';
+
+      return;
+    }
+
+    movies.forEach(movie => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        movie.movieId;
+
+      option.textContent =
+        movie.title +
+        " — " +
+        money(movie.price);
+
+      movieSelect.appendChild(option);
+
+    });
+
+
+    /*
+      If homepage opened order.html with:
+      ?movieId=MOV123
+    */
+
+    if (urlMovieId) {
+
+      const exists =
+        movies.some(
+          movie =>
+            movie.movieId ===
+            urlMovieId
+        );
+
+      if (exists) {
+
+        movieSelect.value =
+          urlMovieId;
+
+        selectMovie(
+          urlMovieId
+        );
+      }
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Movie loading error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Unable to load movies."
+    );
+
   }
 }
 
 
 /* =========================================================
-   HERO
+   SELECT MOVIE
 ========================================================= */
 
-.hero{
-  width:min(1120px,calc(100% - 32px));
+function selectMovie(movieId) {
 
-  margin:0 auto;
+  selectedMovie =
+    movies.find(
+      movie =>
+        movie.movieId ===
+        movieId
+    ) || null;
 
-  padding:70px 0 55px;
+  if (!selectedMovie) {
 
-  display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,.85fr);
+    movieBox.style.display =
+      "none";
 
-  align-items:center;
+    amountBox.textContent =
+      "₹0.00";
 
-  gap:50px;
-}
-
-.hero-left{
-  min-width:0;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:8px 13px;
-  margin-bottom:18px;
-
-  border:1px solid rgba(188,113,255,.25);
-  border-radius:999px;
-
-  color:#e2c7ff;
-  background:rgba(146,60,255,.12);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.badge-dot{
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#65ffad;
-
-  box-shadow:
-    0 0 12px #65ffad;
-}
-
-.hero h1{
-  max-width:650px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:
-    clamp(40px,6vw,68px);
-
-  line-height:1.04;
-
-  letter-spacing:-3px;
-
-  font-weight:900;
-
-  margin-bottom:20px;
-}
-
-.gradient{
-  background:
-    linear-gradient(
-      90deg,
-      #b56cff,
-      #ff4fb3,
-      #67d7ff
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-}
-
-.hero-description{
-  max-width:610px;
-
-  color:#bcb6ca;
-
-  font-size:15px;
-  line-height:1.8;
-
-  margin-bottom:27px;
-}
-
-.primary-btn{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-
-  padding:13px 19px;
-
-  border-radius:13px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8637ff,
-      #ff329d
-    );
-
-  font-size:13px;
-  font-weight:800;
-
-  box-shadow:
-    0 12px 30px rgba(161,52,255,.25);
-
-  transition:.25s;
-}
-
-.primary-btn:hover{
-  transform:translateY(-3px);
-}
-
-
-/* =========================================================
-   HERO CARD
-========================================================= */
-
-.hero-visual{
-  min-width:0;
-
-  display:flex;
-  justify-content:center;
-}
-
-.hero-card{
-  width:100%;
-  max-width:410px;
-
-  padding:24px;
-
-  border-radius:26px;
-
-  border:1px solid rgba(255,255,255,.11);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.09),
-      rgba(255,255,255,.025)
-    );
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.35);
-
-  backdrop-filter:blur(16px);
-
-  animation:floating 4s ease-in-out infinite;
-}
-
-@keyframes floating{
-
-  0%,100%{
-    transform:translateY(0);
+    return;
   }
 
-  50%{
-    transform:translateY(-8px);
+  movieBox.style.display =
+    "block";
+
+
+  movieTitle.textContent =
+    selectedMovie.title || "";
+
+
+  moviePrice.textContent =
+    money(
+      selectedMovie.price
+    );
+
+
+  movieDescription.textContent =
+    selectedMovie.description || "";
+
+
+  if (selectedMovie.poster) {
+
+    moviePoster.src =
+      selectedMovie.poster;
+
+    moviePoster.style.display =
+      "block";
+
+  } else {
+
+    moviePoster.removeAttribute(
+      "src"
+    );
+
+    moviePoster.style.display =
+      "none";
   }
 
-}
 
-.profile-head{
-  display:flex;
-  align-items:center;
-
-  gap:12px;
-
-  margin-bottom:20px;
-}
-
-.profile-icon{
-  width:54px;
-  height:54px;
-
-  flex-shrink:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:16px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #833ab4,
-      #fd1d1d,
-      #fcb045
-    );
-
-  font-size:26px;
-}
-
-.profile-name{
-  font-size:15px;
-  font-weight:900;
-}
-
-.profile-handle{
-  margin-top:3px;
-
-  color:#938c9f;
-
-  font-size:10px;
-}
-
-.profile-status{
-  margin-left:auto;
-
-  color:#65ffad;
-
-  font-size:10px;
-  font-weight:800;
-}
-
-.hero-stats{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:8px;
-}
-
-.stat{
-  padding:14px 7px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-
-  background:rgba(0,0,0,.18);
-}
-
-.stat strong{
-  display:block;
-
-  font-size:18px;
-  font-weight:900;
-}
-
-.stat span{
-  display:block;
-
-  margin-top:3px;
-
-  color:#8e879b;
-
-  font-size:9px;
-}
-
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:0 auto;
-
-  padding:55px 0;
-}
-
-.section-heading{
-  max-width:700px;
-
-  margin:0 auto 30px;
-
-  text-align:center;
-}
-[18-08-2026 01:16 PM] Paul Zeeshan: .section-heading .small{
-  margin-bottom:8px;
-
-  color:#c07aff;
-
-  font-size:10px;
-  font-weight:900;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
-}
-
-.section-heading h2{
-  font-family:"Montserrat",sans-serif;
-
-  font-size:
-    clamp(28px,4vw,43px);
-
-  line-height:1.1;
-
-  letter-spacing:-1.5px;
-
-  margin-bottom:10px;
-}
-
-.section-heading p{
-  color:#9992a5;
-
-  font-size:13px;
-
-  line-height:1.7;
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-box{
-  width:100%;
-  max-width:700px;
-
-  margin:0 auto 30px;
-
-  position:relative;
-}
-
-.search-box i{
-  position:absolute;
-
-  left:17px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#888196;
-
-  font-size:14px;
-}
-
-.search-box input{
-  width:100%;
-  height:50px;
-
-  padding:
-    0 18px 0 45px;
-
-  border:
-    1px solid rgba(255,255,255,.09);
-
-  border-radius:15px;
-
-  outline:none;
-
-  color:#fff;
-
-  background:
-    rgba(255,255,255,.045);
-
-  font-size:13px;
-
-  transition:.25s;
-}
-
-.search-box input::placeholder{
-  color:#777080;
-}
-
-.search-box input:focus{
-  border-color:
-    rgba(180,100,255,.55);
-
-  background:
-    rgba(255,255,255,.06);
-
-  box-shadow:
-    0 0 0 3px rgba(150,60,255,.08);
-}
-
-
-/* =========================================================
-   SOCIAL GRID
-========================================================= */
-
-.platform-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,minmax(0,1fr));
-
-  gap:14px;
-}
-
-.platform-card{
-  min-width:0;
-
-  padding:22px 14px;
-
-  text-align:center;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
-    );
-
-  transition:.25s;
-}
-
-.platform-card:hover{
-  transform:translateY(-5px);
-
-  border-color:
-    rgba(180,100,255,.4);
-}
-
-.platform-icon{
-  width:60px;
-  height:60px;
-
-  margin:0 auto 13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:18px;
-
-  font-size:27px;
-}
-
-.instagram{
-  background:
-    linear-gradient(
-      135deg,
-      #833ab4,
-      #fd1d1d,
-      #fcb045
-    );
-}
-
-.youtube{
-  background:#f03;
-}
-
-.snapchat{
-  color:#111;
-  background:#ffdb00;
-}
-
-.facebook{
-  background:#1877f2;
-}
-
-.whatsapp{
-  background:#25d366;
-}
-
-.platform-card h3{
-  margin-bottom:6px;
-  font-size:15px;
-}
-
-.platform-card p{
-  min-height:34px;
-
-  color:#918a9d;
-
-  font-size:9px;
-
-  line-height:1.5;
-}
-
-.status{
-  display:inline-block;
-
-  margin-top:10px;
-
-  padding:4px 8px;
-
-  border-radius:999px;
-
-  font-size:7px;
-
-  font-weight:900;
-
-  text-transform:uppercase;
-}
-
-.available{
-  color:#65ffad;
-  background:rgba(101,255,173,.08);
-}
-
-.soon{
-  color:#ffcf72;
-  background:rgba(255,207,114,.08);
-}
-
-.platform-link{
-  width:100%;
-
-  margin-top:12px;
-
-  padding:9px;
-
-  display:block;
-
-  border:0;
-
-  border-radius:10px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:rgba(255,255,255,.06);
-
-  font-size:10px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.platform-link:hover{
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
+  amountBox.textContent =
+    money(
+      selectedMovie.price
     );
 }
 
 
 /* =========================================================
-   SERVICES
+   MOVIE CHANGE
 ========================================================= */
 
-.service-title{
-  text-align:center;
+movieSelect.addEventListener(
+  "change",
+  function () {
 
-  margin-bottom:25px;
-}
-
-.service-title h2{
-  font-family:"Montserrat",sans-serif;
-
-  font-size:30px;
-
-  margin-bottom:7px;
-}
-
-.service-title p{
-  color:#938c9f;
-
-  font-size:12px;
-}
-
-.pricing-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:14px;
-}
-
-.price-card{
-  min-width:0;
-
-  padding:21px;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
+    selectMovie(
+      this.value
     );
 
-  transition:.25s;
+  }
+);
+[18-08-2026 01:05 PM] Paul Zeeshan: /* =========================================================
+   SCREENSHOT -> BASE64
+========================================================= */
 
-  position:relative;
-}
+function fileToBase64(file) {
 
-.price-card:hover{
-  transform:translateY(-5px);
+  return new Promise(
+    (resolve, reject) => {
 
-  border-color:
-    rgba(180,100,255,.45);
-}
+      const reader =
+        new FileReader();
 
-.price-card.popular{
-  border-color:
-    rgba(255,70,170,.45);
-}
-[18-08-2026 01:16 PM] Paul Zeeshan: .popular-badge{
-  position:absolute;
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
 
-  top:12px;
-  right:12px;
+      reader.onerror =
+        () => reject(
+          new Error(
+            "Unable to read payment screenshot."
+          )
+        );
 
-  padding:4px 7px;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff3b9d,
-      #ff7b47
-    );
-
-  font-size:7px;
-  font-weight:900;
-
-  text-transform:uppercase;
-}
-
-.price-label{
-  margin-bottom:6px;
-
-  color:#a49cac;
-
-  font-size:9px;
-}
-
-.price-card h3{
-  margin-bottom:5px;
-
-  font-size:17px;
-}
-
-.followers-number{
-  margin-bottom:15px;
-
-  color:#c27dff;
-
-  font-size:10px;
-
-  font-weight:800;
-}
-
-.price{
-  display:flex;
-
-  align-items:flex-end;
-
-  gap:3px;
-
-  margin-bottom:16px;
-}
-
-.currency{
-  margin-bottom:5px;
-
-  color:#c8c1d2;
-
-  font-size:15px;
-}
-
-.price strong{
-  font-size:30px;
-
-  line-height:1;
-
-  font-weight:900;
-}
-
-.price-btn{
-  width:100%;
-
-  padding:11px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:7px;
-
-  border-radius:11px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-
-  font-size:10px;
-
-  font-weight:900;
+      reader.readAsDataURL(file);
+    }
+  );
 }
 
 
 /* =========================================================
-   CATEGORY HERO
+   VALIDATION
 ========================================================= */
 
-.category-hero{
-  width:min(900px,calc(100% - 32px));
+function validMobile(value) {
 
-  margin:0 auto;
-
-  padding:65px 0 30px;
-
-  text-align:center;
+  return /^[6-9]\d{9}$/.test(
+    value
+  );
 }
 
-.category-icon{
-  width:75px;
-  height:75px;
 
-  margin:0 auto 18px;
+function validEmail(value) {
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  if (!value) {
+    return false;
+  }
 
-  border-radius:23px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff334e,
-      #8a2be2
-    );
-
-  box-shadow:
-    0 18px 45px rgba(160,45,255,.22);
-
-  font-size:31px;
-}
-
-.category-hero h1{
-  margin-bottom:10px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:
-    clamp(38px,6vw,62px);
-
-  line-height:1;
-
-  letter-spacing:-2px;
-}
-
-.category-hero p{
-  max-width:620px;
-
-  margin:0 auto;
-
-  color:#9e97ab;
-
-  font-size:13px;
-
-  line-height:1.7;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(value);
 }
 
 
 /* =========================================================
-   MOVIES
+   SUBMIT MOVIE ORDER
 ========================================================= */
 
-.movie-grid{
-  display:grid;
+async function submitMovieOrder() {
 
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
+  if (!selectedMovie) {
 
-  gap:16px;
-}
-
-.media-card{
-  min-width:0;
-
-  overflow:hidden;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
+    showError(
+      "Please select a movie."
     );
 
-  transition:.25s;
-}
+    return;
+  }
 
-.media-card:hover{
-  transform:translateY(-5px);
 
-  border-color:
-    rgba(180,100,255,.4);
+  const mobile =
+    mobileInput.value.trim();
+
+  const email =
+    emailInput.value.trim();
+
+  const utr =
+    utrInput.value.trim();
+
+  const promoCode =
+    promoInput.value
+      .trim()
+      .toUpperCase();
+
+  const file =
+    screenshotInput.files[0];
+
+
+  if (!mobile && !email) {
+
+    showError(
+      "Please provide either your mobile number or email address."
+    );
+
+    return;
+  }
+
+
+  if (
+    mobile &&
+    !validMobile(mobile)
+  ) {
+
+    showError(
+      "Please enter a valid Indian mobile number."
+    );
+
+    return;
+  }
+
+
+  if (
+    email &&
+    !validEmail(email)
+  ) {
+
+    showError(
+      "Please enter a valid email address."
+    );
+
+    return;
+  }
+
+
+  if (!file) {
+
+    showError(
+      "Payment screenshot is required."
+    );
+
+    return;
+  }
+
+
+  if (
+    file.size >
+    5 * 1024 * 1024
+  ) {
+
+    showError(
+      "Payment screenshot must be 5 MB or smaller."
+    );
+
+    return;
+  }
+
+
+  const allowedTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp"
+  ];
+
+
+  if (
+    !allowedTypes.includes(
+      file.type
+    )
+  ) {
+
+    showError(
+      "Please upload a valid JPG, PNG or WEBP payment screenshot."
+    );
+
+    return;
+  }
+
+
+  hideError();
+
+  submitBtn.disabled =
+    true;
+
+  submitBtn.textContent =
+    "Submitting...";
+
+
+  try {
+
+    const screenshot =
+      await fileToBase64(file);
+
+
+    /*
+      IMPORTANT:
+      Movie orders MUST go to
+      /api/movie-orders
+    */
+
+    const payload = {
+
+      movieId:
+        selectedMovie.movieId,
+
+      mobile:
+        mobile,
+
+      email:
+        email,
+
+      utr:
+        utr,
+
+      promoCode:
+        promoCode,
+
+      screenshot:
+        screenshot
+    };
+
+
+    console.log(
+      "Movie order payload:",
+      {
+        movieId:
+          payload.movieId,
+        mobile:
+          payload.mobile,
+        email:
+          payload.email,
+        utr:
+          payload.utr,
+        promoCode:
+          payload.promoCode,
+        screenshot:
+          payload.screenshot
+            ? "[uploaded]"
+            : ""
+      }
+    );
+
+
+    const response =
+      await fetch(
+        API_BASE +
+        "/api/movie-orders",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+            "Accept":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    const data =
+      await response.json()
+        .catch(
+          () => ({})
+        );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Unable to process movie order."
+      );
+    }
+
+
+    if (!data.ok) {
+
+      throw new Error(
+        data.error ||
+        "Movie order was not accepted."
+      );
+    }
+
+
+    /*
+      SUCCESS
+    */
+
+    successOrderId.textContent =
+      data.orderId ||
+      "Order submitted";
+[18-08-2026 01:05 PM] Paul Zeeshan: orderCard.style.display =
+      "none";
+
+    successCard.style.display =
+      "block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Movie order error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Unable to process movie order."
+    );
+
+
+    submitBtn.disabled =
+      false;
+
+    submitBtn.textContent =
+      "Submit Order";
+  }
 }
 
 
 /* =========================================================
-   POSTERS
+   INSTAGRAM ORDER
 ========================================================= */
 
-.poster{
-  height:300px;
+async function submitInstagramOrder() {
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  const pkg =
+    packageSelect.value.trim();
 
-  position:relative;
+  const username =
+    usernameInput.value.trim()
+      .replace(/^@/, "");
 
-  overflow:hidden;
-}
+  const profile =
+    profileInput.value.trim();
 
-.poster:before{
-  content:"";
+  const mobile =
+    mobileInput.value.trim();
 
-  position:absolute;
+  const email =
+    emailInput.value.trim();
 
-  inset:0;
+  const utr =
+    utrInput.value.trim();
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.05) 25%,
-      rgba(0,0,0,.78) 100%
+  const promoCode =
+    promoInput.value
+      .trim()
+      .toUpperCase();
+
+  const file =
+    screenshotInput.files[0];
+
+
+  if (!pkg) {
+
+    showError(
+      "Please select an Instagram package."
     );
 
-  z-index:1;
-}
+    return;
+  }
 
-.poster-content{
-  position:relative;
 
-  z-index:2;
+  if (!username) {
 
-  width:100%;
-  height:100%;
+    showError(
+      "Please enter your Instagram username."
+    );
 
-  display:flex;
+    return;
+  }
 
-  flex-direction:column;
 
-  justify-content:flex-end;
+  if (!profile) {
 
-  padding:20px;
+    showError(
+      "Please enter your Instagram profile link."
+    );
 
-  text-align:left;
-}
+    return;
+  }
 
-.poster-kicker{
-  font-size:9px;
 
-  font-weight:900;
+  if (!mobile && !email) {
 
-  letter-spacing:2px;
+    showError(
+      "Please provide either your mobile number or email address."
+    );
 
-  text-transform:uppercase;
+    return;
+  }
 
-  color:#e7dfff;
 
-  margin-bottom:6px;
-}
+  if (
+    mobile &&
+    !validMobile(mobile)
+  ) {
 
-.poster-title{
-  font-family:"Montserrat",sans-serif;
+    showError(
+      "Please enter a valid Indian mobile number."
+    );
 
-  font-size:28px;
+    return;
+  }
 
-  line-height:1.02;
 
-  font-weight:900;
+  if (
+    email &&
+    !validEmail(email)
+  ) {
 
-  letter-spacing:-1px;
+    showError(
+      "Please enter a valid email address."
+    );
 
-  text-shadow:
-    0 5px 20px rgba(0,0,0,.5);
-}
+    return;
+  }
 
-.poster-year{
-  margin-top:7px;
 
-  color:#d6cfdf;
+  if (!file) {
 
-  font-size:10px;
+    showError(
+      "Payment screenshot is required."
+    );
 
-  font-weight:700;
+    return;
+  }
+
+
+  if (
+    file.size >
+    5 * 1024 * 1024
+  ) {
+
+    showError(
+      "Payment screenshot must be 5 MB or smaller."
+    );
+
+    return;
+  }
+
+
+  hideError();
+
+  submitBtn.disabled =
+    true;
+
+  submitBtn.textContent =
+    "Submitting...";
+
+
+  try {
+
+    const screenshot =
+      await fileToBase64(file);
+
+
+    /*
+      Instagram orders use
+      /api/orders
+    */
+
+    const payload = {
+
+      package:
+        pkg,
+
+      mobile:
+        mobile,
+
+      email:
+        email,
+
+      username:
+        username,
+
+      profile:
+        profile,
+
+      utr:
+        utr,
+
+      promoCode:
+        promoCode,
+
+      screenshot:
+        screenshot
+    };
+
+
+    const response =
+      await fetch(
+        API_BASE +
+        "/api/orders",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+            "Accept":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    const data =
+      await response.json()
+        .catch(
+          () => ({})
+        );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Unable to process Instagram order."
+      );
+    }
+
+
+    if (!data.ok) {
+
+      throw new Error(
+        data.error ||
+        "Instagram order was not accepted."
+      );
+    }
+
+
+    successOrderId.textContent =
+      data.orderId ||
+      "Order submitted";
+
+
+    orderCard.style.display =
+      "none";
+
+    successCard.style.display =
+      "block";
+
+
+  } catch (error) {
+
+    console.error(
+      "Instagram order error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Unable to process Instagram order."
+    );
+
+
+    submitBtn.disabled =
+      false;
+
+    submitBtn.textContent =
+      "Submit Order";
+  }
 }
 
 
 /* =========================================================
-   MOVIE ART
-========================================================= */
-
-.movie-shawshank{
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(255,220,170,.22),
-      transparent 18%
-    ),
-    linear-gradient(
-      145deg,
-      #11131d 0%,
-      #332536 45%,
-      #090a10 100%
-    );
-}
-[18-08-2026 01:16 PM] Paul Zeeshan: .movie-oppenheimer{
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      rgba(255,155,40,.4),
-      transparent 22%
-    ),
-    linear-gradient(
-      145deg,
-      #090c13 0%,
-      #4a2918 48%,
-      #05060a 100%
-    );
-}
-
-.movie-inception{
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(80,150,255,.35),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #07111f,
-      #152c52,
-      #05070d
-    );
-}
-
-.movie-interstellar{
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(140,80,255,.35),
-      transparent 24%
-    ),
-    linear-gradient(
-      145deg,
-      #05050d,
-      #24163f,
-      #020205
-    );
-}
-
-
-/* =========================================================
-   LIMITED TIME BADGE
-========================================================= */
-
-.discount-badge{
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  z-index:5;
-
-  padding:6px 10px;
-
-  border-radius:999px;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff285f,
-      #ff147d
-    );
-
-  font-size:9px;
-
-  font-weight:900;
-
-  box-shadow:
-    0 8px 20px rgba(255,20,100,.25);
-
-  text-transform:uppercase;
-}
-
-.poster-quality{
-  position:absolute;
-
-  left:12px;
-  top:12px;
-
-  z-index:4;
-
-  padding:5px 9px;
-
-  border-radius:7px;
-
-  color:#fff;
-
-  background:rgba(0,0,0,.68);
-
-  font-size:9px;
-
-  font-weight:900;
-}
-
-
-/* =========================================================
-   CARD BODY
-========================================================= */
-
-.card-body{
-  padding:16px;
-}
-
-.card-body h3{
-  margin-bottom:6px;
-
-  font-size:15px;
-}
-
-.card-body p{
-  min-height:32px;
-
-  color:#918a9d;
-
-  font-size:9px;
-
-  line-height:1.6;
-}
-
-.movie-meta{
-  margin-bottom:7px;
-
-  color:#a79faf;
-
-  font-size:9px;
-
-  font-weight:700;
-}
-
-.movie-info{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:7px;
-
-  margin-top:12px;
-}
-
-.movie-info span{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:5px;
-
-  padding:5px 8px;
-
-  border-radius:7px;
-
-  color:#c8c2d2;
-
-  background:
-    rgba(255,255,255,.055);
-
-  font-size:8px;
-
-  font-weight:700;
-}
-
-.movie-info i{
-  color:#c57dff;
-}
-
-
-/* =========================================================
-   MOVIE BUTTON
-========================================================= */
-
-.card-btn{
-  width:100%;
-
-  margin-top:12px;
-
-  padding:10px;
-
-  border:0;
-
-  border-radius:10px;
-
-  color:#fff;
-
-  background:
-    rgba(255,255,255,.06);
-
-  font-size:10px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.card-btn:hover{
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-}
-
-.buy-movie-btn{
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-
-  box-shadow:
-    0 8px 20px rgba(145,45,255,.18);
-}
-
-
-/* =========================================================
-   GAMES
-========================================================= */
-
-.game-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:16px;
-}
-
-.game-one{
-  background:
-    linear-gradient(
-      135deg,
-      #111827,
-      #7c3aed
-    );
-}
-
-.game-two{
-  background:
-    linear-gradient(
-      135deg,
-      #431407,
-      #ea580c
-    );
-}
-
-.game-three{
-  background:
-    linear-gradient(
-      135deg,
-      #022c22,
-      #059669
-    );
-}
-
-.game-four{
-  background:
-    linear-gradient(
-      135deg,
-      #172554,
-      #0891b2
-    );
-}
-
-.game-one i,
-.game-two i,
-.game-three i,
-.game-four i{
-  font-size:55px;
-
-  position:relative;
-
-  z-index:2;
-
-  opacity:.8;
-}
-
-
-/* =========================================================
-   COMING SOON
-========================================================= */
-
-.coming-box{
-  width:min(760px,calc(100% - 32px));
-
-  margin:10px auto 65px;
-
-  padding:38px 22px;
-
-  text-align:center;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgb
+   SUBMIT BUTTON
