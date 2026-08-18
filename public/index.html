@@ -1,2115 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SehrAn Media — Social, Movies & Games</title>
-
-<meta name="description" content="SehrAn Media — Social media services, movies and games.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  width:100%;
-  min-height:100vh;
-  overflow-x:hidden;
-  font-family:"Poppins",sans-serif;
-  color:#fff;
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(130,45,255,.22),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(255,40,150,.15),
-      transparent 28%
-    ),
-    #07070d;
-}
-
-button,
-input{
-  font-family:inherit;
-}
-
-a{
-  color:inherit;
-}
-
-/* =========================================================
-   BACKGROUND GLOW
-========================================================= */
-
-.glow{
-  position:fixed;
-  width:350px;
-  height:350px;
-  border-radius:50%;
-  filter:blur(110px);
-  opacity:.12;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.glow-1{
-  top:-150px;
-  left:-150px;
-  background:#8a2be2;
-}
-
-.glow-2{
-  right:-150px;
-  top:300px;
-  background:#ff1493;
-}
-
-.glow-3{
-  left:40%;
-  bottom:-200px;
-  background:#00bfff;
-}
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-  width:min(1120px,calc(100% - 32px));
-  margin:auto;
-}
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-.navbar{
-  width:min(1120px,calc(100% - 32px));
-  margin:18px auto 0;
-  padding:13px 16px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:18px;
-
-  background:rgba(15,13,28,.88);
-
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  box-shadow:0 15px 45px rgba(0,0,0,.28);
-
-  position:sticky;
-  top:12px;
-  z-index:100;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-.logo-icon{
-  width:42px;
-  height:42px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7b2cff,
-      #ff3cac,
-      #ffb347
-    );
-
-  box-shadow:0 8px 25px rgba(174,57,255,.3);
-}
-
-.logo-icon i{
-  font-size:19px;
-}
-
-.logo-text{
-  font-size:17px;
-  font-weight:900;
-}
-
-.logo-text span{
-  color:#d78aff;
-}
-
-/* =========================================================
-   MAIN TABS
-========================================================= */
-
-.main-tabs{
-  width:min(1120px,calc(100% - 32px));
-  margin:24px auto 0;
-  padding:8px;
-
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-
-  background:rgba(255,255,255,.035);
-}
-
-.main-tab{
-  min-width:0;
-
-  padding:14px 10px;
-
-  border:0;
-  border-radius:13px;
-
-  background:transparent;
-  color:#9992a8;
-
-  font-size:13px;
-  font-weight:800;
-
-  cursor:pointer;
-  transition:.25s;
-}
-
-.main-tab i{
-  margin-right:7px;
-}
-
-.main-tab:hover{
-  color:#fff;
-  background:rgba(255,255,255,.06);
-}
-
-.main-tab.active{
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7d32ff,
-      #ff329d
-    );
-
-  box-shadow:
-    0 10px 30px
-    rgba(140,45,255,.22);
-}
-
-/* =========================================================
-   TABS
-========================================================= */
-
-.tab-content{
-  display:none;
-  animation:fadeIn .3s ease;
-}
-
-.tab-content.active{
-  display:block;
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-  width:min(1120px,calc(100% - 32px));
-  margin:0 auto;
-
-  padding:70px 0 55px;
-
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
-
-  align-items:center;
-  gap:50px;
-}
-
-.hero-left{
-  min-width:0;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:8px 13px;
-  margin-bottom:18px;
-
-  border:1px solid rgba(188,113,255,.25);
-  border-radius:999px;
-
-  color:#e2c7ff;
-  background:rgba(146,60,255,.12);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-.badge-dot{
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#65ffad;
-
-  box-shadow:0 0 12px #65ffad;
-}
-
-.hero h1{
-  max-width:650px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:clamp(40px,6vw,68px);
-
-  line-height:1.04;
-  letter-spacing:-3px;
-  font-weight:900;
-
-  margin-bottom:20px;
-}
-
-.gradient{
-  background:
-    linear-gradient(
-      90deg,
-      #b56cff,
-      #ff4fb3,
-      #67d7ff
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-}
-
-.hero-description{
-  max-width:610px;
-
-  color:#bcb6ca;
-
-  font-size:15px;
-  line-height:1.8;
-
-  margin-bottom:27px;
-}
-
-.primary-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-
-  padding:13px 19px;
-
-  border-radius:13px;
-
-  text-decoration:none;
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8637ff,
-      #ff329d
-    );
-
-  font-size:13px;
-  font-weight:800;
-
-  box-shadow:
-    0 12px 30px
-    rgba(161,52,255,.25);
-
-  transition:.25s;
-}
-
-.primary-btn:hover{
-  transform:translateY(-3px);
-}
-
-/* =========================================================
-   HERO CARD
-========================================================= */
-
-.hero-visual{
-  min-width:0;
-
-  display:flex;
-  justify-content:center;
-}
-
-.hero-card{
-  width:100%;
-  max-width:410px;
-
-  padding:24px;
-
-  border-radius:26px;
-
-  border:1px solid rgba(255,255,255,.11);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.09),
-      rgba(255,255,255,.025)
-    );
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.35);
-
-  backdrop-filter:blur(16px);
-
-  animation:floating 4s ease-in-out infinite;
-}
-
-@keyframes floating{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-8px);
-  }
-}
-
-.profile-head{
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  margin-bottom:20px;
-}
-
-.profile-icon{
-  width:54px;
-  height:54px;
-
-  flex-shrink:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:16px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #833ab4,
-      #fd1d1d,
-      #fcb045
-    );
-
-  font-size:26px;
-}
-
-.profile-name{
-  font-size:15px;
-  font-weight:900;
-}
-
-.profile-handle{
-  margin-top:3px;
-
-  color:#938c9f;
-
-  font-size:10px;
-}
-
-.profile-status{
-  margin-left:auto;
-
-  color:#65ffad;
-
-  font-size:10px;
-  font-weight:800;
-}
-
-.hero-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.stat{
-  padding:14px 7px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-
-  background:rgba(0,0,0,.18);
-}
-
-.stat strong{
-  display:block;
-
-  font-size:18px;
-  font-weight:900;
-}
-
-.stat span{
-  display:block;
-
-  margin-top:3px;
-
-  color:#8e879b;
-
-  font-size:9px;
-}
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:0 auto;
-
-  padding:55px 0;
-}
-
-.section-heading{
-  max-width:700px;
-
-  margin:0 auto 30px;
-
-  text-align:center;
-}
-
-.section-heading .small{
-  margin-bottom:8px;
-
-  color:#c07aff;
-
-  font-size:10px;
-  font-weight:900;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
-}
-
-.section-heading h2{
-  font-family:"Montserrat",sans-serif;
-
-  font-size:clamp(28px,4vw,43px);
-
-  line-height:1.1;
-
-  letter-spacing:-1.5px;
-
-  margin-bottom:10px;
-}
-
-.section-heading p{
-  color:#9992a5;
-
-  font-size:13px;
-  line-height:1.7;
-}
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-box{
-  width:100%;
-  max-width:700px;
-
-  margin:0 auto 30px;
-
-  position:relative;
-}
-
-.search-box i{
-  position:absolute;
-
-  left:17px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#888196;
-
-  font-size:14px;
-}
-
-.search-box input{
-  width:100%;
-  height:50px;
-
-  padding:0 18px 0 45px;
-
-  border:1px solid rgba(255,255,255,.09);
-
-  border-radius:15px;
-
-  outline:none;
-
-  color:#fff;
-
-  background:rgba(255,255,255,.045);
-
-  font-size:13px;
-
-  transition:.25s;
-}
-
-.search-box input::placeholder{
-  color:#777080;
-}
-
-.search-box input:focus{
-  border-color:rgba(180,100,255,.55);
-
-  background:rgba(255,255,255,.06);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(150,60,255,.08);
-}
-
-/* =========================================================
-   SOCIAL PLATFORMS
-========================================================= */
-
-.platform-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,minmax(0,1fr));
-
-  gap:14px;
-}
-
-.platform-card{
-  min-width:0;
-
-  padding:22px 14px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
-    );
-
-  transition:.25s;
-}
-
-.platform-card:hover{
-  transform:translateY(-5px);
-
-  border-color:
-    rgba(180,100,255,.4);
-}
-
-.platform-icon{
-  width:60px;
-  height:60px;
-
-  margin:0 auto 13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:18px;
-
-  font-size:27px;
-}
-
-.instagram{
-  background:
-    linear-gradient(
-      135deg,
-      #833ab4,
-      #fd1d1d,
-      #fcb045
-    );
-}
-
-.youtube{
-  background:#f03;
-}
-
-.snapchat{
-  color:#111;
-  background:#ffdb00;
-}
-
-.facebook{
-  background:#1877f2;
-}
-
-.whatsapp{
-  background:#25d366;
-}
-
-.platform-card h3{
-  margin-bottom:6px;
-
-  font-size:15px;
-}
-
-.platform-card p{
-  min-height:34px;
-
-  color:#918a9d;
-
-  font-size:9px;
-  line-height:1.5;
-}
-
-.platform-link{
-  width:100%;
-
-  margin-top:12px;
-  padding:9px;
-
-  display:block;
-
-  border:0;
-  border-radius:10px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:rgba(255,255,255,.06);
-
-  font-size:10px;
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.platform-link:hover{
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-}
-
-.status{
-  display:inline-block;
-
-  margin-top:10px;
-
-  padding:4px 8px;
-
-  border-radius:999px;
-
-  font-size:7px;
-  font-weight:900;
-
-  text-transform:uppercase;
-}
-
-.available{
-  color:#65ffad;
-  background:rgba(101,255,173,.08);
-}
-
-.soon{
-  color:#ffcf72;
-  background:rgba(255,207,114,.08);
-}
-
-/* =========================================================
-   INSTAGRAM SERVICES
-========================================================= */
-
-#instagram-services{
-  scroll-margin-top:90px;
-}
-
-.service-title{
-  text-align:center;
-
-  margin-bottom:25px;
-}
-
-.service-title h2{
-  font-family:"Montserrat",sans-serif;
-
-  font-size:30px;
-
-  margin-bottom:7px;
-}
-
-.service-title p{
-  color:#938c9f;
-
-  font-size:12px;
-}
-
-.pricing-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:14px;
-}
-
-.price-card{
-  min-width:0;
-
-  padding:21px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
-    );
-
-  transition:.25s;
-
-  position:relative;
-}
-
-.price-card:hover{
-  transform:translateY(-5px);
-
-  border-color:
-    rgba(180,100,255,.45);
-}
-
-.price-card.popular{
-  border-color:
-    rgba(255,70,170,.45);
-}
-
-.popular-badge{
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  padding:4px 7px;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff3b9d,
-      #ff7b47
-    );
-
-  font-size:7px;
-  font-weight:900;
-
-  text-transform:uppercase;
-}
-
-.price-label{
-  margin-bottom:6px;
-
-  color:#a49cac;
-
-  font-size:9px;
-}
-
-.price-card h3{
-  margin-bottom:5px;
-
-  font-size:17px;
-}
-
-.followers-number{
-  margin-bottom:15px;
-
-  color:#c27dff;
-
-  font-size:10px;
-  font-weight:800;
-}
-
-.price{
-  display:flex;
-  align-items:flex-end;
-  gap:3px;
-
-  margin-bottom:16px;
-}
-
-.currency{
-  margin-bottom:5px;
-
-  color:#c8c1d2;
-
-  font-size:15px;
-}
-
-.price strong{
-  font-size:30px;
-
-  line-height:1;
-
-  font-weight:900;
-}
-
-.price-btn{
-  width:100%;
-
-  padding:11px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-
-  border-radius:11px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-
-  font-size:10px;
-  font-weight:900;
-}
-
-/* =========================================================
-   CATEGORY HERO
-========================================================= */
-
-.category-hero{
-  width:min(900px,calc(100% - 32px));
-
-  margin:0 auto;
-
-  padding:55px 0 30px;
-
-  text-align:center;
-}
-
-.category-icon{
-  width:75px;
-  height:75px;
-
-  margin:0 auto 18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:23px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff334e,
-      #8a2be2
-    );
-
-  box-shadow:
-    0 18px 45px
-    rgba(160,45,255,.22);
-
-  font-size:31px;
-}
-
-.category-hero h1{
-  margin-bottom:10px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:clamp(38px,6vw,62px);
-
-  line-height:1;
-
-  letter-spacing:-2px;
-}
-
-.category-hero p{
-  max-width:650px;
-
-  margin:0 auto;
-
-  color:#9e97ab;
-
-  font-size:13px;
-
-  line-height:1.7;
-}
-
-/* =========================================================
-   LIMITED TIME OFFER
-========================================================= */
-
-.limited-offer{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  margin-bottom:15px;
-
-  padding:8px 14px;
-
-  border:1px solid rgba(255,100,180,.3);
-
-  border-radius:999px;
-
-  color:#ffb7dd;
-
-  background:rgba(255,50,150,.09);
-
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:1.2px;
-}
-
-.offer-dot{
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#ff4fae;
-
-  box-shadow:0 0 12px #ff4fae;
-
-  animation:offerPulse 1.5s infinite;
-}
-
-@keyframes offerPulse{
-
-  0%,100%{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  50%{
-    opacity:.45;
-    transform:scale(.75);
-  }
-}
-
-/* =========================================================
-   MOVIE / GAME GRID
-========================================================= */
-
-.movie-grid,
-.game-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:16px;
-}
-
-.media-card{
-  min-width:0;
-
-  overflow:hidden;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,.025)
-    );
-
-  transition:.25s;
-}
-
-.media-card:hover{
-  transform:translateY(-5px);
-
-  border-color:
-    rgba(180,100,255,.4);
-}
-
-/* =========================================================
-   MOVIE POSTERS
-========================================================= */
-
-.poster{
-  height:260px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  position:relative;
-
-  overflow:hidden;
-}
-
-.poster:before{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.05) 25%,
-      rgba(0,0,0,.8) 100%
-    );
-
-  z-index:1;
-}
-
-.poster-content{
-  position:relative;
-
-  z-index:2;
-
-  width:100%;
-  height:100%;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:flex-end;
-
-  padding:20px;
-
-  text-align:left;
-}
-
-.poster-kicker{
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
-
-  color:#e7dfff;
-
-  margin-bottom:6px;
-}
-
-.poster-title{
-  font-family:"Montserrat",sans-serif;
-
-  font-size:27px;
-
-  line-height:1.02;
-
-  font-weight:900;
-
-  letter-spacing:-1px;
-
-  text-shadow:
-    0 5px 20px rgba(0,0,0,.5);
-}
-
-.poster-year{
-  margin-top:7px;
-
-  color:#d6cfdf;
-
-  font-size:10px;
-
-  font-weight:700;
-}
-
-/* =========================================================
-   MOVIE CARD DESIGNS
-========================================================= */
-
-.movie-bollywood{
-
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      rgba(255,180,60,.4),
-      transparent 22%
-    ),
-    linear-gradient(
-      145deg,
-      #26120c,
-      #9b3b18,
-      #12090a
-    );
-}
-
-.movie-hollywood{
-
-  background:
-    radial-gradient(
-      circle at 70% 25%,
-      rgba(70,150,255,.45),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #07152b,
-      #174a88,
-      #050913
-    );
-}
-
-.movie-south{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(0,255,190,.35),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #061d19,
-      #087f67,
-      #03100e
-    );
-}
-
-.movie-hindi-dubbed{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(255,100,200,.4),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #250719,
-      #8a174e,
-      #10030c
-    );
-}
-
-.movie-punjabi{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(255,180,60,.45),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #2b1804,
-      #b25d08,
-      #100802
-    );
-}
-
-.movie-new{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(180,90,255,.45),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #16072d,
-      #6834a8,
-      #08040e
-    );
-}
-
-.movie-trending{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(255,60,100,.45),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #30070c,
-      #9e2634,
-      #100306
-    );
-}
-
-.movie-all{
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(80,180,255,.45),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #061b2c,
-      #176e9e,
-      #030b12
-    );
-}
-
-/* =========================================================
-   MOVIE BADGES
-========================================================= */
-
-.movie-badge{
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  z-index:4;
-
-  padding:6px 10px;
-
-  border-radius:999px;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff285f,
-      #ff147d
-    );
-
-  font-size:9px;
-
-  font-weight:900;
-
-  box-shadow:
-    0 8px 20px
-    rgba(255,20,100,.25);
-}
-
-.movie-quality{
-  position:absolute;
-
-  left:12px;
-  top:12px;
-
-  z-index:4;
-
-  padding:5px 9px;
-
-  border-radius:7px;
-
-  color:#fff;
-
-  background:rgba(0,0,0,.68);
-
-  font-size:9px;
-
-  font-weight:900;
-}
-
-/* =========================================================
-   CARD BODY
-========================================================= */
-
-.card-body{
-  padding:16px;
-}
-
-.card-body h3{
-  margin-bottom:6px;
-
-  font-size:15px;
-}
-
-.card-body p{
-  min-height:38px;
-
-  color:#918a9d;
-
-  font-size:9px;
-
-  line-height:1.6;
-}
-
-.movie-meta{
-  margin-bottom:7px;
-
-  color:#a79faf;
-
-  font-size:9px;
-
-  font-weight:700;
-}
-
-.movie-info{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:7px;
-
-  margin-top:12px;
-}
-
-.movie-info span{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:5px;
-
-  padding:5px 8px;
-
-  border-radius:7px;
-
-  color:#c8c2d2;
-
-  background:rgba(255,255,255,.055);
-
-  font-size:8px;
-
-  font-weight:700;
-}
-
-.movie-info i{
-  color:#c57dff;
-}
-
-/* =========================================================
-   MOVIE BUTTON
-========================================================= */
-
-.movie-open-btn{
-  width:100%;
-
-  margin-top:12px;
-
-  padding:11px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:7px;
-
-  border:0;
-
-  border-radius:10px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8337ff,
-      #ff3ba5
-    );
-
-  font-size:10px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 8px 20px
-    rgba(145,45,255,.18);
-
-  transition:.2s;
-}
-
-.movie-open-btn:hover{
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 12px 25px
-    rgba(145,45,255,.3);
-}
-
-/* =========================================================
-   COMING BOX
-========================================================= */
-
-.coming-box{
-  width:min(760px,calc(100% - 32px));
-
-  margin:10px auto 65px;
-
-  padding:38px 22px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.06),
-      rgba(255,255,255,.02)
-    );
-}
-
-.coming-box i{
-  margin-bottom:15px;
-
-  color:#c678ff;
-
-  font-size:38px;
-}
-
-.coming-box h2{
-  margin-bottom:8px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:25px;
-}
-
-.coming-box p{
-  max-width:550px;
-
-  margin:auto;
-
-  color:#938c9f;
-
-  font-size:12px;
-
-  line-height:1.7;
-}
-
-.movie-main-button{
-  margin-top:20px;
-}
-
-/* =========================================================
-   GAMES
-========================================================= */
-
-.game-one{
-  background:
-    linear-gradient(
-      135deg,
-      #111827,
-      #7c3aed
-    );
-}
-
-.game-two{
-  background:
-    linear-gradient(
-      135deg,
-      #431407,
-      #ea580c
-    );
-}
-
-.game-three{
-  background:
-    linear-gradient(
-      135deg,
-      #022c22,
-      #059669
-    );
-}
-
-.game-four{
-  background:
-    linear-gradient(
-      135deg,
-      #172554,
-      #0891b2
-    );
-}
-
-.game-one i,
-.game-two i,
-.game-three i,
-.game-four i{
-  font-size:55px;
-
-  position:relative;
-
-  z-index:2;
-
-  opacity:.8;
-}
-
-/* =========================================================
-   SUPPORT
-========================================================= */
-
-.support-section{
-  width:min(850px,calc(100% - 32px));
-
-  margin:15px auto 60px;
-
-  padding:32px 20px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:25px;
-
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(150,57,255,.18),
-      rgba(255,255,255,.02)
-    );
-}
-
-.support-section h2{
-  margin-bottom:7px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:27px;
-}
-
-.support-section p{
-  margin-bottom:18px;
-
-  color:#a29bad;
-
-  font-size:12px;
-}
-
-.support-buttons{
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:9px;
-}
-
-.support-btn{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:7px;
-
-  padding:11px 15px;
-
-  border-radius:11px;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  font-size:11px;
-
-  font-weight:800;
-}
-
-.whatsapp-btn{
-  background:#25d366;
-}
-
-.email-btn{
-  background:#7c4dff;
-}
-
-.telegram-btn{
-  background:#229ed9;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:0 auto;
-
-  padding:25px 0 32px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
-  border-top:1px solid rgba(255,255,255,.07);
-}
-
-.footer-brand{
-  font-size:13px;
-
-  font-weight:900;
-}
-
-.footer-brand span{
-  color:#c778ff;
-}
-
-footer p{
-  color:#777181;
-
-  font-size:9px;
-}
-
-.hidden-item{
-  display:none!important;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:950px){
-
-  .hero{
-    grid-template-columns:1fr;
-
-    text-align:center;
-
-    gap:35px;
-  }
-
-  .hero-description{
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .hero-buttons{
-    display:flex;
-
-    justify-content:center;
-  }
-
-  .hero-visual{
-    width:100%;
-  }
-
-  .platform-grid{
-    grid-template-columns:
-      repeat(3,minmax(0,1fr));
-  }
-
-  .pricing-grid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
-  .movie-grid,
-  .game-grid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-}
-
-@media(max-width:650px){
-
-  .container,
-  .navbar,
-  .main-tabs,
-  .hero,
-  .section,
-  footer{
-    width:calc(100% - 24px);
-  }
-
-  .navbar{
-    margin-top:10px;
-  }
-
-  .main-tabs{
-    grid-template-columns:1fr;
-
-    margin-top:15px;
-  }
-
-  .main-tab{
-    padding:12px;
-  }
-
-  .hero{
-    padding-top:45px;
-  }
-
-  .hero h1{
-    font-size:40px;
-
-    letter-spacing:-2px;
-  }
-
-  .hero-description{
-    font-size:12px;
-  }
-
-  .hero-card{
-    padding:18px;
-  }
-
-  .platform-grid,
-  .pricing-grid,
-  .movie-grid,
-  .game-grid{
-    grid-template-columns:1fr;
-  }
-
-  .category-hero{
-    width:calc(100% - 24px);
-
-    padding-top:48px;
-  }
-
-  .poster{
-    height:300px;
-  }
-
-  .poster-title{
-    font-size:31px;
-  }
-
-  .support-section,
-  .coming-box{
-    width:calc(100% - 24px);
-  }
-
-  footer{
-    flex-direction:column;
-
-    text-align:center;
-  }
-}
-
-@media(max-width:380px){
-
-  .logo-text{
-    font-size:14px;
-  }
-
-  .logo-icon{
-    width:38px;
-    height:38px;
-  }
-
-  .hero h1{
-    font-size:34px;
-  }
-
-  .hero-stats{
-    grid-template-columns:1fr;
-  }
-}
-
-</style>
-</head>
-
-<body>
-
 <!-- =========================================================
-     BACKGROUND
+     GAMES TAB — ANKER GAMES
 ========================================================= -->
 
-<div class="glow glow-1"></div>
-<div class="glow glow-2"></div>
-<div class="glow glow-3"></div>
+<main id="games" class="tab-content">
 
+<section class="category-hero">
 
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-
-<nav class="navbar">
-
-  <a href="index.html" class="logo">
-
-    <div class="logo-icon">
-      <i class="fa-solid fa-bolt"></i>
-    </div>
-
-    <div class="logo-text">
-      SehrAn <span>Media</span>
-    </div>
-
-  </a>
-
-</nav>
-
-
-<!-- =========================================================
-     MAIN TABS
-========================================================= -->
-
-<div class="main-tabs">
-
-  <button
-    class="main-tab active"
-    onclick="showTab('social',this)"
-  >
-    <i class="fa-solid fa-share-nodes"></i>
-    Social Apps
-  </button>
-
-  <button
-    class="main-tab"
-    onclick="showTab('movies',this)"
-  >
-    <i class="fa-solid fa-film"></i>
-    Movies
-  </button>
-
-  <button
-    class="main-tab"
-    onclick="showTab('games',this)"
-  >
+  <div class="category-icon game-category-icon">
     <i class="fa-solid fa-gamepad"></i>
-    Games
-  </button>
-
-</div>
-
-
-<!-- =========================================================
-     SOCIAL TAB
-========================================================= -->
-
-<main id="social" class="tab-content active">
-
-
-<section class="hero">
-
-  <div class="hero-left">
-
-    <div class="badge">
-
-      <span class="badge-dot"></span>
-
-      Social Services Available
-
-    </div>
-
-
-    <h1>
-
-      Grow Your
-
-      <span class="gradient">
-        Social Presence
-      </span>
-
-      Faster.
-
-    </h1>
-
-
-    <p class="hero-description">
-
-      Explore Instagram, YouTube, Snapchat,
-      Facebook and WhatsApp in one clean
-      and organized place.
-
-    </p>
-
-
-    <a
-      href="#social-platforms"
-      class="primary-btn"
-    >
-
-      <i class="fa-solid fa-rocket"></i>
-
-      Explore Social Apps
-
-    </a>
-
   </div>
 
-
-  <div class="hero-visual">
-
-    <div class="hero-card">
-
-      <div class="profile-head">
-
-        <div class="profile-icon">
-
-          <i class="fa-brands fa-instagram"></i>
-
-        </div>
-
-
-        <div>
-
-          <div class="profile-name">
-            SehrAn Media
-          </div>
-
-          <div class="profile-handle">
-            Social Media Services
-          </div>
-
-        </div>
-
-
-        <div class="profile-status">
-          ● LIVE
-        </div>
-
-      </div>
-
-
-      <div class="hero-stats">
-
-        <div class="stat">
-
-          <strong>5+</strong>
-
-          <span>
-            Platforms
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong>24/7</strong>
-
-          <span>
-            Support
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong>2026</strong>
-
-          <span>
-            Active
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
+  <div class="limited-offer game-offer">
+    <span class="offer-dot"></span>
+    PC GAMING COLLECTION
   </div>
+
+  <h1>
+    <span class="gradient">
+      PC Games
+    </span>
+  </h1>
+
+  <p>
+    Discover popular, trending and latest PC games.
+    Select any game or collection to continue on AnkerGames.
+  </p>
 
 </section>
 
 
-<section
-  class="section"
-  id="social-platforms"
->
+<!-- GAME SEARCH -->
+
+<section class="section">
 
   <div class="section-heading">
 
     <div class="small">
-      Social Applications
+      ANKER GAMES
     </div>
 
     <h2>
-      Choose Your Platform
+      Explore <span class="gradient">PC Games</span>
     </h2>
 
     <p>
-      Search for a platform or select one below.
+      Browse popular games, trending titles, latest releases
+      and the complete PC game collection.
     </p>
 
   </div>
@@ -2121,885 +57,111 @@ footer p{
 
     <input
       type="text"
-      id="socialSearch"
-      placeholder="Search Instagram, YouTube, Snapchat, Facebook..."
-      oninput="searchSocial()"
+      id="gameSearch"
+      placeholder="Search GTA, Minecraft, Red Dead, Forza..."
+      oninput="searchGames()"
     >
 
   </div>
 
+
+  <!-- GAME FEATURE CARDS -->
 
   <div
-    class="platform-grid"
-    id="socialGrid"
-  >
-
-
-    <div
-      class="platform-card social-item"
-      data-name="instagram"
-    >
-
-      <div class="platform-icon instagram">
-
-        <i class="fa-brands fa-instagram"></i>
-
-      </div>
-
-      <h3>
-        Instagram
-      </h3>
-
-      <p>
-        Followers and social media services.
-      </p>
-
-      <span class="status available">
-        Available
-      </span>
-
-      <button
-        class="platform-link"
-        onclick="openInstagram()"
-      >
-        View Services
-      </button>
-
-    </div>
-
-
-    <div
-      class="platform-card social-item"
-      data-name="youtube"
-    >
-
-      <div class="platform-icon youtube">
-
-        <i class="fa-brands fa-youtube"></i>
-
-      </div>
-
-      <h3>
-        YouTube
-      </h3>
-
-      <p>
-        YouTube channel services.
-      </p>
-
-      <span class="status soon">
-        Coming Soon
-      </span>
-
-    </div>
-
-
-    <div
-      class="platform-card social-item"
-      data-name="snapchat"
-    >
-
-      <div class="platform-icon snapchat">
-
-        <i class="fa-brands fa-snapchat"></i>
-
-      </div>
-
-      <h3>
-        Snapchat
-      </h3>
-
-      <p>
-        Snapchat services and packages.
-      </p>
-
-      <span class="status soon">
-        Coming Soon
-      </span>
-
-    </div>
-
-
-    <div
-      class="platform-card social-item"
-      data-name="facebook"
-    >
-
-      <div class="platform-icon facebook">
-
-        <i class="fa-brands fa-facebook-f"></i>
-
-      </div>
-
-      <h3>
-        Facebook
-      </h3>
-
-      <p>
-        Facebook services.
-      </p>
-
-      <span class="status soon">
-        Coming Soon
-      </span>
-
-    </div>
-
-
-    <div
-      class="platform-card social-item"
-      data-name="whatsapp"
-    >
-
-      <div class="platform-icon whatsapp">
-
-        <i class="fa-brands fa-whatsapp"></i>
-
-      </div>
-
-      <h3>
-        WhatsApp
-      </h3>
-
-      <p>
-        Direct customer support.
-      </p>
-
-      <span class="status available">
-        Support
-      </span>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     INSTAGRAM SERVICES
-========================================================= -->
-
-<section
-  class="section"
-  id="instagram-services"
->
-
-  <div class="service-title">
-
-    <h2>
-      <span class="gradient">
-        Instagram
-      </span>
-      Services
-    </h2>
-
-    <p>
-      Select a package to continue.
-    </p>
-
-  </div>
-
-
-  <div class="pricing-grid">
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Starter
-      </h3>
-
-      <div class="followers-number">
-        200 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          30
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=200&followers=200&price=30"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Starter Plus
-      </h3>
-
-      <div class="followers-number">
-        500 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          50
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=500&followers=500&price=50"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card popular">
-
-      <div class="popular-badge">
-        Popular
-      </div>
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Popular
-      </h3>
-
-      <div class="followers-number">
-        1,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          90
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=1000&followers=1000&price=90"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Growth
-      </h3>
-
-      <div class="followers-number">
-        1,500 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          130
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=1500&followers=1500&price=130"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Growth Plus
-      </h3>
-
-      <div class="followers-number">
-        2,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          150
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=2000&followers=2000&price=150"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Pro
-      </h3>
-
-      <div class="followers-number">
-        3,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          200
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=3000&followers=3000&price=200"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Pro Plus
-      </h3>
-
-      <div class="followers-number">
-        4,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          250
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=4000&followers=4000&price=250"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card popular">
-
-      <div class="popular-badge">
-        Best Value
-      </div>
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Premium
-      </h3>
-
-      <div class="followers-number">
-        5,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          300
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=5000&followers=5000&price=300"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Premium Plus
-      </h3>
-
-      <div class="followers-number">
-        6,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          350
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=6000&followers=6000&price=350"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Advanced
-      </h3>
-
-      <div class="followers-number">
-        7,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          450
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=7000&followers=7000&price=450"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Advanced Plus
-      </h3>
-
-      <div class="followers-number">
-        8,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          500
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=8000&followers=8000&price=500"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Elite
-      </h3>
-
-      <div class="followers-number">
-        9,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          550
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=9000&followers=9000&price=550"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-    <div class="price-card popular">
-
-      <div class="popular-badge">
-        Maximum
-      </div>
-
-      <div class="price-label">
-        Instagram Followers
-      </div>
-
-      <h3>
-        Elite Plus
-      </h3>
-
-      <div class="followers-number">
-        10,000 Followers
-      </div>
-
-      <div class="price">
-
-        <span class="currency">
-          ₹
-        </span>
-
-        <strong>
-          600
-        </strong>
-
-      </div>
-
-      <a
-        href="order.html?package=10000&followers=10000&price=600"
-        class="price-btn"
-      >
-        Get Package
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     SUPPORT
-========================================================= -->
-
-<section class="support-section">
-
-  <h2>
-    Need Help?
-  </h2>
-
-  <p>
-    Contact SehrAn Media support.
-  </p>
-
-  <div class="support-buttons">
-
-    <a
-      href="https://wa.me/919103874044"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="support-btn whatsapp-btn"
-    >
-      <i class="fa-brands fa-whatsapp"></i>
-      WhatsApp
-    </a>
-
-    <a
-      href="mailto:zpaul5567@gmail.com"
-      class="support-btn email-btn"
-    >
-      <i class="fa-solid fa-envelope"></i>
-      Email
-    </a>
-
-    <a
-      href="https://t.me/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="support-btn telegram-btn"
-    >
-      <i class="fa-brands fa-telegram"></i>
-      Telegram
-    </a>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- =========================================================
-     MOVIES TAB
-========================================================= -->
-
-<main id="movies" class="tab-content">
-
-
-<section class="category-hero">
-
-  <div class="category-icon">
-    <i class="fa-solid fa-film"></i>
-  </div>
-
-
-  <div class="limited-offer">
-
-    <span class="offer-dot"></span>
-
-    LIMITED-TIME MOVIE COLLECTION
-
-  </div>
-
-
-  <h1>
-
-    <span class="gradient">
-      Movies
-    </span>
-
-  </h1>
-
-
-  <p>
-
-    Explore a large movie collection through
-    MoviesBazar. Choose a category below
-    to continue.
-
-  </p>
-
-</section>
-
-
-<section class="section">
-
-
-  <div class="search-box">
-
-    <i class="fa-solid fa-magnifying-glass"></i>
-
-    <input
-      type="text"
-      id="movieSearch"
-      placeholder="Search Bollywood, Hollywood, South, Hindi..."
-      oninput="searchMovies()"
-    >
-
-  </div>
-
-
-  <div
-    class="movie-grid"
-    id="movieGrid"
+    class="game-grid"
+    id="gameGrid"
   >
 
 
     <!-- =====================================================
-         BOLLYWOOD
+         GTA V
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="bollywood hindi indian movies"
+      class="media-card game-item game-featured"
+      data-name="gta grand theft auto gta 5 gta v grand theft auto v"
     >
 
-      <div class="poster movie-bollywood">
+      <a
+        href="https://ankergames.net/game/grand-theft-auto-v?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          COLLECTION
-        </div>
+        <div class="poster game-gta">
 
-        <div class="movie-quality">
-          HINDI
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            HINDI CINEMA
+          <div class="game-badge">
+            #1 POPULAR
           </div>
 
-          <div class="poster-title">
-            BOLLYWOOD
-            <br>
-            MOVIES
+          <div class="game-quality">
+            PC
           </div>
 
-          <div class="poster-year">
-            Hindi • Indian Cinema
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              GRAND THEFT AUTO
+            </div>
+
+            <div class="game-title">
+              GTA V
+            </div>
+
+            <div class="game-subtitle">
+              ACTION • OPEN WORLD
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          BOLLYWOOD • HINDI
+        <div class="game-meta">
+          POPULAR • ACTION • OPEN WORLD
         </div>
 
         <h3>
-          Bollywood Movies
+          Grand Theft Auto V
         </h3>
 
         <p>
-          Explore the Bollywood and Hindi movie collection.
+          One of the most popular PC games on AnkerGames.
+          Open the actual GTA V listing directly.
         </p>
 
         <div class="movie-info">
 
           <span>
-            <i class="fa-solid fa-film"></i>
-            Bollywood
+            <i class="fa-solid fa-gamepad"></i>
+            PC
           </span>
 
           <span>
-            <i class="fa-solid fa-language"></i>
-            Hindi
+            <i class="fa-solid fa-earth-americas"></i>
+            Open World
+          </span>
+
+          <span>
+            <i class="fa-solid fa-fire"></i>
+            Popular
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://ankergames.net/game/grand-theft-auto-v?lang=en"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Explore Bollywood
-
+          Open GTA V
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3008,85 +170,182 @@ footer p{
 
 
     <!-- =====================================================
-         HOLLYWOOD
+         GTA V ENHANCED
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="hollywood english international movies"
+      class="media-card game-item"
+      data-name="gta v enhanced grand theft auto v enhanced gta enhanced"
     >
 
-      <div class="poster movie-hollywood">
+      <a
+        href="https://ankergames.net/game/grand-theft-auto-v-enhanced?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          COLLECTION
-        </div>
+        <div class="poster game-gta-enhanced">
 
-        <div class="movie-quality">
-          ENGLISH
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            INTERNATIONAL
+          <div class="game-badge">
+            LATEST
           </div>
 
-          <div class="poster-title">
-            HOLLYWOOD
-            <br>
-            MOVIES
+          <div class="game-quality">
+            2025
           </div>
 
-          <div class="poster-year">
-            English • International
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              GRAND THEFT AUTO
+            </div>
+
+            <div class="game-title">
+              GTA V
+              <br>
+              ENHANCED
+            </div>
+
+            <div class="game-subtitle">
+              ACTION • CRIME
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          HOLLYWOOD • INTERNATIONAL
+        <div class="game-meta">
+          2025 • ACTION • CRIME
         </div>
 
         <h3>
-          Hollywood Movies
+          Grand Theft Auto V Enhanced
         </h3>
 
         <p>
-          Explore Hollywood and international movie listings.
+          Enhanced edition listing with updated PC information.
         </p>
 
         <div class="movie-info">
 
           <span>
-            <i class="fa-solid fa-film"></i>
-            Hollywood
+            <i class="fa-solid fa-calendar"></i>
+            2025
+          </span>
+
+          <span>
+            <i class="fa-solid fa-gamepad"></i>
+            PC
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/grand-theft-auto-v-enhanced?lang=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="movie-open-btn"
+        >
+          Open Game
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RED DEAD REDEMPTION 2
+    ====================================================== -->
+
+    <div
+      class="media-card game-item"
+      data-name="red dead redemption 2 rdr2 red dead action adventure"
+    >
+
+      <a
+        href="https://ankergames.net/games?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
+
+        <div class="poster game-rdr2">
+
+          <div class="game-badge">
+            POPULAR
+          </div>
+
+          <div class="game-quality">
+            PC
+          </div>
+
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              ROCKSTAR GAMES
+            </div>
+
+            <div class="game-title">
+              RED DEAD
+              <br>
+              REDEMPTION 2
+            </div>
+
+            <div class="game-subtitle">
+              ACTION • ADVENTURE
+            </div>
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <div class="card-body">
+
+        <div class="game-meta">
+          ACTION • ADVENTURE • RPG
+        </div>
+
+        <h3>
+          Red Dead Redemption 2
+        </h3>
+
+        <p>
+          Popular Rockstar open-world adventure game.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-horse"></i>
+            Adventure
           </span>
 
           <span>
             <i class="fa-solid fa-globe"></i>
-            International
+            Open World
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://ankergames.net/games?lang=en"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Explore Hollywood
-
+          Find Game
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3095,85 +354,89 @@ footer p{
 
 
     <!-- =====================================================
-         SOUTH
+         MINECRAFT
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="south indian tamil telugu malayalam kannada movies"
+      class="media-card game-item"
+      data-name="minecraft sandbox survival adventure"
     >
 
-      <div class="poster movie-south">
+      <a
+        href="https://ankergames.net/games?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          COLLECTION
-        </div>
+        <div class="poster game-minecraft">
 
-        <div class="movie-quality">
-          SOUTH
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            SOUTH INDIAN
+          <div class="game-badge">
+            POPULAR
           </div>
 
-          <div class="poster-title">
-            SOUTH
-            <br>
-            MOVIES
+          <div class="game-quality">
+            PC
           </div>
 
-          <div class="poster-year">
-            Tamil • Telugu • Malayalam • Kannada
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              SANDBOX
+            </div>
+
+            <div class="game-title">
+              MINECRAFT
+            </div>
+
+            <div class="game-subtitle">
+              ACTION • ADVENTURE
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          SOUTH INDIAN
+        <div class="game-meta">
+          ACTION • ADVENTURE • SANDBOX
         </div>
 
         <h3>
-          South Indian Movies
+          Minecraft
         </h3>
 
         <p>
-          Browse South Indian movie listings and releases.
+          Popular sandbox adventure game featured in the
+          AnkerGames library.
         </p>
 
         <div class="movie-info">
 
           <span>
-            <i class="fa-solid fa-film"></i>
-            South
+            <i class="fa-solid fa-cubes"></i>
+            Sandbox
           </span>
 
           <span>
-            <i class="fa-solid fa-language"></i>
-            Multi Language
+            <i class="fa-solid fa-gamepad"></i>
+            PC
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://ankergames.net/games?lang=en"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Explore South Movies
-
+          Find Game
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3182,259 +445,91 @@ footer p{
 
 
     <!-- =====================================================
-         HINDI DUBBED
+         FORZA HORIZON 6
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="hindi dubbed movies dubbed movies"
+      class="media-card game-item"
+      data-name="forza horizon 6 racing forza fh6 racing games"
     >
 
-      <div class="poster movie-hindi-dubbed">
+      <a
+        href="https://ankergames.net/games?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          POPULAR
-        </div>
+        <div class="poster game-forza">
 
-        <div class="movie-quality">
-          DUBBED
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            DUBBED COLLECTION
-          </div>
-
-          <div class="poster-title">
-            HINDI
-            <br>
-            DUBBED
-          </div>
-
-          <div class="poster-year">
-            Hindi Dubbed Movies
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card-body">
-
-        <div class="movie-meta">
-          DUBBED • HINDI
-        </div>
-
-        <h3>
-          Hindi Dubbed Movies
-        </h3>
-
-        <p>
-          Explore Hindi dubbed movie listings and collections.
-        </p>
-
-        <div class="movie-info">
-
-          <span>
-            <i class="fa-solid fa-language"></i>
-            Hindi Dubbed
-          </span>
-
-          <span>
-            <i class="fa-solid fa-film"></i>
-            Movies
-          </span>
-
-        </div>
-
-
-        <a
-          href="https://www.moviesbazar.tv/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="movie-open-btn"
-        >
-
-          Explore Dubbed Movies
-
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         PUNJABI
-    ====================================================== -->
-
-    <div
-      class="media-card movie-item"
-      data-name="punjabi movies punjabi"
-    >
-
-      <div class="poster movie-punjabi">
-
-        <div class="movie-badge">
-          COLLECTION
-        </div>
-
-        <div class="movie-quality">
-          PUNJABI
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            REGIONAL CINEMA
-          </div>
-
-          <div class="poster-title">
-            PUNJABI
-            <br>
-            MOVIES
-          </div>
-
-          <div class="poster-year">
-            Punjabi Cinema
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card-body">
-
-        <div class="movie-meta">
-          PUNJABI CINEMA
-        </div>
-
-        <h3>
-          Punjabi Movies
-        </h3>
-
-        <p>
-          Explore Punjabi movie listings and regional cinema.
-        </p>
-
-        <div class="movie-info">
-
-          <span>
-            <i class="fa-solid fa-film"></i>
-            Punjabi
-          </span>
-
-          <span>
-            <i class="fa-solid fa-language"></i>
-            Regional
-          </span>
-
-        </div>
-
-
-        <a
-          href="https://www.moviesbazar.tv/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="movie-open-btn"
-        >
-
-          Explore Punjabi
-
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         NEW MOVIES
-    ====================================================== -->
-
-    <div
-      class="media-card movie-item"
-      data-name="new latest latest movies new releases"
-    >
-
-      <div class="poster movie-new">
-
-        <div class="movie-badge">
-          NEW
-        </div>
-
-        <div class="movie-quality">
-          LATEST
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            RECENT RELEASES
-          </div>
-
-          <div class="poster-title">
+          <div class="game-badge">
             NEW
-            <br>
-            MOVIES
           </div>
 
-          <div class="poster-year">
-            Latest Movie Collection
+          <div class="game-quality">
+            2026
+          </div>
+
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              RACING
+            </div>
+
+            <div class="game-title">
+              FORZA
+              <br>
+              HORIZON 6
+            </div>
+
+            <div class="game-subtitle">
+              RACING • OPEN WORLD
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          LATEST • NEW RELEASES
+        <div class="game-meta">
+          2026 • RACING • OPEN WORLD
         </div>
 
         <h3>
-          New Movies
+          Forza Horizon 6
         </h3>
 
         <p>
-          Discover recently added movie listings.
+          A newer racing title appearing in the current
+          AnkerGames top-games chart.
         </p>
 
         <div class="movie-info">
 
           <span>
-            <i class="fa-solid fa-bolt"></i>
-            Latest
+            <i class="fa-solid fa-car"></i>
+            Racing
           </span>
 
           <span>
-            <i class="fa-solid fa-film"></i>
-            Movies
+            <i class="fa-solid fa-road"></i>
+            Open World
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://ankergames.net/games?lang=en"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Explore New Movies
-
+          Find Game
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3447,53 +542,63 @@ footer p{
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="trending popular movies"
+      class="media-card game-item"
+      data-name="trending games trending pc games popular this week"
     >
 
-      <div class="poster movie-trending">
+      <a
+        href="https://www.ankergames.net/trending"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          TRENDING
-        </div>
+        <div class="poster game-trending">
 
-        <div class="movie-quality">
-          POPULAR
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            POPULAR NOW
-          </div>
-
-          <div class="poster-title">
+          <div class="game-badge">
             TRENDING
-            <br>
-            MOVIES
           </div>
 
-          <div class="poster-year">
-            Popular Movie Collection
+          <div class="game-quality">
+            THIS WEEK
+          </div>
+
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              ANKER GAMES
+            </div>
+
+            <div class="game-title">
+              TRENDING
+              <br>
+              GAMES
+            </div>
+
+            <div class="game-subtitle">
+              WHAT'S HOT NOW
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          TRENDING • POPULAR
+        <div class="game-meta">
+          TRENDING • LAST 7 DAYS
         </div>
 
         <h3>
-          Trending Movies
+          Trending Games
         </h3>
 
         <p>
-          Explore currently popular movie listings.
+          See the current AnkerGames trending chart,
+          updated continuously.
         </p>
 
         <div class="movie-info">
@@ -3504,24 +609,20 @@ footer p{
           </span>
 
           <span>
-            <i class="fa-solid fa-star"></i>
-            Popular
+            <i class="fa-solid fa-chart-line"></i>
+            Weekly
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://www.ankergames.net/trending"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Explore Trending
-
+          Open Trending
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3530,85 +631,91 @@ footer p{
 
 
     <!-- =====================================================
-         ALL MOVIES
+         TOP / MOST POPULAR
     ====================================================== -->
 
     <div
-      class="media-card movie-item"
-      data-name="all movies complete collection"
+      class="media-card game-item"
+      data-name="top games most popular popular games all time"
     >
 
-      <div class="poster movie-all">
+      <a
+        href="https://ankergames.net/top-games?page=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
 
-        <div class="movie-badge">
-          FULL COLLECTION
-        </div>
+        <div class="poster game-top">
 
-        <div class="movie-quality">
-          ALL
-        </div>
-
-        <div class="poster-content">
-
-          <div class="poster-kicker">
-            COMPLETE COLLECTION
+          <div class="game-badge">
+            TOP CHART
           </div>
 
-          <div class="poster-title">
-            ALL
-            <br>
-            MOVIES
+          <div class="game-quality">
+            POPULAR
           </div>
 
-          <div class="poster-year">
-            Explore MoviesBazar
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              ALL-TIME CHART
+            </div>
+
+            <div class="game-title">
+              TOP
+              <br>
+              GAMES
+            </div>
+
+            <div class="game-subtitle">
+              MOST DOWNLOADED TITLES
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </a>
 
 
       <div class="card-body">
 
-        <div class="movie-meta">
-          COMPLETE MOVIE COLLECTION
+        <div class="game-meta">
+          TOP • POPULAR • ALL-TIME
         </div>
 
         <h3>
-          All Movies
+          Top Games
         </h3>
 
         <p>
-          Open the complete movie collection and browse available categories.
+          Open the current AnkerGames top-games ranking
+          and discover the most popular titles.
         </p>
 
         <div class="movie-info">
 
           <span>
-            <i class="fa-solid fa-layer-group"></i>
-            Collection
+            <i class="fa-solid fa-trophy"></i>
+            Top
           </span>
 
           <span>
-            <i class="fa-solid fa-film"></i>
-            Movies
+            <i class="fa-solid fa-star"></i>
+            Popular
           </span>
 
         </div>
 
-
         <a
-          href="https://www.moviesbazar.tv/"
+          href="https://ankergames.net/top-games?page=1"
           target="_blank"
           rel="noopener noreferrer"
           class="movie-open-btn"
         >
-
-          Open Movie Collection
-
+          Open Top Games
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
         </a>
 
       </div>
@@ -3616,39 +723,223 @@ footer p{
     </div>
 
 
+    <!-- =====================================================
+         LATEST GAMES
+    ====================================================== -->
+
+    <div
+      class="media-card game-item"
+      data-name="latest new games newest pc games new releases"
+    >
+
+      <a
+        href="https://ankergames.net/games?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
+
+        <div class="poster game-latest">
+
+          <div class="game-badge">
+            LATEST
+          </div>
+
+          <div class="game-quality">
+            NEW
+          </div>
+
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              NEW RELEASES
+            </div>
+
+            <div class="game-title">
+              LATEST
+              <br>
+              GAMES
+            </div>
+
+            <div class="game-subtitle">
+              DISCOVER NEW TITLES
+            </div>
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <div class="card-body">
+
+        <div class="game-meta">
+          NEW • LATEST RELEASES
+        </div>
+
+        <h3>
+          Latest Games
+        </h3>
+
+        <p>
+          Browse the AnkerGames library and discover
+          recently added PC games.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-bolt"></i>
+            New
+          </span>
+
+          <span>
+            <i class="fa-solid fa-calendar"></i>
+            Latest
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/games?lang=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="movie-open-btn"
+        >
+          Browse Latest
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ALL PC GAMES
+    ====================================================== -->
+
+    <div
+      class="media-card game-item"
+      data-name="all games pc game collection game library"
+    >
+
+      <a
+        href="https://ankergames.net/games?lang=en"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="game-link"
+      >
+
+        <div class="poster game-all">
+
+          <div class="game-badge">
+            FULL LIBRARY
+          </div>
+
+          <div class="game-quality">
+            PC
+          </div>
+
+          <div class="game-poster-content">
+
+            <div class="game-kicker">
+              ANKER GAMES
+            </div>
+
+            <div class="game-title">
+              ALL
+              <br>
+              GAMES
+            </div>
+
+            <div class="game-subtitle">
+              COMPLETE PC LIBRARY
+            </div>
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <div class="card-body">
+
+        <div class="game-meta">
+          COMPLETE PC GAME LIBRARY
+        </div>
+
+        <h3>
+          All PC Games
+        </h3>
+
+        <p>
+          Search the complete AnkerGames PC game library
+          by title, genre, year and other filters.
+        </p>
+
+        <div class="movie-info">
+
+          <span>
+            <i class="fa-solid fa-layer-group"></i>
+            Library
+          </span>
+
+          <span>
+            <i class="fa-solid fa-gamepad"></i>
+            PC
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/games?lang=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="movie-open-btn"
+        >
+          Open Game Library
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+      </div>
+
+    </div>
+
   </div>
 
 </section>
 
 
 <!-- =========================================================
-     MOVIE CTA
+     GAME CTA
 ========================================================= -->
 
-<div class="coming-box">
+<div class="coming-box game-cta">
 
-  <i class="fa-solid fa-clapperboard"></i>
+  <i class="fa-solid fa-gamepad"></i>
 
   <h2>
-    Explore More Movies
+    Explore AnkerGames
   </h2>
 
   <p>
-    Browse the available movie collection,
-    categories and latest listings on MoviesBazar.
+    Browse PC games, trending titles, popular games
+    and the complete game library.
   </p>
 
-
   <a
-    href="https://www.moviesbazar.tv/"
+    href="https://ankergames.net/games?lang=en"
     target="_blank"
     rel="noopener noreferrer"
     class="primary-btn movie-main-button"
   >
 
-    <i class="fa-solid fa-film"></i>
+    <i class="fa-solid fa-gamepad"></i>
 
-    Open MoviesBazar
+    Open AnkerGames
 
     <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
@@ -3657,404 +948,3 @@ footer p{
 </div>
 
 </main>
-
-
-<!-- =========================================================
-     GAMES TAB
-========================================================= -->
-
-<main id="games" class="tab-content">
-
-
-<section class="category-hero">
-
-  <div class="category-icon">
-
-    <i class="fa-solid fa-gamepad"></i>
-
-  </div>
-
-
-  <h1>
-
-    <span class="gradient">
-      Games
-    </span>
-
-  </h1>
-
-
-  <p>
-    Search and browse your game collection here.
-  </p>
-
-</section>
-
-
-<section class="section">
-
-
-  <div class="search-box">
-
-    <i class="fa-solid fa-magnifying-glass"></i>
-
-    <input
-      type="text"
-      id="gameSearch"
-      placeholder="Search games..."
-      oninput="searchGames()"
-    >
-
-  </div>
-
-
-  <div
-    class="game-grid"
-    id="gameGrid"
-  >
-
-
-    <div
-      class="media-card game-item"
-      data-name="pc games"
-    >
-
-      <div class="poster game-one">
-
-        <i class="fa-solid fa-gamepad"></i>
-
-      </div>
-
-      <div class="card-body">
-
-        <h3>
-          PC Games
-        </h3>
-
-        <p>
-          Add your PC game listings here.
-        </p>
-
-        <button
-          class="movie-open-btn"
-          onclick="comingSoon('PC Games')"
-        >
-          View Game
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="media-card game-item"
-      data-name="action games"
-    >
-
-      <div class="poster game-two">
-
-        <i class="fa-solid fa-fire"></i>
-
-      </div>
-
-      <div class="card-body">
-
-        <h3>
-          Action Games
-        </h3>
-
-        <p>
-          Add action games here.
-        </p>
-
-        <button
-          class="movie-open-btn"
-          onclick="comingSoon('Action Games')"
-        >
-          View Game
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="media-card game-item"
-      data-name="multiplayer games"
-    >
-
-      <div class="poster game-three">
-
-        <i class="fa-solid fa-trophy"></i>
-
-      </div>
-
-      <div class="card-body">
-
-        <h3>
-          Multiplayer Games
-        </h3>
-
-        <p>
-          Add multiplayer games here.
-        </p>
-
-        <button
-          class="movie-open-btn"
-          onclick="comingSoon('Multiplayer Games')"
-        >
-          View Game
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="media-card game-item"
-      data-name="mobile games"
-    >
-
-      <div class="poster game-four">
-
-        <i class="fa-solid fa-mobile-screen"></i>
-
-      </div>
-
-      <div class="card-body">
-
-        <h3>
-          Mobile Games
-        </h3>
-
-        <p>
-          Add mobile games here.
-        </p>
-
-        <button
-          class="movie-open-btn"
-          onclick="comingSoon('Mobile Games')"
-        >
-          View Game
-        </button>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<div class="coming-box">
-
-  <i class="fa-solid fa-gamepad"></i>
-
-  <h2>
-    Games Section Ready
-  </h2>
-
-  <p>
-    Add your legally distributable game catalog,
-    categories and game details here.
-  </p>
-
-</div>
-
-</main>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-  <div class="footer-brand">
-
-    SehrAn
-    <span>
-      Media
-    </span>
-
-  </div>
-
-
-  <p>
-    © 2026 SehrAn Media. All rights reserved.
-  </p>
-
-</footer>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<script>
-
-/* =========================================================
-   TAB SWITCHING
-========================================================= */
-
-function showTab(tabName, clickedButton){
-
-  document
-    .querySelectorAll(".tab-content")
-    .forEach(tab => {
-      tab.classList.remove("active");
-    });
-
-
-  document
-    .querySelectorAll(".main-tab")
-    .forEach(button => {
-      button.classList.remove("active");
-    });
-
-
-  const selectedTab =
-    document.getElementById(tabName);
-
-
-  if(selectedTab){
-    selectedTab.classList.add("active");
-  }
-
-
-  if(clickedButton){
-    clickedButton.classList.add("active");
-  }
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   INSTAGRAM
-========================================================= */
-
-function openInstagram(){
-
-  const services =
-    document.getElementById("instagram-services");
-
-
-  if(services){
-
-    services.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-  }
-
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-function filterItems(inputId,itemSelector){
-
-  const input =
-    document.getElementById(inputId);
-
-
-  if(!input){
-    return;
-  }
-
-
-  const query =
-    input.value.toLowerCase().trim();
-
-
-  document
-    .querySelectorAll(itemSelector)
-    .forEach(item => {
-
-      const name =
-        item.getAttribute("data-name") || "";
-
-
-      item.classList.toggle(
-        "hidden-item",
-        !name.toLowerCase().includes(query)
-      );
-
-    });
-
-}
-
-
-/* =========================================================
-   SOCIAL SEARCH
-========================================================= */
-
-function searchSocial(){
-
-  filterItems(
-    "socialSearch",
-    ".social-item"
-  );
-
-}
-
-
-/* =========================================================
-   MOVIE SEARCH
-========================================================= */
-
-function searchMovies(){
-
-  filterItems(
-    "movieSearch",
-    ".movie-item"
-  );
-
-}
-
-
-/* =========================================================
-   GAME SEARCH
-========================================================= */
-
-function searchGames(){
-
-  filterItems(
-    "gameSearch",
-    ".game-item"
-  );
-
-}
-
-
-/* =========================================================
-   COMING SOON
-========================================================= */
-
-function comingSoon(name){
-
-  alert(
-    name +
-    " section is coming soon!"
-  );
-
-}
-
-</script>
-
-</body>
-</html>
