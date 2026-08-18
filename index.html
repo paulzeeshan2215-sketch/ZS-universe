@@ -47,6 +47,7 @@ body{
   overflow-x:hidden;
 
   font-family:"Poppins",sans-serif;
+
   color:#fff;
 
   background:
@@ -68,16 +69,12 @@ input{
   font-family:inherit;
 }
 
-button{
-  cursor:pointer;
-}
-
 a{
   color:inherit;
 }
 
 /* =========================================================
-   BACKGROUND GLOW
+   BACKGROUND GLOWS
 ========================================================= */
 
 .glow{
@@ -116,15 +113,6 @@ a{
 }
 
 /* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-  width:min(1120px,calc(100% - 32px));
-  margin:auto;
-}
-
-/* =========================================================
    NAVBAR
 ========================================================= */
 
@@ -132,6 +120,7 @@ a{
   width:min(1120px,calc(100% - 32px));
 
   margin:18px auto 0;
+
   padding:13px 16px;
 
   display:flex;
@@ -139,6 +128,7 @@ a{
   justify-content:space-between;
 
   border:1px solid rgba(255,255,255,.09);
+
   border-radius:18px;
 
   background:rgba(15,13,28,.88);
@@ -149,6 +139,7 @@ a{
   box-shadow:0 15px 45px rgba(0,0,0,.28);
 
   position:sticky;
+
   top:12px;
 
   z-index:100;
@@ -161,6 +152,8 @@ a{
   gap:10px;
 
   text-decoration:none;
+
+  white-space:nowrap;
 }
 
 .logo-icon{
@@ -206,14 +199,18 @@ a{
   width:min(1120px,calc(100% - 32px));
 
   margin:24px auto 0;
+
   padding:8px;
 
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
 
   gap:8px;
 
   border:1px solid rgba(255,255,255,.08);
+
   border-radius:18px;
 
   background:rgba(255,255,255,.035);
@@ -225,6 +222,7 @@ a{
   padding:14px 10px;
 
   border:0;
+
   border-radius:13px;
 
   background:transparent;
@@ -232,7 +230,10 @@ a{
   color:#9992a8;
 
   font-size:13px;
+
   font-weight:800;
+
+  cursor:pointer;
 
   transition:.25s;
 }
@@ -243,6 +244,7 @@ a{
 
 .main-tab:hover{
   color:#fff;
+
   background:rgba(255,255,255,.06);
 }
 
@@ -316,6 +318,7 @@ a{
 
 .badge{
   display:inline-flex;
+
   align-items:center;
 
   gap:8px;
@@ -325,6 +328,7 @@ a{
   margin-bottom:18px;
 
   border:1px solid rgba(188,113,255,.25);
+
   border-radius:999px;
 
   color:#e2c7ff;
@@ -332,6 +336,7 @@ a{
   background:rgba(146,60,255,.12);
 
   font-size:11px;
+
   font-weight:800;
 }
 
@@ -383,6 +388,7 @@ a{
   color:#bcb6ca;
 
   font-size:15px;
+
   line-height:1.8;
 
   margin-bottom:27px;
@@ -398,7 +404,6 @@ a{
 
   padding:13px 19px;
 
-  border:0;
   border-radius:13px;
 
   text-decoration:none;
@@ -413,12 +418,17 @@ a{
     );
 
   font-size:13px;
+
   font-weight:800;
 
   box-shadow:
     0 12px 30px rgba(161,52,255,.25);
 
   transition:.25s;
+
+  border:0;
+
+  cursor:pointer;
 }
 
 .primary-btn:hover{
@@ -433,11 +443,13 @@ a{
   min-width:0;
 
   display:flex;
+
   justify-content:center;
 }
 
 .hero-card{
   width:100%;
+
   max-width:410px;
 
   padding:24px;
@@ -475,6 +487,7 @@ a{
 
 .profile-head{
   display:flex;
+
   align-items:center;
 
   gap:12px;
@@ -489,6 +502,7 @@ a{
   flex-shrink:0;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
@@ -507,6 +521,7 @@ a{
 
 .profile-name{
   font-size:15px;
+
   font-weight:900;
 }
 
@@ -524,13 +539,15 @@ a{
   color:#65ffad;
 
   font-size:10px;
+
   font-weight:800;
 }
 
 .hero-stats{
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+    repeat(3,1fr);
 
   gap:8px;
 }
@@ -541,6 +558,7 @@ a{
   text-align:center;
 
   border:1px solid rgba(255,255,255,.06);
+
   border-radius:14px;
 
   background:rgba(0,0,0,.18);
@@ -550,6 +568,7 @@ a{
   display:block;
 
   font-size:18px;
+
   font-weight:900;
 }
 
@@ -589,6 +608,7 @@ a{
   color:#c07aff;
 
   font-size:10px;
+
   font-weight:900;
 
   letter-spacing:2px;
@@ -622,6 +642,7 @@ a{
 
 .search-box{
   width:100%;
+
   max-width:700px;
 
   margin:0 auto 30px;
@@ -644,6 +665,7 @@ a{
 
 .search-box input{
   width:100%;
+
   height:50px;
 
   padding:0 18px 0 45px;
@@ -723,6 +745,7 @@ a{
   margin:0 auto 13px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
@@ -747,6 +770,7 @@ a{
 
 .snapchat{
   color:#111;
+
   background:#ffdb00;
 }
 
@@ -778,11 +802,13 @@ a{
   width:100%;
 
   margin-top:12px;
+
   padding:9px;
 
   display:block;
 
   border:0;
+
   border-radius:10px;
 
   text-decoration:none;
@@ -792,7 +818,10 @@ a{
   background:rgba(255,255,255,.06);
 
   font-size:10px;
+
   font-weight:800;
+
+  cursor:pointer;
 
   transition:.2s;
 }
@@ -816,6 +845,7 @@ a{
   border-radius:999px;
 
   font-size:7px;
+
   font-weight:900;
 
   text-transform:uppercase;
@@ -834,7 +864,7 @@ a{
 }
 
 /* =========================================================
-   INSTAGRAM PRICING
+   INSTAGRAM
 ========================================================= */
 
 #instagram-services{
@@ -919,6 +949,7 @@ a{
     );
 
   font-size:7px;
+
   font-weight:900;
 
   text-transform:uppercase;
@@ -944,6 +975,7 @@ a{
   color:#c27dff;
 
   font-size:10px;
+
   font-weight:800;
 }
 
@@ -999,6 +1031,7 @@ a{
     );
 
   font-size:10px;
+
   font-weight:900;
 }
 
@@ -1023,6 +1056,7 @@ a{
   margin:0 auto 18px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
@@ -1160,6 +1194,7 @@ a{
   height:260px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
@@ -1243,7 +1278,7 @@ a{
 }
 
 /* =========================================================
-   MOVIE BACKGROUNDS
+   MOVIE COLORS
 ========================================================= */
 
 .movie-bollywood{
@@ -1521,6 +1556,8 @@ a{
 
   font-weight:900;
 
+  cursor:pointer;
+
   box-shadow:
     0 8px 20px rgba(145,45,255,.18);
 
@@ -1529,48 +1566,52 @@ a{
 
 .movie-open-btn:hover{
   transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(145,45,255,.3);
 }
 
 /* =========================================================
    =========================================================
-   PC GAMES SECTION
+   HIGH QUALITY PC GAMES SECTION
    =========================================================
 ========================================================= */
 
 .games-hero{
-  width:min(1000px,calc(100% - 32px));
+  width:min(1120px,calc(100% - 32px));
 
   margin:0 auto;
 
-  padding:60px 0 25px;
+  padding:55px 0 20px;
 
   text-align:center;
 }
 
-.games-icon{
-  width:82px;
-  height:82px;
+.games-hero-icon{
+  width:86px;
+  height:86px;
 
   margin:0 auto 20px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
-  border-radius:25px;
+  border-radius:27px;
 
   background:
     linear-gradient(
       135deg,
-      #4f46e5,
-      #9333ea,
-      #ec4899
+      #6d28d9,
+      #ec4899,
+      #06b6d4
     );
 
   box-shadow:
-    0 20px 55px rgba(124,58,237,.35);
+    0 25px 70px rgba(139,45,255,.3);
 
-  font-size:34px;
+  font-size:37px;
 
   animation:gameIconFloat 3s ease-in-out infinite;
 }
@@ -1578,11 +1619,11 @@ a{
 @keyframes gameIconFloat{
 
   0%,100%{
-    transform:translateY(0);
+    transform:translateY(0) rotate(0deg);
   }
 
   50%{
-    transform:translateY(-7px);
+    transform:translateY(-6px) rotate(2deg);
   }
 
 }
@@ -1590,185 +1631,199 @@ a{
 .games-hero h1{
   font-family:"Montserrat",sans-serif;
 
-  font-size:clamp(40px,6vw,67px);
+  font-size:clamp(40px,7vw,70px);
 
   line-height:1;
 
   letter-spacing:-3px;
 
-  margin-bottom:14px;
+  margin-bottom:15px;
 }
 
 .games-hero p{
   max-width:700px;
 
-  margin:auto;
+  margin:0 auto;
 
-  color:#9e97ab;
+  color:#aaa3b5;
 
   font-size:13px;
 
   line-height:1.8;
 }
 
-/* LIVE COLLECTION BAR */
-
-.games-live-bar{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:20px auto 15px;
-
-  padding:16px 18px;
-
-  display:flex;
+.games-live{
+  display:inline-flex;
 
   align-items:center;
-  justify-content:space-between;
-
-  gap:15px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(124,58,237,.14),
-      rgba(236,72,153,.07)
-    );
-
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.18);
-}
-
-.games-live-left{
-  display:flex;
-
-  align-items:center;
-
-  gap:11px;
-}
-
-.live-pulse{
-  width:10px;
-  height:10px;
-
-  flex-shrink:0;
-
-  border-radius:50%;
-
-  background:#65ffad;
-
-  box-shadow:
-    0 0 15px #65ffad;
-}
-
-.games-live-title{
-  font-size:12px;
-  font-weight:900;
-}
-
-.games-live-sub{
-  margin-top:2px;
-
-  color:#817a8d;
-
-  font-size:8px;
-}
-
-.games-live-right{
-  display:flex;
-
-  gap:7px;
-
-  flex-wrap:wrap;
-}
-
-.game-stat{
-  padding:7px 10px;
-
-  border-radius:9px;
-
-  background:rgba(255,255,255,.05);
-
-  color:#c7c0d2;
-
-  font-size:8px;
-
-  font-weight:800;
-}
-
-/* GAME FILTERS */
-
-.game-filters{
-  width:min(1120px,calc(100% - 32px));
-
-  margin:10px auto 25px;
-
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
 
   gap:8px;
-}
 
-.game-filter{
-  padding:9px 14px;
+  margin-bottom:18px;
 
-  border:1px solid rgba(255,255,255,.08);
+  padding:8px 14px;
+
+  border:1px solid rgba(101,255,173,.2);
 
   border-radius:999px;
 
-  color:#938b9e;
+  color:#9affc9;
 
-  background:rgba(255,255,255,.035);
+  background:rgba(101,255,173,.06);
 
   font-size:9px;
 
   font-weight:900;
 
-  transition:.2s;
+  letter-spacing:1px;
 }
 
-.game-filter:hover{
-  color:#fff;
+.games-live-dot{
+  width:7px;
+  height:7px;
 
-  border-color:rgba(170,80,255,.35);
+  border-radius:50%;
+
+  background:#65ffad;
+
+  box-shadow:0 0 12px #65ffad;
 }
 
-.game-filter.active{
+/* =========================================================
+   GAME CATEGORY NAV
+========================================================= */
+
+.game-category-nav{
+  width:min(1120px,calc(100% - 32px));
+
+  margin:25px auto 0;
+
+  padding:8px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:8px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.035);
+}
+
+.game-nav-btn{
+  padding:13px 8px;
+
+  border:0;
+
+  border-radius:12px;
+
+  color:#9992a8;
+
+  background:transparent;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.game-nav-btn:hover{
   color:#fff;
 
-  border-color:transparent;
+  background:rgba(255,255,255,.06);
+}
+
+.game-nav-btn.active{
+  color:#fff;
 
   background:
     linear-gradient(
       135deg,
-      #7d32ff,
-      #ff329d
+      #7c3aed,
+      #ec4899
     );
 
   box-shadow:
-    0 8px 20px rgba(135,45,255,.2);
+    0 10px 25px rgba(124,58,237,.2);
 }
 
-/* GAME SECTION HEADER */
+/* =========================================================
+   GAMES SEARCH
+========================================================= */
 
-.game-section-heading{
+.games-search-area{
+  width:min(800px,calc(100% - 32px));
+
+  margin:30px auto 10px;
+}
+
+.games-search{
+  position:relative;
+}
+
+.games-search i{
+  position:absolute;
+
+  left:18px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#887f95;
+}
+
+.games-search input{
+  width:100%;
+
+  height:54px;
+
+  padding:0 20px 0 48px;
+
+  border:1px solid rgba(255,255,255,.1);
+
+  border-radius:17px;
+
+  outline:none;
+
+  color:#fff;
+
+  background:
+    rgba(255,255,255,.045);
+
+  font-size:13px;
+}
+
+.games-search input:focus{
+  border-color:rgba(167,93,255,.65);
+
+  box-shadow:
+    0 0 0 4px rgba(126,58,237,.1);
+}
+
+/* =========================================================
+   GAME SECTION TITLE
+========================================================= */
+
+.game-section-title{
   display:flex;
 
   align-items:flex-end;
+
   justify-content:space-between;
 
   gap:15px;
 
-  margin:40px 0 17px;
+  margin-bottom:18px;
 }
 
-.game-section-heading-left{
+.game-section-title-left{
   display:flex;
 
   align-items:center;
@@ -1776,7 +1831,7 @@ a{
   gap:10px;
 }
 
-.game-section-icon{
+.game-section-title-icon{
   width:38px;
   height:38px;
 
@@ -1787,51 +1842,35 @@ a{
 
   border-radius:11px;
 
+  color:#fff;
+
   background:
     linear-gradient(
       135deg,
-      rgba(124,58,237,.3),
-      rgba(236,72,153,.2)
+      #7c3aed,
+      #ec4899
     );
-
-  color:#d18aff;
-
-  font-size:14px;
 }
 
-.game-section-heading h2{
+.game-section-title h2{
   font-family:"Montserrat",sans-serif;
 
-  font-size:21px;
-
-  letter-spacing:-.5px;
-}
-
-.game-section-heading p{
-  margin-top:2px;
-
-  color:#777080;
-
-  font-size:8px;
-}
-
-.game-view-all{
-  padding:8px 11px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:9px;
-
-  color:#bcaeca;
-
-  background:rgba(255,255,255,.035);
-
-  font-size:8px;
+  font-size:23px;
 
   font-weight:900;
 }
 
-/* GAME GRID */
+.game-section-title p{
+  color:#81798e;
+
+  font-size:9px;
+
+  text-align:right;
+}
+
+/* =========================================================
+   GAME GRID
+========================================================= */
 
 .game-grid{
   display:grid;
@@ -1842,7 +1881,9 @@ a{
   gap:16px;
 }
 
-/* GAME CARD */
+/* =========================================================
+   GAME CARD
+========================================================= */
 
 .game-card{
   min-width:0;
@@ -1851,9 +1892,9 @@ a{
 
   position:relative;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.09);
 
-  border-radius:20px;
+  border-radius:21px;
 
   background:
     linear-gradient(
@@ -1861,6 +1902,9 @@ a{
       rgba(255,255,255,.075),
       rgba(255,255,255,.025)
     );
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.2);
 
   transition:
     transform .25s,
@@ -1871,16 +1915,19 @@ a{
 .game-card:hover{
   transform:translateY(-7px);
 
-  border-color:rgba(171,91,255,.48);
+  border-color:
+    rgba(173,95,255,.5);
 
   box-shadow:
-    0 25px 55px rgba(0,0,0,.3);
+    0 28px 70px rgba(0,0,0,.35);
 }
 
-/* GAME THUMBNAIL */
+/* =========================================================
+   GAME THUMBNAIL
+========================================================= */
 
 .game-thumb{
-  height:245px;
+  height:230px;
 
   position:relative;
 
@@ -1890,49 +1937,12 @@ a{
 
   align-items:flex-end;
 
-  background:
-    linear-gradient(
-      145deg,
-      #17122c,
-      #5b21b6
-    );
+  background:#15121f;
 }
 
-/*
-   OPTIONAL REAL THUMBNAIL
+.game-thumb:after{
+  content:"";
 
-   Put your own image here:
-
-   /uploads/games/mortal-shell-2.jpg
-
-   Example:
-
-   <img src="/uploads/games/example.jpg"
-        class="game-real-image">
-*/
-
-.game-real-image{
-  position:absolute;
-
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  transition:
-    transform .45s ease,
-    filter .45s ease;
-}
-
-.game-card:hover .game-real-image{
-  transform:scale(1.07);
-
-  filter:brightness(1.08);
-}
-
-.game-thumb-overlay{
   position:absolute;
 
   inset:0;
@@ -1940,142 +1950,264 @@ a{
   background:
     linear-gradient(
       180deg,
-      rgba(0,0,0,.05) 10%,
-      rgba(0,0,0,.2) 35%,
-      rgba(0,0,0,.92) 100%
+      rgba(0,0,0,.05) 15%,
+      rgba(5,5,12,.92) 100%
     );
 
   z-index:2;
 }
 
-/* CSS ART FALLBACK */
+.game-thumb-content{
+  position:relative;
 
-.game-art{
-  position:absolute;
+  z-index:3;
 
-  inset:0;
+  width:100%;
+
+  padding:18px;
+}
+
+.game-thumb-icon{
+  width:48px;
+  height:48px;
+
+  margin-bottom:10px;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  z-index:1;
+  border-radius:15px;
 
-  overflow:hidden;
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.15);
+
+  backdrop-filter:blur(10px);
+
+  font-size:20px;
 }
 
-.game-art:before{
-  content:"";
+.game-thumb-title{
+  font-family:"Montserrat",sans-serif;
 
-  position:absolute;
+  font-size:22px;
 
-  width:190px;
-  height:190px;
+  line-height:1.05;
 
-  border-radius:50%;
+  font-weight:900;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.22),
-      transparent 65%
-    );
-
-  filter:blur(5px);
-}
-
-.game-art i{
-  position:relative;
-
-  z-index:2;
-
-  color:rgba(255,255,255,.8);
-
-  font-size:70px;
+  letter-spacing:-.7px;
 
   text-shadow:
-    0 12px 35px rgba(0,0,0,.55);
+    0 6px 20px rgba(0,0,0,.6);
 }
 
-.art-purple{
+.game-thumb-year{
+  margin-top:6px;
+
+  color:#d5cddd;
+
+  font-size:9px;
+
+  font-weight:700;
+}
+
+/* =========================================================
+   GAME THUMBNAIL DESIGNS
+========================================================= */
+
+.game-gta{
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255,90,120,.4),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 75% 40%,
+      rgba(90,130,255,.4),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #160c28,
+      #55205f,
+      #09132b
+    );
+}
+
+.game-gta-enhanced{
   background:
     radial-gradient(
       circle at 70% 20%,
-      rgba(255,100,220,.35),
-      transparent 28%
+      rgba(255,200,70,.45),
+      transparent 25%
     ),
     linear-gradient(
-      145deg,
-      #10081f,
-      #5424a8,
-      #09050f
+      135deg,
+      #061b31,
+      #0b5c88,
+      #100b20
     );
 }
 
-.art-blue{
+.game-minecraft{
   background:
     radial-gradient(
-      circle at 25% 20%,
-      rgba(60,180,255,.4),
-      transparent 28%
+      circle at 60% 25%,
+      rgba(101,255,150,.4),
+      transparent 25%
     ),
     linear-gradient(
-      145deg,
-      #03111f,
-      #075985,
-      #020711
+      135deg,
+      #11351e,
+      #27743d,
+      #142c1c
     );
 }
 
-.art-red{
+.game-forza{
   background:
     radial-gradient(
-      circle at 65% 25%,
-      rgba(255,80,80,.42),
-      transparent 27%
+      circle at 75% 25%,
+      rgba(255,120,50,.55),
+      transparent 25%
     ),
     linear-gradient(
-      145deg,
-      #210407,
-      #991b1b,
-      #090204
+      135deg,
+      #101b48,
+      #124d8b,
+      #0b102a
     );
 }
 
-.art-green{
-  background:
-    radial-gradient(
-      circle at 50% 25%,
-      rgba(70,255,180,.35),
-      transparent 27%
-    ),
-    linear-gradient(
-      145deg,
-      #021b16,
-      #047857,
-      #020b08
-    );
-}
-
-.art-orange{
+.game-rdr{
   background:
     radial-gradient(
       circle at 50% 25%,
-      rgba(255,190,60,.4),
-      transparent 27%
+      rgba(255,145,60,.45),
+      transparent 25%
     ),
     linear-gradient(
-      145deg,
-      #241004,
-      #c2410c,
-      #0c0502
+      135deg,
+      #2b1007,
+      #71301a,
+      #100507
     );
 }
 
-/* GAME BADGES */
+.game-wukong{
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255,200,80,.4),
+      transparent 23%
+    ),
+    linear-gradient(
+      135deg,
+      #241007,
+      #87511c,
+      #0b0705
+    );
+}
 
-.game-badge{
+.game-ac{
+  background:
+    radial-gradient(
+      circle at 60% 20%,
+      rgba(80,140,255,.5),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #07152e,
+      #193c75,
+      #080b18
+    );
+}
+
+.game-after{
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(100,255,170,.4),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #06251d,
+      #0a795b,
+      #05110e
+    );
+}
+
+.game-stone{
+  background:
+    radial-gradient(
+      circle at 60% 20%,
+      rgba(255,110,110,.4),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #240b13,
+      #873047,
+      #0d0508
+    );
+}
+
+.game-ruins{
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(120,150,255,.4),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #09132f,
+      #3a4f9b,
+      #080b18
+    );
+}
+
+.game-mortal{
+  background:
+    radial-gradient(
+      circle at 55% 20%,
+      rgba(255,90,80,.5),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #1c0505,
+      #732018,
+      #080303
+    );
+}
+
+.game-marvel{
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(70,160,255,.5),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #08122c,
+      #174b9a,
+      #1d0714
+    );
+}
+
+/* =========================================================
+   GAME LABELS
+========================================================= */
+
+.game-label{
   position:absolute;
 
   top:12px;
@@ -2087,156 +2219,107 @@ a{
 
   border-radius:8px;
 
-  color:#fff;
-
   background:
-    linear-gradient(
-      135deg,
-      #7c3aed,
-      #ec4899
-    );
-
-  font-size:7px;
-
-  font-weight:900;
-
-  letter-spacing:.6px;
-
-  text-transform:uppercase;
-
-  box-shadow:
-    0 8px 20px rgba(124,58,237,.25);
-}
-
-.game-year{
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  z-index:5;
-
-  padding:5px 8px;
-
-  border-radius:7px;
-
-  color:#ddd7e5;
-
-  background:rgba(0,0,0,.65);
+    rgba(0,0,0,.65);
 
   backdrop-filter:blur(8px);
 
+  color:#fff;
+
   font-size:8px;
-
-  font-weight:800;
-}
-
-/* GAME THUMB TITLE */
-
-.game-thumb-info{
-  position:relative;
-
-  z-index:4;
-
-  width:100%;
-
-  padding:18px;
-}
-
-.game-thumb-info .game-category{
-  margin-bottom:5px;
-
-  color:#d7c6ef;
-
-  font-size:7px;
 
   font-weight:900;
 
-  letter-spacing:1.5px;
-
-  text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
-.game-thumb-info h3{
+.game-label.hot{
+  background:
+    linear-gradient(
+      135deg,
+      #ff315d,
+      #ff1685
+    );
+}
+
+.game-label.new{
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4,
+      #2563eb
+    );
+}
+
+.game-label.popular{
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #ef4444
+    );
+}
+
+/* =========================================================
+   GAME CARD BODY
+========================================================= */
+
+.game-card-body{
+  padding:16px;
+}
+
+.game-card-body h3{
+  margin-bottom:7px;
+
   font-family:"Montserrat",sans-serif;
 
-  font-size:22px;
-
-  line-height:1.03;
-
-  letter-spacing:-.8px;
-
-  text-shadow:
-    0 5px 20px rgba(0,0,0,.65);
-}
-
-/* GAME BODY */
-
-.game-body{
-  padding:15px;
-}
-
-.game-meta{
-  display:flex;
-
-  align-items:center;
-  justify-content:space-between;
-
-  gap:8px;
-
-  margin-bottom:8px;
-}
-
-.game-genre{
-  color:#b988ff;
-
-  font-size:8px;
+  font-size:15px;
 
   font-weight:900;
-
-  text-transform:uppercase;
 }
 
-.game-size{
-  color:#81798d;
-
-  font-size:8px;
-
-  font-weight:700;
-}
-
-.game-body p{
-  min-height:38px;
+.game-card-description{
+  min-height:36px;
 
   color:#918a9d;
 
   font-size:9px;
 
-  line-height:1.55;
+  line-height:1.6;
 }
 
-.game-tags{
+.game-meta{
   display:flex;
 
   flex-wrap:wrap;
 
   gap:6px;
 
-  margin-top:11px;
+  margin-top:12px;
 }
 
-.game-tags span{
+.game-meta span{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
   padding:5px 7px;
 
   border-radius:7px;
 
-  color:#bcb4c9;
+  color:#c7c0d0;
 
-  background:rgba(255,255,255,.045);
+  background:rgba(255,255,255,.055);
 
-  font-size:7px;
+  font-size:8px;
 
-  font-weight:800;
+  font-weight:700;
+}
+
+.game-meta i{
+  color:#bd78ff;
 }
 
 .game-open{
@@ -2255,25 +2338,22 @@ a{
 
   border:0;
 
-  border-radius:10px;
+  border-radius:11px;
+
+  text-decoration:none;
 
   color:#fff;
 
   background:
     linear-gradient(
       135deg,
-      #7c3aed,
-      #db2777
+      #7137ff,
+      #e933a5
     );
 
-  font-size:9px;
+  font-size:10px;
 
   font-weight:900;
-
-  text-decoration:none;
-
-  box-shadow:
-    0 8px 22px rgba(124,58,237,.18);
 
   transition:.2s;
 }
@@ -2282,97 +2362,49 @@ a{
   transform:translateY(-2px);
 
   box-shadow:
-    0 12px 27px rgba(124,58,237,.32);
+    0 10px 25px rgba(145,45,255,.3);
 }
 
-/* UPCOMING FEATURE */
+/* =========================================================
+   GAMES CTA
+========================================================= */
 
-.upcoming-game{
-  width:100%;
+.games-cta{
+  width:min(850px,calc(100% - 32px));
 
-  margin-top:25px;
+  margin:20px auto 65px;
 
-  padding:20px;
+  padding:35px 22px;
 
-  display:grid;
+  text-align:center;
 
-  grid-template-columns:120px minmax(0,1fr) auto;
+  border:1px solid rgba(255,255,255,.09);
 
-  align-items:center;
-
-  gap:18px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
+  border-radius:26px;
 
   background:
     radial-gradient(
-      circle at left,
-      rgba(124,58,237,.17),
-      transparent 45%
-    ),
-    rgba(255,255,255,.025);
+      circle at top,
+      rgba(139,60,255,.2),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.25);
 }
 
-.upcoming-art{
-  width:120px;
-  height:90px;
+.games-cta-icon{
+  width:60px;
+  height:60px;
+
+  margin:0 auto 15px;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  border-radius:14px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #111827,
-      #7c3aed,
-      #ec4899
-    );
-
-  font-size:30px;
-}
-
-.upcoming-info .eyebrow{
-  margin-bottom:5px;
-
-  color:#bd7fff;
-
-  font-size:8px;
-
-  font-weight:900;
-
-  letter-spacing:1.5px;
-}
-
-.upcoming-info h3{
-  margin-bottom:5px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:19px;
-}
-
-.upcoming-info p{
-  color:#918a9d;
-
-  font-size:9px;
-
-  line-height:1.6;
-}
-
-.upcoming-button{
-  padding:10px 13px;
-
-  border-radius:10px;
-
-  text-decoration:none;
-
-  color:#fff;
+  border-radius:18px;
 
   background:
     linear-gradient(
@@ -2381,56 +2413,25 @@ a{
       #ec4899
     );
 
-  font-size:9px;
-
-  font-weight:900;
-
-  white-space:nowrap;
+  font-size:24px;
 }
 
-/* GAME NOTE */
-
-.game-note{
-  width:min(800px,calc(100% - 32px));
-
-  margin:45px auto 65px;
-
-  padding:25px;
-
-  text-align:center;
-
-  border:1px solid rgba(255,255,255,.07);
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.05),
-      rgba(255,255,255,.02)
-    );
-}
-
-.game-note i{
-  margin-bottom:10px;
-
-  color:#c579ff;
-
-  font-size:25px;
-}
-
-.game-note h3{
-  margin-bottom:6px;
+.games-cta h2{
+  margin-bottom:8px;
 
   font-family:"Montserrat",sans-serif;
 
-  font-size:18px;
+  font-size:27px;
 }
 
-.game-note p{
-  color:#8f8899;
+.games-cta p{
+  max-width:570px;
 
-  font-size:10px;
+  margin:0 auto 20px;
+
+  color:#938c9f;
+
+  font-size:11px;
 
   line-height:1.7;
 }
@@ -2557,10 +2558,6 @@ footer p{
   font-size:9px;
 }
 
-/* =========================================================
-   HIDDEN
-========================================================= */
-
 .hidden-item{
   display:none!important;
 }
@@ -2568,15 +2565,6 @@ footer p{
 /* =========================================================
    RESPONSIVE
 ========================================================= */
-
-@media(max-width:1100px){
-
-  .game-grid{
-    grid-template-columns:
-      repeat(3,minmax(0,1fr));
-  }
-
-}
 
 @media(max-width:950px){
 
@@ -2613,20 +2601,15 @@ footer p{
       repeat(2,minmax(0,1fr));
   }
 
-  .movie-grid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
+  .movie-grid,
   .game-grid{
     grid-template-columns:
       repeat(2,minmax(0,1fr));
   }
 
-  .games-live-bar{
-    align-items:flex-start;
-
-    flex-direction:column;
+  .game-category-nav{
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
 }
@@ -2681,19 +2664,14 @@ footer p{
     grid-template-columns:1fr;
   }
 
-  .category-hero,
-  .games-hero{
+  .category-hero{
     width:calc(100% - 24px);
 
     padding-top:48px;
   }
 
-  .poster{
-    height:300px;
-  }
-
-  .poster-title{
-    font-size:31px;
+  .games-hero{
+    width:calc(100% - 24px);
   }
 
   .games-hero h1{
@@ -2702,39 +2680,36 @@ footer p{
     letter-spacing:-2px;
   }
 
-  .game-thumb{
-    height:290px;
+  .game-category-nav{
+    width:calc(100% - 24px);
+
+    grid-template-columns:1fr 1fr;
   }
 
-  .game-thumb-info h3{
-    font-size:30px;
-  }
-
-  .game-section-heading{
+  .game-section-title{
     align-items:flex-start;
 
     flex-direction:column;
   }
 
-  .upcoming-game{
-    grid-template-columns:1fr;
-
-    text-align:center;
+  .game-section-title p{
+    text-align:left;
   }
 
-  .upcoming-art{
-    width:100%;
-    height:150px;
+  .poster{
+    height:300px;
   }
 
-  .upcoming-button{
-    display:block;
+  .game-thumb{
+    height:280px;
+  }
 
-    text-align:center;
+  .poster-title{
+    font-size:31px;
   }
 
   .support-section,
-  .game-note{
+  .games-cta{
     width:calc(100% - 24px);
   }
 
@@ -2765,10 +2740,22 @@ footer p{
     grid-template-columns:1fr;
   }
 
-  .game-thumb{
-    height:260px;
+  .game-category-nav{
+    grid-template-columns:1fr;
   }
 
+}
+
+/* =========================================================
+   HIDE GAME FILTER GROUPS
+========================================================= */
+
+.game-group{
+  display:none;
+}
+
+.game-group.active{
+  display:block;
 }
 
 </style>
@@ -2827,11 +2814,10 @@ footer p{
     onclick="showTab('games',this)"
   >
     <i class="fa-solid fa-gamepad"></i>
-    Games
+    PC Games
   </button>
 
 </div>
-
 
 <!-- =======================================================
      SOCIAL TAB
@@ -2884,7 +2870,6 @@ footer p{
 
   </div>
 
-
   <div class="hero-visual">
 
     <div class="hero-card">
@@ -2918,18 +2903,33 @@ footer p{
       <div class="hero-stats">
 
         <div class="stat">
+
           <strong>5+</strong>
-          <span>Platforms</span>
+
+          <span>
+            Platforms
+          </span>
+
         </div>
 
         <div class="stat">
+
           <strong>24/7</strong>
-          <span>Support</span>
+
+          <span>
+            Support
+          </span>
+
         </div>
 
         <div class="stat">
+
           <strong>2026</strong>
-          <span>Active</span>
+
+          <span>
+            Active
+          </span>
+
         </div>
 
       </div>
@@ -2939,7 +2939,6 @@ footer p{
   </div>
 
 </section>
-
 
 <section
   class="section"
@@ -2962,7 +2961,6 @@ footer p{
 
   </div>
 
-
   <div class="search-box">
 
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -2975,7 +2973,6 @@ footer p{
     >
 
   </div>
-
 
   <div
     class="platform-grid"
@@ -2993,7 +2990,9 @@ footer p{
 
       </div>
 
-      <h3>Instagram</h3>
+      <h3>
+        Instagram
+      </h3>
 
       <p>
         Followers and social media services.
@@ -3012,7 +3011,6 @@ footer p{
 
     </div>
 
-
     <div
       class="platform-card social-item"
       data-name="youtube"
@@ -3024,7 +3022,9 @@ footer p{
 
       </div>
 
-      <h3>YouTube</h3>
+      <h3>
+        YouTube
+      </h3>
 
       <p>
         YouTube channel services.
@@ -3035,7 +3035,6 @@ footer p{
       </span>
 
     </div>
-
 
     <div
       class="platform-card social-item"
@@ -3048,7 +3047,9 @@ footer p{
 
       </div>
 
-      <h3>Snapchat</h3>
+      <h3>
+        Snapchat
+      </h3>
 
       <p>
         Snapchat services and packages.
@@ -3059,7 +3060,6 @@ footer p{
       </span>
 
     </div>
-
 
     <div
       class="platform-card social-item"
@@ -3072,7 +3072,9 @@ footer p{
 
       </div>
 
-      <h3>Facebook</h3>
+      <h3>
+        Facebook
+      </h3>
 
       <p>
         Facebook services.
@@ -3083,7 +3085,6 @@ footer p{
       </span>
 
     </div>
-
 
     <div
       class="platform-card social-item"
@@ -3096,7 +3097,9 @@ footer p{
 
       </div>
 
-      <h3>WhatsApp</h3>
+      <h3>
+        WhatsApp
+      </h3>
 
       <p>
         Direct customer support.
@@ -3111,7 +3114,6 @@ footer p{
   </div>
 
 </section>
-
 
 <!-- =======================================================
      INSTAGRAM SERVICES
@@ -3140,7 +3142,6 @@ footer p{
 
   </div>
 
-
   <div class="pricing-grid">
 
     <!-- 200 -->
@@ -3151,7 +3152,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Starter</h3>
+      <h3>
+        Starter
+      </h3>
 
       <div class="followers-number">
         200 Followers
@@ -3179,7 +3182,6 @@ footer p{
 
     </div>
 
-
     <!-- 500 -->
 
     <div class="price-card">
@@ -3188,7 +3190,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Starter Plus</h3>
+      <h3>
+        Starter Plus
+      </h3>
 
       <div class="followers-number">
         500 Followers
@@ -3216,7 +3220,6 @@ footer p{
 
     </div>
 
-
     <!-- 1000 -->
 
     <div class="price-card popular">
@@ -3229,7 +3232,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Popular</h3>
+      <h3>
+        Popular
+      </h3>
 
       <div class="followers-number">
         1,000 Followers
@@ -3257,7 +3262,6 @@ footer p{
 
     </div>
 
-
     <!-- 1500 -->
 
     <div class="price-card">
@@ -3266,7 +3270,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Growth</h3>
+      <h3>
+        Growth
+      </h3>
 
       <div class="followers-number">
         1,500 Followers
@@ -3294,7 +3300,6 @@ footer p{
 
     </div>
 
-
     <!-- 2000 -->
 
     <div class="price-card">
@@ -3303,7 +3308,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Growth Plus</h3>
+      <h3>
+        Growth Plus
+      </h3>
 
       <div class="followers-number">
         2,000 Followers
@@ -3331,7 +3338,6 @@ footer p{
 
     </div>
 
-
     <!-- 3000 -->
 
     <div class="price-card">
@@ -3340,7 +3346,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Pro</h3>
+      <h3>
+        Pro
+      </h3>
 
       <div class="followers-number">
         3,000 Followers
@@ -3368,7 +3376,6 @@ footer p{
 
     </div>
 
-
     <!-- 4000 -->
 
     <div class="price-card">
@@ -3377,7 +3384,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Pro Plus</h3>
+      <h3>
+        Pro Plus
+      </h3>
 
       <div class="followers-number">
         4,000 Followers
@@ -3405,7 +3414,6 @@ footer p{
 
     </div>
 
-
     <!-- 5000 -->
 
     <div class="price-card popular">
@@ -3418,7 +3426,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Premium</h3>
+      <h3>
+        Premium
+      </h3>
 
       <div class="followers-number">
         5,000 Followers
@@ -3446,7 +3456,6 @@ footer p{
 
     </div>
 
-
     <!-- 6000 -->
 
     <div class="price-card">
@@ -3455,7 +3464,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Premium Plus</h3>
+      <h3>
+        Premium Plus
+      </h3>
 
       <div class="followers-number">
         6,000 Followers
@@ -3483,7 +3494,6 @@ footer p{
 
     </div>
 
-
     <!-- 7000 -->
 
     <div class="price-card">
@@ -3492,7 +3502,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Advanced</h3>
+      <h3>
+        Advanced
+      </h3>
 
       <div class="followers-number">
         7,000 Followers
@@ -3520,7 +3532,6 @@ footer p{
 
     </div>
 
-
     <!-- 8000 -->
 
     <div class="price-card">
@@ -3529,7 +3540,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Advanced Plus</h3>
+      <h3>
+        Advanced Plus
+      </h3>
 
       <div class="followers-number">
         8,000 Followers
@@ -3557,7 +3570,6 @@ footer p{
 
     </div>
 
-
     <!-- 9000 -->
 
     <div class="price-card">
@@ -3566,7 +3578,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Elite</h3>
+      <h3>
+        Elite
+      </h3>
 
       <div class="followers-number">
         9,000 Followers
@@ -3594,7 +3608,6 @@ footer p{
 
     </div>
 
-
     <!-- 10000 -->
 
     <div class="price-card popular">
@@ -3607,7 +3620,9 @@ footer p{
         Instagram Followers
       </div>
 
-      <h3>Elite Plus</h3>
+      <h3>
+        Elite Plus
+      </h3>
 
       <div class="followers-number">
         10,000 Followers
@@ -3639,8 +3654,9 @@ footer p{
 
 </section>
 
-
-<!-- SOCIAL SUPPORT -->
+<!-- =======================================================
+     SUPPORT
+======================================================= -->
 
 <section class="support-section">
 
@@ -3660,25 +3676,17 @@ footer p{
       rel="noopener noreferrer"
       class="support-btn whatsapp-btn"
     >
-
       <i class="fa-brands fa-whatsapp"></i>
-
       WhatsApp
-
     </a>
-
 
     <a
       href="mailto:zpaul5567@gmail.com"
       class="support-btn email-btn"
     >
-
       <i class="fa-solid fa-envelope"></i>
-
       Email
-
     </a>
-
 
     <a
       href="https://t.me/"
@@ -3686,11 +3694,8 @@ footer p{
       rel="noopener noreferrer"
       class="support-btn telegram-btn"
     >
-
       <i class="fa-brands fa-telegram"></i>
-
       Telegram
-
     </a>
 
   </div>
@@ -3698,7 +3703,6 @@ footer p{
 </section>
 
 </main>
-
 
 <!-- =======================================================
      MOVIES TAB
@@ -3740,7 +3744,6 @@ footer p{
 
 </section>
 
-
 <section class="section">
 
   <div class="search-box">
@@ -3755,7 +3758,6 @@ footer p{
     >
 
   </div>
-
 
   <div
     class="movie-grid"
@@ -3799,7 +3801,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -3832,17 +3833,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('Bollywood Movies')"
         >
-
           Explore Bollywood
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- HOLLYWOOD -->
 
@@ -3881,7 +3878,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -3914,17 +3910,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('Hollywood Movies')"
         >
-
           Explore Hollywood
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- SOUTH -->
 
@@ -3963,7 +3955,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -3996,17 +3987,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('South Indian Movies')"
         >
-
           Explore South Movies
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- HINDI DUBBED -->
 
@@ -4045,7 +4032,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -4078,17 +4064,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('Hindi Dubbed Movies')"
         >
-
           Explore Dubbed Movies
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- PUNJABI -->
 
@@ -4127,7 +4109,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -4160,17 +4141,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('Punjabi Movies')"
         >
-
           Explore Punjabi
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- NEW -->
 
@@ -4209,7 +4186,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -4242,17 +4218,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('New Movies')"
         >
-
           Explore New Movies
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- TRENDING -->
 
@@ -4291,7 +4263,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -4324,17 +4295,13 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('Trending Movies')"
         >
-
           Explore Trending
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
 
     </div>
-
 
     <!-- ALL -->
 
@@ -4373,7 +4340,6 @@ footer p{
 
       </div>
 
-
       <div class="card-body">
 
         <div class="movie-meta">
@@ -4406,11 +4372,8 @@ footer p{
           class="movie-open-btn"
           onclick="movieCategory('All Movies')"
         >
-
           Open Movie Collection
-
           <i class="fa-solid fa-arrow-right"></i>
-
         </button>
 
       </div>
@@ -4421,44 +4384,61 @@ footer p{
 
 </section>
 
+<div class="games-cta">
 
-<div class="game-note">
+  <div class="games-cta-icon">
 
-  <i class="fa-solid fa-clapperboard"></i>
+    <i class="fa-solid fa-film"></i>
 
-  <h3>
+  </div>
+
+  <h2>
     Explore More Movies
-  </h3>
+  </h2>
 
   <p>
     Browse movie categories, latest releases
     and available movie listings.
   </p>
 
+  <button
+    class="primary-btn"
+    onclick="movieCategory('Movie Collection')"
+  >
+
+    <i class="fa-solid fa-film"></i>
+
+    Explore Movie Collection
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
 </div>
 
 </main>
 
-
 <!-- =======================================================
-     GAMES TAB
+     PC GAMES TAB
 ======================================================= -->
 
 <main id="games" class="tab-content">
 
+<!-- GAMES HERO -->
+
 <section class="games-hero">
 
-  <div class="games-icon">
+  <div class="games-live">
 
-    <i class="fa-solid fa-gamepad"></i>
+    <span class="games-live-dot"></span>
+
+    PC GAME LIBRARY
 
   </div>
 
-  <div class="limited-offer">
+  <div class="games-hero-icon">
 
-    <span class="offer-dot"></span>
-
-    PC GAMING COLLECTION
+    <i class="fa-solid fa-gamepad"></i>
 
   </div>
 
@@ -4472,147 +4452,608 @@ footer p{
 
   <p>
 
-    Discover trending, latest, popular and upcoming
-    PC games in one premium gaming collection.
+    Discover popular, trending and latest PC games.
+    Every game card below opens its corresponding
+    AnkerGames game page.
 
   </p>
 
 </section>
 
+<!-- =====================================================
+     GAME CATEGORY BUTTONS
+===================================================== -->
 
-<!-- LIVE BAR -->
-
-<div class="games-live-bar">
-
-  <div class="games-live-left">
-
-    <span class="live-pulse"></span>
-
-    <div>
-
-      <div class="games-live-title">
-        PC Games Collection
-      </div>
-
-      <div class="games-live-sub">
-        Updated gaming listings
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="games-live-right">
-
-    <span class="game-stat">
-      <i class="fa-solid fa-gamepad"></i>
-      PC
-    </span>
-
-    <span class="game-stat">
-      <i class="fa-solid fa-fire"></i>
-      Trending
-    </span>
-
-    <span class="game-stat">
-      <i class="fa-solid fa-bolt"></i>
-      Latest
-    </span>
-
-    <span class="game-stat">
-      <i class="fa-solid fa-star"></i>
-      Popular
-    </span>
-
-  </div>
-
-</div>
-
-
-<!-- GAME SEARCH -->
-
-<section class="section">
-
-  <div class="search-box">
-
-    <i class="fa-solid fa-magnifying-glass"></i>
-
-    <input
-      type="text"
-      id="gameSearch"
-      placeholder="Search games by name, genre or year..."
-      oninput="searchGames()"
-    >
-
-  </div>
-
-</section>
-
-
-<!-- FILTERS -->
-
-<div class="game-filters">
+<div class="game-category-nav">
 
   <button
-    class="game-filter active"
-    data-filter="all"
-    onclick="filterGames('all',this)"
+    class="game-nav-btn active"
+    onclick="showGameGroup('popular',this)"
   >
-    <i class="fa-solid fa-layer-group"></i>
-    All Games
+    <i class="fa-solid fa-crown"></i>
+    Popular Games
   </button>
 
   <button
-    class="game-filter"
-    data-filter="trending"
-    onclick="filterGames('trending',this)"
+    class="game-nav-btn"
+    onclick="showGameGroup('trending',this)"
   >
     <i class="fa-solid fa-fire"></i>
     Trending
   </button>
 
   <button
-    class="game-filter"
-    data-filter="latest"
-    onclick="filterGames('latest',this)"
+    class="game-nav-btn"
+    onclick="showGameGroup('latest',this)"
   >
     <i class="fa-solid fa-bolt"></i>
-    Latest
+    Latest Games
   </button>
 
   <button
-    class="game-filter"
-    data-filter="popular"
-    onclick="filterGames('popular',this)"
+    class="game-nav-btn"
+    onclick="openAnkerAllGames()"
   >
-    <i class="fa-solid fa-star"></i>
-    Popular
-  </button>
-
-  <button
-    class="game-filter"
-    data-filter="upcoming"
-    onclick="filterGames('upcoming',this)"
-  >
-    <i class="fa-solid fa-rocket"></i>
-    Upcoming
+    <i class="fa-solid fa-layer-group"></i>
+    All Games
   </button>
 
 </div>
 
+<!-- =====================================================
+     SEARCH
+===================================================== -->
 
-<!-- =======================================================
+<div class="games-search-area">
+
+  <div class="games-search">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="gameSearch"
+      placeholder="Search GTA, Minecraft, Forza, Red Dead..."
+      oninput="searchGames()"
+    >
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     POPULAR GAMES
+===================================================== -->
+
+<section
+  class="section game-group active"
+  id="popularGames"
+>
+
+  <div class="game-section-title">
+
+    <div class="game-section-title-left">
+
+      <div class="game-section-title-icon">
+
+        <i class="fa-solid fa-crown"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Popular Games
+        </h2>
+
+      </div>
+
+    </div>
+
+    <p>
+      Top titles from the AnkerGames chart
+    </p>
+
+  </div>
+
+  <div class="game-grid">
+
+    <!-- GTA V -->
+
+    <article
+      class="game-card game-item"
+      data-name="grand theft auto gta v gta 5 popular action adventure open world"
+    >
+
+      <div class="game-thumb game-gta">
+
+        <span class="game-label popular">
+          #1 POPULAR
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-car-side"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            Grand Theft
+            <br>
+            Auto V
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2013
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Grand Theft Auto V
+        </h3>
+
+        <p class="game-card-description">
+          One of the biggest titles in the AnkerGames
+          all-time chart.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-crosshairs"></i>
+            Action
+          </span>
+
+          <span>
+            <i class="fa-solid fa-earth-americas"></i>
+            Open World
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            117.6 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/grand-theft-auto-v"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- GTA V ENHANCED -->
+
+    <article
+      class="game-card game-item"
+      data-name="grand theft auto v enhanced gta 5 enhanced popular action crime"
+    >
+
+      <div class="game-thumb game-gta-enhanced">
+
+        <span class="game-label popular">
+          TOP 2
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-city"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            GTA V
+            <br>
+            Enhanced
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2025
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Grand Theft Auto V Enhanced
+        </h3>
+
+        <p class="game-card-description">
+          Enhanced edition with upgraded PC
+          visuals and features.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-gun"></i>
+            Action
+          </span>
+
+          <span>
+            <i class="fa-solid fa-city"></i>
+            Crime
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            94.7 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/grand-theft-auto-v-enhanced"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- MINECRAFT -->
+
+    <article
+      class="game-card game-item"
+      data-name="minecraft popular survival action adventure sandbox"
+    >
+
+      <div class="game-thumb game-minecraft">
+
+        <span class="game-label popular">
+          TOP GAME
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            Minecraft
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2009
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Minecraft
+        </h3>
+
+        <p class="game-card-description">
+          Sandbox survival adventure with
+          building, exploration and multiplayer.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-cube"></i>
+            Sandbox
+          </span>
+
+          <span>
+            <i class="fa-solid fa-shield-halved"></i>
+            Survival
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            2 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/minecraft"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- FORZA -->
+
+    <article
+      class="game-card game-item"
+      data-name="forza horizon 6 racing popular driving simulation"
+    >
+
+      <div class="game-thumb game-forza">
+
+        <span class="game-label popular">
+          2026 HIT
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-car"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            Forza
+            <br>
+            Horizon 6
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Forza Horizon 6
+        </h3>
+
+        <p class="game-card-description">
+          Open-world racing set across
+          Japan with hundreds of cars.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-flag-checkered"></i>
+            Racing
+          </span>
+
+          <span>
+            <i class="fa-solid fa-road"></i>
+            Open World
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            144.6 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/forza-horizon-6"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- RDR2 -->
+
+    <article
+      class="game-card game-item"
+      data-name="red dead redemption 2 rdr2 popular western open world"
+    >
+
+      <div class="game-thumb game-rdr">
+
+        <span class="game-label popular">
+          TOP 10
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-hat-cowboy"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            Red Dead
+            <br>
+            Redemption 2
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2018
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Red Dead Redemption 2
+        </h3>
+
+        <p class="game-card-description">
+          Massive open-world western adventure
+          with a story-driven campaign.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-crosshairs"></i>
+            Action
+          </span>
+
+          <span>
+            <i class="fa-solid fa-earth-americas"></i>
+            Open World
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            113 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/red-dead-redemption-2"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- WUKONG -->
+
+    <article
+      class="game-card game-item"
+      data-name="black myth wukong action rpg fantasy popular"
+    >
+
+      <div class="game-thumb game-wukong">
+
+        <span class="game-label popular">
+          POPULAR
+        </span>
+
+        <div class="game-thumb-content">
+
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-dragon"></i>
+          </div>
+
+          <div class="game-thumb-title">
+            Black Myth:
+            <br>
+            Wukong
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2024
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="game-card-body">
+
+        <h3>
+          Black Myth: Wukong
+        </h3>
+
+        <p class="game-card-description">
+          Mythology-inspired action RPG with
+          cinematic combat.
+        </p>
+
+        <div class="game-meta">
+
+          <span>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Fantasy
+          </span>
+
+          <span>
+            <i class="fa-solid fa-swords"></i>
+            RPG
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            133.1 GB
+          </span>
+
+        </div>
+
+        <a
+          href="https://ankergames.net/game/black-myth-wukong"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="game-open"
+        >
+
+          Open Game
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
      TRENDING GAMES
-======================================================= -->
+===================================================== -->
 
-<section class="section">
+<section
+  class="section game-group"
+  id="trendingGames"
+>
 
-  <div class="game-section-heading">
+  <div class="game-section-title">
 
-    <div class="game-section-heading-left">
+    <div class="game-section-title-left">
 
-      <div class="game-section-icon">
+      <div class="game-section-title-icon">
 
         <i class="fa-solid fa-fire"></i>
 
@@ -4624,107 +5065,81 @@ footer p{
           Trending Games
         </h2>
 
-        <p>
-          Popular games right now
-        </p>
-
       </div>
 
     </div>
 
-    <div class="game-view-all">
-      HOT RIGHT NOW
-    </div>
+    <p>
+      Current movement on AnkerGames
+    </p>
 
   </div>
-
 
   <div class="game-grid">
 
-
-    <!-- MORTAL SHELL II -->
+    <!-- MINECRAFT -->
 
     <article
       class="game-card game-item"
-      data-name="mortal shell ii action rpg 2026"
-      data-category="trending latest upcoming"
+      data-name="minecraft trending survival action adventure"
     >
 
-      <div class="game-thumb art-purple">
+      <div class="game-thumb game-minecraft">
 
-        <!-- Optional image:
-        <img
-          src="/uploads/games/mortal-shell-ii.jpg"
-          class="game-real-image"
-          alt="Mortal Shell II"
-        >
-        -->
-
-        <div class="game-art">
-          <i class="fa-solid fa-skull"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
+        <span class="game-label hot">
           TRENDING
-        </div>
+        </span>
 
-        <div class="game-year">
-          2026
-        </div>
+        <div class="game-thumb-content">
 
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Action RPG
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-cubes"></i>
           </div>
 
-          <h3>
-            Mortal Shell II
-          </h3>
+          <div class="game-thumb-title">
+            Minecraft
+          </div>
+
+          <div class="game-thumb-year">
+            PC • Trending
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Minecraft
+        </h3>
+
+        <p class="game-card-description">
+          One of the titles appearing on the
+          current AnkerGames trending chart.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Action
-          </span>
-
-          <span class="game-size">
-            65.6 GB
-          </span>
-
-        </div>
-
-        <p>
-          Dark fantasy action RPG with intense combat and Shell-based gameplay.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-fire"></i>
+            Trending
           </span>
 
           <span>
-            RPG
+            <i class="fa-solid fa-shield-halved"></i>
+            Survival
           </span>
 
           <span>
-            2026
+            <i class="fa-solid fa-hard-drive"></i>
+            2 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/minecraft"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -4740,82 +5155,71 @@ footer p{
 
     </article>
 
-
-    <!-- RUINS OF DAWN -->
+    <!-- GTA ENHANCED -->
 
     <article
       class="game-card game-item"
-      data-name="ruins of dawn adventure 2026"
-      data-category="trending latest"
+      data-name="gta v enhanced grand theft auto trending"
     >
 
-      <div class="game-thumb art-blue">
+      <div class="game-thumb game-gta-enhanced">
 
-        <div class="game-art">
-          <i class="fa-solid fa-mountain-sun"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
+        <span class="game-label hot">
           TRENDING
-        </div>
+        </span>
 
-        <div class="game-year">
-          2026
-        </div>
+        <div class="game-thumb-content">
 
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Adventure
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-city"></i>
           </div>
 
-          <h3>
-            Ruins of Dawn
-          </h3>
+          <div class="game-thumb-title">
+            GTA V
+            <br>
+            Enhanced
+          </div>
+
+          <div class="game-thumb-year">
+            PC • Trending
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          GTA V Enhanced
+        </h3>
+
+        <p class="game-card-description">
+          A major open-world title currently
+          appearing in the trending chart.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Adventure
-          </span>
-
-          <span class="game-size">
-            2.1 GB
-          </span>
-
-        </div>
-
-        <p>
-          Explore a mysterious world filled with adventure and discovery.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-fire"></i>
+            Trending
           </span>
 
           <span>
-            Adventure
+            <i class="fa-solid fa-city"></i>
+            Open World
           </span>
 
           <span>
-            2026
+            <i class="fa-solid fa-hard-drive"></i>
+            94.7 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/grand-theft-auto-v-enhanced"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -4831,83 +5235,71 @@ footer p{
 
     </article>
 
-
-    <!-- DRAGONSWORD -->
+    <!-- FORZA -->
 
     <article
       class="game-card game-item"
-      data-name="dragonsword awakening action rpg 2026"
-      data-category="trending latest popular"
+      data-name="forza horizon 6 trending racing"
     >
 
-      <div class="game-thumb art-red">
+      <div class="game-thumb game-forza">
 
-        <div class="game-art">
-          <i class="fa-solid fa-dragon"></i>
-        </div>
+        <span class="game-label hot">
+          TRENDING
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          HOT
-        </div>
-
-        <div class="game-year">
-          2026
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Action RPG
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-car"></i>
           </div>
 
-          <h3>
-            DragonSword:
-            Awakening
-          </h3>
+          <div class="game-thumb-title">
+            Forza
+            <br>
+            Horizon 6
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Forza Horizon 6
+        </h3>
+
+        <p class="game-card-description">
+          Racing and open-world action with
+          a strong current position.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Action
-          </span>
-
-          <span class="game-size">
-            16.4 GB
-          </span>
-
-        </div>
-
-        <p>
-          Fantasy action adventure with a young hero and a dangerous journey.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-fire"></i>
+            Trending
           </span>
 
           <span>
-            RPG
+            <i class="fa-solid fa-car"></i>
+            Racing
           </span>
 
           <span>
-            2026
+            <i class="fa-solid fa-hard-drive"></i>
+            144.6 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/forza-horizon-6"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -4923,83 +5315,71 @@ footer p{
 
     </article>
 
-
-    <!-- BLACK MYTH -->
+    <!-- RDR2 -->
 
     <article
       class="game-card game-item"
-      data-name="black myth wukong fantasy action rpg 2024"
-      data-category="trending popular"
+      data-name="red dead redemption 2 trending rdr2"
     >
 
-      <div class="game-thumb art-orange">
+      <div class="game-thumb game-rdr">
 
-        <div class="game-art">
-          <i class="fa-solid fa-staff-snake"></i>
-        </div>
+        <span class="game-label hot">
+          TRENDING
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          POPULAR
-        </div>
-
-        <div class="game-year">
-          2024
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Fantasy Action
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-hat-cowboy"></i>
           </div>
 
-          <h3>
-            Black Myth:
-            Wukong
-          </h3>
+          <div class="game-thumb-title">
+            Red Dead
+            <br>
+            Redemption 2
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2018
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Red Dead Redemption 2
+        </h3>
+
+        <p class="game-card-description">
+          A major open-world title appearing
+          on the current trending list.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Fantasy
-          </span>
-
-          <span class="game-size">
-            133.1 GB
-          </span>
-
-        </div>
-
-        <p>
-          Mythical action RPG inspired by the legendary Monkey King.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-fire"></i>
+            Trending
           </span>
 
           <span>
-            RPG
+            <i class="fa-solid fa-earth-americas"></i>
+            Open World
           </span>
 
           <span>
-            Popular
+            <i class="fa-solid fa-hard-drive"></i>
+            113 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/red-dead-redemption-2"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5017,16 +5397,22 @@ footer p{
 
   </div>
 
+</section>
 
-  <!-- =====================================================
-       LATEST GAMES
-  ===================================================== -->
+<!-- =====================================================
+     LATEST GAMES
+===================================================== -->
 
-  <div class="game-section-heading">
+<section
+  class="section game-group"
+  id="latestGames"
+>
 
-    <div class="game-section-heading-left">
+  <div class="game-section-title">
 
-      <div class="game-section-icon">
+    <div class="game-section-title-left">
+
+      <div class="game-section-title-icon">
 
         <i class="fa-solid fa-bolt"></i>
 
@@ -5038,100 +5424,83 @@ footer p{
           Latest Games
         </h2>
 
-        <p>
-          Recently added PC games
-        </p>
-
       </div>
 
     </div>
 
-    <div class="game-view-all">
-      NEW ARRIVALS
-    </div>
+    <p>
+      Recently added titles
+    </p>
 
   </div>
 
-
   <div class="game-grid">
-
 
     <!-- AFTER INC -->
 
     <article
       class="game-card game-item"
-      data-name="after inc revival simulation 2025"
-      data-category="latest"
+      data-name="after inc revival latest simulation"
     >
 
-      <div class="game-thumb art-green">
+      <div class="game-thumb game-after">
 
-        <div class="game-art">
-          <i class="fa-solid fa-city"></i>
-        </div>
+        <span class="game-label new">
+          LATEST
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          NEW
-        </div>
-
-        <div class="game-year">
-          2025
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Simulation
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-city"></i>
           </div>
 
-          <h3>
+          <div class="game-thumb-title">
             After Inc:
+            <br>
             Revival
-          </h3>
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2025
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          After Inc: Revival
+        </h3>
+
+        <p class="game-card-description">
+          Recently listed title from the
+          AnkerGames latest section.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
+          <span>
+            <i class="fa-solid fa-bolt"></i>
+            Latest
+          </span>
+
+          <span>
+            <i class="fa-solid fa-chart-line"></i>
             Simulation
           </span>
 
-          <span class="game-size">
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
             739.9 MB
           </span>
 
         </div>
 
-        <p>
-          Build, manage and survive in a challenging post-apocalyptic world.
-        </p>
-
-        <div class="game-tags">
-
-          <span>
-            PC
-          </span>
-
-          <span>
-            Simulation
-          </span>
-
-          <span>
-            Latest
-          </span>
-
-        </div>
-
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/after-inc-revival"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5146,174 +5515,70 @@ footer p{
       </div>
 
     </article>
-
 
     <!-- STONEMACHIA -->
 
     <article
       class="game-card game-item"
-      data-name="stonemachia action 2026"
-      data-category="latest"
+      data-name="stonemachia latest action"
     >
 
-      <div class="game-thumb art-purple">
+      <div class="game-thumb game-stone">
 
-        <div class="game-art">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
+        <span class="game-label new">
+          LATEST
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          NEW
-        </div>
-
-        <div class="game-year">
-          2026
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Action
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-shield"></i>
           </div>
 
-          <h3>
+          <div class="game-thumb-title">
             Stonemachia
-          </h3>
-
-        </div>
-
-      </div>
-
-
-      <div class="game-body">
-
-        <div class="game-meta">
-
-          <span class="game-genre">
-            Action
-          </span>
-
-          <span class="game-size">
-            11.0 GB
-          </span>
-
-        </div>
-
-        <p>
-          Enter a fantasy action world filled with combat and challenges.
-        </p>
-
-        <div class="game-tags">
-
-          <span>
-            PC
-          </span>
-
-          <span>
-            Action
-          </span>
-
-          <span>
-            2026
-          </span>
-
-        </div>
-
-        <a
-          href="https://ankergames.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="game-open"
-        >
-
-          Open Game
-
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-        </a>
-
-      </div>
-
-    </article>
-
-
-    <!-- SURVIVAL LOG -->
-
-    <article
-      class="game-card game-item"
-      data-name="survival log adventure survival 2026"
-      data-category="latest trending"
-    >
-
-      <div class="game-thumb art-blue">
-
-        <div class="game-art">
-          <i class="fa-solid fa-person-running"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
-          NEW
-        </div>
-
-        <div class="game-year">
-          2026
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Survival
           </div>
 
-          <h3>
-            Survival Log
-          </h3>
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Stonemachia
+        </h3>
+
+        <p class="game-card-description">
+          A recent action title listed in
+          the latest games section.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Adventure
-          </span>
-
-          <span class="game-size">
-            3.7 GB
-          </span>
-
-        </div>
-
-        <p>
-          A compact adventure experience focused on exploration and survival.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
-          </span>
-
-          <span>
-            Survival
-          </span>
-
-          <span>
+            <i class="fa-solid fa-bolt"></i>
             Latest
           </span>
 
+          <span>
+            <i class="fa-solid fa-crosshairs"></i>
+            Action
+          </span>
+
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            11 GB
+          </span>
+
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/stonemachia"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5329,82 +5594,71 @@ footer p{
 
     </article>
 
-
-    <!-- SANDUSTRY -->
+    <!-- MORTAL SHELL -->
 
     <article
       class="game-card game-item"
-      data-name="sandustry adventure simulation 2026"
-      data-category="latest trending"
+      data-name="mortal shell ii latest action adventure horror rpg"
     >
 
-      <div class="game-thumb art-orange">
+      <div class="game-thumb game-mortal">
 
-        <div class="game-art">
-          <i class="fa-solid fa-industry"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
+        <span class="game-label new">
           NEW
-        </div>
+        </span>
 
-        <div class="game-year">
-          2026
-        </div>
+        <div class="game-thumb-content">
 
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Adventure
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-skull"></i>
           </div>
 
-          <h3>
-            Sandustry
-          </h3>
+          <div class="game-thumb-title">
+            Mortal
+            <br>
+            Shell II
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Mortal Shell II
+        </h3>
+
+        <p class="game-card-description">
+          Current AnkerGames featured title
+          with a 2026 release.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Adventure
-          </span>
-
-          <span class="game-size">
-            358 MB
-          </span>
-
-        </div>
-
-        <p>
-          Discover a fresh adventure experience in a compact package.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-bolt"></i>
+            Latest
           </span>
 
           <span>
-            Adventure
+            <i class="fa-solid fa-skull"></i>
+            Action
           </span>
 
           <span>
-            2026
+            <i class="fa-solid fa-hard-drive"></i>
+            65.6 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/mortal-shell-ii"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5420,123 +5674,71 @@ footer p{
 
     </article>
 
-  </div>
-
-
-  <!-- =====================================================
-       POPULAR GAMES
-  ===================================================== -->
-
-  <div class="game-section-heading">
-
-    <div class="game-section-heading-left">
-
-      <div class="game-section-icon">
-
-        <i class="fa-solid fa-star"></i>
-
-      </div>
-
-      <div>
-
-        <h2>
-          Popular Games
-        </h2>
-
-        <p>
-          Well-known PC games
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="game-view-all">
-      FAN FAVORITES
-    </div>
-
-  </div>
-
-
-  <div class="game-grid">
-
-
-    <!-- GHOST RECON -->
+    <!-- MARVEL -->
 
     <article
       class="game-card game-item"
-      data-name="ghost recon wildlands tom clancy open world action 2017"
-      data-category="popular"
+      data-name="marvel tokon fighting souls latest action fighting"
     >
 
-      <div class="game-thumb art-blue">
+      <div class="game-thumb game-marvel">
 
-        <div class="game-art">
-          <i class="fa-solid fa-crosshairs"></i>
-        </div>
+        <span class="game-label new">
+          NEW
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          POPULAR
-        </div>
-
-        <div class="game-year">
-          2017
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Open World
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-mask"></i>
           </div>
 
-          <h3>
-            Ghost Recon
-            Wildlands
-          </h3>
+          <div class="game-thumb-title">
+            MARVEL Tōkon:
+            <br>
+            Fighting Souls
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          MARVEL Tōkon: Fighting Souls
+        </h3>
+
+        <p class="game-card-description">
+          4v4 tag-team fighting game featuring
+          Marvel characters.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Open World
-          </span>
-
-          <span class="game-size">
-            71.4 GB
-          </span>
-
-        </div>
-
-        <p>
-          Tactical open-world shooter set across a massive landscape.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-bolt"></i>
+            Latest
           </span>
 
           <span>
-            Action
+            <i class="fa-solid fa-hand-fist"></i>
+            Fighting
           </span>
 
           <span>
-            Open World
+            <i class="fa-solid fa-hard-drive"></i>
+            24.6 GB
           </span>
 
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/marvel-tokon-fighting-souls"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5552,175 +5754,71 @@ footer p{
 
     </article>
 
-
-    <!-- PROJECT ZOMBOID -->
-
-    <article
-      class="game-card game-item"
-      data-name="project zomboid survival simulation zombie 2013"
-      data-category="popular"
-    >
-
-      <div class="game-thumb art-red">
-
-        <div class="game-art">
-          <i class="fa-solid fa-skull-crossbones"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
-          POPULAR
-        </div>
-
-        <div class="game-year">
-          2013
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Survival
-          </div>
-
-          <h3>
-            Project
-            Zomboid
-          </h3>
-
-        </div>
-
-      </div>
-
-
-      <div class="game-body">
-
-        <div class="game-meta">
-
-          <span class="game-genre">
-            Simulation
-          </span>
-
-          <span class="game-size">
-            4.9 GB
-          </span>
-
-        </div>
-
-        <p>
-          Hardcore zombie survival with crafting, building and exploration.
-        </p>
-
-        <div class="game-tags">
-
-          <span>
-            PC
-          </span>
-
-          <span>
-            Zombie
-          </span>
-
-          <span>
-            Survival
-          </span>
-
-        </div>
-
-        <a
-          href="https://ankergames.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="game-open"
-        >
-
-          Open Game
-
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-        </a>
-
-      </div>
-
-    </article>
-
-
-    <!-- MINECRAFT DUNGEONS -->
+    <!-- RUINS -->
 
     <article
       class="game-card game-item"
-      data-name="minecraft dungeons action adventure 2020"
-      data-category="popular"
+      data-name="ruins of dawn latest adventure"
     >
 
-      <div class="game-thumb art-green">
+      <div class="game-thumb game-ruins">
 
-        <div class="game-art">
-          <i class="fa-solid fa-cubes-stacked"></i>
-        </div>
+        <span class="game-label new">
+          LATEST
+        </span>
 
-        <div class="game-thumb-overlay"></div>
+        <div class="game-thumb-content">
 
-        <div class="game-badge">
-          POPULAR
-        </div>
-
-        <div class="game-year">
-          2020
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Action
+          <div class="game-thumb-icon">
+            <i class="fa-solid fa-mountain-sun"></i>
           </div>
 
-          <h3>
-            Minecraft
-            Dungeons
-          </h3>
+          <div class="game-thumb-title">
+            Ruins
+            <br>
+            of Dawn
+          </div>
+
+          <div class="game-thumb-year">
+            PC • 2026
+          </div>
 
         </div>
 
       </div>
 
+      <div class="game-card-body">
 
-      <div class="game-body">
+        <h3>
+          Ruins of Dawn
+        </h3>
+
+        <p class="game-card-description">
+          Adventure title appearing among
+          the latest AnkerGames listings.
+        </p>
 
         <div class="game-meta">
 
-          <span class="game-genre">
-            Action
-          </span>
-
-          <span class="game-size">
-            2.2 GB
-          </span>
-
-        </div>
-
-        <p>
-          Dungeon-crawling action adventure set in the Minecraft universe.
-        </p>
-
-        <div class="game-tags">
-
           <span>
-            PC
+            <i class="fa-solid fa-bolt"></i>
+            Latest
           </span>
 
           <span>
-            Action
-          </span>
-
-          <span>
+            <i class="fa-solid fa-compass"></i>
             Adventure
           </span>
 
+          <span>
+            <i class="fa-solid fa-hard-drive"></i>
+            2.1 GB
+          </span>
+
         </div>
 
         <a
-          href="https://ankergames.net/"
+          href="https://ankergames.net/game/ruins-of-dawn"
           target="_blank"
           rel="noopener noreferrer"
           class="game-open"
@@ -5735,201 +5833,51 @@ footer p{
       </div>
 
     </article>
-
-
-    <!-- ELEX -->
-
-    <article
-      class="game-card game-item"
-      data-name="elex action rpg 2017"
-      data-category="popular"
-    >
-
-      <div class="game-thumb art-purple">
-
-        <div class="game-art">
-          <i class="fa-solid fa-wand-sparkles"></i>
-        </div>
-
-        <div class="game-thumb-overlay"></div>
-
-        <div class="game-badge">
-          POPULAR
-        </div>
-
-        <div class="game-year">
-          2017
-        </div>
-
-        <div class="game-thumb-info">
-
-          <div class="game-category">
-            Action RPG
-          </div>
-
-          <h3>
-            ELEX
-          </h3>
-
-        </div>
-
-      </div>
-
-
-      <div class="game-body">
-
-        <div class="game-meta">
-
-          <span class="game-genre">
-            Action
-          </span>
-
-          <span class="game-size">
-            24.7 GB
-          </span>
-
-        </div>
-
-        <p>
-          Open-world action RPG combining science fiction and fantasy.
-        </p>
-
-        <div class="game-tags">
-
-          <span>
-            PC
-          </span>
-
-          <span>
-            RPG
-          </span>
-
-          <span>
-            Open World
-          </span>
-
-        </div>
-
-        <a
-          href="https://ankergames.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="game-open"
-        >
-
-          Open Game
-
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-        </a>
-
-      </div>
-
-    </article>
-
-  </div>
-
-
-  <!-- =====================================================
-       UPCOMING
-  ===================================================== -->
-
-  <div class="game-section-heading">
-
-    <div class="game-section-heading-left">
-
-      <div class="game-section-icon">
-
-        <i class="fa-solid fa-rocket"></i>
-
-      </div>
-
-      <div>
-
-        <h2>
-          Upcoming Games
-        </h2>
-
-        <p>
-          Coming soon
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="game-view-all">
-      COMING SOON
-    </div>
-
-  </div>
-
-
-  <div class="upcoming-game">
-
-    <div class="upcoming-art">
-
-      <i class="fa-solid fa-skull"></i>
-
-    </div>
-
-
-    <div class="upcoming-info">
-
-      <div class="eyebrow">
-        UPCOMING PC RELEASE
-      </div>
-
-      <h3>
-        Mortal Shell II
-      </h3>
-
-      <p>
-        Action RPG • PC • Release scheduled for
-        August 20, 2026.
-      </p>
-
-    </div>
-
-
-    <a
-      href="https://ankergames.net/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="upcoming-button"
-    >
-
-      View Details
-
-      <i class="fa-solid fa-arrow-right"></i>
-
-    </a>
 
   </div>
 
 </section>
 
+<!-- =====================================================
+     GAME CTA
+===================================================== -->
 
-<!-- GAME NOTE -->
+<div class="games-cta">
 
-<div class="game-note">
+  <div class="games-cta-icon">
 
-  <i class="fa-solid fa-gamepad"></i>
+    <i class="fa-solid fa-gamepad"></i>
 
-  <h3>
-    More PC Games Coming
-  </h3>
+  </div>
+
+  <h2>
+    Explore Full PC Game Library
+  </h2>
 
   <p>
-    This gaming section is designed so you can
-    easily add more titles, thumbnails, genres,
-    sizes and categories later.
+    Browse the complete AnkerGames catalog,
+    including popular, trending, latest and
+    genre-based PC game listings.
   </p>
+
+  <a
+    href="https://ankergames.net/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="primary-btn"
+  >
+
+    <i class="fa-solid fa-gamepad"></i>
+
+    Open AnkerGames
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </a>
 
 </div>
 
 </main>
-
 
 <!-- =======================================================
      FOOTER
@@ -5952,7 +5900,6 @@ footer p{
 
 </footer>
 
-
 <!-- =======================================================
      JAVASCRIPT
 ======================================================= -->
@@ -5960,7 +5907,7 @@ footer p{
 <script>
 
 /* =========================================================
-   TAB SWITCHING
+   MAIN TAB SWITCHING
 ========================================================= */
 
 function showTab(tabName,clickedButton){
@@ -5973,7 +5920,6 @@ function showTab(tabName,clickedButton){
 
     });
 
-
   document
     .querySelectorAll(".main-tab")
     .forEach(button => {
@@ -5982,10 +5928,8 @@ function showTab(tabName,clickedButton){
 
     });
 
-
   const selectedTab =
     document.getElementById(tabName);
-
 
   if(selectedTab){
 
@@ -5993,13 +5937,11 @@ function showTab(tabName,clickedButton){
 
   }
 
-
   if(clickedButton){
 
     clickedButton.classList.add("active");
 
   }
-
 
   window.scrollTo({
     top:0,
@@ -6008,7 +5950,6 @@ function showTab(tabName,clickedButton){
 
 }
 
-
 /* =========================================================
    INSTAGRAM
 ========================================================= */
@@ -6016,10 +5957,7 @@ function showTab(tabName,clickedButton){
 function openInstagram(){
 
   const services =
-    document.getElementById(
-      "instagram-services"
-    );
-
+    document.getElementById("instagram-services");
 
   if(services){
 
@@ -6032,9 +5970,8 @@ function openInstagram(){
 
 }
 
-
 /* =========================================================
-   GENERIC SEARCH
+   GENERIC FILTER
 ========================================================= */
 
 function filterItems(inputId,itemSelector){
@@ -6042,17 +5979,12 @@ function filterItems(inputId,itemSelector){
   const input =
     document.getElementById(inputId);
 
-
   if(!input){
     return;
   }
 
-
   const query =
-    input.value
-      .toLowerCase()
-      .trim();
-
+    input.value.toLowerCase().trim();
 
   document
     .querySelectorAll(itemSelector)
@@ -6061,18 +5993,14 @@ function filterItems(inputId,itemSelector){
       const name =
         item.getAttribute("data-name") || "";
 
-
       item.classList.toggle(
         "hidden-item",
-        !name
-          .toLowerCase()
-          .includes(query)
+        !name.toLowerCase().includes(query)
       );
 
     });
 
 }
-
 
 /* =========================================================
    SOCIAL SEARCH
@@ -6087,7 +6015,6 @@ function searchSocial(){
 
 }
 
-
 /* =========================================================
    MOVIE SEARCH
 ========================================================= */
@@ -6101,83 +6028,85 @@ function searchMovies(){
 
 }
 
-
 /* =========================================================
    GAME SEARCH
 ========================================================= */
-
-let activeGameFilter = "all";
-
 
 function searchGames(){
 
   const input =
     document.getElementById("gameSearch");
 
-
   if(!input){
     return;
   }
 
-
   const query =
-    input.value
-      .toLowerCase()
-      .trim();
-
+    input.value.toLowerCase().trim();
 
   document
-    .querySelectorAll(".game-item")
-    .forEach(card => {
+    .querySelectorAll(
+      ".game-group.active .game-item"
+    )
+    .forEach(item => {
 
       const name =
-        (
-          card.getAttribute("data-name") || ""
-        ).toLowerCase();
+        item.getAttribute("data-name") || "";
 
-
-      const categories =
-        (
-          card.getAttribute("data-category") || ""
-        ).toLowerCase();
-
-
-      const matchesSearch =
-        name.includes(query);
-
-
-      const matchesFilter =
-        activeGameFilter === "all" ||
-        categories.includes(activeGameFilter);
-
-
-      card.classList.toggle(
+      item.classList.toggle(
         "hidden-item",
-        !(matchesSearch && matchesFilter)
+        !name.toLowerCase().includes(query)
       );
 
     });
 
 }
 
-
 /* =========================================================
-   GAME FILTER
+   GAME CATEGORY SWITCHING
 ========================================================= */
 
-function filterGames(filter,button){
-
-  activeGameFilter = filter;
-
+function showGameGroup(groupName,button){
 
   document
-    .querySelectorAll(".game-filter")
+    .querySelectorAll(".game-group")
+    .forEach(group => {
+
+      group.classList.remove("active");
+
+    });
+
+  document
+    .querySelectorAll(".game-nav-btn")
     .forEach(btn => {
 
       btn.classList.remove("active");
 
     });
 
+  if(groupName === "popular"){
+
+    document
+      .getElementById("popularGames")
+      .classList.add("active");
+
+  }
+
+  if(groupName === "trending"){
+
+    document
+      .getElementById("trendingGames")
+      .classList.add("active");
+
+  }
+
+  if(groupName === "latest"){
+
+    document
+      .getElementById("latestGames")
+      .classList.add("active");
+
+  }
 
   if(button){
 
@@ -6185,11 +6114,35 @@ function filterGames(filter,button){
 
   }
 
+  const search =
+    document.getElementById("gameSearch");
 
-  searchGames();
+  if(search){
+
+    search.value = "";
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
+/* =========================================================
+   OPEN ALL ANKER GAMES
+========================================================= */
+
+function openAnkerAllGames(){
+
+  window.open(
+    "https://ankergames.net/",
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
 
 /* =========================================================
    MOVIE CATEGORY
