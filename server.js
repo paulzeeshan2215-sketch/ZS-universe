@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const app = express();
 
 /* =========================================================
-   SERVER CONFIGURATION
+   CONFIGURATION
 ========================================================= */
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -17,8 +17,8 @@ const PRIVATE_DIR = path.join(__dirname, "private");
 const MOVIES_DIR = path.join(PRIVATE_DIR, "movies");
 const SCREENSHOTS_DIR = path.join(PRIVATE_DIR, "screenshots");
 
-const ORDERS_FILE = path.join(__dirname, "orders.json");
-const MOVIES_FILE = path.join(__dirname, "movies.json");
+const STORE = path.join(__dirname, "orders.json");
+const MOVIES_STORE = path.join(__dirname, "movies.json");
 
 const ADMIN_KEY =
   process.env.ADMIN_KEY || "CHANGE_THIS_ADMIN_KEY";
@@ -34,7 +34,7 @@ const ADMIN_URL =
 
 
 /* =========================================================
-   IMPORTANT LIMITS
+   CONSTANTS
 ========================================================= */
 
 const MAX_SCREENSHOT_SIZE =
@@ -43,74 +43,103 @@ const MAX_SCREENSHOT_SIZE =
 const MAX_MOVIE_SIZE =
   5 * 1024 * 1024 * 1024;
 
+const VALID_PROMO_CODE =
+  "ZEESHAN10";
 
-/* =========================================================
-   PROMO CODE
-========================================================= */
-
-const VALID_PROMO_CODE = "ZEESHAN10";
-const PROMO_DISCOUNT = 0.10;
+const PROMO_DISCOUNT =
+  0.10;
 
 
 /* =========================================================
-   INSTAGRAM PACKAGE PRICES
+   INSTAGRAM PACKAGE CATALOG
 =========================================================
 
    IMPORTANT:
-   Replace ONLY these six numbers with the exact prices
-   shown on your website.
+   Prices here are the SERVER-SIDE prices.
 
-   Example:
-   "200 Followers": 49,
+   The price sent by the customer/frontend
+   is NEVER trusted.
 
 ========================================================= */
 
 const INSTAGRAM_PACKAGES = {
-  "200 Followers": 0,
-  "500 Followers": 0,
-  "1,000 Followers": 0,
-  "2,000 Followers": 0,
-  "5,000 Followers": 0,
-  "10,000 Followers": 0
+
+  "200 Followers": 30,
+
+  "500 Followers": 50,
+
+  "1,000 Followers": 90,
+
+  "1,500 Followers": 130,
+
+  "2,000 Followers": 150,
+
+  "3,000 Followers": 200,
+
+  "4,000 Followers": 250,
+
+  "5,000 Followers": 300,
+
+  "6,000 Followers": 350,
+
+  "7,000 Followers": 450,
+
+  "8,000 Followers": 500,
+
+  "9,000 Followers": 550,
+
+  "10,000 Followers": 600
+
 };
 
 
 /* =========================================================
-   CREATE DIRECTORIES
+   DIRECTORIES
 ========================================================= */
 
-for (const directory of [
+for (const dir of [
   PUBLIC_DIR,
   PRIVATE_DIR,
   MOVIES_DIR,
   SCREENSHOTS_DIR
 ]) {
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, {
-      recursive: true
-    });
+
+  if (!fs.existsSync(dir)) {
+
+    fs.mkdirSync(
+      dir,
+      {
+        recursive: true
+      }
+    );
+
   }
+
 }
 
 
 /* =========================================================
-   CREATE JSON DATABASES
+   JSON FILES
 ========================================================= */
 
-if (!fs.existsSync(ORDERS_FILE)) {
+if (!fs.existsSync(STORE)) {
+
   fs.writeFileSync(
-    ORDERS_FILE,
+    STORE,
     "[]",
     "utf8"
   );
+
 }
 
-if (!fs.existsSync(MOVIES_FILE)) {
+if (!fs.existsSync(MOVIES_STORE)) {
+
   fs.writeFileSync(
-    MOVIES_FILE,
+    MOVIES_STORE,
     "[]",
     "utf8"
   );
+
 }
 
 
@@ -136,34 +165,37 @@ app.use(
    SECURITY HEADERS
 ========================================================= */
 
-app.use((req, res, next) => {
+app.use(
+  (req, res, next) => {
 
-  res.setHeader(
-    "X-Content-Type-Options",
-    "nosniff"
-  );
+    res.setHeader(
+      "X-Content-Type-Options",
+      "nosniff"
+    );
 
-  res.setHeader(
-    "X-Frame-Options",
-    "SAMEORIGIN"
-  );
+    res.setHeader(
+      "X-Frame-Options",
+      "SAMEORIGIN"
+    );
 
-  res.setHeader(
-    "Referrer-Policy",
-    "strict-origin-when-cross-origin"
-  );
+    res.setHeader(
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin"
+    );
 
-  res.setHeader(
-    "X-XSS-Protection",
-    "0"
-  );
+    res.setHeader(
+      "X-XSS-Protection",
+      "0"
+    );
 
-  next();
-});
+    next();
+
+  }
+);
 
 
 /* =========================================================
-   PUBLIC STATIC FILES
+   STATIC PUBLIC FILES
 ========================================================= */
 
 app.use(
@@ -180,52 +212,50 @@ app.use(
    JSON HELPERS
 ========================================================= */
 
-function readJSON(file) {
+function readOrders() {
 
   try {
 
-    if (!fs.existsSync(file)) {
-      return [];
-    }
-
-    const content =
+    const data =
       fs.readFileSync(
-        file,
+        STORE,
         "utf8"
       );
 
-    if (!content.trim()) {
+    if (!data.trim()) {
       return [];
     }
 
-    const data =
-      JSON.parse(content);
+    const parsed =
+      JSON.parse(data);
 
-    return Array.isArray(data)
-      ? data
+    return Array.isArray(parsed)
+      ? parsed
       : [];
 
   } catch (error) {
 
     console.error(
-      "JSON read error:",
+      "Orders read error:",
       error
     );
 
     return [];
+
   }
+
 }
 
 
-function writeJSON(file, data) {
+function writeOrders(orders) {
 
-  const temporaryFile =
-    file + ".tmp";
+  const tempFile =
+    STORE + ".tmp";
 
   fs.writeFileSync(
-    temporaryFile,
+    tempFile,
     JSON.stringify(
-      data,
+      orders,
       null,
       2
     ),
@@ -233,40 +263,73 @@ function writeJSON(file, data) {
   );
 
   fs.renameSync(
-    temporaryFile,
-    file
+    tempFile,
+    STORE
   );
-}
 
-
-function readOrders() {
-  return readJSON(ORDERS_FILE);
-}
-
-
-function writeOrders(orders) {
-  writeJSON(
-    ORDERS_FILE,
-    orders
-  );
 }
 
 
 function readMovies() {
-  return readJSON(MOVIES_FILE);
+
+  try {
+
+    const data =
+      fs.readFileSync(
+        MOVIES_STORE,
+        "utf8"
+      );
+
+    if (!data.trim()) {
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(data);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  } catch (error) {
+
+    console.error(
+      "Movies read error:",
+      error
+    );
+
+    return [];
+
+  }
+
 }
 
 
 function writeMovies(movies) {
-  writeJSON(
-    MOVIES_FILE,
-    movies
+
+  const tempFile =
+    MOVIES_STORE + ".tmp";
+
+  fs.writeFileSync(
+    tempFile,
+    JSON.stringify(
+      movies,
+      null,
+      2
+    ),
+    "utf8"
   );
+
+  fs.renameSync(
+    tempFile,
+    MOVIES_STORE
+  );
+
 }
 
 
 /* =========================================================
-   ID GENERATORS
+   ID / TOKEN GENERATORS
 ========================================================= */
 
 function createOrderId() {
@@ -277,10 +340,11 @@ function createOrderId() {
       .toString()
       .slice(-8) +
     crypto
-      .randomBytes(3)
+      .randomBytes(2)
       .toString("hex")
       .toUpperCase()
   );
+
 }
 
 
@@ -292,10 +356,11 @@ function createMovieId() {
       .toString()
       .slice(-8) +
     crypto
-      .randomBytes(3)
+      .randomBytes(2)
       .toString("hex")
       .toUpperCase()
   );
+
 }
 
 
@@ -304,6 +369,7 @@ function createAccessToken() {
   return crypto
     .randomBytes(32)
     .toString("hex");
+
 }
 
 
@@ -319,7 +385,9 @@ function cleanText(
   if (
     typeof value !== "string"
   ) {
+
     return "";
+
   }
 
   return value
@@ -329,6 +397,7 @@ function cleanText(
       0,
       maxLength
     );
+
 }
 
 
@@ -341,7 +410,9 @@ function cleanMobile(value) {
   if (
     typeof value !== "string"
   ) {
+
     return "";
+
   }
 
   return value
@@ -351,6 +422,7 @@ function cleanMobile(value) {
       0,
       20
     );
+
 }
 
 
@@ -373,6 +445,7 @@ function validMobile(mobile) {
 
   return /^[6-9]\d{9}$/
     .test(normalized);
+
 }
 
 
@@ -385,7 +458,9 @@ function cleanEmail(value) {
   if (
     typeof value !== "string"
   ) {
+
     return "";
+
   }
 
   return value
@@ -395,6 +470,7 @@ function cleanEmail(value) {
       0,
       150
     );
+
 }
 
 
@@ -406,6 +482,7 @@ function validEmail(email) {
 
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
     .test(email);
+
 }
 
 
@@ -418,10 +495,12 @@ function cleanUsername(username) {
   return cleanText(
     username,
     30
-  ).replace(
-    /^@+/,
-    ""
-  );
+  )
+    .replace(
+      /^@+/,
+      ""
+    );
+
 }
 
 
@@ -429,6 +508,7 @@ function validUsername(username) {
 
   return /^[A-Za-z0-9._]{1,30}$/
     .test(username);
+
 }
 
 
@@ -439,7 +519,9 @@ function validInstagramProfile(profile) {
     !profile ||
     profile.length > 300
   ) {
+
     return false;
+
   }
 
   try {
@@ -459,15 +541,20 @@ function validInstagramProfile(profile) {
       hostname !== "instagram.com" &&
       hostname !== "instagr.am"
     ) {
+
       return false;
+
     }
 
     return /^\/[A-Za-z0-9._]+\/?$/
       .test(url.pathname);
 
   } catch {
+
     return false;
+
   }
+
 }
 
 
@@ -485,11 +572,14 @@ function validUTR(utr) {
     utr.length < 6 ||
     utr.length > 80
   ) {
+
     return false;
+
   }
 
   return /^[A-Za-z0-9._-]+$/
     .test(utr);
+
 }
 
 
@@ -503,7 +593,9 @@ function cleanAmount(value) {
     value === null ||
     value === undefined
   ) {
+
     return "";
+
   }
 
   const text =
@@ -516,7 +608,9 @@ function cleanAmount(value) {
     !/^\d+(?:\.\d{1,2})?$/
       .test(text)
   ) {
+
     return "";
+
   }
 
   const number =
@@ -527,15 +621,18 @@ function cleanAmount(value) {
     number <= 0 ||
     number > 100000
   ) {
+
     return "";
+
   }
 
   return number.toFixed(2);
+
 }
 
 
 /* =========================================================
-   PROMO CALCULATION
+   DISCOUNT
 ========================================================= */
 
 function calculateFinalAmount(
@@ -550,7 +647,9 @@ function calculateFinalAmount(
     !Number.isFinite(amount) ||
     amount <= 0
   ) {
+
     return "";
+
   }
 
   if (
@@ -564,30 +663,13 @@ function calculateFinalAmount(
         (1 - PROMO_DISCOUNT) *
         100
       ) / 100
-    ).toFixed(2);
+    )
+      .toFixed(2);
+
   }
 
   return amount.toFixed(2);
-}
 
-
-/* =========================================================
-   PASSWORD PROTECTION
-========================================================= */
-
-function containsPassword(data) {
-
-  try {
-
-    return /password|passcode/i
-      .test(
-        JSON.stringify(data)
-      );
-
-  } catch {
-
-    return false;
-  }
 }
 
 
@@ -603,9 +685,11 @@ function parseScreenshot(
     typeof screenshot !== "string" ||
     !screenshot
   ) {
+
     throw new Error(
       "Payment screenshot is required."
     );
+
   }
 
   const match =
@@ -614,9 +698,11 @@ function parseScreenshot(
     );
 
   if (!match) {
+
     throw new Error(
       "Please upload a valid JPG, PNG or WEBP payment screenshot."
     );
+
   }
 
   const mimeType =
@@ -629,9 +715,11 @@ function parseScreenshot(
     !/^[A-Za-z0-9+/]+={0,2}$/
       .test(base64Data)
   ) {
+
     throw new Error(
       "The payment screenshot data is invalid."
     );
+
   }
 
   const buffer =
@@ -644,24 +732,29 @@ function parseScreenshot(
     !buffer ||
     buffer.length === 0
   ) {
+
     throw new Error(
       "The payment screenshot could not be read."
     );
+
   }
 
   if (
     buffer.length >
     MAX_SCREENSHOT_SIZE
   ) {
+
     throw new Error(
       "Payment screenshot must be 5 MB or smaller."
     );
+
   }
 
   return {
     mimeType,
     buffer
   };
+
 }
 
 
@@ -675,7 +768,9 @@ function detectImageType(buffer) {
     !Buffer.isBuffer(buffer) ||
     buffer.length < 12
   ) {
+
     return null;
+
   }
 
   if (
@@ -683,7 +778,9 @@ function detectImageType(buffer) {
     buffer[1] === 0xd8 &&
     buffer[2] === 0xff
   ) {
+
     return "image/jpeg";
+
   }
 
   if (
@@ -696,7 +793,9 @@ function detectImageType(buffer) {
     buffer[6] === 0x1a &&
     buffer[7] === 0x0a
   ) {
+
     return "image/png";
+
   }
 
   if (
@@ -711,15 +810,18 @@ function detectImageType(buffer) {
       12
     ) === "WEBP"
   ) {
+
     return "image/webp";
+
   }
 
   return null;
+
 }
 
 
 /* =========================================================
-   SAVE SCREENSHOT
+   SAVE SCREENSHOT PRIVATELY
 ========================================================= */
 
 function saveScreenshot(
@@ -736,14 +838,14 @@ function saveScreenshot(
     );
 
   const detectedType =
-    detectImageType(
-      buffer
-    );
+    detectImageType(buffer);
 
   if (!detectedType) {
+
     throw new Error(
       "The uploaded file is not a valid image."
     );
+
   }
 
   const compatible =
@@ -764,23 +866,30 @@ function saveScreenshot(
     );
 
   if (!compatible) {
+
     throw new Error(
       "The screenshot file type does not match its actual image format."
     );
+
   }
 
-  let extension = "jpg";
+  let extension =
+    "jpg";
 
   if (
     detectedType === "image/png"
   ) {
+
     extension = "png";
+
   }
 
   if (
     detectedType === "image/webp"
   ) {
+
     extension = "webp";
+
   }
 
   const filename =
@@ -800,11 +909,18 @@ function saveScreenshot(
   );
 
   return {
+
     filename,
+
     filepath,
+
     buffer,
-    mimeType: detectedType
+
+    mimeType:
+      detectedType
+
   };
+
 }
 
 
@@ -826,18 +942,19 @@ async function notifyTelegram(
     );
 
     return false;
+
   }
 
   try {
 
-    const url =
+    const telegramUrl =
       "https://api.telegram.org/bot" +
       TG_BOT_TOKEN +
       "/sendMessage";
 
     const response =
       await fetch(
-        url,
+        telegramUrl,
         {
           method: "POST",
 
@@ -867,6 +984,7 @@ async function notifyTelegram(
       );
 
       return false;
+
     }
 
     return true;
@@ -879,7 +997,9 @@ async function notifyTelegram(
     );
 
     return false;
+
   }
+
 }
 
 
@@ -896,7 +1016,9 @@ async function sendTelegramScreenshot(
     !TG_BOT_TOKEN ||
     !TG_CHAT_ID
   ) {
+
     return false;
+
   }
 
   try {
@@ -931,14 +1053,14 @@ async function sendTelegramScreenshot(
       screenshotInfo.filename
     );
 
-    const url =
+    const telegramUrl =
       "https://api.telegram.org/bot" +
       TG_BOT_TOKEN +
       "/sendPhoto";
 
     const response =
       await fetch(
-        url,
+        telegramUrl,
         {
           method: "POST",
           body: form
@@ -953,6 +1075,7 @@ async function sendTelegramScreenshot(
       );
 
       return false;
+
     }
 
     return true;
@@ -965,12 +1088,14 @@ async function sendTelegramScreenshot(
     );
 
     return false;
+
   }
+
 }
 
 
 /* =========================================================
-   ADMIN AUTHENTICATION
+   ADMIN AUTH
 ========================================================= */
 
 function admin(
@@ -993,9 +1118,11 @@ function admin(
       error:
         "Unauthorized"
     });
+
   }
 
   next();
+
 }
 
 
@@ -1010,26 +1137,30 @@ app.get(
     const packages =
       Object.entries(
         INSTAGRAM_PACKAGES
-      ).map(
+      )
+      .map(
         ([name, price]) => ({
-          package: name,
+
+          package:
+            name,
 
           price:
-            Number(price) > 0
-              ? Number(price).toFixed(2)
-              : null
+            Number(price)
+              .toFixed(2)
+
         })
       );
 
     res.json({
       packages
     });
+
   }
 );
 
 
 /* =========================================================
-   PUBLIC MOVIES
+   PUBLIC MOVIE CATALOG
 ========================================================= */
 
 app.get(
@@ -1044,6 +1175,7 @@ app.get(
         )
         .map(
           movie => ({
+
             movieId:
               movie.movieId,
 
@@ -1058,18 +1190,20 @@ app.get(
 
             poster:
               movie.poster || ""
+
           })
         );
 
     res.json({
       movies
     });
+
   }
 );
 
 
 /* =========================================================
-   ADMIN MOVIE UPLOAD
+   ADMIN - MOVIE UPLOAD
 ========================================================= */
 
 app.post(
@@ -1127,6 +1261,7 @@ app.post(
           error:
             "Movie title is required."
         });
+
       }
 
       if (!price) {
@@ -1135,6 +1270,7 @@ app.post(
           error:
             "Valid movie price is required."
         });
+
       }
 
       const filename =
@@ -1146,19 +1282,19 @@ app.post(
           filename
         );
 
-      const resolvedFile =
+      const resolvedPath =
         path.resolve(
           filepath
         );
 
-      const resolvedDir =
+      const resolvedMoviesDir =
         path.resolve(
           MOVIES_DIR
         );
 
       if (
-        !resolvedFile.startsWith(
-          resolvedDir +
+        !resolvedPath.startsWith(
+          resolvedMoviesDir +
           path.sep
         )
       ) {
@@ -1167,6 +1303,7 @@ app.post(
           error:
             "Invalid movie path."
         });
+
       }
 
       const contentLength =
@@ -1186,10 +1323,11 @@ app.post(
           error:
             "Movie file must be 5 GB or smaller."
         });
+
       }
 
       let received = 0;
-      let finished = false;
+      let aborted = false;
 
       const writeStream =
         fs.createWriteStream(
@@ -1199,103 +1337,97 @@ app.post(
           }
         );
 
-      await new Promise(
-        (resolve, reject) => {
+      const uploadPromise =
+        new Promise(
+          (resolve, reject) => {
 
-          req.on(
-            "data",
-            chunk => {
+            req.on(
+              "data",
+              chunk => {
 
-              if (finished) {
-                return;
+                if (aborted) {
+                  return;
+                }
+
+                received +=
+                  chunk.length;
+
+                if (
+                  received >
+                  MAX_MOVIE_SIZE
+                ) {
+
+                  aborted = true;
+
+                  req.destroy(
+                    new Error(
+                      "MOVIE_TOO_LARGE"
+                    )
+                  );
+
+                  writeStream.destroy();
+
+                  reject(
+                    new Error(
+                      "Movie file must be 5 GB or smaller."
+                    )
+                  );
+
+                }
+
               }
+            );
 
-              received +=
-                chunk.length;
+            req.on(
+              "aborted",
+              () => {
 
-              if (
-                received >
-                MAX_MOVIE_SIZE
-              ) {
-
-                finished = true;
-
-                writeStream.destroy();
+                aborted = true;
 
                 reject(
                   new Error(
-                    "MOVIE_TOO_LARGE"
+                    "Upload aborted."
                   )
                 );
+
               }
-            }
-          );
+            );
 
-          req.on(
-            "aborted",
-            () => {
+            req.on(
+              "error",
+              error => {
 
-              if (finished) {
-                return;
+                reject(error);
+
               }
+            );
 
-              finished = true;
+            writeStream.on(
+              "error",
+              error => {
 
-              reject(
-                new Error(
-                  "Upload aborted."
-                )
-              );
-            }
-          );
+                reject(error);
 
-          req.on(
-            "error",
-            error => {
-
-              if (finished) {
-                return;
               }
+            );
 
-              finished = true;
+            writeStream.on(
+              "finish",
+              () => {
 
-              reject(error);
-            }
-          );
+                resolve();
 
-          writeStream.on(
-            "error",
-            error => {
-
-              if (finished) {
-                return;
               }
+            );
 
-              finished = true;
+            req.pipe(
+              writeStream
+            );
 
-              reject(error);
-            }
-          );
+          }
+        );
 
-          writeStream.on(
-            "finish",
-            () => {
-
-              if (finished) {
-                return;
-              }
-
-              finished = true;
-
-              resolve();
-            }
-          );
-
-          req.pipe(
-            writeStream
-          );
-        }
-      );
+      await uploadPromise;
 
       if (
         received === 0
@@ -1304,28 +1436,31 @@ app.post(
         if (
           fs.existsSync(filepath)
         ) {
+
           fs.unlinkSync(filepath);
+
         }
 
         return res.status(400).json({
           error:
             "Movie file is empty."
         });
+
       }
 
       const movies =
         readMovies();
 
-      const index =
+      const existingIndex =
         movies.findIndex(
           movie =>
             movie.movieId ===
             movieId
         );
 
-      const oldMovie =
-        index >= 0
-          ? movies[index]
+      const existing =
+        existingIndex >= 0
+          ? movies[existingIndex]
           : null;
 
       const movie = {
@@ -1345,21 +1480,32 @@ app.post(
         active: true,
 
         createdAt:
-          oldMovie &&
-          oldMovie.createdAt
-            ? oldMovie.createdAt
+          existing &&
+          existing.createdAt
+            ? existing.createdAt
             : new Date()
                 .toISOString(),
 
         updatedAt:
           new Date()
             .toISOString()
+
       };
 
-      if (index >= 0) {
-        movies[index] = movie;
+      if (
+        existingIndex >= 0
+      ) {
+
+        movies[
+          existingIndex
+        ] = movie;
+
       } else {
-        movies.unshift(movie);
+
+        movies.unshift(
+          movie
+        );
+
       }
 
       writeMovies(
@@ -1379,8 +1525,11 @@ app.post(
       );
 
       return res.json({
+
         ok: true,
+
         movie
+
       });
 
     } catch (error) {
@@ -1396,8 +1545,25 @@ app.post(
       ) {
 
         try {
-          fs.unlinkSync(filepath);
+
+          fs.unlinkSync(
+            filepath
+          );
+
         } catch {}
+
+      }
+
+      if (
+        error.message ===
+        "Movie file must be 5 GB or smaller."
+      ) {
+
+        return res.status(413).json({
+          error:
+            error.message
+        });
+
       }
 
       if (
@@ -1409,19 +1575,22 @@ app.post(
           error:
             "Movie file must be 5 GB or smaller."
         });
+
       }
 
       return res.status(500).json({
         error:
           "Movie upload failed."
       });
+
     }
+
   }
 );
 
 
 /* =========================================================
-   ENABLE / DISABLE MOVIE
+   ADMIN - DISABLE MOVIE
 ========================================================= */
 
 app.post(
@@ -1445,9 +1614,11 @@ app.post(
         error:
           "Movie not found."
       });
+
     }
 
-    movie.active = false;
+    movie.active =
+      false;
 
     movie.updatedAt =
       new Date()
@@ -1461,9 +1632,14 @@ app.post(
       ok: true,
       movie
     });
+
   }
 );
 
+
+/* =========================================================
+   ADMIN - ENABLE MOVIE
+========================================================= */
 
 app.post(
   "/api/admin/movies/:id/enable",
@@ -1486,9 +1662,11 @@ app.post(
         error:
           "Movie not found."
       });
+
     }
 
-    movie.active = true;
+    movie.active =
+      true;
 
     movie.updatedAt =
       new Date()
@@ -1502,6 +1680,7 @@ app.post(
       ok: true,
       movie
     });
+
   }
 );
 
@@ -1520,13 +1699,16 @@ app.post(
         req.body || {};
 
       if (
-        containsPassword(body)
+        /password|passcode/i.test(
+          JSON.stringify(body)
+        )
       ) {
 
         return res.status(400).json({
           error:
             "Passwords are not accepted."
         });
+
       }
 
       const movieId =
@@ -1560,7 +1742,8 @@ app.post(
         ).toUpperCase();
 
       const screenshot =
-        body.screenshot || "";
+        body.screenshot ||
+        "";
 
       const movies =
         readMovies();
@@ -1579,6 +1762,7 @@ app.post(
           error:
             "Movie not found."
         });
+
       }
 
       if (
@@ -1590,6 +1774,7 @@ app.post(
           error:
             "Please provide either your mobile number or email address."
         });
+
       }
 
       if (
@@ -1601,6 +1786,7 @@ app.post(
           error:
             "Please enter a valid Indian mobile number."
         });
+
       }
 
       if (
@@ -1612,6 +1798,7 @@ app.post(
           error:
             "Please enter a valid email address."
         });
+
       }
 
       if (
@@ -1622,6 +1809,7 @@ app.post(
           error:
             "Please enter a valid UTR or leave it empty."
         });
+
       }
 
       if (
@@ -1634,6 +1822,7 @@ app.post(
           error:
             "Invalid promo code."
         });
+
       }
 
       if (!screenshot) {
@@ -1642,6 +1831,7 @@ app.post(
           error:
             "Payment screenshot is required."
         });
+
       }
 
       const baseAmount =
@@ -1655,6 +1845,7 @@ app.post(
           error:
             "Movie price is not configured correctly."
         });
+
       }
 
       const amount =
@@ -1685,15 +1876,18 @@ app.post(
           error:
             error.message
         });
+
       }
 
       const order = {
 
         orderId,
 
-        type: "MOVIE",
+        type:
+          "MOVIE",
 
-        status: "PENDING",
+        status:
+          "PENDING",
 
         movieId:
           movie.movieId,
@@ -1722,6 +1916,7 @@ app.post(
         createdAt:
           new Date()
             .toISOString()
+
       };
 
       const orders =
@@ -1736,17 +1931,16 @@ app.post(
       );
 
       const message =
-        "🎬 NEW MOVIE ORDER\n\n" +
 
-        "🆔 Order ID: " +
+        "🎬 NEW MOVIE ORDER " +
         orderId +
-        "\n" +
+        "\n\n" +
 
         "🎥 Movie: " +
         movie.title +
         "\n" +
 
-        "🎞 Movie ID: " +
+        "🆔 Movie ID: " +
         movie.movieId +
         "\n" +
 
@@ -1782,7 +1976,7 @@ app.post(
 
         "\n" +
 
-        "🎟 Promo: " +
+        "🎟 Promo Code: " +
         (
           promoCode ||
           "Not used"
@@ -1798,8 +1992,7 @@ app.post(
 
       await sendTelegramScreenshot(
         screenshotInfo,
-
-        "💳 MOVIE PAYMENT\n" +
+        "💳 MOVIE PAYMENT SCREENSHOT\n" +
         "Order ID: " +
         orderId +
         "\n" +
@@ -1809,15 +2002,21 @@ app.post(
         "Amount: ₹" +
         amount +
         "\n\n" +
-        "⚠️ VERIFY PAYMENT."
+        "⚠️ Verify payment before accepting."
       );
 
       res.json({
+
         ok: true,
+
         orderId,
-        status: "PENDING",
+
+        status:
+          "PENDING",
+
         movieId:
           movie.movieId
+
       });
 
     } catch (error) {
@@ -1831,7 +2030,9 @@ app.post(
         error:
           "Unable to process movie order."
       });
+
     }
+
   }
 );
 
@@ -1850,13 +2051,16 @@ app.post(
         req.body || {};
 
       if (
-        containsPassword(body)
+        /password|passcode/i.test(
+          JSON.stringify(body)
+        )
       ) {
 
         return res.status(400).json({
           error:
             "Passwords are not accepted."
         });
+
       }
 
       const pkg =
@@ -1901,7 +2105,8 @@ app.post(
         ).toUpperCase();
 
       const screenshot =
-        body.screenshot || "";
+        body.screenshot ||
+        "";
 
       if (
         !pkg ||
@@ -1912,8 +2117,9 @@ app.post(
 
         return res.status(400).json({
           error:
-            "Please complete all required fields and upload your payment screenshot."
+            "Please complete the required fields and upload your payment screenshot."
         });
+
       }
 
       if (
@@ -1927,7 +2133,12 @@ app.post(
           error:
             "Invalid Instagram package."
         });
+
       }
+
+      /*
+        SERVER-SIDE PACKAGE PRICE
+      */
 
       const packagePrice =
         cleanAmount(
@@ -1940,6 +2151,7 @@ app.post(
           error:
             "This Instagram package price is not configured on the server."
         });
+
       }
 
       if (
@@ -1951,6 +2163,7 @@ app.post(
           error:
             "Please provide either your mobile number or email address."
         });
+
       }
 
       if (
@@ -1962,6 +2175,7 @@ app.post(
           error:
             "Please enter a valid Indian mobile number."
         });
+
       }
 
       if (
@@ -1973,6 +2187,7 @@ app.post(
           error:
             "Please enter a valid email address."
         });
+
       }
 
       if (
@@ -1983,16 +2198,20 @@ app.post(
           error:
             "Please enter a valid Instagram username."
         });
+
       }
 
       if (
-        !validInstagramProfile(profile)
+        !validInstagramProfile(
+          profile
+        )
       ) {
 
         return res.status(400).json({
           error:
             "Please enter a valid Instagram profile link."
         });
+
       }
 
       if (
@@ -2003,6 +2222,7 @@ app.post(
           error:
             "Please enter a valid UTR or leave it empty."
         });
+
       }
 
       if (
@@ -2015,6 +2235,7 @@ app.post(
           error:
             "Invalid promo code."
         });
+
       }
 
       const amount =
@@ -2042,17 +2263,21 @@ app.post(
           error:
             error.message
         });
+
       }
 
       const order = {
 
         orderId,
 
-        type: "INSTAGRAM",
+        type:
+          "INSTAGRAM",
 
-        status: "PENDING",
+        status:
+          "PENDING",
 
-        package: pkg,
+        package:
+          pkg,
 
         mobile,
 
@@ -2077,6 +2302,7 @@ app.post(
         createdAt:
           new Date()
             .toISOString()
+
       };
 
       const orders =
@@ -2091,11 +2317,10 @@ app.post(
       );
 
       const message =
-        "📸 NEW INSTAGRAM ORDER\n\n" +
 
-        "🆔 Order ID: " +
+        "🔔 NEW INSTAGRAM ORDER " +
         orderId +
-        "\n" +
+        "\n\n" +
 
         "📦 Package: " +
         pkg +
@@ -2125,7 +2350,7 @@ app.post(
 
         "\n\n" +
 
-        "👤 Instagram: @" +
+        "📸 Instagram: @" +
         username +
 
         "\n" +
@@ -2143,7 +2368,7 @@ app.post(
 
         "\n" +
 
-        "🎟 Promo: " +
+        "🎟 Promo Code: " +
         (
           promoCode ||
           "Not used"
@@ -2159,8 +2384,7 @@ app.post(
 
       await sendTelegramScreenshot(
         screenshotInfo,
-
-        "💳 INSTAGRAM PAYMENT\n" +
+        "💳 INSTAGRAM PAYMENT SCREENSHOT\n" +
         "Order ID: " +
         orderId +
         "\n" +
@@ -2170,13 +2394,18 @@ app.post(
         "Amount: ₹" +
         amount +
         "\n\n" +
-        "⚠️ VERIFY PAYMENT."
+        "⚠️ Verify payment before accepting."
       );
 
       res.json({
+
         ok: true,
+
         orderId,
-        status: "PENDING"
+
+        status:
+          "PENDING"
+
       });
 
     } catch (error) {
@@ -2190,7 +2419,9 @@ app.post(
         error:
           "Unable to process order."
       });
+
     }
+
   }
 );
 
@@ -2211,19 +2442,22 @@ app.get(
       orders.map(
         order => {
 
-          const copy = {
-            ...order
-          };
+          const copy =
+            {
+              ...order
+            };
 
           delete copy.accessToken;
 
           return copy;
+
         }
       );
 
     res.json(
       safeOrders
     );
+
   }
 );
 
@@ -2240,12 +2474,13 @@ app.get(
     res.json(
       readMovies()
     );
+
   }
 );
 
 
 /* =========================================================
-   ADMIN - PAYMENT SCREENSHOT
+   ADMIN - VIEW PAYMENT SCREENSHOT
 ========================================================= */
 
 app.get(
@@ -2268,6 +2503,7 @@ app.get(
       return res.status(404).send(
         "Order not found."
       );
+
     }
 
     if (!order.screenshot) {
@@ -2275,6 +2511,7 @@ app.get(
       return res.status(404).send(
         "Screenshot not found."
       );
+
     }
 
     const filename =
@@ -2307,6 +2544,7 @@ app.get(
       return res.status(403).send(
         "Invalid screenshot path."
       );
+
     }
 
     if (
@@ -2316,6 +2554,7 @@ app.get(
       return res.status(404).send(
         "Screenshot file not found."
       );
+
     }
 
     res.setHeader(
@@ -2323,15 +2562,16 @@ app.get(
       "private, no-store"
     );
 
-    return res.sendFile(
+    res.sendFile(
       filepath
     );
+
   }
 );
 
 
 /* =========================================================
-   ADMIN - ACCEPT / REJECT ORDER
+   ADMIN - ACCEPT / REJECT
 ========================================================= */
 
 app.post(
@@ -2339,7 +2579,7 @@ app.post(
   admin,
   async (req, res) => {
 
-    const allowedStatuses = [
+    const allowed = [
       "ACCEPTED",
       "REJECTED"
     ];
@@ -2349,15 +2589,16 @@ app.post(
       req.body.status;
 
     if (
-      !allowedStatuses.includes(
+      !allowed.includes(
         status
       )
     ) {
 
       return res.status(400).json({
         error:
-          "Invalid status."
+          "Invalid status"
       });
+
     }
 
     const orders =
@@ -2374,8 +2615,9 @@ app.post(
 
       return res.status(404).json({
         error:
-          "Order not found."
+          "Order not found"
       });
+
     }
 
     order.status =
@@ -2389,46 +2631,60 @@ app.post(
       orders
     );
 
-    const itemName =
-      order.type === "MOVIE"
-        ? "🎬 Movie: " +
-          order.movieTitle
-        : "📸 Instagram: @" +
-          order.username;
+    await notifyTelegram(
 
-    if (
       status === "ACCEPTED"
-    ) {
 
-      await notifyTelegram(
-        "✅ ORDER ACCEPTED\n\n" +
-        "Order ID: " +
-        order.orderId +
-        "\n" +
-        itemName
-      );
+        ? (
+          "✅ ORDER ACCEPTED\n\n" +
 
-    } else {
+          "Order ID: " +
+          order.orderId +
+          "\n" +
 
-      await notifyTelegram(
-        "❌ ORDER REJECTED\n\n" +
-        "Order ID: " +
-        order.orderId +
-        "\n" +
-        itemName
-      );
-    }
+          (
+            order.type === "MOVIE"
 
-    const safeOrder = {
-      ...order
-    };
+              ? "🎬 Movie: " +
+                order.movieTitle
 
-    delete safeOrder.accessToken;
+              : "📦 Instagram: @" +
+                order.username
+          )
+        )
+
+        : (
+          "❌ ORDER REJECTED\n\n" +
+
+          "Order ID: " +
+          order.orderId +
+          "\n" +
+
+          (
+            order.type === "MOVIE"
+
+              ? "🎬 Movie: " +
+                order.movieTitle
+
+              : "📦 Instagram: @" +
+                order.username
+          )
+        )
+
+    );
 
     res.json({
+
       ok: true,
-      order: safeOrder
+
+      order: {
+        ...order,
+        accessToken:
+          undefined
+      }
+
     });
+
   }
 );
 
@@ -2455,8 +2711,9 @@ app.get(
 
       return res.status(404).json({
         error:
-          "Order not found."
+          "Order not found"
       });
+
     }
 
     res.json({
@@ -2482,19 +2739,17 @@ app.get(
         order.movieTitle ||
         null,
 
-      amount:
-        order.amount ||
-        null,
-
       createdAt:
         order.createdAt
+
     });
+
   }
 );
 
 
 /* =========================================================
-   CUSTOMER - MOVIE ACCESS
+   CUSTOMER - MY MOVIE ACCESS
 ========================================================= */
 
 app.get(
@@ -2517,6 +2772,7 @@ app.get(
         error:
           "Order not found."
       });
+
     }
 
     if (
@@ -2528,6 +2784,7 @@ app.get(
         error:
           "This is not a movie order."
       });
+
     }
 
     if (
@@ -2539,6 +2796,7 @@ app.get(
         error:
           "Movie access has not been approved."
       });
+
     }
 
     const movies =
@@ -2557,6 +2815,7 @@ app.get(
         error:
           "Movie is no longer available."
       });
+
     }
 
     const watchUrl =
@@ -2588,8 +2847,11 @@ app.get(
           movie.poster || "",
 
         watchUrl
+
       }
+
     });
+
   }
 );
 
@@ -2613,6 +2875,7 @@ app.get(
       return res.status(401).send(
         "Movie access requires an approved order."
       );
+
     }
 
     const orders =
@@ -2630,6 +2893,7 @@ app.get(
       return res.status(404).send(
         "Invalid movie access token."
       );
+
     }
 
     if (
@@ -2640,6 +2904,7 @@ app.get(
       return res.status(403).send(
         "Invalid movie order."
       );
+
     }
 
     if (
@@ -2650,6 +2915,7 @@ app.get(
       return res.status(403).send(
         "Movie access has not been approved."
       );
+
     }
 
     if (
@@ -2660,6 +2926,7 @@ app.get(
       return res.status(403).send(
         "This order does not have access to this movie."
       );
+
     }
 
     const movies =
@@ -2677,6 +2944,7 @@ app.get(
       return res.status(404).send(
         "Movie not found."
       );
+
     }
 
     const filename =
@@ -2685,8 +2953,7 @@ app.get(
       );
 
     if (
-      !filename ||
-      !filename.toLowerCase().endsWith(
+      !filename.endsWith(
         ".mp4"
       )
     ) {
@@ -2694,6 +2961,7 @@ app.get(
       return res.status(400).send(
         "Invalid movie file."
       );
+
     }
 
     const filepath =
@@ -2722,6 +2990,7 @@ app.get(
       return res.status(403).send(
         "Invalid movie path."
       );
+
     }
 
     if (
@@ -2731,6 +3000,7 @@ app.get(
       return res.status(404).send(
         "Movie file is not available."
       );
+
     }
 
     const stat =
@@ -2743,6 +3013,7 @@ app.get(
       return res.status(404).send(
         "Movie file is not available."
       );
+
     }
 
     const fileSize =
@@ -2778,9 +3049,12 @@ app.get(
         fileSize
       );
 
-      return fs
-        .createReadStream(filepath)
-        .pipe(res);
+      fs.createReadStream(
+        filepath
+      ).pipe(res);
+
+      return;
+
     }
 
     const match =
@@ -2799,6 +3073,7 @@ app.get(
       );
 
       return res.end();
+
     }
 
     let start =
@@ -2831,15 +3106,24 @@ app.get(
       );
 
       return res.end();
+
     }
 
-    if (start < 0) {
+    if (
+      start < 0
+    ) {
+
       start = 0;
+
     }
 
-    if (end >= fileSize) {
+    if (
+      end >= fileSize
+    ) {
+
       end =
         fileSize - 1;
+
     }
 
     if (
@@ -2856,6 +3140,7 @@ app.get(
       );
 
       return res.end();
+
     }
 
     const chunkSize =
@@ -2896,23 +3181,27 @@ app.get(
           error
         );
 
-        if (
-          !res.headersSent
-        ) {
+        if (!res.headersSent) {
+
           res.status(500).end();
+
         } else {
+
           res.destroy();
+
         }
+
       }
     );
 
     stream.pipe(res);
+
   }
 );
 
 
 /* =========================================================
-   HTML PAGE HELPER
+   HTML ROUTES
 ========================================================= */
 
 function sendPublicPage(
@@ -2920,16 +3209,14 @@ function sendPublicPage(
   res
 ) {
 
-  const filepath =
+  const file =
     path.join(
       PUBLIC_DIR,
       filename
     );
 
   const resolvedFile =
-    path.resolve(
-      filepath
-    );
+    path.resolve(file);
 
   const resolvedPublic =
     path.resolve(
@@ -2946,50 +3233,25 @@ function sendPublicPage(
     return res.status(403).send(
       "Invalid file path."
     );
+
   }
 
   if (
-    !fs.existsSync(filepath)
+    !fs.existsSync(file)
   ) {
 
     return res.status(404).send(
       filename +
       " was not found."
     );
+
   }
 
   return res.sendFile(
-    filepath
+    file
   );
+
 }
-
-
-/* =========================================================
-   HTML ROUTES
-========================================================= */
-
-app.get(
-  "/",
-  (req, res) => {
-
-    sendPublicPage(
-      "index.html",
-      res
-    );
-  }
-);
-
-
-app.get(
-  "/index.html",
-  (req, res) => {
-
-    sendPublicPage(
-      "index.html",
-      res
-    );
-  }
-);
 
 
 app.get(
@@ -3000,6 +3262,7 @@ app.get(
       "order.html",
       res
     );
+
   }
 );
 
@@ -3012,6 +3275,7 @@ app.get(
       "admin.html",
       res
     );
+
   }
 );
 
@@ -3024,16 +3288,30 @@ app.get(
       "watch.html",
       res
     );
+
+  }
+);
+
+
+app.get(
+  "/",
+  (req, res) => {
+
+    sendPublicPage(
+      "index.html",
+      res
+    );
+
   }
 );
 
 
 /* =========================================================
-   API 404
+   404
 ========================================================= */
 
 app.use(
-  (req, res, next) => {
+  (req, res) => {
 
     if (
       req.path.startsWith(
@@ -3043,25 +3321,15 @@ app.use(
 
       return res.status(404).json({
         error:
-          "API endpoint not found."
+          "API endpoint not found"
       });
+
     }
-
-    next();
-  }
-);
-
-
-/* =========================================================
-   PAGE 404
-========================================================= */
-
-app.use(
-  (req, res) => {
 
     res.status(404).send(
       "Page not found."
     );
+
   }
 );
 
@@ -3083,12 +3351,14 @@ app.use(
     ) {
 
       return next(error);
+
     }
 
     res.status(500).json({
       error:
         "Internal server error."
     });
+
   }
 );
 
@@ -3122,15 +3392,11 @@ app.listen(
     );
 
     console.log(
-      "Telegram:",
-      TG_BOT_TOKEN && TG_CHAT_ID
-        ? "configured"
-        : "not configured"
+      "Instagram packages loaded:",
+      Object.keys(
+        INSTAGRAM_PACKAGES
+      ).length
     );
 
-    console.log(
-      "Admin URL:",
-      ADMIN_URL || "not configured"
-    );
   }
 );
