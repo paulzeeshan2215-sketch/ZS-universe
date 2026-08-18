@@ -8,7 +8,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -151,6 +150,7 @@ button{
     opacity:0;
     transform:translateY(8px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
@@ -174,9 +174,9 @@ button{
   margin-bottom:24px;
 }
 
-/* MOVIE */
+/* PRODUCT CARD */
 
-.movie-card{
+.product-card{
   width:100%;
   padding:20px;
   margin-bottom:22px;
@@ -192,7 +192,7 @@ button{
     );
 }
 
-.movie-label{
+.product-label{
   color:#8d97b3;
   font-size:10px;
   font-weight:700;
@@ -201,45 +201,17 @@ button{
   margin-bottom:6px;
 }
 
-.movie-name{
+.product-name{
   font-family:"Montserrat",sans-serif;
   font-size:21px;
   font-weight:800;
   line-height:1.35;
 }
 
-.movie-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:13px;
-}
-
-.meta{
-  padding:6px 9px;
-  border-radius:8px;
-  background:#171e34;
-  color:#b9c1d6;
-  font-size:10px;
-  font-weight:600;
-}
-
-.movie-price{
-  margin-top:16px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.old-price{
-  color:#6f7892;
-  text-decoration:line-through;
-  font-size:13px;
-}
-
-.sale-price{
+.product-price{
+  margin-top:12px;
   color:#ff5d97;
-  font-size:24px;
+  font-size:27px;
   font-weight:800;
 }
 
@@ -454,7 +426,8 @@ button:disabled{
   overflow:hidden;
 }
 
-#qrCode{
+#instagramQR,
+#movieQR{
   width:100%;
   height:100%;
 
@@ -464,8 +437,10 @@ button:disabled{
   background:#fff;
 }
 
-#qrCode img,
-#qrCode canvas{
+#instagramQR img,
+#instagramQR canvas,
+#movieQR img,
+#movieQR canvas{
   width:100%!important;
   height:100%!important;
   object-fit:contain!important;
@@ -719,7 +694,7 @@ button:disabled{
     font-size:21px;
   }
 
-  .movie-name{
+  .product-name{
     font-size:18px;
   }
 
@@ -801,53 +776,23 @@ button:disabled{
     Complete the details below to purchase your movie.
   </p>
 
-  <div class="movie-card">
+  <div class="product-card">
 
-    <div class="movie-label">
+    <div class="product-label">
       Selected Movie
     </div>
 
-    <div class="movie-name" id="movieName">
+    <div class="product-name" id="movieName">
       Loading movie...
     </div>
 
-    <div class="movie-meta">
-
-      <span class="meta" id="movieYear">
-        Movie
-      </span>
-
-      <span class="meta" id="movieQuality">
-        Quality
-      </span>
-
-      <span class="meta" id="movieLanguage">
-        Language
-      </span>
-
-      <span class="meta" id="movieSize">
-        Digital
-      </span>
-
-    </div>
-
-    <div class="movie-price">
-
-      <span class="old-price" id="movieOldPrice">
-        ₹0
-      </span>
-
-      <span class="sale-price" id="moviePrice">
-        ₹0
-      </span>
-
+    <div class="product-price" id="moviePrice">
+      ₹0
     </div>
 
   </div>
 
   <div class="error" id="movieError1"></div>
-
-  <!-- CONTACT -->
 
   <div class="form-group">
 
@@ -891,10 +836,7 @@ button:disabled{
 
     </div>
 
-    <div
-      id="movieEmailField"
-      style="display:none;"
-    >
+    <div id="movieEmailField" style="display:none;">
 
       <input
         id="movieEmail"
@@ -978,10 +920,6 @@ button:disabled{
       ₹0
     </div>
 
-    <div class="upi-note">
-      The exact amount is included in the QR code.
-    </div>
-
   </div>
 
   <div class="qr-wrapper">
@@ -1006,10 +944,7 @@ button:disabled{
       📋 Copy UPI ID
     </button>
 
-    <div
-      class="copy-success"
-      id="copySuccess"
-    >
+    <div class="copy-success" id="copySuccess">
       ✓ UPI ID copied successfully
     </div>
 
@@ -1035,8 +970,6 @@ button:disabled{
 
   <div class="error" id="movieError2"></div>
 
-  <!-- UTR -->
-
   <div class="form-group">
 
     <label for="movieUTR">
@@ -1054,15 +987,11 @@ button:disabled{
 
   </div>
 
-  <!-- SCREENSHOT -->
-
   <div class="upload-box">
 
     <label for="movieScreenshot">
-
       Payment Screenshot
       <span class="required">*</span>
-
     </label>
 
     <input
@@ -1071,10 +1000,7 @@ button:disabled{
       accept="image/jpeg,image/png,image/webp"
     >
 
-    <div
-      class="file-name"
-      id="movieFileName"
-    >
+    <div class="file-name" id="movieFileName">
       No screenshot selected
     </div>
 
@@ -1213,25 +1139,24 @@ button:disabled{
   </h2>
 
   <p class="subtitle">
-    Enter your Instagram details and contact information
-    to continue.
+    Select package details and enter your Instagram information.
   </p>
 
-  <div class="movie-card">
+  <div class="product-card">
 
-    <div class="movie-label">
-      Selected Package
+    <div class="product-label">
+      Selected Instagram Package
     </div>
 
     <div
-      class="movie-name"
+      class="product-name"
       id="instagramPackage"
     >
       Loading package...
     </div>
 
     <div
-      class="sale-price"
+      class="product-price"
       id="instagramPrice"
     >
       ₹0
@@ -1278,6 +1203,7 @@ button:disabled{
         inputmode="numeric"
         maxlength="15"
         placeholder="Enter mobile number"
+        autocomplete="tel"
       >
 
     </div>
@@ -1292,6 +1218,7 @@ button:disabled{
         type="email"
         maxlength="150"
         placeholder="Enter email address"
+        autocomplete="email"
       >
 
     </div>
@@ -1310,6 +1237,7 @@ button:disabled{
       type="text"
       maxlength="30"
       placeholder="@yourusername"
+      autocomplete="off"
     >
 
   </div>
@@ -1458,13 +1386,14 @@ button:disabled{
       type="text"
       maxlength="80"
       placeholder="Enter UTR if available"
+      autocomplete="off"
     >
 
   </div>
 
   <div class="upload-box">
 
-    <label>
+    <label for="instagramScreenshot">
 
       Payment Screenshot
       <span class="required">*</span>
@@ -1622,21 +1551,202 @@ button:disabled{
 const UPI_ID = "7889777143@fam";
 const UPI_NAME = "SehrAn Media";
 
+
 /* =========================================================
-   URL DATA
+   INSTAGRAM PACKAGE DATABASE
+   IMPORTANT:
+   Package ID = follower count
+   Price is controlled here.
 ========================================================= */
 
-const params =
-  new URLSearchParams(
-    window.location.search
+const INSTAGRAM_PACKAGES = {
+
+  "200": {
+    name: "Starter — 200 Followers",
+    followers: 200,
+    price: 30
+  },
+
+  "500": {
+    name: "Starter Plus — 500 Followers",
+    followers: 500,
+    price: 50
+  },
+
+  "1000": {
+    name: "Popular — 1,000 Followers",
+    followers: 1000,
+    price: 90
+  },
+
+  "1500": {
+    name: "Growth — 1,500 Followers",
+    followers: 1500,
+    price: 130
+  },
+
+  "2000": {
+    name: "Growth Plus — 2,000 Followers",
+    followers: 2000,
+    price: 150
+  },
+
+  "3000": {
+    name: "Pro — 3,000 Followers",
+    followers: 3000,
+    price: 200
+  },
+
+  "4000": {
+    name: "Pro Plus — 4,000 Followers",
+    followers: 4000,
+    price: 250
+  },
+
+  "5000": {
+    name: "Premium — 5,000 Followers",
+    followers: 5000,
+    price: 300
+  },
+
+  "6000": {
+    name: "Premium Plus — 6,000 Followers",
+    followers: 6000,
+    price: 350
+  },
+
+  "7000": {
+    name: "Advanced — 7,000 Followers",
+    followers: 7000,
+    price: 450
+  },
+
+  "8000": {
+    name: "Advanced Plus — 8,000 Followers",
+    followers: 8000,
+    price: 500
+  },
+
+  "9000": {
+    name: "Elite — 9,000 Followers",
+    followers: 9000,
+    price: 550
+  },
+
+  "10000": {
+    name: "Elite Plus — 10,000 Followers",
+    followers: 10000,
+    price: 600
+  }
+
+};
+
+
+/* =========================================================
+   URL PARAMETERS
+========================================================= */
+
+const params = new URLSearchParams(
+  window.location.search
+);
+
+const productType = (
+  params.get("product") ||
+  params.get("type") ||
+  ""
+).toLowerCase();
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getNumber(value){
+
+  if(!value){
+    return 0;
+  }
+
+  const cleaned = String(value)
+    .replace(/,/g,"")
+    .replace(/₹/g,"")
+    .replace(/INR/gi,"")
+    .trim();
+
+  const match = cleaned.match(
+    /(\d+(?:\.\d{1,2})?)/
   );
 
-const productType =
-  (
-    params.get("product") ||
-    params.get("type") ||
-    ""
-  ).toLowerCase();
+  return match
+    ? Number(match[1])
+    : 0;
+}
+
+
+function money(value){
+
+  const number = Number(value) || 0;
+
+  if(Number.isInteger(number)){
+    return "₹" + number;
+  }
+
+  return "₹" + number.toFixed(2);
+}
+
+
+/* =========================================================
+   INSTAGRAM PACKAGE DETECTION
+========================================================= */
+
+const requestedPackage =
+  params.get("followers") ||
+  params.get("package") ||
+  params.get("pkg") ||
+  params.get("service") ||
+  "";
+
+
+/*
+  Normalize values such as:
+
+  1000
+  1,000
+  1000 Followers
+  1,000 Followers
+*/
+
+const normalizedPackage = String(
+  requestedPackage
+)
+  .replace(/,/g,"")
+  .replace(/\s+/g,"")
+  .replace(/followers/gi,"")
+  .replace(/follower/gi,"")
+  .trim();
+
+
+let selectedInstagramPackage =
+  INSTAGRAM_PACKAGES[normalizedPackage];
+
+
+/*
+  Fallback:
+  If package is not found, show an error instead
+  of silently accepting an incorrect price.
+*/
+
+let instagramPackage = selectedInstagramPackage
+  ? selectedInstagramPackage.name
+  : "Invalid Instagram Package";
+
+let instagramPrice = selectedInstagramPackage
+  ? selectedInstagramPackage.price
+  : 0;
+
+let instagramFollowers = selectedInstagramPackage
+  ? selectedInstagramPackage.followers
+  : 0;
 
 
 /* =========================================================
@@ -1680,72 +1790,11 @@ let movieSize =
 
 
 /* =========================================================
-   INSTAGRAM DATA
-========================================================= */
-
-let instagramPackage =
-  params.get("package") ||
-  params.get("pkg") ||
-  params.get("service") ||
-  params.get("name") ||
-  "Selected Package";
-
-let instagramPrice =
-  getNumber(
-    params.get("amount") ||
-    params.get("price") ||
-    params.get("cost") ||
-    "0"
-  );
-
-
-/* =========================================================
-   CURRENT MODE
+   MODE
 ========================================================= */
 
 const isMovie =
   productType === "movie";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getNumber(value){
-
-  if(!value){
-    return 0;
-  }
-
-  const cleaned =
-    String(value)
-      .replace(/,/g,"")
-      .replace(/₹/g,"")
-      .replace(/INR/gi,"")
-      .trim();
-
-  const match =
-    cleaned.match(
-      /(\d+(?:\.\d{1,2})?)/
-    );
-
-  return match
-    ? Number(match[1])
-    : 0;
-}
-
-
-function money(value){
-
-  const number =
-    Number(value) || 0;
-
-  if(Number.isInteger(number)){
-    return "₹" + number;
-  }
-
-  return "₹" + number.toFixed(2);
-}
 
 
 /* =========================================================
@@ -1774,6 +1823,10 @@ function generateQR(elementId,amount){
   const container =
     document.getElementById(elementId);
 
+  if(!container){
+    return;
+  }
+
   container.innerHTML = "";
 
   if(
@@ -1792,8 +1845,7 @@ function generateQR(elementId,amount){
       height:290,
       colorDark:"#000000",
       colorLight:"#ffffff",
-      correctLevel:
-        QRCode.CorrectLevel.H
+      correctLevel:QRCode.CorrectLevel.H
     }
   );
 }
@@ -1834,8 +1886,9 @@ async function copyUPI(){
       box.classList.add("show");
 
       setTimeout(
-        () =>
-          box.classList.remove("show"),
+        () => {
+          box.classList.remove("show");
+        },
         2500
       );
     }
@@ -1875,25 +1928,34 @@ function updateProgress(number){
 
     if(step){
 
-      if(i<=number){
-        step.classList.add("active");
-      }else{
-        step.classList.remove("active");
-      }
+      step.classList.toggle(
+        "active",
+        i <= number
+      );
     }
   }
 
-  document.getElementById("line1")
-    .style.background =
+  const line1 =
+    document.getElementById("line1");
+
+  const line2 =
+    document.getElementById("line2");
+
+  if(line1){
+
+    line1.style.background =
       number >= 2
         ? "#ff3d81"
         : "#303952";
+  }
 
-  document.getElementById("line2")
-    .style.background =
+  if(line2){
+
+    line2.style.background =
       number >= 3
         ? "#ff3d81"
         : "#303952";
+  }
 }
 
 
@@ -1901,11 +1963,14 @@ function movieShowScreen(number){
 
   hideAllScreens();
 
-  document
-    .getElementById(
+  const screen =
+    document.getElementById(
       "movieScreen"+number
-    )
-    .classList.add("active");
+    );
+
+  if(screen){
+    screen.classList.add("active");
+  }
 
   updateProgress(number);
 
@@ -1920,11 +1985,14 @@ function instagramShowScreen(number){
 
   hideAllScreens();
 
-  document
-    .getElementById(
+  const screen =
+    document.getElementById(
       "instagramScreen"+number
-    )
-    .classList.add("active");
+    );
+
+  if(screen){
+    screen.classList.add("active");
+  }
 
   updateProgress(number);
 
@@ -1952,26 +2020,6 @@ function initializeMovie(){
     movieName;
 
   document.getElementById(
-    "movieYear"
-  ).textContent =
-    movieYear;
-
-  document.getElementById(
-    "movieQuality"
-  ).textContent =
-    movieQuality;
-
-  document.getElementById(
-    "movieLanguage"
-  ).textContent =
-    movieLanguage;
-
-  document.getElementById(
-    "movieSize"
-  ).textContent =
-    movieSize;
-
-  document.getElementById(
     "moviePrice"
   ).textContent =
     money(moviePrice);
@@ -1990,21 +2038,6 @@ function initializeMovie(){
     "moviePaymentAmount"
   ).textContent =
     money(moviePrice);
-
-  if(movieOriginalPrice > moviePrice){
-
-    document.getElementById(
-      "movieOldPrice"
-    ).textContent =
-      money(movieOriginalPrice);
-
-  }else{
-
-    document.getElementById(
-      "movieOldPrice"
-    ).style.display =
-      "none";
-  }
 }
 
 
@@ -2012,46 +2045,36 @@ function initializeMovie(){
    MOVIE CONTACT
 ========================================================= */
 
-let movieContactMethod =
-  "mobile";
+let movieContactMethod = "mobile";
 
 
 function selectMovieContact(method){
 
-  movieContactMethod =
-    method;
+  movieContactMethod = method;
 
   document
-    .getElementById(
-      "movieMobileOption"
-    )
+    .getElementById("movieMobileOption")
     .classList.toggle(
       "active",
       method === "mobile"
     );
 
   document
-    .getElementById(
-      "movieEmailOption"
-    )
+    .getElementById("movieEmailOption")
     .classList.toggle(
       "active",
       method === "email"
     );
 
   document
-    .getElementById(
-      "movieMobileField"
-    )
+    .getElementById("movieMobileField")
     .style.display =
       method === "mobile"
         ? "block"
         : "none";
 
   document
-    .getElementById(
-      "movieEmailField"
-    )
+    .getElementById("movieEmailField")
     .style.display =
       method === "email"
         ? "block"
@@ -2065,18 +2088,14 @@ function getMovieContact(){
 
     mobile:
       document
-        .getElementById(
-          "movieMobile"
-        )
+        .getElementById("movieMobile")
         .value
         .trim()
         .replace(/[^\d+]/g,""),
 
     email:
       document
-        .getElementById(
-          "movieEmail"
-        )
+        .getElementById("movieEmail")
         .value
         .trim()
         .toLowerCase()
@@ -2179,28 +2198,7 @@ function moviePayUPI(){
 
 
 /* =========================================================
-   MOVIE FILE
-========================================================= */
-
-document
-  .getElementById(
-    "movieScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "movieFileName"
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   INSTAGRAM
+   INSTAGRAM INITIALIZATION
 ========================================================= */
 
 let instagramContactMethod =
@@ -2240,6 +2238,10 @@ function initializeInstagram(){
     money(instagramPrice);
 }
 
+
+/* =========================================================
+   INSTAGRAM CONTACT
+========================================================= */
 
 function selectInstagramContact(method){
 
@@ -2284,15 +2286,19 @@ function selectInstagramContact(method){
 }
 
 
+/* =========================================================
+   INSTAGRAM STEP 1
+========================================================= */
+
 function instagramContinue(){
 
   clearErrors();
 
-  if(instagramPrice <= 0){
+  if(!selectedInstagramPackage){
 
     showError(
       "instagramError1",
-      "Package price could not be detected."
+      "Invalid Instagram package. Please go back and select a package again."
     );
 
     return;
@@ -2341,6 +2347,48 @@ function instagramContinue(){
     return;
   }
 
+  if(mobile){
+
+    const normalized =
+      mobile
+        .replace(/[^\d+]/g,"")
+        .replace(/^\+91/,"")
+        .replace(
+          /^91(?=\d{10}$)/,
+          ""
+        );
+
+    if(
+      !/^[6-9]\d{9}$/.test(
+        normalized
+      )
+    ){
+
+      showError(
+        "instagramError1",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+    }
+  }
+
+  if(email){
+
+    if(
+      !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+        .test(email)
+    ){
+
+      showError(
+        "instagramError1",
+        "Please enter a valid email address."
+      );
+
+      return;
+    }
+  }
+
   if(
     !/^[A-Za-z0-9._]{1,30}$/.test(
       username
@@ -2369,6 +2417,7 @@ function instagramContinue(){
       hostname !== "instagram.com" &&
       hostname !== "instagr.am"
     ){
+
       throw new Error();
     }
 
@@ -2398,27 +2447,6 @@ function instagramPayUPI(){
     "instagramError2"
   );
 }
-
-
-/* =========================================================
-   INSTAGRAM FILE
-========================================================= */
-
-document
-  .getElementById(
-    "instagramScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "instagramFileName"
-      );
-
-    }
-  );
 
 
 /* =========================================================
@@ -2497,10 +2525,6 @@ function validateFile(input,id){
 }
 
 
-/* =========================================================
-   BASE64
-========================================================= */
-
 function fileToBase64(file){
 
   return new Promise(
@@ -2531,7 +2555,41 @@ function fileToBase64(file){
 
 
 /* =========================================================
-   MOVIE ORDER SUBMIT
+   FILE EVENTS
+========================================================= */
+
+document
+  .getElementById("movieScreenshot")
+  .addEventListener(
+    "change",
+    function(){
+
+      validateFile(
+        this,
+        "movieFileName"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("instagramScreenshot")
+  .addEventListener(
+    "change",
+    function(){
+
+      validateFile(
+        this,
+        "instagramFileName"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   MOVIE SUBMIT
 ========================================================= */
 
 async function submitMovieOrder(){
@@ -2553,17 +2611,14 @@ async function submitMovieOrder(){
 
   const utr =
     document
-      .getElementById(
-        "movieUTR"
-      )
+      .getElementById("movieUTR")
       .value
       .trim();
 
   const fileInput =
-    document
-      .getElementById(
-        "movieScreenshot"
-      );
+    document.getElementById(
+      "movieScreenshot"
+    );
 
   if(
     !contact.mobile &&
@@ -2588,10 +2643,12 @@ async function submitMovieOrder(){
     return;
   }
 
-  if(!validateFile(
-    fileInput,
-    "movieFileName"
-  )){
+  if(
+    !validateFile(
+      fileInput,
+      "movieFileName"
+    )
+  ){
 
     showError(
       "movieError2",
@@ -2599,22 +2656,6 @@ async function submitMovieOrder(){
     );
 
     return;
-  }
-
-  if(utr){
-
-    if(
-      utr.length < 6 ||
-      !/^[A-Za-z0-9._-]+$/.test(utr)
-    ){
-
-      showError(
-        "movieError2",
-        "Please enter a valid UTR or leave it empty."
-      );
-
-      return;
-    }
   }
 
   const button =
@@ -2674,7 +2715,6 @@ async function submitMovieOrder(){
 
       screenshot:
         screenshot
-
     };
 
     const response =
@@ -2738,6 +2778,7 @@ async function submitMovieOrder(){
     );
 
     button.disabled = false;
+
     button.textContent =
       "Submit Movie Order ✓";
   }
@@ -2745,12 +2786,22 @@ async function submitMovieOrder(){
 
 
 /* =========================================================
-   INSTAGRAM ORDER SUBMIT
+   INSTAGRAM SUBMIT
 ========================================================= */
 
 async function submitInstagramOrder(){
 
   clearErrors();
+
+  if(!selectedInstagramPackage){
+
+    showError(
+      "instagramError2",
+      "Invalid Instagram package. Please go back and select a valid package."
+    );
+
+    return;
+  }
 
   if(instagramPrice <= 0){
 
@@ -2843,10 +2894,12 @@ async function submitInstagramOrder(){
     return;
   }
 
-  if(!validateFile(
-    fileInput,
-    "instagramFileName"
-  )){
+  if(
+    !validateFile(
+      fileInput,
+      "instagramFileName"
+    )
+  ){
 
     showError(
       "instagramError2",
@@ -2881,6 +2934,12 @@ async function submitInstagramOrder(){
       package:
         instagramPackage,
 
+      packageId:
+        String(instagramFollowers),
+
+      followers:
+        instagramFollowers,
+
       amount:
         Number(instagramPrice).toFixed(2),
 
@@ -2901,7 +2960,6 @@ async function submitInstagramOrder(){
 
       screenshot:
         screenshot
-
     };
 
     const response =
@@ -2931,7 +2989,7 @@ async function submitInstagramOrder(){
 
       throw new Error(
         data.error ||
-        "Unable to submit order."
+        "Unable to submit Instagram order."
       );
     }
 
@@ -2965,6 +3023,7 @@ async function submitInstagramOrder(){
     );
 
     button.disabled = false;
+
     button.textContent =
       "Submit Order ✓";
   }
@@ -3012,23 +3071,23 @@ function createStars(count){
       Math.random()*100+"%";
 
     star.style.fontSize =
-      12+
-      Math.random()*20+
+      12 +
+      Math.random()*20 +
       "px";
 
     star.style.animationDuration =
-      2+
-      Math.random()*3+
+      2 +
+      Math.random()*3 +
       "s";
 
     star.style.animationDelay =
-      Math.random()*.7+
+      Math.random()*.7 +
       "s";
 
     container.appendChild(star);
 
     setTimeout(
-      ()=>star.remove(),
+      () => star.remove(),
       5500
     );
   }
@@ -3060,9 +3119,12 @@ function clearErrors(){
   document
     .querySelectorAll(".error")
     .forEach(
-      box=>{
+      box => {
+
         box.classList.remove("show");
-        box.textContent="";
+
+        box.textContent = "";
+
       }
     );
 }
@@ -3085,10 +3147,6 @@ function goHome(){
 
 if(isMovie){
 
-  /*
-    MOVIE ORDER MODE
-  */
-
   initializeMovie();
 
   hideAllScreens();
@@ -3099,11 +3157,9 @@ if(isMovie){
     )
     .classList.add("active");
 
-}else{
+  updateProgress(1);
 
-  /*
-    INSTAGRAM ORDER MODE
-  */
+}else{
 
   initializeInstagram();
 
@@ -3114,6 +3170,8 @@ if(isMovie){
       "instagramScreen1"
     )
     .classList.add("active");
+
+  updateProgress(1);
 }
 
 </script>
