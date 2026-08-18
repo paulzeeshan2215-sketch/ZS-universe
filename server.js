@@ -34,67 +34,62 @@ const ADMIN_URL =
 
 
 /* =========================================================
-   CONSTANTS
+   LIMITS
 ========================================================= */
 
+/*
+  JSON order requests:
+  12 MB
+
+  This is enough for payment screenshots encoded as
+  base64 inside JSON.
+
+  IMPORTANT:
+  Movie uploads DO NOT use this parser.
+  Movie uploads are streamed separately up to 5 GB.
+*/
+
+const JSON_BODY_LIMIT = "12mb";
+
 const MAX_SCREENSHOT_SIZE =
-  5 * 1024 * 1024;
+  5 * 1024 * 1024; // 5 MB
 
 const MAX_MOVIE_SIZE =
-  5 * 1024 * 1024 * 1024;
+  5 * 1024 * 1024 * 1024; // 5 GB
 
-const VALID_PROMO_CODE =
-  "ZEESHAN10";
 
-const PROMO_DISCOUNT =
-  0.10;
+/* =========================================================
+   PROMO
+========================================================= */
+
+const VALID_PROMO_CODE = "ZEESHAN10";
+const PROMO_DISCOUNT = 0.10;
 
 
 /* =========================================================
    INSTAGRAM PACKAGE CATALOG
-=========================================================
-
-   IMPORTANT:
-   Prices here are the SERVER-SIDE prices.
-
-   The price sent by the customer/frontend
-   is NEVER trusted.
-
+   SERVER-SIDE PRICES
 ========================================================= */
 
 const INSTAGRAM_PACKAGES = {
-
   "200 Followers": 30,
-
   "500 Followers": 50,
-
   "1,000 Followers": 90,
-
   "1,500 Followers": 130,
-
   "2,000 Followers": 150,
-
   "3,000 Followers": 200,
-
   "4,000 Followers": 250,
-
   "5,000 Followers": 300,
-
   "6,000 Followers": 350,
-
   "7,000 Followers": 450,
-
   "8,000 Followers": 500,
-
   "9,000 Followers": 550,
-
   "10,000 Followers": 600
-
 };
 
 
 /* =========================================================
-   DIRECTORIES
+   DIRECTORY SETUP
 ========================================================= */
 
 for (const dir of [
@@ -103,109 +98,353 @@ for (const dir of [
   MOVIES_DIR,
   SCREENSHOTS_DIR
 ]) {
-
   if (!fs.existsSync(dir)) {
-
-    fs.mkdirSync(
-      dir,
-      {
-        recursive: true
-      }
-    );
-
+    fs.mkdirSync(dir, {
+      recursive: true
+    });
   }
-
 }
 
 
 /* =========================================================
-   JSON FILES
+   JSON FILE SETUP
 ========================================================= */
 
 if (!fs.existsSync(STORE)) {
-
   fs.writeFileSync(
     STORE,
     "[]",
     "utf8"
   );
-
 }
 
 if (!fs.existsSync(MOVIES_STORE)) {
-
   fs.writeFileSync(
     MOVIES_STORE,
     "[]",
     "utf8"
   );
-
 }
-
-
-/* =========================================================
-   BODY PARSERS
-========================================================= */
-
-app.use(
-  express.json({
-    limit: "12mb"
-  })
-);
-
-app.use(
-  express.urlencoded({
-    extended: true,
-    limit: "12mb"
-  })
-);
 
 
 /* =========================================================
    SECURITY HEADERS
 ========================================================= */
 
-app.use(
-  (req, res, next) => {
+app.disable("x-powered-by");
 
-    res.setHeader(
-      "X-Content-Type-Options",
-      "nosniff"
-    );
+app.use((req, res, next) => {
+  res.setHeader(
+    "X-Content-Type-Options",
+    "nosniff"
+  );
 
-    res.setHeader(
-      "X-Frame-Options",
-      "SAMEORIGIN"
-    );
+  res.setHeader(
+    "X-Frame-Options",
+    "SAMEORIGIN"
+  );
 
-    res.setHeader(
-      "Referrer-Policy",
-      "strict-origin-when-cross-origin"
-    );
+  res.setHeader(
+    "Referrer-Policy",
+    "strict-origin-when-cross-origin"
+  );
 
-    res.setHeader(
-      "X-XSS-Protection",
-      "0"
-    );
+  res.setHeader(
+    "X-XSS-Protection",
+    "0"
+  );
 
-    next();
-
-  }
-);
+  next();
+});
 
 
 /* =========================================================
-   STATIC PUBLIC FILES
+   IMPORTANT:
+   MOVIE UPLOAD ROUTE MUST BE BEFORE JSON PARSER
 ========================================================= */
 
-app.use(
-  express.static(
-    PUBLIC_DIR,
-    {
-      index: false
+/*
+  Movie upload is a raw streamed request.
+
+  Expected request:
+
+  POST /api/admin/movies/upload
+
+  Headers:
+    x-admin-key
+    x-movie-title
+    x-movie-price
+    x-movie-description
+    x-movie-poster
+    x-movie-id (optional)
+
+  Body:
+    raw movie file
+
+  Example content-type:
+    video/mp4
+
+  The server never loads the whole movie into RAM.
+*/
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function cleanText(value, maxLength) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value
+    .trim()
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
+}
+
+
+function cleanMobile(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value
+    .trim()
+    .replace(/[^\d+]/g, "")
+    .slice(0, 20);
+}
+
+
+function validMobile(mobile) {
+  if (!mobile) {
+    return false;
+  }
+
+  const normalized = mobile
+    .replace(/^\+91/, "")
+    .replace(/^91(?=\d{10}$)/, "");
+
+  return /^[6-9]\d{9}$/.test(
+    normalized
+  );
+}
+
+
+function cleanEmail(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value
+    .trim()
+    .toLowerCase()
+    .slice(0, 150);
+}
+
+
+function validEmail(email) {
+  if (!email) {
+    return false;
+  }
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(
+    email
+  );
+}
+
+
+function cleanUsername(username) {
+  return cleanText(
+    username,
+    30
+  ).replace(/^@+/, "");
+}
+
+
+function validUsername(username) {
+  return /^[A-Za-z0-9._]{1,30}$/.test(
+    username
+  );
+}
+
+
+function validInstagramProfile(profile) {
+  if (
+    typeof profile !== "string" ||
+    !profile ||
+    profile.length > 300
+  ) {
+    return false;
+  }
+
+  try {
+    const url = new URL(profile);
+
+    const hostname = url.hostname
+      .toLowerCase()
+      .replace(/^www\./, "");
+
+    if (
+      hostname !== "instagram.com" &&
+      hostname !== "instagr.am"
+    ) {
+      return false;
     }
-  )
-);
+
+    return /^\/[A-Za-z0-9._]+\/?$/.test(
+      url.pathname
+    );
+  } catch {
+    return false;
+  }
+}
+
+
+function validUTR(utr) {
+  if (!utr) {
+    return true;
+  }
+
+  if (
+    utr.length < 6 ||
+    utr.length > 80
+  ) {
+    return false;
+  }
+
+  return /^[A-Za-z0-9._-]+$/.test(
+    utr
+  );
+}
+
+
+function cleanAmount(value) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "";
+  }
+
+  const text = String(value)
+    .replace(/,/g, "")
+    .replace(/₹/g, "")
+    .trim();
+
+  if (
+    !/^\d+(?:\.\d{1,2})?$/.test(text)
+  ) {
+    return "";
+  }
+
+  const number = Number(text);
+
+  if (
+    !Number.isFinite(number) ||
+    number <= 0 ||
+    number > 100000
+  ) {
+    return "";
+  }
+
+  return number.toFixed(2);
+}
+
+
+function calculateFinalAmount(
+  originalAmount,
+  promoCode
+) {
+  const amount = Number(
+    originalAmount
+  );
+
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
+    return "";
+  }
+
+  if (
+    promoCode === VALID_PROMO_CODE
+  ) {
+    return (
+      Math.round(
+        amount *
+        (1 - PROMO_DISCOUNT) *
+        100
+      ) / 100
+    ).toFixed(2);
+  }
+
+  return amount.toFixed(2);
+}
+
+
+/* =========================================================
+   ID / TOKEN GENERATORS
+========================================================= */
+
+function createOrderId() {
+  return (
+    "SM" +
+    Date.now()
+      .toString()
+      .slice(-8) +
+    crypto
+      .randomBytes(3)
+      .toString("hex")
+      .toUpperCase()
+  );
+}
+
+
+function createMovieId() {
+  return (
+    "MOV" +
+    Date.now()
+      .toString()
+      .slice(-8) +
+    crypto
+      .randomBytes(3)
+      .toString("hex")
+      .toUpperCase()
+  );
+}
+
+
+function createAccessToken() {
+  return crypto
+    .randomBytes(48)
+    .toString("hex");
+}
+
+
+/* =========================================================
+   PATH SECURITY
+========================================================= */
+
+function isInsideDirectory(
+  targetPath,
+  baseDirectory
+) {
+  const target = path.resolve(
+    targetPath
+  );
+
+  const base = path.resolve(
+    baseDirectory
+  );
+
+  return (
+    target === base ||
+    target.startsWith(
+      base + path.sep
+    )
+  );
+}
 
 
 /* =========================================================
@@ -213,42 +452,35 @@ app.use(
 ========================================================= */
 
 function readOrders() {
-
   try {
-
-    const data =
-      fs.readFileSync(
-        STORE,
-        "utf8"
-      );
+    const data = fs.readFileSync(
+      STORE,
+      "utf8"
+    );
 
     if (!data.trim()) {
       return [];
     }
 
-    const parsed =
-      JSON.parse(data);
+    const parsed = JSON.parse(
+      data
+    );
 
     return Array.isArray(parsed)
       ? parsed
       : [];
-
   } catch (error) {
-
     console.error(
       "Orders read error:",
       error
     );
 
     return [];
-
   }
-
 }
 
 
 function writeOrders(orders) {
-
   const tempFile =
     STORE + ".tmp";
 
@@ -266,47 +498,39 @@ function writeOrders(orders) {
     tempFile,
     STORE
   );
-
 }
 
 
 function readMovies() {
-
   try {
-
-    const data =
-      fs.readFileSync(
-        MOVIES_STORE,
-        "utf8"
-      );
+    const data = fs.readFileSync(
+      MOVIES_STORE,
+      "utf8"
+    );
 
     if (!data.trim()) {
       return [];
     }
 
-    const parsed =
-      JSON.parse(data);
+    const parsed = JSON.parse(
+      data
+    );
 
     return Array.isArray(parsed)
       ? parsed
       : [];
-
   } catch (error) {
-
     console.error(
       "Movies read error:",
       error
     );
 
     return [];
-
   }
-
 }
 
 
 function writeMovies(movies) {
-
   const tempFile =
     MOVIES_STORE + ".tmp";
 
@@ -324,385 +548,197 @@ function writeMovies(movies) {
     tempFile,
     MOVIES_STORE
   );
-
 }
 
 
 /* =========================================================
-   ID / TOKEN GENERATORS
+   ADMIN AUTH
 ========================================================= */
 
-function createOrderId() {
+function checkAdminKey(req) {
+  const key =
+    req.headers["x-admin-key"];
 
   return (
-    "SM" +
-    Date.now()
-      .toString()
-      .slice(-8) +
-    crypto
-      .randomBytes(2)
-      .toString("hex")
-      .toUpperCase()
+    typeof key === "string" &&
+    key.length > 0 &&
+    key === ADMIN_KEY
   );
-
 }
 
 
-function createMovieId() {
+function admin(req, res, next) {
+  if (!checkAdminKey(req)) {
+    return res.status(401).json({
+      error: "Unauthorized"
+    });
+  }
 
-  return (
-    "MOV" +
-    Date.now()
-      .toString()
-      .slice(-8) +
-    crypto
-      .randomBytes(2)
-      .toString("hex")
-      .toUpperCase()
-  );
-
-}
-
-
-function createAccessToken() {
-
-  return crypto
-    .randomBytes(32)
-    .toString("hex");
-
+  next();
 }
 
 
 /* =========================================================
-   TEXT CLEANING
+   TELEGRAM
 ========================================================= */
 
-function cleanText(
-  value,
-  maxLength
-) {
-
+async function notifyTelegram(text) {
   if (
-    typeof value !== "string"
+    !TG_BOT_TOKEN ||
+    !TG_CHAT_ID
   ) {
-
-    return "";
-
-  }
-
-  return value
-    .trim()
-    .replace(/\s+/g, " ")
-    .slice(
-      0,
-      maxLength
+    console.log(
+      "Telegram is not configured."
     );
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-function cleanMobile(value) {
-
-  if (
-    typeof value !== "string"
-  ) {
-
-    return "";
-
-  }
-
-  return value
-    .trim()
-    .replace(/[^\d+]/g, "")
-    .slice(
-      0,
-      20
-    );
-
-}
-
-
-function validMobile(mobile) {
-
-  if (!mobile) {
-    return false;
-  }
-
-  const normalized =
-    mobile
-      .replace(
-        /^\+91/,
-        ""
-      )
-      .replace(
-        /^91(?=\d{10}$)/,
-        ""
-      );
-
-  return /^[6-9]\d{9}$/
-    .test(normalized);
-
-}
-
-
-/* =========================================================
-   EMAIL
-========================================================= */
-
-function cleanEmail(value) {
-
-  if (
-    typeof value !== "string"
-  ) {
-
-    return "";
-
-  }
-
-  return value
-    .trim()
-    .toLowerCase()
-    .slice(
-      0,
-      150
-    );
-
-}
-
-
-function validEmail(email) {
-
-  if (!email) {
-    return false;
-  }
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-    .test(email);
-
-}
-
-
-/* =========================================================
-   INSTAGRAM
-========================================================= */
-
-function cleanUsername(username) {
-
-  return cleanText(
-    username,
-    30
-  )
-    .replace(
-      /^@+/,
-      ""
-    );
-
-}
-
-
-function validUsername(username) {
-
-  return /^[A-Za-z0-9._]{1,30}$/
-    .test(username);
-
-}
-
-
-function validInstagramProfile(profile) {
-
-  if (
-    typeof profile !== "string" ||
-    !profile ||
-    profile.length > 300
-  ) {
 
     return false;
-
   }
 
   try {
+    const telegramUrl =
+      "https://api.telegram.org/bot" +
+      TG_BOT_TOKEN +
+      "/sendMessage";
 
-    const url =
-      new URL(profile);
+    const response = await fetch(
+      telegramUrl,
+      {
+        method: "POST",
 
-    const hostname =
-      url.hostname
-        .toLowerCase()
-        .replace(
-          /^www\./,
-          ""
-        );
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
 
-    if (
-      hostname !== "instagram.com" &&
-      hostname !== "instagr.am"
-    ) {
+        body: JSON.stringify({
+          chat_id:
+            TG_CHAT_ID,
+
+          text,
+
+          disable_web_page_preview:
+            true
+        })
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        "Telegram message failed:",
+        await response.text()
+      );
 
       return false;
-
     }
 
-    return /^\/[A-Za-z0-9._]+\/?$/
-      .test(url.pathname);
-
-  } catch {
-
-    return false;
-
-  }
-
-}
-
-
-/* =========================================================
-   UTR
-========================================================= */
-
-function validUTR(utr) {
-
-  if (!utr) {
     return true;
-  }
-
-  if (
-    utr.length < 6 ||
-    utr.length > 80
-  ) {
+  } catch (error) {
+    console.error(
+      "Telegram message error:",
+      error
+    );
 
     return false;
-
   }
-
-  return /^[A-Za-z0-9._-]+$/
-    .test(utr);
-
 }
 
 
-/* =========================================================
-   AMOUNT
-========================================================= */
-
-function cleanAmount(value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
-  }
-
-  const text =
-    String(value)
-      .replace(/,/g, "")
-      .replace(/₹/g, "")
-      .trim();
-
-  if (
-    !/^\d+(?:\.\d{1,2})?$/
-      .test(text)
-  ) {
-
-    return "";
-
-  }
-
-  const number =
-    Number(text);
-
-  if (
-    !Number.isFinite(number) ||
-    number <= 0 ||
-    number > 100000
-  ) {
-
-    return "";
-
-  }
-
-  return number.toFixed(2);
-
-}
-
-
-/* =========================================================
-   DISCOUNT
-========================================================= */
-
-function calculateFinalAmount(
-  originalAmount,
-  promoCode
+async function sendTelegramScreenshot(
+  screenshotInfo,
+  caption
 ) {
-
-  const amount =
-    Number(originalAmount);
-
   if (
-    !Number.isFinite(amount) ||
-    amount <= 0
+    !TG_BOT_TOKEN ||
+    !TG_CHAT_ID
   ) {
-
-    return "";
-
+    return false;
   }
 
-  if (
-    promoCode ===
-    VALID_PROMO_CODE
-  ) {
+  try {
+    const form = new FormData();
 
-    return (
-      Math.round(
-        amount *
-        (1 - PROMO_DISCOUNT) *
-        100
-      ) / 100
-    )
-      .toFixed(2);
+    form.append(
+      "chat_id",
+      TG_CHAT_ID
+    );
 
+    form.append(
+      "caption",
+      caption
+    );
+
+    const blob = new Blob(
+      [screenshotInfo.buffer],
+      {
+        type:
+          screenshotInfo.mimeType
+      }
+    );
+
+    form.append(
+      "photo",
+      blob,
+      screenshotInfo.filename
+    );
+
+    const telegramUrl =
+      "https://api.telegram.org/bot" +
+      TG_BOT_TOKEN +
+      "/sendPhoto";
+
+    const response = await fetch(
+      telegramUrl,
+      {
+        method: "POST",
+        body: form
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        "Telegram screenshot failed:",
+        await response.text()
+      );
+
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error(
+      "Telegram screenshot error:",
+      error
+    );
+
+    return false;
   }
-
-  return amount.toFixed(2);
-
 }
 
 
 /* =========================================================
-   SCREENSHOT PARSER
+   SCREENSHOT VALIDATION
 ========================================================= */
 
 function parseScreenshot(
   screenshot
 ) {
-
   if (
     typeof screenshot !== "string" ||
     !screenshot
   ) {
-
     throw new Error(
       "Payment screenshot is required."
     );
-
   }
 
-  const match =
-    screenshot.match(
-      /^data:(image\/jpeg|image\/jpg|image\/png|image\/webp);base64,(.+)$/i
-    );
+  const match = screenshot.match(
+    /^data:(image\/jpeg|image\/jpg|image\/png|image\/webp);base64,(.+)$/i
+  );
 
   if (!match) {
-
     throw new Error(
       "Please upload a valid JPG, PNG or WEBP payment screenshot."
     );
-
   }
 
   const mimeType =
@@ -712,65 +748,51 @@ function parseScreenshot(
     match[2];
 
   if (
-    !/^[A-Za-z0-9+/]+={0,2}$/
-      .test(base64Data)
+    !/^[A-Za-z0-9+/]+={0,2}$/.test(
+      base64Data
+    )
   ) {
-
     throw new Error(
       "The payment screenshot data is invalid."
     );
-
   }
 
-  const buffer =
-    Buffer.from(
-      base64Data,
-      "base64"
-    );
+  const buffer = Buffer.from(
+    base64Data,
+    "base64"
+  );
 
   if (
     !buffer ||
     buffer.length === 0
   ) {
-
     throw new Error(
       "The payment screenshot could not be read."
     );
-
   }
 
   if (
     buffer.length >
     MAX_SCREENSHOT_SIZE
   ) {
-
     throw new Error(
       "Payment screenshot must be 5 MB or smaller."
     );
-
   }
 
   return {
     mimeType,
     buffer
   };
-
 }
 
 
-/* =========================================================
-   IMAGE TYPE DETECTION
-========================================================= */
-
 function detectImageType(buffer) {
-
   if (
     !Buffer.isBuffer(buffer) ||
     buffer.length < 12
   ) {
-
     return null;
-
   }
 
   if (
@@ -778,9 +800,7 @@ function detectImageType(buffer) {
     buffer[1] === 0xd8 &&
     buffer[2] === 0xff
   ) {
-
     return "image/jpeg";
-
   }
 
   if (
@@ -793,9 +813,7 @@ function detectImageType(buffer) {
     buffer[6] === 0x1a &&
     buffer[7] === 0x0a
   ) {
-
     return "image/png";
-
   }
 
   if (
@@ -810,42 +828,31 @@ function detectImageType(buffer) {
       12
     ) === "WEBP"
   ) {
-
     return "image/webp";
-
   }
 
   return null;
-
 }
 
-
-/* =========================================================
-   SAVE SCREENSHOT PRIVATELY
-========================================================= */
 
 function saveScreenshot(
   screenshot,
   orderId
 ) {
-
   const {
     mimeType,
     buffer
-  } =
-    parseScreenshot(
-      screenshot
-    );
+  } = parseScreenshot(
+    screenshot
+  );
 
   const detectedType =
     detectImageType(buffer);
 
   if (!detectedType) {
-
     throw new Error(
       "The uploaded file is not a valid image."
     );
-
   }
 
   const compatible =
@@ -854,42 +861,40 @@ function saveScreenshot(
         mimeType === "image/jpeg" ||
         mimeType === "image/jpg"
       ) &&
-      detectedType === "image/jpeg"
+      detectedType ===
+        "image/jpeg"
     ) ||
     (
       mimeType === "image/png" &&
-      detectedType === "image/png"
+      detectedType ===
+        "image/png"
     ) ||
     (
       mimeType === "image/webp" &&
-      detectedType === "image/webp"
+      detectedType ===
+        "image/webp"
     );
 
   if (!compatible) {
-
     throw new Error(
       "The screenshot file type does not match its actual image format."
     );
-
   }
 
-  let extension =
-    "jpg";
+  let extension = "jpg";
 
   if (
-    detectedType === "image/png"
+    detectedType ===
+    "image/png"
   ) {
-
     extension = "png";
-
   }
 
   if (
-    detectedType === "image/webp"
+    detectedType ===
+    "image/webp"
   ) {
-
     extension = "webp";
-
   }
 
   const filename =
@@ -903,317 +908,60 @@ function saveScreenshot(
       filename
     );
 
+  if (
+    !isInsideDirectory(
+      filepath,
+      SCREENSHOTS_DIR
+    )
+  ) {
+    throw new Error(
+      "Invalid screenshot path."
+    );
+  }
+
   fs.writeFileSync(
     filepath,
     buffer
   );
 
   return {
-
     filename,
-
     filepath,
-
     buffer,
-
     mimeType:
       detectedType
-
   };
-
 }
 
 
 /* =========================================================
-   TELEGRAM MESSAGE
-========================================================= */
-
-async function notifyTelegram(
-  text
-) {
-
-  if (
-    !TG_BOT_TOKEN ||
-    !TG_CHAT_ID
-  ) {
-
-    console.log(
-      "Telegram is not configured."
-    );
-
-    return false;
-
-  }
-
-  try {
-
-    const telegramUrl =
-      "https://api.telegram.org/bot" +
-      TG_BOT_TOKEN +
-      "/sendMessage";
-
-    const response =
-      await fetch(
-        telegramUrl,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              chat_id:
-                TG_CHAT_ID,
-
-              text,
-
-              disable_web_page_preview:
-                true
-            })
-        }
-      );
-
-    if (!response.ok) {
-
-      console.error(
-        "Telegram message failed:",
-        await response.text()
-      );
-
-      return false;
-
-    }
-
-    return true;
-
-  } catch (error) {
-
-    console.error(
-      "Telegram message error:",
-      error
-    );
-
-    return false;
-
-  }
-
-}
-
-
-/* =========================================================
-   TELEGRAM SCREENSHOT
-========================================================= */
-
-async function sendTelegramScreenshot(
-  screenshotInfo,
-  caption
-) {
-
-  if (
-    !TG_BOT_TOKEN ||
-    !TG_CHAT_ID
-  ) {
-
-    return false;
-
-  }
-
-  try {
-
-    const form =
-      new FormData();
-
-    form.append(
-      "chat_id",
-      TG_CHAT_ID
-    );
-
-    form.append(
-      "caption",
-      caption
-    );
-
-    const blob =
-      new Blob(
-        [
-          screenshotInfo.buffer
-        ],
-        {
-          type:
-            screenshotInfo.mimeType
-        }
-      );
-
-    form.append(
-      "photo",
-      blob,
-      screenshotInfo.filename
-    );
-
-    const telegramUrl =
-      "https://api.telegram.org/bot" +
-      TG_BOT_TOKEN +
-      "/sendPhoto";
-
-    const response =
-      await fetch(
-        telegramUrl,
-        {
-          method: "POST",
-          body: form
-        }
-      );
-
-    if (!response.ok) {
-
-      console.error(
-        "Telegram screenshot failed:",
-        await response.text()
-      );
-
-      return false;
-
-    }
-
-    return true;
-
-  } catch (error) {
-
-    console.error(
-      "Telegram screenshot error:",
-      error
-    );
-
-    return false;
-
-  }
-
-}
-
-
-/* =========================================================
-   ADMIN AUTH
-========================================================= */
-
-function admin(
-  req,
-  res,
-  next
-) {
-
-  const key =
-    req.headers[
-      "x-admin-key"
-    ];
-
-  if (
-    !key ||
-    key !== ADMIN_KEY
-  ) {
-
-    return res.status(401).json({
-      error:
-        "Unauthorized"
-    });
-
-  }
-
-  next();
-
-}
-
-
-/* =========================================================
-   PUBLIC INSTAGRAM PACKAGES
-========================================================= */
-
-app.get(
-  "/api/instagram-packages",
-  (req, res) => {
-
-    const packages =
-      Object.entries(
-        INSTAGRAM_PACKAGES
-      )
-      .map(
-        ([name, price]) => ({
-
-          package:
-            name,
-
-          price:
-            Number(price)
-              .toFixed(2)
-
-        })
-      );
-
-    res.json({
-      packages
-    });
-
-  }
-);
-
-
-/* =========================================================
-   PUBLIC MOVIE CATALOG
-========================================================= */
-
-app.get(
-  "/api/movies",
-  (req, res) => {
-
-    const movies =
-      readMovies()
-        .filter(
-          movie =>
-            movie.active !== false
-        )
-        .map(
-          movie => ({
-
-            movieId:
-              movie.movieId,
-
-            title:
-              movie.title,
-
-            price:
-              movie.price,
-
-            description:
-              movie.description || "",
-
-            poster:
-              movie.poster || ""
-
-          })
-        );
-
-    res.json({
-      movies
-    });
-
-  }
-);
-
-
-/* =========================================================
-   ADMIN - MOVIE UPLOAD
+   RAW MOVIE UPLOAD
+   5 GB MAX
 ========================================================= */
 
 app.post(
   "/api/admin/movies/upload",
-  admin,
   async (req, res) => {
-
     let filepath = "";
+    let writeStream = null;
+    let finished = false;
+    let received = 0;
 
     try {
+      /* -----------------------------
+         ADMIN AUTH
+      ----------------------------- */
+
+      if (!checkAdminKey(req)) {
+        return res.status(401).json({
+          error: "Unauthorized"
+        });
+      }
+
+
+      /* -----------------------------
+         MOVIE METADATA
+      ----------------------------- */
 
       const movieId =
         cleanText(
@@ -1221,7 +969,7 @@ app.post(
             "x-movie-id"
           ] ||
           createMovieId(),
-          50
+          60
         );
 
       const title =
@@ -1255,23 +1003,109 @@ app.post(
           1000
         );
 
-      if (!title) {
 
+      /* -----------------------------
+         VALIDATION
+      ----------------------------- */
+
+      if (!title) {
         return res.status(400).json({
           error:
             "Movie title is required."
         });
-
       }
 
       if (!price) {
-
         return res.status(400).json({
           error:
             "Valid movie price is required."
         });
-
       }
+
+      if (
+        !/^MOV[A-Z0-9]+$/i.test(
+          movieId
+        )
+      ) {
+        return res.status(400).json({
+          error:
+            "Invalid movie ID."
+        });
+      }
+
+
+      /* -----------------------------
+         CONTENT TYPE
+      ----------------------------- */
+
+      const contentType =
+        String(
+          req.headers[
+            "content-type"
+          ] || ""
+        )
+          .split(";")[0]
+          .trim()
+          .toLowerCase();
+
+      const allowedMovieTypes = [
+        "video/mp4",
+        "application/octet-stream"
+      ];
+
+      if (
+        !allowedMovieTypes.includes(
+          contentType
+        )
+      ) {
+        return res.status(400).json({
+          error:
+            "Please upload an MP4 movie file."
+        });
+      }
+
+
+      /* -----------------------------
+         CONTENT LENGTH
+      ----------------------------- */
+
+      const contentLengthHeader =
+        req.headers[
+          "content-length"
+        ];
+
+      const contentLength =
+        Number(
+          contentLengthHeader
+        );
+
+      if (
+        Number.isFinite(
+          contentLength
+        )
+      ) {
+        if (contentLength <= 0) {
+          return res.status(400).json({
+            error:
+              "Movie file is empty."
+          });
+        }
+
+        if (
+          contentLength >
+          MAX_MOVIE_SIZE
+        ) {
+          return res.status(413).json({
+            error:
+              "Movie file must be 5 GB or smaller."
+          });
+        }
+      }
+
+
+      /* -----------------------------
+         FILE PATH
+      ----------------------------- */
 
       const filename =
         movieId + ".mp4";
@@ -1282,54 +1116,24 @@ app.post(
           filename
         );
 
-      const resolvedPath =
-        path.resolve(
-          filepath
-        );
-
-      const resolvedMoviesDir =
-        path.resolve(
-          MOVIES_DIR
-        );
-
       if (
-        !resolvedPath.startsWith(
-          resolvedMoviesDir +
-          path.sep
+        !isInsideDirectory(
+          filepath,
+          MOVIES_DIR
         )
       ) {
-
         return res.status(400).json({
           error:
             "Invalid movie path."
         });
-
       }
 
-      const contentLength =
-        Number(
-          req.headers[
-            "content-length"
-          ]
-        );
 
-      if (
-        Number.isFinite(contentLength) &&
-        contentLength >
-          MAX_MOVIE_SIZE
-      ) {
+      /* -----------------------------
+         CREATE STREAM
+      ----------------------------- */
 
-        return res.status(413).json({
-          error:
-            "Movie file must be 5 GB or smaller."
-        });
-
-      }
-
-      let received = 0;
-      let aborted = false;
-
-      const writeStream =
+      writeStream =
         fs.createWriteStream(
           filepath,
           {
@@ -1337,254 +1141,420 @@ app.post(
           }
         );
 
-      const uploadPromise =
-        new Promise(
-          (resolve, reject) => {
 
-            req.on(
-              "data",
-              chunk => {
+      /* -----------------------------
+         STREAM UPLOAD
+      ----------------------------- */
 
-                if (aborted) {
-                  return;
-                }
+      await new Promise(
+        (resolve, reject) => {
+          let rejected = false;
 
-                received +=
-                  chunk.length;
+          const fail = (error) => {
+            if (rejected) {
+              return;
+            }
 
-                if (
-                  received >
-                  MAX_MOVIE_SIZE
-                ) {
+            rejected = true;
 
-                  aborted = true;
+            try {
+              req.pause();
+            } catch {}
 
-                  req.destroy(
-                    new Error(
-                      "MOVIE_TOO_LARGE"
-                    )
-                  );
+            try {
+              writeStream.destroy();
+            } catch {}
 
-                  writeStream.destroy();
+            reject(error);
+          };
 
-                  reject(
-                    new Error(
-                      "Movie file must be 5 GB or smaller."
-                    )
-                  );
 
-                }
-
+          req.on(
+            "data",
+            (chunk) => {
+              if (rejected) {
+                return;
               }
-            );
 
-            req.on(
-              "aborted",
-              () => {
+              received +=
+                chunk.length;
 
-                aborted = true;
-
-                reject(
+              if (
+                received >
+                MAX_MOVIE_SIZE
+              ) {
+                fail(
                   new Error(
-                    "Upload aborted."
+                    "MOVIE_TOO_LARGE"
                   )
                 );
 
+                try {
+                  req.destroy();
+                } catch {}
+
+                return;
               }
-            );
+            }
+          );
 
-            req.on(
-              "error",
-              error => {
 
-                reject(error);
+          req.on(
+            "aborted",
+            () => {
+              fail(
+                new Error(
+                  "UPLOAD_ABORTED"
+                )
+              );
+            }
+          );
 
-              }
-            );
 
-            writeStream.on(
-              "error",
-              error => {
+          req.on(
+            "error",
+            (error) => {
+              fail(error);
+            }
+          );
 
-                reject(error);
 
-              }
-            );
+          writeStream.on(
+            "error",
+            (error) => {
+              fail(error);
+            }
+          );
 
-            writeStream.on(
-              "finish",
-              () => {
 
+          writeStream.on(
+            "finish",
+            () => {
+              if (!rejected) {
+                finished = true;
                 resolve();
-
               }
-            );
+            }
+          );
 
-            req.pipe(
-              writeStream
-            );
 
-          }
+          req.pipe(
+            writeStream
+          );
+        }
+      );
+
+
+      /* -----------------------------
+         FINAL VALIDATION
+      ----------------------------- */
+
+      if (!finished) {
+        throw new Error(
+          "UPLOAD_NOT_FINISHED"
         );
-
-      await uploadPromise;
+      }
 
       if (
-        received === 0
+        received <= 0
       ) {
-
-        if (
-          fs.existsSync(filepath)
-        ) {
-
-          fs.unlinkSync(filepath);
-
-        }
-
-        return res.status(400).json({
-          error:
-            "Movie file is empty."
-        });
-
+        throw new Error(
+          "MOVIE_EMPTY"
+        );
       }
+
+      if (
+        received >
+        MAX_MOVIE_SIZE
+      ) {
+        throw new Error(
+          "MOVIE_TOO_LARGE"
+        );
+      }
+
+
+      /* -----------------------------
+         VERIFY FILE
+      ----------------------------- */
+
+      if (
+        !fs.existsSync(
+          filepath
+        )
+      ) {
+        throw new Error(
+          "MOVIE_FILE_MISSING"
+        );
+      }
+
+      const stats =
+        fs.statSync(
+          filepath
+        );
+
+      if (
+        !stats.isFile() ||
+        stats.size <= 0
+      ) {
+        throw new Error(
+          "MOVIE_FILE_INVALID"
+        );
+      }
+
+
+      /* -----------------------------
+         SAVE MOVIE DATABASE
+      ----------------------------- */
 
       const movies =
         readMovies();
 
       const existingIndex =
         movies.findIndex(
-          movie =>
+          (movie) =>
             movie.movieId ===
             movieId
         );
 
       const existing =
         existingIndex >= 0
-          ? movies[existingIndex]
+          ? movies[
+              existingIndex
+            ]
           : null;
 
+      const now =
+        new Date().toISOString();
+
       const movie = {
-
         movieId,
-
         title,
-
         price,
-
         description,
-
         poster,
-
         filename,
-
+        filesize: stats.size,
         active: true,
 
         createdAt:
           existing &&
           existing.createdAt
             ? existing.createdAt
-            : new Date()
-                .toISOString(),
+            : now,
 
-        updatedAt:
-          new Date()
-            .toISOString()
-
+        updatedAt: now
       };
 
       if (
         existingIndex >= 0
       ) {
-
         movies[
           existingIndex
         ] = movie;
-
       } else {
-
         movies.unshift(
           movie
         );
-
       }
 
       writeMovies(
         movies
       );
 
+
+      /* -----------------------------
+         TELEGRAM
+      ----------------------------- */
+
       await notifyTelegram(
         "🎬 MOVIE UPLOADED\n\n" +
         "Movie: " +
         title +
         "\n" +
+        "Movie ID: " +
+        movieId +
+        "\n" +
         "Price: ₹" +
         price +
         "\n" +
-        "Movie ID: " +
-        movieId
+        "File Size: " +
+        (
+          stats.size /
+          (1024 * 1024)
+        ).toFixed(2) +
+        " MB"
       );
 
+
+      /* -----------------------------
+         RESPONSE
+      ----------------------------- */
+
       return res.json({
-
         ok: true,
-
         movie
-
       });
 
     } catch (error) {
-
       console.error(
         "Movie upload error:",
         error
       );
 
+      /* -----------------------------
+         CLEAN INCOMPLETE FILE
+      ----------------------------- */
+
       if (
         filepath &&
-        fs.existsSync(filepath)
+        fs.existsSync(
+          filepath
+        )
       ) {
-
         try {
-
           fs.unlinkSync(
             filepath
           );
-
         } catch {}
-
       }
 
-      if (
-        error.message ===
-        "Movie file must be 5 GB or smaller."
-      ) {
-
-        return res.status(413).json({
-          error:
-            error.message
-        });
-
-      }
 
       if (
         error.message ===
         "MOVIE_TOO_LARGE"
       ) {
-
         return res.status(413).json({
           error:
             "Movie file must be 5 GB or smaller."
         });
+      }
 
+      if (
+        error.message ===
+        "UPLOAD_ABORTED"
+      ) {
+        return res.status(400).json({
+          error:
+            "Movie upload was cancelled."
+        });
+      }
+
+      if (
+        error.message ===
+        "MOVIE_EMPTY"
+      ) {
+        return res.status(400).json({
+          error:
+            "Movie file is empty."
+        });
       }
 
       return res.status(500).json({
         error:
           "Movie upload failed."
       });
-
     }
+  }
+);
 
+
+/* =========================================================
+   JSON BODY PARSERS
+   IMPORTANT:
+   These come AFTER the movie upload route.
+========================================================= */
+
+app.use(
+  express.json({
+    limit: JSON_BODY_LIMIT
+  })
+);
+
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: JSON_BODY_LIMIT
+  })
+);
+
+
+/* =========================================================
+   PUBLIC STATIC FILES
+========================================================= */
+
+app.use(
+  express.static(
+    PUBLIC_DIR,
+    {
+      index: false
+    }
+  )
+);
+
+
+/* =========================================================
+   PUBLIC INSTAGRAM PACKAGES
+========================================================= */
+
+app.get(
+  "/api/instagram-packages",
+  (req, res) => {
+    const packages =
+      Object.entries(
+        INSTAGRAM_PACKAGES
+      ).map(
+        ([name, price]) => ({
+          package: name,
+          price:
+            Number(price)
+              .toFixed(2)
+        })
+      );
+
+    res.json({
+      packages
+    });
+  }
+);
+
+
+/* =========================================================
+   PUBLIC MOVIE CATALOG
+========================================================= */
+
+app.get(
+  "/api/movies",
+  (req, res) => {
+    const movies =
+      readMovies()
+        .filter(
+          (movie) =>
+            movie.active !== false
+        )
+        .map(
+          (movie) => ({
+            movieId:
+              movie.movieId,
+
+            title:
+              movie.title,
+
+            price:
+              movie.price,
+
+            description:
+              movie.description ||
+              "",
+
+            poster:
+              movie.poster ||
+              ""
+          })
+        );
+
+    res.json({
+      movies
+    });
   }
 );
 
@@ -1597,32 +1567,27 @@ app.post(
   "/api/admin/movies/:id/disable",
   admin,
   (req, res) => {
-
     const movies =
       readMovies();
 
     const movie =
       movies.find(
-        item =>
+        (item) =>
           item.movieId ===
           req.params.id
       );
 
     if (!movie) {
-
       return res.status(404).json({
         error:
           "Movie not found."
       });
-
     }
 
-    movie.active =
-      false;
+    movie.active = false;
 
     movie.updatedAt =
-      new Date()
-        .toISOString();
+      new Date().toISOString();
 
     writeMovies(
       movies
@@ -1632,7 +1597,6 @@ app.post(
       ok: true,
       movie
     });
-
   }
 );
 
@@ -1645,32 +1609,27 @@ app.post(
   "/api/admin/movies/:id/enable",
   admin,
   (req, res) => {
-
     const movies =
       readMovies();
 
     const movie =
       movies.find(
-        item =>
+        (item) =>
           item.movieId ===
           req.params.id
       );
 
     if (!movie) {
-
       return res.status(404).json({
         error:
           "Movie not found."
       });
-
     }
 
-    movie.active =
-      true;
+    movie.active = true;
 
     movie.updatedAt =
-      new Date()
-        .toISOString();
+      new Date().toISOString();
 
     writeMovies(
       movies
@@ -1680,7 +1639,6 @@ app.post(
       ok: true,
       movie
     });
-
   }
 );
 
@@ -1692,29 +1650,35 @@ app.post(
 app.post(
   "/api/movie-orders",
   async (req, res) => {
-
     try {
-
       const body =
         req.body || {};
+
+
+      /* -----------------------------
+         PASSWORD REJECTION
+      ----------------------------- */
 
       if (
         /password|passcode/i.test(
           JSON.stringify(body)
         )
       ) {
-
         return res.status(400).json({
           error:
             "Passwords are not accepted."
         });
-
       }
+
+
+      /* -----------------------------
+         INPUTS
+      ----------------------------- */
 
       const movieId =
         cleanText(
           body.movieId,
-          50
+          60
         );
 
       const mobile =
@@ -1745,94 +1709,110 @@ app.post(
         body.screenshot ||
         "";
 
+
+      /* -----------------------------
+         FIND MOVIE
+      ----------------------------- */
+
       const movies =
         readMovies();
 
       const movie =
         movies.find(
-          item =>
+          (item) =>
             item.movieId ===
               movieId &&
             item.active !== false
         );
 
       if (!movie) {
-
         return res.status(404).json({
           error:
             "Movie not found."
         });
-
       }
+
+
+      /* -----------------------------
+         CONTACT VALIDATION
+      ----------------------------- */
 
       if (
         !mobile &&
         !email
       ) {
-
         return res.status(400).json({
           error:
             "Please provide either your mobile number or email address."
         });
-
       }
 
       if (
         mobile &&
         !validMobile(mobile)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid Indian mobile number."
         });
-
       }
 
       if (
         email &&
         !validEmail(email)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid email address."
         });
-
       }
+
+
+      /* -----------------------------
+         UTR
+      ----------------------------- */
 
       if (
         !validUTR(utr)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid UTR or leave it empty."
         });
-
       }
+
+
+      /* -----------------------------
+         PROMO
+      ----------------------------- */
 
       if (
         promoCode &&
         promoCode !==
           VALID_PROMO_CODE
       ) {
-
         return res.status(400).json({
           error:
             "Invalid promo code."
         });
-
       }
 
-      if (!screenshot) {
 
+      /* -----------------------------
+         SCREENSHOT
+      ----------------------------- */
+
+      if (!screenshot) {
         return res.status(400).json({
           error:
             "Payment screenshot is required."
         });
-
       }
+
+
+      /* -----------------------------
+         SERVER-SIDE PRICE
+      ----------------------------- */
 
       const baseAmount =
         cleanAmount(
@@ -1840,12 +1820,10 @@ app.post(
         );
 
       if (!baseAmount) {
-
         return res.status(500).json({
           error:
             "Movie price is not configured correctly."
         });
-
       }
 
       const amount =
@@ -1854,33 +1832,43 @@ app.post(
           promoCode
         );
 
+
+      /* -----------------------------
+         ORDER
+      ----------------------------- */
+
       const orderId =
         createOrderId();
 
       const accessToken =
         createAccessToken();
 
+
+      /* -----------------------------
+         SAVE SCREENSHOT
+      ----------------------------- */
+
       let screenshotInfo;
 
       try {
-
         screenshotInfo =
           saveScreenshot(
             screenshot,
             orderId
           );
-
       } catch (error) {
-
         return res.status(400).json({
           error:
             error.message
         });
-
       }
 
-      const order = {
 
+      /* -----------------------------
+         ORDER OBJECT
+      ----------------------------- */
+
+      const order = {
         orderId,
 
         type:
@@ -1896,11 +1884,8 @@ app.post(
           movie.title,
 
         mobile,
-
         email,
-
         utr,
-
         promoCode,
 
         originalAmount:
@@ -1914,10 +1899,13 @@ app.post(
         accessToken,
 
         createdAt:
-          new Date()
-            .toISOString()
-
+          new Date().toISOString()
       };
+
+
+      /* -----------------------------
+         SAVE ORDER
+      ----------------------------- */
 
       const orders =
         readOrders();
@@ -1930,9 +1918,30 @@ app.post(
         orders
       );
 
-      const message =
 
-        "🎬 NEW MOVIE ORDER " +
+      /* -----------------------------
+         TELEGRAM
+      ----------------------------- */
+
+      const contact =
+        [
+          mobile
+            ? "Mobile: " +
+              mobile
+            : "",
+
+          email
+            ? "Email: " +
+              email
+            : ""
+        ]
+          .filter(Boolean)
+          .join("\n");
+
+      const message =
+        "🎬 NEW MOVIE ORDER\n\n" +
+
+        "🆔 Order ID: " +
         orderId +
         "\n\n" +
 
@@ -1942,7 +1951,7 @@ app.post(
 
         "🆔 Movie ID: " +
         movie.movieId +
-        "\n" +
+        "\n\n" +
 
         "💰 Original: ₹" +
         baseAmount +
@@ -1953,19 +1962,7 @@ app.post(
         "\n\n" +
 
         "📱 Contact\n" +
-
-        [
-          mobile
-            ? "Mobile: " + mobile
-            : "",
-
-          email
-            ? "Email: " + email
-            : ""
-        ]
-        .filter(Boolean)
-        .join("\n") +
-
+        contact +
         "\n\n" +
 
         "🧾 UTR: " +
@@ -1973,7 +1970,6 @@ app.post(
           utr ||
           "Not provided"
         ) +
-
         "\n" +
 
         "🎟 Promo Code: " +
@@ -1981,7 +1977,6 @@ app.post(
           promoCode ||
           "Not used"
         ) +
-
         "\n\n" +
 
         "⚠️ VERIFY PAYMENT BEFORE ACCEPTING.";
@@ -1993,20 +1988,28 @@ app.post(
       await sendTelegramScreenshot(
         screenshotInfo,
         "💳 MOVIE PAYMENT SCREENSHOT\n" +
+
         "Order ID: " +
         orderId +
         "\n" +
+
         "Movie: " +
         movie.title +
         "\n" +
+
         "Amount: ₹" +
         amount +
         "\n\n" +
+
         "⚠️ Verify payment before accepting."
       );
 
-      res.json({
 
+      /* -----------------------------
+         RESPONSE
+      ----------------------------- */
+
+      res.json({
         ok: true,
 
         orderId,
@@ -2016,11 +2019,9 @@ app.post(
 
         movieId:
           movie.movieId
-
       });
 
     } catch (error) {
-
       console.error(
         "Movie order error:",
         error
@@ -2030,9 +2031,7 @@ app.post(
         error:
           "Unable to process movie order."
       });
-
     }
-
   }
 );
 
@@ -2044,24 +2043,30 @@ app.post(
 app.post(
   "/api/orders",
   async (req, res) => {
-
     try {
-
       const body =
         req.body || {};
+
+
+      /* -----------------------------
+         PASSWORD REJECTION
+      ----------------------------- */
 
       if (
         /password|passcode/i.test(
           JSON.stringify(body)
         )
       ) {
-
         return res.status(400).json({
           error:
             "Passwords are not accepted."
         });
-
       }
+
+
+      /* -----------------------------
+         INPUTS
+      ----------------------------- */
 
       const pkg =
         cleanText(
@@ -2108,19 +2113,27 @@ app.post(
         body.screenshot ||
         "";
 
+
+      /* -----------------------------
+         REQUIRED FIELDS
+      ----------------------------- */
+
       if (
         !pkg ||
         !username ||
         !profile ||
         !screenshot
       ) {
-
         return res.status(400).json({
           error:
             "Please complete the required fields and upload your payment screenshot."
         });
-
       }
+
+
+      /* -----------------------------
+         PACKAGE VALIDATION
+      ----------------------------- */
 
       if (
         !Object.prototype.hasOwnProperty.call(
@@ -2128,77 +2141,80 @@ app.post(
           pkg
         )
       ) {
-
         return res.status(400).json({
           error:
             "Invalid Instagram package."
         });
-
       }
 
-      /*
-        SERVER-SIDE PACKAGE PRICE
-      */
+
+      /* -----------------------------
+         SERVER-SIDE PRICE
+      ----------------------------- */
 
       const packagePrice =
         cleanAmount(
-          INSTAGRAM_PACKAGES[pkg]
+          INSTAGRAM_PACKAGES[
+            pkg
+          ]
         );
 
       if (!packagePrice) {
-
         return res.status(500).json({
           error:
             "This Instagram package price is not configured on the server."
         });
-
       }
+
+
+      /* -----------------------------
+         CONTACT
+      ----------------------------- */
 
       if (
         !mobile &&
         !email
       ) {
-
         return res.status(400).json({
           error:
             "Please provide either your mobile number or email address."
         });
-
       }
 
       if (
         mobile &&
         !validMobile(mobile)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid Indian mobile number."
         });
-
       }
 
       if (
         email &&
         !validEmail(email)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid email address."
         });
-
       }
 
-      if (
-        !validUsername(username)
-      ) {
 
+      /* -----------------------------
+         INSTAGRAM VALIDATION
+      ----------------------------- */
+
+      if (
+        !validUsername(
+          username
+        )
+      ) {
         return res.status(400).json({
           error:
             "Please enter a valid Instagram username."
         });
-
       }
 
       if (
@@ -2206,37 +2222,46 @@ app.post(
           profile
         )
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid Instagram profile link."
         });
-
       }
+
+
+      /* -----------------------------
+         UTR
+      ----------------------------- */
 
       if (
         !validUTR(utr)
       ) {
-
         return res.status(400).json({
           error:
             "Please enter a valid UTR or leave it empty."
         });
-
       }
+
+
+      /* -----------------------------
+         PROMO
+      ----------------------------- */
 
       if (
         promoCode &&
         promoCode !==
           VALID_PROMO_CODE
       ) {
-
         return res.status(400).json({
           error:
             "Invalid promo code."
         });
-
       }
+
+
+      /* -----------------------------
+         FINAL PRICE
+      ----------------------------- */
 
       const amount =
         calculateFinalAmount(
@@ -2244,30 +2269,40 @@ app.post(
           promoCode
         );
 
+
+      /* -----------------------------
+         ORDER ID
+      ----------------------------- */
+
       const orderId =
         createOrderId();
+
+
+      /* -----------------------------
+         SCREENSHOT
+      ----------------------------- */
 
       let screenshotInfo;
 
       try {
-
         screenshotInfo =
           saveScreenshot(
             screenshot,
             orderId
           );
-
       } catch (error) {
-
         return res.status(400).json({
           error:
             error.message
         });
-
       }
 
-      const order = {
 
+      /* -----------------------------
+         ORDER
+      ----------------------------- */
+
+      const order = {
         orderId,
 
         type:
@@ -2280,7 +2315,6 @@ app.post(
           pkg,
 
         mobile,
-
         email,
 
         username,
@@ -2300,10 +2334,13 @@ app.post(
           screenshotInfo.filename,
 
         createdAt:
-          new Date()
-            .toISOString()
-
+          new Date().toISOString()
       };
+
+
+      /* -----------------------------
+         SAVE
+      ----------------------------- */
 
       const orders =
         readOrders();
@@ -2316,9 +2353,30 @@ app.post(
         orders
       );
 
-      const message =
 
-        "🔔 NEW INSTAGRAM ORDER " +
+      /* -----------------------------
+         TELEGRAM
+      ----------------------------- */
+
+      const contact =
+        [
+          mobile
+            ? "Mobile: " +
+              mobile
+            : "",
+
+          email
+            ? "Email: " +
+              email
+            : ""
+        ]
+          .filter(Boolean)
+          .join("\n");
+
+      const message =
+        "🔔 NEW INSTAGRAM ORDER\n\n" +
+
+        "🆔 Order ID: " +
         orderId +
         "\n\n" +
 
@@ -2335,29 +2393,15 @@ app.post(
         "\n\n" +
 
         "📱 Contact\n" +
-
-        [
-          mobile
-            ? "Mobile: " + mobile
-            : "",
-
-          email
-            ? "Email: " + email
-            : ""
-        ]
-        .filter(Boolean)
-        .join("\n") +
-
+        contact +
         "\n\n" +
 
         "📸 Instagram: @" +
         username +
-
         "\n" +
 
         "🔗 Profile: " +
         profile +
-
         "\n\n" +
 
         "🧾 UTR: " +
@@ -2365,7 +2409,6 @@ app.post(
           utr ||
           "Not provided"
         ) +
-
         "\n" +
 
         "🎟 Promo Code: " +
@@ -2373,7 +2416,6 @@ app.post(
           promoCode ||
           "Not used"
         ) +
-
         "\n\n" +
 
         "⚠️ VERIFY PAYMENT BEFORE ACCEPTING.";
@@ -2385,31 +2427,37 @@ app.post(
       await sendTelegramScreenshot(
         screenshotInfo,
         "💳 INSTAGRAM PAYMENT SCREENSHOT\n" +
+
         "Order ID: " +
         orderId +
         "\n" +
+
         "Instagram: @" +
         username +
         "\n" +
+
         "Amount: ₹" +
         amount +
         "\n\n" +
+
         "⚠️ Verify payment before accepting."
       );
 
-      res.json({
 
+      /* -----------------------------
+         RESPONSE
+      ----------------------------- */
+
+      res.json({
         ok: true,
 
         orderId,
 
         status:
           "PENDING"
-
       });
 
     } catch (error) {
-
       console.error(
         "Instagram order error:",
         error
@@ -2419,9 +2467,7 @@ app.post(
         error:
           "Unable to process order."
       });
-
     }
-
   }
 );
 
@@ -2434,30 +2480,25 @@ app.get(
   "/api/admin/orders",
   admin,
   (req, res) => {
-
     const orders =
       readOrders();
 
     const safeOrders =
       orders.map(
-        order => {
-
-          const copy =
-            {
-              ...order
-            };
+        (order) => {
+          const copy = {
+            ...order
+          };
 
           delete copy.accessToken;
 
           return copy;
-
         }
       );
 
     res.json(
       safeOrders
     );
-
   }
 );
 
@@ -2470,48 +2511,41 @@ app.get(
   "/api/admin/movies",
   admin,
   (req, res) => {
-
     res.json(
       readMovies()
     );
-
   }
 );
 
 
 /* =========================================================
-   ADMIN - VIEW PAYMENT SCREENSHOT
+   ADMIN - PAYMENT SCREENSHOT
 ========================================================= */
 
 app.get(
   "/api/admin/orders/:id/screenshot",
   admin,
   (req, res) => {
-
     const orders =
       readOrders();
 
     const order =
       orders.find(
-        item =>
+        (item) =>
           item.orderId ===
           req.params.id
       );
 
     if (!order) {
-
       return res.status(404).send(
         "Order not found."
       );
-
     }
 
     if (!order.screenshot) {
-
       return res.status(404).send(
         "Screenshot not found."
       );
-
     }
 
     const filename =
@@ -2525,36 +2559,25 @@ app.get(
         filename
       );
 
-    const resolved =
-      path.resolve(
-        filepath
-      );
-
-    const base =
-      path.resolve(
-        SCREENSHOTS_DIR
-      );
-
     if (
-      !resolved.startsWith(
-        base + path.sep
+      !isInsideDirectory(
+        filepath,
+        SCREENSHOTS_DIR
       )
     ) {
-
       return res.status(403).send(
         "Invalid screenshot path."
       );
-
     }
 
     if (
-      !fs.existsSync(filepath)
+      !fs.existsSync(
+        filepath
+      )
     ) {
-
       return res.status(404).send(
         "Screenshot file not found."
       );
-
     }
 
     res.setHeader(
@@ -2562,10 +2585,9 @@ app.get(
       "private, no-store"
     );
 
-    res.sendFile(
+    return res.sendFile(
       filepath
     );
-
   }
 );
 
@@ -2578,7 +2600,6 @@ app.post(
   "/api/admin/orders/:id/status",
   admin,
   async (req, res) => {
-
     const allowed = [
       "ACCEPTED",
       "REJECTED"
@@ -2593,12 +2614,10 @@ app.post(
         status
       )
     ) {
-
       return res.status(400).json({
         error:
-          "Invalid status"
+          "Invalid status."
       });
-
     }
 
     const orders =
@@ -2606,85 +2625,89 @@ app.post(
 
     const order =
       orders.find(
-        item =>
+        (item) =>
           item.orderId ===
           req.params.id
       );
 
     if (!order) {
-
       return res.status(404).json({
         error:
-          "Order not found"
+          "Order not found."
       });
-
     }
+
+
+    /* -----------------------------
+       UPDATE STATUS
+    ----------------------------- */
 
     order.status =
       status;
 
     order.updatedAt =
-      new Date()
-        .toISOString();
+      new Date().toISOString();
 
     writeOrders(
       orders
     );
 
-    await notifyTelegram(
 
-      status === "ACCEPTED"
+    /* -----------------------------
+       TELEGRAM
+    ----------------------------- */
 
+    const orderDescription =
+      order.type === "MOVIE"
         ? (
-          "✅ ORDER ACCEPTED\n\n" +
-
-          "Order ID: " +
-          order.orderId +
-          "\n" +
-
-          (
-            order.type === "MOVIE"
-
-              ? "🎬 Movie: " +
-                order.movieTitle
-
-              : "📦 Instagram: @" +
-                order.username
+            "🎬 Movie: " +
+            order.movieTitle
           )
-        )
-
         : (
-          "❌ ORDER REJECTED\n\n" +
+            "📦 Instagram: @" +
+            order.username
+          );
 
-          "Order ID: " +
-          order.orderId +
-          "\n" +
+    if (
+      status === "ACCEPTED"
+    ) {
+      await notifyTelegram(
+        "✅ ORDER ACCEPTED\n\n" +
 
-          (
-            order.type === "MOVIE"
+        "Order ID: " +
+        order.orderId +
+        "\n\n" +
 
-              ? "🎬 Movie: " +
-                order.movieTitle
+        orderDescription
+      );
+    } else {
+      await notifyTelegram(
+        "❌ ORDER REJECTED\n\n" +
 
-              : "📦 Instagram: @" +
-                order.username
-          )
-        )
+        "Order ID: " +
+        order.orderId +
+        "\n\n" +
 
-    );
+        orderDescription
+      );
+    }
+
+
+    /* -----------------------------
+       RESPONSE
+    ----------------------------- */
+
+    const safeOrder = {
+      ...order
+    };
+
+    delete safeOrder.accessToken;
 
     res.json({
-
       ok: true,
-
-      order: {
-        ...order,
-        accessToken:
-          undefined
-      }
-
+      order:
+        safeOrder
     });
-
   }
 );
 
@@ -2696,28 +2719,24 @@ app.post(
 app.get(
   "/api/orders/:id",
   (req, res) => {
-
     const orders =
       readOrders();
 
     const order =
       orders.find(
-        item =>
+        (item) =>
           item.orderId ===
           req.params.id
       );
 
     if (!order) {
-
       return res.status(404).json({
         error:
-          "Order not found"
+          "Order not found."
       });
-
     }
 
     res.json({
-
       orderId:
         order.orderId,
 
@@ -2739,64 +2758,68 @@ app.get(
         order.movieTitle ||
         null,
 
+      amount:
+        order.amount ||
+        null,
+
       createdAt:
         order.createdAt
-
     });
-
   }
 );
 
 
 /* =========================================================
-   CUSTOMER - MY MOVIE ACCESS
+   CUSTOMER - MOVIE ACCESS
 ========================================================= */
 
 app.get(
   "/api/my-movies/:orderId",
   (req, res) => {
-
     const orders =
       readOrders();
 
     const order =
       orders.find(
-        item =>
+        (item) =>
           item.orderId ===
           req.params.orderId
       );
 
     if (!order) {
-
       return res.status(404).json({
         error:
           "Order not found."
       });
-
     }
 
     if (
       order.type !==
       "MOVIE"
     ) {
-
       return res.status(400).json({
         error:
           "This is not a movie order."
       });
-
     }
 
     if (
       order.status !==
       "ACCEPTED"
     ) {
-
       return res.status(403).json({
         error:
           "Movie access has not been approved."
       });
+    }
 
+    if (
+      !order.accessToken
+    ) {
+      return res.status(403).json({
+        error:
+          "Movie access token is unavailable."
+      });
     }
 
     const movies =
@@ -2804,18 +2827,16 @@ app.get(
 
     const movie =
       movies.find(
-        item =>
+        (item) =>
           item.movieId ===
           order.movieId
       );
 
     if (!movie) {
-
       return res.status(404).json({
         error:
           "Movie is no longer available."
       });
-
     }
 
     const watchUrl =
@@ -2829,11 +2850,9 @@ app.get(
       );
 
     res.json({
-
       ok: true,
 
       movie: {
-
         movieId:
           movie.movieId,
 
@@ -2841,127 +2860,143 @@ app.get(
           movie.title,
 
         description:
-          movie.description || "",
+          movie.description ||
+          "",
 
         poster:
-          movie.poster || "",
+          movie.poster ||
+          "",
 
         watchUrl
-
       }
-
     });
-
   }
 );
 
 
 /* =========================================================
    PROTECTED MOVIE STREAM
+   RANGE / SEEK SUPPORT
 ========================================================= */
 
 app.get(
   "/api/watch/:movieId",
   (req, res) => {
-
     const token =
       cleanText(
         req.query.token,
-        100
+        150
       );
 
     if (!token) {
-
       return res.status(401).send(
         "Movie access requires an approved order."
       );
-
     }
+
+
+    /* -----------------------------
+       FIND ORDER
+    ----------------------------- */
 
     const orders =
       readOrders();
 
     const order =
       orders.find(
-        item =>
+        (item) =>
           item.accessToken ===
           token
       );
 
     if (!order) {
-
       return res.status(404).send(
         "Invalid movie access token."
       );
-
     }
+
+
+    /* -----------------------------
+       ORDER TYPE
+    ----------------------------- */
 
     if (
       order.type !==
       "MOVIE"
     ) {
-
       return res.status(403).send(
         "Invalid movie order."
       );
-
     }
+
+
+    /* -----------------------------
+       APPROVAL
+    ----------------------------- */
 
     if (
       order.status !==
       "ACCEPTED"
     ) {
-
       return res.status(403).send(
         "Movie access has not been approved."
       );
-
     }
+
+
+    /* -----------------------------
+       MOVIE MATCH
+    ----------------------------- */
 
     if (
       order.movieId !==
       req.params.movieId
     ) {
-
       return res.status(403).send(
         "This order does not have access to this movie."
       );
-
     }
+
+
+    /* -----------------------------
+       FIND MOVIE
+    ----------------------------- */
 
     const movies =
       readMovies();
 
     const movie =
       movies.find(
-        item =>
+        (item) =>
           item.movieId ===
           req.params.movieId
       );
 
     if (!movie) {
-
       return res.status(404).send(
         "Movie not found."
       );
-
     }
+
+
+    /* -----------------------------
+       FILE
+    ----------------------------- */
 
     const filename =
       path.basename(
-        movie.filename || ""
+        movie.filename ||
+        ""
       );
 
     if (
-      !filename.endsWith(
-        ".mp4"
+      !/^[A-Za-z0-9_-]+\.mp4$/i.test(
+        filename
       )
     ) {
-
       return res.status(400).send(
         "Invalid movie file."
       );
-
     }
 
     const filepath =
@@ -2970,57 +3005,52 @@ app.get(
         filename
       );
 
-    const resolvedMovie =
-      path.resolve(
-        filepath
-      );
-
-    const resolvedMoviesDir =
-      path.resolve(
-        MOVIES_DIR
-      );
-
     if (
-      !resolvedMovie.startsWith(
-        resolvedMoviesDir +
-        path.sep
+      !isInsideDirectory(
+        filepath,
+        MOVIES_DIR
       )
     ) {
-
       return res.status(403).send(
         "Invalid movie path."
       );
-
     }
 
     if (
-      !fs.existsSync(filepath)
+      !fs.existsSync(
+        filepath
+      )
     ) {
-
       return res.status(404).send(
         "Movie file is not available."
       );
-
     }
+
+
+    /* -----------------------------
+       FILE STAT
+    ----------------------------- */
 
     const stat =
       fs.statSync(
         filepath
       );
 
-    if (!stat.isFile()) {
-
+    if (
+      !stat.isFile()
+    ) {
       return res.status(404).send(
         "Movie file is not available."
       );
-
     }
 
     const fileSize =
       stat.size;
 
-    const range =
-      req.headers.range;
+
+    /* -----------------------------
+       HEADERS
+    ----------------------------- */
 
     res.setHeader(
       "Content-Type",
@@ -3042,28 +3072,59 @@ app.get(
       "nosniff"
     );
 
-    if (!range) {
 
+    /* -----------------------------
+       NO RANGE
+    ----------------------------- */
+
+    const range =
+      req.headers.range;
+
+    if (!range) {
       res.setHeader(
         "Content-Length",
         fileSize
       );
 
-      fs.createReadStream(
-        filepath
-      ).pipe(res);
+      const stream =
+        fs.createReadStream(
+          filepath
+        );
 
-      return;
+      stream.on(
+        "error",
+        (error) => {
+          console.error(
+            "Movie stream error:",
+            error
+          );
 
+          if (
+            !res.headersSent
+          ) {
+            res.status(500).end();
+          } else {
+            res.destroy();
+          }
+        }
+      );
+
+      return stream.pipe(
+        res
+      );
     }
+
+
+    /* -----------------------------
+       RANGE PARSING
+    ----------------------------- */
 
     const match =
       range.match(
-        /bytes=(\d*)-(\d*)/
+        /^bytes=(\d*)-(\d*)$/
       );
 
     if (!match) {
-
       res.status(416);
 
       res.setHeader(
@@ -3073,8 +3134,8 @@ app.get(
       );
 
       return res.end();
-
     }
+
 
     let start =
       match[1]
@@ -3092,11 +3153,59 @@ app.get(
           )
         : fileSize - 1;
 
+
+    /* -----------------------------
+       SUFFIX RANGE
+       Example: bytes=-500000
+    ----------------------------- */
+
+    if (
+      !match[1] &&
+      match[2]
+    ) {
+      const suffixLength =
+        parseInt(
+          match[2],
+          10
+        );
+
+      if (
+        !Number.isInteger(
+          suffixLength
+        ) ||
+        suffixLength <= 0
+      ) {
+        res.status(416);
+
+        res.setHeader(
+          "Content-Range",
+          "bytes */" +
+          fileSize
+        );
+
+        return res.end();
+      }
+
+      start =
+        Math.max(
+          fileSize -
+            suffixLength,
+          0
+        );
+
+      end =
+        fileSize - 1;
+    }
+
+
+    /* -----------------------------
+       VALIDATE RANGE
+    ----------------------------- */
+
     if (
       !Number.isInteger(start) ||
       !Number.isInteger(end)
     ) {
-
       res.status(416);
 
       res.setHeader(
@@ -3106,31 +3215,25 @@ app.get(
       );
 
       return res.end();
-
     }
 
     if (
       start < 0
     ) {
-
       start = 0;
-
     }
 
     if (
       end >= fileSize
     ) {
-
       end =
         fileSize - 1;
-
     }
 
     if (
       start >= fileSize ||
       start > end
     ) {
-
       res.status(416);
 
       res.setHeader(
@@ -3140,8 +3243,12 @@ app.get(
       );
 
       return res.end();
-
     }
+
+
+    /* -----------------------------
+       STREAM RANGE
+    ----------------------------- */
 
     const chunkSize =
       end - start + 1;
@@ -3163,6 +3270,7 @@ app.get(
       chunkSize
     );
 
+
     const stream =
       fs.createReadStream(
         filepath,
@@ -3174,28 +3282,25 @@ app.get(
 
     stream.on(
       "error",
-      error => {
-
+      (error) => {
         console.error(
-          "Movie stream error:",
+          "Movie range stream error:",
           error
         );
 
-        if (!res.headersSent) {
-
+        if (
+          !res.headersSent
+        ) {
           res.status(500).end();
-
         } else {
-
           res.destroy();
-
         }
-
       }
     );
 
-    stream.pipe(res);
-
+    return stream.pipe(
+      res
+    );
   }
 );
 
@@ -3208,100 +3313,94 @@ function sendPublicPage(
   filename,
   res
 ) {
-
   const file =
     path.join(
       PUBLIC_DIR,
       filename
     );
 
-  const resolvedFile =
-    path.resolve(file);
-
-  const resolvedPublic =
-    path.resolve(
-      PUBLIC_DIR
-    );
-
   if (
-    !resolvedFile.startsWith(
-      resolvedPublic +
-      path.sep
+    !isInsideDirectory(
+      file,
+      PUBLIC_DIR
     )
   ) {
-
     return res.status(403).send(
       "Invalid file path."
     );
-
   }
 
   if (
     !fs.existsSync(file)
   ) {
-
     return res.status(404).send(
       filename +
       " was not found."
     );
-
   }
 
   return res.sendFile(
     file
   );
-
 }
 
+
+/* -----------------------------
+   ORDER PAGE
+----------------------------- */
 
 app.get(
   "/order.html",
   (req, res) => {
-
     sendPublicPage(
       "order.html",
       res
     );
-
   }
 );
 
+
+/* -----------------------------
+   ADMIN PAGE
+----------------------------- */
 
 app.get(
   "/admin.html",
   (req, res) => {
-
     sendPublicPage(
       "admin.html",
       res
     );
-
   }
 );
 
+
+/* -----------------------------
+   WATCH PAGE
+----------------------------- */
 
 app.get(
   "/watch.html",
   (req, res) => {
-
     sendPublicPage(
       "watch.html",
       res
     );
-
   }
 );
 
 
+/* -----------------------------
+   HOME
+----------------------------- */
+
 app.get(
   "/",
   (req, res) => {
-
     sendPublicPage(
       "index.html",
       res
     );
-
   }
 );
 
@@ -3312,35 +3411,30 @@ app.get(
 
 app.use(
   (req, res) => {
-
     if (
       req.path.startsWith(
         "/api/"
       )
     ) {
-
       return res.status(404).json({
         error:
-          "API endpoint not found"
+          "API endpoint not found."
       });
-
     }
 
     res.status(404).send(
       "Page not found."
     );
-
   }
 );
 
 
 /* =========================================================
-   ERROR HANDLER
+   BODY PARSER ERROR HANDLER
 ========================================================= */
 
 app.use(
   (error, req, res, next) => {
-
     console.error(
       "Unhandled server error:",
       error
@@ -3349,16 +3443,24 @@ app.use(
     if (
       res.headersSent
     ) {
-
       return next(error);
-
     }
 
-    res.status(500).json({
+    if (
+      error &&
+      error.type ===
+        "entity.too.large"
+    ) {
+      return res.status(413).json({
+        error:
+          "Request is too large. Maximum JSON request size is 12 MB."
+      });
+    }
+
+    return res.status(500).json({
       error:
         "Internal server error."
     });
-
   }
 );
 
@@ -3370,7 +3472,6 @@ app.use(
 app.listen(
   PORT,
   () => {
-
     console.log(
       "SehrAn Media server running on port " +
       PORT
@@ -3398,5 +3499,35 @@ app.listen(
       ).length
     );
 
+    console.log(
+      "JSON request limit:",
+      JSON_BODY_LIMIT
+    );
+
+    console.log(
+      "Screenshot limit:",
+      "5 MB"
+    );
+
+    console.log(
+      "Movie upload limit:",
+      "5 GB"
+    );
+
+    console.log(
+      "Promo code:",
+      VALID_PROMO_CODE
+    );
+
+    console.log(
+      "Promo discount:",
+      "10%"
+    );
+
+    if (ADMIN_URL) {
+      console.log(
+        "Admin URL configured."
+      );
+    }
   }
 );
