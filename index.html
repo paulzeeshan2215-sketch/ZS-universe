@@ -1265,9 +1265,7 @@
   function showMovieCategory(category) {
 
     const status =
-      document.getElementById(
-        "movieCategoryStatus"
-      );
+      document.getElementById("movieCategoryStatus");
 
     const names = {
       bollywood: "Bollywood Movies",
@@ -1275,22 +1273,19 @@
       trending: "Trending Movies"
     };
 
+    const safeCategory =
+      Object.prototype.hasOwnProperty.call(names, category)
+        ? category
+        : "all";
+
     status.style.display = "block";
 
     status.innerHTML =
-      `<strong>${names[category]}</strong>
+      `<strong>${names[safeCategory] || "Movies"}</strong>
        <br>
-       Showing the ${names[category]} collection.`;
+       Loading the selected movie collection...`;
 
-    /*
-      If your movies.json later contains:
-
-      "category": "bollywood"
-
-      then the catalog can be filtered automatically.
-    */
-
-    loadMovies(category);
+    loadMovies(safeCategory);
 
     document
       .getElementById("movieList")
@@ -1308,31 +1303,34 @@
   async function loadMovies(category = "all") {
 
     const container =
-      document.getElementById(
-        "movieList"
-      );
+      document.getElementById("movieList");
+
+    const status =
+      document.getElementById("movieCategoryStatus");
+
+    const categoryNames = {
+      all: "All Movies",
+      bollywood: "Bollywood Movies",
+      hollywood: "Hollywood Movies",
+      trending: "Trending Movies"
+    };
 
     container.innerHTML = `
       <div class="movie-empty">
         <i class="fa-solid fa-spinner fa-spin"></i>
-        Loading movies...
+        Loading ${escapeHtml(categoryNames[category] || "Movies")}...
       </div>
     `;
 
     try {
 
       const response =
-        await fetch(
-          "/api/movies",
-          {
-            cache: "no-store"
-          }
-        );
+        await fetch("/api/movies", {
+          cache: "no-store"
+        });
 
       if (!response.ok) {
-        throw new Error(
-          "Movie API failed"
-        );
+        throw new Error("Movie API failed");
       }
 
       const data =
@@ -1343,45 +1341,69 @@
           ? data.movies
           : [];
 
-
       /*
-        Category filtering works if your movie object has:
-
-        category:
-          "bollywood"
-          "hollywood"
-          "trending"
-
-        If category is missing, all available movies remain visible.
+        Supports both the current server response and a newer response
+        that includes movie.category.
       */
+      const inferCategory = (movie) => {
+
+        const explicit =
+          String(movie.category || "")
+            .trim()
+            .toLowerCase();
+
+        if (
+          ["bollywood", "hollywood", "trending"]
+            .includes(explicit)
+        ) {
+          return explicit;
+        }
+
+        const haystack =
+          [
+            movie.title || "",
+            movie.description || ""
+          ]
+            .join(" ")
+            .toLowerCase();
+
+        if (
+          /\b(bollywood|hindi|indian cinema|india)\b/
+            .test(haystack)
+        ) {
+          return "bollywood";
+        }
+
+        if (
+          /\b(hollywood|english|american|international)\b/
+            .test(haystack)
+        ) {
+          return "hollywood";
+        }
+
+        if (
+          /\b(oppenheimer|shawshank|the shawshank redemption)\b/
+            .test(haystack)
+        ) {
+          return "trending";
+        }
+
+        return "";
+      };
 
       if (category !== "all") {
 
-        const filtered =
-          movies.filter(movie => {
-
-            const movieCategory =
-              String(
-                movie.category || ""
-              ).toLowerCase();
-
-            return (
-              movieCategory === category
-            );
-          });
-
-        /*
-          Only replace the list when actual category
-          information exists.
-        */
-
-        if (filtered.length > 0) {
-          movies = filtered;
-        }
+        movies =
+          movies.filter(
+            movie =>
+              inferCategory(movie) === category
+          );
       }
 
-
       if (!movies.length) {
+
+        const categoryName =
+          categoryNames[category] || "Movies";
 
         container.innerHTML = `
           <div class="movie-empty">
@@ -1394,14 +1416,33 @@
             <br>
 
             No movies are currently available
-            in this collection.
+            in <strong>${escapeHtml(categoryName)}</strong>.
+
+            <br><br>
+
+            <small>
+              Add a movie to this category from your movie catalog.
+            </small>
 
           </div>
         `;
 
+        if (status) {
+          status.innerHTML =
+            `<strong>${escapeHtml(categoryName)}</strong>
+             <br>
+             No movie is currently listed in this collection.`;
+        }
+
         return;
       }
 
+      if (status) {
+        status.innerHTML =
+          `<strong>${escapeHtml(categoryNames[category] || "Movies")}</strong>
+           <br>
+           Showing ${movies.length} available movie${movies.length === 1 ? "" : "s"}.`;
+      }
 
       container.innerHTML =
         movies
@@ -1493,7 +1534,7 @@
 
           Movie catalog could not be loaded.
 
-          <br>
+          <br><br>
 
           <small>
             Please try again later.
