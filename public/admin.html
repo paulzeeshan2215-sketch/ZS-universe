@@ -1,7 +1,761 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SehrAn Media Admin</title>
-<style>body{font-family:Arial;background:#08040c;color:#fff;padding:25px}.bar{display:flex;gap:10px;margin-bottom:20px}input,button{padding:11px;border-radius:8px;border:1px solid #444;background:#111;color:#fff}button{cursor:pointer}.ok{background:#0b7d3b}.no{background:#9c173e}.card{border:1px solid #333;border-radius:12px;padding:16px;margin:10px 0;background:#120a18}.muted{color:#aaa}</style></head>
-<body><h1>SehrAn Media — Orders</h1><div class="bar"><input id="key" placeholder="Admin key"><button onclick="load()">Load Orders</button></div><div id="orders"></div>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>SehrAn Media — Admin Panel</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:25px;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#08040c;
+  color:#fff;
+}
+
+h1{
+  margin-top:0;
+}
+
+.top{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+input,button,select{
+  padding:11px 14px;
+  border-radius:9px;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
+  font-size:14px;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.85;
+}
+
+.load{
+  background:#333;
+}
+
+.accept{
+  background:#087d3d;
+  border-color:#087d3d;
+}
+
+.reject{
+  background:#a5153e;
+  border-color:#a5153e;
+}
+
+.movie{
+  border-color:#6d32a8;
+}
+
+.instagram{
+  border-color:#b72d67;
+}
+
+.card{
+  border:1px solid #333;
+  border-radius:14px;
+  padding:18px;
+  margin:12px 0;
+  background:#120a18;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.movieBadge{
+  background:#542080;
+}
+
+.instagramBadge{
+  background:#9b2458;
+}
+
+.pending{
+  color:#ffd54a;
+}
+
+.accepted{
+  color:#40e17a;
+}
+
+.rejected{
+  color:#ff557c;
+}
+
+.info{
+  line-height:1.7;
+}
+
+.muted{
+  color:#999;
+  font-size:13px;
+}
+
+.actions{
+  margin-top:15px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.empty{
+  color:#aaa;
+  padding:30px 0;
+  text-align:center;
+}
+
+#message{
+  margin:10px 0;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<h1>SehrAn Media — Admin Panel</h1>
+
+<div class="top">
+
+  <input
+    id="key"
+    type="password"
+    placeholder="Enter Admin Key"
+  >
+
+  <button
+    class="load"
+    onclick="loadOrders()"
+  >
+    Load Orders
+  </button>
+
+  <select id="filter" onchange="renderOrders()">
+    <option value="ALL">All Orders</option>
+    <option value="MOVIE">Movies</option>
+    <option value="INSTAGRAM">Instagram</option>
+  </select>
+
+</div>
+
+<div id="message"></div>
+
+<div id="orders">
+  <div class="empty">
+    Enter your Admin Key and click Load Orders.
+  </div>
+</div>
+
+
 <script>
-async function load(){const key=document.getElementById('key').value;localStorage.adminKey=key;const r=await fetch('/api/admin/orders',{headers:{'x-admin-key':key}});const a=await r.json();if(!r.ok)return alert(a.error);document.getElementById('orders').innerHTML=a.map(o=>`<div class="card"><b>${o.orderId}</b> — ${o.status}<br><br>Name: ${o.name}<br>Instagram: ${o.username}<br>Profile: ${o.profile}<br>Package: ${o.package}<br>UTR: ${o.utr}<br><span class="muted">${o.createdAt}</span><br><br>${o.status==='PENDING'?`<button class="ok" onclick="setStatus('${o.orderId}','ACCEPTED')">ACCEPT</button> <button class="no" onclick="setStatus('${o.orderId}','REJECTED')">REJECT</button>`:''}</div>`).join('')||'<p>No orders.</p>'}
-async function setStatus(id,status){const key=localStorage.adminKey;await fetch('/api/admin/orders/'+id+'/status',{method:'POST',headers:{'x-admin-key':key,'Content-Type':'application/json'},body:JSON.stringify({status})});load()}
-</script></body></html>
+
+let allOrders = [];
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+async function loadOrders(){
+
+  const key =
+    document.getElementById("key").value.trim();
+
+  if(!key){
+    alert("Please enter your Admin Key.");
+    return;
+  }
+
+  localStorage.setItem(
+    "adminKey",
+    key
+  );
+
+  document.getElementById("message").textContent =
+    "Loading orders...";
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin/orders",
+        {
+          headers:{
+            "x-admin-key":key
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Unable to load orders."
+      );
+    }
+
+    allOrders =
+      Array.isArray(data)
+        ? data
+        : [];
+
+    document.getElementById("message").textContent =
+      allOrders.length +
+      " order(s) found.";
+
+    renderOrders();
+
+  }catch(error){
+
+    document.getElementById("message").textContent =
+      "";
+
+    alert(error.message);
+
+  }
+
+}
+
+
+/* =====================================================
+   DETECT ORDER TYPE
+===================================================== */
+
+function getOrderType(order){
+
+  /*
+    New movie orders should contain:
+
+    type: "MOVIE"
+
+    or
+
+    orderType: "MOVIE"
+
+    or
+
+    movieId / movieTitle
+  */
+
+  const type =
+    String(
+      order.type ||
+      order.orderType ||
+      ""
+    ).toUpperCase();
+
+  if(
+    type === "MOVIE" ||
+    order.movieId ||
+    order.movieTitle ||
+    order.movie
+  ){
+
+    return "MOVIE";
+
+  }
+
+  return "INSTAGRAM";
+}
+
+
+/* =====================================================
+   RENDER ORDERS
+===================================================== */
+
+function renderOrders(){
+
+  const container =
+    document.getElementById("orders");
+
+  const filter =
+    document.getElementById("filter").value;
+
+  let orders =
+    allOrders;
+
+  if(filter !== "ALL"){
+
+    orders =
+      allOrders.filter(
+        order =>
+          getOrderType(order) === filter
+      );
+
+  }
+
+
+  if(!orders.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        No orders found.
+      </div>`;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    orders.map(
+      order =>
+        createOrderCard(order)
+    ).join("");
+
+}
+
+
+/* =====================================================
+   CREATE ORDER CARD
+===================================================== */
+
+function createOrderCard(order){
+
+  const type =
+    getOrderType(order);
+
+  const status =
+    String(
+      order.status ||
+      "PENDING"
+    ).toUpperCase();
+
+
+  const statusClass =
+    status === "ACCEPTED"
+      ? "accepted"
+      : status === "REJECTED"
+      ? "rejected"
+      : "pending";
+
+
+  /* ===================================================
+     MOVIE ORDER
+  =================================================== */
+
+  if(type === "MOVIE"){
+
+    const movieTitle =
+      order.movieTitle ||
+      order.movie ||
+      order.package ||
+      "Movie";
+
+    const movieId =
+      order.movieId ||
+      "";
+
+    const amount =
+      order.amount ||
+      "0";
+
+    const email =
+      order.email ||
+      "";
+
+    const mobile =
+      order.mobile ||
+      "";
+
+
+    return `
+      <div class="card movie">
+
+        <span class="badge movieBadge">
+          🎬 MOVIE ORDER
+        </span>
+
+        <h2>
+          ${escapeHTML(movieTitle)}
+        </h2>
+
+        <div class="info">
+
+          <b>Order ID:</b>
+          ${escapeHTML(order.orderId || "")}
+          <br>
+
+          <b>Movie ID:</b>
+          ${escapeHTML(movieId)}
+          <br>
+
+          <b>Amount:</b>
+          ₹${escapeHTML(amount)}
+          <br>
+
+          ${
+            email
+              ? `<b>Email:</b> ${escapeHTML(email)}<br>`
+              : ""
+          }
+
+          ${
+            mobile
+              ? `<b>Mobile:</b> ${escapeHTML(mobile)}<br>`
+              : ""
+          }
+
+          <b>Status:</b>
+          <span class="${statusClass}">
+            ${escapeHTML(status)}
+          </span>
+
+          <br>
+
+          <span class="muted">
+            ${escapeHTML(order.createdAt || "")}
+          </span>
+
+        </div>
+
+
+        ${
+          status === "ACCEPTED"
+            ? `
+              <div style="margin-top:15px;color:#40e17a;">
+                ✅ Movie access is GRANTED to this customer.
+              </div>
+            `
+            : status === "REJECTED"
+            ? `
+              <div style="margin-top:15px;color:#ff557c;">
+                ❌ Movie access is NOT granted.
+              </div>
+            `
+            : `
+              <div class="actions">
+
+                <button
+                  class="accept"
+                  onclick="setStatus(
+                    '${escapeJS(order.orderId)}',
+                    'ACCEPTED'
+                  )"
+                >
+                  ✅ APPROVE & GRANT MOVIE
+                </button>
+
+                <button
+                  class="reject"
+                  onclick="setStatus(
+                    '${escapeJS(order.orderId)}',
+                    'REJECTED'
+                  )"
+                >
+                  ❌ REJECT
+                </button>
+
+              </div>
+            `
+        }
+
+      </div>
+    `;
+  }
+
+
+  /* ===================================================
+     INSTAGRAM ORDER
+  =================================================== */
+
+  return `
+    <div class="card instagram">
+
+      <span class="badge instagramBadge">
+        📸 INSTAGRAM ORDER
+      </span>
+
+      <h2>
+        ${escapeHTML(
+          order.package ||
+          "Instagram Service"
+        )}
+      </h2>
+
+      <div class="info">
+
+        <b>Order ID:</b>
+        ${escapeHTML(order.orderId || "")}
+        <br>
+
+        <b>Username:</b>
+        @${escapeHTML(order.username || "")}
+        <br>
+
+        <b>Profile:</b>
+        ${escapeHTML(order.profile || "")}
+        <br>
+
+        <b>Amount:</b>
+        ₹${escapeHTML(order.amount || "0")}
+        <br>
+
+        <b>UTR:</b>
+        ${escapeHTML(
+          order.utr ||
+          "Not provided"
+        )}
+        <br>
+
+        ${
+          order.mobile
+            ? `<b>Mobile:</b> ${escapeHTML(order.mobile)}<br>`
+            : ""
+        }
+
+        ${
+          order.email
+            ? `<b>Email:</b> ${escapeHTML(order.email)}<br>`
+            : ""
+        }
+
+        <b>Status:</b>
+
+        <span class="${statusClass}">
+          ${escapeHTML(status)}
+        </span>
+
+        <br>
+
+        <span class="muted">
+          ${escapeHTML(order.createdAt || "")}
+        </span>
+
+      </div>
+
+
+      ${
+        status === "PENDING"
+          ? `
+            <div class="actions">
+
+              <button
+                class="accept"
+                onclick="setStatus(
+                  '${escapeJS(order.orderId)}',
+                  'ACCEPTED'
+                )"
+              >
+                ✅ ACCEPT
+              </button>
+
+              <button
+                class="reject"
+                onclick="setStatus(
+                  '${escapeJS(order.orderId)}',
+                  'REJECTED'
+                )"
+              >
+                ❌ REJECT
+              </button>
+
+            </div>
+          `
+          : ""
+      }
+
+    </div>
+  `;
+
+}
+
+
+/* =====================================================
+   CHANGE ORDER STATUS
+===================================================== */
+
+async function setStatus(
+  orderId,
+  status
+){
+
+  const key =
+    localStorage.getItem(
+      "adminKey"
+    ) ||
+    document.getElementById("key").value.trim();
+
+
+  if(!key){
+
+    alert(
+      "Admin key is missing."
+    );
+
+    return;
+  }
+
+
+  const confirmation =
+    status === "ACCEPTED"
+      ? "Approve this order?"
+      : "Reject this order?";
+
+
+  if(!confirm(confirmation)){
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin/orders/" +
+        encodeURIComponent(orderId) +
+        "/status",
+        {
+          method:"POST",
+
+          headers:{
+            "x-admin-key":key,
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              status:status
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Unable to update order."
+      );
+
+    }
+
+
+    /*
+      Update the order locally first
+      so the UI changes immediately.
+    */
+
+    const index =
+      allOrders.findIndex(
+        order =>
+          order.orderId ===
+          orderId
+      );
+
+
+    if(index !== -1){
+
+      allOrders[index].status =
+        status;
+
+    }
+
+
+    renderOrders();
+
+
+    document.getElementById("message").textContent =
+      "Order " +
+      orderId +
+      " → " +
+      status;
+
+
+  }catch(error){
+
+    alert(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJS(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'\\"')
+    .replace(/\n/g,"\\n")
+    .replace(/\r/g,"\\r");
+
+}
+
+
+/* =====================================================
+   RESTORE ADMIN KEY
+===================================================== */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const saved =
+      localStorage.getItem(
+        "adminKey"
+      );
+
+    if(saved){
+
+      document.getElementById("key").value =
+        saved;
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
