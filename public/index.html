@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SehrAn Media — Under Maintenance</title>
+  <title>SehrAn Media — Rebuilding the Experience</title>
 
   <meta
     name="description"
-    content="SehrAn Media is currently undergoing a major upgrade. We'll be back soon with a better experience."
+    content="SehrAn Media is undergoing a major transformation. A new experience is loading."
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
@@ -25,6 +25,7 @@
   >
 
   <style>
+
     /* =====================================================
        RESET
     ===================================================== */
@@ -35,31 +36,75 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #070713;
+      --bg-two: #0b0b20;
+      --purple: #8b5cf6;
+      --purple-light: #b56cff;
+      --blue: #00d9ff;
+      --pink: #ff3cac;
+      --green: #3dffb5;
+      --text: #f5f5ff;
+      --muted: #8f90aa;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
-      font-family: "Inter", "Poppins", sans-serif;
-      background:
-        radial-gradient(
-          circle at 50% 15%,
-          rgba(53, 119, 255, 0.12),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 10% 80%,
-          rgba(114, 46, 255, 0.12),
-          transparent 35%
-        ),
-        #070b16;
-      color: #ffffff;
       overflow-x: hidden;
+      color: var(--text);
+
+      font-family:
+        "Inter",
+        sans-serif;
+
+      background:
+        #070713;
     }
 
+
     /* =====================================================
-       BACKGROUND
+       CUSTOM CURSOR GLOW
+    ===================================================== */
+
+    .cursor-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+
+      left: 0;
+      top: 0;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      transform:
+        translate(-50%, -50%);
+
+      z-index: -1;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139, 92, 246, 0.13),
+          rgba(0, 217, 255, 0.05) 35%,
+          transparent 70%
+        );
+
+      filter: blur(15px);
+
+      transition:
+        left 0.12s linear,
+        top 0.12s linear;
+    }
+
+
+    /* =====================================================
+       MAIN BACKGROUND
     ===================================================== */
 
     .background {
@@ -67,962 +112,1924 @@
       inset: 0;
       z-index: -10;
       overflow: hidden;
-      pointer-events: none;
     }
 
     .background::before {
       content: "";
+
       position: absolute;
-      width: 700px;
-      height: 700px;
+
+      width: 850px;
+      height: 850px;
+
+      top: -300px;
       left: -250px;
-      top: -250px;
+
       border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(104, 70, 255, 0.18),
-        transparent 65%
-      );
-      filter: blur(20px);
-      animation: backgroundFloat 12s ease-in-out infinite alternate;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(120, 65, 255, 0.23),
+          transparent 67%
+        );
+
+      filter: blur(30px);
+
+      animation:
+        blobOne 14s ease-in-out infinite alternate;
     }
 
     .background::after {
       content: "";
+
       position: absolute;
-      width: 650px;
-      height: 650px;
-      right: -250px;
-      bottom: -250px;
+
+      width: 800px;
+      height: 800px;
+
+      right: -280px;
+      bottom: -280px;
+
       border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(0, 220, 255, 0.12),
-        transparent 65%
-      );
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(0, 210, 255, 0.16),
+          transparent 68%
+        );
+
       filter: blur(30px);
-      animation: backgroundFloatTwo 14s ease-in-out infinite alternate;
+
+      animation:
+        blobTwo 17s ease-in-out infinite alternate;
     }
 
-    @keyframes backgroundFloat {
+    @keyframes blobOne {
+
       0% {
-        transform: translate(0, 0) scale(1);
+        transform:
+          translate(0, 0)
+          scale(1);
       }
 
       100% {
-        transform: translate(120px, 100px) scale(1.15);
+        transform:
+          translate(200px, 130px)
+          scale(1.25);
       }
+
     }
 
-    @keyframes backgroundFloatTwo {
+    @keyframes blobTwo {
+
       0% {
-        transform: translate(0, 0) scale(1);
+        transform:
+          translate(0, 0)
+          scale(1);
       }
 
       100% {
-        transform: translate(-100px, -120px) scale(1.2);
+        transform:
+          translate(-180px, -150px)
+          scale(1.2);
       }
+
     }
+
 
     /* =====================================================
-       FLOATING PARTICLES
+       AURORA
+    ===================================================== */
+
+    .aurora {
+      position: fixed;
+      inset: -40%;
+      z-index: -8;
+
+      background:
+        conic-gradient(
+          from 180deg,
+          transparent,
+          rgba(117, 63, 255, 0.08),
+          rgba(0, 213, 255, 0.08),
+          rgba(255, 60, 172, 0.06),
+          transparent
+        );
+
+      filter:
+        blur(80px);
+
+      animation:
+        auroraRotate 25s linear infinite;
+    }
+
+    @keyframes auroraRotate {
+
+      from {
+        transform:
+          rotate(0deg)
+          scale(1);
+      }
+
+      to {
+        transform:
+          rotate(360deg)
+          scale(1.2);
+      }
+
+    }
+
+
+    /* =====================================================
+       ANIMATED GRID
+    ===================================================== */
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -7;
+
+      background-image:
+
+        linear-gradient(
+          rgba(139, 92, 246, 0.055) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(0, 217, 255, 0.04) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        55px 55px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          transparent,
+          black 25%,
+          black 75%,
+          transparent
+        );
+
+      animation:
+        gridMove 15s linear infinite;
+    }
+
+    @keyframes gridMove {
+
+      from {
+        background-position:
+          0 0;
+      }
+
+      to {
+        background-position:
+          55px 55px;
+      }
+
+    }
+
+
+    /* =====================================================
+       SCANNING LINE
+    ===================================================== */
+
+    .scan-line {
+      position: fixed;
+
+      left: 0;
+      width: 100%;
+      height: 1px;
+
+      z-index: -5;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 217, 255, 0.5),
+          rgba(255, 60, 172, 0.5),
+          transparent
+        );
+
+      box-shadow:
+        0 0 25px
+        rgba(0, 217, 255, 0.5);
+
+      animation:
+        scanner 8s linear infinite;
+    }
+
+    @keyframes scanner {
+
+      0% {
+        top: -5%;
+      }
+
+      100% {
+        top: 105%;
+      }
+
+    }
+
+
+    /* =====================================================
+       PARTICLES
     ===================================================== */
 
     .particles {
       position: fixed;
       inset: 0;
       overflow: hidden;
-      z-index: -5;
       pointer-events: none;
+      z-index: -4;
     }
 
     .particle {
       position: absolute;
+
       width: 5px;
       height: 5px;
+
       border-radius: 50%;
-      background: #35cfff;
-      box-shadow: 0 0 15px #35cfff;
-      opacity: 0.7;
-      animation: particleFloat linear infinite;
+
+      background:
+        var(--blue);
+
+      box-shadow:
+        0 0 15px var(--blue);
+
+      animation:
+        particleMove linear infinite;
     }
 
     .particle:nth-child(1) {
       left: 5%;
-      top: 30%;
-      animation-duration: 10s;
+      top: 80%;
+      animation-duration: 14s;
     }
 
     .particle:nth-child(2) {
-      left: 13%;
-      top: 58%;
+      left: 14%;
+      top: 60%;
+      width: 3px;
+      height: 3px;
+      background: var(--pink);
+      box-shadow: 0 0 15px var(--pink);
+      animation-duration: 18s;
+    }
+
+    .particle:nth-child(3) {
+      left: 25%;
+      top: 90%;
+      width: 4px;
+      height: 4px;
+      animation-duration: 11s;
+    }
+
+    .particle:nth-child(4) {
+      left: 48%;
+      top: 85%;
+      background: var(--purple-light);
+      animation-duration: 16s;
+    }
+
+    .particle:nth-child(5) {
+      left: 70%;
+      top: 95%;
       width: 3px;
       height: 3px;
       animation-duration: 13s;
     }
 
-    .particle:nth-child(3) {
-      right: 7%;
-      top: 22%;
-      width: 4px;
-      height: 4px;
-      animation-duration: 12s;
-    }
-
-    .particle:nth-child(4) {
-      right: 18%;
-      bottom: 15%;
-      animation-duration: 15s;
-    }
-
-    .particle:nth-child(5) {
-      left: 25%;
-      bottom: 12%;
-      width: 3px;
-      height: 3px;
-      animation-duration: 11s;
-    }
-
     .particle:nth-child(6) {
-      right: 30%;
-      top: 12%;
-      width: 3px;
-      height: 3px;
-      animation-duration: 14s;
+      left: 87%;
+      top: 75%;
+      background: var(--pink);
+      animation-duration: 19s;
     }
 
     .particle:nth-child(7) {
-      left: 8%;
-      bottom: 25%;
+      left: 94%;
+      top: 92%;
       width: 4px;
       height: 4px;
-      animation-duration: 16s;
+      animation-duration: 15s;
     }
 
     .particle:nth-child(8) {
-      right: 3%;
-      bottom: 40%;
+      left: 35%;
+      top: 70%;
       width: 3px;
       height: 3px;
-      animation-duration: 12s;
+      background: var(--green);
+      box-shadow: 0 0 15px var(--green);
+      animation-duration: 17s;
     }
 
-    @keyframes particleFloat {
+    @keyframes particleMove {
+
       0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.2;
+        transform:
+          translateY(0)
+          translateX(0)
+          scale(1);
+
+        opacity: 0;
       }
 
-      50% {
+      20% {
         opacity: 1;
       }
 
       100% {
-        transform: translateY(-120px) translateX(40px);
-        opacity: 0.2;
+        transform:
+          translateY(-100vh)
+          translateX(120px)
+          scale(0.3);
+
+        opacity: 0;
       }
+
     }
 
+
     /* =====================================================
-       MAIN CONTAINER
+       MAIN PAGE
     ===================================================== */
 
     .maintenance-page {
       min-height: 100vh;
+
+      position: relative;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 35px 20px;
-      position: relative;
+
+      padding:
+        100px 20px 80px;
     }
 
+
     /* =====================================================
-       BRAND
+       TOP BRAND
     ===================================================== */
 
     .brand {
       position: absolute;
-      top: 22px;
+
+      top: 24px;
       left: 50%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
+
       font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.5px;
-      white-space: nowrap;
-      animation: brandAppear 1s ease;
+
+      animation:
+        brandEntrance 1s ease forwards;
     }
 
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      background: #4ee0b5;
+    .brand-core {
+      width: 13px;
+      height: 13px;
+
       border-radius: 50%;
-      box-shadow: 0 0 18px rgba(78, 224, 181, 0.9);
-      animation: pulseDot 2s infinite;
-    }
-
-    .brand span:first-of-type {
-      color: #f1f5ff;
-    }
-
-    .brand-highlight {
-      color: #45cfff;
-    }
-
-    @keyframes brandAppear {
-      from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-
-    @keyframes pulseDot {
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(1.5);
-        opacity: 0.55;
-      }
-    }
-
-    /* =====================================================
-       MAIN CARD
-    ===================================================== */
-
-    .maintenance-card {
-      width: min(820px, 100%);
-      text-align: center;
-      position: relative;
-      padding: 45px 25px;
-      animation: cardAppear 1s cubic-bezier(.2, .8, .2, 1);
-    }
-
-    @keyframes cardAppear {
-      from {
-        opacity: 0;
-        transform: translateY(35px) scale(0.96);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* =====================================================
-       TOOL ICON
-    ===================================================== */
-
-    .tool-system {
-      width: 190px;
-      height: 190px;
-      margin: 0 auto 28px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(109, 104, 255, 0.5);
-    }
-
-    .ring-one {
-      width: 170px;
-      height: 170px;
-      animation: rotateRing 12s linear infinite;
-      border-top-color: #38d9ff;
-      border-right-color: #8c5cff;
-    }
-
-    .ring-two {
-      width: 138px;
-      height: 138px;
-      border-color: rgba(83, 81, 255, 0.35);
-      animation: rotateRingReverse 8s linear infinite;
-    }
-
-    .ring-three {
-      width: 112px;
-      height: 112px;
-      border: 1px solid rgba(50, 210, 255, 0.2);
-      animation: pulseRing 3s ease-in-out infinite;
-    }
-
-    @keyframes rotateRing {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes rotateRingReverse {
-      from {
-        transform: rotate(360deg);
-      }
-
-      to {
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes pulseRing {
-      0%,
-      100% {
-        transform: scale(0.95);
-        opacity: 0.45;
-      }
-
-      50% {
-        transform: scale(1.08);
-        opacity: 1;
-      }
-    }
-
-    .tool-box {
-      width: 92px;
-      height: 92px;
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
 
       background:
         linear-gradient(
           135deg,
-          rgba(65, 61, 145, 0.75),
-          rgba(27, 70, 92, 0.75)
+          var(--green),
+          var(--blue)
         );
 
-      border: 1px solid rgba(86, 208, 255, 0.45);
-
       box-shadow:
-        inset 0 0 25px rgba(81, 119, 255, 0.18),
-        0 0 40px rgba(65, 118, 255, 0.18);
+        0 0 25px
+        var(--green);
 
-      animation: toolFloat 4s ease-in-out infinite;
+      animation:
+        brandPulse 2s ease-in-out infinite;
     }
 
-    .tool-box::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border-radius: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+    .brand-name {
+      color:
+        #f5f5ff;
     }
 
-    .tool-box i {
-      font-size: 42px;
-      color: #f4f7ff;
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
-      animation: toolSpin 6s ease-in-out infinite;
+    .brand-name strong {
+      color:
+        var(--blue);
     }
 
-    @keyframes toolFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
+    @keyframes brandEntrance {
 
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
-    @keyframes toolSpin {
-      0%,
-      100% {
-        transform: rotate(-8deg);
-      }
-
-      50% {
-        transform: rotate(8deg);
-      }
-    }
-
-    /* =====================================================
-       STATUS BADGE
-    ===================================================== */
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 10px 20px;
-      margin-bottom: 20px;
-
-      border-radius: 999px;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(53, 77, 190, 0.18),
-          rgba(109, 70, 198, 0.18)
-        );
-
-      border: 1px solid rgba(117, 126, 255, 0.45);
-
-      color: #c5c9df;
-
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-
-      box-shadow:
-        0 0 25px rgba(80, 90, 255, 0.1);
-
-      animation: badgePulse 3s ease-in-out infinite;
-    }
-
-    .status-badge i {
-      color: #45d8ff;
-      animation: gearRotate 4s linear infinite;
-    }
-
-    @keyframes badgePulse {
-      0%,
-      100% {
-        box-shadow: 0 0 18px rgba(80, 90, 255, 0.1);
-      }
-
-      50% {
-        box-shadow: 0 0 35px rgba(80, 90, 255, 0.28);
-      }
-    }
-
-    @keyframes gearRotate {
       from {
-        transform: rotate(0deg);
+        opacity: 0;
+
+        transform:
+          translateX(-50%)
+          translateY(-30px);
       }
 
       to {
-        transform: rotate(360deg);
+        opacity: 1;
+
+        transform:
+          translateX(-50%)
+          translateY(0);
       }
+
     }
+
+    @keyframes brandPulse {
+
+      0%,
+      100% {
+        transform:
+          scale(1);
+
+        box-shadow:
+          0 0 15px
+          var(--green);
+      }
+
+      50% {
+        transform:
+          scale(1.6);
+
+        box-shadow:
+          0 0 35px
+          var(--blue);
+      }
+
+    }
+
 
     /* =====================================================
-       HEADLINE
+       MAIN CONTENT
     ===================================================== */
 
-    .maintenance-card h1 {
-      font-size: clamp(42px, 7vw, 82px);
-      line-height: 0.95;
-      font-weight: 900;
-      letter-spacing: -4px;
-      margin-bottom: 22px;
-      color: #f3f5ff;
+    .maintenance-card {
+      width:
+        min(980px, 100%);
+
+      text-align:
+        center;
+
+      animation:
+        mainEntrance
+        1.2s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
     }
 
-    .maintenance-card h1 span {
-      display: block;
+    @keyframes mainEntrance {
 
-      background:
-        linear-gradient(
-          90deg,
-          #5fcfff 0%,
-          #28a9e8 30%,
-          #f0f3ff 52%,
-          #b9b9e8 75%,
-          #9d8cff 100%
-        );
-
-      background-size: 250% auto;
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      -webkit-text-fill-color: transparent;
-
-      animation: gradientMove 5s linear infinite;
-    }
-
-    @keyframes gradientMove {
       from {
-        background-position: 0% center;
+        opacity: 0;
+
+        transform:
+          translateY(60px)
+          scale(0.94);
+
+        filter:
+          blur(8px);
       }
 
       to {
-        background-position: 250% center;
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+
+        filter:
+          blur(0);
       }
+
     }
 
-    .description {
-      max-width: 650px;
-      margin: 0 auto 28px;
-
-      color: #9ca8bd;
-
-      font-size: clamp(14px, 2vw, 16px);
-      line-height: 1.9;
-    }
 
     /* =====================================================
-       PROGRESS SECTION
+       CORE SYSTEM
     ===================================================== */
 
-    .progress-container {
-      width: min(620px, 100%);
-      margin: 0 auto 28px;
-      padding: 20px 22px;
-
-      background: rgba(14, 21, 40, 0.58);
-
-      border:
-        1px solid rgba(130, 143, 255, 0.18);
-
-      border-radius: 20px;
-
-      backdrop-filter: blur(15px);
-
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.22);
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-
-      color: #b6bfd0;
-
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .progress-percent {
-      font-size: 20px;
-      font-weight: 900;
-      color: #55d5ff;
-      text-shadow: 0 0 18px rgba(85, 213, 255, 0.4);
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 13px;
-
-      background: rgba(255, 255, 255, 0.07);
-
-      border-radius: 999px;
-      overflow: hidden;
-
-      border:
-        1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
+    .core-system {
+      width: 220px;
+      height: 220px;
 
       position: relative;
 
-      border-radius: inherit;
+      margin:
+        0 auto 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orbit {
+      position: absolute;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(139, 92, 246, 0.32);
+    }
+
+    .orbit-one {
+      width: 210px;
+      height: 210px;
+
+      border-top-color:
+        var(--blue);
+
+      border-bottom-color:
+        var(--pink);
+
+      animation:
+        orbitRotate 10s linear infinite;
+    }
+
+    .orbit-two {
+      width: 165px;
+      height: 165px;
+
+      border-left-color:
+        var(--purple-light);
+
+      border-right-color:
+        var(--green);
+
+      animation:
+        orbitReverse 7s linear infinite;
+    }
+
+    .orbit-three {
+      width: 120px;
+      height: 120px;
+
+      border-color:
+        rgba(0, 217, 255, 0.2);
+
+      animation:
+        orbitPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes orbitRotate {
+
+      from {
+        transform:
+          rotate(0deg);
+      }
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+
+    }
+
+    @keyframes orbitReverse {
+
+      from {
+        transform:
+          rotate(360deg);
+      }
+
+      to {
+        transform:
+          rotate(0deg);
+      }
+
+    }
+
+    @keyframes orbitPulse {
+
+      0%,
+      100% {
+        transform:
+          scale(0.92);
+
+        opacity:
+          0.5;
+      }
+
+      50% {
+        transform:
+          scale(1.08);
+
+        opacity:
+          1;
+      }
+
+    }
+
+
+    /* =====================================================
+       ORBIT ICONS
+    ===================================================== */
+
+    .orbit-icon {
+      position: absolute;
+
+      width: 34px;
+      height: 34px;
+
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        rgba(12, 12, 35, 0.9);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+      backdrop-filter:
+        blur(10px);
+
+      box-shadow:
+        0 0 25px
+        rgba(139, 92, 246, 0.2);
+
+      font-size:
+        14px;
+    }
+
+    .orbit-icon.one {
+      top: 5px;
+      left: 50%;
+
+      color:
+        var(--blue);
+
+      animation:
+        iconFloatOne 4s ease-in-out infinite;
+    }
+
+    .orbit-icon.two {
+      right: 0;
+      top: 50%;
+
+      color:
+        var(--pink);
+
+      animation:
+        iconFloatTwo 4.5s ease-in-out infinite;
+    }
+
+    .orbit-icon.three {
+      bottom: 5px;
+      left: 50%;
+
+      color:
+        var(--green);
+
+      animation:
+        iconFloatThree 3.8s ease-in-out infinite;
+    }
+
+    .orbit-icon.four {
+      left: 0;
+      top: 50%;
+
+      color:
+        var(--purple-light);
+
+      animation:
+        iconFloatFour 4.2s ease-in-out infinite;
+    }
+
+    @keyframes iconFloatOne {
+
+      0%,
+      100% {
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(0deg);
+      }
+
+      50% {
+        transform:
+          translateX(-50%)
+          translateY(-12px)
+          rotate(15deg);
+      }
+
+    }
+
+    @keyframes iconFloatTwo {
+
+      0%,
+      100% {
+        transform:
+          translateY(-50%)
+          translateX(0);
+      }
+
+      50% {
+        transform:
+          translateY(-50%)
+          translateX(12px);
+      }
+
+    }
+
+    @keyframes iconFloatThree {
+
+      0%,
+      100% {
+        transform:
+          translateX(-50%)
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateX(-50%)
+          translateY(12px)
+          rotate(-15deg);
+      }
+
+    }
+
+    @keyframes iconFloatFour {
+
+      0%,
+      100% {
+        transform:
+          translateY(-50%)
+          translateX(0);
+      }
+
+      50% {
+        transform:
+          translateY(-50%)
+          translateX(-12px);
+      }
+
+    }
+
+
+    /* =====================================================
+       CENTRAL CORE
+    ===================================================== */
+
+    .core {
+      width: 88px;
+      height: 88px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.85),
+          rgba(0, 110, 180, 0.75)
+        );
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.22);
+
+      box-shadow:
+
+        inset
+        0 0 30px
+        rgba(255, 255, 255, 0.08),
+
+        0 0 30px
+        rgba(139, 92, 246, 0.55),
+
+        0 0 80px
+        rgba(0, 217, 255, 0.18);
+
+      animation:
+        coreFloat
+        4s ease-in-out infinite;
+    }
+
+    .core::before {
+      content: "";
+
+      position: absolute;
+
+      inset: -12px;
+
+      border-radius:
+        35px;
+
+      border:
+        1px solid
+        rgba(0, 217, 255, 0.25);
+
+      animation:
+        corePulse
+        2s ease-in-out infinite;
+    }
+
+    .core i {
+      font-size:
+        37px;
+
+      color:
+        white;
+
+      filter:
+        drop-shadow(
+          0 0 12px
+          rgba(255, 255, 255, 0.6)
+        );
+
+      animation:
+        wrenchCrazy
+        6s ease-in-out infinite;
+    }
+
+    @keyframes coreFloat {
+
+      0%,
+      100% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotate(4deg);
+      }
+
+    }
+
+    @keyframes corePulse {
+
+      0%,
+      100% {
+        transform:
+          scale(0.95);
+
+        opacity:
+          0.4;
+      }
+
+      50% {
+        transform:
+          scale(1.18);
+
+        opacity:
+          1;
+      }
+
+    }
+
+    @keyframes wrenchCrazy {
+
+      0%,
+      100% {
+        transform:
+          rotate(-12deg);
+      }
+
+      25% {
+        transform:
+          rotate(15deg)
+          scale(1.08);
+      }
+
+      50% {
+        transform:
+          rotate(-5deg);
+      }
+
+      75% {
+        transform:
+          rotate(20deg);
+      }
+
+    }
+
+
+    /* =====================================================
+       STATUS CHIP
+    ===================================================== */
+
+    .status-chip {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      padding:
+        10px 20px;
+
+      margin-bottom:
+        20px;
+
+      border-radius:
+        999px;
 
       background:
         linear-gradient(
           90deg,
-          #30c9ff,
-          #4e8dff,
-          #865cff,
-          #35d8e8
+          rgba(0, 217, 255, 0.1),
+          rgba(139, 92, 246, 0.14),
+          rgba(255, 60, 172, 0.1)
         );
 
-      background-size: 300% 100%;
+      border:
+        1px solid
+        rgba(139, 92, 246, 0.38);
+
+      color:
+        #c7c8dc;
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
 
       box-shadow:
-        0 0 20px rgba(49, 197, 255, 0.65);
+        0 0 40px
+        rgba(139, 92, 246, 0.12);
 
       animation:
-        loadProgress 2.5s cubic-bezier(.2, .8, .2, 1) forwards,
-        progressGradient 3s linear infinite;
+        chipGlow
+        3s ease-in-out infinite;
+    }
+
+    .status-chip .chip-dot {
+      width:
+        8px;
+
+      height:
+        8px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 15px
+        var(--green);
+
+      animation:
+        chipPulse
+        1.5s infinite;
+    }
+
+    @keyframes chipGlow {
+
+      0%,
+      100% {
+        box-shadow:
+          0 0 25px
+          rgba(139, 92, 246, 0.1);
+      }
+
+      50% {
+        box-shadow:
+          0 0 50px
+          rgba(0, 217, 255, 0.22);
+      }
+
+    }
+
+    @keyframes chipPulse {
+
+      0% {
+        box-shadow:
+          0 0 0 0
+          rgba(61, 255, 181, 0.6);
+      }
+
+      70% {
+        box-shadow:
+          0 0 0 8px
+          rgba(61, 255, 181, 0);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0
+          rgba(61, 255, 181, 0);
+      }
+
+    }
+
+
+    /* =====================================================
+       GLITCH HEADLINE
+    ===================================================== */
+
+    .headline {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(45px, 8vw, 92px);
+
+      font-weight:
+        800;
+
+      line-height:
+        0.88;
+
+      letter-spacing:
+        -5px;
+
+      margin-bottom:
+        24px;
+    }
+
+    .headline-top {
+      display:
+        block;
+
+      color:
+        #f5f4ff;
+    }
+
+    .headline-main {
+      display:
+        block;
+
+      position:
+        relative;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00d9ff,
+          #8b5cf6,
+          #ff3cac,
+          #00d9ff
+        );
+
+      background-size:
+        300% 100%;
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      -webkit-text-fill-color:
+        transparent;
+
+      animation:
+        textGradient
+        4s linear infinite;
+    }
+
+    @keyframes textGradient {
+
+      from {
+        background-position:
+          0% 50%;
+      }
+
+      to {
+        background-position:
+          300% 50%;
+      }
+
+    }
+
+
+    /* =====================================================
+       DESCRIPTION
+    ===================================================== */
+
+    .description {
+      width:
+        min(700px, 100%);
+
+      margin:
+        0 auto 26px;
+
+      color:
+        #9294ac;
+
+      font-size:
+        clamp(14px, 2vw, 16px);
+
+      line-height:
+        1.9;
+    }
+
+    .description strong {
+      color:
+        #d9dcff;
+
+      font-weight:
+        700;
+    }
+
+
+    /* =====================================================
+       SYSTEM PANEL
+    ===================================================== */
+
+    .system-panel {
+      width:
+        min(760px, 100%);
+
+      margin:
+        0 auto 24px;
+
+      padding:
+        22px;
+
+      text-align:
+        left;
+
+      border-radius:
+        22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(20, 20, 48, 0.72),
+          rgba(8, 9, 23, 0.78)
+        );
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+      box-shadow:
+
+        0 30px 80px
+        rgba(0, 0, 0, 0.3),
+
+        inset
+        0 1px 0
+        rgba(255, 255, 255, 0.04);
+
+      backdrop-filter:
+        blur(20px);
+    }
+
+    .system-header {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        16px;
+
+      font-size:
+        12px;
+
+      color:
+        #777b98;
+    }
+
+    .system-name {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+    }
+
+    .system-name i {
+      color:
+        var(--blue);
+    }
+
+    .system-live {
+      color:
+        var(--green);
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+    }
+
+
+    /* =====================================================
+       PROGRESS
+    ===================================================== */
+
+    .progress-row {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
+      margin-bottom:
+        11px;
+    }
+
+    .progress-label {
+      color:
+        #d6d7e8;
+
+      font-size:
+        15px;
+
+      font-weight:
+        700;
+    }
+
+    .progress-number {
+      font-size:
+        28px;
+
+      font-weight:
+        900;
+
+      color:
+        var(--blue);
+
+      text-shadow:
+        0 0 20px
+        rgba(0, 217, 255, 0.5);
+    }
+
+    .progress-track {
+      width:
+        100%;
+
+      height:
+        15px;
+
+      overflow:
+        hidden;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255, 255, 255, 0.06);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+    }
+
+    .progress-fill {
+      width:
+        0%;
+
+      height:
+        100%;
+
+      position:
+        relative;
+
+      border-radius:
+        inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00d9ff,
+          #4b8cff,
+          #8b5cf6,
+          #ff3cac
+        );
+
+      background-size:
+        250% 100%;
+
+      box-shadow:
+        0 0 25px
+        rgba(0, 217, 255, 0.7);
+
+      animation:
+
+        progressLoad
+        3s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards,
+
+        progressMove
+        3s linear infinite;
     }
 
     .progress-fill::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 90px;
+      content:
+        "";
+
+      position:
+        absolute;
+
+      top:
+        0;
+
+      left:
+        -100px;
+
+      width:
+        80px;
+
+      height:
+        100%;
 
       background:
         linear-gradient(
           90deg,
           transparent,
-          rgba(255, 255, 255, 0.65),
+          rgba(255, 255, 255, 0.8),
           transparent
         );
 
-      animation: shineProgress 2s ease-in-out infinite;
+      animation:
+        progressShine
+        1.8s linear infinite;
     }
 
-    @keyframes loadProgress {
+    @keyframes progressLoad {
+
       to {
-        width: 82%;
+        width:
+          82%;
       }
+
     }
 
-    @keyframes progressGradient {
+    @keyframes progressMove {
+
       from {
-        background-position: 0% 50%;
+        background-position:
+          0% 50%;
       }
 
       to {
-        background-position: 300% 50%;
+        background-position:
+          250% 50%;
       }
+
     }
 
-    @keyframes shineProgress {
-      from {
-        transform: translateX(-120px);
-      }
+    @keyframes progressShine {
 
       to {
-        transform: translateX(620px);
+        left:
+          110%;
       }
+
     }
 
-    .progress-message {
-      margin-top: 13px;
-      color: #77839a;
-      font-size: 12px;
-      text-align: left;
-    }
 
     /* =====================================================
-       LIVE STATUS
+       TERMINAL
     ===================================================== */
 
-    .live-status {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
+    .terminal {
+      margin-top:
+        18px;
 
-      margin-bottom: 35px;
+      padding-top:
+        15px;
 
-      color: #8d98ac;
-      font-size: 13px;
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+      font-family:
+        monospace;
+
+      font-size:
+        12px;
+
+      color:
+        #69708a;
+
+      min-height:
+        42px;
     }
 
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-
-      background: #4ee0b5;
-
-      box-shadow:
-        0 0 0 0 rgba(78, 224, 181, 0.7);
-
-      animation: livePulse 1.8s infinite;
+    .terminal span {
+      color:
+        var(--green);
     }
 
-    @keyframes livePulse {
-      0% {
-        box-shadow:
-          0 0 0 0 rgba(78, 224, 181, 0.6);
-      }
+    .typing-cursor {
+      display:
+        inline-block;
 
-      70% {
-        box-shadow:
-          0 0 0 10px rgba(78, 224, 181, 0);
-      }
+      width:
+        7px;
 
-      100% {
-        box-shadow:
-          0 0 0 0 rgba(78, 224, 181, 0);
-      }
-    }
+      height:
+        13px;
 
-    /* =====================================================
-       CHANGES GRID
-    ===================================================== */
-
-    .changes {
-      width: min(760px, 100%);
-      margin: 0 auto;
-    }
-
-    .changes-title {
-      color: #e3e7f3;
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 18px;
-    }
-
-    .changes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .change-card {
-      padding: 18px 12px;
-
-      border-radius: 17px;
+      margin-left:
+        4px;
 
       background:
-        linear-gradient(
-          145deg,
-          rgba(31, 42, 75, 0.55),
-          rgba(12, 19, 36, 0.5)
-        );
+        var(--blue);
+
+      vertical-align:
+        middle;
+
+      animation:
+        cursorBlink
+        0.8s steps(1)
+        infinite;
+    }
+
+    @keyframes cursorBlink {
+
+      50% {
+        opacity:
+          0;
+      }
+
+    }
+
+
+    /* =====================================================
+       MODULES
+    ===================================================== */
+
+    .modules {
+      width:
+        min(850px, 100%);
+
+      margin:
+        0 auto;
+    }
+
+    .modules-title {
+      margin-bottom:
+        15px;
+
+      color:
+        #d8daea;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+    }
+
+    .module-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap:
+        12px;
+    }
+
+    .module {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      padding:
+        18px 12px;
+
+      border-radius:
+        18px;
+
+      background:
+        rgba(15, 16, 37, 0.55);
 
       border:
-        1px solid rgba(255, 255, 255, 0.06);
+        1px solid
+        rgba(255, 255, 255, 0.06);
 
       transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        background 0.3s ease;
+        0.35s ease;
 
-      animation: cardFloat 5s ease-in-out infinite;
+      animation:
+        moduleFloat
+        5s ease-in-out infinite;
     }
 
-    .change-card:nth-child(2) {
-      animation-delay: 0.5s;
+    .module:nth-child(2) {
+      animation-delay:
+        0.4s;
     }
 
-    .change-card:nth-child(3) {
-      animation-delay: 1s;
+    .module:nth-child(3) {
+      animation-delay:
+        0.8s;
     }
 
-    .change-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(61, 205, 255, 0.35);
+    .module:nth-child(4) {
+      animation-delay:
+        1.2s;
+    }
+
+    .module::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      inset:
+        -100%;
 
       background:
         linear-gradient(
-          145deg,
-          rgba(35, 58, 105, 0.65),
-          rgba(15, 29, 53, 0.65)
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
         );
+
+      transform:
+        rotate(30deg);
+
+      animation:
+        moduleShine
+        5s linear infinite;
     }
 
-    .change-card i {
-      display: block;
-      margin-bottom: 9px;
-      font-size: 21px;
-      color: #55cfff;
+    .module:hover {
+      transform:
+        translateY(-9px)
+        scale(1.03);
+
+      border-color:
+        rgba(0, 217, 255, 0.38);
+
+      box-shadow:
+        0 20px 40px
+        rgba(0, 0, 0, 0.25);
     }
 
-    .change-card h3 {
-      color: #e9edfa;
-      font-size: 13px;
-      margin-bottom: 4px;
+    .module i {
+      display:
+        block;
+
+      margin-bottom:
+        9px;
+
+      font-size:
+        20px;
+
+      color:
+        var(--blue);
     }
 
-    .change-card p {
-      color: #7d8799;
-      font-size: 10px;
-      line-height: 1.5;
+    .module:nth-child(2) i {
+      color:
+        var(--purple-light);
     }
 
-    @keyframes cardFloat {
+    .module:nth-child(3) i {
+      color:
+        var(--pink);
+    }
+
+    .module:nth-child(4) i {
+      color:
+        var(--green);
+    }
+
+    .module h3 {
+      color:
+        #e7e8f5;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        4px;
+    }
+
+    .module p {
+      color:
+        #747990;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+    }
+
+    @keyframes moduleFloat {
+
       0%,
       100% {
-        transform: translateY(0);
+        transform:
+          translateY(0);
       }
 
       50% {
-        transform: translateY(-4px);
+        transform:
+          translateY(-4px);
       }
+
     }
 
+    @keyframes moduleShine {
+
+      0% {
+        transform:
+          translateX(-100%)
+          rotate(30deg);
+      }
+
+      100% {
+        transform:
+          translateX(100%)
+          rotate(30deg);
+      }
+
+    }
+
+
     /* =====================================================
-       FOOTER
+       FOOTER STATUS
     ===================================================== */
 
     .footer {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      position:
+        absolute;
 
-      width: 100%;
+      bottom:
+        20px;
 
-      text-align: center;
+      left:
+        50%;
 
-      color: #556075;
-      font-size: 11px;
+      transform:
+        translateX(-50%);
+
+      width:
+        100%;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      gap:
+        18px;
+
+      color:
+        #5d6178;
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.5px;
     }
 
-    .footer strong {
-      color: #718099;
-      font-weight: 700;
+    .footer-item {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        6px;
     }
+
+    .footer-item i {
+      color:
+        var(--blue);
+      font-size:
+        8px;
+    }
+
 
     /* =====================================================
-       MOBILE
+       RESPONSIVE
     ===================================================== */
 
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
 
       .maintenance-page {
-        padding: 90px 16px 75px;
-        justify-content: center;
+        padding:
+          90px 16px 70px;
       }
 
-      .maintenance-card {
-        padding: 20px 0;
+      .core-system {
+        width:
+          185px;
+
+        height:
+          185px;
+
+        margin-bottom:
+          18px;
       }
 
-      .tool-system {
-        width: 160px;
-        height: 160px;
-        margin-bottom: 20px;
+      .orbit-one {
+        width:
+          180px;
+
+        height:
+          180px;
       }
 
-      .ring-one {
-        width: 150px;
-        height: 150px;
+      .orbit-two {
+        width:
+          145px;
+
+        height:
+          145px;
       }
 
-      .ring-two {
-        width: 122px;
-        height: 122px;
+      .orbit-three {
+        width:
+          105px;
+
+        height:
+          105px;
       }
 
-      .ring-three {
-        width: 100px;
-        height: 100px;
+      .headline {
+        letter-spacing:
+          -3px;
       }
 
-      .tool-box {
-        width: 78px;
-        height: 78px;
-        border-radius: 23px;
+      .module-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
-      .tool-box i {
-        font-size: 35px;
-      }
-
-      .maintenance-card h1 {
-        letter-spacing: -2.5px;
-        margin-bottom: 17px;
-      }
-
-      .status-badge {
-        font-size: 9px;
-        letter-spacing: 0.9px;
-        padding: 9px 14px;
-      }
-
-      .description {
-        font-size: 13px;
-        line-height: 1.7;
-      }
-
-      .progress-container {
-        padding: 16px;
-      }
-
-      .changes-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .change-card {
-        display: flex;
-        align-items: center;
-        text-align: left;
-        gap: 13px;
-        padding: 14px;
-      }
-
-      .change-card i {
-        margin-bottom: 0;
-        min-width: 28px;
-        text-align: center;
-      }
     }
 
-    @media (max-height: 750px) and (min-width: 701px) {
+    @media (max-width: 520px) {
 
-      .maintenance-page {
-        padding-top: 65px;
-        padding-bottom: 50px;
+      .brand {
+        top:
+          18px;
       }
 
-      .tool-system {
-        width: 145px;
-        height: 145px;
-        margin-bottom: 15px;
+      .core-system {
+        transform:
+          scale(0.9);
+
+        margin-bottom:
+          8px;
       }
 
-      .ring-one {
-        width: 135px;
-        height: 135px;
+      .status-chip {
+        font-size:
+          8px;
+
+        letter-spacing:
+          1.2px;
+
+        padding:
+          9px 14px;
       }
 
-      .ring-two {
-        width: 110px;
-        height: 110px;
-      }
+      .headline {
+        font-size:
+          44px;
 
-      .ring-three {
-        width: 88px;
-        height: 88px;
-      }
+        letter-spacing:
+          -2px;
 
-      .tool-box {
-        width: 72px;
-        height: 72px;
-      }
-
-      .tool-box i {
-        font-size: 32px;
-      }
-
-      .maintenance-card h1 {
-        font-size: clamp(42px, 6vw, 70px);
-        margin-bottom: 12px;
+        line-height:
+          0.92;
       }
 
       .description {
-        margin-bottom: 16px;
+        font-size:
+          13px;
+
+        line-height:
+          1.7;
       }
 
-      .progress-container {
-        margin-bottom: 15px;
+      .system-panel {
+        padding:
+          16px;
+
+        border-radius:
+          18px;
       }
 
-      .live-status {
-        margin-bottom: 18px;
+      .progress-label {
+        font-size:
+          13px;
       }
 
-      .changes-title {
-        margin-bottom: 10px;
+      .progress-number {
+        font-size:
+          23px;
       }
 
-      .change-card {
-        padding: 12px;
+      .terminal {
+        font-size:
+          10px;
+
+        min-height:
+          48px;
+      }
+
+      .module-grid {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .module {
+        padding:
+          14px 9px;
+      }
+
+      .module p {
+        font-size:
+          9px;
       }
 
       .footer {
-        bottom: 8px;
+        flex-direction:
+          column;
+
+        gap:
+          5px;
+
+        bottom:
+          10px;
       }
+
     }
 
   </style>
@@ -1030,13 +2037,23 @@
 
 <body>
 
-  <!-- =====================================================
-       ANIMATED BACKGROUND
-  ====================================================== -->
+  <!-- Cursor Glow -->
+
+  <div class="cursor-glow"></div>
+
+
+  <!-- Background -->
 
   <div class="background"></div>
 
-  <!-- Floating Particles -->
+  <div class="aurora"></div>
+
+  <div class="grid"></div>
+
+  <div class="scan-line"></div>
+
+
+  <!-- Particles -->
 
   <div class="particles">
 
@@ -1052,42 +2069,72 @@
   </div>
 
 
-  <!-- =====================================================
-       MAIN PAGE
-  ====================================================== -->
+  <!-- Main -->
 
   <main class="maintenance-page">
 
 
-    <!-- BRAND -->
+    <!-- Brand -->
 
     <div class="brand">
 
-      <span class="brand-dot"></span>
+      <div class="brand-core"></div>
 
-      <span>SehrAn</span>
+      <div class="brand-name">
 
-      <span class="brand-highlight">Media</span>
+        SehrAn <strong>Media</strong>
+
+      </div>
 
     </div>
 
 
-    <!-- MAIN CONTENT -->
+    <!-- Content -->
 
     <section class="maintenance-card">
 
 
-      <!-- ANIMATED TOOL -->
+      <!-- Animated Core -->
 
-      <div class="tool-system">
+      <div class="core-system">
 
-        <div class="ring ring-one"></div>
+        <div class="orbit orbit-one"></div>
 
-        <div class="ring ring-two"></div>
+        <div class="orbit orbit-two"></div>
 
-        <div class="ring ring-three"></div>
+        <div class="orbit orbit-three"></div>
 
-        <div class="tool-box">
+
+        <!-- Orbiting Icons -->
+
+        <div class="orbit-icon one">
+
+          <i class="fa-solid fa-code"></i>
+
+        </div>
+
+        <div class="orbit-icon two">
+
+          <i class="fa-solid fa-film"></i>
+
+        </div>
+
+        <div class="orbit-icon three">
+
+          <i class="fa-solid fa-gamepad"></i>
+
+        </div>
+
+        <div class="orbit-icon four">
+
+          <i class="fa-solid fa-rocket"></i>
+
+        </div>
+
+
+        <!-- Main Core -->
+
+        <div class="core">
 
           <i class="fa-solid fa-screwdriver-wrench"></i>
 
@@ -1096,148 +2143,183 @@
       </div>
 
 
-      <!-- STATUS -->
+      <!-- Status -->
 
-      <div class="status-badge">
+      <div class="status-chip">
 
-        <i class="fa-solid fa-gear"></i>
+        <span class="chip-dot"></span>
 
-        Website Maintenance In Progress
+        Major Upgrade In Progress
 
       </div>
 
 
-      <!-- TITLE -->
+      <!-- Main Title -->
 
-      <h1>
+      <h1 class="headline">
 
-        We're Working
+        <span class="headline-top">
 
-        <span>Behind the Scenes</span>
+          WE'RE NOT JUST
+
+        </span>
+
+        <span class="headline-main">
+
+          UPGRADING.
+
+        </span>
 
       </h1>
 
 
-      <!-- DESCRIPTION -->
+      <!-- Description -->
 
       <p class="description">
 
-        SehrAn Media is currently undergoing a major upgrade.
-        We're rebuilding the experience with bigger features,
-        improved performance and exciting new content.
+        <strong>SehrAn Media is being rebuilt from the inside out.</strong>
 
-        <br><br>
+        <br>
 
-        <strong style="color:#cbd5e1;">
-          Big changes are coming soon.
-        </strong>
+        We're creating a faster, more powerful and completely
+        redesigned experience.
+
+        <br>
+
+        The next version is not far away.
 
       </p>
 
 
-      <!-- PROGRESS -->
+      <!-- System Panel -->
 
-      <div class="progress-container">
+      <div class="system-panel">
 
-        <div class="progress-top">
 
-          <span>Website Upgrade Progress</span>
+        <div class="system-header">
 
-          <span class="progress-percent">
-            <span id="percentage">0</span>%
-          </span>
+          <div class="system-name">
+
+            <i class="fa-solid fa-microchip"></i>
+
+            System Rebuild
+
+          </div>
+
+          <div class="system-live">
+
+            ● LIVE
+
+          </div>
 
         </div>
 
 
-        <div class="progress-bar">
+        <!-- Progress -->
+
+        <div class="progress-row">
+
+          <div class="progress-label">
+
+            Next Generation Experience
+
+          </div>
+
+          <div class="progress-number">
+
+            <span id="percentage">0</span>%
+
+          </div>
+
+        </div>
+
+
+        <div class="progress-track">
 
           <div class="progress-fill"></div>
 
         </div>
 
 
-        <div class="progress-message">
+        <!-- Terminal -->
 
-          Almost there... our team is currently preparing the next version of SehrAn Media.
+        <div class="terminal">
+
+          <span>›</span>
+
+          <span id="terminal-text">
+            Initializing SehrAn Media rebuild...
+          </span>
+
+          <span class="typing-cursor"></span>
 
         </div>
 
       </div>
 
 
-      <!-- LIVE STATUS -->
+      <!-- Upgrade Modules -->
 
-      <div class="live-status">
+      <div class="modules">
 
-        <span class="live-dot"></span>
+        <div class="modules-title">
 
-        <span>Our development team is actively working on the upgrade</span>
-
-      </div>
-
-
-      <!-- UPCOMING CHANGES -->
-
-      <div class="changes">
-
-        <div class="changes-title">
-
-          What's being upgraded?
+          Upgrade Modules Loading
 
         </div>
 
 
-        <div class="changes-grid">
+        <div class="module-grid">
 
 
-          <div class="change-card">
+          <div class="module">
 
-            <i class="fa-solid fa-film"></i>
+            <i class="fa-solid fa-bolt"></i>
 
-            <div>
+            <h3>Speed</h3>
 
-              <h3>Movies Experience</h3>
-
-              <p>
-                Improved movie browsing and a better entertainment experience.
-              </p>
-
-            </div>
+            <p>
+              Faster and smoother performance.
+            </p>
 
           </div>
 
 
-          <div class="change-card">
+          <div class="module">
 
-            <i class="fa-solid fa-gamepad"></i>
+            <i class="fa-solid fa-cubes"></i>
 
-            <div>
+            <h3>Experience</h3>
 
-              <h3>Games Section</h3>
-
-              <p>
-                New gaming content, better categories and exciting additions.
-              </p>
-
-            </div>
+            <p>
+              A completely redesigned interface.
+            </p>
 
           </div>
 
 
-          <div class="change-card">
+          <div class="module">
 
             <i class="fa-solid fa-wand-magic-sparkles"></i>
 
-            <div>
+            <h3>Features</h3>
 
-              <h3>Premium Redesign</h3>
+            <p>
+              New possibilities are being prepared.
+            </p>
 
-              <p>
-                Faster performance, smoother animations and a completely improved look.
-              </p>
+          </div>
 
-            </div>
+
+          <div class="module">
+
+            <i class="fa-solid fa-infinity"></i>
+
+            <h3>Beyond</h3>
+
+            <p>
+              This is only the beginning.
+            </p>
 
           </div>
 
@@ -1245,15 +2327,38 @@
         </div>
 
       </div>
+
 
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- Footer -->
 
     <div class="footer">
 
-      © 2026 <strong>SehrAn Media</strong> — Building something better for you.
+      <div class="footer-item">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span>Core systems active</span>
+
+      </div>
+
+      <div class="footer-item">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <span>Secure rebuild</span>
+
+      </div>
+
+      <div class="footer-item">
+
+        <i class="fa-solid fa-sparkles"></i>
+
+        <span>Something big is coming</span>
+
+      </div>
 
     </div>
 
@@ -1261,44 +2366,154 @@
   </main>
 
 
-  <!-- =====================================================
-       PROGRESS COUNTER
-  ====================================================== -->
-
   <script>
+
+    /* =====================================================
+       MOUSE GLOW
+    ===================================================== */
+
+    const cursorGlow =
+      document.querySelector(".cursor-glow");
+
+    document.addEventListener(
+      "mousemove",
+      function(event) {
+
+        cursorGlow.style.left =
+          event.clientX + "px";
+
+        cursorGlow.style.top =
+          event.clientY + "px";
+
+      }
+    );
+
+
+    /* =====================================================
+       PROGRESS COUNTER
+    ===================================================== */
 
     const percentageElement =
       document.getElementById("percentage");
 
-    const targetPercentage = 82;
+    const targetPercentage =
+      82;
 
-    let currentPercentage = 0;
+    let currentPercentage =
+      0;
 
-    const duration = 2500;
+    const duration =
+      3000;
 
-    const intervalTime = 25;
+    const interval =
+      25;
 
     const increment =
-      targetPercentage / (duration / intervalTime);
+      targetPercentage /
+      (duration / interval);
 
 
-    const counter =
-      setInterval(() => {
+    const progressCounter =
+      setInterval(function() {
 
         currentPercentage += increment;
 
-        if (currentPercentage >= targetPercentage) {
+        if (
+          currentPercentage >=
+          targetPercentage
+        ) {
 
-          currentPercentage = targetPercentage;
+          currentPercentage =
+            targetPercentage;
 
-          clearInterval(counter);
+          clearInterval(
+            progressCounter
+          );
 
         }
 
         percentageElement.textContent =
-          Math.floor(currentPercentage);
+          Math.floor(
+            currentPercentage
+          );
 
-      }, intervalTime);
+      }, interval);
+
+
+    /* =====================================================
+       LIVE TERMINAL MESSAGES
+    ===================================================== */
+
+    const terminalText =
+      document.getElementById(
+        "terminal-text"
+      );
+
+
+    const messages = [
+
+      "Initializing next-generation SehrAn Media...",
+
+      "Optimizing performance modules...",
+
+      "Rebuilding entertainment experience...",
+
+      "Loading new visual systems...",
+
+      "Synchronizing future features...",
+
+      "Deploying major improvements...",
+
+      "Almost ready for the next chapter..."
+
+    ];
+
+
+    let messageIndex =
+      0;
+
+
+    function changeTerminalMessage() {
+
+      terminalText.style.opacity =
+        "0";
+
+
+      setTimeout(function() {
+
+        terminalText.textContent =
+          messages[messageIndex];
+
+        terminalText.style.opacity =
+          "1";
+
+
+        messageIndex++;
+
+
+        if (
+          messageIndex >=
+          messages.length
+        ) {
+
+          messageIndex =
+            0;
+
+        }
+
+      }, 250);
+
+    }
+
+
+    terminalText.style.transition =
+      "opacity 0.25s ease";
+
+
+    setInterval(
+      changeTerminalMessage,
+      3000
+    );
 
   </script>
 
