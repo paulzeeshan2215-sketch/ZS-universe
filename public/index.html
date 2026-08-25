@@ -2,50 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SehrAn Media — Movies, Games & Social</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>SehrAn Media — Social, Movies & Games</title>
 
   <meta
     name="description"
-    content="SehrAn Media — Explore social services, movies and games in one premium entertainment hub."
+    content="Explore social media services, movies and games with SehrAn Media."
   >
 
-  <meta name="theme-color" content="#090713">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="theme-color" content="#070814">
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
   >
 
   <style>
+
+    /* =====================================================
+       ROOT
+    ====================================================== */
+
     :root{
-      --bg:#08070e;
-      --bg2:#0d0a18;
-      --panel:rgba(255,255,255,.055);
-      --panel-strong:rgba(255,255,255,.085);
-      --line:rgba(255,255,255,.09);
+      --bg:#070814;
+      --bg-soft:#0d1020;
+      --card:#101426;
+      --card-2:#151a30;
+      --border:rgba(255,255,255,.09);
+
       --text:#ffffff;
-      --muted:#aaa3b7;
-      --purple:#8a42ff;
-      --pink:#ff3d9d;
-      --blue:#39c8ff;
-      --green:#5dffaf;
-      --orange:#ff9d45;
+      --muted:#a7afc7;
+
+      --purple:#7c3aed;
+      --purple-2:#a855f7;
+
+      --pink:#ec4899;
+      --blue:#38bdf8;
+
+      --green:#22c55e;
+      --red:#ef4444;
+      --orange:#f59e0b;
+
+      --shadow:
+        0 25px 70px
+        rgba(0,0,0,.42);
+
+      --radius:24px;
     }
 
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
     *{
+      box-sizing:border-box;
       margin:0;
       padding:0;
-      box-sizing:border-box;
     }
 
     html{
@@ -54,32 +88,34 @@
 
     body{
       min-height:100vh;
-      overflow-x:hidden;
-      color:var(--text);
-      font-family:"Poppins",sans-serif;
-      background:
-        radial-gradient(circle at 10% 5%,rgba(131,61,255,.20),transparent 25%),
-        radial-gradient(circle at 90% 18%,rgba(255,43,151,.13),transparent 28%),
-        radial-gradient(circle at 50% 100%,rgba(43,175,255,.08),transparent 30%),
-        var(--bg);
-    }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.35),transparent 75%);
-      z-index:-5;
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(124,58,237,.16),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(56,189,248,.10),
+          transparent 25%
+        ),
+
+        #070814;
+
+      color:var(--text);
+
+      font-family:
+        "Poppins",
+        sans-serif;
+
+      overflow-x:hidden;
     }
 
     button,
     input{
-      font-family:inherit;
+      font:inherit;
     }
 
     button{
@@ -88,1262 +124,1799 @@
 
     a{
       color:inherit;
+      text-decoration:none;
     }
 
-    .container{
-      width:min(1180px,calc(100% - 32px));
-      margin:auto;
-    }
 
-    /* =========================
+    /* =====================================================
        BACKGROUND GLOWS
-    ========================== */
+    ====================================================== */
 
     .glow{
       position:fixed;
-      width:380px;
-      height:380px;
+
       border-radius:50%;
-      filter:blur(120px);
-      opacity:.11;
+
       pointer-events:none;
-      z-index:-3;
+
+      filter:blur(80px);
+
+      opacity:.25;
+
+      z-index:-1;
     }
 
-    .glow-one{
-      top:-150px;
-      left:-150px;
-      background:#7d32ff;
+    .glow-1{
+      width:340px;
+      height:340px;
+
+      background:#7c3aed;
+
+      top:-100px;
+      left:-100px;
     }
 
-    .glow-two{
-      top:300px;
-      right:-170px;
-      background:#ff298e;
+    .glow-2{
+      width:320px;
+      height:320px;
+
+      background:#ec4899;
+
+      right:-130px;
+      top:30%;
     }
 
-    .glow-three{
-      bottom:-220px;
-      left:35%;
-      background:#189dff;
+    .glow-3{
+      width:280px;
+      height:280px;
+
+      background:#0ea5e9;
+
+      bottom:-100px;
+      left:30%;
     }
 
-    /* =========================
+
+    /* =====================================================
        NAVBAR
-    ========================== */
+    ====================================================== */
 
     .navbar{
       width:min(1180px,calc(100% - 32px));
+
       margin:18px auto 0;
-      padding:13px 16px;
+
+      padding:15px 20px;
+
       display:flex;
+
       align-items:center;
+
       justify-content:space-between;
-      gap:20px;
+
+      background:
+        rgba(12,15,31,.75);
+
+      backdrop-filter:
+        blur(18px);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:18px;
+
+      box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.25);
+
       position:sticky;
+
       top:12px;
-      z-index:500;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(10,8,19,.86);
-      backdrop-filter:blur(20px);
-      box-shadow:0 18px 50px rgba(0,0,0,.30);
+
+      z-index:100;
     }
 
     .logo{
       display:flex;
+
       align-items:center;
-      gap:11px;
-      text-decoration:none;
-      white-space:nowrap;
+
+      gap:12px;
+
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-weight:900;
+
+      letter-spacing:-1px;
+
+      font-size:20px;
     }
 
     .logo-icon{
-      width:43px;
-      height:43px;
+      width:42px;
+      height:42px;
+
       display:grid;
+
       place-items:center;
+
       border-radius:14px;
-      background:linear-gradient(135deg,#6e31ff,#ff3b9d,#ffae42);
-      box-shadow:0 10px 30px rgba(147,53,255,.35);
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 0 25px
+        rgba(124,58,237,.45);
     }
 
-    .logo-text{
-      font-family:"Montserrat",sans-serif;
-      font-size:17px;
-      font-weight:900;
-      letter-spacing:-.6px;
-    }
-
-    .logo-text span{
-      color:#d084ff;
+    .logo span{
+      color:#b783ff;
     }
 
     .nav-status{
       display:flex;
+
       align-items:center;
+
       gap:8px;
-      color:#c6becf;
-      font-size:10px;
-      font-weight:800;
+
+      color:#cbd5e1;
+
+      font-size:12px;
+
+      font-weight:700;
     }
 
     .status-dot{
-      width:7px;
-      height:7px;
+      width:8px;
+      height:8px;
+
       border-radius:50%;
+
       background:var(--green);
-      box-shadow:0 0 14px var(--green);
+
+      box-shadow:
+        0 0 12px
+        var(--green);
+
+      animation:pulse 1.8s infinite;
     }
 
-    /* =========================
+
+    /* =====================================================
        MAIN TABS
-    ========================== */
+    ====================================================== */
 
     .main-tabs{
-      width:min(1180px,calc(100% - 32px));
-      margin:22px auto 0;
-      padding:8px;
+      width:min(900px,calc(100% - 32px));
+
+      margin:28px auto 0;
+
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:8px;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(255,255,255,.035);
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:10px;
+
+      padding:10px;
+
+      border-radius:22px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--border);
     }
 
     .main-tab{
-      min-width:0;
-      padding:14px 10px;
-      border:0;
-      border-radius:14px;
-      color:#9992a7;
-      background:transparent;
-      font-size:13px;
-      font-weight:900;
-      transition:.25s;
-    }
+      border:none;
 
-    .main-tab i{
-      margin-right:7px;
+      color:#aab3c9;
+
+      background:transparent;
+
+      padding:15px 18px;
+
+      border-radius:16px;
+
+      font-weight:800;
+
+      transition:
+        .25s ease;
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      gap:10px;
     }
 
     .main-tab:hover{
       color:#fff;
-      background:rgba(255,255,255,.055);
+
+      background:
+        rgba(255,255,255,.05);
     }
 
     .main-tab.active{
       color:#fff;
-      background:linear-gradient(135deg,#7c32ff,#ff319c);
-      box-shadow:0 12px 30px rgba(137,49,255,.24);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.95),
+          rgba(168,85,247,.85)
+        );
+
+      box-shadow:
+        0 10px 30px
+        rgba(124,58,237,.25);
     }
+
+
+    /* =====================================================
+       TAB CONTENT
+    ====================================================== */
 
     .tab-content{
       display:none;
-      animation:fadeIn .35s ease;
+
+      animation:
+        tabFade .45s ease;
     }
 
     .tab-content.active{
       display:block;
     }
 
-    @keyframes fadeIn{
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
 
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
+    /* =====================================================
+       GENERAL
+    ====================================================== */
 
-    /* =========================
-       SOCIAL HERO
-    ========================== */
-
-    .hero{
+    .container,
+    .section{
       width:min(1180px,calc(100% - 32px));
+
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .section{
+      padding:65px 0;
+    }
+
+    .section-heading{
+      text-align:center;
+
+      margin-bottom:35px;
+    }
+
+    .section-heading h2{
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:
+        clamp(30px,5vw,48px);
+
+      letter-spacing:-2px;
+
+      margin-bottom:10px;
+    }
+
+    .section-heading p{
+      color:var(--muted);
+
+      max-width:700px;
+
       margin:auto;
-      padding:72px 0 58px;
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);
-      gap:55px;
-      align-items:center;
-    }
 
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      margin-bottom:20px;
-      border:1px solid rgba(184,107,255,.28);
-      border-radius:999px;
-      color:#e5caff;
-      background:rgba(145,59,255,.11);
-      font-size:10px;
-      font-weight:900;
-      letter-spacing:.5px;
-    }
+      font-size:14px;
 
-    .hero-badge span{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 12px var(--green);
-    }
-
-    .hero h1{
-      max-width:680px;
-      margin-bottom:20px;
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(42px,6vw,72px);
-      line-height:1.02;
-      letter-spacing:-3px;
-      font-weight:900;
+      line-height:1.8;
     }
 
     .gradient-text{
-      background:linear-gradient(90deg,#b16cff,#ff4daf,#62d5ff);
+      background:
+        linear-gradient(
+          90deg,
+          #a855f7,
+          #ec4899,
+          #38bdf8
+        );
+
       -webkit-background-clip:text;
+
       background-clip:text;
+
       color:transparent;
     }
 
-    .hero p{
-      max-width:620px;
+
+    /* =====================================================
+       SOCIAL HERO
+    ====================================================== */
+
+    .hero{
+      width:min(1180px,calc(100% - 32px));
+
+      margin:0 auto;
+
+      min-height:610px;
+
+      padding:75px 0;
+
+      display:grid;
+
+      grid-template-columns:
+        1.1fr .9fr;
+
+      align-items:center;
+
+      gap:60px;
+    }
+
+    .badge{
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:9px;
+
+      padding:8px 13px;
+
+      border-radius:999px;
+
+      color:#d8c6ff;
+
+      font-size:11px;
+
+      font-weight:800;
+
+      background:
+        rgba(124,58,237,.12);
+
+      border:
+        1px solid
+        rgba(168,85,247,.25);
+    }
+
+    .badge-dot{
+      width:8px;
+      height:8px;
+
+      background:var(--green);
+
+      border-radius:50%;
+
+      box-shadow:
+        0 0 12px
+        var(--green);
+    }
+
+    .hero h1{
+      margin-top:20px;
+
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:
+        clamp(42px,6vw,74px);
+
+      line-height:1.02;
+
+      letter-spacing:-4px;
+    }
+
+    .hero h1 .gradient{
+      background:
+        linear-gradient(
+          90deg,
+          #a855f7,
+          #ec4899
+        );
+
+      -webkit-background-clip:text;
+
+      background-clip:text;
+
+      color:transparent;
+    }
+
+    .hero-description{
+      margin-top:22px;
+
+      max-width:600px;
+
       color:var(--muted);
-      font-size:14px;
-      line-height:1.85;
+
+      font-size:15px;
+
+      line-height:1.9;
     }
 
     .hero-buttons{
       display:flex;
+
       flex-wrap:wrap;
-      gap:10px;
-      margin-top:27px;
+
+      gap:13px;
+
+      margin-top:30px;
     }
 
     .primary-btn,
     .secondary-btn{
       display:inline-flex;
+
       align-items:center;
+
       justify-content:center;
-      gap:8px;
-      padding:13px 18px;
-      border-radius:13px;
-      text-decoration:none;
-      font-size:11px;
-      font-weight:900;
-      transition:.25s;
+
+      gap:10px;
+
+      padding:14px 20px;
+
+      border-radius:14px;
+
+      font-weight:800;
+
+      font-size:13px;
+
+      transition:.25s ease;
     }
 
     .primary-btn{
-      background:linear-gradient(135deg,#8135ff,#ff339e);
-      box-shadow:0 12px 30px rgba(144,49,255,.24);
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 12px 30px
+        rgba(124,58,237,.3);
+
+      animation:
+        buttonGlow 2s infinite;
+    }
+
+    .primary-btn:hover{
+      transform:
+        translateY(-3px)
+        scale(1.02);
     }
 
     .secondary-btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.045);
-    }
+      border:
+        1px solid var(--border);
 
-    .primary-btn:hover,
-    .secondary-btn:hover{
-      transform:translateY(-3px);
-    }
-
-    .hero-visual{
-      padding:25px;
-      border:1px solid var(--line);
-      border-radius:28px;
       background:
-        radial-gradient(circle at 50% 0,rgba(157,77,255,.18),transparent 40%),
-        linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
-      box-shadow:0 30px 80px rgba(0,0,0,.35);
+        rgba(255,255,255,.04);
+
+      color:#dce1f0;
     }
 
-    .visual-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
+    .secondary-btn:hover{
+      background:
+        rgba(255,255,255,.08);
     }
 
-    .visual-title{
-      font-size:12px;
-      font-weight:900;
-    }
 
-    .live-tag{
-      color:var(--green);
-      font-size:9px;
-      font-weight:900;
-    }
+    /* =====================================================
+       FEATURED INSTAGRAM CARD
+    ====================================================== */
 
-    .visual-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-
-    .visual-card{
-      min-height:110px;
-      padding:15px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:18px;
-      background:rgba(255,255,255,.04);
-    }
-
-    .visual-card i{
-      font-size:25px;
-      color:#d78dff;
-    }
-
-    .visual-card strong{
-      font-size:16px;
-      font-weight:900;
-    }
-
-    .visual-card span{
-      color:#8f879c;
-      font-size:9px;
-    }
-
-    /* =========================
-       SECTION
-    ========================== */
-
-    .section{
-      width:min(1180px,calc(100% - 32px));
-      margin:auto;
-      padding:58px 0;
-    }
-
-    .section-heading{
-      max-width:760px;
-      margin:0 auto 30px;
-      text-align:center;
-    }
-
-    .eyebrow{
-      margin-bottom:8px;
-      color:#c883ff;
-      font-size:9px;
-      font-weight:900;
-      letter-spacing:2px;
-      text-transform:uppercase;
-    }
-
-    .section-heading h2{
-      margin-bottom:10px;
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(28px,4vw,46px);
-      letter-spacing:-1.8px;
-    }
-
-    .section-heading p{
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.75;
-    }
-
-    /* =========================
-       SOCIAL
-    ========================== */
-
-    .search-box{
-      max-width:760px;
-      margin:0 auto 22px;
+    .hero-card{
       position:relative;
+
+      padding:24px;
+
+      border-radius:28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(30,35,65,.9),
+          rgba(13,15,31,.95)
+        );
+
+      border:
+        1px solid
+        rgba(168,85,247,.28);
+
+      box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.42),
+        0 0 60px
+        rgba(124,58,237,.12);
+
+      overflow:hidden;
+
+      animation:
+        floatCard 5s ease-in-out infinite;
     }
 
-    .search-box i{
+    .hero-card::before{
+      content:"";
+
       position:absolute;
-      top:50%;
-      left:17px;
-      transform:translateY(-50%);
-      color:#888090;
+
+      width:260px;
+      height:260px;
+
+      border-radius:50%;
+
+      background:
+        rgba(236,72,153,.16);
+
+      filter:blur(50px);
+
+      right:-80px;
+      top:-100px;
+    }
+
+    .featured-label{
+      position:absolute;
+
+      right:16px;
+      top:16px;
+
+      padding:7px 11px;
+
+      border-radius:999px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ec4899,
+          #f97316
+        );
+
+      font-size:9px;
+
+      font-weight:900;
+
+      letter-spacing:1px;
+    }
+
+    .profile-head{
+      position:relative;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:14px;
+
+      z-index:1;
+    }
+
+    .profile-icon{
+      width:58px;
+      height:58px;
+
+      display:grid;
+
+      place-items:center;
+
+      border-radius:18px;
+
+      font-size:27px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+    }
+
+    .profile-name{
+      font-weight:900;
+
+      font-size:18px;
+    }
+
+    .profile-handle{
+      margin-top:2px;
+
+      color:#aeb7ca;
+
+      font-size:11px;
+    }
+
+    .profile-status{
+      margin-left:auto;
+
+      color:#74f5a2;
+
+      font-size:10px;
+
+      font-weight:900;
+    }
+
+    .hero-stats{
+      display:grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:10px;
+
+      margin-top:26px;
+    }
+
+    .stat{
+      padding:16px 10px;
+
+      border-radius:16px;
+
+      text-align:center;
+
+      background:
+        rgba(255,255,255,.045);
+
+      border:
+        1px solid
+        rgba(255,255,255,.05);
+    }
+
+    .stat strong{
+      display:block;
+
+      font-size:19px;
+    }
+
+    .stat span{
+      color:#9ca6ba;
+
+      font-size:10px;
+    }
+
+    .featured-action{
+      margin-top:20px;
+
+      display:block;
+
+      width:100%;
+
+      text-align:center;
+
+      padding:15px;
+
+      border-radius:14px;
+
+      font-size:13px;
+
+      font-weight:900;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 10px 30px
+        rgba(236,72,153,.18);
+    }
+
+
+    /* =====================================================
+       EXPLORE SERVICES MARQUEE
+    ====================================================== */
+
+    .services-marquee{
+      width:100%;
+
+      overflow:hidden;
+
+      padding:18px 0;
+
+      border-top:
+        1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,.018);
+    }
+
+    .marquee-track{
+      display:flex;
+
+      width:max-content;
+
+      gap:16px;
+
+      animation:
+        moveServices 28s linear infinite;
+    }
+
+    .marquee-track:hover{
+      animation-play-state:paused;
+    }
+
+    .service-chip{
+      min-width:190px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:13px;
+
+      padding:16px;
+
+      border-radius:18px;
+
+      background:
+        rgba(255,255,255,.045);
+
+      border:
+        1px solid var(--border);
+
+      transition:.25s ease;
+    }
+
+    .service-chip:hover{
+      transform:
+        translateY(-4px)
+        scale(1.03);
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .service-chip i{
+      font-size:24px;
+    }
+
+    .service-chip strong{
+      display:block;
+
       font-size:13px;
     }
 
-    .search-box input{
-      width:100%;
-      height:52px;
-      padding:0 18px 0 45px;
-      outline:none;
-      border:1px solid var(--line);
-      border-radius:16px;
-      color:#fff;
-      background:rgba(255,255,255,.045);
-      font-size:12px;
-      transition:.25s;
+    .service-chip span{
+      color:#94a0b9;
+
+      font-size:10px;
     }
 
-    .search-box input:focus{
-      border-color:rgba(180,100,255,.55);
-      box-shadow:0 0 0 3px rgba(147,56,255,.08);
+    .service-chip.instagram{
+      min-width:230px;
+
+      border-color:
+        rgba(236,72,153,.6);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(131,58,180,.22),
+          rgba(253,29,29,.12),
+          rgba(252,176,69,.08)
+        );
+
+      box-shadow:
+        0 0 28px
+        rgba(236,72,153,.16);
     }
+
+
+    /* =====================================================
+       SOCIAL PLATFORM GRID
+    ====================================================== */
 
     .platform-grid{
       display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:14px;
+
+      grid-template-columns:
+        repeat(5,1fr);
+
+      gap:16px;
     }
 
     .platform-card{
-      padding:20px 13px;
+      padding:24px 15px;
+
       text-align:center;
-      border:1px solid var(--line);
+
       border-radius:20px;
-      background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02));
-      transition:.25s;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,.035);
+
+      transition:.3s ease;
+    }
+
+    .platform-card i{
+      font-size:30px;
+
+      margin-bottom:12px;
+    }
+
+    .platform-card strong{
+      display:block;
+
+      font-size:12px;
+    }
+
+    .platform-card span{
+      display:block;
+
+      margin-top:4px;
+
+      color:#8f9ab2;
+
+      font-size:10px;
     }
 
     .platform-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(185,105,255,.4);
+      transform:
+        translateY(-7px);
+
+      border-color:
+        rgba(168,85,247,.5);
     }
 
-    .platform-icon{
-      width:58px;
-      height:58px;
-      margin:0 auto 12px;
-      display:grid;
-      place-items:center;
-      border-radius:18px;
-      font-size:25px;
+    .platform-card.featured{
+      transform:
+        scale(1.06);
+
+      border-color:
+        rgba(236,72,153,.75);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(131,58,180,.20),
+          rgba(236,72,153,.10)
+        );
+
+      box-shadow:
+        0 0 35px
+        rgba(236,72,153,.18);
     }
 
-    .instagram{
-      background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+
+    /* =====================================================
+       INSTAGRAM SERVICES
+    ====================================================== */
+
+    .instagram-zone{
+      position:relative;
+
+      padding:40px;
+
+      border-radius:32px;
+
+      overflow:hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(131,58,180,.13),
+          rgba(13,15,31,.92)
+        );
+
+      border:
+        1px solid
+        rgba(236,72,153,.25);
     }
 
-    .youtube{
-      background:#f03;
-    }
+    .instagram-zone::after{
+      content:"";
 
-    .snapchat{
-      color:#111;
-      background:#ffdb00;
-    }
+      position:absolute;
 
-    .facebook{
-      background:#1877f2;
-    }
+      width:350px;
+      height:350px;
 
-    .whatsapp{
-      background:#25d366;
-    }
+      border-radius:50%;
 
-    .platform-card h3{
-      margin-bottom:5px;
-      font-size:14px;
-    }
+      background:
+        rgba(236,72,153,.10);
 
-    .platform-card p{
-      min-height:34px;
-      color:#918a9b;
-      font-size:9px;
-      line-height:1.5;
-    }
+      filter:blur(60px);
 
-    .platform-btn{
-      width:100%;
-      margin-top:12px;
-      padding:9px;
-      border:0;
-      border-radius:10px;
-      color:#fff;
-      background:rgba(255,255,255,.07);
-      font-size:9px;
-      font-weight:900;
+      right:-100px;
+      bottom:-180px;
     }
-
-    /* =========================
-       INSTAGRAM PRICING
-    ========================== */
 
     .pricing-grid{
+      position:relative;
+
+      z-index:1;
+
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:16px;
     }
 
     .price-card{
       position:relative;
-      padding:20px;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02));
-      transition:.25s;
+
+      padding:24px;
+
+      border-radius:22px;
+
+      background:
+        rgba(8,10,25,.72);
+
+      border:
+        1px solid var(--border);
+
+      overflow:hidden;
+
+      transition:.3s ease;
     }
 
     .price-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(180,100,255,.42);
+      transform:
+        translateY(-8px);
+
+      border-color:
+        rgba(236,72,153,.55);
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.32);
     }
 
-    .popular{
-      border-color:rgba(255,64,166,.42);
+    .price-card.popular{
+      border-color:
+        rgba(236,72,153,.7);
+
+      transform:
+        scale(1.03);
+
+      box-shadow:
+        0 0 35px
+        rgba(236,72,153,.14);
     }
 
     .popular-badge{
       position:absolute;
+
       top:12px;
       right:12px;
-      padding:4px 8px;
+
+      padding:6px 9px;
+
       border-radius:999px;
-      background:linear-gradient(135deg,#ff3b9d,#ff7a43);
-      font-size:7px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--pink),
+          var(--orange)
+        );
+
+      font-size:8px;
+
       font-weight:900;
-    }
-
-    .price-label{
-      margin-bottom:6px;
-      color:#a49daa;
-      font-size:9px;
-    }
-
-    .price-card h3{
-      margin-bottom:6px;
-      font-size:17px;
     }
 
     .followers{
-      margin-bottom:15px;
-      color:#c985ff;
-      font-size:10px;
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:20px;
+
+      font-weight:900;
+    }
+
+    .old-price{
+      display:block;
+
+      margin-top:17px;
+
+      color:#7e879d;
+
+      text-decoration:
+        line-through;
+
+      font-size:13px;
+    }
+
+    .new-price{
+      margin-top:2px;
+
+      font-size:30px;
+
+      font-weight:900;
+
+      color:#fff;
+    }
+
+    .discount{
+      display:inline-block;
+
+      margin-top:8px;
+
+      padding:5px 8px;
+
+      border-radius:999px;
+
+      color:#78f7a5;
+
+      background:
+        rgba(34,197,94,.12);
+
+      font-size:9px;
+
       font-weight:800;
     }
 
-    .price{
-      margin-bottom:15px;
-      font-size:28px;
-      font-weight:900;
-    }
+    .order-btn{
+      display:block;
 
-    .price span{
-      font-size:14px;
-      color:#d5cddd;
-    }
+      margin-top:20px;
 
-    .price-btn{
       width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      padding:11px;
-      border-radius:11px;
+
+      border:none;
+
+      padding:12px;
+
+      border-radius:12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
       color:#fff;
-      text-decoration:none;
-      background:linear-gradient(135deg,#8135ff,#ff359d);
-      font-size:9px;
+
+      font-size:11px;
+
       font-weight:900;
+
+      transition:.25s ease;
     }
 
-    /* =========================
-       MEDIA HERO
-    ========================== */
+    .order-btn:hover{
+      transform:scale(1.03);
+    }
+
+
+    /* =====================================================
+       MOVIE / GAME HERO
+    ====================================================== */
 
     .media-hero{
       width:min(1180px,calc(100% - 32px));
-      margin:auto;
-      padding:65px 0 25px;
+
+      margin:0 auto;
+
+      padding:
+        75px 20px 35px;
+
       text-align:center;
     }
 
     .media-hero-icon{
-      width:76px;
-      height:76px;
-      margin:0 auto 18px;
+      width:70px;
+      height:70px;
+
+      margin:0 auto 20px;
+
       display:grid;
+
       place-items:center;
-      border-radius:24px;
-      background:linear-gradient(135deg,#7132ff,#ff3a9e);
-      box-shadow:0 20px 50px rgba(136,48,255,.28);
+
+      border-radius:22px;
+
       font-size:30px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 0 40px
+        rgba(124,58,237,.3);
     }
 
     .media-hero h1{
-      margin-bottom:11px;
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(40px,6vw,65px);
-      letter-spacing:-2px;
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:
+        clamp(40px,7vw,72px);
+
+      letter-spacing:-3px;
     }
 
     .media-hero p{
       max-width:700px;
-      margin:auto;
+
+      margin:15px auto 0;
+
       color:var(--muted);
-      font-size:13px;
+
+      font-size:14px;
+
       line-height:1.8;
     }
 
-    /* =========================
+
+    /* =====================================================
+       SEARCH
+    ====================================================== */
+
+    .search-box{
+      position:relative;
+
+      max-width:700px;
+
+      margin:0 auto 22px;
+    }
+
+    .search-box i{
+      position:absolute;
+
+      left:18px;
+      top:50%;
+
+      transform:
+        translateY(-50%);
+
+      color:#7f8aa2;
+    }
+
+    .search-box input{
+      width:100%;
+
+      border:none;
+
+      outline:none;
+
+      padding:
+        16px 18px 16px 48px;
+
+      border-radius:16px;
+
+      color:#fff;
+
+      background:
+        rgba(255,255,255,.045);
+
+      border:
+        1px solid var(--border);
+    }
+
+    .search-box input:focus{
+      border-color:
+        rgba(168,85,247,.6);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(124,58,237,.08);
+    }
+
+
+    /* =====================================================
        CATEGORY FILTERS
-    ========================== */
+    ====================================================== */
 
     .category-filters{
       display:flex;
-      flex-wrap:wrap;
+
       justify-content:center;
+
+      flex-wrap:wrap;
+
       gap:9px;
-      margin-bottom:28px;
+
+      margin-bottom:32px;
     }
 
     .filter-btn{
-      padding:9px 13px;
-      border:1px solid var(--line);
+      border:
+        1px solid var(--border);
+
+      color:#aab3c7;
+
+      background:
+        rgba(255,255,255,.035);
+
+      padding:10px 14px;
+
       border-radius:999px;
-      color:#aaa3b4;
-      background:rgba(255,255,255,.035);
-      font-size:9px;
-      font-weight:900;
-      transition:.22s;
+
+      font-size:11px;
+
+      font-weight:800;
+
+      transition:.2s ease;
     }
 
-    .filter-btn:hover{
-      color:#fff;
-      border-color:rgba(180,100,255,.45);
-      background:rgba(137,53,255,.12);
-    }
-
+    .filter-btn:hover,
     .filter-btn.active{
       color:#fff;
-      border-color:transparent;
-      background:linear-gradient(135deg,#7c32ff,#ff339d);
-      box-shadow:0 10px 25px rgba(136,47,255,.22);
+
+      border-color:
+        rgba(168,85,247,.7);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.8),
+          rgba(236,72,153,.6)
+        );
     }
 
-    /* =========================
-       MOVIES / GAMES GRID
-    ========================== */
+
+    /* =====================================================
+       MEDIA GRID
+    ====================================================== */
 
     .media-grid{
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:17px;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:20px;
     }
 
     .media-card{
       position:relative;
+
       overflow:hidden;
-      border:1px solid var(--line);
+
       border-radius:22px;
-      background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
-      transition:.3s;
+
+      background:
+        #101426;
+
+      border:
+        1px solid var(--border);
+
+      transition:
+        .35s ease;
+
+      cursor:pointer;
     }
 
     .media-card:hover{
-      transform:translateY(-7px);
-      border-color:rgba(187,109,255,.48);
-      box-shadow:0 25px 50px rgba(0,0,0,.28);
+      transform:
+        translateY(-9px);
+
+      border-color:
+        rgba(168,85,247,.55);
+
+      box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.38);
+    }
+
+    .media-card.hidden-item{
+      display:none;
     }
 
     .poster{
       position:relative;
+
       height:330px;
+
       overflow:hidden;
-      background-size:cover;
-      background-position:center;
+
+      background:
+        #151a2e;
     }
 
-    .poster::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(to top,rgba(4,4,8,.95),rgba(5,5,10,.05) 60%),
-        linear-gradient(135deg,rgba(255,255,255,.08),transparent 40%);
-      z-index:2;
+    .poster img{
+      width:100%;
+      height:100%;
+
+      object-fit:cover;
+
+      display:block;
+
+      transition:
+        transform .6s ease;
+    }
+
+    .media-card:hover .poster img{
+      transform:
+        scale(1.08);
     }
 
     .poster::after{
       content:"";
+
       position:absolute;
-      inset:-20%;
-      opacity:.6;
-      filter:blur(25px);
-      z-index:0;
-    }
 
-    .poster-content{
-      position:absolute;
-      z-index:4;
-      left:0;
-      right:0;
-      bottom:0;
-      padding:20px;
-    }
+      inset:0;
 
-    .poster-kicker{
-      margin-bottom:6px;
-      color:#e7dfff;
-      font-size:8px;
-      font-weight:900;
-      letter-spacing:2px;
-      text-transform:uppercase;
-    }
-
-    .poster-title{
-      font-family:"Montserrat",sans-serif;
-      font-size:25px;
-      line-height:1.03;
-      font-weight:900;
-      letter-spacing:-1px;
-      text-shadow:0 5px 20px rgba(0,0,0,.6);
-    }
-
-    .poster-subtitle{
-      margin-top:7px;
-      color:#d3ccd9;
-      font-size:9px;
-      font-weight:700;
-    }
-
-    .quality-tag,
-    .genre-tag{
-      position:absolute;
-      z-index:6;
-      top:12px;
-      padding:6px 9px;
-      border-radius:8px;
-      font-size:8px;
-      font-weight:900;
+      background:
+        linear-gradient(
+          to top,
+          rgba(4,5,15,.88),
+          transparent 58%
+        );
     }
 
     .quality-tag{
+      position:absolute;
+
       left:12px;
-      background:rgba(0,0,0,.65);
-      backdrop-filter:blur(8px);
+      top:12px;
+
+      z-index:2;
+
+      padding:6px 8px;
+
+      border-radius:8px;
+
+      background:
+        rgba(0,0,0,.72);
+
+      backdrop-filter:
+        blur(8px);
+
+      font-size:8px;
+
+      font-weight:900;
     }
 
     .genre-tag{
+      position:absolute;
+
       right:12px;
-      background:linear-gradient(135deg,#ff317f,#ff7949);
+      top:12px;
+
+      z-index:2;
+
+      padding:6px 8px;
+
+      border-radius:8px;
+
+      color:#fff;
+
+      background:
+        rgba(124,58,237,.85);
+
+      font-size:8px;
+
+      font-weight:900;
     }
 
     .play-overlay{
       position:absolute;
-      z-index:7;
-      top:50%;
+
+      width:56px;
+      height:56px;
+
       left:50%;
-      width:54px;
-      height:54px;
+      top:50%;
+
+      z-index:3;
+
       display:grid;
+
       place-items:center;
-      transform:translate(-50%,-50%) scale(.85);
-      border:1px solid rgba(255,255,255,.2);
+
+      transform:
+        translate(-50%,-50%)
+        scale(.85);
+
       border-radius:50%;
-      color:#fff;
-      background:rgba(15,10,25,.55);
-      backdrop-filter:blur(10px);
+
+      background:
+        rgba(255,255,255,.14);
+
+      backdrop-filter:
+        blur(8px);
+
+      border:
+        1px solid
+        rgba(255,255,255,.35);
+
       opacity:0;
-      transition:.25s;
+
+      transition:.3s ease;
     }
 
     .media-card:hover .play-overlay{
       opacity:1;
-      transform:translate(-50%,-50%) scale(1);
+
+      transform:
+        translate(-50%,-50%)
+        scale(1);
+    }
+
+    .poster-title{
+      position:absolute;
+
+      z-index:2;
+
+      left:16px;
+      right:16px;
+      bottom:15px;
+
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:22px;
+
+      font-weight:900;
+
+      line-height:1.05;
+
+      text-shadow:
+        0 3px 15px #000;
     }
 
     .card-body{
-      padding:16px;
-    }
-
-    .card-body h3{
-      margin-bottom:6px;
-      font-size:15px;
-    }
-
-    .card-body p{
-      min-height:32px;
-      color:#918a9d;
-      font-size:9px;
-      line-height:1.6;
+      padding:18px;
     }
 
     .media-meta{
-      margin-bottom:7px;
-      color:#ae9eb9;
-      font-size:8px;
+      color:#a78bfa;
+
+      font-size:9px;
+
       font-weight:800;
+
       text-transform:uppercase;
-      letter-spacing:.5px;
+
+      letter-spacing:1px;
+    }
+
+    .card-body h3{
+      margin-top:8px;
+
+      font-size:16px;
+
+      line-height:1.35;
+    }
+
+    .card-body p{
+      margin-top:8px;
+
+      min-height:40px;
+
+      color:#8f99b0;
+
+      font-size:11px;
+
+      line-height:1.7;
     }
 
     .media-info{
       display:flex;
+
       flex-wrap:wrap;
+
       gap:6px;
-      margin-top:12px;
+
+      margin-top:13px;
     }
 
     .media-info span{
-      padding:5px 7px;
-      border-radius:7px;
-      color:#c8c1d2;
-      background:rgba(255,255,255,.055);
+      padding:5px 8px;
+
+      border-radius:999px;
+
+      background:
+        rgba(255,255,255,.05);
+
+      color:#b8c0d2;
+
       font-size:8px;
-      font-weight:700;
     }
 
     .open-media-btn{
       width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      margin-top:14px;
-      padding:11px;
-      border:0;
-      border-radius:11px;
+
+      margin-top:17px;
+
+      border:none;
+
+      padding:13px;
+
+      border-radius:12px;
+
       color:#fff;
-      background:linear-gradient(135deg,#7e35ff,#ff359e);
-      font-size:9px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #6d28d9,
+          #db2777
+        );
+
+      font-size:11px;
+
       font-weight:900;
-      transition:.25s;
+
+      transition:.25s ease;
     }
 
     .open-media-btn:hover{
-      filter:brightness(1.1);
-      transform:translateY(-1px);
+      transform:scale(1.02);
     }
 
-    /* =========================
-       CSS MOVIE POSTERS
-    ========================== */
 
-    .shawshank{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,210,150,.28),transparent 18%),
-        linear-gradient(145deg,#11131d,#463443 55%,#090a0f);
-    }
-
-    .shawshank::after{
-      background:#c98d4e;
-    }
-
-    .dark-knight{
-      background:
-        radial-gradient(circle at 50% 15%,rgba(48,126,255,.25),transparent 18%),
-        linear-gradient(145deg,#05070c,#13233d 55%,#07070b);
-    }
-
-    .dark-knight::after{
-      background:#245dff;
-    }
-
-    .inception{
-      background:
-        radial-gradient(circle at 50% 40%,rgba(89,189,255,.28),transparent 20%),
-        linear-gradient(145deg,#06111b,#193d58,#07090e);
-    }
-
-    .inception::after{
-      background:#2ca7ff;
-    }
-
-    .godfather{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,255,255,.09),transparent 15%),
-        linear-gradient(145deg,#070707,#292020,#070707);
-    }
-
-    .godfather::after{
-      background:#8d3434;
-    }
-
-    .godfather2{
-      background:
-        radial-gradient(circle at 50% 30%,rgba(177,43,43,.22),transparent 18%),
-        linear-gradient(145deg,#100707,#332020,#070606);
-    }
-
-    .godfather2::after{
-      background:#9b2525;
-    }
-
-    .idiots{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(83,220,255,.3),transparent 20%),
-        linear-gradient(145deg,#07394b,#08708b,#061923);
-    }
-
-    .idiots::after{
-      background:#00d4ff;
-    }
-
-    .interstellar{
-      background:
-        radial-gradient(circle at 50% 28%,rgba(255,255,255,.35),transparent 15%),
-        linear-gradient(145deg,#06101d,#172c4b,#05070c);
-    }
-
-    .interstellar::after{
-      background:#7ec8ff;
-    }
-
-    .spiderman{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,45,55,.28),transparent 18%),
-        linear-gradient(145deg,#20040a,#5e0710,#05050a);
-    }
-
-    .spiderman::after{
-      background:#ff1726;
-    }
-
-    .munnabhai{
-      background:
-        radial-gradient(circle at 50% 25%,rgba(255,166,63,.28),transparent 18%),
-        linear-gradient(145deg,#291207,#7d3210,#100906);
-    }
-
-    .munnabhai::after{
-      background:#ff7a18;
-    }
-
-    .oppenheimer{
-      background:
-        radial-gradient(circle at 50% 35%,rgba(255,134,30,.35),transparent 18%),
-        linear-gradient(145deg,#090b11,#552b17,#050509);
-    }
-
-    .oppenheimer::after{
-      background:#ff6818;
-    }
-
-    /* =========================
-       GAME POSTERS
-    ========================== */
-
-    .ghost{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,90,90,.25),transparent 18%),
-        linear-gradient(145deg,#19120f,#6a1818,#0b0908);
-    }
-
-    .ghost::after{
-      background:#ff3d3d;
-    }
-
-    .vicecity{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,80,198,.3),transparent 18%),
-        linear-gradient(145deg,#23082c,#7e176d,#08152d);
-    }
-
-    .vicecity::after{
-      background:#ff2cb7;
-    }
-
-    .resident{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,70,60,.2),transparent 18%),
-        linear-gradient(145deg,#100707,#461414,#080808);
-    }
-
-    .resident::after{
-      background:#e62e2e;
-    }
-
-    .granny{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(170,255,170,.15),transparent 18%),
-        linear-gradient(145deg,#071009,#1b2d1d,#050606);
-    }
-
-    .granny::after{
-      background:#87ff87;
-    }
-
-    .devil{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(210,40,50,.25),transparent 18%),
-        linear-gradient(145deg,#120609,#5a121b,#060506);
-    }
-
-    .devil::after{
-      background:#e5293c;
-    }
-
-    .rdr2{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,130,40,.28),transparent 18%),
-        linear-gradient(145deg,#321207,#8a1c13,#100705);
-    }
-
-    .rdr2::after{
-      background:#ff4b23;
-    }
-
-    .gtav{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(76,255,214,.25),transparent 18%),
-        linear-gradient(145deg,#071e1d,#14544b,#09100f);
-    }
-
-    .gtav::after{
-      background:#00ffc8;
-    }
-
-    .sanandreas{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,185,60,.25),transparent 18%),
-        linear-gradient(145deg,#1e1208,#67421b,#0d0b08);
-    }
-
-    .sanandreas::after{
-      background:#ffb018;
-    }
-
-    .mw2{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(70,255,90,.25),transparent 18%),
-        linear-gradient(145deg,#08130a,#214d22,#060807);
-    }
-
-    .mw2::after{
-      background:#39ff56;
-    }
-
-    .bo2{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,115,35,.25),transparent 18%),
-        linear-gradient(145deg,#130b07,#5a2b13,#080706);
-    }
-
-    .bo2::after{
-      background:#ff6c21;
-    }
-
-    .bo3{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,65,55,.25),transparent 18%),
-        linear-gradient(145deg,#120707,#55100e,#080606);
-    }
-
-    .bo3::after{
-      background:#ff342c;
-    }
-
-    .rdr1{
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,75,40,.28),transparent 18%),
-        linear-gradient(145deg,#200807,#7a1a12,#0c0505);
-    }
-
-    .rdr1::after{
-      background:#f13b22;
-    }
-
-    /* =========================
-       EMPTY / HIDDEN
-    ========================== */
-
-    .hidden-item{
-      display:none !important;
-    }
+    /* =====================================================
+       EMPTY STATE
+    ====================================================== */
 
     .empty-state{
       display:none;
-      padding:35px 20px;
+
+      margin-top:25px;
+
+      padding:35px;
+
       text-align:center;
-      border:1px dashed rgba(255,255,255,.12);
-      border-radius:20px;
-      color:#aaa3b5;
-      font-size:12px;
+
+      border-radius:18px;
+
+      color:#9da7bb;
+
+      background:
+        rgba(255,255,255,.03);
+
+      border:
+        1px dashed var(--border);
     }
 
     .empty-state.show{
       display:block;
     }
 
-    /* =========================
-       SUPPORT
-    ========================== */
 
-    .support-section{
-      width:min(850px,calc(100% - 32px));
-      margin:20px auto 65px;
-      padding:35px 22px;
-      text-align:center;
-      border:1px solid var(--line);
-      border-radius:26px;
-      background:
-        radial-gradient(circle at top,rgba(151,58,255,.18),transparent 50%),
-        rgba(255,255,255,.025);
-    }
-
-    .support-section h2{
-      margin-bottom:8px;
-      font-family:"Montserrat",sans-serif;
-      font-size:28px;
-    }
-
-    .support-section p{
-      margin-bottom:20px;
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .support-buttons{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .support-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      padding:11px 15px;
-      border-radius:11px;
-      color:#fff;
-      text-decoration:none;
-      font-size:10px;
-      font-weight:900;
-    }
-
-    .whatsapp-btn{
-      background:#25d366;
-    }
-
-    .email-btn{
-      background:#7647ff;
-    }
-
-    .telegram-btn{
-      background:#229ed9;
-    }
-
-    /* =========================
+    /* =====================================================
        FOOTER
-    ========================== */
+    ====================================================== */
 
     footer{
       width:min(1180px,calc(100% - 32px));
-      margin:auto;
-      padding:25px 0 32px;
+
+      margin:0 auto 25px;
+
+      padding:25px 0;
+
+      border-top:
+        1px solid var(--border);
+
       display:flex;
-      align-items:center;
+
       justify-content:space-between;
-      gap:15px;
-      border-top:1px solid var(--line);
+
+      align-items:center;
+
+      color:#8791a9;
+
+      font-size:11px;
     }
 
     .footer-brand{
+      color:#fff;
+
+      font-family:
+        "Montserrat",
+        sans-serif;
+
+      font-size:17px;
+
       font-weight:900;
-      font-size:13px;
     }
 
     .footer-brand span{
-      color:#ca7eff;
+      color:#b783ff;
     }
 
-    footer p{
-      color:#77707e;
-      font-size:9px;
+
+    /* =====================================================
+       ANIMATIONS
+    ====================================================== */
+
+    @keyframes tabFade{
+      from{
+        opacity:0;
+        transform:
+          translateY(15px);
+      }
+
+      to{
+        opacity:1;
+        transform:
+          translateY(0);
+      }
     }
 
-    /* =========================
+    @keyframes pulse{
+      0%,100%{
+        transform:scale(1);
+        opacity:1;
+      }
+
+      50%{
+        transform:scale(.7);
+        opacity:.5;
+      }
+    }
+
+    @keyframes floatCard{
+      0%,100%{
+        transform:
+          translateY(0)
+          rotate(0);
+      }
+
+      50%{
+        transform:
+          translateY(-12px)
+          rotate(.4deg);
+      }
+    }
+
+    @keyframes buttonGlow{
+      0%,100%{
+        box-shadow:
+          0 12px 30px
+          rgba(124,58,237,.3);
+      }
+
+      50%{
+        box-shadow:
+          0 12px 45px
+          rgba(236,72,153,.42);
+      }
+    }
+
+    @keyframes moveServices{
+      from{
+        transform:
+          translateX(0);
+      }
+
+      to{
+        transform:
+          translateX(-50%);
+      }
+    }
+
+
+    /* =====================================================
        RESPONSIVE
-    ========================== */
+    ====================================================== */
 
-    @media(max-width:1000px){
+    @media(max-width:1050px){
 
       .hero{
         grid-template-columns:1fr;
+
         text-align:center;
       }
 
-      .hero p{
-        margin:auto;
+      .hero-description{
+        margin-left:auto;
+        margin-right:auto;
       }
 
       .hero-buttons{
         justify-content:center;
       }
 
+      .hero-card{
+        max-width:650px;
+
+        width:100%;
+
+        margin:auto;
+      }
+
       .platform-grid{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+          repeat(3,1fr);
       }
 
       .pricing-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
       .media-grid{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+          repeat(3,1fr);
       }
     }
 
-    @media(max-width:720px){
-
-      .main-tabs{
-        grid-template-columns:1fr;
-      }
+    @media(max-width:750px){
 
       .nav-status{
         display:none;
       }
 
+      .main-tabs{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding-top:55px;
+      }
+
+      .hero h1{
+        letter-spacing:-2px;
+      }
+
       .platform-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
       .media-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
-      .poster{
-        height:300px;
+      .instagram-zone{
+        padding:25px 16px;
       }
     }
 
     @media(max-width:520px){
 
-      .container,
-      .navbar,
-      .main-tabs,
-      .hero,
-      .section,
-      .media-hero,
-      footer{
-        width:calc(100% - 22px);
-      }
-
       .navbar{
-        margin-top:10px;
+        padding:12px 14px;
       }
 
-      .logo-text{
-        font-size:15px;
+      .logo{
+        font-size:17px;
       }
 
-      .hero{
-        padding-top:48px;
+      .logo-icon{
+        width:38px;
+        height:38px;
       }
 
       .hero h1{
-        font-size:40px;
-        letter-spacing:-2px;
+        font-size:42px;
       }
 
-      .hero-visual{
-        padding:17px;
+      .hero-stats{
+        grid-template-columns:1fr;
       }
 
       .platform-grid,
@@ -1352,56 +1925,64 @@
         grid-template-columns:1fr;
       }
 
-      .poster{
-        height:360px;
+      .price-card.popular{
+        transform:none;
       }
 
-      .category-filters{
-        justify-content:flex-start;
+      .poster{
+        height:390px;
       }
 
       footer{
         flex-direction:column;
+
+        gap:10px;
+
         text-align:center;
       }
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <div class="glow glow-one"></div>
-  <div class="glow glow-two"></div>
-  <div class="glow glow-three"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
 
-  <!-- =========================
+
+  <!-- =====================================================
        NAVBAR
-  ========================== -->
+  ====================================================== -->
 
   <nav class="navbar">
 
-    <a href="index.html" class="logo">
-
+    <a
+      href="index.html"
+      class="logo"
+    >
       <div class="logo-icon">
         <i class="fa-solid fa-bolt"></i>
       </div>
 
-      <div class="logo-text">
+      <div>
         SehrAn <span>Media</span>
       </div>
-
     </a>
 
     <div class="nav-status">
       <span class="status-dot"></span>
-      Entertainment Hub Live
+      Services Online
     </div>
 
   </nav>
 
-  <!-- =========================
+
+  <!-- =====================================================
        MAIN TABS
-  ========================== -->
+  ====================================================== -->
 
   <div class="main-tabs">
 
@@ -1431,36 +2012,47 @@
 
   </div>
 
+
   <!-- =====================================================
        SOCIAL TAB
   ====================================================== -->
 
-  <main id="social" class="tab-content active">
+  <main
+    id="social"
+    class="tab-content active"
+  >
 
     <section class="hero">
 
-      <div>
+      <div class="hero-left">
 
-        <div class="hero-badge">
-          <span></span>
-          SOCIAL SERVICES AVAILABLE
+        <div class="badge">
+          <span class="badge-dot"></span>
+          INSTAGRAM SERVICE AVAILABLE
         </div>
 
         <h1>
-          Everything You Love.
-          <span class="gradient-text">One Place.</span>
+          Grow Your
+          <span class="gradient">
+            Social Presence
+          </span>
+          Faster.
         </h1>
 
-        <p>
-          Explore social media services, movies and games through a clean,
-          premium and organized SehrAn Media experience.
+        <p class="hero-description">
+          Explore social platforms, discover entertainment
+          and browse our growing digital universe.
+          Instagram is currently our featured active service.
         </p>
 
         <div class="hero-buttons">
 
-          <a href="#social-platforms" class="primary-btn">
-            <i class="fa-solid fa-rocket"></i>
-            Explore Services
+          <a
+            href="#instagram-services"
+            class="primary-btn"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            View Instagram Services
           </a>
 
           <button
@@ -1468,53 +2060,72 @@
             onclick="showTab('movies',document.querySelectorAll('.main-tab')[1])"
           >
             <i class="fa-solid fa-film"></i>
-            Browse Movies
+            Explore Movies
           </button>
 
         </div>
 
       </div>
 
+
       <div class="hero-visual">
 
-        <div class="visual-top">
-          <div class="visual-title">SehrAn Media Hub</div>
-          <div class="live-tag">● LIVE</div>
-        </div>
+        <div class="hero-card">
 
-        <div class="visual-grid">
-
-          <div class="visual-card">
-            <i class="fa-solid fa-share-nodes"></i>
-            <div>
-              <strong>Social</strong>
-              <span>Growth services</span>
-            </div>
+          <div class="featured-label">
+            FEATURED SERVICE
           </div>
 
-          <div class="visual-card">
-            <i class="fa-solid fa-film"></i>
-            <div>
-              <strong>Movies</strong>
-              <span>Genre collections</span>
+          <div class="profile-head">
+
+            <div class="profile-icon">
+              <i class="fa-brands fa-instagram"></i>
             </div>
+
+            <div>
+              <div class="profile-name">
+                Instagram Growth
+              </div>
+
+              <div class="profile-handle">
+                SehrAn Media Services
+              </div>
+            </div>
+
+            <div class="profile-status">
+              ● LIVE
+            </div>
+
           </div>
 
-          <div class="visual-card">
-            <i class="fa-solid fa-gamepad"></i>
-            <div>
-              <strong>Games</strong>
-              <span>Game categories</span>
+
+          <div class="hero-stats">
+
+            <div class="stat">
+              <strong>200+</strong>
+              <span>Starter</span>
             </div>
+
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>Orders</span>
+            </div>
+
+            <div class="stat">
+              <strong>LIVE</strong>
+              <span>Service</span>
+            </div>
+
           </div>
 
-          <div class="visual-card">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <div>
-              <strong>Search</strong>
-              <span>Find content faster</span>
-            </div>
-          </div>
+
+          <a
+            href="#instagram-services"
+            class="featured-action"
+          >
+            <i class="fa-solid fa-rocket"></i>
+            View Available Instagram Services
+          </a>
 
         </div>
 
@@ -1522,152 +2133,204 @@
 
     </section>
 
-    <!-- SOCIAL PLATFORMS -->
 
-    <section class="section" id="social-platforms">
+    <!-- =====================================================
+         MOVING EXPLORE SERVICES
+    ====================================================== -->
+
+    <section class="section">
 
       <div class="section-heading">
 
-        <div class="eyebrow">Social Applications</div>
-
         <h2>
-          Choose Your Platform
+          Explore
+          <span class="gradient-text">
+            Services
+          </span>
         </h2>
 
         <p>
-          Search and explore available social media services.
+          Our platform universe is growing.
+          Instagram is highlighted as the currently available service.
         </p>
 
       </div>
 
-      <div class="search-box">
+    </section>
 
-        <i class="fa-solid fa-magnifying-glass"></i>
 
-        <input
-          type="text"
-          id="socialSearch"
-          placeholder="Search Instagram, YouTube, Snapchat..."
-          oninput="searchSocial()"
+    <div class="services-marquee">
+
+      <div class="marquee-track">
+
+        <!-- SET 1 -->
+
+        <a
+          href="#instagram-services"
+          class="service-chip instagram"
         >
+          <i class="fa-brands fa-instagram"></i>
+
+          <div>
+            <strong>Instagram</strong>
+            <span>Service Available ●</span>
+          </div>
+        </a>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-youtube"></i>
+
+          <div>
+            <strong>YouTube</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-facebook"></i>
+
+          <div>
+            <strong>Facebook</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-snapchat"></i>
+
+          <div>
+            <strong>Snapchat</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-whatsapp"></i>
+
+          <div>
+            <strong>WhatsApp</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+
+        <!-- SET 2 FOR LOOP -->
+
+        <a
+          href="#instagram-services"
+          class="service-chip instagram"
+        >
+          <i class="fa-brands fa-instagram"></i>
+
+          <div>
+            <strong>Instagram</strong>
+            <span>Service Available ●</span>
+          </div>
+        </a>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-youtube"></i>
+
+          <div>
+            <strong>YouTube</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-facebook"></i>
+
+          <div>
+            <strong>Facebook</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-snapchat"></i>
+
+          <div>
+            <strong>Snapchat</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
+
+        <div class="service-chip">
+          <i class="fa-brands fa-whatsapp"></i>
+
+          <div>
+            <strong>WhatsApp</strong>
+            <span>Coming in future</span>
+          </div>
+        </div>
 
       </div>
 
+    </div>
+
+
+    <!-- =====================================================
+         PLATFORM GRID
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="social-platforms"
+    >
+
       <div class="platform-grid">
 
-        <div
-          class="platform-card social-item"
-          data-name="instagram"
+        <a
+          href="#instagram-services"
+          class="platform-card featured"
         >
+          <i class="fa-brands fa-instagram"></i>
 
-          <div class="platform-icon instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </div>
+          <strong>Instagram</strong>
 
-          <h3>Instagram</h3>
+          <span>AVAILABLE NOW</span>
+        </a>
 
-          <p>
-            Followers and social media services.
-          </p>
+        <div class="platform-card">
+          <i class="fa-brands fa-youtube"></i>
 
-          <button
-            class="platform-btn"
-            onclick="openInstagram()"
-          >
-            View Services
-          </button>
+          <strong>YouTube</strong>
 
+          <span>Coming Soon</span>
         </div>
 
-        <div
-          class="platform-card social-item"
-          data-name="youtube"
-        >
+        <div class="platform-card">
+          <i class="fa-brands fa-snapchat"></i>
 
-          <div class="platform-icon youtube">
-            <i class="fa-brands fa-youtube"></i>
-          </div>
+          <strong>Snapchat</strong>
 
-          <h3>YouTube</h3>
-
-          <p>
-            Channel services and future packages.
-          </p>
-
-          <button class="platform-btn">
-            Coming Soon
-          </button>
-
+          <span>Coming Soon</span>
         </div>
 
-        <div
-          class="platform-card social-item"
-          data-name="snapchat"
-        >
+        <div class="platform-card">
+          <i class="fa-brands fa-facebook"></i>
 
-          <div class="platform-icon snapchat">
-            <i class="fa-brands fa-snapchat"></i>
-          </div>
+          <strong>Facebook</strong>
 
-          <h3>Snapchat</h3>
-
-          <p>
-            Snapchat services and packages.
-          </p>
-
-          <button class="platform-btn">
-            Coming Soon
-          </button>
-
+          <span>Coming Soon</span>
         </div>
 
-        <div
-          class="platform-card social-item"
-          data-name="facebook"
-        >
+        <div class="platform-card">
+          <i class="fa-brands fa-whatsapp"></i>
 
-          <div class="platform-icon facebook">
-            <i class="fa-brands fa-facebook-f"></i>
-          </div>
+          <strong>WhatsApp</strong>
 
-          <h3>Facebook</h3>
-
-          <p>
-            Facebook services and future plans.
-          </p>
-
-          <button class="platform-btn">
-            Coming Soon
-          </button>
-
-        </div>
-
-        <div
-          class="platform-card social-item"
-          data-name="whatsapp support"
-        >
-
-          <div class="platform-icon whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </div>
-
-          <h3>WhatsApp</h3>
-
-          <p>
-            Direct customer communication.
-          </p>
-
-          <button class="platform-btn">
-            Support
-          </button>
-
+          <span>Coming Soon</span>
         </div>
 
       </div>
 
     </section>
 
-    <!-- INSTAGRAM PACKAGES -->
+
+    <!-- =====================================================
+         INSTAGRAM SERVICES
+    ====================================================== -->
 
     <section
       class="section"
@@ -1676,102 +2339,269 @@
 
       <div class="section-heading">
 
-        <div class="eyebrow">
-          Instagram Growth
-        </div>
-
         <h2>
-          Instagram Packages
+          Featured
+          <span class="gradient-text">
+            Instagram Services
+          </span>
         </h2>
 
         <p>
-          Select a package to continue with your order.
+          Select your preferred package and continue
+          to the order page.
         </p>
 
       </div>
 
-      <div class="pricing-grid">
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Starter</h3>
-          <div class="followers">200 Followers</div>
-          <div class="price"><span>₹</span>30</div>
-          <a href="order.html?package=200&followers=200&price=30" class="price-btn">
-            Get Package
-          </a>
-        </div>
+      <div class="instagram-zone">
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Starter Plus</h3>
-          <div class="followers">500 Followers</div>
-          <div class="price"><span>₹</span>50</div>
-          <a href="order.html?package=500&followers=500&price=50" class="price-btn">
-            Get Package
-          </a>
-        </div>
+        <div class="pricing-grid">
 
-        <div class="price-card popular">
-          <div class="popular-badge">Popular</div>
-          <div class="price-label">Instagram Followers</div>
-          <h3>Popular</h3>
-          <div class="followers">1,000 Followers</div>
-          <div class="price"><span>₹</span>90</div>
-          <a href="order.html?package=1000&followers=1000&price=90" class="price-btn">
-            Get Package
-          </a>
-        </div>
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Growth</h3>
-          <div class="followers">1,500 Followers</div>
-          <div class="price"><span>₹</span>130</div>
-          <a href="order.html?package=1500&followers=1500&price=130" class="price-btn">
-            Get Package
-          </a>
-        </div>
+          <!-- PACKAGE 1 -->
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Growth Plus</h3>
-          <div class="followers">2,000 Followers</div>
-          <div class="price"><span>₹</span>150</div>
-          <a href="order.html?package=2000&followers=2000&price=150" class="price-btn">
-            Get Package
-          </a>
-        </div>
+          <div class="price-card">
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Pro</h3>
-          <div class="followers">3,000 Followers</div>
-          <div class="price"><span>₹</span>200</div>
-          <a href="order.html?package=3000&followers=3000&price=200" class="price-btn">
-            Get Package
-          </a>
-        </div>
+            <div class="followers">
+              200 Followers
+            </div>
 
-        <div class="price-card">
-          <div class="price-label">Instagram Followers</div>
-          <h3>Premium</h3>
-          <div class="followers">5,000 Followers</div>
-          <div class="price"><span>₹</span>300</div>
-          <a href="order.html?package=5000&followers=5000&price=300" class="price-btn">
-            Get Package
-          </a>
-        </div>
+            <span class="old-price">
+              ₹100
+            </span>
 
-        <div class="price-card popular">
-          <div class="popular-badge">Best Value</div>
-          <div class="price-label">Instagram Followers</div>
-          <h3>Elite</h3>
-          <div class="followers">10,000 Followers</div>
-          <div class="price"><span>₹</span>600</div>
-          <a href="order.html?package=10000&followers=10000&price=600" class="price-btn">
-            Get Package
-          </a>
+            <div class="new-price">
+              ₹30
+            </div>
+
+            <span class="discount">
+              SPECIAL DISCOUNT
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('200 Followers','30','100')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 2 -->
+
+          <div class="price-card popular">
+
+            <div class="popular-badge">
+              POPULAR
+            </div>
+
+            <div class="followers">
+              500 Followers
+            </div>
+
+            <span class="old-price">
+              ₹180
+            </span>
+
+            <div class="new-price">
+              ₹60
+            </div>
+
+            <span class="discount">
+              SPECIAL DISCOUNT
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('500 Followers','60','180')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 3 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              1,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹300
+            </span>
+
+            <div class="new-price">
+              ₹120
+            </div>
+
+            <span class="discount">
+              LIMITED OFFER
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('1,000 Followers','120','300')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 4 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              2,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹550
+            </span>
+
+            <div class="new-price">
+              ₹220
+            </div>
+
+            <span class="discount">
+              DISCOUNTED
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('2,000 Followers','220','550')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 5 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              3,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹750
+            </span>
+
+            <div class="new-price">
+              ₹320
+            </div>
+
+            <span class="discount">
+              DISCOUNTED
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('3,000 Followers','320','750')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 6 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              5,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹1,200
+            </span>
+
+            <div class="new-price">
+              ₹500
+            </div>
+
+            <span class="discount">
+              BIG SAVING
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('5,000 Followers','500','1200')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 7 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              7,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹1,600
+            </span>
+
+            <div class="new-price">
+              ₹700
+            </div>
+
+            <span class="discount">
+              BIG SAVING
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('7,000 Followers','700','1600')"
+            >
+              View Service
+            </button>
+
+          </div>
+
+
+          <!-- PACKAGE 8 -->
+
+          <div class="price-card">
+
+            <div class="followers">
+              10,000 Followers
+            </div>
+
+            <span class="old-price">
+              ₹2,500
+            </span>
+
+            <div class="new-price">
+              ₹950
+            </div>
+
+            <span class="discount">
+              MAXIMUM VALUE
+            </span>
+
+            <button
+              class="order-btn"
+              onclick="openOrder('10,000 Followers','950','2500')"
+            >
+              View Service
+            </button>
+
+          </div>
+
         </div>
 
       </div>
@@ -1780,11 +2610,15 @@
 
   </main>
 
+
   <!-- =====================================================
        MOVIES TAB
   ====================================================== -->
 
-  <main id="movies" class="tab-content">
+  <main
+    id="movies"
+    class="tab-content"
+  >
 
     <section class="media-hero">
 
@@ -1799,10 +2633,12 @@
       </h1>
 
       <p>
-        Browse movies by genre. Choose a category or search for a specific title.
+        Browse the collection by category and open
+        your selected movie directly from its card.
       </p>
 
     </section>
+
 
     <section class="section">
 
@@ -1811,85 +2647,118 @@
         <i class="fa-solid fa-magnifying-glass"></i>
 
         <input
-          type="text"
           id="movieSearch"
+          type="text"
           placeholder="Search movies..."
           oninput="searchMovies()"
         >
 
       </div>
 
+
       <div class="category-filters">
 
-        <button class="filter-btn active" onclick="filterMovies('all',this)">
+        <button
+          class="filter-btn active"
+          onclick="filterMovies('all',this)"
+        >
           All Movies
         </button>
 
-        <button class="filter-btn" onclick="filterMovies('drama',this)">
-          Drama
-        </button>
-
-        <button class="filter-btn" onclick="filterMovies('crime',this)">
-          Crime
-        </button>
-
-        <button class="filter-btn" onclick="filterMovies('action',this)">
+        <button
+          class="filter-btn"
+          onclick="filterMovies('action',this)"
+        >
           Action
         </button>
 
-        <button class="filter-btn" onclick="filterMovies('scifi',this)">
-          Sci-Fi
-        </button>
-
-        <button class="filter-btn" onclick="filterMovies('thriller',this)">
-          Thriller
-        </button>
-
-        <button class="filter-btn" onclick="filterMovies('comedy',this)">
+        <button
+          class="filter-btn"
+          onclick="filterMovies('comedy',this)"
+        >
           Comedy
         </button>
 
-        <button class="filter-btn" onclick="filterMovies('biography',this)">
+        <button
+          class="filter-btn"
+          onclick="filterMovies('crime',this)"
+        >
+          Crime
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterMovies('drama',this)"
+        >
+          Drama
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterMovies('sciencefiction',this)"
+        >
+          Science Fiction
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterMovies('thriller',this)"
+        >
+          Thriller
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterMovies('biography',this)"
+        >
           Biography
         </button>
 
-        <button class="filter-btn" onclick="filterMovies('superhero',this)">
+        <button
+          class="filter-btn"
+          onclick="filterMovies('superhero',this)"
+        >
           Superhero
         </button>
 
       </div>
+
 
       <div
         class="media-grid"
         id="movieGrid"
       >
 
-        <!-- SHAWSHANK -->
+
+        <!-- =================================================
+             THE SHAWSHANK REDEMPTION
+        ================================================== -->
 
         <article
           class="media-card movie-item"
-          data-name="shawshank redemption drama crime"
+          data-name="the shawshank redemption drama crime"
           data-category="drama crime"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/the-shawshank-redemption/0111161"
+          onclick="openCard(this)"
         >
 
-          <div class="poster shawshank">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
+              alt="The Shawshank Redemption"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Drama</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Hope Never Dies</div>
-              <div class="poster-title">
-                THE SHAWSHANK<br>REDEMPTION
-              </div>
-              <div class="poster-subtitle">
-                1994 • Drama
-              </div>
+            <div class="poster-title">
+              THE SHAWSHANK REDEMPTION
             </div>
 
           </div>
@@ -1900,19 +2769,24 @@
               Drama • Crime
             </div>
 
-            <h3>The Shawshank Redemption</h3>
+            <h3>
+              The Shawshank Redemption
+            </h3>
 
             <p>
-              A powerful story of hope, friendship and survival.
+              A powerful prison drama about hope,
+              friendship and freedom.
             </p>
 
             <div class="media-info">
-              <span>1994</span>
               <span>Drama</span>
               <span>Crime</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
               <i class="fa-solid fa-arrow-right"></i>
             </button>
@@ -1921,32 +2795,34 @@
 
         </article>
 
-        <!-- DARK KNIGHT -->
+
+        <!-- THE DARK KNIGHT -->
 
         <article
           class="media-card movie-item"
           data-name="the dark knight action crime thriller superhero"
           data-category="action crime thriller superhero"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/the-dark-knight/0468569"
+          onclick="openCard(this)"
         >
 
-          <div class="poster dark-knight">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+              alt="The Dark Knight"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Action</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Why So Serious?</div>
-              <div class="poster-title">
-                THE DARK<br>KNIGHT
-              </div>
-              <div class="poster-subtitle">
-                Action • Crime • Thriller
-              </div>
+            <div class="poster-title">
+              THE DARK KNIGHT
             </div>
 
           </div>
@@ -1954,56 +2830,61 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Action • Crime • Superhero
+              Action • Crime • Thriller
             </div>
 
             <h3>The Dark Knight</h3>
 
             <p>
-              A legendary battle between Batman and the Joker.
+              Batman faces one of cinema's most
+              iconic villains in Gotham City.
             </p>
 
             <div class="media-info">
               <span>Action</span>
-              <span>Crime</span>
+              <span>Thriller</span>
               <span>Superhero</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- INCEPTION -->
 
         <article
           class="media-card movie-item"
-          data-name="inception science fiction scifi thriller action"
-          data-category="scifi thriller action"
-          data-url=""
+          data-name="inception science fiction action thriller"
+          data-category="sciencefiction action thriller"
+          data-url="https://www.moviesbazar.tv/watch/movie/inception/1375666"
+          onclick="openCard(this)"
         >
 
-          <div class="poster inception">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+              alt="Inception"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Sci-Fi</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Dream Within A Dream</div>
-              <div class="poster-title">
-                INCEPTION
-              </div>
-              <div class="poster-subtitle">
-                Sci-Fi • Thriller
-              </div>
+            <div class="poster-title">
+              INCEPTION
             </div>
 
           </div>
@@ -2011,29 +2892,33 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Sci-Fi • Thriller • Action
+              Science Fiction • Thriller
             </div>
 
             <h3>Inception</h3>
 
             <p>
-              Enter a world where dreams can be designed and manipulated.
+              A skilled thief enters the world
+              of dreams to perform an impossible mission.
             </p>
 
             <div class="media-info">
               <span>Sci-Fi</span>
-              <span>Thriller</span>
               <span>Action</span>
+              <span>Thriller</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- GODFATHER -->
 
@@ -2041,26 +2926,27 @@
           class="media-card movie-item"
           data-name="the godfather crime drama"
           data-category="crime drama"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/the-godfather/0068646"
+          onclick="openCard(this)"
         >
 
-          <div class="poster godfather">
+          <div class="poster">
 
-            <div class="quality-tag">Classic</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+              alt="The Godfather"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Crime</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">The Family</div>
-              <div class="poster-title">
-                THE<br>GODFATHER
-              </div>
-              <div class="poster-subtitle">
-                Crime • Drama
-              </div>
+            <div class="poster-title">
+              THE GODFATHER
             </div>
 
           </div>
@@ -2074,23 +2960,26 @@
             <h3>The Godfather</h3>
 
             <p>
-              A legendary story about family, power and organized crime.
+              The story of a powerful family
+              and the world of organized crime.
             </p>
 
             <div class="media-info">
               <span>Crime</span>
               <span>Drama</span>
-              <span>Classic</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- GODFATHER II -->
 
@@ -2098,26 +2987,27 @@
           class="media-card movie-item"
           data-name="the godfather part ii crime drama"
           data-category="crime drama"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/the-godfather-part-ii/0071562"
+          onclick="openCard(this)"
         >
 
-          <div class="poster godfather2">
+          <div class="poster">
 
-            <div class="quality-tag">Classic</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg"
+              alt="The Godfather Part II"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Crime</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">The Family Continues</div>
-              <div class="poster-title">
-                THE GODFATHER<br>PART II
-              </div>
-              <div class="poster-subtitle">
-                Crime • Drama
-              </div>
+            <div class="poster-title">
+              THE GODFATHER PART II
             </div>
 
           </div>
@@ -2131,50 +3021,54 @@
             <h3>The Godfather Part II</h3>
 
             <p>
-              The next chapter in the Corleone family story.
+              The Corleone family story continues
+              across two generations.
             </p>
 
             <div class="media-info">
               <span>Crime</span>
               <span>Drama</span>
-              <span>Classic</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- 3 IDIOTS -->
 
         <article
           class="media-card movie-item"
-          data-name="3 idiots comedy drama indian"
+          data-name="3 idiots comedy drama bollywood"
           data-category="comedy drama"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/3-idiots/1187043"
+          onclick="openCard(this)"
         >
 
-          <div class="poster idiots">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/66A9MqXOyVFCssoloscw79z8Tew.jpg"
+              alt="3 Idiots"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Comedy</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">All Is Well</div>
-              <div class="poster-title">
-                3 IDIOTS
-              </div>
-              <div class="poster-subtitle">
-                Comedy • Drama
-              </div>
+            <div class="poster-title">
+              3 IDIOTS
             </div>
 
           </div>
@@ -2188,50 +3082,54 @@
             <h3>3 Idiots</h3>
 
             <p>
-              A memorable story about friendship, education and life.
+              A funny and emotional story about
+              friendship, education and following passion.
             </p>
 
             <div class="media-info">
               <span>Comedy</span>
               <span>Drama</span>
-              <span>India</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- INTERSTELLAR -->
 
         <article
           class="media-card movie-item"
-          data-name="interstellar science fiction scifi adventure drama"
-          data-category="scifi adventure drama"
-          data-url=""
+          data-name="interstellar science fiction adventure drama"
+          data-category="sciencefiction adventure drama"
+          data-url="https://www.moviesbazar.tv/watch/movie/interstellar/0816692"
+          onclick="openCard(this)"
         >
 
-          <div class="poster interstellar">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+              alt="Interstellar"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Sci-Fi</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Beyond Our World</div>
-              <div class="poster-title">
-                INTERSTELLAR
-              </div>
-              <div class="poster-subtitle">
-                Sci-Fi • Adventure
-              </div>
+            <div class="poster-title">
+              INTERSTELLAR
             </div>
 
           </div>
@@ -2239,13 +3137,14 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Sci-Fi • Adventure • Drama
+              Science Fiction • Adventure
             </div>
 
             <h3>Interstellar</h3>
 
             <p>
-              A journey through space, time and humanity's future.
+              Explorers travel through space in
+              search of a future for humanity.
             </p>
 
             <div class="media-info">
@@ -2254,41 +3153,45 @@
               <span>Drama</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- SPIDER-MAN -->
 
         <article
           class="media-card movie-item"
-          data-name="spiderman spider-man brand new day action superhero adventure"
-          data-category="action superhero adventure"
-          data-url=""
+          data-name="spiderman brand new day action superhero science fiction"
+          data-category="action superhero sciencefiction"
+          data-url="https://www.moviesbazar.tv/watch/movie/spiderman-brand-new-day-hindi-english/22084616"
+          onclick="openCard(this)"
         >
 
-          <div class="poster spiderman">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://placehold.co/600x900/7f1d1d/ffffff?text=SPIDER-MAN%0ABRAND+NEW+DAY"
+              alt="Spider-Man Brand New Day"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Superhero</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">A New Chapter</div>
-              <div class="poster-title">
-                SPIDER-MAN<br>BRAND NEW DAY
-              </div>
-              <div class="poster-subtitle">
-                Action • Superhero
-              </div>
+            <div class="poster-title">
+              SPIDER-MAN
             </div>
 
           </div>
@@ -2296,29 +3199,33 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Action • Superhero • Adventure
+              Action • Superhero
             </div>
 
             <h3>Spider-Man: Brand New Day</h3>
 
             <p>
-              A new chapter from the world of Spider-Man.
+              A superhero adventure from the
+              Spider-Man universe.
             </p>
 
             <div class="media-info">
               <span>Action</span>
               <span>Superhero</span>
-              <span>Adventure</span>
+              <span>Sci-Fi</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- MUNNA BHAI -->
 
@@ -2326,26 +3233,27 @@
           class="media-card movie-item"
           data-name="munna bhai mbbs comedy drama"
           data-category="comedy drama"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/munna-bhai-mbbs/0374887"
+          onclick="openCard(this)"
         >
 
-          <div class="poster munnabhai">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://placehold.co/600x900/1e3a8a/ffffff?text=MUNNA+BHAI%0AMBBS"
+              alt="Munna Bhai MBBS"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Comedy</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Laughter & Heart</div>
-              <div class="poster-title">
-                MUNNA BHAI<br>M.B.B.S.
-              </div>
-              <div class="poster-subtitle">
-                Comedy • Drama
-              </div>
+            <div class="poster-title">
+              MUNNA BHAI MBBS
             </div>
 
           </div>
@@ -2356,26 +3264,29 @@
               Comedy • Drama
             </div>
 
-            <h3>Munna Bhai M.B.B.S.</h3>
+            <h3>Munna Bhai MBBS</h3>
 
             <p>
-              A comedy-drama filled with humor and emotion.
+              A warm comedy-drama with humor,
+              heart and an unconventional hero.
             </p>
 
             <div class="media-info">
               <span>Comedy</span>
               <span>Drama</span>
-              <span>India</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- OPPENHEIMER -->
 
@@ -2383,26 +3294,27 @@
           class="media-card movie-item"
           data-name="oppenheimer biography drama history"
           data-category="biography drama"
-          data-url=""
+          data-url="https://www.moviesbazar.tv/watch/movie/oppenheimer/15398776"
+          onclick="openCard(this)"
         >
 
-          <div class="poster oppenheimer">
+          <div class="poster">
 
-            <div class="quality-tag">HD</div>
+            <img
+              src="https://image.tmdb.org/t/p/w780/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+              alt="Oppenheimer"
+            >
+
+            <div class="quality-tag">MOVIE</div>
+
             <div class="genre-tag">Biography</div>
 
             <div class="play-overlay">
               <i class="fa-solid fa-play"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">The Story Of An Invention</div>
-              <div class="poster-title">
-                OPPENHEIMER
-              </div>
-              <div class="poster-subtitle">
-                Biography • Drama
-              </div>
+            <div class="poster-title">
+              OPPENHEIMER
             </div>
 
           </div>
@@ -2416,7 +3328,8 @@
             <h3>Oppenheimer</h3>
 
             <p>
-              A historical drama centered on J. Robert Oppenheimer.
+              A historical drama centered on the
+              life of J. Robert Oppenheimer.
             </p>
 
             <div class="media-info">
@@ -2425,9 +3338,11 @@
               <span>History</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Movie
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
@@ -2436,7 +3351,11 @@
 
       </div>
 
-      <div id="movieEmpty" class="empty-state">
+
+      <div
+        id="movieEmpty"
+        class="empty-state"
+      >
         No movies found in this category.
       </div>
 
@@ -2444,11 +3363,15 @@
 
   </main>
 
+
   <!-- =====================================================
        GAMES TAB
   ====================================================== -->
 
-  <main id="games" class="tab-content">
+  <main
+    id="games"
+    class="tab-content"
+  >
 
     <section class="media-hero">
 
@@ -2463,10 +3386,12 @@
       </h1>
 
       <p>
-        Browse games by genre including open-world, horror, action and shooter titles.
+        Browse open-world, horror, shooter,
+        adventure and action games.
       </p>
 
     </section>
+
 
     <section class="section">
 
@@ -2475,54 +3400,81 @@
         <i class="fa-solid fa-magnifying-glass"></i>
 
         <input
-          type="text"
           id="gameSearch"
+          type="text"
           placeholder="Search games..."
           oninput="searchGames()"
         >
 
       </div>
 
+
       <div class="category-filters">
 
-        <button class="filter-btn active" onclick="filterGames('all',this)">
+        <button
+          class="filter-btn active"
+          onclick="filterGames('all',this)"
+        >
           All Games
         </button>
 
-        <button class="filter-btn" onclick="filterGames('openworld',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('openworld',this)"
+        >
           Open World
         </button>
 
-        <button class="filter-btn" onclick="filterGames('horror',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('horror',this)"
+        >
           Horror
         </button>
 
-        <button class="filter-btn" onclick="filterGames('action',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('action',this)"
+        >
           Action
         </button>
 
-        <button class="filter-btn" onclick="filterGames('shooter',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('shooter',this)"
+        >
           Shooter
         </button>
 
-        <button class="filter-btn" onclick="filterGames('adventure',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('adventure',this)"
+        >
           Adventure
         </button>
 
-        <button class="filter-btn" onclick="filterGames('western',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('western',this)"
+        >
           Western
         </button>
 
-        <button class="filter-btn" onclick="filterGames('survival',this)">
+        <button
+          class="filter-btn"
+          onclick="filterGames('survival',this)"
+        >
           Survival
         </button>
 
       </div>
 
+
       <div
         class="media-grid"
         id="gameGrid"
       >
+
 
         <!-- GHOST OF TSUSHIMA -->
 
@@ -2530,26 +3482,27 @@
           class="media-card game-item"
           data-name="ghost of tsushima action adventure open world samurai"
           data-category="action adventure openworld"
-          data-url=""
+          data-url="https://ankergames.net/game/ghost-of-tsushima"
+          onclick="openCard(this)"
         >
 
-          <div class="poster ghost">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/7f1d1d/ffffff?text=GHOST+OF%0ATSUSHIMA"
+              alt="Ghost of Tsushima"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Adventure</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">The Last Samurai</div>
-              <div class="poster-title">
-                GHOST OF<br>TSUSHIMA
-              </div>
-              <div class="poster-subtitle">
-                Action • Open World
-              </div>
+            <div class="poster-title">
+              GHOST OF TSUSHIMA
             </div>
 
           </div>
@@ -2563,7 +3516,8 @@
             <h3>Ghost of Tsushima</h3>
 
             <p>
-              Explore feudal Japan in a cinematic samurai adventure.
+              A cinematic samurai adventure set
+              in an open world.
             </p>
 
             <div class="media-info">
@@ -2572,14 +3526,17 @@
               <span>Open World</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- GTA VICE CITY -->
 
@@ -2587,26 +3544,27 @@
           class="media-card game-item"
           data-name="grand theft auto vice city gta open world action"
           data-category="openworld action"
-          data-url=""
+          data-url="https://ankergames.net/game/grand-theft-auto-vice-city"
+          onclick="openCard(this)"
         >
 
-          <div class="poster vicecity">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/831843/ffffff?text=GRAND+THEFT+AUTO%0AVICE+CITY"
+              alt="GTA Vice City"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Open World</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Welcome To Vice City</div>
-              <div class="poster-title">
-                GRAND THEFT<br>AUTO VICE CITY
-              </div>
-              <div class="poster-subtitle">
-                Open World • Action
-              </div>
+            <div class="poster-title">
+              GTA VICE CITY
             </div>
 
           </div>
@@ -2620,23 +3578,26 @@
             <h3>Grand Theft Auto: Vice City</h3>
 
             <p>
-              Explore a neon-inspired criminal open world.
+              Explore a crime-filled open world
+              inspired by a vibrant coastal city.
             </p>
 
             <div class="media-info">
               <span>Open World</span>
               <span>Action</span>
-              <span>Classic</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- RESIDENT EVIL 4 -->
 
@@ -2644,26 +3605,27 @@
           class="media-card game-item"
           data-name="resident evil 4 remake horror survival action"
           data-category="horror survival action"
-          data-url=""
+          data-url="https://ankergames.net/game/resident-evil-4-remake"
+          onclick="openCard(this)"
         >
 
-          <div class="poster resident">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/14532d/ffffff?text=RESIDENT+EVIL+4%0AREMAKE"
+              alt="Resident Evil 4 Remake"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Horror</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Survive The Nightmare</div>
-              <div class="poster-title">
-                RESIDENT EVIL 4<br>REMAKE
-              </div>
-              <div class="poster-subtitle">
-                Horror • Survival
-              </div>
+            <div class="poster-title">
+              RESIDENT EVIL 4 REMAKE
             </div>
 
           </div>
@@ -2677,7 +3639,8 @@
             <h3>Resident Evil 4 Remake</h3>
 
             <p>
-              A modern survival horror adventure.
+              A survival horror adventure with
+              action and terrifying encounters.
             </p>
 
             <div class="media-info">
@@ -2686,41 +3649,45 @@
               <span>Action</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- GRANNY CHAPTER TWO -->
+
+        <!-- GRANNY -->
 
         <article
           class="media-card game-item"
           data-name="granny chapter two horror survival"
           data-category="horror survival"
-          data-url=""
+          data-url="https://ankergames.net/game/granny-chapter-two"
+          onclick="openCard(this)"
         >
 
-          <div class="poster granny">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/111827/ffffff?text=GRANNY%0ACHAPTER+TWO"
+              alt="Granny Chapter Two"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Horror</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Don't Make A Sound</div>
-              <div class="poster-title">
-                GRANNY<br>CHAPTER TWO
-              </div>
-              <div class="poster-subtitle">
-                Horror • Survival
-              </div>
+            <div class="poster-title">
+              GRANNY CHAPTER TWO
             </div>
 
           </div>
@@ -2731,53 +3698,57 @@
               Horror • Survival
             </div>
 
-            <h3>Granny: Chapter Two</h3>
+            <h3>Granny Chapter Two</h3>
 
             <p>
-              Escape a terrifying environment without being caught.
+              Escape a terrifying environment while
+              surviving dangerous enemies.
             </p>
 
             <div class="media-info">
               <span>Horror</span>
               <span>Survival</span>
-              <span>Escape</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- DEVIL IN ME -->
+
+        <!-- THE DEVIL IN ME -->
 
         <article
           class="media-card game-item"
           data-name="the dark pictures anthology the devil in me horror adventure survival"
           data-category="horror adventure survival"
-          data-url=""
+          data-url="https://ankergames.net/game/the-dark-pictures-anthology-the-devil-in-me"
+          onclick="openCard(this)"
         >
 
-          <div class="poster devil">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/450a0a/ffffff?text=THE+DEVIL%0AIN+ME"
+              alt="The Devil in Me"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Horror</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Choose Your Fate</div>
-              <div class="poster-title">
-                THE DEVIL<br>IN ME
-              </div>
-              <div class="poster-subtitle">
-                Horror • Adventure
-              </div>
+            <div class="poster-title">
+              THE DEVIL IN ME
             </div>
 
           </div>
@@ -2788,10 +3759,11 @@
               Horror • Adventure • Survival
             </div>
 
-            <h3>The Dark Pictures: The Devil in Me</h3>
+            <h3>The Devil in Me</h3>
 
             <p>
-              A cinematic horror experience where choices matter.
+              A dark cinematic horror experience
+              where choices influence survival.
             </p>
 
             <div class="media-info">
@@ -2800,41 +3772,45 @@
               <span>Survival</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- RDR2 -->
+
+        <!-- RDR 2 -->
 
         <article
           class="media-card game-item"
-          data-name="red dead redemption 2 rdr2 western open world action adventure"
-          data-category="western openworld action adventure"
-          data-url=""
+          data-name="red dead redemption 2 open world western action adventure"
+          data-category="openworld western action adventure"
+          data-url="https://ankergames.net/game/red-dead-redemption-2"
+          onclick="openCard(this)"
         >
 
-          <div class="poster rdr2">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/7f1d1d/ffffff?text=RED+DEAD%0AREDEMPTION+2"
+              alt="Red Dead Redemption 2"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Western</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Outlaws For Life</div>
-              <div class="poster-title">
-                RED DEAD<br>REDEMPTION 2
-              </div>
-              <div class="poster-subtitle">
-                Western • Open World
-              </div>
+            <div class="poster-title">
+              RED DEAD REDEMPTION 2
             </div>
 
           </div>
@@ -2842,29 +3818,33 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Western • Open World • Adventure
+              Open World • Western • Adventure
             </div>
 
             <h3>Red Dead Redemption 2</h3>
 
             <p>
-              An epic western adventure across a massive open world.
+              A large open-world western adventure
+              with a detailed story.
             </p>
 
             <div class="media-info">
-              <span>Western</span>
               <span>Open World</span>
+              <span>Western</span>
               <span>Adventure</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
+
 
         <!-- GTA V -->
 
@@ -2872,26 +3852,27 @@
           class="media-card game-item"
           data-name="grand theft auto v gta 5 open world action"
           data-category="openworld action"
-          data-url=""
+          data-url="https://ankergames.net/game/grand-theft-auto-v"
+          onclick="openCard(this)"
         >
 
-          <div class="poster gtav">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/064e3b/ffffff?text=GRAND+THEFT+AUTO+V"
+              alt="Grand Theft Auto V"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Open World</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Los Santos</div>
-              <div class="poster-title">
-                GRAND THEFT<br>AUTO V
-              </div>
-              <div class="poster-subtitle">
-                Open World • Action
-              </div>
+            <div class="poster-title">
+              GRAND THEFT AUTO V
             </div>
 
           </div>
@@ -2905,50 +3886,54 @@
             <h3>Grand Theft Auto V</h3>
 
             <p>
-              Explore Los Santos in a large-scale open-world experience.
+              A modern open-world action game
+              set in a massive fictional city.
             </p>
 
             <div class="media-info">
               <span>Open World</span>
               <span>Action</span>
-              <span>Sandbox</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- SAN ANDREAS -->
+
+        <!-- GTA SAN ANDREAS -->
 
         <article
           class="media-card game-item"
           data-name="grand theft auto san andreas gta open world action"
           data-category="openworld action"
-          data-url=""
+          data-url="https://ankergames.net/game/grand-theft-auto-san-andreas-2"
+          onclick="openCard(this)"
         >
 
-          <div class="poster sanandreas">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/1d4ed8/ffffff?text=GTA%0ASAN+ANDREAS"
+              alt="Grand Theft Auto San Andreas"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Open World</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Welcome To San Andreas</div>
-              <div class="poster-title">
-                GRAND THEFT<br>AUTO SAN ANDREAS
-              </div>
-              <div class="poster-subtitle">
-                Open World • Action
-              </div>
+            <div class="poster-title">
+              GTA SAN ANDREAS
             </div>
 
           </div>
@@ -2962,50 +3947,54 @@
             <h3>Grand Theft Auto: San Andreas</h3>
 
             <p>
-              A classic open-world action experience.
+              Explore a classic open world filled
+              with missions, cities and freedom.
             </p>
 
             <div class="media-info">
               <span>Open World</span>
               <span>Action</span>
-              <span>Classic</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- MODERN WARFARE 2 -->
+
+        <!-- COD MW2 -->
 
         <article
           class="media-card game-item"
-          data-name="call of duty modern warfare 2 shooter action fps"
+          data-name="call of duty modern warfare 2 shooter action"
           data-category="shooter action"
-          data-url=""
+          data-url="https://ankergames.net/game/call-of-duty-modern-warfare-2"
+          onclick="openCard(this)"
         >
 
-          <div class="poster mw2">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/374151/ffffff?text=CALL+OF+DUTY%0AMODERN+WARFARE+2"
+              alt="Call of Duty Modern Warfare 2"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Shooter</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">No Easy Day</div>
-              <div class="poster-title">
-                CALL OF DUTY<br>MODERN WARFARE 2
-              </div>
-              <div class="poster-subtitle">
-                Shooter • Action
-              </div>
+            <div class="poster-title">
+              MODERN WARFARE 2
             </div>
 
           </div>
@@ -3019,50 +4008,54 @@
             <h3>Call of Duty: Modern Warfare 2</h3>
 
             <p>
-              A high-intensity first-person shooter experience.
+              A military shooter experience with
+              fast-paced action.
             </p>
 
             <div class="media-info">
               <span>Shooter</span>
               <span>Action</span>
-              <span>FPS</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- BLACK OPS II -->
 
         <article
           class="media-card game-item"
-          data-name="call of duty black ops ii black ops 2 shooter action fps"
+          data-name="call of duty black ops ii shooter action"
           data-category="shooter action"
-          data-url=""
+          data-url="https://ankergames.net/game/call-of-duty-black-ops-ii"
+          onclick="openCard(this)"
         >
 
-          <div class="poster bo2">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/111827/ffffff?text=CALL+OF+DUTY%0ABLACK+OPS+II"
+              alt="Call of Duty Black Ops II"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Shooter</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Future Warfare</div>
-              <div class="poster-title">
-                CALL OF DUTY<br>BLACK OPS II
-              </div>
-              <div class="poster-subtitle">
-                Shooter • Action
-              </div>
+            <div class="poster-title">
+              BLACK OPS II
             </div>
 
           </div>
@@ -3076,50 +4069,54 @@
             <h3>Call of Duty: Black Ops II</h3>
 
             <p>
-              A fast-paced military shooter with futuristic warfare.
+              A military shooter with intense
+              missions and combat action.
             </p>
 
             <div class="media-info">
               <span>Shooter</span>
               <span>Action</span>
-              <span>FPS</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
+
         <!-- BLACK OPS III -->
 
         <article
           class="media-card game-item"
-          data-name="call of duty black ops iii black ops 3 shooter action fps"
+          data-name="call of duty black ops iii shooter action"
           data-category="shooter action"
-          data-url=""
+          data-url="https://ankergames.net/game/call-of-duty-black-ops-iii"
+          onclick="openCard(this)"
         >
 
-          <div class="poster bo3">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/9f1239/ffffff?text=CALL+OF+DUTY%0ABLACK+OPS+III"
+              alt="Call of Duty Black Ops III"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Shooter</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">Black Ops Returns</div>
-              <div class="poster-title">
-                CALL OF DUTY<br>BLACK OPS III
-              </div>
-              <div class="poster-subtitle">
-                Shooter • Action
-              </div>
+            <div class="poster-title">
+              BLACK OPS III
             </div>
 
           </div>
@@ -3133,50 +4130,54 @@
             <h3>Call of Duty: Black Ops III</h3>
 
             <p>
-              A futuristic action shooter experience.
+              A futuristic shooter with
+              fast-paced combat.
             </p>
 
             <div class="media-info">
               <span>Shooter</span>
               <span>Action</span>
-              <span>FPS</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
 
         </article>
 
-        <!-- RDR -->
+
+        <!-- RED DEAD REDEMPTION -->
 
         <article
           class="media-card game-item"
-          data-name="red dead redemption western open world action adventure"
-          data-category="western openworld action adventure"
-          data-url=""
+          data-name="red dead redemption open world western action adventure"
+          data-category="openworld western action adventure"
+          data-url="https://ankergames.net/game/red-dead-redemption"
+          onclick="openCard(this)"
         >
 
-          <div class="poster rdr1">
+          <div class="poster">
 
-            <div class="quality-tag">PC</div>
+            <img
+              src="https://placehold.co/600x900/991b1b/ffffff?text=RED+DEAD%0AREDEMPTION"
+              alt="Red Dead Redemption"
+            >
+
+            <div class="quality-tag">GAME</div>
+
             <div class="genre-tag">Western</div>
 
             <div class="play-overlay">
-              <i class="fa-solid fa-gamepad"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </div>
 
-            <div class="poster-content">
-              <div class="poster-kicker">The Wild West</div>
-              <div class="poster-title">
-                RED DEAD<br>REDEMPTION
-              </div>
-              <div class="poster-subtitle">
-                Western • Adventure
-              </div>
+            <div class="poster-title">
+              RED DEAD REDEMPTION
             </div>
 
           </div>
@@ -3184,13 +4185,14 @@
           <div class="card-body">
 
             <div class="media-meta">
-              Western • Open World • Adventure
+              Western • Open World • Action
             </div>
 
             <h3>Red Dead Redemption</h3>
 
             <p>
-              A western adventure about redemption and survival.
+              A western action adventure about
+              redemption in a dangerous frontier.
             </p>
 
             <div class="media-info">
@@ -3199,9 +4201,11 @@
               <span>Adventure</span>
             </div>
 
-            <button class="open-media-btn" onclick="openMedia(this)">
+            <button
+              class="open-media-btn"
+              onclick="event.stopPropagation();openCard(this.closest('.media-card'))"
+            >
               Open Game
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
 
           </div>
@@ -3210,7 +4214,11 @@
 
       </div>
 
-      <div id="gameEmpty" class="empty-state">
+
+      <div
+        id="gameEmpty"
+        class="empty-state"
+      >
         No games found in this category.
       </div>
 
@@ -3218,53 +4226,10 @@
 
   </main>
 
+
   <!-- =====================================================
-       SUPPORT
+       FOOTER
   ====================================================== -->
-
-  <section class="support-section">
-
-    <h2>Need Help?</h2>
-
-    <p>
-      Contact SehrAn Media support for assistance.
-    </p>
-
-    <div class="support-buttons">
-
-      <a
-        href="https://wa.me/919103874044"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn whatsapp-btn"
-      >
-        <i class="fa-brands fa-whatsapp"></i>
-        WhatsApp
-      </a>
-
-      <a
-        href="mailto:zpaul5567@gmail.com"
-        class="support-btn email-btn"
-      >
-        <i class="fa-solid fa-envelope"></i>
-        Email
-      </a>
-
-      <a
-        href="https://t.me/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn telegram-btn"
-      >
-        <i class="fa-brands fa-telegram"></i>
-        Telegram
-      </a>
-
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
 
   <footer>
 
@@ -3278,17 +4243,18 @@
 
   </footer>
 
+
   <!-- =====================================================
        JAVASCRIPT
   ====================================================== -->
 
   <script>
 
-    /* =========================
+    /* =====================================================
        TAB SYSTEM
-    ========================== */
+    ====================================================== */
 
-    function showTab(tabName,clickedButton){
+    function showTab(tabName,button){
 
       document
         .querySelectorAll(".tab-content")
@@ -3298,18 +4264,19 @@
 
       document
         .querySelectorAll(".main-tab")
-        .forEach(button=>{
-          button.classList.remove("active");
+        .forEach(tabButton=>{
+          tabButton.classList.remove("active");
         });
 
-      const selectedTab=document.getElementById(tabName);
+      const selectedTab=
+        document.getElementById(tabName);
 
       if(selectedTab){
         selectedTab.classList.add("active");
       }
 
-      if(clickedButton){
-        clickedButton.classList.add("active");
+      if(button){
+        button.classList.add("active");
       }
 
       window.scrollTo({
@@ -3319,64 +4286,97 @@
 
     }
 
-    /* =========================
-       INSTAGRAM
-    ========================== */
 
-    function openInstagram(){
+    /* =====================================================
+       INSTAGRAM ORDER
+    ====================================================== */
 
-      const services=document.getElementById("instagram-services");
+    function openOrder(
+      packageName,
+      price,
+      originalPrice
+    ){
 
-      if(services){
+      const params=
+        new URLSearchParams();
 
-        services.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
+      params.set(
+        "type",
+        "instagram"
+      );
+
+      params.set(
+        "package",
+        packageName
+      );
+
+      params.set(
+        "price",
+        price
+      );
+
+      params.set(
+        "originalPrice",
+        originalPrice
+      );
+
+      window.location.href=
+        "order.html?"+
+        params.toString();
+
+    }
+
+
+    /* =====================================================
+       DIRECT OPEN MOVIE / GAME
+       NO PLACEHOLDER ERROR
+    ====================================================== */
+
+    function openCard(card){
+
+      if(!card){
+        return;
+      }
+
+      const url=
+        card.dataset.url;
+
+      if(
+        url &&
+        url.startsWith("http")
+      ){
+
+        window.open(
+          url,
+          "_blank",
+          "noopener,noreferrer"
+        );
 
       }
 
     }
 
-    /* =========================
-       SOCIAL SEARCH
-    ========================== */
 
-    function searchSocial(){
-
-      const input=document.getElementById("socialSearch");
-
-      if(!input)return;
-
-      const query=input.value.toLowerCase().trim();
-
-      document
-        .querySelectorAll(".social-item")
-        .forEach(item=>{
-
-          const name=item.dataset.name||"";
-
-          item.classList.toggle(
-            "hidden-item",
-            !name.includes(query)
-          );
-
-        });
-
-    }
-
-    /* =========================
+    /* =====================================================
        MOVIE FILTER
-    ========================== */
+    ====================================================== */
 
-    let currentMovieCategory="all";
+    let currentMovieCategory=
+      "all";
 
-    function filterMovies(category,button){
 
-      currentMovieCategory=category;
+    function filterMovies(
+      category,
+      button
+    ){
+
+      currentMovieCategory=
+        category;
 
       document
-        .querySelectorAll("#movies .filter-btn")
+        .querySelectorAll(
+          "#movies .filter-btn"
+        )
         .forEach(btn=>{
           btn.classList.remove("active");
         });
@@ -3389,17 +4389,24 @@
 
     }
 
+
     function searchMovies(){
 
-      currentMovieCategory="all";
+      currentMovieCategory=
+        "all";
 
       document
-        .querySelectorAll("#movies .filter-btn")
+        .querySelectorAll(
+          "#movies .filter-btn"
+        )
         .forEach(btn=>{
           btn.classList.remove("active");
         });
 
-      const allButton=document.querySelector("#movies .filter-btn");
+      const allButton=
+        document.querySelector(
+          "#movies .filter-btn"
+        );
 
       if(allButton){
         allButton.classList.add("active");
@@ -3409,25 +4416,34 @@
 
     }
 
+
     function applyMovieFilters(){
 
-      const searchInput=document.getElementById("movieSearch");
+      const input=
+        document.getElementById(
+          "movieSearch"
+        );
 
       const query=
-        searchInput.value
+        input.value
           .toLowerCase()
           .trim();
 
       let visibleCount=0;
 
       document
-        .querySelectorAll(".movie-item")
+        .querySelectorAll(
+          ".movie-item"
+        )
         .forEach(item=>{
 
-          const name=item.dataset.name||"";
+          const name=
+            item.dataset.name || "";
 
           const categories=
-            (item.dataset.category||"")
+            (
+              item.dataset.category || ""
+            )
             .split(" ");
 
           const matchesSearch=
@@ -3435,7 +4451,9 @@
 
           const matchesCategory=
             currentMovieCategory==="all" ||
-            categories.includes(currentMovieCategory);
+            categories.includes(
+              currentMovieCategory
+            );
 
           const visible=
             matchesSearch &&
@@ -3453,7 +4471,9 @@
         });
 
       document
-        .getElementById("movieEmpty")
+        .getElementById(
+          "movieEmpty"
+        )
         .classList.toggle(
           "show",
           visibleCount===0
@@ -3461,18 +4481,27 @@
 
     }
 
-    /* =========================
+
+    /* =====================================================
        GAME FILTER
-    ========================== */
+    ====================================================== */
 
-    let currentGameCategory="all";
+    let currentGameCategory=
+      "all";
 
-    function filterGames(category,button){
 
-      currentGameCategory=category;
+    function filterGames(
+      category,
+      button
+    ){
+
+      currentGameCategory=
+        category;
 
       document
-        .querySelectorAll("#games .filter-btn")
+        .querySelectorAll(
+          "#games .filter-btn"
+        )
         .forEach(btn=>{
           btn.classList.remove("active");
         });
@@ -3485,17 +4514,24 @@
 
     }
 
+
     function searchGames(){
 
-      currentGameCategory="all";
+      currentGameCategory=
+        "all";
 
       document
-        .querySelectorAll("#games .filter-btn")
+        .querySelectorAll(
+          "#games .filter-btn"
+        )
         .forEach(btn=>{
           btn.classList.remove("active");
         });
 
-      const allButton=document.querySelector("#games .filter-btn");
+      const allButton=
+        document.querySelector(
+          "#games .filter-btn"
+        );
 
       if(allButton){
         allButton.classList.add("active");
@@ -3505,25 +4541,34 @@
 
     }
 
+
     function applyGameFilters(){
 
-      const searchInput=document.getElementById("gameSearch");
+      const input=
+        document.getElementById(
+          "gameSearch"
+        );
 
       const query=
-        searchInput.value
+        input.value
           .toLowerCase()
           .trim();
 
       let visibleCount=0;
 
       document
-        .querySelectorAll(".game-item")
+        .querySelectorAll(
+          ".game-item"
+        )
         .forEach(item=>{
 
-          const name=item.dataset.name||"";
+          const name=
+            item.dataset.name || "";
 
           const categories=
-            (item.dataset.category||"")
+            (
+              item.dataset.category || ""
+            )
             .split(" ");
 
           const matchesSearch=
@@ -3531,7 +4576,9 @@
 
           const matchesCategory=
             currentGameCategory==="all" ||
-            categories.includes(currentGameCategory);
+            categories.includes(
+              currentGameCategory
+            );
 
           const visible=
             matchesSearch &&
@@ -3549,44 +4596,13 @@
         });
 
       document
-        .getElementById("gameEmpty")
+        .getElementById(
+          "gameEmpty"
+        )
         .classList.toggle(
           "show",
           visibleCount===0
         );
-
-    }
-
-    /* =========================
-       OPEN MOVIE / GAME
-       Only opens a URL placed in
-       data-url on the card.
-    ========================== */
-
-    function openMedia(button){
-
-      const card=
-        button.closest(".media-card");
-
-      if(!card)return;
-
-      const url=
-        card.dataset.url;
-
-      if(!url){
-
-        alert(
-          "No destination URL has been configured for this title yet."
-        );
-
-        return;
-      }
-
-      window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-      );
 
     }
 
