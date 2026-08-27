@@ -4,17 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Order — SehrAn Media</title>
+<title>Checkout — SehrAn Media</title>
+
+<meta
+  name="description"
+  content="Secure checkout and order page — SehrAn Media."
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap"
   rel="stylesheet"
 >
 
 <style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+  --pink:#ff3d81;
+  --pink2:#ff6aa5;
+  --purple:#7c4dff;
+  --blue:#4c8dff;
+  --cyan:#28d7ff;
+  --green:#21d889;
+  --yellow:#ffd166;
+
+  --bg:#050812;
+  --bg2:#090e1b;
+  --card:#0d1425;
+  --card2:#111a2e;
+
+  --border:rgba(120,140,190,.20);
+  --border2:rgba(255,255,255,.08);
+
+  --text:#ffffff;
+  --muted:#8d98b5;
+  --muted2:#64708c;
+}
+
 /* =========================================================
    RESET
 ========================================================= */
@@ -33,25 +65,61 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 
-  font-family:"Poppins",sans-serif;
-  color:#fff;
+  font-family:"Inter",sans-serif;
+  color:var(--text);
 
   background:
     radial-gradient(
       circle at 50% -10%,
-      rgba(124,77,255,.28),
-      transparent 40%
+      rgba(124,77,255,.35),
+      transparent 38%
     ),
     radial-gradient(
-      circle at 0% 30%,
-      rgba(255,61,129,.10),
-      transparent 35%
+      circle at 0% 35%,
+      rgba(255,61,129,.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 100% 65%,
+      rgba(40,215,255,.09),
+      transparent 30%
     ),
     linear-gradient(
       180deg,
-      #0b1020 0%,
-      #070b15 55%,
-      #03050a 100%
+      #080d1b 0%,
+      #050812 50%,
+      #02040a 100%
+    );
+}
+
+body::before{
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.035;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.5) 1px,
+      transparent 1px
+    );
+
+  background-size:45px 45px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 80%
     );
 }
 
@@ -70,16 +138,124 @@ button:disabled{
 }
 
 /* =========================================================
+   FLOATING ORBS
+========================================================= */
+
+.orb{
+  position:fixed;
+
+  width:250px;
+  height:250px;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  filter:blur(70px);
+
+  opacity:.12;
+
+  animation:orbFloat 10s ease-in-out infinite;
+}
+
+.orb.one{
+  top:10%;
+  left:-100px;
+  background:var(--pink);
+}
+
+.orb.two{
+  right:-100px;
+  bottom:10%;
+  background:var(--purple);
+  animation-delay:-4s;
+}
+
+@keyframes orbFloat{
+
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+
+  50%{
+    transform:translate3d(0,-35px,0);
+  }
+}
+
+/* =========================================================
    PAGE
 ========================================================= */
 
 .page{
+  position:relative;
+  z-index:2;
+
   width:100%;
-  max-width:900px;
+  max-width:920px;
 
   margin:0 auto;
 
-  padding:30px 18px 70px;
+  padding:30px 18px 80px;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:28px;
+}
+
+.home-btn{
+  min-height:42px;
+
+  padding:0 15px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:rgba(15,22,40,.75);
+
+  color:#dfe5f4;
+
+  font-size:12px;
+  font-weight:800;
+
+  backdrop-filter:blur(15px);
+
+  transition:.25s ease;
+}
+
+.home-btn:hover{
+  transform:translateY(-2px);
+
+  border-color:rgba(255,61,129,.4);
+
+  background:rgba(255,61,129,.08);
+}
+
+.secure-badge{
+  display:flex;
+  align-items:center;
+  gap:7px;
+
+  padding:9px 13px;
+
+  border:1px solid rgba(33,216,137,.20);
+  border-radius:999px;
+
+  background:rgba(33,216,137,.06);
+
+  color:#7debb8;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:.5px;
 }
 
 /* =========================================================
@@ -88,47 +264,137 @@ button:disabled{
 
 .brand{
   text-align:center;
+
   margin-bottom:28px;
+}
+
+.logo-mark{
+  width:62px;
+  height:62px;
+
+  margin:0 auto 15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,61,129,.28),
+      rgba(124,77,255,.30)
+    );
+
+  box-shadow:
+    0 15px 50px rgba(124,77,255,.20),
+    inset 0 1px 0 rgba(255,255,255,.12);
+
+  font-size:27px;
+
+  animation:logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
 }
 
 .brand h1{
   font-family:"Montserrat",sans-serif;
 
-  font-size:clamp(30px,6vw,42px);
-  font-weight:800;
+  font-size:clamp(31px,6vw,45px);
+  font-weight:900;
 
-  letter-spacing:-1.5px;
+  letter-spacing:-2px;
 }
 
 .brand h1 span{
-  color:#ff3d81;
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      var(--purple),
+      var(--blue)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+
+  background-size:200% 100%;
+
+  animation:gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  100%{
+    background-position:200% 50%;
+  }
 }
 
 .brand p{
-  margin-top:7px;
+  margin-top:8px;
 
-  color:#8f99b5;
+  color:var(--muted);
 
-  font-size:12px;
+  font-size:11px;
+  font-weight:600;
+
+  letter-spacing:.2px;
 }
 
 /* =========================================================
-   PROGRESS
+   CHECKOUT PROGRESS
 ========================================================= */
+
+.progress-card{
+  margin-bottom:24px;
+
+  padding:18px 20px;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:rgba(10,16,30,.72);
+
+  backdrop-filter:blur(20px);
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.25);
+}
 
 .progress{
   display:flex;
   align-items:center;
   justify-content:center;
+}
 
-  margin-bottom:25px;
+.progress-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
 }
 
 .step{
-  width:40px;
-  height:40px;
+  width:39px;
+  height:39px;
 
-  flex:0 0 40px;
+  flex:0 0 39px;
 
   display:flex;
   align-items:center;
@@ -137,35 +403,71 @@ button:disabled{
   border:1px solid #35405d;
   border-radius:50%;
 
-  background:#141b2e;
+  background:#11192b;
 
-  color:#75809d;
+  color:#687593;
 
-  font-size:13px;
-  font-weight:800;
+  font-size:12px;
+  font-weight:900;
 
-  transition:.25s ease;
+  transition:.35s ease;
 }
 
 .step.active{
-  border-color:#ff3d81;
+  border-color:transparent;
 
-  background:#ff3d81;
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink),
+      var(--purple)
+    );
 
   color:#fff;
 
   box-shadow:
-    0 0 0 5px rgba(255,61,129,.08),
-    0 0 28px rgba(255,61,129,.30);
+    0 0 0 5px rgba(255,61,129,.07),
+    0 0 30px rgba(255,61,129,.25);
 }
 
-.line{
-  width:75px;
+.step.done{
+  background:var(--green);
+  border-color:var(--green);
+  color:#06130c;
+}
+
+.step-label{
+  color:#687593;
+
+  font-size:9px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.step-label.active{
+  color:#fff;
+}
+
+.progress-line{
+  width:55px;
   height:2px;
 
-  background:#303950;
+  margin:0 12px;
 
-  transition:.25s ease;
+  background:#29344e;
+
+  transition:.5s ease;
+}
+
+.progress-line.active{
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      var(--purple)
+    );
 }
 
 /* =========================================================
@@ -173,18 +475,47 @@ button:disabled{
 ========================================================= */
 
 .card{
-  width:100%;
+  position:relative;
 
-  padding:30px;
+  overflow:hidden;
 
-  border:1px solid rgba(65,76,110,.65);
-  border-radius:24px;
+  padding:31px;
 
-  background:rgba(10,15,30,.96);
+  border:1px solid var(--border);
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14,21,39,.97),
+      rgba(7,11,21,.98)
+    );
 
   box-shadow:
-    0 25px 80px rgba(0,0,0,.40),
-    inset 0 1px 0 rgba(255,255,255,.025);
+    0 30px 100px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.card::before{
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  top:-200px;
+  right:-130px;
+
+  border-radius:50%;
+
+  background:var(--purple);
+
+  filter:blur(100px);
+
+  opacity:.10;
+
+  pointer-events:none;
 }
 
 /* =========================================================
@@ -193,102 +524,168 @@ button:disabled{
 
 .screen{
   display:none;
+
+  position:relative;
+  z-index:1;
 }
 
 .screen.active{
   display:block;
 
   animation:
-    fadeIn .28s ease;
+    screenIn .35s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes fadeIn{
+@keyframes screenIn{
+
   from{
     opacity:0;
-    transform:translateY(8px);
+    transform:translateY(12px) scale(.99);
   }
 
   to{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
   }
 }
 
 /* =========================================================
-   TITLES
+   TITLE
 ========================================================= */
 
 .title{
   font-family:"Montserrat",sans-serif;
 
-  font-size:26px;
-  font-weight:800;
+  font-size:27px;
+  font-weight:900;
 
-  line-height:1.25;
+  line-height:1.2;
 
-  margin-bottom:8px;
+  letter-spacing:-.8px;
+
+  margin-bottom:9px;
 }
 
 .subtitle{
-  margin-bottom:24px;
+  margin-bottom:25px;
 
-  color:#9ba5bf;
+  color:#8995b2;
 
-  font-size:13px;
-  line-height:1.7;
+  font-size:12px;
+  line-height:1.75;
 }
 
 /* =========================================================
-   PRODUCT
+   PRODUCT CARD
 ========================================================= */
 
 .product-card{
-  width:100%;
+  position:relative;
 
-  margin-bottom:22px;
-  padding:21px;
+  overflow:hidden;
 
-  border:1px solid rgba(255,61,129,.25);
-  border-radius:18px;
+  margin-bottom:23px;
+  padding:22px;
+
+  border:1px solid rgba(255,61,129,.18);
+  border-radius:20px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(255,61,129,.12),
-      rgba(124,77,255,.09)
+      rgba(255,61,129,.11),
+      rgba(124,77,255,.10),
+      rgba(40,215,255,.04)
     );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.product-card::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-30px;
+  top:-30px;
+
+  border-radius:50%;
+
+  background:var(--pink);
+
+  filter:blur(45px);
+
+  opacity:.13;
+}
+
+.product-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
 }
 
 .product-label{
   margin-bottom:7px;
 
-  color:#7f89a7;
+  color:#707c9b;
 
-  font-size:10px;
-  font-weight:800;
+  font-size:9px;
+  font-weight:900;
 
   text-transform:uppercase;
-  letter-spacing:1.3px;
+  letter-spacing:1.5px;
 }
 
 .product-name{
   font-family:"Montserrat",sans-serif;
 
-  font-size:21px;
-  font-weight:800;
+  font-size:20px;
+  font-weight:900;
 
   line-height:1.4;
 
   overflow-wrap:anywhere;
 }
 
-.product-price{
-  margin-top:11px;
+.product-icon{
+  width:46px;
+  height:46px;
 
-  color:#ff5d97;
+  flex:0 0 46px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.07);
+
+  font-size:21px;
+}
+
+.product-price{
+  margin-top:13px;
+
+  color:#fff;
 
   font-size:28px;
-  font-weight:800;
+  font-weight:900;
+}
+
+.product-price span{
+  margin-left:5px;
+
+  color:#76819e;
+
+  font-size:11px;
+  font-weight:600;
 }
 
 /* =========================================================
@@ -296,7 +693,7 @@ button:disabled{
 ========================================================= */
 
 .form-group{
-  margin-bottom:19px;
+  margin-bottom:20px;
 }
 
 label{
@@ -304,59 +701,71 @@ label{
 
   margin-bottom:8px;
 
-  color:#dce1ef;
+  color:#dce3f3;
 
-  font-size:13px;
-  font-weight:600;
+  font-size:12px;
+  font-weight:800;
 }
 
 .required{
-  color:#ff5d97;
+  color:var(--pink2);
 }
 
 .optional{
-  color:#717c99;
+  color:#697590;
 
-  font-size:11px;
-  font-weight:500;
+  font-size:10px;
+  font-weight:600;
 }
 
 input{
   width:100%;
-  height:52px;
+  height:53px;
 
   padding:0 15px;
 
-  border:1px solid #303a57;
-  border-radius:13px;
+  border:1px solid #2b3652;
+  border-radius:14px;
 
   outline:none;
 
-  background:#080d19;
+  background:
+    linear-gradient(
+      180deg,
+      #0a101e,
+      #070c17
+    );
+
   color:#fff;
 
-  font-size:14px;
+  font-size:13px;
 
-  transition:.2s ease;
+  transition:.25s ease;
+}
+
+input:hover{
+  border-color:#3d4969;
 }
 
 input:focus{
-  border-color:#ff3d81;
+  border-color:var(--pink);
 
   box-shadow:
-    0 0 0 3px rgba(255,61,129,.10);
+    0 0 0 4px rgba(255,61,129,.08),
+    0 8px 30px rgba(255,61,129,.06);
 }
 
 input::placeholder{
-  color:#626d88;
+  color:#59657f;
 }
 
 /* =========================================================
-   CONTACT
+   CONTACT SELECTOR
 ========================================================= */
 
 .contact-choice{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr 1fr;
 
   gap:10px;
 
@@ -364,36 +773,169 @@ input::placeholder{
 }
 
 .contact-option{
-  flex:1;
+  min-height:48px;
 
-  min-height:45px;
+  border:1px solid #2d3854;
+  border-radius:13px;
 
-  border:1px solid #303a57;
-  border-radius:11px;
+  background:#10172a;
 
-  background:#11172a;
-  color:#929db8;
+  color:#7e8aa7;
 
-  font-size:12px;
-  font-weight:700;
+  font-size:11px;
+  font-weight:800;
 
-  transition:.2s ease;
+  transition:.25s ease;
 }
 
 .contact-option:hover{
-  border-color:#53607f;
+  transform:translateY(-1px);
+
+  border-color:#4b5879;
 }
 
 .contact-option.active{
-  border-color:#ff3d81;
+  border-color:rgba(255,61,129,.55);
 
-  background:rgba(255,61,129,.12);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,61,129,.15),
+      rgba(124,77,255,.12)
+    );
 
   color:#fff;
+
+  box-shadow:
+    inset 0 0 20px rgba(255,61,129,.04);
 }
 
 /* =========================================================
-   PRICE
+   PROMO
+========================================================= */
+
+.promo-card{
+  position:relative;
+
+  margin-top:8px;
+  margin-bottom:22px;
+
+  padding:17px;
+
+  border:1px solid rgba(124,77,255,.28);
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,77,255,.10),
+      rgba(255,61,129,.07)
+    );
+}
+
+.promo-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:10px;
+
+  color:#e8eaff;
+
+  font-size:12px;
+  font-weight:900;
+}
+
+.promo-row{
+  display:flex;
+  gap:9px;
+}
+
+.promo-row input{
+  flex:1;
+}
+
+.promo-btn{
+  min-width:105px;
+
+  border:1px solid rgba(124,77,255,.45);
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c4dff,
+      #ff3d81
+    );
+
+  color:#fff;
+
+  font-size:11px;
+  font-weight:900;
+
+  box-shadow:
+    0 8px 25px rgba(124,77,255,.14);
+
+  transition:.25s ease;
+}
+
+.promo-btn:hover{
+  transform:translateY(-2px);
+}
+
+.promo-message{
+  display:none;
+
+  margin-top:10px;
+
+  padding:10px 12px;
+
+  border-radius:11px;
+
+  font-size:10px;
+  font-weight:800;
+
+  line-height:1.5;
+}
+
+.promo-message.show{
+  display:block;
+
+  animation:
+    promoPop .35s ease;
+}
+
+.promo-message.success{
+  border:1px solid rgba(33,216,137,.25);
+
+  background:rgba(33,216,137,.08);
+
+  color:#6eeab2;
+}
+
+.promo-message.error{
+  border:1px solid rgba(255,71,97,.25);
+
+  background:rgba(255,71,97,.08);
+
+  color:#ff91a0;
+}
+
+@keyframes promoPop{
+
+  0%{
+    opacity:0;
+    transform:scale(.94) translateY(5px);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+/* =========================================================
+   PRICE BOX
 ========================================================= */
 
 .price-box{
@@ -402,10 +944,15 @@ input::placeholder{
   margin-top:20px;
   padding:18px;
 
-  border:1px solid #29324d;
-  border-radius:16px;
+  border:1px solid #29344e;
+  border-radius:17px;
 
-  background:#080d19;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8,13,25,.95),
+      rgba(5,9,17,.95)
+    );
 }
 
 .price-row{
@@ -417,27 +964,37 @@ input::placeholder{
 
   padding:7px 0;
 
-  color:#aeb7d0;
+  color:#98a4c0;
 
-  font-size:13px;
+  font-size:12px;
 }
 
 .price-row strong{
   color:#fff;
 
   text-align:right;
+
+  font-weight:800;
+}
+
+.price-row.discount strong{
+  color:#5ee7aa;
 }
 
 .price-row.total{
   margin-top:8px;
-  padding-top:14px;
+  padding-top:15px;
 
-  border-top:1px solid #29324d;
+  border-top:1px solid #29344e;
 
   color:#fff;
 
-  font-size:18px;
-  font-weight:800;
+  font-size:17px;
+  font-weight:900;
+}
+
+.price-row.total strong{
+  font-size:20px;
 }
 
 /* =========================================================
@@ -445,7 +1002,8 @@ input::placeholder{
 ========================================================= */
 
 .buttons{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr 1.6fr;
 
   gap:12px;
 
@@ -453,53 +1011,86 @@ input::placeholder{
 }
 
 .btn{
-  flex:1;
-
   min-width:0;
-  min-height:52px;
+  min-height:53px;
 
-  border-radius:13px;
+  border-radius:14px;
 
-  font-size:13px;
-  font-weight:800;
+  font-size:12px;
+  font-weight:900;
 
-  transition:.2s ease;
+  transition:.25s ease;
 }
 
 .btn-primary{
+  position:relative;
+  overflow:hidden;
+
   border:0;
 
   background:
     linear-gradient(
       135deg,
       #ff3d81,
-      #7c4dff
+      #9a4dff 55%,
+      #4c8dff
     );
 
   color:#fff;
 
   box-shadow:
-    0 12px 30px rgba(255,61,129,.15);
+    0 13px 35px rgba(255,61,129,.18);
+}
+
+.btn-primary::after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-100%;
+
+  width:70%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.20),
+      transparent
+    );
+
+  transform:skewX(-20deg);
+
+  transition:.6s ease;
+}
+
+.btn-primary:hover::after{
+  left:130%;
 }
 
 .btn-primary:hover:not(:disabled){
   transform:translateY(-2px);
 
   box-shadow:
-    0 15px 35px rgba(255,61,129,.22);
+    0 18px 45px rgba(255,61,129,.25);
 }
 
 .btn-secondary{
-  border:1px solid #303a57;
+  border:1px solid #303b58;
 
-  background:#171e34;
+  background:#121a2d;
 
-  color:#dce1f0;
+  color:#dce3f2;
 }
 
 .btn-secondary:hover:not(:disabled){
-  border-color:#4a5676;
-  background:#1c2540;
+  border-color:#4a587a;
+
+  background:#18223a;
+
+  transform:translateY(-2px);
 }
 
 /* =========================================================
@@ -509,28 +1100,47 @@ input::placeholder{
 .payment-summary{
   text-align:center;
 
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
 .payment-small{
-  color:#99a3bd;
+  color:#8c98b5;
 
-  font-size:12px;
+  font-size:10px;
+  font-weight:700;
+
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
 .payment-amount{
   margin-top:3px;
 
-  font-size:42px;
-  font-weight:800;
+  font-family:"Montserrat",sans-serif;
+
+  font-size:44px;
+  font-weight:900;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #ff76ab,
+      #a27cff
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
 }
 
 .upi-note{
-  margin-top:5px;
+  margin-top:4px;
 
-  color:#77829e;
+  color:#66728f;
 
-  font-size:11px;
+  font-size:10px;
 }
 
 /* =========================================================
@@ -538,12 +1148,14 @@ input::placeholder{
 ========================================================= */
 
 .qr-wrapper{
+  position:relative;
+
   width:min(310px,100%);
-  aspect-ratio:1 / 1;
+  aspect-ratio:1/1;
 
-  margin:20px auto;
+  margin:21px auto;
 
-  padding:9px;
+  padding:10px;
 
   display:flex;
   align-items:center;
@@ -551,12 +1163,37 @@ input::placeholder{
 
   background:#fff;
 
-  border-radius:18px;
-
-  overflow:hidden;
+  border-radius:20px;
 
   box-shadow:
-    0 15px 40px rgba(0,0,0,.25);
+    0 20px 60px rgba(0,0,0,.35),
+    0 0 0 5px rgba(255,255,255,.025);
+
+  animation:qrFloat 4s ease-in-out infinite;
+}
+
+@keyframes qrFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
+}
+
+.qr-wrapper::before{
+  content:"";
+
+  position:absolute;
+  inset:-3px;
+
+  border-radius:23px;
+
+  border:1px solid rgba(255,61,129,.20);
+
+  pointer-events:none;
 }
 
 #movieQR,
@@ -589,83 +1226,109 @@ input::placeholder{
   width:100%;
   max-width:500px;
 
-  display:flex;
-  flex-direction:column;
+  display:grid;
+  grid-template-columns:1fr 1fr;
 
   gap:10px;
 
-  margin:18px auto;
+  margin:17px auto;
 }
 
 .pay-upi-btn,
 .copy-upi-btn{
-  width:100%;
-
-  min-height:52px;
+  min-height:51px;
 
   border-radius:14px;
 
-  font-size:14px;
-  font-weight:800;
+  font-size:12px;
+  font-weight:900;
+
+  transition:.25s ease;
 }
 
 .pay-upi-btn{
-  border:1px solid rgba(255,61,129,.45);
+  border:1px solid rgba(255,61,129,.42);
 
   background:
     linear-gradient(
       135deg,
-      #ff3d81,
-      #7c4dff
+      rgba(255,61,129,.95),
+      rgba(124,77,255,.95)
     );
 
   color:#fff;
+
+  box-shadow:
+    0 10px 28px rgba(255,61,129,.15);
+}
+
+.pay-upi-btn:hover{
+  transform:translateY(-2px);
 }
 
 .copy-upi-btn{
-  border:1px solid #39425f;
+  border:1px solid #35405e;
 
-  background:#171e34;
+  background:#151e34;
 
-  color:#dce1f0;
+  color:#dce3f1;
+}
+
+.copy-upi-btn:hover{
+  border-color:#4b597b;
 }
 
 .copy-success{
   display:none;
 
+  grid-column:1/-1;
+
   text-align:center;
 
   color:#64e0a9;
 
-  font-size:12px;
-  font-weight:700;
+  font-size:10px;
+  font-weight:800;
 }
 
 .copy-success.show{
   display:block;
+
+  animation:fadeIn .25s ease;
 }
 
+/* =========================================================
+   UPI ID
+========================================================= */
+
 .upi-id-box{
-  margin:14px auto 20px;
+  margin:14px auto 21px;
 
   text-align:center;
+
+  color:#8d98b4;
+
+  font-size:11px;
 }
 
 .upi-id{
   display:inline-flex;
 
-  margin-top:7px;
+  margin-top:8px;
 
-  padding:9px 13px;
+  padding:10px 15px;
 
-  border-radius:10px;
+  border:1px solid #2d3853;
+  border-radius:11px;
 
-  background:#171e34;
+  background:#141c30;
 
   color:#fff;
 
   font-size:12px;
-  font-weight:800;
+  font-weight:900;
+
+  letter-spacing:.2px;
 }
 
 /* =========================================================
@@ -678,9 +1341,37 @@ input::placeholder{
   padding:17px;
 
   border:1px dashed #46516f;
-  border-radius:16px;
+  border-radius:17px;
 
-  background:#080d19;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.018),
+      rgba(255,255,255,.005)
+    );
+}
+
+.upload-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:10px;
+}
+
+.upload-icon{
+  width:31px;
+  height:31px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:rgba(124,77,255,.12);
+
+  font-size:14px;
 }
 
 .upload-box input[type="file"]{
@@ -688,15 +1379,19 @@ input::placeholder{
 
   padding:11px;
 
-  background:#11172a;
+  border:1px solid #303a57;
+
+  background:#11182a;
+
+  font-size:11px;
 }
 
 .file-name{
-  margin-top:8px;
+  margin-top:9px;
 
-  color:#7f8aa8;
+  color:#687590;
 
-  font-size:11px;
+  font-size:10px;
 
   overflow-wrap:anywhere;
 }
@@ -720,20 +1415,38 @@ input::placeholder{
 
   padding:12px 14px;
 
-  border:1px solid rgba(255,65,87,.30);
-  border-radius:12px;
+  border:1px solid rgba(255,65,87,.28);
+  border-radius:13px;
 
-  background:rgba(255,65,87,.09);
+  background:rgba(255,65,87,.08);
 
   color:#ff8798;
 
-  font-size:12px;
+  font-size:11px;
 
   line-height:1.55;
 }
 
 .error.show{
   display:block;
+
+  animation:
+    errorShake .3s ease;
+}
+
+@keyframes errorShake{
+
+  0%,100%{
+    transform:translateX(0);
+  }
+
+  25%{
+    transform:translateX(-4px);
+  }
+
+  75%{
+    transform:translateX(4px);
+  }
 }
 
 /* =========================================================
@@ -745,28 +1458,30 @@ input::placeholder{
 
   text-align:center;
 
-  color:#707b98;
+  color:#68738e;
 
-  font-size:10px;
+  font-size:9px;
 
-  line-height:1.7;
+  line-height:1.8;
 }
 
 /* =========================================================
-   SUCCESS
+   SUCCESS SCREEN
 ========================================================= */
 
 .success-screen{
-  padding:15px 0;
+  padding:16px 0 5px;
 
   text-align:center;
 }
 
 .success-icon{
-  width:92px;
-  height:92px;
+  position:relative;
 
-  margin:0 auto 22px;
+  width:125px;
+  height:125px;
+
+  margin:0 auto 27px;
 
   display:flex;
   align-items:center;
@@ -774,11 +1489,35 @@ input::placeholder{
 
   border-radius:50%;
 
-  background:#20c77a;
+  background:
+    radial-gradient(
+      circle,
+      #39e49a 0%,
+      #1bc97b 58%,
+      #11a968 100%
+    );
 
   box-shadow:
-    0 0 0 12px rgba(32,199,122,.10),
-    0 0 50px rgba(32,199,122,.30);
+    0 0 0 13px rgba(33,216,137,.07),
+    0 0 0 26px rgba(33,216,137,.035),
+    0 0 70px rgba(33,216,137,.35);
+
+  animation:
+    successAppear .7s cubic-bezier(.2,.9,.2,1);
+}
+
+.success-icon::before{
+  content:"";
+
+  position:absolute;
+  inset:-9px;
+
+  border:2px solid rgba(33,216,137,.25);
+
+  border-radius:50%;
+
+  animation:
+    successRing 1.5s ease-out infinite;
 }
 
 .success-icon::after{
@@ -786,23 +1525,439 @@ input::placeholder{
 
   color:#fff;
 
-  font-size:54px;
-  font-weight:800;
+  font-family:"Montserrat",sans-serif;
+
+  font-size:76px;
+  font-weight:900;
+
+  line-height:1;
+
+  text-shadow:
+    0 4px 15px rgba(0,0,0,.13);
+
+  animation:
+    tickDraw .6s .15s cubic-bezier(.2,.9,.2,1) both;
+}
+
+@keyframes successAppear{
+
+  0%{
+    opacity:0;
+    transform:scale(.35) rotate(-15deg);
+  }
+
+  70%{
+    transform:scale(1.08) rotate(2deg);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1) rotate(0);
+  }
+}
+
+@keyframes tickDraw{
+
+  0%{
+    opacity:0;
+    transform:scale(.2) rotate(-20deg);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1) rotate(0);
+  }
+}
+
+@keyframes successRing{
+
+  0%{
+    transform:scale(.9);
+    opacity:.8;
+  }
+
+  100%{
+    transform:scale(1.3);
+    opacity:0;
+  }
+}
+
+.success-title{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:29px;
+  font-weight:900;
+
+  margin-bottom:11px;
+
+  letter-spacing:-.8px;
+}
+
+.success-message{
+  max-width:540px;
+
+  margin:0 auto 20px;
+
+  color:#929db8;
+
+  font-size:12px;
+  line-height:1.8;
+}
+
+.success-message strong{
+  color:#fff;
 }
 
 .order-id{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
 
-  margin-top:12px;
+  margin-top:3px;
 
-  padding:10px 15px;
+  padding:11px 16px;
 
-  border:1px solid #303a57;
-  border-radius:12px;
+  border:1px solid #303b57;
+  border-radius:13px;
 
-  background:#171e34;
+  background:#141c30;
 
-  font-size:13px;
+  color:#8d99b6;
+
+  font-size:11px;
+  font-weight:700;
+}
+
+.order-id span{
+  color:#fff;
+  font-weight:900;
+}
+
+/* =========================================================
+   SUCCESS INFO
+========================================================= */
+
+.delivery-banner{
+  margin:23px auto 0;
+
+  padding:17px;
+
+  border:1px solid rgba(33,216,137,.22);
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(33,216,137,.10),
+      rgba(40,215,255,.05)
+    );
+
+  color:#d8ffec;
+
+  font-size:12px;
+  font-weight:800;
+
+  line-height:1.65;
+}
+
+.delivery-banner small{
+  display:block;
+
+  margin-top:5px;
+
+  color:#6bdba7;
+
+  font-size:9px;
+  font-weight:600;
+}
+
+/* =========================================================
+   PROCESSING OVERLAY
+========================================================= */
+
+.processing-overlay{
+  position:fixed;
+  inset:0;
+
+  z-index:10000;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(124,77,255,.18),
+      transparent 40%
+    ),
+    rgba(2,4,10,.94);
+
+  backdrop-filter:blur(18px);
+}
+
+.processing-overlay.show{
+  display:flex;
+
+  animation:overlayIn .25s ease;
+}
+
+@keyframes overlayIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+}
+
+.processing-card{
+  width:min(440px,100%);
+
+  padding:35px 25px;
+
+  text-align:center;
+
+  border:1px solid rgba(120,140,190,.20);
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15,23,42,.98),
+      rgba(6,10,20,.99)
+    );
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.6);
+
+  animation:
+    processingPop .4s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes processingPop{
+
+  from{
+    opacity:0;
+    transform:scale(.92) translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.loader-ring{
+  position:relative;
+
+  width:110px;
+  height:110px;
+
+  margin:0 auto 25px;
+}
+
+.loader-ring::before,
+.loader-ring::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  border-radius:50%;
+}
+
+.loader-ring::before{
+  border:5px solid rgba(255,255,255,.07);
+}
+
+.loader-ring::after{
+  border:5px solid transparent;
+  border-top-color:var(--pink);
+  border-right-color:var(--purple);
+
+  animation:
+    loaderSpin .9s linear infinite;
+}
+
+@keyframes loaderSpin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.loader-number{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:31px;
+  font-weight:900;
+
+  color:#fff;
+}
+
+.processing-title{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:21px;
+  font-weight:900;
+
+  margin-bottom:8px;
+}
+
+.processing-text{
+  min-height:38px;
+
+  color:#8995b1;
+
+  font-size:11px;
+  line-height:1.6;
+}
+
+.processing-bar{
+  width:100%;
+  height:6px;
+
+  margin-top:20px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#1b253c;
+}
+
+.processing-bar-fill{
+  width:0%;
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      var(--purple),
+      var(--blue)
+    );
+
+  box-shadow:
+    0 0 18px rgba(255,61,129,.30);
+
+  transition:width .15s linear;
+}
+
+.processing-percent{
+  margin-top:9px;
+
+  color:#626e8a;
+
+  font-size:9px;
+  font-weight:800;
+}
+
+/* =========================================================
+   PROMO POPUP
+========================================================= */
+
+.promo-popup{
+  position:fixed;
+  left:50%;
+  top:25px;
+
+  z-index:11000;
+
+  width:min(360px,calc(100% - 30px));
+
+  padding:16px;
+
+  display:none;
+
+  align-items:center;
+  gap:13px;
+
+  transform:translateX(-50%);
+
+  border:1px solid rgba(33,216,137,.25);
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(17,39,31,.97),
+      rgba(10,25,22,.97)
+    );
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45),
+    0 0 35px rgba(33,216,137,.10);
+
+  backdrop-filter:blur(20px);
+}
+
+.promo-popup.show{
+  display:flex;
+
+  animation:
+    popupDrop .5s cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes popupDrop{
+
+  from{
+    opacity:0;
+    transform:translate(-50%,-30px) scale(.94);
+  }
+
+  to{
+    opacity:1;
+    transform:translate(-50%,0) scale(1);
+  }
+}
+
+.promo-popup-icon{
+  width:42px;
+  height:42px;
+
+  flex:0 0 42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  background:#20c77a;
+
+  color:#06130c;
+
+  font-size:21px;
+  font-weight:900;
+}
+
+.promo-popup-title{
+  font-size:12px;
+  font-weight:900;
+
+  color:#fff;
+}
+
+.promo-popup-text{
+  margin-top:3px;
+
+  color:#72dbaa;
+
+  font-size:9px;
   font-weight:700;
 }
 
@@ -812,10 +1967,9 @@ input::placeholder{
 
 #celebration{
   position:fixed;
-
   inset:0;
 
-  z-index:9999;
+  z-index:12000;
 
   pointer-events:none;
 
@@ -824,19 +1978,21 @@ input::placeholder{
 
 .star{
   position:absolute;
-
-  top:-40px;
+  top:-50px;
 
   animation:
     fall linear forwards;
+
+  will-change:transform,opacity;
 }
 
 @keyframes fall{
+
   from{
     opacity:1;
 
     transform:
-      translateY(-40px)
+      translate3d(0,-50px,0)
       rotate(0deg);
   }
 
@@ -844,7 +2000,7 @@ input::placeholder{
     opacity:0;
 
     transform:
-      translateY(110vh)
+      translate3d(0,110vh,0)
       rotate(720deg);
   }
 }
@@ -856,40 +2012,87 @@ input::placeholder{
 @media(max-width:600px){
 
   .page{
-    padding:22px 12px 45px;
+    padding:20px 11px 55px;
   }
 
-  .card{
-    padding:21px 16px;
+  .topbar{
+    margin-bottom:22px;
+  }
 
-    border-radius:20px;
+  .secure-badge{
+    font-size:8px;
+  }
+
+  .brand{
+    margin-bottom:22px;
+  }
+
+  .logo-mark{
+    width:55px;
+    height:55px;
+
+    border-radius:17px;
+
+    font-size:23px;
+  }
+
+  .brand h1{
+    font-size:31px;
+  }
+
+  .progress-card{
+    padding:14px 10px;
   }
 
   .step{
-    width:35px;
-    height:35px;
+    width:34px;
+    height:34px;
 
-    flex-basis:35px;
+    flex-basis:34px;
   }
 
-  .line{
-    width:43px;
+  .step-label{
+    display:none;
+  }
+
+  .progress-line{
+    width:34px;
+
+    margin:0 7px;
+  }
+
+  .card{
+    padding:22px 16px;
+
+    border-radius:22px;
   }
 
   .title{
-    font-size:21px;
+    font-size:22px;
   }
 
   .product-name{
     font-size:18px;
   }
 
+  .product-price{
+    font-size:25px;
+  }
+
   .buttons{
+    grid-template-columns:1fr;
+  }
+
+  .upi-actions{
+    grid-template-columns:1fr;
+  }
+
+  .promo-row{
     flex-direction:column;
   }
 
-  .btn{
-    width:100%;
+  .promo-btn{
+    min-height:49px;
   }
 
   .qr-wrapper{
@@ -897,37 +2100,185 @@ input::placeholder{
   }
 
   .payment-amount{
-    font-size:35px;
+    font-size:36px;
   }
+
+  .success-icon{
+    width:110px;
+    height:110px;
+  }
+
+  .success-icon::after{
+    font-size:66px;
+  }
+
+  .success-title{
+    font-size:24px;
+  }
+
 }
 
 @media(max-width:360px){
 
   .page{
-    padding-left:9px;
-    padding-right:9px;
+    padding-left:8px;
+    padding-right:8px;
   }
 
   .card{
-    padding:18px 13px;
+    padding:19px 13px;
   }
 
-  .line{
-    width:30px;
+  .progress-line{
+    width:25px;
+    margin:0 5px;
+  }
+
+  .step{
+    width:31px;
+    height:31px;
+    flex-basis:31px;
   }
 
   .contact-option{
-    font-size:10px;
+    font-size:9px;
   }
+
 }
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="orb one"></div>
+<div class="orb two"></div>
+
 <div id="celebration"></div>
 
+<!-- =========================================================
+     PROMO SUCCESS POPUP
+========================================================= -->
+
+<div
+  class="promo-popup"
+  id="promoPopup"
+>
+
+  <div class="promo-popup-icon">
+    ✓
+  </div>
+
+  <div>
+
+    <div class="promo-popup-title">
+      PROMO CODE APPLIED
+    </div>
+
+    <div
+      class="promo-popup-text"
+      id="promoPopupText"
+    >
+      You saved 10% on this order.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROCESSING OVERLAY
+========================================================= -->
+
+<div
+  class="processing-overlay"
+  id="processingOverlay"
+>
+
+  <div class="processing-card">
+
+    <div class="loader-ring">
+
+      <div
+        class="loader-number"
+        id="loaderNumber"
+      >
+        1
+      </div>
+
+    </div>
+
+    <div class="processing-title">
+      Processing Your Order
+    </div>
+
+    <div
+      class="processing-text"
+      id="processingText"
+    >
+      Preparing your order...
+    </div>
+
+    <div class="processing-bar">
+
+      <div
+        class="processing-bar-fill"
+        id="processingBar"
+      ></div>
+
+    </div>
+
+    <div
+      class="processing-percent"
+      id="processingPercent"
+    >
+      0%
+    </div>
+
+  </div>
+
+</div>
+
+
 <main class="page">
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="topbar">
+
+  <button
+    type="button"
+    class="home-btn"
+    onclick="goHome()"
+  >
+    ← Home
+  </button>
+
+  <div class="secure-badge">
+    🔒 SECURE CHECKOUT
+  </div>
+
+</div>
+
 
 <!-- =========================================================
      BRAND
@@ -935,12 +2286,16 @@ input::placeholder{
 
 <header class="brand">
 
+  <div class="logo-mark">
+    ✦
+  </div>
+
   <h1>
     SehrAn <span>Media</span>
   </h1>
 
   <p id="brandSubtitle">
-    Secure & Reliable Orders
+    Fast • Secure • Reliable Orders
   </p>
 
 </header>
@@ -950,46 +2305,92 @@ input::placeholder{
      PROGRESS
 ========================================================= -->
 
-<div class="progress">
+<div class="progress-card">
 
-  <div
-    class="step active"
-    id="step1"
-  >
-    1
-  </div>
+  <div class="progress">
 
-  <div
-    class="line"
-    id="line1"
-  ></div>
+    <div class="progress-item">
 
-  <div
-    class="step"
-    id="step2"
-  >
-    2
-  </div>
+      <div
+        class="step active"
+        id="step1"
+      >
+        1
+      </div>
 
-  <div
-    class="line"
-    id="line2"
-  ></div>
+      <div
+        class="step-label active"
+        id="label1"
+      >
+        Details
+      </div>
 
-  <div
-    class="step"
-    id="step3"
-  >
-    3
+    </div>
+
+
+    <div
+      class="progress-line"
+      id="line1"
+    ></div>
+
+
+    <div class="progress-item">
+
+      <div
+        class="step"
+        id="step2"
+      >
+        2
+      </div>
+
+      <div
+        class="step-label"
+        id="label2"
+      >
+        Payment
+      </div>
+
+    </div>
+
+
+    <div
+      class="progress-line"
+      id="line2"
+    ></div>
+
+
+    <div class="progress-item">
+
+      <div
+        class="step"
+        id="step3"
+      >
+        3
+      </div>
+
+      <div
+        class="step-label"
+        id="label3"
+      >
+        Complete
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 
+<!-- =========================================================
+     MAIN CARD
+========================================================= -->
+
 <div class="card">
 
+
 <!-- =========================================================
-     MOVIE — STEP 1
+     MOVIE STEP 1
 ========================================================= -->
 
 <section
@@ -998,24 +2399,38 @@ input::placeholder{
 >
 
   <h2 class="title">
-    Buy Movie
+    Complete Your Order
   </h2>
 
   <p class="subtitle">
-    Review your selected digital product and enter your contact details.
+    Review your selected product, enter your contact details,
+    apply your promo code and continue to secure payment.
   </p>
+
 
   <div class="product-card">
 
-    <div class="product-label">
-      Selected Product
-    </div>
+    <div class="product-top">
 
-    <div
-      class="product-name"
-      id="movieName"
-    >
-      Loading...
+      <div>
+
+        <div class="product-label">
+          Selected Product
+        </div>
+
+        <div
+          class="product-name"
+          id="movieName"
+        >
+          Loading...
+        </div>
+
+      </div>
+
+      <div class="product-icon">
+        🎬
+      </div>
+
     </div>
 
     <div
@@ -1033,6 +2448,8 @@ input::placeholder{
     id="movieError1"
   ></div>
 
+
+  <!-- CONTACT -->
 
   <div class="form-group">
 
@@ -1058,7 +2475,7 @@ input::placeholder{
         id="movieEmailOption"
         onclick="selectMovieContact('email')"
       >
-        ✉️ Email
+        ✉️ Email Address
       </button>
 
     </div>
@@ -1071,7 +2488,7 @@ input::placeholder{
         type="tel"
         inputmode="numeric"
         maxlength="15"
-        placeholder="Enter mobile number"
+        placeholder="Enter your mobile number"
         autocomplete="tel"
       >
 
@@ -1087,7 +2504,7 @@ input::placeholder{
         id="movieEmail"
         type="email"
         maxlength="150"
-        placeholder="Enter email address"
+        placeholder="Enter your email address"
         autocomplete="email"
       >
 
@@ -1095,6 +2512,45 @@ input::placeholder{
 
   </div>
 
+
+  <!-- PROMO -->
+
+  <div class="promo-card">
+
+    <div class="promo-title">
+      🎟️ Have a Promo Code?
+    </div>
+
+    <div class="promo-row">
+
+      <input
+        id="moviePromo"
+        type="text"
+        maxlength="30"
+        placeholder="Enter promo code"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button
+        type="button"
+        class="promo-btn"
+        onclick="applyMoviePromo()"
+      >
+        Apply Code
+      </button>
+
+    </div>
+
+    <div
+      class="promo-message"
+      id="moviePromoMessage"
+    ></div>
+
+  </div>
+
+
+  <!-- PRICE -->
 
   <div class="price-box">
 
@@ -1106,6 +2562,23 @@ input::placeholder{
 
       <strong id="movieSummaryPrice">
         ₹0
+      </strong>
+
+    </div>
+
+
+    <div
+      class="price-row discount"
+      id="movieDiscountRow"
+      style="display:none;"
+    >
+
+      <span>
+        Promo Discount
+      </span>
+
+      <strong id="movieDiscount">
+        -₹0
       </strong>
 
     </div>
@@ -1150,7 +2623,7 @@ input::placeholder{
 
 
 <!-- =========================================================
-     MOVIE — STEP 2
+     MOVIE STEP 2
 ========================================================= -->
 
 <section
@@ -1163,7 +2636,8 @@ input::placeholder{
   </h2>
 
   <p class="subtitle">
-    Scan the QR code with your UPI app or use the UPI payment button.
+    Scan the QR code with your UPI app or use the payment button.
+    Please pay the exact discounted amount shown below.
   </p>
 
 
@@ -1236,7 +2710,7 @@ input::placeholder{
 
     <br>
 
-    <small style="color:#78839f;">
+    <small style="color:#687590;">
       Scan the QR or use the UPI button above.
     </small>
 
@@ -1274,15 +2748,21 @@ input::placeholder{
 
   <div class="upload-box">
 
-    <label for="movieScreenshot">
+    <div class="upload-title">
 
-      Payment Screenshot
+      <div class="upload-icon">
+        📸
+      </div>
 
-      <span class="required">
-        *
-      </span>
+      <label
+        for="movieScreenshot"
+        style="margin:0;"
+      >
+        Payment Screenshot
+        <span class="required">*</span>
+      </label>
 
-    </label>
+    </div>
 
     <input
       id="movieScreenshot"
@@ -1336,7 +2816,7 @@ input::placeholder{
 
 
 <!-- =========================================================
-     MOVIE — STEP 3
+     MOVIE STEP 3
 ========================================================= -->
 
 <section
@@ -1348,13 +2828,22 @@ input::placeholder{
 
     <div class="success-icon"></div>
 
-    <h2 class="title">
+    <div class="success-title">
       Order Submitted!
-    </h2>
+    </div>
 
-    <p class="subtitle">
+    <p class="success-message">
 
-      Your movie order has been received successfully.
+      <strong>
+        Your order has been submitted successfully.
+      </strong>
+
+      <br>
+
+      Your order will reach you
+      <strong>
+        within 10 minutes.
+      </strong>
 
       <br>
 
@@ -1370,6 +2859,17 @@ input::placeholder{
       <span id="movieOrderId">
         ---
       </span>
+
+    </div>
+
+
+    <div class="delivery-banner">
+
+      🚀 Your order is being processed
+
+      <small>
+        Expected delivery: within 10 minutes
+      </small>
 
     </div>
 
@@ -1408,7 +2908,36 @@ input::placeholder{
       <div class="price-row">
 
         <span>
-          Amount
+          Original Price
+        </span>
+
+        <strong id="successMovieOriginalAmount">
+          ₹0
+        </strong>
+
+      </div>
+
+
+      <div
+        class="price-row discount"
+        id="successMovieDiscountRow"
+      >
+
+        <span>
+          Discount
+        </span>
+
+        <strong id="successMovieDiscount">
+          -₹0
+        </strong>
+
+      </div>
+
+
+      <div class="price-row total">
+
+        <span>
+          Amount Paid
         </span>
 
         <strong id="successMovieAmount">
@@ -1438,7 +2967,7 @@ input::placeholder{
 
 
 <!-- =========================================================
-     INSTAGRAM — STEP 1
+     INSTAGRAM STEP 1
 ========================================================= -->
 
 <section
@@ -1447,25 +2976,38 @@ input::placeholder{
 >
 
   <h2 class="title">
-    Instagram Order
+    Complete Your Order
   </h2>
 
   <p class="subtitle">
-    Review your selected package and enter the required information.
+    Review your selected package, enter your Instagram details
+    and apply your promo code before payment.
   </p>
 
 
   <div class="product-card">
 
-    <div class="product-label">
-      Selected Package
-    </div>
+    <div class="product-top">
 
-    <div
-      class="product-name"
-      id="instagramPackage"
-    >
-      Loading package...
+      <div>
+
+        <div class="product-label">
+          Selected Package
+        </div>
+
+        <div
+          class="product-name"
+          id="instagramPackage"
+        >
+          Loading package...
+        </div>
+
+      </div>
+
+      <div class="product-icon">
+        📸
+      </div>
+
     </div>
 
     <div
@@ -1483,6 +3025,8 @@ input::placeholder{
     id="instagramError1"
   ></div>
 
+
+  <!-- CONTACT -->
 
   <div class="form-group">
 
@@ -1508,7 +3052,7 @@ input::placeholder{
         id="instagramEmailOption"
         onclick="selectInstagramContact('email')"
       >
-        ✉️ Email
+        ✉️ Email Address
       </button>
 
     </div>
@@ -1521,7 +3065,7 @@ input::placeholder{
         type="tel"
         inputmode="numeric"
         maxlength="15"
-        placeholder="Enter mobile number"
+        placeholder="Enter your mobile number"
         autocomplete="tel"
       >
 
@@ -1537,7 +3081,7 @@ input::placeholder{
         id="instagramEmail"
         type="email"
         maxlength="150"
-        placeholder="Enter email address"
+        placeholder="Enter your email address"
         autocomplete="email"
       >
 
@@ -1546,13 +3090,13 @@ input::placeholder{
   </div>
 
 
+  <!-- INSTAGRAM -->
+
   <div class="form-group">
 
     <label>
       Instagram Username
-      <span class="required">
-        *
-      </span>
+      <span class="required">*</span>
     </label>
 
     <input
@@ -1570,9 +3114,7 @@ input::placeholder{
 
     <label>
       Instagram Profile Link
-      <span class="required">
-        *
-      </span>
+      <span class="required">*</span>
     </label>
 
     <input
@@ -1585,6 +3127,45 @@ input::placeholder{
   </div>
 
 
+  <!-- PROMO -->
+
+  <div class="promo-card">
+
+    <div class="promo-title">
+      🎟️ Have a Promo Code?
+    </div>
+
+    <div class="promo-row">
+
+      <input
+        id="instagramPromo"
+        type="text"
+        maxlength="30"
+        placeholder="Enter promo code"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button
+        type="button"
+        class="promo-btn"
+        onclick="applyInstagramPromo()"
+      >
+        Apply Code
+      </button>
+
+    </div>
+
+    <div
+      class="promo-message"
+      id="instagramPromoMessage"
+    ></div>
+
+  </div>
+
+
+  <!-- PRICE -->
+
   <div class="price-box">
 
     <div class="price-row">
@@ -1595,6 +3176,23 @@ input::placeholder{
 
       <strong id="instagramTotal">
         ₹0
+      </strong>
+
+    </div>
+
+
+    <div
+      class="price-row discount"
+      id="instagramDiscountRow"
+      style="display:none;"
+    >
+
+      <span>
+        Promo Discount
+      </span>
+
+      <strong id="instagramDiscount">
+        -₹0
       </strong>
 
     </div>
@@ -1639,7 +3237,7 @@ input::placeholder{
 
 
 <!-- =========================================================
-     INSTAGRAM — STEP 2
+     INSTAGRAM STEP 2
 ========================================================= -->
 
 <section
@@ -1653,6 +3251,7 @@ input::placeholder{
 
   <p class="subtitle">
     Scan the QR code with your UPI app and complete the payment.
+    Make sure the amount matches the amount shown below.
   </p>
 
 
@@ -1700,6 +3299,13 @@ input::placeholder{
     >
       📋 Copy UPI ID
     </button>
+
+    <div
+      class="copy-success"
+      id="copySuccess"
+    >
+      ✓ UPI ID copied successfully
+    </div>
 
   </div>
 
@@ -1750,15 +3356,21 @@ input::placeholder{
 
   <div class="upload-box">
 
-    <label for="instagramScreenshot">
+    <div class="upload-title">
 
-      Payment Screenshot
+      <div class="upload-icon">
+        📸
+      </div>
 
-      <span class="required">
-        *
-      </span>
+      <label
+        for="instagramScreenshot"
+        style="margin:0;"
+      >
+        Payment Screenshot
+        <span class="required">*</span>
+      </label>
 
-    </label>
+    </div>
 
     <input
       id="instagramScreenshot"
@@ -1812,7 +3424,7 @@ input::placeholder{
 
 
 <!-- =========================================================
-     INSTAGRAM — STEP 3
+     INSTAGRAM STEP 3
 ========================================================= -->
 
 <section
@@ -1824,13 +3436,22 @@ input::placeholder{
 
     <div class="success-icon"></div>
 
-    <h2 class="title">
+    <div class="success-title">
       Order Submitted!
-    </h2>
+    </div>
 
-    <p class="subtitle">
+    <p class="success-message">
 
-      Your Instagram order has been received successfully.
+      <strong>
+        Your order has been submitted successfully.
+      </strong>
+
+      <br>
+
+      Your order will reach you
+      <strong>
+        within 10 minutes.
+      </strong>
 
       <br>
 
@@ -1846,6 +3467,17 @@ input::placeholder{
       <span id="instagramOrderId">
         ---
       </span>
+
+    </div>
+
+
+    <div class="delivery-banner">
+
+      🚀 Your order is being processed
+
+      <small>
+        Expected delivery: within 10 minutes
+      </small>
 
     </div>
 
@@ -1884,7 +3516,33 @@ input::placeholder{
       <div class="price-row">
 
         <span>
-          Amount
+          Original Price
+        </span>
+
+        <strong id="successInstagramOriginalAmount">
+          ₹0
+        </strong>
+
+      </div>
+
+
+      <div class="price-row discount">
+
+        <span>
+          Discount
+        </span>
+
+        <strong id="successInstagramDiscount">
+          -₹0
+        </strong>
+
+      </div>
+
+
+      <div class="price-row total">
+
+        <span>
+          Amount Paid
         </span>
 
         <strong id="successInstagramAmount">
@@ -1926,6 +3584,7 @@ input::placeholder{
 
 
 <script>
+
 /* =========================================================
    SETTINGS
 ========================================================= */
@@ -1933,6 +3592,15 @@ input::placeholder{
 const UPI_ID = "7889777143@fam";
 
 const UPI_NAME = "SehrAn Media";
+
+/*
+   IMPORTANT:
+   This is the promo code you requested.
+*/
+
+const VALID_PROMO_CODE = "ZEESHAN10";
+
+const PROMO_DISCOUNT_PERCENT = 10;
 
 
 /* =========================================================
@@ -2084,48 +3752,53 @@ function money(value){
 
 
 /* =========================================================
-   INSTAGRAM PACKAGE
+   PROMO CALCULATIONS
 ========================================================= */
 
-const requestedPackage =
-  params.get("followers") ||
-  params.get("package") ||
-  params.get("pkg") ||
-  params.get("service") ||
-  "";
+function calculateDiscount(price){
+
+  return Math.round(
+    Number(price) *
+    PROMO_DISCOUNT_PERCENT /
+    100 *
+    100
+  ) / 100;
+
+}
 
 
-const normalizedPackage =
-  String(requestedPackage)
-    .replace(/,/g,"")
-    .replace(/\s+/g,"")
-    .replace(/followers/gi,"")
-    .replace(/follower/gi,"")
-    .trim();
+function calculateFinalPrice(
+  price,
+  promoApplied
+){
+
+  const original =
+    Number(price) || 0;
+
+  if(!promoApplied){
+    return original;
+  }
+
+  return Math.max(
+    0,
+    Math.round(
+      (
+        original -
+        calculateDiscount(original)
+      ) * 100
+    ) / 100
+  );
+
+}
 
 
-const selectedInstagramPackage =
-  INSTAGRAM_PACKAGES[
-    normalizedPackage
-  ] || null;
+/* =========================================================
+   PROMO STATE
+========================================================= */
 
+let moviePromoApplied = false;
 
-const instagramPackage =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.name
-    : "Invalid Instagram Package";
-
-
-const instagramPrice =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.price
-    : 0;
-
-
-const instagramFollowers =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.followers
-    : 0;
+let instagramPromoApplied = false;
 
 
 /* =========================================================
@@ -2175,11 +3848,76 @@ const movieSize =
 
 
 /* =========================================================
-   MODE
+   MOVIE FINAL PRICE
 ========================================================= */
 
-const isMovie =
-  productType === "movie";
+function getMovieFinalPrice(){
+
+  return calculateFinalPrice(
+    moviePrice,
+    moviePromoApplied
+  );
+
+}
+
+
+/* =========================================================
+   INSTAGRAM PACKAGE
+========================================================= */
+
+const requestedPackage =
+  params.get("followers") ||
+  params.get("package") ||
+  params.get("pkg") ||
+  params.get("service") ||
+  "";
+
+
+const normalizedPackage =
+  String(requestedPackage)
+    .replace(/,/g,"")
+    .replace(/\s+/g,"")
+    .replace(/followers/gi,"")
+    .replace(/follower/gi,"")
+    .trim();
+
+
+const selectedInstagramPackage =
+  INSTAGRAM_PACKAGES[
+    normalizedPackage
+  ] || null;
+
+
+const instagramPackage =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.name
+    : "Invalid Instagram Package";
+
+
+const instagramPrice =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.price
+    : 0;
+
+
+const instagramFollowers =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.followers
+    : 0;
+
+
+/* =========================================================
+   INSTAGRAM FINAL PRICE
+========================================================= */
+
+function getInstagramFinalPrice(){
+
+  return calculateFinalPrice(
+    instagramPrice,
+    instagramPromoApplied
+  );
+
+}
 
 
 /* =========================================================
@@ -2200,6 +3938,7 @@ function buildUPI(amount){
     ) +
     "&cu=INR"
   );
+
 }
 
 
@@ -2242,6 +3981,7 @@ function generateQR(
         QRCode.CorrectLevel.H
     }
   );
+
 }
 
 
@@ -2265,6 +4005,7 @@ function payUPI(
 
   window.location.href =
     buildUPI(amount);
+
 }
 
 
@@ -2291,6 +4032,7 @@ async function copyUPI(){
         },
         2500
       );
+
     }
 
   }catch{
@@ -2299,7 +4041,9 @@ async function copyUPI(){
       "UPI ID: " +
       UPI_ID
     );
+
   }
+
 }
 
 
@@ -2313,11 +4057,14 @@ function hideAllScreens(){
     .querySelectorAll(".screen")
     .forEach(
       screen => {
+
         screen.classList.remove(
           "active"
         );
+
       }
     );
+
 }
 
 
@@ -2334,13 +4081,40 @@ function updateProgress(number){
         "step" + i
       );
 
+    const label =
+      document.getElementById(
+        "label" + i
+      );
+
     if(step){
 
       step.classList.toggle(
         "active",
-        i <= number
+        i === number
       );
+
+      step.classList.toggle(
+        "done",
+        i < number
+      );
+
+      if(i < number){
+        step.textContent = "✓";
+      }else{
+        step.textContent = i;
+      }
+
     }
+
+    if(label){
+
+      label.classList.toggle(
+        "active",
+        i === number
+      );
+
+    }
+
   }
 
 
@@ -2348,7 +4122,6 @@ function updateProgress(number){
     document.getElementById(
       "line1"
     );
-
 
   const line2 =
     document.getElementById(
@@ -2358,20 +4131,23 @@ function updateProgress(number){
 
   if(line1){
 
-    line1.style.background =
+    line1.classList.toggle(
+      "active",
       number >= 2
-        ? "#ff3d81"
-        : "#303952";
+    );
+
   }
 
 
   if(line2){
 
-    line2.style.background =
+    line2.classList.toggle(
+      "active",
       number >= 3
-        ? "#ff3d81"
-        : "#303952";
+    );
+
   }
+
 }
 
 
@@ -2385,9 +4161,11 @@ function movieShowScreen(number){
     );
 
   if(screen){
+
     screen.classList.add(
       "active"
     );
+
   }
 
   updateProgress(number);
@@ -2396,6 +4174,7 @@ function movieShowScreen(number){
     top:0,
     behavior:"smooth"
   });
+
 }
 
 
@@ -2409,9 +4188,11 @@ function instagramShowScreen(number){
     );
 
   if(screen){
+
     screen.classList.add(
       "active"
     );
+
   }
 
   updateProgress(number);
@@ -2420,6 +4201,7 @@ function instagramShowScreen(number){
     top:0,
     behavior:"smooth"
   });
+
 }
 
 
@@ -2453,16 +4235,65 @@ function initializeMovie(){
     money(moviePrice);
 
 
+  updateMoviePriceUI();
+
+}
+
+
+/* =========================================================
+   MOVIE PRICE UI
+========================================================= */
+
+function updateMoviePriceUI(){
+
+  const finalPrice =
+    getMovieFinalPrice();
+
+  const discount =
+    moviePromoApplied
+      ? calculateDiscount(moviePrice)
+      : 0;
+
+
+  document.getElementById(
+    "movieSummaryPrice"
+  ).textContent =
+    money(moviePrice);
+
+
   document.getElementById(
     "movieTotal"
   ).textContent =
-    money(moviePrice);
+    money(finalPrice);
 
 
   document.getElementById(
     "moviePaymentAmount"
   ).textContent =
-    money(moviePrice);
+    money(finalPrice);
+
+
+  const discountRow =
+    document.getElementById(
+      "movieDiscountRow"
+    );
+
+
+  if(discountRow){
+
+    discountRow.style.display =
+      moviePromoApplied
+        ? "flex"
+        : "none";
+
+  }
+
+
+  document.getElementById(
+    "movieDiscount"
+  ).textContent =
+    "-" + money(discount);
+
 }
 
 
@@ -2520,6 +4351,7 @@ function selectMovieContact(
       method === "email"
         ? "block"
         : "none";
+
 }
 
 
@@ -2549,6 +4381,151 @@ function getMovieContact(){
         .toLowerCase()
 
   };
+
+}
+
+
+/* =========================================================
+   INSTAGRAM INITIALIZATION
+========================================================= */
+
+let instagramContactMethod =
+  "mobile";
+
+
+function initializeInstagram(){
+
+  document.getElementById(
+    "brandSubtitle"
+  ).textContent =
+    "Instagram Services • Secure Payment • Reliable Orders";
+
+
+  document.getElementById(
+    "instagramPackage"
+  ).textContent =
+    instagramPackage;
+
+
+  document.getElementById(
+    "instagramPrice"
+  ).textContent =
+    money(instagramPrice);
+
+
+  updateInstagramPriceUI();
+
+}
+
+
+/* =========================================================
+   INSTAGRAM PRICE UI
+========================================================= */
+
+function updateInstagramPriceUI(){
+
+  const finalPrice =
+    getInstagramFinalPrice();
+
+  const discount =
+    instagramPromoApplied
+      ? calculateDiscount(instagramPrice)
+      : 0;
+
+
+  document.getElementById(
+    "instagramTotal"
+  ).textContent =
+    money(instagramPrice);
+
+
+  document.getElementById(
+    "instagramFinal"
+  ).textContent =
+    money(finalPrice);
+
+
+  document.getElementById(
+    "instagramPaymentAmount"
+  ).textContent =
+    money(finalPrice);
+
+
+  const discountRow =
+    document.getElementById(
+      "instagramDiscountRow"
+    );
+
+
+  if(discountRow){
+
+    discountRow.style.display =
+      instagramPromoApplied
+        ? "flex"
+        : "none";
+
+  }
+
+
+  document.getElementById(
+    "instagramDiscount"
+  ).textContent =
+    "-" + money(discount);
+
+}
+
+
+/* =========================================================
+   INSTAGRAM CONTACT
+========================================================= */
+
+function selectInstagramContact(
+  method
+){
+
+  instagramContactMethod =
+    method;
+
+
+  document
+    .getElementById(
+      "instagramMobileOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "mobile"
+    );
+
+
+  document
+    .getElementById(
+      "instagramEmailOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "email"
+    );
+
+
+  document
+    .getElementById(
+      "instagramMobileField"
+    )
+    .style.display =
+      method === "mobile"
+        ? "block"
+        : "none";
+
+
+  document
+    .getElementById(
+      "instagramEmailField"
+    )
+    .style.display =
+      method === "email"
+        ? "block"
+        : "none";
+
 }
 
 
@@ -2578,6 +4555,7 @@ function isValidIndianMobile(
   return /^[6-9]\d{9}$/.test(
     normalized
   );
+
 }
 
 
@@ -2587,6 +4565,213 @@ function isValidEmail(
 
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
     .test(value);
+
+}
+
+
+/* =========================================================
+   PROMO POPUP
+========================================================= */
+
+function showPromoPopup(
+  saved
+){
+
+  const popup =
+    document.getElementById(
+      "promoPopup"
+    );
+
+  const text =
+    document.getElementById(
+      "promoPopupText"
+    );
+
+
+  text.textContent =
+    "ZEESHAN10 applied • You saved " +
+    money(saved) +
+    " (" +
+    PROMO_DISCOUNT_PERCENT +
+    "% off).";
+
+
+  popup.classList.add("show");
+
+
+  setTimeout(
+    () => {
+      popup.classList.remove("show");
+    },
+    3300
+  );
+
+}
+
+
+/* =========================================================
+   MOVIE PROMO
+========================================================= */
+
+function applyMoviePromo(){
+
+  const input =
+    document.getElementById(
+      "moviePromo"
+    );
+
+  const message =
+    document.getElementById(
+      "moviePromoMessage"
+    );
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  message.className =
+    "promo-message";
+
+
+  if(code !== VALID_PROMO_CODE){
+
+    moviePromoApplied = false;
+
+    message.textContent =
+      "✕ Invalid promo code. Please check the code and try again.";
+
+    message.classList.add(
+      "show",
+      "error"
+    );
+
+    updateMoviePriceUI();
+
+    return;
+  }
+
+
+  if(moviePrice <= 0){
+
+    message.textContent =
+      "✕ Promo code cannot be applied to an invalid price.";
+
+    message.classList.add(
+      "show",
+      "error"
+    );
+
+    return;
+  }
+
+
+  moviePromoApplied = true;
+
+  const saved =
+    calculateDiscount(moviePrice);
+
+
+  message.textContent =
+    "✓ Promo code applied successfully. You saved " +
+    money(saved) +
+    ".";
+
+  message.classList.add(
+    "show",
+    "success"
+  );
+
+
+  updateMoviePriceUI();
+
+  showPromoPopup(saved);
+
+}
+
+
+/* =========================================================
+   INSTAGRAM PROMO
+========================================================= */
+
+function applyInstagramPromo(){
+
+  const input =
+    document.getElementById(
+      "instagramPromo"
+    );
+
+  const message =
+    document.getElementById(
+      "instagramPromoMessage"
+    );
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  message.className =
+    "promo-message";
+
+
+  if(code !== VALID_PROMO_CODE){
+
+    instagramPromoApplied = false;
+
+    message.textContent =
+      "✕ Invalid promo code. Please check the code and try again.";
+
+    message.classList.add(
+      "show",
+      "error"
+    );
+
+    updateInstagramPriceUI();
+
+    return;
+  }
+
+
+  if(instagramPrice <= 0){
+
+    message.textContent =
+      "✕ Promo code cannot be applied to an invalid package.";
+
+    message.classList.add(
+      "show",
+      "error"
+    );
+
+    return;
+  }
+
+
+  instagramPromoApplied = true;
+
+  const saved =
+    calculateDiscount(
+      instagramPrice
+    );
+
+
+  message.textContent =
+    "✓ Promo code applied successfully. You saved " +
+    money(saved) +
+    ".";
+
+  message.classList.add(
+    "show",
+    "success"
+  );
+
+
+  updateInstagramPriceUI();
+
+  showPromoPopup(saved);
+
 }
 
 
@@ -2643,6 +4828,7 @@ function movieContinuePayment(){
 
       return;
     }
+
   }
 
 
@@ -2661,125 +4847,32 @@ function movieContinuePayment(){
 
       return;
     }
+
   }
+
+
+  const finalPrice =
+    getMovieFinalPrice();
 
 
   generateQR(
     "movieQR",
-    moviePrice
+    finalPrice
   );
 
 
   movieShowScreen(2);
+
 }
 
 
 function moviePayUPI(){
 
   payUPI(
-    moviePrice,
+    getMovieFinalPrice(),
     "movieError2"
   );
-}
 
-
-/* =========================================================
-   INSTAGRAM INITIALIZATION
-========================================================= */
-
-let instagramContactMethod =
-  "mobile";
-
-
-function initializeInstagram(){
-
-  document.getElementById(
-    "brandSubtitle"
-  ).textContent =
-    "Instagram Services • Secure Payment • Reliable Orders";
-
-
-  document.getElementById(
-    "instagramPackage"
-  ).textContent =
-    instagramPackage;
-
-
-  document.getElementById(
-    "instagramPrice"
-  ).textContent =
-    money(instagramPrice);
-
-
-  document.getElementById(
-    "instagramTotal"
-  ).textContent =
-    money(instagramPrice);
-
-
-  document.getElementById(
-    "instagramFinal"
-  ).textContent =
-    money(instagramPrice);
-
-
-  document.getElementById(
-    "instagramPaymentAmount"
-  ).textContent =
-    money(instagramPrice);
-}
-
-
-/* =========================================================
-   INSTAGRAM CONTACT
-========================================================= */
-
-function selectInstagramContact(
-  method
-){
-
-  instagramContactMethod =
-    method;
-
-
-  document
-    .getElementById(
-      "instagramMobileOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "mobile"
-    );
-
-
-  document
-    .getElementById(
-      "instagramEmailOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "email"
-    );
-
-
-  document
-    .getElementById(
-      "instagramMobileField"
-    )
-    .style.display =
-      method === "mobile"
-        ? "block"
-        : "none";
-
-
-  document
-    .getElementById(
-      "instagramEmailField"
-    )
-    .style.display =
-      method === "email"
-        ? "block"
-        : "none";
 }
 
 
@@ -2797,6 +4890,17 @@ function instagramContinue(){
     showError(
       "instagramError1",
       "Invalid Instagram package. Please go back and select a package again."
+    );
+
+    return;
+  }
+
+
+  if(instagramPrice <= 0){
+
+    showError(
+      "instagramError1",
+      "Invalid package price."
     );
 
     return;
@@ -2873,6 +4977,7 @@ function instagramContinue(){
 
       return;
     }
+
   }
 
 
@@ -2891,6 +4996,7 @@ function instagramContinue(){
 
       return;
     }
+
   }
 
 
@@ -2913,7 +5019,6 @@ function instagramContinue(){
     const url =
       new URL(profile);
 
-
     const hostname =
       url.hostname
         .toLowerCase()
@@ -2929,6 +5034,7 @@ function instagramContinue(){
     ){
 
       throw new Error();
+
     }
 
   }catch{
@@ -2942,22 +5048,32 @@ function instagramContinue(){
   }
 
 
+  const finalPrice =
+    getInstagramFinalPrice();
+
+
   generateQR(
     "instagramQR",
-    instagramPrice
+    finalPrice
   );
 
 
   instagramShowScreen(2);
+
 }
 
+
+/* =========================================================
+   INSTAGRAM UPI
+========================================================= */
 
 function instagramPayUPI(){
 
   payUPI(
-    instagramPrice,
+    getInstagramFinalPrice(),
     "instagramError2"
   );
+
 }
 
 
@@ -3054,7 +5170,7 @@ function validateFile(
 
 
 /* =========================================================
-   FILE TO BASE64
+   FILE BASE64
 ========================================================= */
 
 function fileToBase64(
@@ -3096,6 +5212,7 @@ function fileToBase64(
 
     }
   );
+
 }
 
 
@@ -3135,6 +5252,283 @@ document
 
     }
   );
+
+
+/* =========================================================
+   SUCCESS SOUND
+   Original Web Audio notification.
+   No copyrighted audio file is used.
+========================================================= */
+
+function playSuccessSound(){
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext){
+      return;
+    }
+
+    const ctx =
+      new AudioContext();
+
+
+    const now =
+      ctx.currentTime;
+
+
+    const master =
+      ctx.createGain();
+
+    master.gain.setValueAtTime(
+      0.0001,
+      now
+    );
+
+    master.gain.exponentialRampToValueAtTime(
+      0.16,
+      now + 0.025
+    );
+
+    master.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + 1.05
+    );
+
+    master.connect(
+      ctx.destination
+    );
+
+
+    /*
+      Pleasant two-tone success notification.
+    */
+
+    const notes = [
+      {
+        frequency:523.25,
+        start:0,
+        duration:.22
+      },
+      {
+        frequency:659.25,
+        start:.12,
+        duration:.30
+      },
+      {
+        frequency:783.99,
+        start:.25,
+        duration:.52
+      }
+    ];
+
+
+    notes.forEach(
+      note => {
+
+        const oscillator =
+          ctx.createOscillator();
+
+        const gain =
+          ctx.createGain();
+
+
+        oscillator.type =
+          "sine";
+
+        oscillator.frequency.setValueAtTime(
+          note.frequency,
+          now + note.start
+        );
+
+
+        gain.gain.setValueAtTime(
+          0.0001,
+          now + note.start
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.55,
+          now + note.start + .025
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now + note.start + note.duration
+        );
+
+
+        oscillator.connect(gain);
+        gain.connect(master);
+
+
+        oscillator.start(
+          now + note.start
+        );
+
+        oscillator.stop(
+          now +
+          note.start +
+          note.duration +
+          .03
+        );
+
+      }
+    );
+
+
+    setTimeout(
+      () => {
+        ctx.close();
+      },
+      1500
+    );
+
+  }catch(error){
+
+    console.log(
+      "Success sound unavailable:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PROCESSING SCREEN
+========================================================= */
+
+function startProcessing(){
+
+  return new Promise(
+    resolve => {
+
+      const overlay =
+        document.getElementById(
+          "processingOverlay"
+        );
+
+      const number =
+        document.getElementById(
+          "loaderNumber"
+        );
+
+      const text =
+        document.getElementById(
+          "processingText"
+        );
+
+      const bar =
+        document.getElementById(
+          "processingBar"
+        );
+
+      const percent =
+        document.getElementById(
+          "processingPercent"
+        );
+
+
+      overlay.classList.add(
+        "show"
+      );
+
+
+      const messages = [
+
+        "Preparing your order...",
+
+        "Checking order details...",
+
+        "Securing your information...",
+
+        "Preparing payment details...",
+
+        "Uploading payment proof...",
+
+        "Connecting to order system...",
+
+        "Creating your order ID...",
+
+        "Sending your order...",
+
+        "Almost done...",
+
+        "Order submitted successfully!"
+
+      ];
+
+
+      let current = 0;
+
+      const duration = 2600;
+
+      const interval =
+        duration / 10;
+
+
+      const timer =
+        setInterval(
+          () => {
+
+            current++;
+
+            number.textContent =
+              current;
+
+            text.textContent =
+              messages[
+                current - 1
+              ];
+
+
+            const progress =
+              Math.round(
+                current * 10
+              );
+
+
+            bar.style.width =
+              progress + "%";
+
+
+            percent.textContent =
+              progress + "%";
+
+
+            if(current >= 10){
+
+              clearInterval(timer);
+
+
+              setTimeout(
+                () => {
+
+                  overlay.classList.remove(
+                    "show"
+                  );
+
+                  resolve();
+
+                },
+                280
+              );
+
+            }
+
+          },
+          interval
+        );
+
+    }
+  );
+
+}
 
 
 /* =========================================================
@@ -3237,6 +5631,16 @@ async function submitMovieOrder(){
       );
 
 
+    const finalPrice =
+      getMovieFinalPrice();
+
+
+    const discount =
+      moviePromoApplied
+        ? calculateDiscount(moviePrice)
+        : 0;
+
+
     const payload = {
 
       type:"movie",
@@ -3264,8 +5668,26 @@ async function submitMovieOrder(){
       package:
         movieName,
 
-      amount:
+      originalAmount:
         Number(moviePrice)
+          .toFixed(2),
+
+      discount:
+        Number(discount)
+          .toFixed(2),
+
+      discountPercent:
+        moviePromoApplied
+          ? PROMO_DISCOUNT_PERCENT
+          : 0,
+
+      promoCode:
+        moviePromoApplied
+          ? VALID_PROMO_CODE
+          : "",
+
+      amount:
+        Number(finalPrice)
           .toFixed(2),
 
       mobile:
@@ -3279,6 +5701,7 @@ async function submitMovieOrder(){
 
       screenshot:
         screenshot
+
     };
 
 
@@ -3318,7 +5741,15 @@ async function submitMovieOrder(){
         data.error ||
         "Unable to submit movie order."
       );
+
     }
+
+
+    /*
+      Show the user a clear processing experience.
+    */
+
+    await startProcessing();
 
 
     document.getElementById(
@@ -3335,15 +5766,29 @@ async function submitMovieOrder(){
 
 
     document.getElementById(
-      "successMovieAmount"
+      "successMovieOriginalAmount"
     ).textContent =
       money(moviePrice);
 
 
-    createStars(120);
+    document.getElementById(
+      "successMovieDiscount"
+    ).textContent =
+      "-" + money(discount);
 
+
+    document.getElementById(
+      "successMovieAmount"
+    ).textContent =
+      money(finalPrice);
+
+
+    playSuccessSound();
+
+    createStars(150);
 
     movieShowScreen(3);
+
 
   }catch(error){
 
@@ -3364,7 +5809,9 @@ async function submitMovieOrder(){
 
     button.textContent =
       "Submit Movie Order ✓";
+
   }
+
 }
 
 
@@ -3484,6 +5931,7 @@ async function submitInstagramOrder(){
 
       return;
     }
+
   }
 
 
@@ -3502,6 +5950,7 @@ async function submitInstagramOrder(){
 
       return;
     }
+
   }
 
 
@@ -3566,6 +6015,16 @@ async function submitInstagramOrder(){
       );
 
 
+    const finalPrice =
+      getInstagramFinalPrice();
+
+
+    const discount =
+      instagramPromoApplied
+        ? calculateDiscount(instagramPrice)
+        : 0;
+
+
     const payload = {
 
       type:"instagram",
@@ -3583,8 +6042,26 @@ async function submitInstagramOrder(){
       followers:
         instagramFollowers,
 
-      amount:
+      originalAmount:
         Number(instagramPrice)
+          .toFixed(2),
+
+      discount:
+        Number(discount)
+          .toFixed(2),
+
+      discountPercent:
+        instagramPromoApplied
+          ? PROMO_DISCOUNT_PERCENT
+          : 0,
+
+      promoCode:
+        instagramPromoApplied
+          ? VALID_PROMO_CODE
+          : "",
+
+      amount:
+        Number(finalPrice)
           .toFixed(2),
 
       mobile:
@@ -3604,6 +6081,7 @@ async function submitInstagramOrder(){
 
       screenshot:
         screenshot
+
     };
 
 
@@ -3643,7 +6121,15 @@ async function submitInstagramOrder(){
         data.error ||
         "Unable to submit Instagram order."
       );
+
     }
+
+
+    /*
+      User sees 1 → 10 processing animation.
+    */
+
+    await startProcessing();
 
 
     document.getElementById(
@@ -3660,15 +6146,29 @@ async function submitInstagramOrder(){
 
 
     document.getElementById(
-      "successInstagramAmount"
+      "successInstagramOriginalAmount"
     ).textContent =
       money(instagramPrice);
 
 
-    createStars(120);
+    document.getElementById(
+      "successInstagramDiscount"
+    ).textContent =
+      "-" + money(discount);
 
+
+    document.getElementById(
+      "successInstagramAmount"
+    ).textContent =
+      money(finalPrice);
+
+
+    playSuccessSound();
+
+    createStars(150);
 
     instagramShowScreen(3);
+
 
   }catch(error){
 
@@ -3689,7 +6189,9 @@ async function submitInstagramOrder(){
 
     button.textContent =
       "Submit Order ✓";
+
   }
+
 }
 
 
@@ -3712,7 +6214,8 @@ function createStars(
     "✦",
     "✧",
     "⭐",
-    "✨"
+    "✨",
+    "◆"
   ];
 
 
@@ -3748,9 +6251,9 @@ function createStars(
 
 
     star.style.fontSize =
-      12 +
+      10 +
       Math.random() *
-      20 +
+      22 +
       "px";
 
 
@@ -3778,12 +6281,14 @@ function createStars(
       },
       5500
     );
+
   }
+
 }
 
 
 /* =========================================================
-   ERROR HANDLING
+   ERROR
 ========================================================= */
 
 function showError(
@@ -3815,6 +6320,7 @@ function showError(
     behavior:"smooth",
     block:"center"
   });
+
 }
 
 
@@ -3836,6 +6342,7 @@ function clearErrors(){
 
       }
     );
+
 }
 
 
@@ -3847,12 +6354,17 @@ function goHome(){
 
   window.location.href =
     "/index.html";
+
 }
 
 
 /* =========================================================
    INITIALIZATION
 ========================================================= */
+
+const isMovie =
+  productType === "movie";
+
 
 if(isMovie){
 
@@ -3885,6 +6397,7 @@ if(isMovie){
     );
 
   updateProgress(1);
+
 }
 
 </script>
