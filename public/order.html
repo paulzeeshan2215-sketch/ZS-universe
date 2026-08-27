@@ -1,936 +1,6637 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout — SehrAn Media</title>
-<meta name="description" content="SehrAn Media secure checkout">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>SehrAn Media — Secure Checkout</title>
+
+<meta
+  name="description"
+  content="SehrAn Media secure checkout for Instagram services and digital products."
+>
+
+<meta
+  name="theme-color"
+  content="#080a12"
+>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+></script>
+
+
 <style>
-  :root {
-    --primary: #2874f0;
-    --primary-dark: #1a5dc8;
-    --success: #26a541;
-    --danger: #e53935;
-    --text: #212121;
-    --muted: #878787;
-    --border: #e0e0e0;
-    --bg: #f1f3f6;
-    --card: #ffffff;
-    --shadow: 0 1px 2px rgba(0,0,0,.08);
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+  --bg:#080a12;
+  --bg2:#0d1020;
+
+  --card:rgba(18,22,38,.78);
+  --card2:rgba(12,15,28,.88);
+
+  --border:rgba(255,255,255,.09);
+  --border2:rgba(255,255,255,.14);
+
+  --text:#ffffff;
+  --muted:#9ca3b7;
+
+  --primary:#7c5cff;
+  --primary2:#9b7cff;
+
+  --success:#35d39a;
+  --danger:#ff5f6d;
+  --warning:#ffd166;
+
+  --shadow:
+    0 25px 80px rgba(0,0,0,.45);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+
+html{
+  scroll-behavior:smooth;
+}
+
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(124,92,255,.15),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(0,210,255,.09),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(124,92,255,.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #070910 0%,
+      #0a0d18 48%,
+      #080a12 100%
+    );
+
+  overflow-x:hidden;
+}
+
+
+body::before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,.015) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.015) 1px,
+      transparent 1px
+    );
+
+  background-size:55px 55px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 90%
+    );
+
+  opacity:.25;
+
+  z-index:-1;
+}
+
+
+button,
+input{
+  font:inherit;
+}
+
+
+button{
+  cursor:pointer;
+}
+
+
+button:disabled{
+  cursor:not-allowed;
+  opacity:.65;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar{
+
+  width:100%;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(7,9,16,.68);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:100;
+}
+
+
+.topbar-inner{
+
+  max-width:1050px;
+
+  margin:auto;
+
+  min-height:76px;
+
+  padding:
+    0 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+}
+
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  text-decoration:none;
+
+  color:white;
+}
+
+
+.brand-logo{
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:13px;
+
+  display:grid;
+
+  place-items:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c5cff,
+      #4d8cff
+    );
+
+  box-shadow:
+    0 8px 30px
+    rgba(124,92,255,.35);
+
+  font-size:20px;
+
+  font-weight:800;
+}
+
+
+.brand-text{
+
+  font-family:Poppins,sans-serif;
+
+  font-size:17px;
+
+  font-weight:800;
+
+  letter-spacing:-.3px;
+}
+
+
+.brand-subtitle{
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  margin-top:2px;
+}
+
+
+.secure-header{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  color:#b9c0d5;
+
+  font-size:12px;
+
+  font-weight:600;
+}
+
+
+.secure-dot{
+
+  width:8px;
+
+  height:8px;
+
+  border-radius:50%;
+
+  background:var(--success);
+
+  box-shadow:
+    0 0 12px
+    rgba(53,211,154,.8);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+
+  width:100%;
+
+  padding:
+    34px 18px 80px;
+}
+
+
+.checkout{
+
+  width:100%;
+
+  max-width:850px;
+
+  margin:auto;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin:
+    4px auto 34px;
+
+  max-width:600px;
+}
+
+
+.progress-step{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:8px;
+
+  min-width:82px;
+
+  position:relative;
+
+  z-index:2;
+}
+
+
+.progress-circle{
+
+  width:38px;
+
+  height:38px;
+
+  border-radius:50%;
+
+  display:grid;
+
+  place-items:center;
+
+  background:#171b2b;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  color:#737b91;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  transition:.3s;
+}
+
+
+.progress-step.active
+.progress-circle{
+
+  color:white;
+
+  border-color:
+    rgba(124,92,255,.65);
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c5cff,
+      #4e7cff
+    );
+
+  box-shadow:
+    0 0 0 6px
+    rgba(124,92,255,.10),
+    0 8px 25px
+    rgba(124,92,255,.30);
+}
+
+
+.progress-step.done
+.progress-circle{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #20bd86,
+      #35d39a
+    );
+
+  border-color:
+    rgba(53,211,154,.45);
+}
+
+
+.progress-label{
+
+  color:#70788d;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+
+.progress-step.active
+.progress-label{
+
+  color:white;
+}
+
+
+.progress-line{
+
+  height:2px;
+
+  width:95px;
+
+  background:#202438;
+
+  margin:
+    0 -3px 24px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+
+.progress-line::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  transform:
+    translateX(-100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      #7c5cff,
+      #35d39a
+    );
+
+  transition:.45s;
+}
+
+
+.progress-line.active::after{
+
+  transform:
+    translateX(0);
+}
+
+
+/* =========================================================
+   SCREEN
+========================================================= */
+
+.screen{
+
+  display:none;
+
+  animation:
+    screenIn .45s ease;
+}
+
+
+.screen.active{
+  display:block;
+}
+
+
+@keyframes screenIn{
+
+  from{
+    opacity:0;
+    transform:translateY(12px);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.5;
+  to{
+    opacity:1;
+    transform:translateY(0);
   }
 
-  /* Header */
-  .header {
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 12px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
-  }
-  .header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 20px;
-    color: var(--primary);
-  }
-  .logo-mark {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, #2874f0, #5c9cff);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-  }
-  .secure-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title{
+
+  text-align:center;
+
+  font-family:Poppins,sans-serif;
+
+  font-size:
+    clamp(25px,5vw,36px);
+
+  line-height:1.15;
+
+  letter-spacing:-1px;
+
+  margin-bottom:9px;
+}
+
+
+.subtitle{
+
+  text-align:center;
+
+  max-width:650px;
+
+  margin:
+    0 auto 27px;
+
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.checkout-card{
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(19,23,40,.82),
+      rgba(10,13,24,.90)
+    );
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:24px;
+
+  box-shadow:
+    var(--shadow);
+
+  overflow:hidden;
+
+  backdrop-filter:
+    blur(20px);
+}
+
+
+.card-inner{
+
+  padding:
+    clamp(18px,4vw,30px);
+}
+
+
+/* =========================================================
+   PRODUCT SUMMARY
+========================================================= */
+
+.product-card{
+
+  padding:20px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,92,255,.11),
+      rgba(255,255,255,.025)
+    );
+
+  margin-bottom:22px;
+}
+
+
+.product-top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:10px;
+}
+
+
+.product-label{
+
+  color:#858da3;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+
+.product-badge{
+
+  padding:
+    6px 9px;
+
+  border-radius:999px;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  color:#bdafff;
+
+  background:
+    rgba(124,92,255,.10);
+
+  border:
+    1px solid
+    rgba(124,92,255,.20);
+}
+
+
+.product-name{
+
+  font-family:Poppins,sans-serif;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  margin-bottom:6px;
+}
+
+
+.product-price{
+
+  color:#bba9ff;
+
+  font-size:24px;
+
+  font-weight:800;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group{
+
+  margin-bottom:20px;
+}
+
+
+label{
+
+  display:block;
+
+  color:#e7e9f0;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  margin-bottom:9px;
+}
+
+
+.required{
+  color:#ff6572;
+}
+
+
+.optional{
+
+  color:#737b91;
+
+  font-size:10px;
+
+  font-weight:600;
+
+  margin-left:5px;
+}
+
+
+input{
+
+  width:100%;
+
+  height:50px;
+
+  border-radius:13px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  background:
+    rgba(5,7,14,.65);
+
+  color:white;
+
+  outline:none;
+
+  padding:
+    0 15px;
+
+  transition:
+    border-color .2s,
+    box-shadow .2s,
+    background .2s;
+}
+
+
+input::placeholder{
+  color:#60687b;
+}
+
+
+input:focus{
+
+  border-color:
+    rgba(124,92,255,.70);
+
+  background:
+    rgba(7,9,17,.88);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(124,92,255,.09);
+}
+
+
+/* =========================================================
+   CONTACT CHOICE
+========================================================= */
+
+.contact-choice{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-bottom:10px;
+}
+
+
+.contact-option{
+
+  min-height:46px;
+
+  border-radius:12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:#929aaf;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  transition:.2s;
+}
+
+
+.contact-option:hover{
+
+  border-color:
+    rgba(124,92,255,.30);
+
+  color:white;
+}
+
+
+.contact-option.active{
+
+  color:white;
+
+  border-color:
+    rgba(124,92,255,.55);
+
+  background:
+    rgba(124,92,255,.13);
+
+  box-shadow:
+    inset 0 0 20px
+    rgba(124,92,255,.04);
+}
+
+
+/* =========================================================
+   PROMO
+========================================================= */
+
+.promo-box{
+
+  padding:18px;
+
+  margin:
+    8px 0 21px;
+
+  border-radius:17px;
+
+  border:
+    1px solid
+    rgba(124,92,255,.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,92,255,.08),
+      rgba(255,255,255,.018)
+    );
+}
+
+
+.promo-heading{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  margin-bottom:12px;
+
+  font-size:13px;
+
+  font-weight:800;
+}
+
+
+.promo-icon{
+
+  width:31px;
+
+  height:31px;
+
+  border-radius:9px;
+
+  display:grid;
+
+  place-items:center;
+
+  background:
+    rgba(124,92,255,.15);
+}
+
+
+.promo-row{
+
+  display:flex;
+
+  gap:9px;
+}
+
+
+.promo-input{
+  flex:1;
+}
+
+
+.promo-btn{
+
+  min-width:115px;
+
+  border:0;
+
+  border-radius:12px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7656ff,
+      #5a79ff
+    );
+
+  font-size:12px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 8px 22px
+    rgba(124,92,255,.20);
+
+  transition:.2s;
+}
+
+
+.promo-btn:hover{
+  transform:translateY(-1px);
+}
+
+
+.promo-btn.applied{
+
+  background:
+    linear-gradient(
+      135deg,
+      #1ca979,
+      #35d39a
+    );
+
+  box-shadow:
+    0 8px 22px
+    rgba(53,211,154,.18);
+}
+
+
+.promo-status{
+
+  display:none;
+
+  margin-top:10px;
+
+  color:#5de0ae;
+
+  font-size:11px;
+
+  line-height:1.5;
+}
+
+
+.promo-status.show{
+  display:block;
+}
+
+
+.promo-error{
+
+  display:none;
+
+  margin-top:9px;
+
+  color:#ff707c;
+
+  font-size:11px;
+
+  line-height:1.5;
+}
+
+
+.promo-error.show{
+  display:block;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.price-box{
+
+  padding:18px;
+
+  border-radius:17px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    rgba(5,7,14,.42);
+
+  margin-bottom:22px;
+}
+
+
+.price-row{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:7px 0;
+
+  color:#9ba2b5;
+
+  font-size:13px;
+}
+
+
+.price-row strong{
+  color:#e9ebf2;
+}
+
+
+.price-row.discount{
+
+  color:#48dca4;
+}
+
+
+.price-row.discount strong{
+  color:#48dca4;
+}
+
+
+.old-price{
+
+  text-decoration:line-through;
+
+  color:#737b8f !important;
+}
+
+
+.price-row.total{
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.08);
+
+  margin-top:9px;
+
+  padding-top:15px;
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:800;
+}
+
+
+.price-row.total strong{
+
+  color:white;
+
+  font-size:23px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error{
+
+  display:none;
+
+  padding:12px 14px;
+
+  border-radius:12px;
+
+  margin-bottom:18px;
+
+  color:#ff9ca5;
+
+  background:
+    rgba(255,95,109,.08);
+
+  border:
+    1px solid
+    rgba(255,95,109,.18);
+
+  font-size:12px;
+
+  line-height:1.5;
+}
+
+
+.error.show{
+  display:block;
+
+  animation:
+    shake .28s ease;
+}
+
+
+@keyframes shake{
+
+  25%{
+    transform:translateX(-4px);
   }
 
-  /* Progress */
-  .progress-bar {
-    max-width: 1100px;
-    margin: 20px auto 0;
-    padding: 0 16px;
-  }
-  .steps {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-  }
-  .step-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-  }
-  .step-circle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #e0e0e0;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .step-item.active .step-circle {
-    background: var(--primary);
-  }
-  .step-item.done .step-circle {
-    background: var(--success);
-  }
-  .step-item.active,
-  .step-item.done {
-    color: var(--text);
-  }
-  .step-line {
-    width: 60px;
-    height: 2px;
-    background: #e0e0e0;
-    margin: 0 8px;
-  }
-  .step-line.active {
-    background: var(--primary);
+  75%{
+    transform:translateX(4px);
   }
 
-  /* Main Layout */
-  .container {
-    max-width: 1100px;
-    margin: 24px auto 60px;
-    padding: 0 16px;
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 24px;
-    align-items: start;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(120px,.7fr)
+    minmax(180px,1.3fr);
+
+  gap:10px;
+
+  margin-top:5px;
+}
+
+
+.btn{
+
+  min-height:52px;
+
+  border-radius:14px;
+
+  border:0;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+}
+
+
+.btn:hover{
+
+  transform:translateY(-1px);
+}
+
+
+.btn-secondary{
+
+  color:#d6d9e4;
+
+  background:
+    rgba(255,255,255,.055);
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+}
+
+
+.btn-primary{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7656ff,
+      #5a7aff
+    );
+
+  box-shadow:
+    0 10px 28px
+    rgba(124,92,255,.24);
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+.payment-summary{
+
+  text-align:center;
+
+  padding:20px;
+
+  margin-bottom:20px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,92,255,.10),
+      rgba(255,255,255,.025)
+    );
+
+  border:
+    1px solid
+    rgba(124,92,255,.15);
+}
+
+
+.payment-small{
+
+  color:#858da3;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+
+.payment-amount{
+
+  font-family:Poppins,sans-serif;
+
+  font-size:36px;
+
+  font-weight:800;
+
+  margin:4px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #bbaaff
+    );
+
+  -webkit-background-clip:text;
+
+  background-clip:text;
+
+  color:transparent;
+}
+
+
+.upi-note{
+
+  color:#777f94;
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
+.qr-wrapper{
+
+  width:310px;
+
+  max-width:100%;
+
+  margin:
+    0 auto 18px;
+
+  padding:10px;
+
+  border-radius:20px;
+
+  background:white;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.35);
+}
+
+
+#instagramQR,
+#movieQR{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+
+#instagramQR img,
+#movieQR img{
+
+  width:290px !important;
+
+  height:290px !important;
+
+  max-width:100%;
+
+  display:block;
+}
+
+
+/* =========================================================
+   UPI ACTIONS
+========================================================= */
+
+.upi-actions{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-bottom:14px;
+}
+
+
+.pay-upi-btn,
+.copy-upi-btn{
+
+  min-height:48px;
+
+  border-radius:13px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s;
+}
+
+
+.pay-upi-btn{
+
+  color:white;
+
+  border:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7656ff,
+      #5a7aff
+    );
+
+  box-shadow:
+    0 9px 22px
+    rgba(124,92,255,.18);
+}
+
+
+.copy-upi-btn{
+
+  color:#dfe2eb;
+
+  background:
+    rgba(255,255,255,.045);
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+}
+
+
+.pay-upi-btn:hover,
+.copy-upi-btn:hover{
+
+  transform:translateY(-1px);
+}
+
+
+.copy-success{
+
+  display:none;
+
+  grid-column:
+    1 / -1;
+
+  text-align:center;
+
+  color:#54dda8;
+
+  font-size:11px;
+
+  font-weight:700;
+}
+
+
+.copy-success.show{
+  display:block;
+}
+
+
+.upi-id-box{
+
+  text-align:center;
+
+  padding:14px;
+
+  margin-bottom:20px;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  color:#777f94;
+
+  font-size:11px;
+
+  line-height:1.8;
+}
+
+
+.upi-id{
+
+  color:#ffffff;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  letter-spacing:.2px;
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-box{
+
+  padding:17px;
+
+  border-radius:16px;
+
+  margin-bottom:20px;
+
+  border:
+    1px dashed
+    rgba(255,255,255,.14);
+
+  background:
+    rgba(255,255,255,.018);
+}
+
+
+.upload-box input[type="file"]{
+
+  height:auto;
+
+  padding:12px;
+
+  cursor:pointer;
+}
+
+
+.file-name{
+
+  margin-top:9px;
+
+  color:#697186;
+
+  font-size:11px;
+
+  word-break:break-word;
+}
+
+
+.file-valid{
+  color:#52dca7;
+}
+
+
+.file-warning{
+  color:#ff747f;
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.secure-note{
+
+  text-align:center;
+
+  color:#70788d;
+
+  font-size:11px;
+
+  line-height:1.8;
+
+  margin-top:21px;
+
+  padding-top:18px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.06);
+}
+
+
+.secure-note strong{
+  color:#b6bdce;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.success-screen{
+
+  text-align:center;
+
+  padding:
+    15px 0 5px;
+}
+
+
+.success-icon{
+
+  width:82px;
+
+  height:82px;
+
+  border-radius:50%;
+
+  margin:
+    0 auto 22px;
+
+  display:grid;
+
+  place-items:center;
+
+  position:relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      #21b984,
+      #35d39a
+    );
+
+  box-shadow:
+    0 0 0 10px
+    rgba(53,211,154,.08),
+    0 20px 50px
+    rgba(53,211,154,.20);
+
+  animation:
+    successPop .55s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.success-icon::before{
+
+  content:"✓";
+
+  color:white;
+
+  font-size:43px;
+
+  font-weight:900;
+}
+
+
+@keyframes successPop{
+
+  0%{
+    transform:scale(.3);
+    opacity:0;
   }
 
-  /* Cards */
-  .card {
-    background: var(--card);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .card-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    font-weight: 700;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card-body {
-    padding: 20px;
+  70%{
+    transform:scale(1.08);
   }
 
-  /* Product */
-  .product-row {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .product-img {
-    width: 80px;
-    height: 110px;
-    background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-  .product-info h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .product-info p {
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .price-tag {
-    margin-top: 8px;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .old-price {
-    font-size: 14px;
-    color: var(--muted);
-    text-decoration: line-through;
-    margin-left: 8px;
-    font-weight: 500;
+  100%{
+    transform:scale(1);
+    opacity:1;
   }
 
-  /* Form */
-  .form-group {
-    margin-bottom: 16px;
-  }
-  label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #414141;
-  }
-  .required { color: var(--danger); }
-  input, select {
-    width: 100%;
-    height: 44px;
-    padding: 0 14px;
-    border: 1px solid #c2c2c2;
-    border-radius: 4px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color .2s;
-    background: #fff;
-  }
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(40,116,240,.15);
-  }
-  .contact-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .contact-tab {
-    flex: 1;
-    height: 40px;
-    border: 1px solid #c2c2c2;
-    border-radius: 4px;
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    color: #414141;
-  }
-  .contact-tab.active {
-    border-color: var(--primary);
-    background: #e8f0fe;
-    color: var(--primary);
+}
+
+
+.success-title{
+
+  font-family:Poppins,sans-serif;
+
+  font-size:
+    clamp(25px,5vw,34px);
+
+  margin-bottom:10px;
+
+  letter-spacing:-.8px;
+}
+
+
+.success-message{
+
+  color:#9ca3b7;
+
+  font-size:13px;
+
+  line-height:1.8;
+
+  margin-bottom:17px;
+}
+
+
+.delivery-message{
+
+  display:inline-block;
+
+  padding:
+    10px 14px;
+
+  border-radius:999px;
+
+  color:#55dfa9;
+
+  background:
+    rgba(53,211,154,.07);
+
+  border:
+    1px solid
+    rgba(53,211,154,.14);
+
+  font-size:11px;
+
+  font-weight:800;
+
+  margin-bottom:18px;
+}
+
+
+.order-id{
+
+  padding:14px;
+
+  border-radius:13px;
+
+  color:#838b9f;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  font-size:12px;
+}
+
+
+.order-id span{
+
+  color:white;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+}
+
+
+/* =========================================================
+   PROCESSING OVERLAY
+========================================================= */
+
+.processing-overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:1000;
+
+  display:none;
+
+  place-items:center;
+
+  padding:20px;
+
+  background:
+    rgba(4,6,12,.82);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+.processing-overlay.show{
+  display:grid;
+}
+
+
+.processing-card{
+
+  width:100%;
+
+  max-width:430px;
+
+  padding:30px 25px;
+
+  text-align:center;
+
+  border-radius:24px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20,24,42,.96),
+      rgba(9,12,23,.98)
+    );
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.55);
+
+  animation:
+    processingIn .35s ease;
+}
+
+
+@keyframes processingIn{
+
+  from{
+    opacity:0;
+    transform:scale(.94) translateY(10px);
   }
 
-  /* Promo */
-  .promo-row {
-    display: flex;
-    gap: 8px;
-  }
-  .promo-row input { flex: 1; }
-  .btn-apply {
-    height: 44px;
-    padding: 0 18px;
-    background: #fff;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 13px;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .btn-apply:hover { background: #e8f0fe; }
-  .btn-apply.applied {
-    background: var(--success);
-    border-color: var(--success);
-    color: #fff;
-  }
-  .promo-msg {
-    margin-top: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    display: none;
-  }
-  .promo-msg.success { color: var(--success); display: block; }
-  .promo-msg.error { color: var(--danger); display: block; }
-
-  /* Price Summary */
-  .price-lines {
-    font-size: 14px;
-  }
-  .price-line {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    color: #414141;
-  }
-  .price-line.discount span:last-child { color: var(--success); }
-  .price-line.total {
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
-    padding-top: 12px;
-    font-weight: 700;
-    font-size: 16px;
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
   }
 
-  /* Buttons */
-  .btn {
-    height: 48px;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background .2s, transform .1s;
-  }
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-    width: 100%;
-  }
-  .btn-primary:hover { background: var(--primary-dark); }
-  .btn-primary:disabled {
-    background: #a0a0a0;
-    cursor: not-allowed;
-  }
-  .btn-secondary {
-    background: #fff;
-    border: 1px solid #c2c2c2;
-    color: #414141;
-    width: 100%;
-  }
-  .btn-secondary:hover { background: #f5f5f5; }
+}
 
-  /* Payment Screen */
-  .payment-amount {
-    text-align: center;
-    padding: 20px 0;
-  }
-  .payment-amount .label {
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .payment-amount .amount {
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--text);
-    margin: 4px 0;
-  }
-  .qr-box {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 16px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-  }
-  .qr-box img, .qr-box canvas {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .upi-id {
-    text-align: center;
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-  .upi-id code {
-    background: #f5f5f5;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .upload-area {
-    border: 1px dashed #c2c2c2;
-    border-radius: 6px;
-    padding: 16px;
-    text-align: center;
-    margin-top: 16px;
-    background: #fafafa;
-  }
-  .upload-area input[type="file"] {
-    height: auto;
-    padding: 8px;
-    border: none;
-    background: transparent;
-  }
-  .file-name {
-    font-size: 13px;
-    margin-top: 6px;
-    color: var(--muted);
-  }
 
-  /* Success */
-  .success-box {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  .success-icon {
-    width: 80px;
-    height: 80px;
-    background: var(--success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 40px;
-    color: #fff;
-  }
-  .success-box h2 {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  .success-box p {
-    color: var(--muted);
-    font-size: 14px;
-    max-width: 400px;
-    margin: 0 auto 16px;
-  }
-  .order-id-box {
-    display: inline-block;
-    background: #f5f5f5;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 14px;
-    margin-top: 8px;
-  }
+.loader-ring{
 
-  /* Screens */
-  .screen { display: none; }
-  .screen.active { display: block; }
+  width:76px;
 
-  /* Error */
-  .error-msg {
-    background: #fdecea;
-    color: var(--danger);
-    padding: 10px 14px;
-    border-radius: 4px;
-    font-size: 13px;
-    margin-bottom: 16px;
-    display: none;
-  }
-  .error-msg.show { display: block; }
+  height:76px;
 
-  /* Processing Overlay */
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  .overlay.show { display: flex; }
-  .overlay-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 32px;
-    text-align: center;
-    width: 90%;
-    max-width: 360px;
-  }
-  .spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid #e0e0e0;
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 16px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  border-radius:50%;
 
-  /* Trust */
-  .trust-row {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    font-size: 12px;
-    color: var(--muted);
+  margin:
+    0 auto 20px;
+
+  border:
+    3px solid
+    rgba(255,255,255,.08);
+
+  border-top-color:#7c5cff;
+
+  border-right-color:#35d39a;
+
+  animation:
+    spin 1s linear infinite;
+
+  box-shadow:
+    0 0 35px
+    rgba(124,92,255,.15);
+}
+
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
   }
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+}
+
+
+.loader-number{
+
+  margin-top:-68px;
+
+  margin-bottom:47px;
+
+  font-family:Poppins,sans-serif;
+
+  font-size:17px;
+
+  font-weight:800;
+}
+
+
+.processing-title{
+
+  font-family:Poppins,sans-serif;
+
+  font-size:21px;
+
+  margin-bottom:7px;
+}
+
+
+.processing-subtitle{
+
+  color:#858da3;
+
+  font-size:11px;
+
+  line-height:1.6;
+
+  min-height:35px;
+}
+
+
+.processing-progress{
+
+  height:7px;
+
+  margin-top:20px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#1c2132;
+}
+
+
+.processing-progress-bar{
+
+  width:0%;
+
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7656ff,
+      #5a7aff,
+      #35d39a
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(124,92,255,.45);
+
+  transition:
+    width .3s ease;
+}
+
+
+.processing-percent{
+
+  margin-top:8px;
+
+  color:#727b90;
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+#celebration{
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  overflow:hidden;
+}
+
+
+.star{
+
+  position:absolute;
+
+  top:-50px;
+
+  color:#ffffff;
+
+  opacity:0;
+
+  animation:
+    starFall linear forwards;
+
+  text-shadow:
+    0 0 12px
+    rgba(255,255,255,.5);
+}
+
+
+@keyframes starFall{
+
+  0%{
+    opacity:0;
+    transform:
+      translateY(-30px)
+      rotate(0deg)
+      scale(.7);
   }
 
-  /* Mobile */
-  @media (max-width: 768px) {
-    .container {
-      grid-template-columns: 1fr;
-    }
-    .step-line { width: 40px; }
-    .payment-amount .amount { font-size: 30px; }
+  10%{
+    opacity:1;
   }
+
+  100%{
+    opacity:0;
+    transform:
+      translateY(110vh)
+      rotate(480deg)
+      scale(1.2);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:600px){
+
+  .topbar-inner{
+
+    min-height:68px;
+
+    padding:
+      0 15px;
+  }
+
+
+  .brand-subtitle{
+    display:none;
+  }
+
+
+  .brand-logo{
+
+    width:38px;
+
+    height:38px;
+  }
+
+
+  .secure-header{
+    font-size:10px;
+  }
+
+
+  main{
+
+    padding:
+      25px 12px 60px;
+  }
+
+
+  .progress{
+
+    margin-bottom:25px;
+  }
+
+
+  .progress-step{
+    min-width:62px;
+  }
+
+
+  .progress-circle{
+
+    width:34px;
+
+    height:34px;
+  }
+
+
+  .progress-label{
+    font-size:9px;
+  }
+
+
+  .progress-line{
+    width:45px;
+  }
+
+
+  .checkout-card{
+    border-radius:19px;
+  }
+
+
+  .card-inner{
+    padding:17px;
+  }
+
+
+  .promo-row{
+
+    flex-direction:column;
+  }
+
+
+  .promo-btn{
+
+    min-height:48px;
+
+    width:100%;
+  }
+
+
+  .buttons{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .btn{
+    min-height:50px;
+  }
+
+
+  .upi-actions{
+
+    grid-template-columns:1fr;
+  }
+
+
+  .copy-success{
+    grid-column:auto;
+  }
+
+
+  .payment-amount{
+    font-size:31px;
+  }
+
+}
+
+
+@media(max-width:390px){
+
+  .progress-step{
+    min-width:53px;
+  }
+
+  .progress-line{
+    width:29px;
+  }
+
+  .progress-label{
+    font-size:8px;
+  }
+
+  .secure-header{
+    display:none;
+  }
+
+}
+
+
+/* =========================================================
+   MOVIE SPECIFIC
+========================================================= */
+
+.movie-meta{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:9px;
+}
+
+
+.movie-meta span{
+
+  padding:
+    5px 8px;
+
+  border-radius:7px;
+
+  color:#8991a6;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+
+  font-size:9px;
+
+  font-weight:700;
+}
+
+
 </style>
+
 </head>
+
+
 <body>
 
-<!-- Header -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-mark">S</div>
-      <span>SehrAn Media</span>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <a
+      href="/index.html"
+      class="brand"
+    >
+
+      <div class="brand-logo">
+        S
+      </div>
+
+      <div>
+
+        <div class="brand-text">
+          SehrAn Media
+        </div>
+
+        <div
+          class="brand-subtitle"
+          id="brandSubtitle"
+        >
+          Secure Checkout
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <div class="secure-header">
+
+      <span class="secure-dot"></span>
+
+      Secure Checkout
+
     </div>
-    <div class="secure-badge">
-      🔒 100% Secure Payments
-    </div>
+
   </div>
+
 </header>
 
-<!-- Progress -->
-<div class="progress-bar">
-  <div class="steps">
-    <div class="step-item active" id="step1">
-      <div class="step-circle">1</div>
-      <span>Details</span>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main>
+
+<div class="checkout">
+
+
+<!-- =========================================================
+     PROGRESS
+========================================================= -->
+
+<div class="progress">
+
+  <div
+    class="progress-step active"
+    id="progressStep1"
+  >
+
+    <div
+      class="progress-circle"
+      id="step1"
+    >
+      1
     </div>
-    <div class="step-line" id="line1"></div>
-    <div class="step-item" id="step2">
-      <div class="step-circle">2</div>
-      <span>Payment</span>
+
+    <div class="progress-label">
+      Details
     </div>
-    <div class="step-line" id="line2"></div>
-    <div class="step-item" id="step3">
-      <div class="step-circle">3</div>
-      <span>Done</span>
-    </div>
+
   </div>
+
+
+  <div
+    class="progress-line"
+    id="line1"
+  ></div>
+
+
+  <div
+    class="progress-step"
+    id="progressStep2"
+  >
+
+    <div
+      class="progress-circle"
+      id="step2"
+    >
+      2
+    </div>
+
+    <div class="progress-label">
+      Payment
+    </div>
+
+  </div>
+
+
+  <div
+    class="progress-line"
+    id="line2"
+  ></div>
+
+
+  <div
+    class="progress-step"
+    id="progressStep3"
+  >
+
+    <div
+      class="progress-circle"
+      id="step3"
+    >
+      3
+    </div>
+
+    <div class="progress-label">
+      Complete
+    </div>
+
+  </div>
+
 </div>
 
-<!-- Main -->
-<div class="container">
 
-  <!-- LEFT: Forms -->
-  <div>
-    <!-- SCREEN 1: Details -->
-    <div class="screen active" id="screen1">
-      <div class="card">
-        <div class="card-header">📦 Order Details</div>
-        <div class="card-body">
-          <div class="product-row">
-            <div class="product-img">🎬</div>
-            <div class="product-info">
-              <h3 id="productName">Premium Movie Access</h3>
-              <p>Digital delivery • Instant after payment verification</p>
-              <div class="price-tag">
-                ₹<span id="basePrice">299</span>
-                <span class="old-price" id="oldPriceDisplay">₹499</span>
-              </div>
-            </div>
+
+<!-- =========================================================
+     INSTAGRAM SCREEN 1
+========================================================= -->
+
+<section
+  class="screen"
+  id="instagramScreen1"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <h1 class="title">
+        Instagram Checkout
+      </h1>
+
+      <p class="subtitle">
+        Review your service details, provide your contact information and continue securely to payment.
+      </p>
+
+
+      <div class="product-card">
+
+        <div class="product-top">
+
+          <div class="product-label">
+            Selected Service
           </div>
+
+          <div class="product-badge">
+            Instagram
+          </div>
+
         </div>
+
+
+        <div
+          class="product-name"
+          id="instagramPackage"
+        >
+          Loading package...
+        </div>
+
+
+        <div
+          class="product-price"
+          id="instagramPrice"
+        >
+          ₹0
+        </div>
+
       </div>
 
-      <div class="card" style="margin-top:16px;">
-        <div class="card-header">👤 Your Details</div>
-        <div class="card-body">
-          <div class="error-msg" id="error1"></div>
 
-          <div class="form-group">
-            <label>Full Name <span class="required">*</span></label>
-            <input type="text" id="fullName" placeholder="Enter your full name" required>
-          </div>
+      <div
+        class="error"
+        id="instagramError1"
+      ></div>
 
-          <div class="form-group">
-            <label>Contact Method</label>
-            <div class="contact-tabs">
-              <button type="button" class="contact-tab active" data-type="phone">📱 Phone</button>
-              <button type="button" class="contact-tab" data-type="email">✉️ Email</button>
-            </div>
-            <input type="text" id="contactInput" placeholder="Enter phone number" required>
-          </div>
 
-          <div class="form-group">
-            <label>WhatsApp Number <span style="color:#878787;font-weight:500;">(optional)</span></label>
-            <input type="text" id="whatsapp" placeholder="For delivery updates">
-          </div>
+      <!-- CONTACT -->
 
-          <div class="form-group">
-            <label>Promo Code</label>
-            <div class="promo-row">
-              <input type="text" id="promoCode" placeholder="Enter code">
-              <button class="btn-apply" id="applyPromo">Apply</button>
-            </div>
-            <div class="promo-msg" id="promoMsg"></div>
-          </div>
+      <div class="form-group">
 
-          <button class="btn btn-primary" id="btnContinue" style="margin-top:8px;">
-            Continue to Payment →
+        <label>
+          Contact Details
+          <span class="required">*</span>
+        </label>
+
+
+        <div class="contact-choice">
+
+          <button
+            type="button"
+            class="contact-option active"
+            id="instagramMobileOption"
+            onclick="selectInstagramContact('mobile')"
+          >
+            📱 Mobile Number
           </button>
+
+
+          <button
+            type="button"
+            class="contact-option"
+            id="instagramEmailOption"
+            onclick="selectInstagramContact('email')"
+          >
+            ✉️ Email
+          </button>
+
         </div>
+
+
+        <div id="instagramMobileField">
+
+          <input
+            id="instagramMobile"
+            type="tel"
+            inputmode="numeric"
+            maxlength="15"
+            placeholder="Enter mobile number"
+            autocomplete="tel"
+          >
+
+        </div>
+
+
+        <div
+          id="instagramEmailField"
+          style="display:none;"
+        >
+
+          <input
+            id="instagramEmail"
+            type="email"
+            maxlength="150"
+            placeholder="Enter email address"
+            autocomplete="email"
+          >
+
+        </div>
+
       </div>
+
+
+      <!-- INSTAGRAM USERNAME -->
+
+      <div class="form-group">
+
+        <label>
+          Instagram Username
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="instagramUsername"
+          type="text"
+          maxlength="30"
+          placeholder="@yourusername"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- PROFILE -->
+
+      <div class="form-group">
+
+        <label>
+          Instagram Profile Link
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="instagramProfile"
+          type="url"
+          maxlength="300"
+          placeholder="https://instagram.com/yourusername"
+        >
+
+      </div>
+
+
+      <!-- PROMO -->
+
+      <div class="promo-box">
+
+        <div class="promo-heading">
+
+          <div class="promo-icon">
+            🎟️
+          </div>
+
+          <span>
+            Have a Promo Code?
+          </span>
+
+        </div>
+
+
+        <div class="promo-row">
+
+          <input
+            class="promo-input"
+            id="instagramPromoCode"
+            type="text"
+            maxlength="30"
+            placeholder="Enter promo code"
+            autocomplete="off"
+          >
+
+
+          <button
+            type="button"
+            class="promo-btn"
+            id="instagramPromoButton"
+            onclick="applyInstagramPromo()"
+          >
+            Apply Code
+          </button>
+
+        </div>
+
+
+        <div
+          class="promo-status"
+          id="instagramPromoStatus"
+        >
+          ✓ <strong>PROMO CODE APPLIED</strong>
+          — You saved 10% on this order.
+        </div>
+
+
+        <div
+          class="promo-error"
+          id="instagramPromoError"
+        >
+          Invalid promo code.
+        </div>
+
+      </div>
+
+
+      <!-- PRICE -->
+
+      <div class="price-box">
+
+        <div class="price-row">
+
+          <span>
+            Package Price
+          </span>
+
+          <strong id="instagramTotal">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div
+          class="price-row"
+          id="instagramOriginalRow"
+          style="display:none;"
+        >
+
+          <span>
+            Original Price
+          </span>
+
+          <strong
+            class="old-price"
+            id="instagramOriginalDisplay"
+          >
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div
+          class="price-row discount"
+          id="instagramDiscountRow"
+          style="display:none;"
+        >
+
+          <span>
+            Promo Discount
+          </span>
+
+          <strong id="instagramDiscountDisplay">
+            -₹0
+          </strong>
+
+        </div>
+
+
+        <div class="price-row total">
+
+          <span>
+            Total to Pay
+          </span>
+
+          <strong id="instagramFinal">
+            ₹0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="goHome()"
+        >
+          ← Back
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="instagramContinue()"
+        >
+          Continue to Payment →
+        </button>
+
+      </div>
+
+
+      <div class="secure-note">
+
+        🔒 Your information is used only for processing your order.
+
+        <br>
+
+        <strong>
+          Never share your Instagram password.
+        </strong>
+
+      </div>
+
     </div>
 
-    <!-- SCREEN 2: Payment -->
-    <div class="screen" id="screen2">
-      <div class="card">
-        <div class="card-header">💳 Complete Payment</div>
-        <div class="card-body">
-          <div class="error-msg" id="error2"></div>
-
-          <div class="payment-amount">
-            <div class="label">Amount to Pay</div>
-            <div class="amount">₹<span id="payAmount">299</span></div>
-            <div style="font-size:13px;color:#878787;">Pay via any UPI app</div>
-          </div>
-
-          <div class="qr-box" id="qrcode"></div>
-
-          <div class="upi-id">
-            UPI ID: <code id="upiId">sehranmedia@upi</code>
-            <button class="btn-secondary" id="copyUpi" style="width:auto;height:32px;padding:0 12px;font-size:12px;margin-left:8px;">
-              Copy
-            </button>
-          </div>
-
-          <div style="display:flex;gap:8px;margin-bottom:16px;">
-            <button class="btn btn-primary" id="payUpi" style="flex:1;">
-              Open UPI App
-            </button>
-          </div>
-
-          <div class="upload-area">
-            <div style="font-size:14px;font-weight:600;margin-bottom:8px;">
-              Upload Payment Screenshot <span class="required">*</span>
-            </div>
-            <input type="file" id="paymentProof" accept="image/*">
-            <div class="file-name" id="fileName">No file chosen</div>
-          </div>
-
-          <div style="display:flex;gap:12px;margin-top:20px;">
-            <button class="btn btn-secondary" id="btnBack" style="flex:1;">← Back</button>
-            <button class="btn btn-primary" id="btnSubmit" style="flex:2;">Submit Order</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SCREEN 3: Success -->
-    <div class="screen" id="screen3">
-      <div class="card">
-        <div class="success-box">
-          <div class="success-icon">✓</div>
-          <h2>Order Placed Successfully!</h2>
-          <p>Thank you for your order. We have received your payment proof and will verify it shortly. You will get the movie access on your contact details.</p>
-          <div class="order-id-box">
-            Order ID: <strong id="orderId">SA-XXXXXX</strong>
-          </div>
-          <div class="trust-row" style="margin-top:24px;">
-            <div class="trust-item">⚡ Usually delivered within 30 mins</div>
-            <div class="trust-item">📩 Check WhatsApp/Email</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- RIGHT: Order Summary (sticky) -->
-  <div>
-    <div class="card" style="position:sticky;top:80px;">
-      <div class="card-header">Price Details</div>
-      <div class="card-body">
-        <div class="price-lines">
-          <div class="price-line">
-            <span>Price</span>
-            <span>₹<span id="summaryBase">299</span></span>
-          </div>
-          <div class="price-line discount" id="discountRow" style="display:none;">
-            <span>Discount</span>
-            <span>- ₹<span id="discountAmt">0</span></span>
-          </div>
-          <div class="price-line">
-            <span>Delivery</span>
-            <span style="color:var(--success);">FREE</span>
-          </div>
-          <div class="price-line total">
-            <span>Total Amount</span>
-            <span>₹<span id="summaryTotal">299</span></span>
-          </div>
+</section>
+
+
+
+<!-- =========================================================
+     INSTAGRAM SCREEN 2
+========================================================= -->
+
+<section
+  class="screen"
+  id="instagramScreen2"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <h1 class="title">
+        Complete Payment
+      </h1>
+
+      <p class="subtitle">
+        Scan the QR code with your UPI app and pay the exact amount shown below.
+      </p>
+
+
+      <div class="payment-summary">
+
+        <div class="payment-small">
+          Exact Amount to Pay
         </div>
 
-        <div style="margin-top:16px;font-size:12px;color:#878787;text-align:center;">
-          🔒 Safe and Secure Payments<br>
-          100% Authentic Digital Products
+        <div
+          class="payment-amount"
+          id="instagramPaymentAmount"
+        >
+          ₹0
         </div>
+
+        <div class="upi-note">
+          Please pay the exact amount shown above.
+        </div>
+
       </div>
+
+
+      <div class="qr-wrapper">
+
+        <div id="instagramQR"></div>
+
+      </div>
+
+
+      <div class="upi-actions">
+
+        <button
+          type="button"
+          class="pay-upi-btn"
+          onclick="instagramPayUPI()"
+        >
+          💳 Pay with UPI
+        </button>
+
+
+        <button
+          type="button"
+          class="copy-upi-btn"
+          onclick="copyUPI()"
+        >
+          📋 Copy UPI ID
+        </button>
+
+
+        <div
+          class="copy-success"
+          id="copySuccess"
+        >
+          ✓ UPI ID copied successfully
+        </div>
+
+      </div>
+
+
+      <div class="upi-id-box">
+
+        <strong>
+          UPI ID
+        </strong>
+
+        <br>
+
+        <span class="upi-id">
+          7889777143@fam
+        </span>
+
+      </div>
+
+
+      <div
+        class="error"
+        id="instagramError2"
+      ></div>
+
+
+      <div class="form-group">
+
+        <label>
+
+          UTR / Transaction ID
+
+          <span class="optional">
+            Optional
+          </span>
+
+        </label>
+
+
+        <input
+          id="instagramUTR"
+          type="text"
+          maxlength="80"
+          placeholder="Enter UTR if available"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="upload-box">
+
+        <label for="instagramScreenshot">
+
+          Payment Screenshot
+
+          <span class="required">*</span>
+
+        </label>
+
+
+        <input
+          id="instagramScreenshot"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+        >
+
+
+        <div
+          class="file-name"
+          id="instagramFileName"
+        >
+          No screenshot selected
+        </div>
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="instagramShowScreen(1)"
+        >
+          ← Back
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="instagramSubmitBtn"
+          onclick="submitInstagramOrder()"
+        >
+          Submit Order ✓
+        </button>
+
+      </div>
+
+
+      <div class="secure-note">
+
+        🔒 Payment screenshot is securely submitted with your order.
+
+        <br>
+
+        We never ask for your Instagram password.
+
+      </div>
+
     </div>
+
   </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INSTAGRAM SCREEN 3
+========================================================= -->
+
+<section
+  class="screen"
+  id="instagramScreen3"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <div class="success-screen">
+
+        <div class="success-icon"></div>
+
+
+        <h1 class="success-title">
+          Order Submitted!
+        </h1>
+
+
+        <p class="success-message">
+
+          Your Instagram order has been received successfully.
+
+          <br>
+
+          Please keep your Order ID for reference.
+
+        </p>
+
+
+        <div class="delivery-message">
+
+          🚀 Your order will be delivered within 10 minutes.
+
+        </div>
+
+
+        <div class="order-id">
+
+          Order ID:
+
+          <span id="instagramOrderId">
+            ---
+          </span>
+
+        </div>
+
+
+        <div
+          class="price-box"
+          style="margin-top:20px;text-align:left;"
+        >
+
+          <div class="price-row">
+
+            <span>
+              Status
+            </span>
+
+            <strong style="color:#ffd166;">
+              PROCESSING
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Package
+            </span>
+
+            <strong id="successInstagramPackage">
+              ---
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Amount
+            </span>
+
+            <strong id="successInstagramAmount">
+              ₹0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="goHome()"
+          >
+            Back to Home
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MOVIE SCREEN 1
+========================================================= -->
+
+<section
+  class="screen"
+  id="movieScreen1"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <h1 class="title">
+        Digital Product Checkout
+      </h1>
+
+
+      <p class="subtitle">
+        Review your selected digital product and continue to secure payment.
+      </p>
+
+
+      <div class="product-card">
+
+        <div class="product-top">
+
+          <div class="product-label">
+            Selected Product
+          </div>
+
+          <div class="product-badge">
+            Digital
+          </div>
+
+        </div>
+
+
+        <div
+          class="product-name"
+          id="movieName"
+        >
+          Selected Movie
+        </div>
+
+
+        <div
+          class="product-price"
+          id="moviePrice"
+        >
+          ₹0
+        </div>
+
+
+        <div
+          class="movie-meta"
+          id="movieMeta"
+        ></div>
+
+      </div>
+
+
+      <div
+        class="error"
+        id="movieError1"
+      ></div>
+
+
+      <!-- CONTACT -->
+
+      <div class="form-group">
+
+        <label>
+          Contact Details
+          <span class="required">*</span>
+        </label>
+
+
+        <div class="contact-choice">
+
+          <button
+            type="button"
+            class="contact-option active"
+            id="movieMobileOption"
+            onclick="selectMovieContact('mobile')"
+          >
+            📱 Mobile Number
+          </button>
+
+
+          <button
+            type="button"
+            class="contact-option"
+            id="movieEmailOption"
+            onclick="selectMovieContact('email')"
+          >
+            ✉️ Email
+          </button>
+
+        </div>
+
+
+        <div id="movieMobileField">
+
+          <input
+            id="movieMobile"
+            type="tel"
+            inputmode="numeric"
+            maxlength="15"
+            placeholder="Enter mobile number"
+            autocomplete="tel"
+          >
+
+        </div>
+
+
+        <div
+          id="movieEmailField"
+          style="display:none;"
+        >
+
+          <input
+            id="movieEmail"
+            type="email"
+            maxlength="150"
+            placeholder="Enter email address"
+            autocomplete="email"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- PRICE -->
+
+      <div class="price-box">
+
+        <div class="price-row">
+
+          <span>
+            Product Price
+          </span>
+
+          <strong id="movieSummaryPrice">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div
+          class="price-row"
+          id="movieOriginalRow"
+          style="display:none;"
+        >
+
+          <span>
+            Original Price
+          </span>
+
+          <strong
+            class="old-price"
+            id="movieOriginalDisplay"
+          >
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div
+          class="price-row discount"
+          id="movieDiscountRow"
+          style="display:none;"
+        >
+
+          <span>
+            Discount
+          </span>
+
+          <strong id="movieDiscountDisplay">
+            -₹0
+          </strong>
+
+        </div>
+
+
+        <div class="price-row total">
+
+          <span>
+            Total to Pay
+          </span>
+
+          <strong id="movieTotal">
+            ₹0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="goHome()"
+        >
+          ← Back
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="movieContinuePayment()"
+        >
+          Continue to Payment →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MOVIE SCREEN 2
+========================================================= -->
+
+<section
+  class="screen"
+  id="movieScreen2"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <h1 class="title">
+        Complete Payment
+      </h1>
+
+
+      <p class="subtitle">
+        Scan the QR code with your UPI app and pay the exact amount shown below.
+      </p>
+
+
+      <div class="payment-summary">
+
+        <div class="payment-small">
+          Exact Amount to Pay
+        </div>
+
+        <div
+          class="payment-amount"
+          id="moviePaymentAmount"
+        >
+          ₹0
+        </div>
+
+        <div class="upi-note">
+          Please pay the exact amount shown above.
+        </div>
+
+      </div>
+
+
+      <div class="qr-wrapper">
+
+        <div id="movieQR"></div>
+
+      </div>
+
+
+      <div class="upi-actions">
+
+        <button
+          type="button"
+          class="pay-upi-btn"
+          onclick="moviePayUPI()"
+        >
+          💳 Pay with UPI
+        </button>
+
+
+        <button
+          type="button"
+          class="copy-upi-btn"
+          onclick="copyUPI()"
+        >
+          📋 Copy UPI ID
+        </button>
+
+
+        <div
+          class="copy-success"
+          id="movieCopySuccess"
+        >
+          ✓ UPI ID copied successfully
+        </div>
+
+      </div>
+
+
+      <div class="upi-id-box">
+
+        <strong>
+          UPI ID
+        </strong>
+
+        <br>
+
+        <span class="upi-id">
+          7889777143@fam
+        </span>
+
+      </div>
+
+
+      <div
+        class="error"
+        id="movieError2"
+      ></div>
+
+
+      <div class="form-group">
+
+        <label>
+
+          UTR / Transaction ID
+
+          <span class="optional">
+            Optional
+          </span>
+
+        </label>
+
+
+        <input
+          id="movieUTR"
+          type="text"
+          maxlength="80"
+          placeholder="Enter UTR if available"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="upload-box">
+
+        <label for="movieScreenshot">
+
+          Payment Screenshot
+
+          <span class="required">*</span>
+
+        </label>
+
+
+        <input
+          id="movieScreenshot"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+        >
+
+
+        <div
+          class="file-name"
+          id="movieFileName"
+        >
+          No screenshot selected
+        </div>
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="movieShowScreen(1)"
+        >
+          ← Back
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="movieSubmitBtn"
+          onclick="submitMovieOrder()"
+        >
+          Submit Order ✓
+        </button>
+
+      </div>
+
+
+      <div class="secure-note">
+
+        🔒 Your payment information is submitted securely.
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MOVIE SCREEN 3
+========================================================= -->
+
+<section
+  class="screen"
+  id="movieScreen3"
+>
+
+  <div class="checkout-card">
+
+    <div class="card-inner">
+
+      <div class="success-screen">
+
+        <div class="success-icon"></div>
+
+
+        <h1 class="success-title">
+          Order Submitted!
+        </h1>
+
+
+        <p class="success-message">
+
+          Your digital product order has been received successfully.
+
+          <br>
+
+          Please keep your Order ID for reference.
+
+        </p>
+
+
+        <div class="delivery-message">
+
+          🚀 Your order is being processed.
+
+        </div>
+
+
+        <div class="order-id">
+
+          Order ID:
+
+          <span id="movieOrderId">
+            ---
+          </span>
+
+        </div>
+
+
+        <div
+          class="price-box"
+          style="margin-top:20px;text-align:left;"
+        >
+
+          <div class="price-row">
+
+            <span>
+              Status
+            </span>
+
+            <strong style="color:#ffd166;">
+              PROCESSING
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Product
+            </span>
+
+            <strong id="successMovieName">
+              ---
+            </strong>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <span>
+              Amount
+            </span>
+
+            <strong id="successMovieAmount">
+              ₹0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="goHome()"
+          >
+            Back to Home
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
 </div>
 
-<!-- Processing Overlay -->
-<div class="overlay" id="overlay">
-  <div class="overlay-card">
-    <div class="spinner"></div>
-    <h3 style="margin-bottom:8px;">Submitting Order...</h3>
-    <p style="font-size:14px;color:#878787;" id="overlayText">Verifying details</p>
+</main>
+
+
+
+<!-- =========================================================
+     PROCESSING OVERLAY
+========================================================= -->
+
+<div
+  class="processing-overlay"
+  id="processingOverlay"
+>
+
+  <div class="processing-card">
+
+    <div class="loader-ring"></div>
+
+    <div
+      class="loader-number"
+      id="loaderNumber"
+    >
+      1
+    </div>
+
+
+    <div class="processing-title">
+      Processing Your Order
+    </div>
+
+
+    <div
+      class="processing-subtitle"
+      id="processingSubtitle"
+    >
+      Verifying your order details...
+    </div>
+
+
+    <div class="processing-progress">
+
+      <div
+        class="processing-progress-bar"
+        id="processingProgressBar"
+      ></div>
+
+    </div>
+
+
+    <div
+      class="processing-percent"
+      id="processingPercent"
+    >
+      0%
+    </div>
+
   </div>
+
 </div>
+
+
+
+<!-- =========================================================
+     CELEBRATION
+========================================================= -->
+
+<div id="celebration"></div>
+
+
 
 <script>
-  // ========== CONFIG ==========
-  const CONFIG = {
-    productName: "Premium Movie Access",
-    basePrice: 299,
-    oldPrice: 499,
-    upiId: "sehranmedia@upi",          // अपना UPI ID डालें
-    payeeName: "SehrAn Media",
-    promoCodes: {
-      "SEHRAN10": 10,     // 10% off
-      "MOVIE50": 50,      // flat ₹50 off
-      "WELCOME": 30       // flat ₹30 off
-    }
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+const UPI_ID =
+  "7889777143@fam";
+
+const UPI_NAME =
+  "SehrAn Media";
+
+const PROMO_CODE =
+  "ZEESHAN10";
+
+const PROMO_PERCENT =
+  10;
+
+
+/* =========================================================
+   INSTAGRAM PACKAGES
+========================================================= */
+
+const INSTAGRAM_PACKAGES = {
+
+  "200":{
+    name:"Starter — 200 Followers",
+    followers:200,
+    price:30
+  },
+
+  "500":{
+    name:"Starter Plus — 500 Followers",
+    followers:500,
+    price:50
+  },
+
+  "1000":{
+    name:"Popular — 1,000 Followers",
+    followers:1000,
+    price:90
+  },
+
+  "1500":{
+    name:"Growth — 1,500 Followers",
+    followers:1500,
+    price:130
+  },
+
+  "2000":{
+    name:"Growth Plus — 2,000 Followers",
+    followers:2000,
+    price:150
+  },
+
+  "3000":{
+    name:"Pro — 3,000 Followers",
+    followers:3000,
+    price:200
+  },
+
+  "4000":{
+    name:"Pro Plus — 4,000 Followers",
+    followers:4000,
+    price:250
+  },
+
+  "5000":{
+    name:"Premium — 5,000 Followers",
+    followers:5000,
+    price:300
+  },
+
+  "6000":{
+    name:"Premium Plus — 6,000 Followers",
+    followers:6000,
+    price:350
+  },
+
+  "7000":{
+    name:"Advanced — 7,000 Followers",
+    followers:7000,
+    price:450
+  },
+
+  "8000":{
+    name:"Advanced Plus — 8,000 Followers",
+    followers:8000,
+    price:500
+  },
+
+  "9000":{
+    name:"Elite — 9,000 Followers",
+    followers:9000,
+    price:550
+  },
+
+  "10000":{
+    name:"Elite Plus — 10,000 Followers",
+    followers:10000,
+    price:600
+  }
+
+};
+
+
+/* =========================================================
+   URL PARAMETERS
+========================================================= */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const productType =
+  (
+    params.get("product") ||
+    params.get("type") ||
+    ""
+  )
+  .toLowerCase()
+  .trim();
+
+
+const isMovie =
+  productType === "movie";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getNumber(value){
+
+  if(!value){
+    return 0;
+  }
+
+
+  const cleaned =
+    String(value)
+      .replace(/,/g,"")
+      .replace(/₹/g,"")
+      .replace(/INR/gi,"")
+      .trim();
+
+
+  const match =
+    cleaned.match(
+      /(\d+(?:\.\d{1,2})?)/
+    );
+
+
+  return match
+    ? Number(match[1])
+    : 0;
+}
+
+
+function money(value){
+
+  const number =
+    Number(value) || 0;
+
+
+  if(
+    Number.isInteger(number)
+  ){
+
+    return "₹" + number;
+
+  }
+
+
+  return "₹" +
+    number.toFixed(2);
+}
+
+
+/* =========================================================
+   INSTAGRAM DATA
+========================================================= */
+
+const requestedPackage =
+  params.get("followers") ||
+  params.get("package") ||
+  params.get("pkg") ||
+  params.get("service") ||
+  "";
+
+
+const normalizedPackage =
+  String(requestedPackage)
+    .replace(/,/g,"")
+    .replace(/\s+/g,"")
+    .replace(/followers/gi,"")
+    .replace(/follower/gi,"")
+    .trim();
+
+
+const selectedInstagramPackage =
+  INSTAGRAM_PACKAGES[
+    normalizedPackage
+  ] || null;
+
+
+const instagramPackage =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.name
+    : "Invalid Instagram Package";
+
+
+const instagramPrice =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.price
+    : 0;
+
+
+const instagramFollowers =
+  selectedInstagramPackage
+    ? selectedInstagramPackage.followers
+    : 0;
+
+
+/* =========================================================
+   MOVIE DATA
+========================================================= */
+
+const movieName =
+  params.get("name") ||
+  params.get("movie") ||
+  "Selected Movie";
+
+
+const moviePrice =
+  getNumber(
+    params.get("price") ||
+    params.get("amount") ||
+    "0"
+  );
+
+
+const movieYear =
+  params.get("year") || "";
+
+
+const movieQuality =
+  params.get("quality") ||
+  "Digital";
+
+
+const movieLanguage =
+  params.get("language") ||
+  "";
+
+
+const movieSize =
+  params.get("size") ||
+  "";
+
+
+/* =========================================================
+   PRICE STATE
+========================================================= */
+
+let instagramPromoApplied =
+  false;
+
+
+let instagramFinalPrice =
+  instagramPrice;
+
+
+let movieFinalPrice =
+  moviePrice;
+
+
+/* =========================================================
+   DISCOUNT
+========================================================= */
+
+function calculateDiscount(
+  amount
+){
+
+  const numeric =
+    Number(amount) || 0;
+
+
+  if(numeric <= 0){
+
+    return {
+      discount:0,
+      final:0
+    };
+
+  }
+
+
+  const discount =
+    Math.round(
+      (
+        numeric *
+        PROMO_PERCENT /
+        100
+      ) * 100
+    ) / 100;
+
+
+  const final =
+    Math.round(
+      (
+        numeric -
+        discount
+      ) * 100
+    ) / 100;
+
+
+  return {
+    discount,
+    final
   };
 
-  // ========== STATE ==========
-  let currentStep = 1;
-  let contactType = "phone";
-  let appliedDiscount = 0;
-  let finalPrice = CONFIG.basePrice;
+}
 
-  // ========== INIT ==========
-  document.getElementById("productName").textContent = CONFIG.productName;
-  document.getElementById("basePrice").textContent = CONFIG.basePrice;
-  document.getElementById("oldPriceDisplay").textContent = "₹" + CONFIG.oldPrice;
-  document.getElementById("summaryBase").textContent = CONFIG.basePrice;
-  document.getElementById("summaryTotal").textContent = CONFIG.basePrice;
-  document.getElementById("payAmount").textContent = CONFIG.basePrice;
-  document.getElementById("upiId").textContent = CONFIG.upiId;
 
-  // ========== CONTACT TABS ==========
-  document.querySelectorAll(".contact-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".contact-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      contactType = tab.dataset.type;
-      const input = document.getElementById("contactInput");
-      input.placeholder = contactType === "phone" ? "Enter phone number" : "Enter email address";
-      input.type = contactType === "phone" ? "tel" : "email";
-      input.value = "";
-    });
-  });
+/* =========================================================
+   INSTAGRAM PROMO
+========================================================= */
 
-  // ========== PROMO ==========
-  document.getElementById("applyPromo").addEventListener("click", () => {
-    const code = document.getElementById("promoCode").value.trim().toUpperCase();
-    const msg = document.getElementById("promoMsg");
-    const btn = document.getElementById("applyPromo");
+function applyInstagramPromo(){
 
-    if (!code) {
-      msg.textContent = "Please enter a promo code";
-      msg.className = "promo-msg error";
-      return;
+  const input =
+    document.getElementById(
+      "instagramPromoCode"
+    );
+
+
+  const button =
+    document.getElementById(
+      "instagramPromoButton"
+    );
+
+
+  const status =
+    document.getElementById(
+      "instagramPromoStatus"
+    );
+
+
+  const error =
+    document.getElementById(
+      "instagramPromoError"
+    );
+
+
+  const value =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  error.classList.remove(
+    "show"
+  );
+
+
+  if(
+    value === PROMO_CODE
+  ){
+
+    instagramPromoApplied =
+      true;
+
+
+    const result =
+      calculateDiscount(
+        instagramPrice
+      );
+
+
+    instagramFinalPrice =
+      result.final;
+
+
+    button.classList.add(
+      "applied"
+    );
+
+
+    button.textContent =
+      "✓ Applied";
+
+
+    status.classList.add(
+      "show"
+    );
+
+
+    input.value =
+      PROMO_CODE;
+
+
+    updateInstagramPrice();
+
+
+  }else{
+
+    instagramPromoApplied =
+      false;
+
+
+    instagramFinalPrice =
+      instagramPrice;
+
+
+    button.classList.remove(
+      "applied"
+    );
+
+
+    button.textContent =
+      "Apply Code";
+
+
+    status.classList.remove(
+      "show"
+    );
+
+
+    error.textContent =
+      value
+        ? "Invalid promo code. Please check and try again."
+        : "Please enter a promo code.";
+
+
+    error.classList.add(
+      "show"
+    );
+
+
+    updateInstagramPrice();
+
+  }
+
+}
+
+
+/* =========================================================
+   INSTAGRAM PRICE UI
+========================================================= */
+
+function updateInstagramPrice(){
+
+  const original =
+    instagramPrice;
+
+
+  const final =
+    instagramPromoApplied
+      ? instagramFinalPrice
+      : instagramPrice;
+
+
+  const discount =
+    instagramPromoApplied
+      ? calculateDiscount(
+          instagramPrice
+        ).discount
+      : 0;
+
+
+  document.getElementById(
+    "instagramTotal"
+  ).textContent =
+    money(original);
+
+
+  document.getElementById(
+    "instagramFinal"
+  ).textContent =
+    money(final);
+
+
+  document.getElementById(
+    "instagramPaymentAmount"
+  ).textContent =
+    money(final);
+
+
+  document.getElementById(
+    "instagramOriginalDisplay"
+  ).textContent =
+    money(original);
+
+
+  document.getElementById(
+    "instagramDiscountDisplay"
+  ).textContent =
+    "-" + money(discount);
+
+
+  document.getElementById(
+    "instagramOriginalRow"
+  ).style.display =
+    instagramPromoApplied
+      ? "flex"
+      : "none";
+
+
+  document.getElementById(
+    "instagramDiscountRow"
+  ).style.display =
+    instagramPromoApplied
+      ? "flex"
+      : "none";
+
+}
+
+
+/* =========================================================
+   MOVIE PRICE UI
+========================================================= */
+
+function updateMoviePrice(){
+
+  const final =
+    movieFinalPrice;
+
+
+  document.getElementById(
+    "movieSummaryPrice"
+  ).textContent =
+    money(moviePrice);
+
+
+  document.getElementById(
+    "movieTotal"
+  ).textContent =
+    money(final);
+
+
+  document.getElementById(
+    "moviePaymentAmount"
+  ).textContent =
+    money(final);
+
+}
+
+
+/* =========================================================
+   UPI
+========================================================= */
+
+function buildUPI(
+  amount
+){
+
+  return (
+    "upi://pay" +
+    "?pa=" +
+    encodeURIComponent(
+      UPI_ID
+    ) +
+    "&pn=" +
+    encodeURIComponent(
+      UPI_NAME
+    ) +
+    "&am=" +
+    encodeURIComponent(
+      Number(amount).toFixed(2)
+    ) +
+    "&cu=INR"
+  );
+
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
+function generateQR(
+  elementId,
+  amount
+){
+
+  const container =
+    document.getElementById(
+      elementId
+    );
+
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML =
+    "";
+
+
+  if(
+    !amount ||
+    amount <= 0 ||
+    typeof QRCode ===
+      "undefined"
+  ){
+
+    return;
+  }
+
+
+  new QRCode(
+    container,
+    {
+
+      text:
+        buildUPI(amount),
+
+      width:
+        290,
+
+      height:
+        290,
+
+      colorDark:
+        "#000000",
+
+      colorLight:
+        "#ffffff",
+
+      correctLevel:
+        QRCode.CorrectLevel.H
+
     }
+  );
 
-    if (CONFIG.promoCodes[code] !== undefined) {
-      const val = CONFIG.promoCodes[code];
-      if (val < 100) { // treat <100 as percentage
-        appliedDiscount = Math.round(CONFIG.basePrice * val / 100);
-      } else {
-        appliedDiscount = val;
+}
+
+
+/* =========================================================
+   UPI PAYMENT
+========================================================= */
+
+function payUPI(
+  amount,
+  errorId
+){
+
+  if(
+    !amount ||
+    amount <= 0
+  ){
+
+    showError(
+      errorId,
+      "Invalid payment amount."
+    );
+
+    return;
+  }
+
+
+  window.location.href =
+    buildUPI(amount);
+
+}
+
+
+/* =========================================================
+   COPY UPI
+========================================================= */
+
+async function copyUPI(){
+
+  try{
+
+    await navigator
+      .clipboard
+      .writeText(
+        UPI_ID
+      );
+
+
+    document
+      .querySelectorAll(
+        ".copy-success"
+      )
+      .forEach(
+        box => {
+
+          box.classList.add(
+            "show"
+          );
+
+
+          setTimeout(
+            () => {
+
+              box.classList.remove(
+                "show"
+              );
+
+            },
+            2500
+          );
+
+        }
+      );
+
+
+  }catch{
+
+    alert(
+      "UPI ID: " +
+      UPI_ID
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SCREEN MANAGEMENT
+========================================================= */
+
+function hideAllScreens(){
+
+  document
+    .querySelectorAll(
+      ".screen"
+    )
+    .forEach(
+      screen => {
+
+        screen.classList.remove(
+          "active"
+        );
+
       }
-      finalPrice = Math.max(0, CONFIG.basePrice - appliedDiscount);
+    );
 
-      msg.textContent = `🎉 Code applied! You saved ₹${appliedDiscount}`;
-      msg.className = "promo-msg success";
-      btn.textContent = "Applied";
-      btn.classList.add("applied");
-      btn.disabled = true;
+}
 
-      updatePrices();
-    } else {
-      msg.textContent = "Invalid promo code";
-      msg.className = "promo-msg error";
-      appliedDiscount = 0;
-      finalPrice = CONFIG.basePrice;
-      updatePrices();
+
+function updateProgress(
+  number
+){
+
+  for(
+    let i=1;
+    i<=3;
+    i++
+  ){
+
+    const circle =
+      document.getElementById(
+        "step" + i
+      );
+
+
+    const step =
+      document.getElementById(
+        "progressStep" + i
+      );
+
+
+    if(!circle || !step){
+      continue;
     }
-  });
 
-  function updatePrices() {
-    document.getElementById("summaryTotal").textContent = finalPrice;
-    document.getElementById("payAmount").textContent = finalPrice;
-    document.getElementById("discountAmt").textContent = appliedDiscount;
 
-    const row = document.getElementById("discountRow");
-    if (appliedDiscount > 0) {
-      row.style.display = "flex";
-    } else {
-      row.style.display = "none";
+    step.classList.toggle(
+      "active",
+      i === number
+    );
+
+
+    step.classList.toggle(
+      "done",
+      i < number
+    );
+
+
+    if(i < number){
+
+      circle.textContent =
+        "✓";
+
+    }else{
+
+      circle.textContent =
+        i;
+
     }
+
   }
 
-  // ========== STEP NAVIGATION ==========
-  document.getElementById("btnContinue").addEventListener("click", () => {
-    const name = document.getElementById("fullName").value.trim();
-    const contact = document.getElementById("contactInput").value.trim();
-    const err = document.getElementById("error1");
 
-    if (!name || name.length < 2) {
-      err.textContent = "Please enter a valid full name";
-      err.classList.add("show");
-      return;
-    }
-    if (!contact) {
-      err.textContent = contactType === "phone" ? "Please enter phone number" : "Please enter email";
-      err.classList.add("show");
-      return;
-    }
-    if (contactType === "phone" && !/^[6-9]\d{9}$/.test(contact.replace(/\D/g, ""))) {
-      err.textContent = "Please enter a valid 10-digit phone number";
-      err.classList.add("show");
-      return;
-    }
-    if (contactType === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) {
-      err.textContent = "Please enter a valid email address";
-      err.classList.add("show");
-      return;
-    }
+  document
+    .getElementById(
+      "line1"
+    )
+    .classList.toggle(
+      "active",
+      number >= 2
+    );
 
-    err.classList.remove("show");
-    goToStep(2);
-    generateQR();
+
+  document
+    .getElementById(
+      "line2"
+    )
+    .classList.toggle(
+      "active",
+      number >= 3
+    );
+
+}
+
+
+/* =========================================================
+   MOVIE SCREENS
+========================================================= */
+
+function movieShowScreen(
+  number
+){
+
+  hideAllScreens();
+
+
+  const screen =
+    document.getElementById(
+      "movieScreen" + number
+    );
+
+
+  if(screen){
+
+    screen.classList.add(
+      "active"
+    );
+
+  }
+
+
+  updateProgress(
+    number
+  );
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  document.getElementById("btnBack").addEventListener("click", () => {
-    goToStep(1);
+}
+
+
+/* =========================================================
+   INSTAGRAM SCREENS
+========================================================= */
+
+function instagramShowScreen(
+  number
+){
+
+  hideAllScreens();
+
+
+  const screen =
+    document.getElementById(
+      "instagramScreen" + number
+    );
+
+
+  if(screen){
+
+    screen.classList.add(
+      "active"
+    );
+
+  }
+
+
+  updateProgress(
+    number
+  );
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  document.getElementById("btnSubmit").addEventListener("click", () => {
-    const file = document.getElementById("paymentProof").files[0];
-    const err = document.getElementById("error2");
+}
 
-    if (!file) {
-      err.textContent = "Please upload payment screenshot";
-      err.classList.add("show");
+
+/* =========================================================
+   MOVIE INITIALIZATION
+========================================================= */
+
+function initializeMovie(){
+
+  document.getElementById(
+    "brandSubtitle"
+  ).textContent =
+    "Digital Products • Secure Checkout";
+
+
+  document.getElementById(
+    "movieName"
+  ).textContent =
+    movieName;
+
+
+  document.getElementById(
+    "moviePrice"
+  ).textContent =
+    money(moviePrice);
+
+
+  const meta =
+    document.getElementById(
+      "movieMeta"
+    );
+
+
+  meta.innerHTML =
+    "";
+
+
+  if(movieYear){
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.textContent =
+      movieYear;
+
+    meta.appendChild(
+      span
+    );
+
+  }
+
+
+  if(movieQuality){
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.textContent =
+      movieQuality;
+
+    meta.appendChild(
+      span
+    );
+
+  }
+
+
+  if(movieLanguage){
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.textContent =
+      movieLanguage;
+
+    meta.appendChild(
+      span
+    );
+
+  }
+
+
+  if(movieSize){
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.textContent =
+      movieSize;
+
+    meta.appendChild(
+      span
+    );
+
+  }
+
+
+  updateMoviePrice();
+
+}
+
+
+/* =========================================================
+   MOVIE CONTACT
+========================================================= */
+
+let movieContactMethod =
+  "mobile";
+
+
+function selectMovieContact(
+  method
+){
+
+  movieContactMethod =
+    method;
+
+
+  document
+    .getElementById(
+      "movieMobileOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "mobile"
+    );
+
+
+  document
+    .getElementById(
+      "movieEmailOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "email"
+    );
+
+
+  document
+    .getElementById(
+      "movieMobileField"
+    )
+    .style.display =
+      method === "mobile"
+        ? "block"
+        : "none";
+
+
+  document
+    .getElementById(
+      "movieEmailField"
+    )
+    .style.display =
+      method === "email"
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   INSTAGRAM CONTACT
+========================================================= */
+
+let instagramContactMethod =
+  "mobile";
+
+
+function selectInstagramContact(
+  method
+){
+
+  instagramContactMethod =
+    method;
+
+
+  document
+    .getElementById(
+      "instagramMobileOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "mobile"
+    );
+
+
+  document
+    .getElementById(
+      "instagramEmailOption"
+    )
+    .classList.toggle(
+      "active",
+      method === "email"
+    );
+
+
+  document
+    .getElementById(
+      "instagramMobileField"
+    )
+    .style.display =
+      method === "mobile"
+        ? "block"
+        : "none";
+
+
+  document
+    .getElementById(
+      "instagramEmailField"
+    )
+    .style.display =
+      method === "email"
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function isValidIndianMobile(
+  value
+){
+
+  const normalized =
+    String(value)
+      .replace(
+        /[^\d+]/g,
+        ""
+      )
+      .replace(
+        /^\+91/,
+        ""
+      )
+      .replace(
+        /^91(?=\d{10}$)/,
+        ""
+      );
+
+
+  return /^[6-9]\d{9}$/.test(
+    normalized
+  );
+
+}
+
+
+function isValidEmail(
+  value
+){
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    .test(value);
+
+}
+
+
+/* =========================================================
+   MOVIE CONTACT
+========================================================= */
+
+function getMovieContact(){
+
+  return {
+
+    mobile:
+      document
+        .getElementById(
+          "movieMobile"
+        )
+        .value
+        .trim()
+        .replace(
+          /[^\d+]/g,
+          ""
+        ),
+
+    email:
+      document
+        .getElementById(
+          "movieEmail"
+        )
+        .value
+        .trim()
+        .toLowerCase()
+
+  };
+
+}
+
+
+/* =========================================================
+   MOVIE STEP 1
+========================================================= */
+
+function movieContinuePayment(){
+
+  clearErrors();
+
+
+  if(moviePrice <= 0){
+
+    showError(
+      "movieError1",
+      "Movie price could not be detected."
+    );
+
+    return;
+  }
+
+
+  const contact =
+    getMovieContact();
+
+
+  if(
+    !contact.mobile &&
+    !contact.email
+  ){
+
+    showError(
+      "movieError1",
+      "Please provide your mobile number or email address."
+    );
+
+    return;
+  }
+
+
+  if(
+    movieContactMethod ===
+    "mobile"
+  ){
+
+    if(
+      !isValidIndianMobile(
+        contact.mobile
+      )
+    ){
+
+      showError(
+        "movieError1",
+        "Please enter a valid Indian mobile number."
+      );
+
       return;
     }
-    err.classList.remove("show");
 
-    // Show processing
-    const overlay = document.getElementById("overlay");
-    const text = document.getElementById("overlayText");
-    overlay.classList.add("show");
+  }else{
 
-    const steps = [
-      "Verifying order details...",
-      "Checking payment screenshot...",
-      "Generating order ID...",
-      "Almost done..."
-    ];
-    let i = 0;
-    text.textContent = steps[0];
+    if(
+      !isValidEmail(
+        contact.email
+      )
+    ){
 
-    const interval = setInterval(() => {
-      i++;
-      if (i < steps.length) {
-        text.textContent = steps[i];
-      } else {
-        clearInterval(interval);
-        // Generate order ID
-        const orderId = "SA-" + Date.now().toString().slice(-8);
-        document.getElementById("orderId").textContent = orderId;
+      showError(
+        "movieError1",
+        "Please enter a valid email address."
+      );
 
-        setTimeout(() => {
-          overlay.classList.remove("show");
-          goToStep(3);
-        }, 600);
+      return;
+    }
+
+  }
+
+
+  generateQR(
+    "movieQR",
+    movieFinalPrice
+  );
+
+
+  movieShowScreen(2);
+
+}
+
+
+/* =========================================================
+   MOVIE PAY
+========================================================= */
+
+function moviePayUPI(){
+
+  payUPI(
+    movieFinalPrice,
+    "movieError2"
+  );
+
+}
+
+
+/* =========================================================
+   INSTAGRAM STEP 1
+========================================================= */
+
+function instagramContinue(){
+
+  clearErrors();
+
+
+  if(
+    !selectedInstagramPackage
+  ){
+
+    showError(
+      "instagramError1",
+      "Invalid Instagram package. Please go back and select a package again."
+    );
+
+    return;
+  }
+
+
+  if(
+    instagramPrice <= 0
+  ){
+
+    showError(
+      "instagramError1",
+      "Invalid package price."
+    );
+
+    return;
+  }
+
+
+  const mobile =
+    document
+      .getElementById(
+        "instagramMobile"
+      )
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById(
+        "instagramEmail"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const username =
+    document
+      .getElementById(
+        "instagramUsername"
+      )
+      .value
+      .trim()
+      .replace(
+        /^@+/,
+        ""
+      );
+
+
+  const profile =
+    document
+      .getElementById(
+        "instagramProfile"
+      )
+      .value
+      .trim();
+
+
+  if(
+    instagramContactMethod ===
+    "mobile"
+  ){
+
+    if(
+      !isValidIndianMobile(
+        mobile
+      )
+    ){
+
+      showError(
+        "instagramError1",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+    }
+
+  }else{
+
+    if(
+      !isValidEmail(
+        email
+      )
+    ){
+
+      showError(
+        "instagramError1",
+        "Please enter a valid email address."
+      );
+
+      return;
+    }
+
+  }
+
+
+  if(
+    !/^[A-Za-z0-9._]{1,30}$/
+      .test(username)
+  ){
+
+    showError(
+      "instagramError1",
+      "Please enter a valid Instagram username."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    const url =
+      new URL(profile);
+
+
+    const hostname =
+      url.hostname
+        .toLowerCase()
+        .replace(
+          /^www\./,
+          ""
+        );
+
+
+    if(
+      hostname !==
+        "instagram.com" &&
+      hostname !==
+        "instagr.am"
+    ){
+
+      throw new Error();
+
+    }
+
+  }catch{
+
+    showError(
+      "instagramError1",
+      "Please enter a valid Instagram profile link."
+    );
+
+    return;
+  }
+
+
+  generateQR(
+    "instagramQR",
+    instagramFinalPrice
+  );
+
+
+  instagramShowScreen(2);
+
+}
+
+
+/* =========================================================
+   INSTAGRAM PAY
+========================================================= */
+
+function instagramPayUPI(){
+
+  payUPI(
+    instagramFinalPrice,
+    "instagramError2"
+  );
+
+}
+
+
+/* =========================================================
+   FILE VALIDATION
+========================================================= */
+
+function validateFile(
+  input,
+  id
+){
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  const display =
+    document.getElementById(
+      id
+    );
+
+
+  if(!file){
+
+    display.textContent =
+      "No screenshot selected";
+
+
+    display.className =
+      "file-name";
+
+
+    return false;
+
+  }
+
+
+  const allowedTypes = [
+
+    "image/jpeg",
+
+    "image/png",
+
+    "image/webp"
+
+  ];
+
+
+  if(
+    !allowedTypes.includes(
+      file.type
+    )
+  ){
+
+    display.textContent =
+      "✕ Invalid file type";
+
+
+    display.className =
+      "file-name file-warning";
+
+
+    return false;
+
+  }
+
+
+  if(
+    file.size >
+    5 * 1024 * 1024
+  ){
+
+    display.textContent =
+      "✕ File is larger than 5 MB";
+
+
+    display.className =
+      "file-name file-warning";
+
+
+    return false;
+
+  }
+
+
+  const size =
+    (
+      file.size /
+      1024 /
+      1024
+    ).toFixed(2);
+
+
+  display.textContent =
+    "✓ " +
+    file.name +
+    " • " +
+    size +
+    " MB";
+
+
+  display.className =
+    "file-name file-valid";
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   BASE64
+========================================================= */
+
+function fileToBase64(
+  file
+){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+
+      reader.onerror =
+        () => {
+
+          reject(
+            new Error(
+              "Could not read screenshot."
+            )
+          );
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   FILE EVENTS
+========================================================= */
+
+document
+  .getElementById(
+    "movieScreenshot"
+  )
+  .addEventListener(
+    "change",
+    function(){
+
+      validateFile(
+        this,
+        "movieFileName"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "instagramScreenshot"
+  )
+  .addEventListener(
+    "change",
+    function(){
+
+      validateFile(
+        this,
+        "instagramFileName"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   PROCESSING
+========================================================= */
+
+function showProcessing(){
+
+  const overlay =
+    document.getElementById(
+      "processingOverlay"
+    );
+
+
+  const bar =
+    document.getElementById(
+      "processingProgressBar"
+    );
+
+
+  const percent =
+    document.getElementById(
+      "processingPercent"
+    );
+
+
+  const number =
+    document.getElementById(
+      "loaderNumber"
+    );
+
+
+  const subtitle =
+    document.getElementById(
+      "processingSubtitle"
+    );
+
+
+  overlay.classList.add(
+    "show"
+  );
+
+
+  let progress =
+    0;
+
+
+  const messages = [
+
+    "Verifying your order details...",
+
+    "Preparing secure payment information...",
+
+    "Uploading your payment screenshot...",
+
+    "Sending your order securely...",
+
+    "Almost done..."
+
+  ];
+
+
+  const interval =
+    setInterval(
+      () => {
+
+        progress +=
+          Math.floor(
+            Math.random() * 7
+          ) + 4;
+
+
+        if(progress > 96){
+          progress = 96;
+        }
+
+
+        bar.style.width =
+          progress + "%";
+
+
+        percent.textContent =
+          progress + "%";
+
+
+        number.textContent =
+          Math.min(
+            10,
+            Math.ceil(
+              progress / 10
+            )
+          );
+
+
+        const index =
+          Math.min(
+            messages.length - 1,
+            Math.floor(
+              progress / 20
+            )
+          );
+
+
+        subtitle.textContent =
+          messages[index];
+
+      },
+      350
+    );
+
+
+  return {
+
+    finish:function(){
+
+      clearInterval(
+        interval
+      );
+
+
+      bar.style.width =
+        "100%";
+
+
+      percent.textContent =
+        "100%";
+
+
+      number.textContent =
+        "10";
+
+
+      subtitle.textContent =
+        "Order submitted successfully!";
+
+
+      return new Promise(
+        resolve => {
+
+          setTimeout(
+            resolve,
+            550
+          );
+
+        }
+      );
+
+    }
+
+  };
+
+}
+
+
+/* =========================================================
+   LOUD PREMIUM SUCCESS SOUND
+========================================================= */
+
+function playSuccessSound(){
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+
+    if(!AudioContext){
+      return;
+    }
+
+
+    const ctx =
+      new AudioContext();
+
+
+    if(ctx.state === "suspended"){
+
+      ctx.resume()
+        .catch(()=>{});
+
+    }
+
+
+    const master =
+      ctx.createGain();
+
+
+    /*
+      Increased volume.
+      Previous version was much softer.
+    */
+
+    master.gain.setValueAtTime(
+      0.72,
+      ctx.currentTime
+    );
+
+
+    master.connect(
+      ctx.destination
+    );
+
+
+    const now =
+      ctx.currentTime;
+
+
+    function tone(
+      frequency,
+      start,
+      duration,
+      volume,
+      type
+    ){
+
+      const oscillator =
+        ctx.createOscillator();
+
+
+      const gain =
+        ctx.createGain();
+
+
+      oscillator.type =
+        type || "sine";
+
+
+      oscillator.frequency
+        .setValueAtTime(
+          frequency,
+          now + start
+        );
+
+
+      gain.gain
+        .setValueAtTime(
+          0.001,
+          now + start
+        );
+
+
+      gain.gain
+        .exponentialRampToValueAtTime(
+          volume,
+          now + start + .025
+        );
+
+
+      gain.gain
+        .exponentialRampToValueAtTime(
+          0.001,
+          now + start + duration
+        );
+
+
+      oscillator.connect(
+        gain
+      );
+
+
+      gain.connect(
+        master
+      );
+
+
+      oscillator.start(
+        now + start
+      );
+
+
+      oscillator.stop(
+        now + start + duration + .05
+      );
+
+    }
+
+
+    /*
+      Loud premium confirmation chord
+    */
+
+    tone(
+      392.00,
+      0,
+      .20,
+      .95,
+      "sine"
+    );
+
+
+    tone(
+      523.25,
+      .08,
+      .24,
+      1.00,
+      "sine"
+    );
+
+
+    tone(
+      659.25,
+      .17,
+      .28,
+      1.00,
+      "sine"
+    );
+
+
+    tone(
+      783.99,
+      .27,
+      .42,
+      1.00,
+      "sine"
+    );
+
+
+    /*
+      Bright confirmation sparkle
+    */
+
+    tone(
+      1046.50,
+      .38,
+      .30,
+      .70,
+      "triangle"
+    );
+
+
+    tone(
+      1318.51,
+      .43,
+      .25,
+      .48,
+      "triangle"
+    );
+
+
+    /*
+      Small low confirmation hit
+    */
+
+    tone(
+      261.63,
+      0,
+      .32,
+      .42,
+      "sine"
+    );
+
+
+    setTimeout(
+      () => {
+
+        try{
+          ctx.close();
+        }catch{}
+
+      },
+      1700
+    );
+
+
+  }catch(error){
+
+    console.log(
+      "Success sound unavailable:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MOVIE SUBMIT
+========================================================= */
+
+async function submitMovieOrder(){
+
+  clearErrors();
+
+
+  if(moviePrice <= 0){
+
+    showError(
+      "movieError2",
+      "Invalid movie price."
+    );
+
+    return;
+  }
+
+
+  const contact =
+    getMovieContact();
+
+
+  const utr =
+    document
+      .getElementById(
+        "movieUTR"
+      )
+      .value
+      .trim();
+
+
+  const fileInput =
+    document.getElementById(
+      "movieScreenshot"
+    );
+
+
+  if(
+    movieContactMethod ===
+    "mobile"
+  ){
+
+    if(
+      !isValidIndianMobile(
+        contact.mobile
+      )
+    ){
+
+      showError(
+        "movieError2",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+    }
+
+  }else{
+
+    if(
+      !isValidEmail(
+        contact.email
+      )
+    ){
+
+      showError(
+        "movieError2",
+        "Please enter a valid email address."
+      );
+
+      return;
+    }
+
+  }
+
+
+  if(!fileInput.files[0]){
+
+    showError(
+      "movieError2",
+      "Please upload your payment screenshot."
+    );
+
+    return;
+  }
+
+
+  if(
+    !validateFile(
+      fileInput,
+      "movieFileName"
+    )
+  ){
+
+    showError(
+      "movieError2",
+      "Please select a valid payment screenshot."
+    );
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "movieSubmitBtn"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting...";
+
+
+  const processing =
+    showProcessing();
+
+
+  try{
+
+    const screenshot =
+      await fileToBase64(
+        fileInput.files[0]
+      );
+
+
+    const payload = {
+
+      type:
+        "movie",
+
+      product:
+        "movie",
+
+      movie:
+        movieName,
+
+      movieName:
+        movieName,
+
+      year:
+        movieYear,
+
+      quality:
+        movieQuality,
+
+      language:
+        movieLanguage,
+
+      size:
+        movieSize,
+
+      package:
+        movieName,
+
+      originalAmount:
+        Number(moviePrice)
+          .toFixed(2),
+
+      discount:
+        "0.00",
+
+      promoCode:
+        "",
+
+      promoApplied:
+        false,
+
+      amount:
+        Number(movieFinalPrice)
+          .toFixed(2),
+
+      mobile:
+        contact.mobile,
+
+      email:
+        contact.email,
+
+      utr:
+        utr,
+
+      screenshot:
+        screenshot
+
+    };
+
+
+    const response =
+      await fetch(
+        "/api/orders",
+        {
+
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    let data = {};
+
+
+    try{
+
+      data =
+        await response.json();
+
+    }catch{}
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Unable to submit movie order."
+      );
+
+    }
+
+
+    await processing.finish();
+
+
+    document.getElementById(
+      "movieOrderId"
+    ).textContent =
+      data.orderId ||
+      "---";
+
+
+    document.getElementById(
+      "successMovieName"
+    ).textContent =
+      movieName;
+
+
+    document.getElementById(
+      "successMovieAmount"
+    ).textContent =
+      money(movieFinalPrice);
+
+
+    document
+      .getElementById(
+        "processingOverlay"
+      )
+      .classList.remove(
+        "show"
+      );
+
+
+    playSuccessSound();
+
+
+    createStars(
+      180
+    );
+
+
+    movieShowScreen(
+      3
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Movie order error:",
+      error
+    );
+
+
+    document
+      .getElementById(
+        "processingOverlay"
+      )
+      .classList.remove(
+        "show"
+      );
+
+
+    showError(
+      "movieError2",
+      error.message ||
+      "Unable to submit order. Please try again."
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Submit Order ✓";
+
+  }
+
+}
+
+
+/* =========================================================
+   INSTAGRAM SUBMIT
+========================================================= */
+
+async function submitInstagramOrder(){
+
+  clearErrors();
+
+
+  if(
+    !selectedInstagramPackage
+  ){
+
+    showError(
+      "instagramError2",
+      "Invalid Instagram package."
+    );
+
+    return;
+  }
+
+
+  if(
+    instagramPrice <= 0
+  ){
+
+    showError(
+      "instagramError2",
+      "Invalid package price."
+    );
+
+    return;
+  }
+
+
+  const mobile =
+    document
+      .getElementById(
+        "instagramMobile"
+      )
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById(
+        "instagramEmail"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const username =
+    document
+      .getElementById(
+        "instagramUsername"
+      )
+      .value
+      .trim()
+      .replace(
+        /^@+/,
+        ""
+      );
+
+
+  const profile =
+    document
+      .getElementById(
+        "instagramProfile"
+      )
+      .value
+      .trim();
+
+
+  const utr =
+    document
+      .getElementById(
+        "instagramUTR"
+      )
+      .value
+      .trim();
+
+
+  const fileInput =
+    document.getElementById(
+      "instagramScreenshot"
+    );
+
+
+  if(
+    instagramContactMethod ===
+    "mobile"
+  ){
+
+    if(
+      !isValidIndianMobile(
+        mobile
+      )
+    ){
+
+      showError(
+        "instagramError2",
+        "Please enter a valid Indian mobile number."
+      );
+
+      return;
+    }
+
+  }else{
+
+    if(
+      !isValidEmail(
+        email
+      )
+    ){
+
+      showError(
+        "instagramError2",
+        "Please enter a valid email address."
+      );
+
+      return;
+    }
+
+  }
+
+
+  if(
+    !/^[A-Za-z0-9._]{1,30}$/
+      .test(username)
+  ){
+
+    showError(
+      "instagramError2",
+      "Please enter a valid Instagram username."
+    );
+
+    return;
+  }
+
+
+  if(!fileInput.files[0]){
+
+    showError(
+      "instagramError2",
+      "Please upload your payment screenshot."
+    );
+
+    return;
+  }
+
+
+  if(
+    !validateFile(
+      fileInput,
+      "instagramFileName"
+    )
+  ){
+
+    showError(
+      "instagramError2",
+      "Please select a valid screenshot."
+    );
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "instagramSubmitBtn"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting...";
+
+
+  const processing =
+    showProcessing();
+
+
+  try{
+
+    const screenshot =
+      await fileToBase64(
+        fileInput.files[0]
+      );
+
+
+    const discount =
+      instagramPromoApplied
+        ? calculateDiscount(
+            instagramPrice
+          ).discount
+        : 0;
+
+
+    const finalAmount =
+      instagramPromoApplied
+        ? instagramFinalPrice
+        : instagramPrice;
+
+
+    const payload = {
+
+      type:
+        "instagram",
+
+      product:
+        "instagram",
+
+      package:
+        instagramPackage,
+
+      packageId:
+        String(
+          instagramFollowers
+        ),
+
+      followers:
+        instagramFollowers,
+
+      originalAmount:
+        Number(instagramPrice)
+          .toFixed(2),
+
+      discount:
+        Number(discount)
+          .toFixed(2),
+
+      promoCode:
+        instagramPromoApplied
+          ? PROMO_CODE
+          : "",
+
+      promoApplied:
+        instagramPromoApplied,
+
+      amount:
+        Number(finalAmount)
+          .toFixed(2),
+
+      mobile:
+        mobile,
+
+      email:
+        email,
+
+      username:
+        username,
+
+      profile:
+        profile,
+
+      utr:
+        utr,
+
+      screenshot:
+        screenshot
+
+    };
+
+
+    const response =
+      await fetch(
+        "/api/orders",
+        {
+
+          method:
+            "POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    let data = {};
+
+
+    try{
+
+      data =
+        await response.json();
+
+    }catch{}
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Unable to submit Instagram order."
+      );
+
+    }
+
+
+    await processing.finish();
+
+
+    document.getElementById(
+      "instagramOrderId"
+    ).textContent =
+      data.orderId ||
+      "---";
+
+
+    document.getElementById(
+      "successInstagramPackage"
+    ).textContent =
+      instagramPackage;
+
+
+    document.getElementById(
+      "successInstagramAmount"
+    ).textContent =
+      money(finalAmount);
+
+
+    document
+      .getElementById(
+        "processingOverlay"
+      )
+      .classList.remove(
+        "show"
+      );
+
+
+    /*
+      LOUD SUCCESS SOUND
+    */
+
+    playSuccessSound();
+
+
+    createStars(
+      180
+    );
+
+
+    instagramShowScreen(
+      3
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Instagram order error:",
+      error
+    );
+
+
+    document
+      .getElementById(
+        "processingOverlay"
+      )
+      .classList.remove(
+        "show"
+      );
+
+
+    showError(
+      "instagramError2",
+      error.message ||
+      "Unable to submit order. Please try again."
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Submit Order ✓";
+
+  }
+
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+function createStars(
+  count
+){
+
+  const container =
+    document.getElementById(
+      "celebration"
+    );
+
+
+  const symbols = [
+
+    "★",
+    "✦",
+    "✧",
+    "⭐",
+    "✨",
+    "◆"
+
+  ];
+
+
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
+
+    const star =
+      document.createElement(
+        "div"
+      );
+
+
+    star.className =
+      "star";
+
+
+    star.textContent =
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
+
+
+    star.style.left =
+      Math.random() *
+      100 +
+      "%";
+
+
+    star.style.fontSize =
+      12 +
+      Math.random() *
+      22 +
+      "px";
+
+
+    star.style.animationDuration =
+      2 +
+      Math.random() *
+      3 +
+      "s";
+
+
+    star.style.animationDelay =
+      Math.random() *
+      .8 +
+      "s";
+
+
+    container.appendChild(
+      star
+    );
+
+
+    setTimeout(
+      () => {
+
+        star.remove();
+
+      },
+      6000
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(
+  id,
+  message
+){
+
+  const box =
+    document.getElementById(
+      id
+    );
+
+
+  if(!box){
+    return;
+  }
+
+
+  box.textContent =
+    message;
+
+
+  box.classList.add(
+    "show"
+  );
+
+
+  box.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+}
+
+
+function clearErrors(){
+
+  document
+    .querySelectorAll(
+      ".error"
+    )
+    .forEach(
+      box => {
+
+        box.classList.remove(
+          "show"
+        );
+
+
+        box.textContent =
+          "";
+
       }
-    }, 700);
-  });
+    );
 
-  function goToStep(step) {
-    currentStep = step;
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    document.getElementById("screen" + step).classList.add("active");
 
-    // Update progress
-    for (let i = 1; i <= 3; i++) {
-      const el = document.getElementById("step" + i);
-      el.classList.remove("active", "done");
-      if (i < step) el.classList.add("done");
-      if (i === step) el.classList.add("active");
+  document
+    .querySelectorAll(
+      ".promo-error"
+    )
+    .forEach(
+      box => {
+
+        box.classList.remove(
+          "show"
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function goHome(){
+
+  window.location.href =
+    "/index.html";
+
+}
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+document
+  .getElementById(
+    "instagramPromoCode"
+  )
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key ===
+        "Enter"
+      ){
+
+        event.preventDefault();
+
+        applyInstagramPromo();
+
+      }
+
     }
-    document.getElementById("line1").classList.toggle("active", step > 1);
-    document.getElementById("line2").classList.toggle("active", step > 2);
-  }
+  );
 
-  // ========== QR + UPI ==========
-  function generateQR() {
-    const qrContainer = document.getElementById("qrcode");
-    qrContainer.innerHTML = "";
 
-    const upiLink = `upi://pay?pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.payeeName)}&am=${finalPrice}&cu=INR&tn=${encodeURIComponent("Movie Order - SehrAn Media")}`;
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
-    new QRCode(qrContainer, {
-      text: upiLink,
-      width: 200,
-      height: 200,
-      colorDark: "#000000",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.H
-    });
-  }
+if(isMovie){
 
-  document.getElementById("copyUpi").addEventListener("click", () => {
-    navigator.clipboard.writeText(CONFIG.upiId).then(() => {
-      const btn = document.getElementById("copyUpi");
-      btn.textContent = "Copied!";
-      setTimeout(() => btn.textContent = "Copy", 1500);
-    });
-  });
+  initializeMovie();
 
-  document.getElementById("payUpi").addEventListener("click", () => {
-    const upiLink = `upi://pay?pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.payeeName)}&am=${finalPrice}&cu=INR&tn=${encodeURIComponent("Movie Order")}`;
-    window.location.href = upiLink;
-  });
+  hideAllScreens();
 
-  // File name display
-  document.getElementById("paymentProof").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    document.getElementById("fileName").textContent = file ? file.name : "No file chosen";
-  });
+  document
+    .getElementById(
+      "movieScreen1"
+    )
+    .classList.add(
+      "active"
+    );
+
+  updateProgress(1);
+
+}else{
+
+  document
+    .getElementById(
+      "brandSubtitle"
+    )
+    .textContent =
+      "Instagram Services • Secure Checkout";
+
+
+  document
+    .getElementById(
+      "instagramPackage"
+    )
+    .textContent =
+      instagramPackage;
+
+
+  document
+    .getElementById(
+      "instagramPrice"
+    )
+    .textContent =
+      money(instagramPrice);
+
+
+  updateInstagramPrice();
+
+  hideAllScreens();
+
+  document
+    .getElementById(
+      "instagramScreen1"
+    )
+    .classList.add(
+      "active"
+    );
+
+  updateProgress(1);
+
+}
+
 </script>
+
 </body>
 </html>
