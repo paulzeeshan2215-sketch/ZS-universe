@@ -1,6641 +1,2273 @@
+Yesterday 11:12 PM
+Pasted text(20260827-174132).txt
+Document
+ये मेरा index.html है, इसके अंदर क्या दिक्कत आ रही है, सबसे पहले आप इसको अपनी intelligence का इस्तेमाल करके और भी ज़्यादा बेहतरीन बनाओ। मतलब मैं कहता हूँ इतना बेहतरीन कि मतलब अगर आप ये पूरा का पूरा चेंज भी कर सकते हो ना, पूरा का पूरा चेंज करो, नया बनाओ, जो भी आपको अच्छा लगे लेकिन बनाओ। और मुझे ये दिक्कत आ रही है, जो movies है ना movies section, या जब मैं movies के बारे में करता हूँ, ये ऊपर कहीं जा रहा है, नीचे movies के अंदर नहीं जा रहा है, ये movies खोलो, movies के अंदर जाना चाहिए। और movies की जो thumbnail बनाई है ना इसने, वो प्रॉपर नहीं है डब्बे में फिक्स, इसको अब और attractive बनाओ movies की जो thumbnail बनाई हुई है, और as well as games भी यही issue आ रहा है। और फिर से मैं आपको remind देना चाहता हूँ, अगर आप चाहते हो कि मैं इसको पूरा का पूरा चेंज करूँ, पूरा का पूरा चेंज करो, पूरा index.html एक नया look लाओ, ठीक है ना? अगर आपको अच्छा लगता है, मुझे लगता है हाँ, एक नया look लाओ, अपनी सारी की सारी intelligence का use करो, लिखो नया code, मैं पुराने वाले code को delete करता हूँ.
+Analysis paused
+
+हाँ, मैंने आपका पूरा index.html देखकर issue समझ लिया है।
+
+सबसे बड़ी दिक्कत यही है: आपका openTab() function Movies/Games खोलने के बाद यह चला रहा है:
+
+window.scrollTo({
+  top: 0,
+  behavior: "smooth"
+});
+
+इसलिए Movies पर click करते ही Movies section खुल तो जाता है, लेकिन page ऊपर Hero section पर चला जाता है। इसी वजह से आपको लगता है कि Movies “अंदर नीचे” नहीं खुल रही। आपके code में tab panels और Movies/Games sections मौजूद हैं, और यही scroll logic उन्हें गलत जगह ले जा रहा है।
+
+इसके अलावा पुराने design में thumbnails के लिए पूरा card एक fixed background image जैसा बनाया गया है; mobile पर card height भी अलग है, जिससे posters awkward crop हो सकते हैं। Movies और Games दोनों के लिए actual sections, search और categories पहले से हैं, इसलिए मैंने नए design में इन्हें पूरी तरह बेहतर structure देने का फैसला किया है।
+
+मेरा सुझाव: पुराने code को पूरा delete करके नया code paste करें। नया version:
+
+Movies/Games click → सीधे उसी section पर जाएगा
+ऊपर Hero पर वापस नहीं जाएगा
+बेहतर sticky navigation
+attractive poster thumbnails
+aspect-ratio से thumbnails properly fixed
+hover effects
+search
+category filters
+responsive mobile layout
+आपका WhatsApp customer-care number रखा गया है
+Instagram packages का पूरा structure भी रखा जा सकता है
+
+लेकिन आपका original file 4,462 lines का है और उसमें बहुत सारी existing movie/game links और packages हैं। मैं अगली reply में आपको पूरा नया replacement index.html दूँगा, जिसमें आपकी existing Movies/Games links और content भी preserve करके नया design बनाया जाएगा—ताकि आपको केवल copy → delete old code → paste new code करना पड़े।
+
+करो पूरा का पूरा को, हाँ करो पूरा का पूरा नया, लेकिन मैं पुरानी वाली बोर्ड को डिलीट करता हूँ। और भी तुम अगर हो इसमें एडिट करना चाहते हो तो करो, ठीक है ना? ठीक है ना? और अगर आप जो होम स्क्रीन है इसको और अट्रैक्टिव बनाना चाहते हो या अलग तरीके से बनाना चाहते हो, मुझे कोई एतराज नहीं है, आप करो।
+
+हाँ, बिल्कुल। आप पुराना पूरा index.html delete कर सकते हैं। मैं इसे सिर्फ patch नहीं करूँगा—पूरी website का नया modern look बनाऊँगा।
+
+नए version में मैं ये सब बदलूँगा:
+
+नया Homepage
+ज्यादा premium और professional hero section
+SehrAn Media branding का नया visual look
+animated background/glow effects
+Social / Movies / Games को ज्यादा साफ़ तरीके से दिखाना
+mobile और desktop दोनों पर proper responsive design
+Movies
+Movies click करते ही सीधे Movies content पर
+ऊपर Hero section पर वापस नहीं जाएगा
+poster thumbnails fixed proportion में
+object-fit: cover और fixed aspect ratio
+hover पर title, category और Open Movie action
+search + category filters
+clean movie-grid layout
+Games
+Movies जैसा ही premium card design
+game thumbnails properly fixed
+Horror / Action / Open World / Shooter आदि categories
+mobile पर भी thumbnails खराब नहीं होंगे
+game card click करने पर आपका existing link खुलेगा
+Navigation
+sticky navigation
+active tab highlighting
+smooth but correct scrolling
+duplicate tab confusion नहीं होगी
+बाकी बदलाव
+WhatsApp Customer Care floating button
+आपका नंबर 91038 74044
+बेहतर footer
+cleaner JavaScript
+पुराने unnecessary/repeated CSS और JS हटेंगे
+
+मैं आपकी existing file में मौजूद Movies और Games links को आधार बनाकर एकदम नया replacement index.html तैयार करूँगा, ताकि आपको सिर्फ:
+
+पुराना code delete → नया पूरा code paste → Save/Commit
+
+करना पड़े। आपकी मौजूदा file में Movies और Games cards तथा उनके existing external links मौजूद हैं, इसलिए इन्हें नए layout में preserve करना संभव है।
+
+अब मैं अगला पूरा code single complete replacement index.html के रूप में तैयार करूँगा।
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Order — SehrAn Media</title>
+<html lang="en"> <head> <meta charset="UTF-8">
 
 <meta
-  name="description"
-  content="SehrAn Media secure checkout and order page."
->
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
-  rel="stylesheet"
->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<style>
+<title>SehrAn Media — Social, Movies & Games</title>
 
-/* =========================================================
-   ROOT
-========================================================= */
+<meta
+name="description"
+content="SehrAn Media — Instagram services, Movies and PC Games."
 
-:root{
-  --pink:#ff3d81;
-  --pink2:#ff6aa3;
-  --violet:#7c4dff;
-  --cyan:#36d9ff;
-  --green:#22d487;
-  --yellow:#ffd166;
 
-  --bg:#050711;
-  --bg2:#080b17;
-  --card:rgba(10,14,28,.88);
 
-  --border:rgba(111,126,170,.22);
-  --text:#ffffff;
-  --muted:#8994b2;
-  --muted2:#626d8a;
 
-  --shadow:
-    0 30px 100px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.035);
-}
+<meta name="theme-color" content="#7c3aed">
 
+<link rel="preconnect" href="https://fonts.googleapis.com" >
 
-/* =========================================================
-   RESET
-========================================================= */
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" >
 
-html{
-  scroll-behavior:smooth;
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" >
 
-body{
+<style> :root { --bg: #080814; --bg2: #111127; --white: #ffffff; --muted: #a7a7bc; --purple: #8b3dff; --purple2: #6d28d9; --pink: #ff258f; --pink2: #db2777; --cyan: #00d9ff; --green: #25d366; --card: rgba(22, 22, 40, 0.82); --border: rgba(255,255,255,0.12); --shadow: 0 20px 60px rgba(0,0,0,0.4); } * { margin: 0; padding: 0; box-sizing: border-box; } html { scroll-behavior: smooth; } body { font-family: "Poppins", sans-serif; background: radial-gradient( circle at 10% 10%, rgba(124,58,237,0.22), transparent 30% ), radial-gradient( circle at 90% 20%, rgba(255,37,143,0.18), transparent 28% ), radial-gradient( circle at 50% 90%, rgba(0,217,255,0.10), transparent 35% ), #080814; color: var(--white); overflow-x: hidden; } a { text-decoration: none; color: inherit; } button, input { font: inherit; } /* ===================================================== BACKGROUND ===================================================== */ .bg-orb { position: fixed; width: 420px; height: 420px; border-radius: 50%; filter: blur(110px); opacity: 0.15; pointer-events: none; z-index: -1; } .orb-one { background: #7c3aed; top: -150px; left: -150px; } .orb-two { background: #ff258f; right: -180px; top: 200px; } /* ===================================================== HEADER ===================================================== */ header { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(18px); background: rgba(8,8,20,0.82); border-bottom: 1px solid rgba(255,255,255,0.08); } .nav { max-width: 1280px; margin: auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; } .logo { display: flex; align-items: center; gap: 10px; font-family: "Montserrat", sans-serif; font-size: 22px; font-weight: 900; } .logo-icon { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient( 135deg, var(--purple), var(--pink) ); box-shadow: 0 10px 35px rgba(139,61,255,0.35); } .nav-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; } .nav-link { border: none; background: transparent; color: var(--muted); padding: 10px 16px; border-radius: 12px; cursor: pointer; font-weight: 700; transition: 0.25s; } .nav-link:hover, .nav-link.active { color: white; background: linear-gradient( 135deg, rgba(139,61,255,0.9), rgba(255,37,143,0.8) ); box-shadow: 0 10px 30px rgba(139,61,255,0.25); } /* ===================================================== HERO ===================================================== */ .hero { max-width: 1280px; margin: auto; padding: 75px 24px 45px; text-align: center; } .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #e9d5ff; font-size: 13px; font-weight: 700; } .hero h1 { margin-top: 22px; font-family: "Montserrat", sans-serif; font-size: clamp( 42px, 7vw, 82px ); line-height: 1.05; font-weight: 900; } .gradient-text { background: linear-gradient( 90deg, #ffffff, #c084fc, #ff6eb4, #ffffff ); background-size: 300%; -webkit-background-clip: text; color: transparent; animation: gradientMove 6s linear infinite; } @keyframes gradientMove { from { background-position: 0%; } to { background-position: 300%; } } .hero p { max-width: 720px; margin: 22px auto 0; color: var(--muted); line-height: 1.8; font-size: 16px; } .hero-actions { margin-top: 32px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; } .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 22px; border-radius: 14px; border: none; cursor: pointer; font-weight: 800; transition: 0.25s; } .btn-primary { color: white; background: linear-gradient( 90deg, #7c3aed, #ff258f ); box-shadow: 0 15px 35px rgba(124,58,237,0.3); } .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 50px rgba(255,37,143,0.35); } .btn-outline { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: white; } .btn-outline:hover { background: rgba(255,255,255,0.10); transform: translateY(-2px); } /* ===================================================== TABS ===================================================== */ .tabs-wrap { max-width: 1280px; margin: auto; padding: 10px 24px 50px; } .main-tabs { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; } .main-tab { min-width: 155px; padding: 15px 22px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--muted); font-weight: 800; cursor: pointer; transition: 0.25s; } .main-tab i { margin-right: 8px; } .main-tab:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.3); } .main-tab.active { color: white; border-color: transparent; background: linear-gradient( 135deg, #7c3aed, #ff258f ); box-shadow: 0 18px 40px rgba(124,58,237,0.28); } .tab-panel { display: none; } .tab-panel.active { display: block; animation: fadeIn 0.4s ease; } @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } } /* ===================================================== SECTION ===================================================== */ .section { max-width: 1280px; margin: auto; padding: 40px 24px 70px; } .section-heading { text-align: center; margin-bottom: 30px; } .section-heading h2 { font-family: "Montserrat", sans-serif; font-size: clamp( 28px, 4vw, 48px ); font-weight: 900; } .section-heading p { color: var(--muted); margin-top: 10px; } /* ===================================================== FLOATING SOCIAL APPS ===================================================== */ .social-marquee { overflow: hidden; width: 100%; margin: 30px 0 50px; padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.025); } .marquee-track { display: flex; gap: 20px; width: max-content; animation: socialMove 28s linear infinite; } .social-marquee:hover .marquee-track { animation-play-state: paused; } @keyframes socialMove { from { transform: translateX(0); } to { transform: translateX(-50%); } } .app-card { width: 240px; min-height: 115px; flex-shrink: 0; padding: 18px; border-radius: 22px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,0.15); position: relative; overflow: hidden; transition: 0.3s; } .app-card:hover { transform: translateY(-8px) scale(1.03); } .app-card::before { content: ""; position: absolute; width: 120px; height: 120px; border-radius: 50%; right: -35px; top: -40px; opacity: 0.28; filter: blur(20px); } .instagram-app { background: linear-gradient( 135deg, rgba(131,58,180,0.9), rgba(253,29,29,0.8), rgba(252,176,69,0.75) ); box-shadow: 0 15px 35px rgba(253,29,29,0.25); } .youtube-app { background: linear-gradient( 135deg, #4d0000, #ff0000, #6b0000 ); box-shadow: 0 15px 35px rgba(255,0,0,0.22); } .facebook-app { background: linear-gradient( 135deg, #0d47a1, #1877f2, #004fc4 ); box-shadow: 0 15px 35px rgba(24,119,242,0.22); } .snapchat-app { background: linear-gradient( 135deg, #d9b900, #fffc00, #bda600 ); color: #101010; box-shadow: 0 15px 35px rgba(255,252,0,0.2); } .whatsapp-app { background: linear-gradient( 135deg, #075e54, #25d366, #128c7e ); box-shadow: 0 15px 35px rgba(37,211,102,0.22); } .app-icon { width: 58px; height: 58px; flex-shrink: 0; display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,0.18); font-size: 30px; backdrop-filter: blur(10px); } .app-info strong { display: block; font-size: 17px; } .app-info span { font-size: 12px; opacity: 0.85; } /* ===================================================== INSTAGRAM FEATURE ===================================================== */ .instagram-feature { position: relative; padding: 28px; border-radius: 30px; margin-bottom: 35px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); background: linear-gradient( 135deg, rgba(131,58,180,0.25), rgba(253,29,29,0.17), rgba(252,176,69,0.12) ); box-shadow: var(--shadow); } .instagram-feature::after { content: ""; position: absolute; width: 350px; height: 350px; border-radius: 50%; right: -130px; top: -150px; background: linear-gradient( 135deg, #833ab4, #fd1d1d, #fcb045 ); opacity: 0.18; filter: blur(40px); } .insta-feature-content { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap; } .insta-title { display: flex; align-items: center; gap: 18px; } .insta-big-icon { width: 80px; height: 80px; border-radius: 25px; display: grid; place-items: center; font-size: 40px; background: linear-gradient( 135deg, #833ab4, #fd1d1d, #fcb045 ); box-shadow: 0 15px 40px rgba(253,29,29,0.3); } .available-badge { display: inline-flex; margin-bottom: 7px; padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 900; letter-spacing: 1px; background: rgba(37,211,102,0.18); color: #65ff9b; border: 1px solid rgba(37,211,102,0.3); } .insta-feature-content h2 { font-size: 30px; font-family: "Montserrat", sans-serif; } .insta-feature-content p { color: #d1d1df; margin-top: 6px; } /* ===================================================== PACKAGE GRID ===================================================== */ .package-grid { display: grid; grid-template-columns: repeat( auto-fit, minmax(245px, 1fr) ); gap: 18px; } .package-card { position: relative; min-height: 300px; padding: 26px; border-radius: 25px; overflow: hidden; background: linear-gradient( 145deg, rgba(31,31,45,0.95), rgba(12,12,22,0.95) ); border: 1px solid rgba(255,255,255,0.12); transition: 0.3s; } .package-card::before { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; right: -80px; top: -80px; background: radial-gradient( circle, rgba(124,58,237,0.28), transparent 70% ); } .package-card:hover { transform: translateY(-9px); border-color: rgba(255,37,143,0.65); box-shadow: 0 20px 55px rgba(124,58,237,0.18); } .package-card.featured { border-color: rgba(255,37,143,0.8); background: linear-gradient( 145deg, rgba(55,22,62,0.98), rgba(21,16,34,0.98) ); } .package-top { position: relative; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; } .package-label { color: #b5b5c6; font-size: 12px; font-weight: 800; } .package-card h3 { margin-top: 10px; font-size: 24px; } .followers { margin-top: 6px; color: #d4a7ff; font-weight: 800; font-size: 13px; } .discount-badge { padding: 7px 10px; border-radius: 999px; background: linear-gradient( 90deg, #ff258f, #ff7043 ); color: white; font-size: 10px; font-weight: 900; white-space: nowrap; } .price-box { margin-top: 28px; position: relative; z-index: 2; } .old-price { color: #747486; text-decoration: line-through; font-size: 14px; font-weight: 700; } .price { margin-top: 2px; font-family: "Montserrat", sans-serif; font-size: 42px; font-weight: 900; } .package-btn { position: absolute; left: 24px; right: 24px; bottom: 24px; padding: 14px; border-radius: 15px; text-align: center; font-size: 14px; font-weight: 900; background: linear-gradient( 90deg, #7c3aed, #ff258f ); box-shadow: 0 12px 30px rgba(124,58,237,0.25); transition: 0.25s; } .package-btn:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(255,37,143,0.32); } /* ===================================================== SEARCH ===================================================== */ .search-box { max-width: 650px; margin: 0 auto 24px; position: relative; } .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #a5a5b8; } .search-box input { width: 100%; padding: 17px 20px 17px 50px; border-radius: 17px; outline: none; color: white; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.13); } .search-box input:focus { border-color: #8b3dff; box-shadow: 0 0 0 4px rgba(139,61,255,0.12); } /* ===================================================== CATEGORY FILTER ===================================================== */ .categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; } .category-btn { padding: 11px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.13); background: rgba(255,255,255,0.04); color: #b8b8c8; font-weight: 700; cursor: pointer; transition: 0.25s; } .category-btn:hover { color: white; transform: translateY(-2px); } .category-btn.active { color: white; border-color: transparent; background: linear-gradient( 90deg, #7c3aed, #ff258f ); } /* ===================================================== MOVIES / GAMES GRID ===================================================== */ .media-grid { display: grid; grid-template-columns: repeat( auto-fill, minmax(220px, 1fr) ); gap: 22px; } .media-card { display: block; position: relative; min-height: 385px; overflow: hidden; border-radius: 22px; background: #161625; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 15px 40px rgba(0,0,0,0.25); transition: 0.35s; } .media-card:hover { transform: translateY(-10px) scale(1.015); border-color: rgba(255,255,255,0.3); box-shadow: 0 28px 60px rgba(0,0,0,0.45); } .media-card.hidden { display: none; } .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: 0.5s; } .media-card:hover .poster { transform: scale(1.08); } .poster-overlay { position: absolute; inset: 0; background: linear-gradient( to top, rgba(5,5,12,0.98) 0%, rgba(5,5,12,0.6) 45%, rgba(5,5,12,0.05) 80% ); } .play-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.8); width: 65px; height: 65px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient( 135deg, #7c3aed, #ff258f ); opacity: 0; transition: 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.45); } .media-card:hover .play-circle { opacity: 1; transform: translate(-50%,-50%) scale(1); } .media-content { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; z-index: 3; } .media-type { display: inline-flex; margin-bottom: 9px; padding: 6px 10px; border-radius: 999px; background: rgba(124,58,237,0.85); font-size: 10px; font-weight: 900; letter-spacing: 0.6px; } .game-type { background: rgba(0,217,255,0.85); color: #071018; } .media-content h3 { font-size: 18px; line-height: 1.35; font-family: "Montserrat", sans-serif; } .media-content p { margin-top: 6px; color: #c2c2d0; font-size: 12px; } .open-now { margin-top: 14px; display: inline-flex; align-items: center; gap: 7px; color: white; font-size: 12px; font-weight: 900; } /* ===================================================== WHATSAPP CUSTOMER CARE ===================================================== */ .whatsapp-float { position: fixed; right: 22px; bottom: 22px; z-index: 2000; display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; border-radius: 999px; background: linear-gradient( 135deg, #075e54, #25d366 ); color: white; box-shadow: 0 15px 40px rgba(37,211,102,0.4); animation: whatsappFloat 3s ease-in-out infinite; transition: 0.25s; } @keyframes whatsappFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } .whatsapp-float:hover { transform: scale(1.05); } .wa-icon { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.18); font-size: 27px; } .wa-text small { display: block; font-size: 10px; opacity: 0.9; font-weight: 700; } .wa-text strong { display: block; font-size: 14px; } /* ===================================================== FOOTER ===================================================== */ footer { margin-top: 30px; padding: 40px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); } footer strong { color: white; } /* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 700px) { .nav { padding: 13px 14px; } .nav-links { display: none; } .hero { padding: 60px 18px 30px; } .section, .tabs-wrap { padding-left: 16px; padding-right: 16px; } .media-grid { grid-template-columns: repeat( 2, minmax(0,1fr) ); gap: 12px; } .media-card { min-height: 315px; } .media-content { padding: 13px; } .media-content h3 { font-size: 14px; } .media-content p { display: none; } .whatsapp-float { right: 14px; bottom: 14px; } .wa-text { display: none; } .whatsapp-float { padding: 9px; } } </style>
 
-  min-height:100vh;
-
-  overflow-x:hidden;
-
-  font-family:"Poppins",sans-serif;
-
-  color:var(--text);
-
-  background:
-
-    radial-gradient(
-      circle at 50% -15%,
-      rgba(124,77,255,.28),
-      transparent 38%
-    ),
-
-    radial-gradient(
-      circle at 0% 35%,
-      rgba(255,61,129,.12),
-      transparent 34%
-    ),
-
-    radial-gradient(
-      circle at 100% 70%,
-      rgba(54,217,255,.08),
-      transparent 30%
-    ),
-
-    linear-gradient(
-      180deg,
-      #090c19 0%,
-      #050711 55%,
-      #020308 100%
-    );
-}
-
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  inset:0;
-
-  pointer-events:none;
-
-  opacity:.22;
-
-  background-image:
-
-    linear-gradient(
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    ),
-
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    );
-
-  background-size:45px 45px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black,
-      transparent 85%
-    );
-}
-
-button,
-input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-button:disabled{
-  cursor:not-allowed;
-  opacity:.55;
-}
-
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.page{
-
-  width:100%;
-
-  max-width:930px;
-
-  margin:auto;
-
-  padding:
-    28px 18px 80px;
-}
-
-
-/* =========================================================
-   BRAND
-========================================================= */
-
-.brand{
-
-  position:relative;
-
-  text-align:center;
-
-  margin-bottom:27px;
-}
-
-
-/* premium orb instead of triangle */
-
-.brand-mark{
-
-  position:relative;
-
-  width:62px;
-  height:62px;
-
-  margin:
-    0 auto 15px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:20px;
-
-  background:
-
-    radial-gradient(
-      circle at 30% 25%,
-      rgba(255,255,255,.20),
-      transparent 30%
-    ),
-
-    linear-gradient(
-      135deg,
-      rgba(255,61,129,.95),
-      rgba(124,77,255,.95)
-    );
-
-  box-shadow:
-
-    0 0 0 7px rgba(255,61,129,.045),
-
-    0 0 45px rgba(255,61,129,.24),
-
-    0 15px 35px rgba(0,0,0,.4);
-
-  animation:
-    brandFloat 4s ease-in-out infinite;
-}
-
-.brand-mark::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:-2px;
-
-  border-radius:22px;
-
-  padding:1px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.45),
-      transparent,
-      rgba(54,217,255,.35)
-    );
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  -webkit-mask-composite:xor;
-
-  mask-composite:exclude;
-}
-
-.brand-mark span{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:29px;
-
-  font-weight:900;
-
-  letter-spacing:-2px;
-
-  color:#fff;
-
-  text-shadow:
-    0 4px 18px rgba(0,0,0,.25);
-}
-
-@keyframes brandFloat{
-
-  0%,
-  100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-5px);
-  }
-}
-
-.brand h1{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:clamp(31px,6vw,46px);
-
-  font-weight:900;
-
-  letter-spacing:-2px;
-}
-
-.brand h1 span{
-
-  color:var(--pink);
-
-  text-shadow:
-    0 0 25px rgba(255,61,129,.28);
-}
-
-.brand p{
-
-  margin-top:8px;
-
-  color:#858fab;
-
-  font-size:12px;
-}
-
-
-/* =========================================================
-   TRUST BADGES
-========================================================= */
-
-.trust-row{
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-
-  margin-top:15px;
-}
-
-.trust-badge{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:6px;
-
-  padding:
-    7px 11px;
-
-  border:
-    1px solid rgba(111,126,170,.20);
-
-  border-radius:999px;
-
-  background:
-    rgba(255,255,255,.025);
-
-  color:#8e99b5;
-
-  font-size:10px;
-
-  font-weight:700;
-}
-
-.trust-badge strong{
-  color:#dce2f1;
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-wrap{
-
-  margin-bottom:26px;
-}
-
-.progress{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-}
-
-.step{
-
-  position:relative;
-
-  width:43px;
-  height:43px;
-
-  flex:0 0 43px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border:
-    1px solid #303a56;
-
-  border-radius:50%;
-
-  background:
-    rgba(17,23,42,.95);
-
-  color:#68738f;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  transition:.35s ease;
-}
-
-.step.active{
-
-  border-color:var(--pink);
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--pink),
-      var(--violet)
-    );
-
-  color:#fff;
-
-  box-shadow:
-
-    0 0 0 5px
-      rgba(255,61,129,.07),
-
-    0 0 35px
-      rgba(255,61,129,.35);
-}
-
-.step.done{
-
-  border-color:var(--green);
-
-  background:
-    linear-gradient(
-      135deg,
-      #19c77c,
-      #36e6a0
-    );
-
-  box-shadow:
-    0 0 28px
-      rgba(34,212,135,.25);
-}
-
-.line{
-
-  width:90px;
-
-  height:2px;
-
-  background:#252d45;
-
-  transition:.45s ease;
-}
-
-.line.active{
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--pink),
-      var(--violet)
-    );
-
-  box-shadow:
-    0 0 15px
-      rgba(255,61,129,.35);
-}
-
-.progress-labels{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:70px;
-
-  margin-top:9px;
-
-  color:#626d89;
-
-  font-size:9px;
-
-  font-weight:700;
-
-  text-transform:uppercase;
-
-  letter-spacing:1px;
-}
-
-
-/* =========================================================
-   MAIN CARD
-========================================================= */
-
-.card{
-
-  position:relative;
-
-  width:100%;
-
-  padding:32px;
-
-  overflow:hidden;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:27px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(13,18,35,.96),
-      rgba(7,10,21,.96)
-    );
-
-  box-shadow:var(--shadow);
-}
-
-.card::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:280px;
-  height:280px;
-
-  top:-180px;
-  right:-130px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,61,129,.13),
-      transparent 70%
-    );
-
-  pointer-events:none;
-}
-
-.card::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:240px;
-  height:240px;
-
-  bottom:-160px;
-  left:-130px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(124,77,255,.10),
-      transparent 70%
-    );
-
-  pointer-events:none;
-}
-
-
-/* =========================================================
-   SCREEN
-========================================================= */
-
-.screen{
-
-  display:none;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.screen.active{
-
-  display:block;
-
-  animation:
-    screenIn .42s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes screenIn{
-
-  from{
-    opacity:0;
-    transform:
-      translateY(15px)
-      scale(.985);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      translateY(0)
-      scale(1);
-  }
-}
-
-
-/* =========================================================
-   TITLES
-========================================================= */
-
-.title{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:28px;
-
-  font-weight:900;
-
-  line-height:1.2;
-
-  letter-spacing:-1px;
-
-  margin-bottom:8px;
-}
-
-.subtitle{
-
-  margin-bottom:25px;
-
-  color:#8994b0;
-
-  font-size:13px;
-
-  line-height:1.75;
-}
-
-
-/* =========================================================
-   PRODUCT CARD
-========================================================= */
-
-.product-card{
-
-  position:relative;
-
-  margin-bottom:22px;
-
-  padding:22px;
-
-  overflow:hidden;
-
-  border:
-    1px solid rgba(255,61,129,.20);
-
-  border-radius:20px;
-
-  background:
-
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(124,77,255,.17),
-      transparent 45%
-    ),
-
-    linear-gradient(
-      135deg,
-      rgba(255,61,129,.095),
-      rgba(124,77,255,.055)
-    );
-}
-
-.product-card::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:110px;
-  height:110px;
-
-  right:-50px;
-  bottom:-60px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,61,129,.10);
-
-  filter:blur(15px);
-}
-
-.product-label{
-
-  margin-bottom:7px;
-
-  color:#737e9b;
-
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:1.5px;
-
-  text-transform:uppercase;
-}
-
-.product-name{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:21px;
-
-  font-weight:900;
-
-  line-height:1.4;
-
-  overflow-wrap:anywhere;
-}
-
-.product-price{
-
-  margin-top:11px;
-
-  color:#ff6099;
-
-  font-size:28px;
-
-  font-weight:900;
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.form-group{
-  margin-bottom:19px;
-}
-
-label{
-
-  display:block;
-
-  margin-bottom:8px;
-
-  color:#dce2f0;
-
-  font-size:12px;
-
-  font-weight:700;
-}
-
-.required{
-  color:#ff5c96;
-}
-
-.optional{
-
-  color:#66718d;
-
-  font-size:10px;
-
-  font-weight:600;
-}
-
-input{
-
-  width:100%;
-
-  height:54px;
-
-  padding:0 16px;
-
-  outline:none;
-
-  border:
-    1px solid #29344f;
-
-  border-radius:14px;
-
-  background:
-    rgba(4,8,17,.92);
-
-  color:#fff;
-
-  font-size:13px;
-
-  transition:.25s ease;
-
-  box-shadow:
-    inset 0 1px 0
-      rgba(255,255,255,.015);
-}
-
-input:hover{
-  border-color:#3a4664;
-}
-
-input:focus{
-
-  border-color:var(--pink);
-
-  background:#080c18;
-
-  box-shadow:
-
-    0 0 0 3px
-      rgba(255,61,129,.08),
-
-    0 0 25px
-      rgba(255,61,129,.06);
-}
-
-input::placeholder{
-  color:#56617d;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-choice{
-
-  display:flex;
-
-  gap:10px;
-
-  margin-bottom:11px;
-}
-
-.contact-option{
-
-  flex:1;
-
-  min-height:47px;
-
-  border:
-    1px solid #2c3652;
-
-  border-radius:12px;
-
-  background:#0e1425;
-
-  color:#7d88a4;
-
-  font-size:11px;
-
-  font-weight:800;
-
-  transition:.25s ease;
-}
-
-.contact-option:hover{
-
-  border-color:#495674;
-
-  transform:translateY(-1px);
-}
-
-.contact-option.active{
-
-  border-color:var(--pink);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,61,129,.13),
-      rgba(124,77,255,.09)
-    );
-
-  color:#fff;
-
-  box-shadow:
-    0 0 20px
-      rgba(255,61,129,.08);
-}
-
-
-/* =========================================================
-   PROMO CODE
-========================================================= */
-
-.promo-box{
-
-  position:relative;
-
-  margin-top:22px;
-
-  padding:18px;
-
-  border:
-    1px solid rgba(124,77,255,.24);
-
-  border-radius:18px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      rgba(124,77,255,.08),
-      rgba(255,61,129,.055)
-    );
-
-  overflow:hidden;
-}
-
-.promo-box::before{
-
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:-100%;
-
-  width:70%;
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.55),
-      transparent
-    );
-
-  animation:
-    promoShine 4s linear infinite;
-}
-
-@keyframes promoShine{
-
-  from{
-    left:-100%;
-  }
-
-  to{
-    left:130%;
-  }
-}
-
-.promo-heading{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:9px;
-
-  margin-bottom:11px;
-
-  color:#e8eaf5;
-
-  font-size:12px;
-
-  font-weight:800;
-}
-
-.promo-icon{
-
-  width:30px;
-  height:30px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:9px;
-
-  background:
-    rgba(255,61,129,.12);
-
-  font-size:15px;
-}
-
-.promo-row{
-
-  display:flex;
-
-  gap:9px;
-}
-
-.promo-input{
-
-  flex:1;
-
-  min-width:0;
-}
-
-.promo-btn{
-
-  min-width:105px;
-
-  padding:0 15px;
-
-  border:
-    1px solid #3b4663;
-
-  border-radius:13px;
-
-  background:#151c31;
-
-  color:#aeb7cb;
-
-  font-size:11px;
-
-  font-weight:900;
-
-  transition:.3s ease;
-}
-
-/* IMPORTANT:
-   NO GLOW BEFORE APPLY */
-
-.promo-btn:hover:not(:disabled){
-
-  border-color:#5b6683;
-
-  background:#1a2340;
-}
-
-/* glow only after successful application */
-
-.promo-btn.applied{
-
-  border-color:var(--green);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(34,212,135,.18),
-      rgba(34,212,135,.08)
-    );
-
-  color:#74efb6;
-
-  box-shadow:
-
-    0 0 0 3px
-      rgba(34,212,135,.05),
-
-    0 0 28px
-      rgba(34,212,135,.28);
-
-  animation:
-    promoAppliedGlow 1.7s ease-in-out infinite;
-}
-
-@keyframes promoAppliedGlow{
-
-  0%,
-  100%{
-    box-shadow:
-      0 0 0 3px
-        rgba(34,212,135,.04),
-      0 0 20px
-        rgba(34,212,135,.20);
-  }
-
-  50%{
-    box-shadow:
-      0 0 0 5px
-        rgba(34,212,135,.07),
-      0 0 38px
-        rgba(34,212,135,.40);
-  }
-}
-
-.promo-status{
-
-  display:none;
-
-  margin-top:11px;
-
-  padding:10px 12px;
-
-  border:
-    1px solid rgba(34,212,135,.22);
-
-  border-radius:11px;
-
-  background:
-    rgba(34,212,135,.065);
-
-  color:#65e6a9;
-
-  font-size:10px;
-
-  font-weight:800;
-
-  animation:
-    promoStatusIn .35s ease;
-}
-
-.promo-status.show{
-  display:block;
-}
-
-@keyframes promoStatusIn{
-
-  from{
-    opacity:0;
-    transform:
-      translateY(-5px)
-      scale(.97);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      translateY(0)
-      scale(1);
-  }
-}
-
-.promo-status strong{
-  color:#fff;
-}
-
-.promo-error{
-
-  display:none;
-
-  margin-top:9px;
-
-  color:#ff8195;
-
-  font-size:10px;
-
-  font-weight:700;
-}
-
-.promo-error.show{
-  display:block;
-}
-
-
-/* =========================================================
-   PRICE BOX
-========================================================= */
-
-.price-box{
-
-  margin-top:20px;
-
-  padding:19px;
-
-  border:
-    1px solid #242e48;
-
-  border-radius:17px;
-
-  background:
-    rgba(4,8,17,.78);
-}
-
-.price-row{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
-  padding:7px 0;
-
-  color:#8994ae;
-
-  font-size:12px;
-}
-
-.price-row strong{
-
-  color:#e8ecf7;
-
-  text-align:right;
-}
-
-.price-row.discount strong{
-  color:#55e7a1;
-}
-
-.price-row.total{
-
-  margin-top:8px;
-
-  padding-top:14px;
-
-  border-top:
-    1px solid #252f49;
-
-  color:#fff;
-
-  font-size:18px;
-
-  font-weight:900;
-}
-
-.price-row.total strong{
-
-  color:#fff;
-
-  font-size:21px;
-
-  text-shadow:
-    0 0 18px rgba(255,255,255,.08);
-}
-
-.old-price{
-
-  color:#5e6985!important;
-
-  text-decoration:line-through;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.buttons{
-
-  display:flex;
-
-  gap:12px;
-
-  margin-top:25px;
-}
-
-.btn{
-
-  flex:1;
-
-  min-width:0;
-
-  min-height:54px;
-
-  border-radius:14px;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  transition:.25s ease;
-}
-
-.btn-primary{
-
-  position:relative;
-
-  overflow:hidden;
-
-  border:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--pink),
-      var(--violet)
-    );
-
-  color:#fff;
-
-  box-shadow:
-    0 13px 32px
-      rgba(255,61,129,.17);
-}
-
-.btn-primary::before{
-
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:-120%;
-
-  width:70%;
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.18),
-      transparent
-    );
-
-  transform:skewX(-20deg);
-
-  transition:.5s ease;
-}
-
-.btn-primary:hover:not(:disabled)::before{
-  left:130%;
-}
-
-.btn-primary:hover:not(:disabled){
-
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 17px 42px
-      rgba(255,61,129,.25);
-}
-
-.btn-secondary{
-
-  border:
-    1px solid #2e3955;
-
-  background:#11182a;
-
-  color:#cbd2e3;
-}
-
-.btn-secondary:hover:not(:disabled){
-
-  border-color:#4a5675;
-
-  background:#171f35;
-
-  transform:translateY(-1px);
-}
-
-
-/* =========================================================
-   PAYMENT
-========================================================= */
-
-.payment-summary{
-
-  text-align:center;
-
-  margin-bottom:18px;
-}
-
-.payment-small{
-
-  color:#8994b0;
-
-  font-size:11px;
-
-  font-weight:700;
-}
-
-.payment-amount{
-
-  margin-top:4px;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:45px;
-
-  font-weight:900;
-
-  letter-spacing:-2px;
-
-  text-shadow:
-    0 0 35px
-      rgba(255,61,129,.18);
-}
-
-.upi-note{
-
-  margin-top:5px;
-
-  color:#68738f;
-
-  font-size:10px;
-}
-
-
-/* =========================================================
-   QR
-========================================================= */
-
-.qr-wrapper{
-
-  position:relative;
-
-  width:min(305px,100%);
-
-  aspect-ratio:1/1;
-
-  margin:20px auto;
-
-  padding:9px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:22px;
-
-  background:#fff;
-
-  box-shadow:
-
-    0 18px 55px
-      rgba(0,0,0,.38),
-
-    0 0 50px
-      rgba(124,77,255,.09);
-}
-
-.qr-wrapper::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:-6px;
-
-  border-radius:27px;
-
-  border:
-    1px solid
-      rgba(255,61,129,.18);
-
-  animation:
-    qrPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes qrPulse{
-
-  0%,
-  100%{
-    opacity:.35;
-  }
-
-  50%{
-    opacity:1;
-  }
-}
-
-#movieQR,
-#instagramQR{
-
-  width:100%;
-  height:100%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:#fff;
-}
-
-#movieQR img,
-#movieQR canvas,
-#instagramQR img,
-#instagramQR canvas{
-
-  width:100%!important;
-
-  height:100%!important;
-
-  object-fit:contain!important;
-}
-
-
-/* =========================================================
-   UPI
-========================================================= */
-
-.upi-actions{
-
-  width:100%;
-
-  max-width:500px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:10px;
-
-  margin:18px auto;
-}
-
-.pay-upi-btn,
-.copy-upi-btn{
-
-  width:100%;
-
-  min-height:52px;
-
-  border-radius:14px;
-
-  font-size:12px;
-
-  font-weight:900;
-}
-
-.pay-upi-btn{
-
-  border:
-    1px solid
-      rgba(255,61,129,.40);
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--pink),
-      var(--violet)
-    );
-
-  color:#fff;
-
-  box-shadow:
-    0 12px 30px
-      rgba(255,61,129,.14);
-
-  transition:.25s ease;
-}
-
-.pay-upi-btn:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 17px 40px
-      rgba(255,61,129,.25);
-}
-
-.copy-upi-btn{
-
-  border:
-    1px solid #343e5b;
-
-  background:#131a2e;
-
-  color:#d1d8e8;
-}
-
-.copy-upi-btn:hover{
-
-  border-color:#505c79;
-
-  background:#19213a;
-}
-
-.copy-success{
-
-  display:none;
-
-  text-align:center;
-
-  color:#64e0a9;
-
-  font-size:10px;
-
-  font-weight:800;
-}
-
-.copy-success.show{
-  display:block;
-}
-
-.upi-id-box{
-
-  margin:15px auto 21px;
-
-  text-align:center;
-
-  color:#9aa4bd;
-
-  font-size:11px;
-}
-
-.upi-id{
-
-  display:inline-flex;
-
-  margin-top:7px;
-
-  padding:9px 14px;
-
-  border:
-    1px solid #29334d;
-
-  border-radius:10px;
-
-  background:#131a2c;
-
-  color:#fff;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  box-shadow:
-    inset 0 1px 0
-      rgba(255,255,255,.02);
-}
-
-
-/* =========================================================
-   UPLOAD
-========================================================= */
-
-.upload-box{
-
-  margin-top:21px;
-
-  padding:17px;
-
-  border:
-    1px dashed #3c4865;
-
-  border-radius:17px;
-
-  background:
-    rgba(4,8,17,.65);
-
-  transition:.25s ease;
-}
-
-.upload-box:hover{
-
-  border-color:#596682;
-
-  background:
-    rgba(8,12,24,.85);
-}
-
-.upload-box input[type="file"]{
-
-  height:auto;
-
-  padding:10px;
-
-  border:1px solid #28334d;
-
-  background:#0d1424;
-
-  font-size:11px;
-}
-
-.file-name{
-
-  margin-top:8px;
-
-  color:#69748f;
-
-  font-size:10px;
-
-  overflow-wrap:anywhere;
-}
-
-.file-valid{
-  color:#63e4a7;
-}
-
-.file-warning{
-  color:#ff8296;
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.error{
-
-  display:none;
-
-  margin-bottom:15px;
-
-  padding:12px 14px;
-
-  border:
-    1px solid
-      rgba(255,65,87,.30);
-
-  border-radius:12px;
-
-  background:
-    rgba(255,65,87,.08);
-
-  color:#ff8297;
-
-  font-size:11px;
-
-  line-height:1.55;
-
-  animation:
-    errorShake .3s ease;
-}
-
-.error.show{
-  display:block;
-}
-
-@keyframes errorShake{
-
-  0%,
-  100%{
-    transform:translateX(0);
-  }
-
-  25%{
-    transform:translateX(-4px);
-  }
-
-  75%{
-    transform:translateX(4px);
-  }
-}
-
-
-/* =========================================================
-   SECURE NOTE
-========================================================= */
-
-.secure-note{
-
-  margin-top:17px;
-
-  text-align:center;
-
-  color:#68738e;
-
-  font-size:9px;
-
-  line-height:1.8;
-}
-
-
-/* =========================================================
-   SUCCESS SCREEN
-========================================================= */
-
-.success-screen{
-
-  padding:14px 0 8px;
-
-  text-align:center;
-}
-
-
-/* HUGE SUCCESS ICON */
-
-.success-icon{
-
-  position:relative;
-
-  width:135px;
-  height:135px;
-
-  margin:10px auto 30px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #65f1b4,
-      #20c77a 58%,
-      #13a866 100%
-    );
-
-  box-shadow:
-
-    0 0 0 13px
-      rgba(34,212,135,.07),
-
-    0 0 0 25px
-      rgba(34,212,135,.025),
-
-    0 0 75px
-      rgba(34,212,135,.35),
-
-    0 25px 55px
-      rgba(0,0,0,.40);
-
-  animation:
-    successPop .7s
-      cubic-bezier(.18,.89,.32,1.28);
-}
-
-@keyframes successPop{
-
-  0%{
-    opacity:0;
-    transform:scale(.15) rotate(-25deg);
-  }
-
-  65%{
-    opacity:1;
-    transform:scale(1.12) rotate(4deg);
-  }
-
-  100%{
-    transform:scale(1) rotate(0);
-  }
-}
-
-.success-icon::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:-14px;
-
-  border:
-    2px solid
-      rgba(34,212,135,.20);
-
-  border-radius:50%;
-
-  animation:
-    successRing 1.7s ease-out infinite;
-}
-
-@keyframes successRing{
-
-  0%{
-    transform:scale(.88);
-
-    opacity:.9;
-  }
-
-  100%{
-    transform:scale(1.3);
-
-    opacity:0;
-  }
-}
-
-.success-icon::after{
-
-  content:"✓";
-
-  color:#fff;
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:82px;
-
-  font-weight:900;
-
-  line-height:1;
-
-  text-shadow:
-    0 5px 15px
-      rgba(0,0,0,.12);
-
-  animation:
-    tickDraw .5s
-      .25s ease both;
-}
-
-@keyframes tickDraw{
-
-  from{
-    opacity:0;
-    transform:
-      scale(.4)
-      rotate(-15deg);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      scale(1)
-      rotate(0);
-  }
-}
-
-.success-title{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:31px;
-
-  font-weight:900;
-
-  letter-spacing:-1px;
-
-  margin-bottom:10px;
-}
-
-.success-message{
-
-  max-width:580px;
-
-  margin:auto;
-
-  color:#9aa4bd;
-
-  font-size:13px;
-
-  line-height:1.8;
-}
-
-.delivery-message{
-
-  display:inline-block;
-
-  margin-top:14px;
-
-  padding:12px 17px;
-
-  border:
-    1px solid
-      rgba(34,212,135,.20);
-
-  border-radius:13px;
-
-  background:
-    rgba(34,212,135,.055);
-
-  color:#64e6a8;
-
-  font-size:12px;
-
-  font-weight:800;
-
-  box-shadow:
-    0 0 30px
-      rgba(34,212,135,.06);
-}
-
-.order-id{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:6px;
-
-  margin-top:17px;
-
-  padding:11px 16px;
-
-  border:
-    1px solid #2d3853;
-
-  border-radius:12px;
-
-  background:#131a2d;
-
-  color:#8994ae;
-
-  font-size:11px;
-
-  font-weight:700;
-}
-
-.order-id span{
-  color:#fff;
-}
-
-
-/* =========================================================
-   PROCESSING OVERLAY
-========================================================= */
-
-.processing-overlay{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:10000;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(2,3,9,.91);
-
-  backdrop-filter:
-    blur(15px);
-
-  -webkit-backdrop-filter:
-    blur(15px);
-}
-
-.processing-overlay.show{
-
-  display:flex;
-
-  animation:
-    overlayIn .3s ease;
-}
-
-@keyframes overlayIn{
-
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-}
-
-.processing-card{
-
-  width:min(430px,100%);
-
-  padding:35px 25px;
-
-  text-align:center;
-
-  border:
-    1px solid
-      rgba(255,61,129,.20);
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(16,21,40,.97),
-      rgba(6,9,19,.98)
-    );
-
-  box-shadow:
-
-    0 35px 100px
-      rgba(0,0,0,.65),
-
-    0 0 70px
-      rgba(124,77,255,.08);
-}
-
-
-/* loader */
-
-.loader{
-
-  position:relative;
-
-  width:105px;
-  height:105px;
-
-  margin:0 auto 24px;
-}
-
-.loader-ring{
-
-  position:absolute;
-
-  inset:0;
-
-  border:
-    5px solid
-      rgba(255,255,255,.06);
-
-  border-top-color:var(--pink);
-
-  border-right-color:var(--violet);
-
-  border-radius:50%;
-
-  animation:
-    spin 1s linear infinite;
-}
-
-.loader-ring.two{
-
-  inset:12px;
-
-  border:
-    3px solid
-      rgba(255,255,255,.04);
-
-  border-bottom-color:var(--cyan);
-
-  border-left-color:var(--pink2);
-
-  animation:
-    spinReverse 1.3s linear infinite;
-}
-
-@keyframes spin{
-
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-@keyframes spinReverse{
-
-  to{
-    transform:rotate(-360deg);
-  }
-}
-
-.loader-center{
-
-  position:absolute;
-
-  inset:25px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--pink),
-      var(--violet)
-    );
-
-  box-shadow:
-    0 0 30px
-      rgba(255,61,129,.22);
-}
-
-.loader-center span{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:15px;
-
-  font-weight:900;
-}
-
-.processing-title{
-
-  font-family:"Montserrat",sans-serif;
-
-  font-size:22px;
-
-  font-weight:900;
-
-  margin-bottom:7px;
-}
-
-.processing-subtitle{
-
-  color:#7f8aa6;
-
-  font-size:11px;
-
-  line-height:1.7;
-
-  min-height:38px;
-}
-
-.processing-progress{
-
-  height:5px;
-
-  margin-top:22px;
-
-  overflow:hidden;
-
-  border-radius:99px;
-
-  background:#171e31;
-}
-
-.processing-progress-bar{
-
-  width:0%;
-
-  height:100%;
-
-  border-radius:99px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--pink),
-      var(--violet),
-      var(--cyan)
-    );
-
-  box-shadow:
-    0 0 18px
-      rgba(255,61,129,.35);
-
-  transition:
-    width .35s ease;
-}
-
-.processing-percent{
-
-  margin-top:9px;
-
-  color:#64708b;
-
-  font-size:10px;
-
-  font-weight:800;
-}
-
-
-/* =========================================================
-   CELEBRATION
-========================================================= */
-
-#celebration{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:9999;
-
-  pointer-events:none;
-
-  overflow:hidden;
-}
-
-.star{
-
-  position:absolute;
-
-  top:-50px;
-
-  animation:
-    fall linear forwards;
-
-  filter:
-    drop-shadow(
-      0 0 8px
-      rgba(255,255,255,.4)
-    );
-}
-
-@keyframes fall{
-
-  from{
-
-    opacity:1;
-
-    transform:
-      translateY(-50px)
-      rotate(0deg)
-      scale(.7);
-  }
-
-  to{
-
-    opacity:0;
-
-    transform:
-      translateY(110vh)
-      rotate(720deg)
-      scale(1.1);
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-  .page{
-    padding:
-      20px 11px 50px;
-  }
-
-  .brand{
-    margin-bottom:23px;
-  }
-
-  .brand-mark{
-    width:56px;
-    height:56px;
-    border-radius:18px;
-  }
-
-  .brand-mark span{
-    font-size:26px;
-  }
-
-  .brand h1{
-    font-size:32px;
-  }
-
-  .trust-row{
-    gap:6px;
-  }
-
-  .trust-badge{
-    font-size:9px;
-    padding:6px 9px;
-  }
-
-  .card{
-
-    padding:
-      23px 16px;
-
-    border-radius:22px;
-  }
-
-  .step{
-    width:36px;
-    height:36px;
-    flex-basis:36px;
-  }
-
-  .line{
-    width:47px;
-  }
-
-  .progress-labels{
-    gap:38px;
-    font-size:8px;
-  }
-
-  .title{
-    font-size:22px;
-  }
-
-  .product-name{
-    font-size:18px;
-  }
-
-  .buttons{
-    flex-direction:column;
-  }
-
-  .btn{
-    width:100%;
-  }
-
-  .promo-row{
-    flex-direction:column;
-  }
-
-  .promo-btn{
-    min-height:50px;
-    width:100%;
-  }
-
-  .qr-wrapper{
-    width:min(280px,100%);
-  }
-
-  .payment-amount{
-    font-size:38px;
-  }
-
-  .success-icon{
-    width:120px;
-    height:120px;
-  }
-
-  .success-icon::after{
-    font-size:73px;
-  }
-
-  .success-title{
-    font-size:26px;
-  }
-
-  .processing-card{
-    padding:
-      30px 20px;
-  }
-}
-
-@media(max-width:360px){
-
-  .page{
-    padding-left:8px;
-    padding-right:8px;
-  }
-
-  .card{
-    padding:
-      20px 13px;
-  }
-
-  .line{
-    width:31px;
-  }
-
-  .progress-labels{
-    gap:27px;
-  }
-
-  .contact-option{
-    font-size:9px;
-  }
-}
-
-</style>
 </head>
-
 
 <body>
 
+<div class="bg-orb orb-one"></div> <div class="bg-orb orb-two"></div>
 
-<!-- =========================================================
-     CELEBRATION
-========================================================= -->
+<!-- =================================================== HEADER ==================================================== -->
 
-<div id="celebration"></div>
+<header>
 
+<nav class="nav">
 
-<!-- =========================================================
-     PROCESSING OVERLAY
-========================================================= -->
+  <a href="#" class="logo">
 
-<div
-  class="processing-overlay"
-  id="processingOverlay"
->
-
-  <div class="processing-card">
-
-    <div class="loader">
-
-      <div class="loader-ring"></div>
-
-      <div class="loader-ring two"></div>
-
-      <div class="loader-center">
-        <span id="loaderNumber">1</span>
-      </div>
-
+    <div class="logo-icon">
+      <i class="fa-solid fa-bolt"></i>
     </div>
 
-    <h2 class="processing-title">
-      Submitting Your Order
-    </h2>
+    <span>SehrAn Media</span>
 
-    <p
-      class="processing-subtitle"
-      id="processingSubtitle"
+  </a>
+
+
+  <div class="nav-links">
+
+    <button
+      class="nav-link active"
+      data-target="social"
     >
-      Verifying your order details...
-    </p>
+      Social
+    </button>
 
-    <div class="processing-progress">
-
-      <div
-        class="processing-progress-bar"
-        id="processingProgressBar"
-      ></div>
-
-    </div>
-
-    <div
-      class="processing-percent"
-      id="processingPercent"
+    <button
+      class="nav-link"
+      data-target="movies"
     >
-      0%
-    </div>
+      Movies
+    </button>
+
+    <button
+      class="nav-link"
+      data-target="games"
+    >
+      Games
+    </button>
 
   </div>
 
-</div>
-
-
-<!-- =========================================================
-     PAGE
-========================================================= -->
-
-<main class="page">
-
-
-<!-- =========================================================
-     BRAND
-========================================================= -->
-
-<header class="brand">
-
-  <div class="brand-mark">
-    <span>S</span>
-  </div>
-
-  <h1>
-    SehrAn <span>Media</span>
-  </h1>
-
-  <p id="brandSubtitle">
-    Secure & Reliable Checkout
-  </p>
-
-  <div class="trust-row">
-
-    <div class="trust-badge">
-      🔒 <strong>Secure</strong> Checkout
-    </div>
-
-    <div class="trust-badge">
-      ⚡ Fast Processing
-    </div>
-
-    <div class="trust-badge">
-      ✓ Trusted Orders
-    </div>
-
-  </div>
+</nav>
 
 </header>
 
+<!-- =================================================== HERO ==================================================== -->
 
-<!-- =========================================================
-     PROGRESS
-========================================================= -->
+<section class="hero">
 
-<div class="progress-wrap">
-
-  <div class="progress">
-
-    <div
-      class="step active"
-      id="step1"
-    >
-      1
-    </div>
-
-    <div
-      class="line"
-      id="line1"
-    ></div>
-
-    <div
-      class="step"
-      id="step2"
-    >
-      2
-    </div>
-
-    <div
-      class="line"
-      id="line2"
-    ></div>
-
-    <div
-      class="step"
-      id="step3"
-    >
-      3
-    </div>
-
-  </div>
-
-  <div class="progress-labels">
-
-    <span>Details</span>
-
-    <span>Payment</span>
-
-    <span>Complete</span>
-
-  </div>
-
+<div class="hero-badge">
+  <i class="fa-solid fa-sparkles"></i>
+  Social • Movies • Games
 </div>
 
 
-<!-- =========================================================
-     CARD
-========================================================= -->
+<h1>
 
-<div class="card">
+  Your Digital
 
+  <span class="gradient-text">
+    Entertainment Hub
+  </span>
 
-<!-- =========================================================
-     MOVIE STEP 1
-========================================================= -->
+</h1>
 
-<section
-  class="screen active"
-  id="movieScreen1"
->
 
-  <h2 class="title">
-    Buy Movie
-  </h2>
+<p>
 
-  <p class="subtitle">
-    Review your selected product, apply your promo code and continue to secure payment.
-  </p>
+  Explore Instagram growth packages,
+  popular movies and exciting PC games
+  in one powerful entertainment platform.
 
+</p>
 
-  <div class="product-card">
 
-    <div class="product-label">
-      Selected Product
-    </div>
+<div class="hero-actions">
 
-    <div
-      class="product-name"
-      id="movieName"
-    >
-      Loading...
-    </div>
+  <button
+    class="btn btn-primary"
+    onclick="openTab('social')"
+  >
 
-    <div
-      class="product-price"
-      id="moviePrice"
-    >
-      ₹0
-    </div>
+    <i class="fa-brands fa-instagram"></i>
 
-  </div>
+    Explore Instagram
 
+  </button>
 
-  <div
-    class="error"
-    id="movieError1"
-  ></div>
 
+  <button
+    class="btn btn-outline"
+    onclick="openTab('movies')"
+  >
 
-  <!-- CONTACT -->
+    <i class="fa-solid fa-film"></i>
 
-  <div class="form-group">
+    Browse Movies
 
-    <label>
-      Contact Details
-      <span class="required">*</span>
-    </label>
-
-    <div class="contact-choice">
-
-      <button
-        type="button"
-        class="contact-option active"
-        id="movieMobileOption"
-        onclick="selectMovieContact('mobile')"
-      >
-        📱 Mobile Number
-      </button>
-
-      <button
-        type="button"
-        class="contact-option"
-        id="movieEmailOption"
-        onclick="selectMovieContact('email')"
-      >
-        ✉️ Email
-      </button>
-
-    </div>
-
-
-    <div id="movieMobileField">
-
-      <input
-        id="movieMobile"
-        type="tel"
-        inputmode="numeric"
-        maxlength="15"
-        placeholder="Enter mobile number"
-        autocomplete="tel"
-      >
-
-    </div>
-
-
-    <div
-      id="movieEmailField"
-      style="display:none;"
-    >
-
-      <input
-        id="movieEmail"
-        type="email"
-        maxlength="150"
-        placeholder="Enter email address"
-        autocomplete="email"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- PROMO -->
-
-  <div class="promo-box">
-
-    <div class="promo-heading">
-
-      <div class="promo-icon">
-        🎟️
-      </div>
-
-      <span>
-        Have a Promo Code?
-      </span>
-
-    </div>
-
-
-    <div class="promo-row">
-
-      <input
-        class="promo-input"
-        id="moviePromoCode"
-        type="text"
-        maxlength="30"
-        placeholder="Enter promo code"
-        autocomplete="off"
-      >
-
-      <button
-        type="button"
-        class="promo-btn"
-        id="moviePromoButton"
-        onclick="applyMoviePromo()"
-      >
-        Apply Code
-      </button>
-
-    </div>
-
-
-    <div
-      class="promo-status"
-      id="moviePromoStatus"
-    >
-      ✓ <strong>PROMO CODE APPLIED</strong> — You saved 10% on this order.
-    </div>
-
-
-    <div
-      class="promo-error"
-      id="moviePromoError"
-    >
-      Invalid promo code.
-    </div>
-
-  </div>
-
-
-  <!-- PRICE -->
-
-  <div class="price-box">
-
-    <div class="price-row">
-
-      <span>
-        Product Price
-      </span>
-
-      <strong
-        id="movieSummaryPrice"
-      >
-        ₹0
-      </strong>
-
-    </div>
-
-
-    <div
-      class="price-row"
-      id="movieOriginalRow"
-      style="display:none;"
-    >
-
-      <span>
-        Original Price
-      </span>
-
-      <strong
-        class="old-price"
-        id="movieOriginalDisplay"
-      >
-        ₹0
-      </strong>
-
-    </div>
-
-
-    <div
-      class="price-row discount"
-      id="movieDiscountRow"
-      style="display:none;"
-    >
-
-      <span>
-        Promo Discount
-      </span>
-
-      <strong id="movieDiscountDisplay">
-        -₹0
-      </strong>
-
-    </div>
-
-
-    <div class="price-row total">
-
-      <span>
-        Total to Pay
-      </span>
-
-      <strong id="movieTotal">
-        ₹0
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <div class="buttons">
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="goHome()"
-    >
-      ← Back
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      onclick="movieContinuePayment()"
-    >
-      Continue to Payment →
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MOVIE STEP 2
-========================================================= -->
-
-<section
-  class="screen"
-  id="movieScreen2"
->
-
-  <h2 class="title">
-    Complete Payment
-  </h2>
-
-  <p class="subtitle">
-    Scan the QR code with your UPI app or use the payment button below.
-  </p>
-
-
-  <div class="payment-summary">
-
-    <div class="payment-small">
-      Exact Amount to Pay
-    </div>
-
-    <div
-      class="payment-amount"
-      id="moviePaymentAmount"
-    >
-      ₹0
-    </div>
-
-    <div class="upi-note">
-      Please pay the exact amount shown above.
-    </div>
-
-  </div>
-
-
-  <div class="qr-wrapper">
-
-    <div id="movieQR"></div>
-
-  </div>
-
-
-  <div class="upi-actions">
-
-    <button
-      type="button"
-      class="pay-upi-btn"
-      onclick="moviePayUPI()"
-    >
-      💳 Pay with UPI
-    </button>
-
-    <button
-      type="button"
-      class="copy-upi-btn"
-      onclick="copyUPI()"
-    >
-      📋 Copy UPI ID
-    </button>
-
-    <div
-      class="copy-success"
-      id="copySuccess"
-    >
-      ✓ UPI ID copied successfully
-    </div>
-
-  </div>
-
-
-  <div class="upi-id-box">
-
-    <strong>
-      UPI ID
-    </strong>
-
-    <br>
-
-    <span class="upi-id">
-      7889777143@fam
-    </span>
-
-    <br>
-
-    <small style="color:#68738f;">
-      Scan the QR or use the UPI button above.
-    </small>
-
-  </div>
-
-
-  <div
-    class="error"
-    id="movieError2"
-  ></div>
-
-
-  <div class="form-group">
-
-    <label for="movieUTR">
-
-      UTR / Transaction ID
-
-      <span class="optional">
-        Optional
-      </span>
-
-    </label>
-
-    <input
-      id="movieUTR"
-      type="text"
-      maxlength="80"
-      placeholder="Enter UTR if available"
-      autocomplete="off"
-    >
-
-  </div>
-
-
-  <div class="upload-box">
-
-    <label for="movieScreenshot">
-
-      Payment Screenshot
-      <span class="required">*</span>
-
-    </label>
-
-    <input
-      id="movieScreenshot"
-      type="file"
-      accept="image/jpeg,image/png,image/webp"
-    >
-
-    <div
-      class="file-name"
-      id="movieFileName"
-    >
-      No screenshot selected
-    </div>
-
-  </div>
-
-
-  <div class="buttons">
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="movieShowScreen(1)"
-    >
-      ← Back
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      id="movieSubmitBtn"
-      onclick="submitMovieOrder()"
-    >
-      Submit Movie Order ✓
-    </button>
-
-  </div>
-
-
-  <div class="secure-note">
-
-    🔒 Your payment screenshot is submitted securely with your order.
-
-    <br>
-
-    Never share passwords or sensitive account credentials.
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MOVIE STEP 3
-========================================================= -->
-
-<section
-  class="screen"
-  id="movieScreen3"
->
-
-  <div class="success-screen">
-
-    <div class="success-icon"></div>
-
-    <h2 class="success-title">
-      Order Submitted Successfully!
-    </h2>
-
-    <p class="success-message">
-
-      Your order has been submitted successfully.
-
-      <br>
-
-      Please keep your Order ID for reference.
-
-    </p>
-
-
-    <div class="delivery-message">
-
-      🚀 Your order will be delivered within 10 minutes.
-
-    </div>
-
-
-    <div class="order-id">
-
-      Order ID:
-
-      <span id="movieOrderId">
-        ---
-      </span>
-
-    </div>
-
-
-    <div
-      class="price-box"
-      style="margin-top:22px;text-align:left;"
-    >
-
-      <div class="price-row">
-
-        <span>
-          Status
-        </span>
-
-        <strong style="color:#ffd166;">
-          PROCESSING
-        </strong>
-
-      </div>
-
-
-      <div class="price-row">
-
-        <span>
-          Product
-        </span>
-
-        <strong id="successMovieName">
-          ---
-        </strong>
-
-      </div>
-
-
-      <div class="price-row">
-
-        <span>
-          Amount
-        </span>
-
-        <strong id="successMovieAmount">
-          ₹0
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="buttons">
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        onclick="goHome()"
-      >
-        Back to Home
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     INSTAGRAM STEP 1
-========================================================= -->
-
-<section
-  class="screen"
-  id="instagramScreen1"
->
-
-  <h2 class="title">
-    Instagram Order
-  </h2>
-
-  <p class="subtitle">
-    Review your package, enter your Instagram details and apply your promo code.
-  </p>
-
-
-  <div class="product-card">
-
-    <div class="product-label">
-      Selected Package
-    </div>
-
-    <div
-      class="product-name"
-      id="instagramPackage"
-    >
-      Loading package...
-    </div>
-
-    <div
-      class="product-price"
-      id="instagramPrice"
-    >
-      ₹0
-    </div>
-
-  </div>
-
-
-  <div
-    class="error"
-    id="instagramError1"
-  ></div>
-
-
-  <!-- CONTACT -->
-
-  <div class="form-group">
-
-    <label>
-      Contact Details
-      <span class="required">*</span>
-    </label>
-
-    <div class="contact-choice">
-
-      <button
-        type="button"
-        class="contact-option active"
-        id="instagramMobileOption"
-        onclick="selectInstagramContact('mobile')"
-      >
-        📱 Mobile Number
-      </button>
-
-      <button
-        type="button"
-        class="contact-option"
-        id="instagramEmailOption"
-        onclick="selectInstagramContact('email')"
-      >
-        ✉️ Email
-      </button>
-
-    </div>
-
-
-    <div id="instagramMobileField">
-
-      <input
-        id="instagramMobile"
-        type="tel"
-        inputmode="numeric"
-        maxlength="15"
-        placeholder="Enter mobile number"
-        autocomplete="tel"
-      >
-
-    </div>
-
-
-    <div
-      id="instagramEmailField"
-      style="display:none;"
-    >
-
-      <input
-        id="instagramEmail"
-        type="email"
-        maxlength="150"
-        placeholder="Enter email address"
-        autocomplete="email"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- INSTAGRAM -->
-
-  <div class="form-group">
-
-    <label>
-
-      Instagram Username
-
-      <span class="required">*</span>
-
-    </label>
-
-    <input
-      id="instagramUsername"
-      type="text"
-      maxlength="30"
-      placeholder="@yourusername"
-      autocomplete="off"
-    >
-
-  </div>
-
-
-  <div class="form-group">
-
-    <label>
-
-      Instagram Profile Link
-
-      <span class="required">*</span>
-
-    </label>
-
-    <input
-      id="instagramProfile"
-      type="url"
-      maxlength="300"
-      placeholder="https://instagram.com/yourusername"
-    >
-
-  </div>
-
-
-  <!-- PROMO -->
-
-  <div class="promo-box">
-
-    <div class="promo-heading">
-
-      <div class="promo-icon">
-        🎟️
-      </div>
-
-      <span>
-        Have a Promo Code?
-      </span>
-
-    </div>
-
-
-    <div class="promo-row">
-
-      <input
-        class="promo-input"
-        id="instagramPromoCode"
-        type="text"
-        maxlength="30"
-        placeholder="Enter promo code"
-        autocomplete="off"
-      >
-
-      <button
-        type="button"
-        class="promo-btn"
-        id="instagramPromoButton"
-        onclick="applyInstagramPromo()"
-      >
-        Apply Code
-      </button>
-
-    </div>
-
-
-    <div
-      class="promo-status"
-      id="instagramPromoStatus"
-    >
-      ✓ <strong>PROMO CODE APPLIED</strong> — You saved 10% on this order.
-    </div>
-
-
-    <div
-      class="promo-error"
-      id="instagramPromoError"
-    >
-      Invalid promo code.
-    </div>
-
-  </div>
-
-
-  <!-- PRICE -->
-
-  <div class="price-box">
-
-    <div class="price-row">
-
-      <span>
-        Package Price
-      </span>
-
-      <strong
-        id="instagramTotal"
-      >
-        ₹0
-      </strong>
-
-    </div>
-
-
-    <div
-      class="price-row"
-      id="instagramOriginalRow"
-      style="display:none;"
-    >
-
-      <span>
-        Original Price
-      </span>
-
-      <strong
-        class="old-price"
-        id="instagramOriginalDisplay"
-      >
-        ₹0
-      </strong>
-
-    </div>
-
-
-    <div
-      class="price-row discount"
-      id="instagramDiscountRow"
-      style="display:none;"
-    >
-
-      <span>
-        Promo Discount
-      </span>
-
-      <strong id="instagramDiscountDisplay">
-        -₹0
-      </strong>
-
-    </div>
-
-
-    <div class="price-row total">
-
-      <span>
-        Total to Pay
-      </span>
-
-      <strong id="instagramFinal">
-        ₹0
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <div class="buttons">
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="goHome()"
-    >
-      ← Back
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      onclick="instagramContinue()"
-    >
-      Continue to Payment →
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     INSTAGRAM STEP 2
-========================================================= -->
-
-<section
-  class="screen"
-  id="instagramScreen2"
->
-
-  <h2 class="title">
-    Complete Payment
-  </h2>
-
-  <p class="subtitle">
-    Scan the QR code with your UPI app and complete the payment.
-  </p>
-
-
-  <div class="payment-summary">
-
-    <div class="payment-small">
-      Exact Amount to Pay
-    </div>
-
-    <div
-      class="payment-amount"
-      id="instagramPaymentAmount"
-    >
-      ₹0
-    </div>
-
-    <div class="upi-note">
-      Please pay the exact amount shown above.
-    </div>
-
-  </div>
-
-
-  <div class="qr-wrapper">
-
-    <div id="instagramQR"></div>
-
-  </div>
-
-
-  <div class="upi-actions">
-
-    <button
-      type="button"
-      class="pay-upi-btn"
-      onclick="instagramPayUPI()"
-    >
-      💳 Pay with UPI
-    </button>
-
-    <button
-      type="button"
-      class="copy-upi-btn"
-      onclick="copyUPI()"
-    >
-      📋 Copy UPI ID
-    </button>
-
-    <div
-      class="copy-success"
-      id="copySuccess"
-    >
-      ✓ UPI ID copied successfully
-    </div>
-
-  </div>
-
-
-  <div class="upi-id-box">
-
-    <strong>
-      UPI ID
-    </strong>
-
-    <br>
-
-    <span class="upi-id">
-      7889777143@fam
-    </span>
-
-  </div>
-
-
-  <div
-    class="error"
-    id="instagramError2"
-  ></div>
-
-
-  <div class="form-group">
-
-    <label>
-
-      UTR / Transaction ID
-
-      <span class="optional">
-        Optional
-      </span>
-
-    </label>
-
-    <input
-      id="instagramUTR"
-      type="text"
-      maxlength="80"
-      placeholder="Enter UTR if available"
-      autocomplete="off"
-    >
-
-  </div>
-
-
-  <div class="upload-box">
-
-    <label for="instagramScreenshot">
-
-      Payment Screenshot
-
-      <span class="required">*</span>
-
-    </label>
-
-    <input
-      id="instagramScreenshot"
-      type="file"
-      accept="image/jpeg,image/png,image/webp"
-    >
-
-    <div
-      class="file-name"
-      id="instagramFileName"
-    >
-      No screenshot selected
-    </div>
-
-  </div>
-
-
-  <div class="buttons">
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      onclick="instagramShowScreen(1)"
-    >
-      ← Back
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-primary"
-      id="instagramSubmitBtn"
-      onclick="submitInstagramOrder()"
-    >
-      Submit Order ✓
-    </button>
-
-  </div>
-
-
-  <div class="secure-note">
-
-    🔒 Never share your Instagram password.
-
-    <br>
-
-    This order form does not request your Instagram password.
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     INSTAGRAM STEP 3
-========================================================= -->
-
-<section
-  class="screen"
-  id="instagramScreen3"
->
-
-  <div class="success-screen">
-
-    <div class="success-icon"></div>
-
-    <h2 class="success-title">
-      Order Submitted Successfully!
-    </h2>
-
-    <p class="success-message">
-
-      Your order has been submitted successfully.
-
-      <br>
-
-      Please keep your Order ID for reference.
-
-    </p>
-
-
-    <div class="delivery-message">
-
-      🚀 Your order will be delivered within 10 minutes.
-
-    </div>
-
-
-    <div class="order-id">
-
-      Order ID:
-
-      <span id="instagramOrderId">
-        ---
-      </span>
-
-    </div>
-
-
-    <div
-      class="price-box"
-      style="margin-top:22px;text-align:left;"
-    >
-
-      <div class="price-row">
-
-        <span>
-          Status
-        </span>
-
-        <strong style="color:#ffd166;">
-          PROCESSING
-        </strong>
-
-      </div>
-
-
-      <div class="price-row">
-
-        <span>
-          Package
-        </span>
-
-        <strong id="successInstagramPackage">
-          ---
-        </strong>
-
-      </div>
-
-
-      <div class="price-row">
-
-        <span>
-          Amount
-        </span>
-
-        <strong id="successInstagramAmount">
-          ₹0
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="buttons">
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        onclick="goHome()"
-      >
-        Back to Home
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
+  </button>
 
 </div>
+
+</section>
+
+<!-- =================================================== MAIN TABS ==================================================== -->
+
+<div class="tabs-wrap">
+
+<div class="main-tabs">
+
+  <button
+    class="main-tab active"
+    data-tab="social"
+  >
+
+    <i class="fa-solid fa-share-nodes"></i>
+
+    Social Apps
+
+  </button>
+
+
+  <button
+    class="main-tab"
+    data-tab="movies"
+  >
+
+    <i class="fa-solid fa-clapperboard"></i>
+
+    Movies
+
+  </button>
+
+
+  <button
+    class="main-tab"
+    data-tab="games"
+  >
+
+    <i class="fa-solid fa-gamepad"></i>
+
+    Games
+
+  </button>
+
+</div>
+
+</div>
+
+<!-- =================================================== SOCIAL TAB ==================================================== -->
+
+<main>
+
+<section
+  id="social"
+  class="tab-panel active"
+>
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h2>
+        Explore <span class="gradient-text">Services</span>
+      </h2>
+
+      <p>
+        Colorful social platforms moving across the screen.
+      </p>
+
+    </div>
+
+
+    <!-- FLOATING APPS -->
+
+    <div class="social-marquee">
+
+      <div class="marquee-track">
+
+        <div class="app-card instagram-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Instagram</strong>
+            <span>Services Available Now</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card youtube-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>YouTube</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card facebook-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Facebook</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card snapchat-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-snapchat"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Snapchat</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card whatsapp-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>WhatsApp</strong>
+            <span>Customer Support</span>
+          </div>
+
+        </div>
+
+
+        <!-- DUPLICATE FOR CONTINUOUS MOVEMENT -->
+
+        <div class="app-card instagram-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Instagram</strong>
+            <span>Services Available Now</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card youtube-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>YouTube</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card facebook-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Facebook</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card snapchat-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-snapchat"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>Snapchat</strong>
+            <span>Coming Soon</span>
+          </div>
+
+        </div>
+
+
+        <div class="app-card whatsapp-app">
+
+          <div class="app-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+
+          <div class="app-info">
+            <strong>WhatsApp</strong>
+            <span>Customer Support</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INSTAGRAM FEATURE -->
+
+    <div class="instagram-feature">
+
+      <div class="insta-feature-content">
+
+        <div class="insta-title">
+
+          <div class="insta-big-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+
+
+          <div>
+
+            <span class="available-badge">
+              ● AVAILABLE NOW
+            </span>
+
+            <h2>
+              Instagram Growth Services
+            </h2>
+
+            <p>
+              Choose your followers package below.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <a
+          href="#packages"
+          class="btn btn-primary"
+        >
+
+          View Services
+
+          <i class="fa-solid fa-arrow-down"></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- PACKAGES -->
+
+    <div
+      class="section-heading"
+      id="packages"
+    >
+
+      <h2>
+        Instagram
+        <span class="gradient-text">
+          Packages
+        </span>
+      </h2>
+
+      <p>
+        Special discounted prices.
+      </p>
+
+    </div>
+
+
+    <div class="package-grid">
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Starter</h3>
+
+            <div class="followers">
+              200 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            70% OFF
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹100
+          </div>
+
+          <div class="price">
+            ₹30
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=200&followers=200&price=30"
+        >
+
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Starter Plus</h3>
+
+            <div class="followers">
+              500 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            67% OFF
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹150
+          </div>
+
+          <div class="price">
+            ₹50
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=500&followers=500&price=50"
+        >
+
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+      </div>
+
+
+      <div class="package-card featured">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Popular</h3>
+
+            <div class="followers">
+              1,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            MOST POPULAR
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹250
+          </div>
+
+          <div class="price">
+            ₹90
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=1000&followers=1000&price=90"
+        >
+
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Growth</h3>
+
+            <div class="followers">
+              1,500 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹300
+          </div>
+
+          <div class="price">
+            ₹130
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=1500&followers=1500&price=130"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Growth Plus</h3>
+
+            <div class="followers">
+              2,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹400
+          </div>
+
+          <div class="price">
+            ₹150
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=2000&followers=2000&price=150"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Pro</h3>
+
+            <div class="followers">
+              3,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹500
+          </div>
+
+          <div class="price">
+            ₹200
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=3000&followers=3000&price=200"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Pro Plus</h3>
+
+            <div class="followers">
+              4,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹600
+          </div>
+
+          <div class="price">
+            ₹250
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=4000&followers=4000&price=250"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card featured">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Premium</h3>
+
+            <div class="followers">
+              5,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            BEST VALUE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹750
+          </div>
+
+          <div class="price">
+            ₹300
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=5000&followers=5000&price=300"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Premium Plus</h3>
+
+            <div class="followers">
+              6,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹900
+          </div>
+
+          <div class="price">
+            ₹350
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=6000&followers=6000&price=350"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Advanced</h3>
+
+            <div class="followers">
+              7,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹1,100
+          </div>
+
+          <div class="price">
+            ₹450
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=7000&followers=7000&price=450"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Advanced Plus</h3>
+
+            <div class="followers">
+              8,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹1,200
+          </div>
+
+          <div class="price">
+            ₹500
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=8000&followers=8000&price=500"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Elite</h3>
+
+            <div class="followers">
+              9,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            SALE
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹1,400
+          </div>
+
+          <div class="price">
+            ₹550
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=9000&followers=9000&price=550"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div class="package-card featured">
+
+        <div class="package-top">
+
+          <div>
+            <div class="package-label">
+              Instagram Followers
+            </div>
+
+            <h3>Elite Plus</h3>
+
+            <div class="followers">
+              10,000 Followers
+            </div>
+          </div>
+
+          <div class="discount-badge">
+            MAXIMUM
+          </div>
+
+        </div>
+
+        <div class="price-box">
+
+          <div class="old-price">
+            ₹1,500
+          </div>
+
+          <div class="price">
+            ₹600
+          </div>
+
+        </div>
+
+        <a
+          class="package-btn"
+          href="order.html?package=10000&followers=10000&price=600"
+        >
+          Get the Package
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =================================================
+     MOVIES TAB
+================================================== -->
+
+<section
+  id="movies"
+  class="tab-panel"
+>
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h2>
+        Movie
+        <span class="gradient-text">
+          Collection
+        </span>
+      </h2>
+
+      <p>
+        Select a category or search for a movie.
+      </p>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        id="movieSearch"
+        placeholder="Search movies..."
+      >
+
+    </div>
+
+
+    <div class="categories">
+
+      <button
+        class="category-btn active"
+        data-category="all"
+        data-type="movie"
+      >
+        All Movies
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="drama"
+        data-type="movie"
+      >
+        Drama
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="action"
+        data-type="movie"
+      >
+        Action
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="scifi"
+        data-type="movie"
+      >
+        Sci-Fi
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="crime"
+        data-type="movie"
+      >
+        Crime
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="comedy"
+        data-type="movie"
+      >
+        Comedy
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="adventure"
+        data-type="movie"
+      >
+        Adventure
+      </button>
+
+    </div>
+
+
+    <div
+      class="media-grid"
+      id="movieGrid"
+    >
+
+
+      <a
+        class="media-card movie-card"
+        data-category="drama crime"
+        href="https://www.moviesbazar.tv/watch/movie/the-shawshank-redemption/0111161"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/Q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+          alt="The Shawshank Redemption"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            DRAMA
+          </span>
+
+          <h3>
+            The Shawshank Redemption
+          </h3>
+
+          <p>
+            Drama • Crime
+          </p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="action crime"
+        href="https://www.moviesbazar.tv/watch/movie/the-dark-knight/0468569"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+          alt="The Dark Knight"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            ACTION
+          </span>
+
+          <h3>The Dark Knight</h3>
+
+          <p>Action • Crime</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="scifi action adventure"
+        href="https://www.moviesbazar.tv/watch/movie/inception/1375666"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+          alt="Inception"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            SCI-FI
+          </span>
+
+          <h3>Inception</h3>
+
+          <p>Sci-Fi • Action</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="crime drama"
+        href="https://www.moviesbazar.tv/watch/movie/the-godfather/0068646"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+          alt="The Godfather"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            CRIME
+          </span>
+
+          <h3>The Godfather</h3>
+
+          <p>Crime • Drama</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="crime drama"
+        href="https://www.moviesbazar.tv/watch/movie/the-godfather-part-ii/0071562"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg"
+          alt="The Godfather Part II"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            CRIME
+          </span>
+
+          <h3>The Godfather Part II</h3>
+
+          <p>Crime • Drama</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="comedy drama"
+        href="https://www.moviesbazar.tv/watch/movie/3-idiots/1187043"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/66A9MqXOyVFCssoloscw79z8Tew.jpg"
+          alt="3 Idiots"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            COMEDY
+          </span>
+
+          <h3>3 Idiots</h3>
+
+          <p>Comedy • Drama</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="scifi adventure drama"
+        href="https://www.moviesbazar.tv/watch/movie/interstellar/0816692"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+          alt="Interstellar"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            SCI-FI
+          </span>
+
+          <h3>Interstellar</h3>
+
+          <p>Sci-Fi • Adventure</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="action adventure"
+        href="https://www.moviesbazar.tv/watch/movie/spiderman-brand-new-day-hindi-english/22084616"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=900&q=80"
+          alt="Spider-Man Brand New Day"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            ACTION
+          </span>
+
+          <h3>Spider-Man: Brand New Day</h3>
+
+          <p>Action • Adventure</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="comedy drama"
+        href="https://www.moviesbazar.tv/watch/movie/munna-bhai-mbbs/0374887"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/4m3D2z7G2z3Yh8M1zK4j6gVj8lR.jpg"
+          alt="Munna Bhai MBBS"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            COMEDY
+          </span>
+
+          <h3>Munna Bhai MBBS</h3>
+
+          <p>Comedy • Drama</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card movie-card"
+        data-category="drama scifi"
+        href="https://www.moviesbazar.tv/watch/movie/oppenheimer/15398776"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://image.tmdb.org/t/p/w780/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+          alt="Oppenheimer"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type">
+            DRAMA
+          </span>
+
+          <h3>Oppenheimer</h3>
+
+          <p>Drama • Historical</p>
+
+          <span class="open-now">
+            Open Movie
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =================================================
+     GAMES TAB
+================================================== -->
+
+<section
+  id="games"
+  class="tab-panel"
+>
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <h2>
+        PC Game
+        <span class="gradient-text">
+          Collection
+        </span>
+      </h2>
+
+      <p>
+        Browse games by category and click any cover to open it.
+      </p>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        id="gameSearch"
+        placeholder="Search games..."
+      >
+
+    </div>
+
+
+    <div class="categories">
+
+      <button
+        class="category-btn active"
+        data-category="all"
+        data-type="game"
+      >
+        All Games
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="openworld"
+        data-type="game"
+      >
+        Open World
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="action"
+        data-type="game"
+      >
+        Action
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="horror"
+        data-type="game"
+      >
+        Horror
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="shooter"
+        data-type="game"
+      >
+        Shooter
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="adventure"
+        data-type="game"
+      >
+        Adventure
+      </button>
+
+    </div>
+
+
+    <div
+      class="media-grid"
+      id="gameGrid"
+    >
+
+
+      <a
+        class="media-card game-card"
+        data-category="action adventure openworld"
+        href="https://ankergames.net/game/ghost-of-tsushima"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg"
+          alt="Ghost of Tsushima"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            ADVENTURE
+          </span>
+
+          <h3>Ghost of Tsushima</h3>
+
+          <p>Action • Adventure</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="openworld action"
+        href="https://ankergames.net/game/grand-theft-auto-vice-city"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/12110/header.jpg"
+          alt="Grand Theft Auto Vice City"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            OPEN WORLD
+          </span>
+
+          <h3>GTA Vice City</h3>
+
+          <p>Open World • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="horror action"
+        href="https://ankergames.net/game/resident-evil-4-remake"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg"
+          alt="Resident Evil 4 Remake"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            HORROR
+          </span>
+
+          <h3>Resident Evil 4 Remake</h3>
+
+          <p>Horror • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="horror adventure"
+        href="https://ankergames.net/game/granny-chapter-two"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
+          alt="Granny Chapter Two"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            HORROR
+          </span>
+
+          <h3>Granny Chapter Two</h3>
+
+          <p>Horror • Survival</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="horror adventure"
+        href="https://ankergames.net/game/the-dark-pictures-anthology-the-devil-in-me"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80"
+          alt="The Devil in Me"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            HORROR
+          </span>
+
+          <h3>The Devil in Me</h3>
+
+          <p>Horror • Adventure</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="openworld action adventure"
+        href="https://ankergames.net/game/red-dead-redemption-2"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg"
+          alt="Red Dead Redemption 2"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            OPEN WORLD
+          </span>
+
+          <h3>Red Dead Redemption 2</h3>
+
+          <p>Open World • Adventure</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="openworld action"
+        href="https://ankergames.net/game/grand-theft-auto-v"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg"
+          alt="Grand Theft Auto V"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            OPEN WORLD
+          </span>
+
+          <h3>Grand Theft Auto V</h3>
+
+          <p>Open World • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="openworld action"
+        href="https://ankergames.net/game/grand-theft-auto-san-andreas-2"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/1547000/header.jpg"
+          alt="Grand Theft Auto San Andreas"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            OPEN WORLD
+          </span>
+
+          <h3>GTA San Andreas</h3>
+
+          <p>Open World • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="shooter action"
+        href="https://ankergames.net/game/call-of-duty-modern-warfare-2"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/10180/header.jpg"
+          alt="Call of Duty Modern Warfare 2"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            SHOOTER
+          </span>
+
+          <h3>COD: Modern Warfare 2</h3>
+
+          <p>Shooter • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="shooter action"
+        href="https://ankergames.net/game/call-of-duty-black-ops-ii"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/202970/header.jpg"
+          alt="Call of Duty Black Ops II"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            SHOOTER
+          </span>
+
+          <h3>COD: Black Ops II</h3>
+
+          <p>Shooter • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="shooter action"
+        href="https://ankergames.net/game/call-of-duty-black-ops-iii"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"
+          alt="Call of Duty Black Ops III"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            SHOOTER
+          </span>
+
+          <h3>COD: Black Ops III</h3>
+
+          <p>Shooter • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        class="media-card game-card"
+        data-category="openworld action adventure"
+        href="https://ankergames.net/game/red-dead-redemption"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=900&q=80"
+          alt="Red Dead Redemption"
+        >
+
+        <div class="poster-overlay"></div>
+
+        <div class="play-circle">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <div class="media-content">
+
+          <span class="media-type game-type">
+            OPEN WORLD
+          </span>
+
+          <h3>Red Dead Redemption</h3>
+
+          <p>Open World • Action</p>
+
+          <span class="open-now">
+            Open Game
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
 </main>
 
+<!-- =================================================== WHATSAPP CUSTOMER CARE ==================================================== -->
 
-<script>
+<a
+class="whatsapp-float"
+href="https://wa.me/919103874044"
+target="_blank"
+rel="noopener"
+aria-label="WhatsApp Customer Care"
 
-/* =========================================================
-   SETTINGS
-========================================================= */
 
-const UPI_ID =
-  "7889777143@fam";
 
-const UPI_NAME =
-  "SehrAn Media";
 
-const PROMO_CODE =
-  "ZEESHAN10";
+<div class="wa-icon">
+  <i class="fa-brands fa-whatsapp"></i>
+</div>
 
-const PROMO_PERCENT =
-  10;
 
+<div class="wa-text">
 
-/* =========================================================
-   INSTAGRAM PACKAGES
-========================================================= */
+  <small>
+    CUSTOMER CARE
+  </small>
 
-const INSTAGRAM_PACKAGES = {
+  <strong>
+    91038 74044
+  </strong>
 
-  "200":{
-    name:"Starter — 200 Followers",
-    followers:200,
-    price:30
-  },
+</div>
 
-  "500":{
-    name:"Starter Plus — 500 Followers",
-    followers:500,
-    price:50
-  },
+</a>
 
-  "1000":{
-    name:"Popular — 1,000 Followers",
-    followers:1000,
-    price:90
-  },
+<!-- =================================================== FOOTER ==================================================== -->
 
-  "1500":{
-    name:"Growth — 1,500 Followers",
-    followers:1500,
-    price:130
-  },
+<footer>
 
-  "2000":{
-    name:"Growth Plus — 2,000 Followers",
-    followers:2000,
-    price:150
-  },
+<p>
 
-  "3000":{
-    name:"Pro — 3,000 Followers",
-    followers:3000,
-    price:200
-  },
+  © 2026
 
-  "4000":{
-    name:"Pro Plus — 4,000 Followers",
-    followers:4000,
-    price:250
-  },
+  <strong>
+    SehrAn Media
+  </strong>
 
-  "5000":{
-    name:"Premium — 5,000 Followers",
-    followers:5000,
-    price:300
-  },
+  — Social, Movies & Games
 
-  "6000":{
-    name:"Premium Plus — 6,000 Followers",
-    followers:6000,
-    price:350
-  },
+</p>
 
-  "7000":{
-    name:"Advanced — 7,000 Followers",
-    followers:7000,
-    price:450
-  },
+</footer>
 
-  "8000":{
-    name:"Advanced Plus — 8,000 Followers",
-    followers:8000,
-    price:500
-  },
+<!-- =================================================== JAVASCRIPT ==================================================== -->
 
-  "9000":{
-    name:"Elite — 9,000 Followers",
-    followers:9000,
-    price:550
-  },
+<script> /* MAIN TAB SWITCHING */ const mainTabs = document.querySelectorAll(".main-tab"); const navLinks = document.querySelectorAll(".nav-link"); const panels = document.querySelectorAll(".tab-panel"); function openTab(tabId) { panels.forEach(panel => { panel.classList.remove("active"); }); mainTabs.forEach(tab => { tab.classList.remove("active"); }); navLinks.forEach(link => { link.classList.remove("active"); }); const panel = document.getElementById(tabId); if (panel) { panel.classList.add("active"); } const activeMainTab = document.querySelector( `.main-tab[data-tab="${tabId}"]` ); if (activeMainTab) { activeMainTab.classList.add("active"); } const activeNav = document.querySelector( `.nav-link[data-target="${tabId}"]` ); if (activeNav) { activeNav.classList.add("active"); } window.scrollTo({ top: 0, behavior: "smooth" }); } mainTabs.forEach(tab => { tab.addEventListener( "click", () => { openTab( tab.dataset.tab ); } ); }); navLinks.forEach(link => { link.addEventListener( "click", () => { openTab( link.dataset.target ); } ); }); /* CATEGORY FILTER */ const categoryButtons = document.querySelectorAll(".category-btn"); categoryButtons.forEach(button => { button.addEventListener( "click", () => { const type = button.dataset.type; const category = button.dataset.category; document .querySelectorAll( `.category-btn[data-type="${type}"]` ) .forEach(btn => { btn.classList.remove("active"); }); button.classList.add("active"); const cards = document.querySelectorAll( `.${type}-card` ); cards.forEach(card => { const cardCategories = card.dataset.category .split(" "); if ( category === "all" || cardCategories.includes(category) ) { card.classList.remove("hidden"); } else { card.classList.add("hidden"); } }); } ); }); /* MOVIE SEARCH */ const movieSearch = document.getElementById("movieSearch"); movieSearch.addEventListener( "input", function () { const value = this.value .toLowerCase() .trim(); document .querySelectorAll(".movie-card") .forEach(card => { const text = card.innerText .toLowerCase(); if ( text.includes(value) ) { card.classList.remove("hidden"); } else { card.classList.add("hidden"); } }); } ); /* GAME SEARCH */ const gameSearch = document.getElementById("gameSearch"); gameSearch.addEventListener( "input", function () { const value = this.value .toLowerCase() .trim(); document .querySelectorAll(".game-card") .forEach(card => { const text = card.innerText .toLowerCase(); if ( text.includes(value) ) { card.classList.remove("hidden"); } else { card.classList.add("hidden"); } }); } ); </script>
 
-  "10000":{
-    name:"Elite Plus — 10,000 Followers",
-    followers:10000,
-    price:600
-  }
+</body> </html>
 
-};
-
-
-/* =========================================================
-   URL PARAMETERS
-========================================================= */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const productType =
-  (
-    params.get("product") ||
-    params.get("type") ||
-    ""
-  )
-  .toLowerCase()
-  .trim();
-
-const isMovie =
-  productType === "movie";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getNumber(value){
-
-  if(!value){
-    return 0;
-  }
-
-  const cleaned =
-    String(value)
-      .replace(/,/g,"")
-      .replace(/₹/g,"")
-      .replace(/INR/gi,"")
-      .trim();
-
-  const match =
-    cleaned.match(
-      /(\d+(?:\.\d{1,2})?)/
-    );
-
-  return match
-    ? Number(match[1])
-    : 0;
-}
-
-
-function money(value){
-
-  const number =
-    Number(value) || 0;
-
-  if(
-    Number.isInteger(number)
-  ){
-
-    return "₹" + number;
-  }
-
-  return "₹" +
-    number.toFixed(2);
-}
-
-
-/* =========================================================
-   INSTAGRAM DATA
-========================================================= */
-
-const requestedPackage =
-  params.get("followers") ||
-  params.get("package") ||
-  params.get("pkg") ||
-  params.get("service") ||
-  "";
-
-const normalizedPackage =
-  String(requestedPackage)
-    .replace(/,/g,"")
-    .replace(/\s+/g,"")
-    .replace(/followers/gi,"")
-    .replace(/follower/gi,"")
-    .trim();
-
-const selectedInstagramPackage =
-  INSTAGRAM_PACKAGES[
-    normalizedPackage
-  ] || null;
-
-const instagramPackage =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.name
-    : "Invalid Instagram Package";
-
-const instagramPrice =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.price
-    : 0;
-
-const instagramFollowers =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.followers
-    : 0;
-
-
-/* =========================================================
-   MOVIE DATA
-========================================================= */
-
-const movieName =
-  params.get("name") ||
-  params.get("movie") ||
-  "Selected Movie";
-
-const moviePrice =
-  getNumber(
-    params.get("price") ||
-    params.get("amount") ||
-    "0"
-  );
-
-const movieYear =
-  params.get("year") || "";
-
-const movieQuality =
-  params.get("quality") ||
-  "Digital";
-
-const movieLanguage =
-  params.get("language") ||
-  "";
-
-const movieSize =
-  params.get("size") ||
-  "";
-
-
-/* =========================================================
-   DISCOUNT STATE
-========================================================= */
-
-let moviePromoApplied =
-  false;
-
-let instagramPromoApplied =
-  false;
-
-let movieFinalPrice =
-  moviePrice;
-
-let instagramFinalPrice =
-  instagramPrice;
-
-
-/* =========================================================
-   DISCOUNT CALCULATION
-========================================================= */
-
-function calculateDiscount(
-  amount
-){
-
-  if(!amount){
-    return {
-      discount:0,
-      final:Number(amount) || 0
-    };
-  }
-
-  const discount =
-    Math.round(
-      (
-        Number(amount) *
-        PROMO_PERCENT /
-        100
-      ) * 100
-    ) / 100;
-
-  const final =
-    Math.round(
-      (
-        Number(amount) -
-        discount
-      ) * 100
-    ) / 100;
-
-  return {
-    discount,
-    final
-  };
-}
-
-
-/* =========================================================
-   APPLY MOVIE PROMO
-========================================================= */
-
-function applyMoviePromo(){
-
-  const input =
-    document.getElementById(
-      "moviePromoCode"
-    );
-
-  const button =
-    document.getElementById(
-      "moviePromoButton"
-    );
-
-  const status =
-    document.getElementById(
-      "moviePromoStatus"
-    );
-
-  const error =
-    document.getElementById(
-      "moviePromoError"
-    );
-
-  const value =
-    input.value
-      .trim()
-      .toUpperCase();
-
-  error.classList.remove(
-    "show"
-  );
-
-  if(
-    value === PROMO_CODE
-  ){
-
-    moviePromoApplied = true;
-
-    const result =
-      calculateDiscount(
-        moviePrice
-      );
-
-    movieFinalPrice =
-      result.final;
-
-    button.classList.add(
-      "applied"
-    );
-
-    button.textContent =
-      "✓ Applied";
-
-    status.classList.add(
-      "show"
-    );
-
-    input.value =
-      PROMO_CODE;
-
-    updateMoviePrice();
-
-  }else{
-
-    moviePromoApplied = false;
-
-    movieFinalPrice =
-      moviePrice;
-
-    button.classList.remove(
-      "applied"
-    );
-
-    button.textContent =
-      "Apply Code";
-
-    status.classList.remove(
-      "show"
-    );
-
-    error.textContent =
-      value
-        ? "Invalid promo code. Please check and try again."
-        : "Please enter a promo code.";
-
-    error.classList.add(
-      "show"
-    );
-
-    updateMoviePrice();
-  }
-}
-
-
-/* =========================================================
-   APPLY INSTAGRAM PROMO
-========================================================= */
-
-function applyInstagramPromo(){
-
-  const input =
-    document.getElementById(
-      "instagramPromoCode"
-    );
-
-  const button =
-    document.getElementById(
-      "instagramPromoButton"
-    );
-
-  const status =
-    document.getElementById(
-      "instagramPromoStatus"
-    );
-
-  const error =
-    document.getElementById(
-      "instagramPromoError"
-    );
-
-  const value =
-    input.value
-      .trim()
-      .toUpperCase();
-
-  error.classList.remove(
-    "show"
-  );
-
-  if(
-    value === PROMO_CODE
-  ){
-
-    instagramPromoApplied = true;
-
-    const result =
-      calculateDiscount(
-        instagramPrice
-      );
-
-    instagramFinalPrice =
-      result.final;
-
-    button.classList.add(
-      "applied"
-    );
-
-    button.textContent =
-      "✓ Applied";
-
-    status.classList.add(
-      "show"
-    );
-
-    input.value =
-      PROMO_CODE;
-
-    updateInstagramPrice();
-
-  }else{
-
-    instagramPromoApplied = false;
-
-    instagramFinalPrice =
-      instagramPrice;
-
-    button.classList.remove(
-      "applied"
-    );
-
-    button.textContent =
-      "Apply Code";
-
-    status.classList.remove(
-      "show"
-    );
-
-    error.textContent =
-      value
-        ? "Invalid promo code. Please check and try again."
-        : "Please enter a promo code.";
-
-    error.classList.add(
-      "show"
-    );
-
-    updateInstagramPrice();
-  }
-}
-
-
-/* =========================================================
-   MOVIE PRICE UI
-========================================================= */
-
-function updateMoviePrice(){
-
-  const original =
-    moviePrice;
-
-  const final =
-    moviePromoApplied
-      ? movieFinalPrice
-      : moviePrice;
-
-  const discount =
-    moviePromoApplied
-      ? calculateDiscount(
-          moviePrice
-        ).discount
-      : 0;
-
-  document.getElementById(
-    "movieSummaryPrice"
-  ).textContent =
-    money(original);
-
-  document.getElementById(
-    "movieTotal"
-  ).textContent =
-    money(final);
-
-  document.getElementById(
-    "moviePaymentAmount"
-  ).textContent =
-    money(final);
-
-  document.getElementById(
-    "movieOriginalDisplay"
-  ).textContent =
-    money(original);
-
-  document.getElementById(
-    "movieDiscountDisplay"
-  ).textContent =
-    "-" + money(discount);
-
-  document.getElementById(
-    "movieOriginalRow"
-  ).style.display =
-    moviePromoApplied
-      ? "flex"
-      : "none";
-
-  document.getElementById(
-    "movieDiscountRow"
-  ).style.display =
-    moviePromoApplied
-      ? "flex"
-      : "none";
-}
-
-
-/* =========================================================
-   INSTAGRAM PRICE UI
-========================================================= */
-
-function updateInstagramPrice(){
-
-  const original =
-    instagramPrice;
-
-  const final =
-    instagramPromoApplied
-      ? instagramFinalPrice
-      : instagramPrice;
-
-  const discount =
-    instagramPromoApplied
-      ? calculateDiscount(
-          instagramPrice
-        ).discount
-      : 0;
-
-  document.getElementById(
-    "instagramTotal"
-  ).textContent =
-    money(original);
-
-  document.getElementById(
-    "instagramFinal"
-  ).textContent =
-    money(final);
-
-  document.getElementById(
-    "instagramPaymentAmount"
-  ).textContent =
-    money(final);
-
-  document.getElementById(
-    "instagramOriginalDisplay"
-  ).textContent =
-    money(original);
-
-  document.getElementById(
-    "instagramDiscountDisplay"
-  ).textContent =
-    "-" + money(discount);
-
-  document.getElementById(
-    "instagramOriginalRow"
-  ).style.display =
-    instagramPromoApplied
-      ? "flex"
-      : "none";
-
-  document.getElementById(
-    "instagramDiscountRow"
-  ).style.display =
-    instagramPromoApplied
-      ? "flex"
-      : "none";
-}
-
-
-/* =========================================================
-   UPI
-========================================================= */
-
-function buildUPI(
-  amount
-){
-
-  return (
-    "upi://pay" +
-    "?pa=" +
-    encodeURIComponent(
-      UPI_ID
-    ) +
-    "&pn=" +
-    encodeURIComponent(
-      UPI_NAME
-    ) +
-    "&am=" +
-    encodeURIComponent(
-      Number(amount).toFixed(2)
-    ) +
-    "&cu=INR"
-  );
-}
-
-
-function generateQR(
-  elementId,
-  amount
-){
-
-  const container =
-    document.getElementById(
-      elementId
-    );
-
-  if(!container){
-    return;
-  }
-
-  container.innerHTML = "";
-
-  if(
-    !amount ||
-    amount <= 0 ||
-    typeof QRCode ===
-      "undefined"
-  ){
-
-    return;
-  }
-
-  new QRCode(
-    container,
-    {
-      text:
-        buildUPI(amount),
-
-      width:290,
-
-      height:290,
-
-      colorDark:
-        "#000000",
-
-      colorLight:
-        "#ffffff",
-
-      correctLevel:
-        QRCode.CorrectLevel.H
-    }
-  );
-}
-
-
-function payUPI(
-  amount,
-  errorId
-){
-
-  if(
-    !amount ||
-    amount <= 0
-  ){
-
-    showError(
-      errorId,
-      "Invalid payment amount."
-    );
-
-    return;
-  }
-
-  window.location.href =
-    buildUPI(amount);
-}
-
-
-/* =========================================================
-   COPY UPI
-========================================================= */
-
-async function copyUPI(){
-
-  try{
-
-    await navigator
-      .clipboard
-      .writeText(
-        UPI_ID
-      );
-
-    const box =
-      document.getElementById(
-        "copySuccess"
-      );
-
-    if(box){
-
-      box.classList.add(
-        "show"
-      );
-
-      setTimeout(
-        () => {
-
-          box.classList.remove(
-            "show"
-          );
-
-        },
-        2500
-      );
-    }
-
-  }catch{
-
-    alert(
-      "UPI ID: " +
-      UPI_ID
-    );
-  }
-}
-
-
-/* =========================================================
-   SCREEN MANAGEMENT
-========================================================= */
-
-function hideAllScreens(){
-
-  document
-    .querySelectorAll(
-      ".screen"
-    )
-    .forEach(
-      screen => {
-
-        screen.classList.remove(
-          "active"
-        );
-
-      }
-    );
-}
-
-
-function updateProgress(
-  number
-){
-
-  for(
-    let i=1;
-    i<=3;
-    i++
-  ){
-
-    const step =
-      document.getElementById(
-        "step" + i
-      );
-
-    if(step){
-
-      step.classList.toggle(
-        "active",
-        i === number
-      );
-
-      step.classList.toggle(
-        "done",
-        i < number
-      );
-
-      if(
-        i < number
-      ){
-
-        step.textContent =
-          "✓";
-
-      }else{
-
-        step.textContent =
-          i;
-      }
-    }
-  }
-
-
-  const line1 =
-    document.getElementById(
-      "line1"
-    );
-
-  const line2 =
-    document.getElementById(
-      "line2"
-    );
-
-
-  line1.classList.toggle(
-    "active",
-    number >= 2
-  );
-
-  line2.classList.toggle(
-    "active",
-    number >= 3
-  );
-}
-
-
-function movieShowScreen(
-  number
-){
-
-  hideAllScreens();
-
-  const screen =
-    document.getElementById(
-      "movieScreen" + number
-    );
-
-  if(screen){
-
-    screen.classList.add(
-      "active"
-    );
-  }
-
-  updateProgress(
-    number
-  );
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-function instagramShowScreen(
-  number
-){
-
-  hideAllScreens();
-
-  const screen =
-    document.getElementById(
-      "instagramScreen" +
-      number
-    );
-
-  if(screen){
-
-    screen.classList.add(
-      "active"
-    );
-  }
-
-  updateProgress(
-    number
-  );
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* =========================================================
-   MOVIE INITIALIZATION
-========================================================= */
-
-function initializeMovie(){
-
-  document.getElementById(
-    "brandSubtitle"
-  ).textContent =
-    "Digital Products • Secure Payment • Fast Delivery";
-
-
-  document.getElementById(
-    "movieName"
-  ).textContent =
-    movieName;
-
-
-  document.getElementById(
-    "moviePrice"
-  ).textContent =
-    money(moviePrice);
-
-
-  updateMoviePrice();
-}
-
-
-/* =========================================================
-   MOVIE CONTACT
-========================================================= */
-
-let movieContactMethod =
-  "mobile";
-
-
-function selectMovieContact(
-  method
-){
-
-  movieContactMethod =
-    method;
-
-
-  document
-    .getElementById(
-      "movieMobileOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "mobile"
-    );
-
-
-  document
-    .getElementById(
-      "movieEmailOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "email"
-    );
-
-
-  document
-    .getElementById(
-      "movieMobileField"
-    )
-    .style.display =
-      method === "mobile"
-        ? "block"
-        : "none";
-
-
-  document
-    .getElementById(
-      "movieEmailField"
-    )
-    .style.display =
-      method === "email"
-        ? "block"
-        : "none";
-}
-
-
-function getMovieContact(){
-
-  return {
-
-    mobile:
-      document
-        .getElementById(
-          "movieMobile"
-        )
-        .value
-        .trim()
-        .replace(
-          /[^\d+]/g,
-          ""
-        ),
-
-    email:
-      document
-        .getElementById(
-          "movieEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase()
-
-  };
-}
-
-
-/* =========================================================
-   VALIDATION
-========================================================= */
-
-function isValidIndianMobile(
-  value
-){
-
-  const normalized =
-    String(value)
-      .replace(
-        /[^\d+]/g,
-        ""
-      )
-      .replace(
-        /^\+91/,
-        ""
-      )
-      .replace(
-        /^91(?=\d{10}$)/,
-        ""
-      );
-
-  return /^[6-9]\d{9}$/.test(
-    normalized
-  );
-}
-
-
-function isValidEmail(
-  value
-){
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-    .test(value);
-}
-
-
-/* =========================================================
-   MOVIE STEP 1
-========================================================= */
-
-function movieContinuePayment(){
-
-  clearErrors();
-
-  if(moviePrice <= 0){
-
-    showError(
-      "movieError1",
-      "Movie price could not be detected."
-    );
-
-    return;
-  }
-
-
-  const contact =
-    getMovieContact();
-
-
-  if(
-    !contact.mobile &&
-    !contact.email
-  ){
-
-    showError(
-      "movieError1",
-      "Please provide your mobile number or email address."
-    );
-
-    return;
-  }
-
-
-  if(contact.mobile){
-
-    if(
-      !isValidIndianMobile(
-        contact.mobile
-      )
-    ){
-
-      showError(
-        "movieError1",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-  }
-
-
-  if(contact.email){
-
-    if(
-      !isValidEmail(
-        contact.email
-      )
-    ){
-
-      showError(
-        "movieError1",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-  }
-
-
-  generateQR(
-    "movieQR",
-    movieFinalPrice
-  );
-
-
-  movieShowScreen(2);
-}
-
-
-function moviePayUPI(){
-
-  payUPI(
-    movieFinalPrice,
-    "movieError2"
-  );
-}
-
-
-/* =========================================================
-   INSTAGRAM INITIALIZATION
-========================================================= */
-
-let instagramContactMethod =
-  "mobile";
-
-
-function initializeInstagram(){
-
-  document.getElementById(
-    "brandSubtitle"
-  ).textContent =
-    "Instagram Services • Secure Payment • Fast Delivery";
-
-
-  document.getElementById(
-    "instagramPackage"
-  ).textContent =
-    instagramPackage;
-
-
-  document.getElementById(
-    "instagramPrice"
-  ).textContent =
-    money(instagramPrice);
-
-
-  updateInstagramPrice();
-}
-
-
-/* =========================================================
-   INSTAGRAM CONTACT
-========================================================= */
-
-function selectInstagramContact(
-  method
-){
-
-  instagramContactMethod =
-    method;
-
-
-  document
-    .getElementById(
-      "instagramMobileOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "mobile"
-    );
-
-
-  document
-    .getElementById(
-      "instagramEmailOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "email"
-    );
-
-
-  document
-    .getElementById(
-      "instagramMobileField"
-    )
-    .style.display =
-      method === "mobile"
-        ? "block"
-        : "none";
-
-
-  document
-    .getElementById(
-      "instagramEmailField"
-    )
-    .style.display =
-      method === "email"
-        ? "block"
-        : "none";
-}
-
-
-/* =========================================================
-   INSTAGRAM STEP 1
-========================================================= */
-
-function instagramContinue(){
-
-  clearErrors();
-
-
-  if(
-    !selectedInstagramPackage
-  ){
-
-    showError(
-      "instagramError1",
-      "Invalid Instagram package. Please go back and select a package again."
-    );
-
-    return;
-  }
-
-
-  if(
-    instagramPrice <= 0
-  ){
-
-    showError(
-      "instagramError1",
-      "Invalid package price."
-    );
-
-    return;
-  }
-
-
-  const mobile =
-    document
-      .getElementById(
-        "instagramMobile"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "instagramEmail"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const username =
-    document
-      .getElementById(
-        "instagramUsername"
-      )
-      .value
-      .trim()
-      .replace(
-        /^@+/,
-        ""
-      );
-
-
-  const profile =
-    document
-      .getElementById(
-        "instagramProfile"
-      )
-      .value
-      .trim();
-
-
-  if(
-    !mobile &&
-    !email
-  ){
-
-    showError(
-      "instagramError1",
-      "Please provide your mobile number or email address."
-    );
-
-    return;
-  }
-
-
-  if(mobile){
-
-    if(
-      !isValidIndianMobile(
-        mobile
-      )
-    ){
-
-      showError(
-        "instagramError1",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-  }
-
-
-  if(email){
-
-    if(
-      !isValidEmail(
-        email
-      )
-    ){
-
-      showError(
-        "instagramError1",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-  }
-
-
-  if(
-    !/^[A-Za-z0-9._]{1,30}$/
-      .test(username)
-  ){
-
-    showError(
-      "instagramError1",
-      "Please enter a valid Instagram username."
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const url =
-      new URL(profile);
-
-    const hostname =
-      url.hostname
-        .toLowerCase()
-        .replace(
-          /^www\./,
-          ""
-        );
-
-    if(
-      hostname !==
-        "instagram.com" &&
-      hostname !==
-        "instagr.am"
-    ){
-
-      throw new Error();
-    }
-
-  }catch{
-
-    showError(
-      "instagramError1",
-      "Please enter a valid Instagram profile link."
-    );
-
-    return;
-  }
-
-
-  generateQR(
-    "instagramQR",
-    instagramFinalPrice
-  );
-
-
-  instagramShowScreen(2);
-}
-
-
-function instagramPayUPI(){
-
-  payUPI(
-    instagramFinalPrice,
-    "instagramError2"
-  );
-}
-
-
-/* =========================================================
-   FILE VALIDATION
-========================================================= */
-
-function validateFile(
-  input,
-  id
-){
-
-  const file =
-    input.files &&
-    input.files[0];
-
-  const display =
-    document.getElementById(
-      id
-    );
-
-
-  if(!file){
-
-    display.textContent =
-      "No screenshot selected";
-
-    display.className =
-      "file-name";
-
-    return false;
-  }
-
-
-  const allowedTypes = [
-
-    "image/jpeg",
-
-    "image/png",
-
-    "image/webp"
-
-  ];
-
-
-  if(
-    !allowedTypes.includes(
-      file.type
-    )
-  ){
-
-    display.textContent =
-      "✕ Invalid file type";
-
-    display.className =
-      "file-name file-warning";
-
-    return false;
-  }
-
-
-  if(
-    file.size >
-    5 * 1024 * 1024
-  ){
-
-    display.textContent =
-      "✕ File is larger than 5 MB";
-
-    display.className =
-      "file-name file-warning";
-
-    return false;
-  }
-
-
-  const size =
-    (
-      file.size /
-      1024 /
-      1024
-    ).toFixed(2);
-
-
-  display.textContent =
-    "✓ " +
-    file.name +
-    " • " +
-    size +
-    " MB";
-
-
-  display.className =
-    "file-name file-valid";
-
-
-  return true;
-}
-
-
-/* =========================================================
-   FILE BASE64
-========================================================= */
-
-function fileToBase64(
-  file
-){
-
-  return new Promise(
-    (resolve,reject)=>{
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        () => {
-
-          resolve(
-            reader.result
-          );
-
-        };
-
-
-      reader.onerror =
-        () => {
-
-          reject(
-            new Error(
-              "Could not read screenshot."
-            )
-          );
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-  );
-}
-
-
-/* =========================================================
-   FILE EVENTS
-========================================================= */
-
-document
-  .getElementById(
-    "movieScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "movieFileName"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "instagramScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "instagramFileName"
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   PROCESSING ANIMATION
-========================================================= */
-
-function showProcessing(){
-
-  const overlay =
-    document.getElementById(
-      "processingOverlay"
-    );
-
-  const bar =
-    document.getElementById(
-      "processingProgressBar"
-    );
-
-  const percent =
-    document.getElementById(
-      "processingPercent"
-    );
-
-  const number =
-    document.getElementById(
-      "loaderNumber"
-    );
-
-  const subtitle =
-    document.getElementById(
-      "processingSubtitle"
-    );
-
-
-  overlay.classList.add(
-    "show"
-  );
-
-
-  let progress = 0;
-
-
-  const messages = [
-
-    "Verifying your order details...",
-
-    "Preparing secure payment information...",
-
-    "Uploading your payment screenshot...",
-
-    "Sending your order securely...",
-
-    "Almost done..."
-
-  ];
-
-
-  const interval =
-    setInterval(
-      () => {
-
-        progress +=
-          Math.floor(
-            Math.random() * 8
-          ) + 5;
-
-
-        if(progress > 96){
-          progress = 96;
-        }
-
-
-        bar.style.width =
-          progress + "%";
-
-
-        percent.textContent =
-          progress + "%";
-
-
-        number.textContent =
-          Math.min(
-            10,
-            Math.ceil(
-              progress / 10
-            )
-          );
-
-
-        const index =
-          Math.min(
-            messages.length - 1,
-            Math.floor(
-              progress / 20
-            )
-          );
-
-
-        subtitle.textContent =
-          messages[index];
-
-
-      },
-      350
-    );
-
-
-  return {
-
-    finish:function(){
-
-      clearInterval(
-        interval
-      );
-
-      bar.style.width =
-        "100%";
-
-      percent.textContent =
-        "100%";
-
-      number.textContent =
-        "10";
-
-      subtitle.textContent =
-        "Order submitted successfully!";
-
-      return new Promise(
-        resolve => {
-
-          setTimeout(
-            resolve,
-            500
-          );
-
-        }
-      );
-    }
-
-  };
-}
-
-
-/* =========================================================
-   SUCCESS SOUND
-   Premium synthesized checkout sound
-========================================================= */
-
-function playSuccessSound(){
-
-  try{
-
-    const AudioContext =
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-    if(!AudioContext){
-      return;
-    }
-
-    const ctx =
-      new AudioContext();
-
-
-    const master =
-      ctx.createGain();
-
-
-    master.gain.value =
-      0.32;
-
-
-    master.connect(
-      ctx.destination
-    );
-
-
-    const now =
-      ctx.currentTime;
-
-
-    function tone(
-      frequency,
-      start,
-      duration,
-      volume,
-      type
-    ){
-
-      const oscillator =
-        ctx.createOscillator();
-
-      const gain =
-        ctx.createGain();
-
-
-      oscillator.type =
-        type || "sine";
-
-      oscillator.frequency
-        .setValueAtTime(
-          frequency,
-          now + start
-        );
-
-
-      gain.gain
-        .setValueAtTime(
-          0,
-          now + start
-        );
-
-
-      gain.gain
-        .linearRampToValueAtTime(
-          volume,
-          now + start + .025
-        );
-
-
-      gain.gain
-        .exponentialRampToValueAtTime(
-          .001,
-          now + start + duration
-        );
-
-
-      oscillator.connect(
-        gain
-      );
-
-      gain.connect(
-        master
-      );
-
-
-      oscillator.start(
-        now + start
-      );
-
-      oscillator.stop(
-        now + start + duration + .03
-      );
-    }
-
-
-    /*
-      Premium 3-stage confirmation tone
-    */
-
-    tone(
-      523.25,
-      0,
-      .20,
-      .90,
-      "sine"
-    );
-
-    tone(
-      659.25,
-      .11,
-      .23,
-      .95,
-      "sine"
-    );
-
-    tone(
-      783.99,
-      .23,
-      .36,
-      1.00,
-      "sine"
-    );
-
-
-    /* small confirmation sparkle */
-
-    tone(
-      1046.50,
-      .34,
-      .25,
-      .38,
-      "triangle"
-    );
-
-
-    setTimeout(
-      () => {
-
-        try{
-          ctx.close();
-        }catch{}
-
-      },
-      1300
-    );
-
-  }catch(error){
-
-    console.log(
-      "Success sound unavailable:",
-      error
-    );
-
-  }
-}
-
-
-/* =========================================================
-   MOVIE SUBMIT
-========================================================= */
-
-async function submitMovieOrder(){
-
-  clearErrors();
-
-
-  if(moviePrice <= 0){
-
-    showError(
-      "movieError2",
-      "Invalid movie price."
-    );
-
-    return;
-  }
-
-
-  const contact =
-    getMovieContact();
-
-
-  const utr =
-    document
-      .getElementById(
-        "movieUTR"
-      )
-      .value
-      .trim();
-
-
-  const fileInput =
-    document.getElementById(
-      "movieScreenshot"
-    );
-
-
-  if(
-    !contact.mobile &&
-    !contact.email
-  ){
-
-    showError(
-      "movieError2",
-      "Please provide your contact details."
-    );
-
-    return;
-  }
-
-
-  if(!fileInput.files[0]){
-
-    showError(
-      "movieError2",
-      "Please upload your payment screenshot."
-    );
-
-    return;
-  }
-
-
-  if(
-    !validateFile(
-      fileInput,
-      "movieFileName"
-    )
-  ){
-
-    showError(
-      "movieError2",
-      "Please select a valid payment screenshot."
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "movieSubmitBtn"
-    );
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "Submitting...";
-
-
-  let processing =
-    showProcessing();
-
-
-  try{
-
-    const screenshot =
-      await fileToBase64(
-        fileInput.files[0]
-      );
-
-
-    const discount =
-      moviePromoApplied
-        ? calculateDiscount(
-            moviePrice
-          ).discount
-        : 0;
-
-
-    const finalAmount =
-      moviePromoApplied
-        ? movieFinalPrice
-        : moviePrice;
-
-
-    const payload = {
-
-      type:"movie",
-
-      product:"movie",
-
-      movie:
-        movieName,
-
-      movieName:
-        movieName,
-
-      year:
-        movieYear,
-
-      quality:
-        movieQuality,
-
-      language:
-        movieLanguage,
-
-      size:
-        movieSize,
-
-      package:
-        movieName,
-
-      originalAmount:
-        Number(moviePrice)
-          .toFixed(2),
-
-      discount:
-        Number(discount)
-          .toFixed(2),
-
-      promoCode:
-        moviePromoApplied
-          ? PROMO_CODE
-          : "",
-
-      promoApplied:
-        moviePromoApplied,
-
-      amount:
-        Number(finalAmount)
-          .toFixed(2),
-
-      mobile:
-        contact.mobile,
-
-      email:
-        contact.email,
-
-      utr:
-        utr,
-
-      screenshot:
-        screenshot
-
-    };
-
-
-    const response =
-      await fetch(
-        "/api/orders",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    let data = {};
-
-
-    try{
-
-      data =
-        await response.json();
-
-    }catch{}
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Unable to submit movie order."
-      );
-
-    }
-
-
-    await processing.finish();
-
-
-    document.getElementById(
-      "movieOrderId"
-    ).textContent =
-      data.orderId ||
-      "---";
-
-
-    document.getElementById(
-      "successMovieName"
-    ).textContent =
-      movieName;
-
-
-    document.getElementById(
-      "successMovieAmount"
-    ).textContent =
-      money(finalAmount);
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    /*
-      Play success sound after
-      successful submission
-    */
-
-    playSuccessSound();
-
-
-    createStars(
-      180
-    );
-
-
-    movieShowScreen(
-      3
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Movie order error:",
-      error
-    );
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    showError(
-      "movieError2",
-      error.message ||
-      "Unable to submit order. Please try again."
-    );
-
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Submit Movie Order ✓";
-  }
-}
-
-
-/* =========================================================
-   INSTAGRAM SUBMIT
-========================================================= */
-
-async function submitInstagramOrder(){
-
-  clearErrors();
-
-
-  if(
-    !selectedInstagramPackage
-  ){
-
-    showError(
-      "instagramError2",
-      "Invalid Instagram package."
-    );
-
-    return;
-  }
-
-
-  if(
-    instagramPrice <= 0
-  ){
-
-    showError(
-      "instagramError2",
-      "Invalid package price."
-    );
-
-    return;
-  }
-
-
-  const mobile =
-    document
-      .getElementById(
-        "instagramMobile"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "instagramEmail"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const username =
-    document
-      .getElementById(
-        "instagramUsername"
-      )
-      .value
-      .trim()
-      .replace(
-        /^@+/,
-        ""
-      );
-
-
-  const profile =
-    document
-      .getElementById(
-        "instagramProfile"
-      )
-      .value
-      .trim();
-
-
-  const utr =
-    document
-      .getElementById(
-        "instagramUTR"
-      )
-      .value
-      .trim();
-
-
-  const fileInput =
-    document.getElementById(
-      "instagramScreenshot"
-    );
-
-
-  if(
-    !mobile &&
-    !email
-  ){
-
-    showError(
-      "instagramError2",
-      "Please provide your contact details."
-    );
-
-    return;
-  }
-
-
-  if(mobile){
-
-    if(
-      !isValidIndianMobile(
-        mobile
-      )
-    ){
-
-      showError(
-        "instagramError2",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-  }
-
-
-  if(email){
-
-    if(
-      !isValidEmail(
-        email
-      )
-    ){
-
-      showError(
-        "instagramError2",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-  }
-
-
-  if(
-    !/^[A-Za-z0-9._]{1,30}$/
-      .test(username)
-  ){
-
-    showError(
-      "instagramError2",
-      "Please enter a valid Instagram username."
-    );
-
-    return;
-  }
-
-
-  if(!fileInput.files[0]){
-
-    showError(
-      "instagramError2",
-      "Please upload your payment screenshot."
-    );
-
-    return;
-  }
-
-
-  if(
-    !validateFile(
-      fileInput,
-      "instagramFileName"
-    )
-  ){
-
-    showError(
-      "instagramError2",
-      "Please select a valid screenshot."
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "instagramSubmitBtn"
-    );
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "Submitting...";
-
-
-  let processing =
-    showProcessing();
-
-
-  try{
-
-    const screenshot =
-      await fileToBase64(
-        fileInput.files[0]
-      );
-
-
-    const discount =
-      instagramPromoApplied
-        ? calculateDiscount(
-            instagramPrice
-          ).discount
-        : 0;
-
-
-    const finalAmount =
-      instagramPromoApplied
-        ? instagramFinalPrice
-        : instagramPrice;
-
-
-    const payload = {
-
-      type:"instagram",
-
-      product:"instagram",
-
-      package:
-        instagramPackage,
-
-      packageId:
-        String(
-          instagramFollowers
-        ),
-
-      followers:
-        instagramFollowers,
-
-      originalAmount:
-        Number(instagramPrice)
-          .toFixed(2),
-
-      discount:
-        Number(discount)
-          .toFixed(2),
-
-      promoCode:
-        instagramPromoApplied
-          ? PROMO_CODE
-          : "",
-
-      promoApplied:
-        instagramPromoApplied,
-
-      amount:
-        Number(finalAmount)
-          .toFixed(2),
-
-      mobile:
-        mobile,
-
-      email:
-        email,
-
-      username:
-        username,
-
-      profile:
-        profile,
-
-      utr:
-        utr,
-
-      screenshot:
-        screenshot
-
-    };
-
-
-    const response =
-      await fetch(
-        "/api/orders",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    let data = {};
-
-
-    try{
-
-      data =
-        await response.json();
-
-    }catch{}
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Unable to submit Instagram order."
-      );
-
-    }
-
-
-    await processing.finish();
-
-
-    document.getElementById(
-      "instagramOrderId"
-    ).textContent =
-      data.orderId ||
-      "---";
-
-
-    document.getElementById(
-      "successInstagramPackage"
-    ).textContent =
-      instagramPackage;
-
-
-    document.getElementById(
-      "successInstagramAmount"
-    ).textContent =
-      money(finalAmount);
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    playSuccessSound();
-
-
-    createStars(
-      180
-    );
-
-
-    instagramShowScreen(
-      3
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Instagram order error:",
-      error
-    );
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    showError(
-      "instagramError2",
-      error.message ||
-      "Unable to submit order. Please try again."
-    );
-
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Submit Order ✓";
-  }
-}
-
-
-/* =========================================================
-   CELEBRATION
-========================================================= */
-
-function createStars(
-  count
-){
-
-  const container =
-    document.getElementById(
-      "celebration"
-    );
-
-
-  const symbols = [
-
-    "★",
-
-    "✦",
-
-    "✧",
-
-    "⭐",
-
-    "✨",
-
-    "◆"
-
-  ];
-
-
-  for(
-    let i=0;
-    i<count;
-    i++
-  ){
-
-    const star =
-      document.createElement(
-        "div"
-      );
-
-
-    star.className =
-      "star";
-
-
-    star.textContent =
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ];
-
-
-    star.style.left =
-      Math.random() *
-      100 +
-      "%";
-
-
-    star.style.fontSize =
-      12 +
-      Math.random() *
-      22 +
-      "px";
-
-
-    star.style.animationDuration =
-      2 +
-      Math.random() *
-      3 +
-      "s";
-
-
-    star.style.animationDelay =
-      Math.random() *
-      .8 +
-      "s";
-
-
-    container.appendChild(
-      star
-    );
-
-
-    setTimeout(
-      () => {
-
-        star.remove();
-
-      },
-      6000
-    );
-  }
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(
-  id,
-  message
-){
-
-  const box =
-    document.getElementById(
-      id
-    );
-
-
-  if(!box){
-    return;
-  }
-
-
-  box.textContent =
-    message;
-
-
-  box.classList.add(
-    "show"
-  );
-
-
-  box.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-}
-
-
-function clearErrors(){
-
-  document
-    .querySelectorAll(
-      ".error"
-    )
-    .forEach(
-      box => {
-
-        box.classList.remove(
-          "show"
-        );
-
-        box.textContent =
-          "";
-
-      }
-    );
-
-  document
-    .querySelectorAll(
-      ".promo-error"
-    )
-    .forEach(
-      box => {
-
-        box.classList.remove(
-          "show"
-        );
-
-      }
-    );
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
-
-function goHome(){
-
-  window.location.href =
-    "/index.html";
-}
-
-
-/* =========================================================
-   PROMO ENTER KEY
-========================================================= */
-
-document
-  .getElementById(
-    "moviePromoCode"
-  )
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key ===
-        "Enter"
-      ){
-
-        event.preventDefault();
-
-        applyMoviePromo();
-      }
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "instagramPromoCode"
-  )
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key ===
-        "Enter"
-      ){
-
-        event.preventDefault();
-
-        applyInstagramPromo();
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-if(isMovie){
-
-  initializeMovie();
-
-  hideAllScreens();
-
-  document
-    .getElementById(
-      "movieScreen1"
-    )
-    .classList.add(
-      "active"
-    );
-
-  updateProgress(1);
-
-}else{
-
-  initializeInstagram();
-
-  hideAllScreens();
-
-  document
-    .getElementById(
-      "instagramScreen1"
-    )
-    .classList.add(
-      "active"
-    );
-
-  updateProgress(1);
-}
-
-</script>
-
-</body>
-</html>
+Close
