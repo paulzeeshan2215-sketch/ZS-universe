@@ -1,956 +1,662 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>SehrAn Media — Permanently Closed</title>
 
+<!-- SVG Icons (Lucide) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =========================
+   RESET & BASE STYLES
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html,body{
-    width:100%;
-    min-height:100%;
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #030611;
+    color: #fff;
+    overflow-x: hidden;
 }
 
-body{
-    min-height:100vh;
-    overflow:hidden;
-    font-family:Inter,Arial,Helvetica,sans-serif;
-    color:#fff;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            #17233d 0%,
-            #0a1020 42%,
-            #02050d 100%
-        );
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: radial-gradient(circle at 50% 20%, #101c3d 0%, #040817 50%, #02040a 100%);
 }
 
 /* =========================
-   BACKGROUND GLOW
+   BACKGROUND GLOW & WAVES
 ========================= */
+.bg-glow {
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(90, 120, 255, 0.18) 0%, rgba(160, 60, 255, 0.08) 45%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+}
 
-body::before{
-    content:"";
-    position:fixed;
-    width:650px;
-    height:650px;
-    left:50%;
-    top:40%;
-    transform:translate(-50%,-50%);
+.wave-floor {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: radial-gradient(ellipse at bottom, rgba(82, 113, 255, 0.25) 0%, rgba(160, 70, 255, 0.1) 40%, transparent 75%);
+    border-top: 1px solid rgba(120, 150, 255, 0.15);
+    box-shadow: 0 -10px 40px rgba(80, 100, 255, 0.15);
+    pointer-events: none;
+    z-index: 0;
+}
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(82,113,255,.15),
-            rgba(110,65,255,.07),
-            transparent 70%
-        );
+/* Floating Particles */
+.particles-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
 
-    filter:blur(30px);
-    pointer-events:none;
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #6495ed;
+    box-shadow: 0 0 10px #5271ff;
+    animation: floatParticle 8s ease-in-out infinite;
+}
+
+.particle.p1 { width: 4px; height: 4px; left: 10%; top: 20%; animation-delay: 0s; }
+.particle.p2 { width: 6px; height: 6px; left: 85%; top: 15%; animation-delay: 2s; background: #c15cff; box-shadow: 0 0 10px #c15cff; }
+.particle.p3 { width: 3px; height: 3px; left: 20%; top: 75%; animation-delay: 4s; }
+.particle.p4 { width: 5px; height: 5px; left: 80%; top: 70%; animation-delay: 1s; background: #5271ff; }
+.particle.p5 { width: 4px; height: 4px; left: 50%; top: 10%; animation-delay: 3s; }
+
+@keyframes floatParticle {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-40px) scale(1.3); opacity: 0.8; }
+}
+
+/* Dynamic Floating Heart Elements */
+.floating-heart-bg {
+    position: absolute;
+    color: rgba(160, 90, 255, 0.3);
+    font-size: 20px;
+    animation: floatHeart 6s ease-in-out infinite;
+    pointer-events: none;
+}
+.fh-1 { top: 25%; left: 18%; animation-delay: 0.5s; }
+.fh-2 { top: 32%; right: 18%; animation-delay: 2.5s; }
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+    50% { transform: translateY(-15px) rotate(12deg); opacity: 0.6; }
 }
 
 /* =========================
-   FLOATING PARTICLES
+   CONTAINER & LAYOUT
 ========================= */
-
-.particles{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-}
-
-.particle{
-    position:absolute;
-    width:4px;
-    height:4px;
-    border-radius:50%;
-    background:#7896ff;
-    opacity:.35;
-
-    animation:
-        particleFloat 7s ease-in-out infinite;
-}
-
-.particle:nth-child(1){
-    left:8%;
-    top:18%;
-}
-
-.particle:nth-child(2){
-    left:18%;
-    top:70%;
-    animation-delay:1s;
-}
-
-.particle:nth-child(3){
-    left:82%;
-    top:22%;
-    animation-delay:2s;
-}
-
-.particle:nth-child(4){
-    left:92%;
-    top:65%;
-    animation-delay:3s;
-}
-
-.particle:nth-child(5){
-    left:28%;
-    top:30%;
-    animation-delay:4s;
-}
-
-.particle:nth-child(6){
-    left:72%;
-    top:78%;
-    animation-delay:2.5s;
-}
-
-.particle:nth-child(7){
-    left:52%;
-    top:12%;
-    animation-delay:1.5s;
-}
-
-@keyframes particleFloat{
-
-    0%,100%{
-        transform:translate(0,0);
-        opacity:.2;
-    }
-
-    50%{
-        transform:translate(18px,-30px);
-        opacity:.8;
-    }
+.container {
+    position: relative;
+    z-index: 2;
+    width: min(1000px, 92%);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* =========================
-   MAIN CONTAINER
+   3D Sad Robot Illustration
 ========================= */
+.robot-stage {
+    position: relative;
+    width: 320px;
+    height: 300px;
+    margin-bottom: 10px;
+    animation: robotHover 5s ease-in-out infinite;
+}
 
-.container{
-    position:relative;
-    width:min(900px,94%);
-    min-height:100vh;
+@keyframes robotHover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+/* Shadow underneath */
+.robot-shadow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: shadowPulse 5s ease-in-out infinite;
+}
 
-    text-align:center;
+@keyframes shadowPulse {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    50% { transform: translateX(-50%) scale(0.75); opacity: 0.4; }
+}
 
-    padding:30px 15px;
+/* Broken Heart Glow */
+.broken-heart-3d {
+    position: absolute;
+    right: 15px;
+    bottom: 35px;
+    font-size: 68px;
+    z-index: 10;
+    filter: drop-shadow(0 0 20px rgba(255, 65, 115, 0.8));
+    animation: heartPulse 3s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1) rotate(5deg); }
+    50% { transform: scale(1.08) rotate(-3deg); }
+}
+
+/* Robot Parts */
+.robot-wrapper {
+    position: absolute;
+    width: 210px;
+    height: 240px;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+}
+
+.antenna-wire {
+    position: absolute;
+    width: 6px;
+    height: 35px;
+    background: linear-gradient(to bottom, #d2dcff, #6f7e9c);
+    left: 50%;
+    top: -28px;
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+
+.antenna-orb {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffffff, #6d93ff);
+    left: 50%;
+    top: -12px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px #6d93ff, inset 0 0 5px #fff;
+    animation: orbGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes orbGlow {
+    0%, 100% { box-shadow: 0 0 15px #6d93ff; }
+    50% { box-shadow: 0 0 30px #9bb5ff, 0 0 40px #6d93ff; }
+}
+
+.robot-head-shell {
+    position: absolute;
+    width: 190px;
+    height: 140px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    border-radius: 55px 55px 45px 45px;
+    background: linear-gradient(145deg, #ffffff 0%, #d8e0f0 45%, #9aa6bc 100%);
+    box-shadow: inset 0 -10px 15px rgba(0,0,0,0.15), inset 0 5px 10px rgba(255,255,255,0.8), 0 20px 35px rgba(0,0,0,0.5);
+    border: 3px solid #b8c4d8;
+}
+
+.ear-caps {
+    position: absolute;
+    width: 22px;
+    height: 48px;
+    top: 45px;
+    background: linear-gradient(145deg, #a4b2c7, #6e7b91);
+    border-radius: 12px;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.4);
+}
+.ear-caps.left { left: -14px; }
+.ear-caps.right { right: -14px; }
+
+.robot-screen-face {
+    position: absolute;
+    width: 145px;
+    height: 85px;
+    left: 50%;
+    top: 26px;
+    transform: translateX(-50%);
+    border-radius: 35px;
+    background: linear-gradient(160deg, #090e1a, #02050d);
+    border: 3px solid #55637a;
+    box-shadow: inset 0 0 18px rgba(0,0,0,0.9), 0 0 15px rgba(80,120,255,0.15);
+}
+
+/* Sad Eyes & Tears */
+.sad-eye {
+    position: absolute;
+    width: 22px;
+    height: 12px;
+    top: 32px;
+    border-top: 4px solid #6495ed;
+    border-radius: 50% 50% 0 0;
+    filter: drop-shadow(0 0 6px #5271ff);
+}
+.sad-eye.left { left: 32px; transform: rotate(-10deg); }
+.sad-eye.right { right: 32px; transform: rotate(10deg); }
+
+.tear-drop {
+    position: absolute;
+    width: 6px;
+    height: 10px;
+    background: #78a6ff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #78a6ff;
+    animation: tearFall 2.5s infinite ease-in;
+}
+.tear-drop.left { left: 38px; top: 44px; }
+.tear-drop.right { right: 38px; top: 44px; animation-delay: 1.2s; }
+
+@keyframes tearFall {
+    0% { opacity: 0; transform: translateY(0) scale(0.7); }
+    30% { opacity: 1; }
+    80% { opacity: 0.8; transform: translateY(22px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(28px) scale(0.3); }
+}
+
+.sad-mouth {
+    position: absolute;
+    width: 30px;
+    height: 14px;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    border-top: 3px solid #6495ed;
+    border-radius: 50% 50% 0 0;
+    filter: drop-shadow(0 0 5px #5271ff);
+}
+
+.robot-body-shell {
+    position: absolute;
+    width: 135px;
+    height: 95px;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    border-radius: 35px 35px 25px 25px;
+    background: linear-gradient(145deg, #e3e9f5, #9aa7bd);
+    box-shadow: inset 0 -8px 12px rgba(0,0,0,0.2), 0 15px 25px rgba(0,0,0,0.4);
+    border: 3px solid #9aa7bd;
+}
+
+.chest-light {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+    background: #5271ff;
+    box-shadow: 0 0 15px #5271ff;
+    animation: chestPulse 2s infinite ease-in-out;
+}
+
+@keyframes chestPulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(0.9); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.15); box-shadow: 0 0 22px #7896ff; }
 }
 
 /* =========================
-   ROBOT AREA
+   TEXT CONTENT & BADGE
 ========================= */
-
-.robot-area{
-    position:relative;
-    width:330px;
-    height:330px;
-
-    animation:
-        robotFloat 4.5s ease-in-out infinite;
+.badge-closed {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: rgba(30, 45, 85, 0.5);
+    border: 1px solid rgba(120, 160, 255, 0.4);
+    color: #9bb5ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px rgba(80, 110, 255, 0.2);
+    margin-top: 10px;
 }
 
-@keyframes robotFloat{
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6495ed;
+    box-shadow: 0 0 8px #6495ed;
+}
 
-    0%,100%{
-        transform:translateY(0);
-    }
+h1.main-title {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
 
-    50%{
-        transform:translateY(-14px);
-    }
+.brand-name {
+    font-size: clamp(40px, 7.5vw, 76px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #f0f4ff;
+    text-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
+}
+
+.closed-text {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #6090ff, #b76eff, #ff6eb4, #6090ff);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+.sub-description {
+    margin-top: 14px;
+    color: #8c9bb5;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 /* =========================
-   BROKEN HEART
+   CARDS GRID SECTION
 ========================= */
-
-.broken-heart{
-    position:absolute;
-    z-index:10;
-
-    top:-5px;
-    right:5px;
-
-    width:90px;
-    height:80px;
-
-    font-size:72px;
-    line-height:80px;
-
-    color:#ff536e;
-
-    filter:
-        drop-shadow(0 0 12px rgba(255,60,95,.5));
-
-    animation:
-        heartFloat 3s ease-in-out infinite;
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 45px;
+    margin-bottom: 45px;
 }
 
-@keyframes heartFloat{
+.info-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(100, 130, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-    0%,100%{
-        transform:translateY(0) rotate(3deg);
-    }
+.info-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(120, 150, 255, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
 
-    50%{
-        transform:translateY(-10px) rotate(-4deg);
-    }
+.info-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(140, 170, 255, 0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(80, 120, 255, 0.2);
+}
+
+.info-card:hover::before {
+    opacity: 1;
+}
+
+.card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(40, 60, 110, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: #9bb5ff;
+    border: 1px solid rgba(120, 160, 255, 0.25);
+    box-shadow: 0 0 12px rgba(80, 120, 255, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover .card-icon {
+    transform: scale(1.15);
+    color: #c8d8ff;
+    border-color: rgba(160, 190, 255, 0.5);
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
+
+.card-desc {
+    font-size: 13px;
+    color: #7c8ba6;
+    line-height: 1.45;
 }
 
 /* =========================
-   ROBOT
+   BUTTON & FOOTER
 ========================= */
-
-.robot{
-    position:absolute;
-
-    width:210px;
-    height:245px;
-
-    left:50%;
-    bottom:15px;
-
-    transform:translateX(-50%);
+.home-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 42px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    background: linear-gradient(90deg, rgba(40, 70, 160, 0.6), rgba(110, 50, 180, 0.6));
+    border: 1px solid rgba(140, 170, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(50, 80, 200, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.35s ease;
+    overflow: hidden;
 }
 
-/* Robot antenna */
-
-.antenna{
-    position:absolute;
-
-    width:6px;
-    height:30px;
-
-    background:#aeb8ca;
-
-    left:50%;
-    top:-25px;
-
-    transform:translateX(-50%);
-
-    border-radius:10px;
+.home-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(180, 200, 255, 0.8);
+    box-shadow: 0 18px 40px rgba(80, 100, 240, 0.5), 0 0 25px rgba(160, 90, 255, 0.4);
+    background: linear-gradient(90deg, rgba(50, 85, 190, 0.8), rgba(130, 60, 210, 0.8));
 }
 
-.antenna::before{
-    content:"";
-
-    position:absolute;
-
-    width:13px;
-    height:13px;
-
-    border-radius:50%;
-
-    background:#91a5ff;
-
-    left:50%;
-    top:-8px;
-
-    transform:translateX(-50%);
-
-    box-shadow:
-        0 0 15px #718bff;
-
-    animation:
-        antennaPulse 2s infinite;
-}
-
-@keyframes antennaPulse{
-
-    0%,100%{
-        transform:translateX(-50%) scale(1);
-    }
-
-    50%{
-        transform:translateX(-50%) scale(1.3);
-    }
-}
-
-/* Robot head */
-
-.robot-head{
-    position:absolute;
-
-    width:190px;
-    height:135px;
-
-    left:50%;
-    top:0;
-
-    transform:translateX(-50%);
-
-    border-radius:55px 55px 48px 48px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #f8faff,
-            #b8c2d0
-        );
-
-    border:5px solid #8d99ab;
-
-    box-shadow:
-        inset 0 -8px 15px rgba(0,0,0,.12),
-        0 18px 35px rgba(0,0,0,.35);
-}
-
-/* Robot screen */
-
-.robot-screen{
-    position:absolute;
-
-    width:145px;
-    height:82px;
-
-    left:50%;
-    top:28px;
-
-    transform:translateX(-50%);
-
-    border-radius:35px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111a2c,
-            #050a14
-        );
-
-    border:4px solid #667389;
-
-    box-shadow:
-        inset 0 0 20px rgba(0,0,0,.8),
-        0 0 15px rgba(90,110,180,.12);
-}
-
-/* Sad eyes */
-
-.eye{
-    position:absolute;
-
-    width:17px;
-    height:24px;
-
-    top:24px;
-
-    border-radius:50%;
-
-    background:#5c8cff;
-
-    box-shadow:
-        0 0 12px rgba(80,130,255,.8);
-
-    animation:
-        eyeBlink 4s infinite;
-}
-
-.eye.left{
-    left:38px;
-}
-
-.eye.right{
-    right:38px;
-}
-
-@keyframes eyeBlink{
-
-    0%,44%,48%,100%{
-        transform:scaleY(1);
-    }
-
-    46%{
-        transform:scaleY(.15);
-    }
-}
-
-/* Sad mouth */
-
-.mouth{
-    position:absolute;
-
-    width:38px;
-    height:20px;
-
-    left:50%;
-    bottom:13px;
-
-    transform:translateX(-50%);
-
-    border-top:4px solid #5c8cff;
-
-    border-radius:50%;
-
-    filter:
-        drop-shadow(0 0 5px rgba(80,130,255,.7));
-}
-
-/* Robot ears */
-
-.ear{
-    position:absolute;
-
-    width:24px;
-    height:50px;
-
-    top:42px;
-
-    background:#aab5c4;
-
-    border:4px solid #7d899c;
-
-    border-radius:12px;
-}
-
-.ear.left{
-    left:-18px;
-}
-
-.ear.right{
-    right:-18px;
-}
-
-/* Robot body */
-
-.robot-body{
-    position:absolute;
-
-    width:145px;
-    height:100px;
-
-    left:50%;
-    bottom:0;
-
-    transform:translateX(-50%);
-
-    border-radius:35px 35px 28px 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #e8edf4,
-            #a7b2c1
-        );
-
-    border:5px solid #7e8b9d;
-
-    box-shadow:
-        inset 0 -8px 15px rgba(0,0,0,.12),
-        0 15px 30px rgba(0,0,0,.35);
-}
-
-/* Body light */
-
-.body-light{
-    position:absolute;
-
-    width:24px;
-    height:24px;
-
-    border-radius:50%;
-
-    left:50%;
-    top:28px;
-
-    transform:translateX(-50%);
-
-    background:#7895ff;
-
-    box-shadow:
-        0 0 18px rgba(90,125,255,.8);
-
-    animation:
-        bodyPulse 2.5s infinite;
-}
-
-@keyframes bodyPulse{
-
-    0%,100%{
-        opacity:.55;
-        transform:translateX(-50%) scale(1);
-    }
-
-    50%{
-        opacity:1;
-        transform:translateX(-50%) scale(1.2);
-    }
-}
-
-/* Robot arms */
-
-.arm{
-    position:absolute;
-
-    width:30px;
-    height:80px;
-
-    bottom:8px;
-
-    background:#b9c3d0;
-
-    border:4px solid #7f8b9c;
-
-    border-radius:20px;
-
-    transform-origin:top center;
-}
-
-.arm.left{
-    left:7px;
-    transform:rotate(25deg);
-}
-
-.arm.right{
-    right:7px;
-    transform:rotate(-25deg);
-}
-
-/* Hands */
-
-.hand{
-    position:absolute;
-
-    width:32px;
-    height:32px;
-
-    border-radius:50%;
-
-    background:#d8dee7;
-
-    border:4px solid #7d899a;
-
-    bottom:-15px;
-}
-
-.arm.left .hand{
-    left:-5px;
-}
-
-.arm.right .hand{
-    right:-5px;
+footer {
+    margin-top: 55px;
+    color: #4b576d;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* =========================
-   CLOSED MESSAGE
+   RESPONSIVE DESIGN
 ========================= */
-
-.status{
-    margin-top:15px;
-
-    padding:8px 17px;
-
-    border:1px solid rgba(112,140,255,.35);
-
-    border-radius:50px;
-
-    background:rgba(55,75,130,.12);
-
-    color:#91a8ff;
-
-    font-size:12px;
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    animation:
-        statusPulse 3s infinite;
-}
-
-@keyframes statusPulse{
-
-    0%,100%{
-        box-shadow:0 0 10px rgba(100,130,255,.05);
-    }
-
-    50%{
-        box-shadow:0 0 25px rgba(100,130,255,.2);
+@media (max-width: 900px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }
 
-h1{
-    margin-top:20px;
-
-    line-height:1.05;
-
-    font-weight:900;
-
-    letter-spacing:-2px;
-}
-
-.site-name{
-    display:block;
-
-    font-size:clamp(38px,7vw,70px);
-
-    color:#f5f7fb;
-}
-
-.closed{
-    display:block;
-
-    margin-top:7px;
-
-    font-size:clamp(27px,5vw,50px);
-
-    background:
-        linear-gradient(
-            90deg,
-            #668cff,
-            #9d69ff,
-            #c15cff,
-            #668cff
-        );
-
-    background-size:300% auto;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    animation:
-        gradientMove 5s linear infinite;
-}
-
-@keyframes gradientMove{
-
-    from{
-        background-position:0% center;
+@media (max-width: 550px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
     }
-
-    to{
-        background-position:300% center;
+    .robot-stage {
+        transform: scale(0.85);
+        margin-bottom: -20px;
     }
-}
-
-/* Divider */
-
-.divider{
-    width:min(560px,80%);
-
-    height:1px;
-
-    margin:25px auto 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(100,130,255,.5),
-            transparent
-        );
-
-    position:relative;
-}
-
-.divider::after{
-    content:"";
-
-    position:absolute;
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#7592ff;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    box-shadow:
-        0 0 15px #7592ff;
-}
-
-/* Description */
-
-.description{
-    margin-top:22px;
-
-    color:#929caf;
-
-    font-size:17px;
-
-    line-height:1.5;
-}
-
-/* =========================
-   HOME BUTTON
-========================= */
-
-.home-btn{
-    margin-top:27px;
-
-    display:inline-flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:12px;
-
-    padding:14px 28px;
-
-    min-width:205px;
-
-    color:#eef2ff;
-
-    text-decoration:none;
-
-    font-size:16px;
-    font-weight:800;
-
-    border:1px solid #718cff;
-
-    border-radius:14px;
-
-    background:
-        rgba(65,85,160,.12);
-
-    box-shadow:
-        0 8px 25px rgba(50,80,190,.12);
-
-    transition:
-        .3s ease;
-}
-
-.home-btn:hover{
-    transform:translateY(-5px);
-
-    background:
-        rgba(80,105,200,.22);
-
-    box-shadow:
-        0 15px 35px rgba(70,100,230,.25);
-}
-
-.home-icon{
-    font-size:22px;
-}
-
-/* Footer */
-
-footer{
-    margin-top:25px;
-
-    color:#535d72;
-
-    font-size:12px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-    body{
-        overflow:auto;
+    .sub-description {
+        font-size: 15px;
     }
-
-    .container{
-        min-height:100vh;
-        padding:25px 12px;
-    }
-
-    .robot-area{
-        transform:scale(.82);
-        margin-bottom:-30px;
-    }
-
-    .site-name{
-        font-size:40px;
-    }
-
-    .closed{
-        font-size:27px;
-    }
-
-    .description{
-        font-size:15px;
-    }
-
-    .home-btn{
-        width:85%;
-    }
-}
-
-/* Accessibility */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation:none !important;
-        transition:none !important;
+    .home-btn {
+        width: 100%;
+        padding: 16px 20px;
     }
 }
 </style>
 </head>
-
-
 <body>
 
-<!-- Background particles -->
+<!-- Ambient Glows -->
+<div class="bg-glow"></div>
+<div class="wave-floor"></div>
 
-<div class="particles">
-
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-
+<!-- Background Floating Particles -->
+<div class="particles-container">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
 </div>
 
+<!-- Floating Heart Decor -->
+<div class="floating-heart-bg fh-1">♥</div>
+<div class="floating-heart-bg fh-2">♥</div>
 
 <main class="container">
 
-
-    <!-- =========================
-         SAD ROBOT
-    ========================== -->
-
-    <div class="robot-area">
-
-        <!-- Broken Heart -->
-
-        <div class="broken-heart">
-            💔
-        </div>
-
-
-        <div class="robot">
-
-            <!-- Antenna -->
-
-            <div class="antenna"></div>
-
-
-            <!-- Head -->
-
-            <div class="robot-head">
-
-                <div class="ear left"></div>
-                <div class="ear right"></div>
-
-
-                <div class="robot-screen">
-
-                    <div class="eye left"></div>
-                    <div class="eye right"></div>
-
-                    <div class="mouth"></div>
-
+    <!-- 3D Animated Sad Robot Stage -->
+    <div class="robot-stage">
+        
+        <div class="broken-heart-3d">💔</div>
+        
+        <div class="robot-wrapper">
+            <div class="antenna-wire"></div>
+            <div class="antenna-orb"></div>
+            
+            <div class="robot-head-shell">
+                <div class="ear-caps left"></div>
+                <div class="ear-caps right"></div>
+                
+                <div class="robot-screen-face">
+                    <div class="sad-eye left"></div>
+                    <div class="sad-eye right"></div>
+                    <div class="tear-drop left"></div>
+                    <div class="tear-drop right"></div>
+                    <div class="sad-mouth"></div>
                 </div>
-
             </div>
-
-
-            <!-- Arms -->
-
-            <div class="arm left">
-                <div class="hand"></div>
+            
+            <div class="robot-body-shell">
+                <div class="chest-light"></div>
             </div>
-
-            <div class="arm right">
-                <div class="hand"></div>
-            </div>
-
-
-            <!-- Body -->
-
-            <div class="robot-body">
-
-                <div class="body-light"></div>
-
-            </div>
-
         </div>
 
+        <div class="robot-shadow"></div>
     </div>
 
-
-    <!-- Status -->
-
-    <div class="status">
-        ● WEBSITE CLOSED
+    <!-- Status Badge -->
+    <div class="badge-closed">
+        <span class="badge-dot"></span>
+        Website Closed
     </div>
 
-
-    <!-- Main message -->
-
-    <h1>
-
-        <span class="site-name">
-            SEHRAN MEDIA
-        </span>
-
-        <span class="closed">
-            IS PERMANENTLY CLOSED.
-        </span>
-
+    <!-- Main Header -->
+    <h1 class="main-title">
+        <span class="brand-name">SEHRAN MEDIA</span>
+        <span class="closed-text">IS PERMANENTLY CLOSED</span>
     </h1>
 
+    <p class="sub-description">This website is no longer available.</p>
 
-    <!-- Divider -->
+    <!-- Cards Section (Matching Reference Image) -->
+    <div class="cards-grid">
+        
+        <div class="info-card">
+            <div class="card-icon">
+                <i data-lucide="heart"></i>
+            </div>
+            <h3 class="card-title">Thanks For Everything</h3>
+            <p class="card-desc">Your support and love meant the world to us.</p>
+        </div>
 
-    <div class="divider"></div>
+        <div class="info-card">
+            <div class="card-icon">
+                <i data-lucide="star"></i>
+            </div>
+            <h3 class="card-title">Memories Remain</h3>
+            <p class="card-desc">The journey was beautiful and unforgettable.</p>
+        </div>
 
+        <div class="info-card">
+            <div class="card-icon">
+                <i data-lucide="cloud"></i>
+            </div>
+            <h3 class="card-title">Time To Say Goodbye</h3>
+            <p class="card-desc">Every ending has a new beginning somewhere.</p>
+        </div>
 
-    <!-- Short message -->
+        <div class="info-card">
+            <div class="card-icon">
+                <i data-lucide="leaf"></i>
+            </div>
+            <h3 class="card-title">Forever Grateful</h3>
+            <p class="card-desc">We are grateful for every moment with you.</p>
+        </div>
 
-    <p class="description">
-        This website is no longer available.
-    </p>
+    </div>
 
-
-    <!-- Home -->
-
+    <!-- Home Navigation Button -->
     <a href="/" class="home-btn">
-
-        <span class="home-icon">⌂</span>
-
-        <span>
-            GO BACK HOME
-        </span>
-
+        <i data-lucide="home" size="18"></i>
+        <span>GO BACK HOME</span>
     </a>
 
-
+    <!-- Footer -->
     <footer>
-        © 2026 SehrAn Media
+        © 2026 SEHRAN MEDIA. ALL RIGHTS RESERVED.
     </footer>
-
 
 </main>
 
+<!-- Initialize Icons -->
+<script>
+    lucide.createIcons();
+</script>
+
 </body>
 </html>
-```
