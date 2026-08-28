@@ -1,19 +1,19 @@
-# SehrAn Media — Live Order System
-
-This is a deploy-ready starter for a real order workflow:
-Customer -> order saved -> Telegram notification -> admin Accept/Reject -> status endpoint.
-
-## Important
-Never collect an Instagram password. This project intentionally does not have a password field.
-
-## Required environment variables
-- ADMIN_KEY: strong secret for admin dashboard/API
-- TG_BOT_TOKEN: Telegram Bot API token from @BotFather
-- TG_CHAT_ID: your Telegram chat ID (configured as 7006568699)
-- ADMIN_URL: public URL of the admin dashboard
-
-## Run
-npm install
-ADMIN_KEY=change-me TG_BOT_TOKEN=YOUR_BOT_TOKEN TG_CHAT_ID=7006568699 ADMIN_URL=https://your-domain.com/admin.html npm start
-
-Then open /public/order.html through the server (the server serves public/ at root), and /admin.html for the admin dashboard.
+SehrAn Games — safe virtual-coin prototype
+This version follows the mobile-game-library look of the supplied references while avoiding real-money wagering, deposits, withdrawals, or rigged 40/60 cash-game outcomes.
+Run
+Install Node.js 18+.
+`npm install`
+`npm start`
+Open `http://localhost:3000`
+Real OTP
+The server intentionally does not display a fake/demo OTP. Configure a real SMS provider:
+`SMS_API_URL`
+`SMS_API_KEY`
+The provider should accept a JSON body containing `to` and `message`. Adapt `sendSmsOtp()` to the provider you choose.
+Promo
+`ZEESHAN10` gives 1,000 virtual coins once per browser.
+Game artwork and music
+The game cards currently use original emoji placeholders. Replace them with artwork you own or have permission to use.
+For background/game music, add audio files you have rights to and wire them into the page; do not upload copyrighted commercial tracks without permission.
+Important
+The balance is virtual only. There are no payment, deposit, withdrawal, UPI, bank-account, or cash-prize endpoints in this version.
