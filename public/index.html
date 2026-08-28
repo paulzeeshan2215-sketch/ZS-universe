@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Website Permanently Closed</title>
+<title>SehrAn Media — Permanently Closed</title>
 
 <style>
 *{
@@ -19,391 +20,793 @@ html,body{
 }
 
 body{
+    min-height:100vh;
+    overflow:hidden;
     font-family:Inter,Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at 50% 25%, #12182d 0%, #070b19 42%, #02040d 100%);
     color:#fff;
-    overflow-x:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #17233d 0%,
+            #0a1020 42%,
+            #02050d 100%
+        );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-/* Background glow */
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
 body::before{
     content:"";
     position:fixed;
-    width:500px;
-    height:500px;
+    width:650px;
+    height:650px;
     left:50%;
-    top:15%;
-    transform:translateX(-50%);
-    background:radial-gradient(
-        circle,
-        rgba(112,63,255,.13),
-        rgba(255,45,110,.04),
-        transparent 70%
-    );
-    filter:blur(20px);
+    top:40%;
+    transform:translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(82,113,255,.15),
+            rgba(110,65,255,.07),
+            transparent 70%
+        );
+
+    filter:blur(30px);
     pointer-events:none;
 }
 
-/* Floating particles */
+/* =========================
+   FLOATING PARTICLES
+========================= */
+
 .particles{
     position:fixed;
     inset:0;
-    overflow:hidden;
     pointer-events:none;
 }
 
 .particle{
     position:absolute;
-    width:5px;
-    height:5px;
+    width:4px;
+    height:4px;
     border-radius:50%;
-    background:#9a75ff;
-    opacity:.45;
-    animation:floatParticle 7s ease-in-out infinite;
+    background:#7896ff;
+    opacity:.35;
+
+    animation:
+        particleFloat 7s ease-in-out infinite;
 }
 
-.particle:nth-child(1){left:8%;top:18%;animation-delay:0s}
-.particle:nth-child(2){left:22%;top:40%;animation-delay:1s}
-.particle:nth-child(3){left:78%;top:25%;animation-delay:2s}
-.particle:nth-child(4){left:88%;top:50%;animation-delay:3s}
-.particle:nth-child(5){left:15%;top:70%;animation-delay:4s}
-.particle:nth-child(6){left:72%;top:75%;animation-delay:2.5s}
-.particle:nth-child(7){left:93%;top:14%;animation-delay:1.5s}
+.particle:nth-child(1){
+    left:8%;
+    top:18%;
+}
 
-@keyframes floatParticle{
+.particle:nth-child(2){
+    left:18%;
+    top:70%;
+    animation-delay:1s;
+}
+
+.particle:nth-child(3){
+    left:82%;
+    top:22%;
+    animation-delay:2s;
+}
+
+.particle:nth-child(4){
+    left:92%;
+    top:65%;
+    animation-delay:3s;
+}
+
+.particle:nth-child(5){
+    left:28%;
+    top:30%;
+    animation-delay:4s;
+}
+
+.particle:nth-child(6){
+    left:72%;
+    top:78%;
+    animation-delay:2.5s;
+}
+
+.particle:nth-child(7){
+    left:52%;
+    top:12%;
+    animation-delay:1.5s;
+}
+
+@keyframes particleFloat{
+
     0%,100%{
-        transform:translateY(0) translateX(0);
-        opacity:.25;
+        transform:translate(0,0);
+        opacity:.2;
     }
 
     50%{
-        transform:translateY(-30px) translateX(15px);
+        transform:translate(18px,-30px);
         opacity:.8;
     }
 }
 
-/* Main */
+/* =========================
+   MAIN CONTAINER
+========================= */
+
 .container{
     position:relative;
-    width:100%;
-    max-width:1000px;
-    margin:auto;
+    width:min(900px,94%);
     min-height:100vh;
-    padding:55px 20px 35px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
     text-align:center;
+
+    padding:30px 15px;
 }
 
-/* Illustration area */
-.illustration{
+/* =========================
+   ROBOT AREA
+========================= */
+
+.robot-area{
     position:relative;
-    width:min(850px,100%);
-    margin:0 auto 35px;
-    animation:mainFloat 5s ease-in-out infinite;
+    width:330px;
+    height:330px;
+
+    animation:
+        robotFloat 4.5s ease-in-out infinite;
 }
 
-.illustration img{
-    display:block;
-    width:100%;
-    height:auto;
-    border-radius:25px;
-    filter:
-        drop-shadow(0 20px 40px rgba(0,0,0,.65))
-        drop-shadow(0 0 30px rgba(105,65,255,.08));
-}
+@keyframes robotFloat{
 
-/*
-   Floating animation
-*/
-@keyframes mainFloat{
     0%,100%{
         transform:translateY(0);
     }
 
     50%{
-        transform:translateY(-10px);
+        transform:translateY(-14px);
     }
 }
 
-/* Lock icon */
-.lock-section{
-    margin-top:-5px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
-}
+/* =========================
+   BROKEN HEART
+========================= */
 
-.line{
-    width:140px;
-    height:2px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #814cff,
-        #c03b88
-    );
-}
-
-.lock{
-    width:105px;
-    height:105px;
-    border-radius:50%;
-    border:3px solid #8d55ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(142,75,255,.20),
-            rgba(20,10,50,.5)
-        );
-
-    box-shadow:
-        0 0 25px rgba(132,72,255,.35),
-        inset 0 0 25px rgba(255,50,130,.12);
-
-    animation:lockPulse 3s ease-in-out infinite;
-}
-
-.lock::before{
-    content:"";
+.broken-heart{
     position:absolute;
-    width:27px;
-    height:30px;
-    border:7px solid #b56aff;
-    border-bottom:0;
-    border-radius:18px 18px 0 0;
-    top:22px;
+    z-index:10;
+
+    top:-5px;
+    right:5px;
+
+    width:90px;
+    height:80px;
+
+    font-size:72px;
+    line-height:80px;
+
+    color:#ff536e;
+
+    filter:
+        drop-shadow(0 0 12px rgba(255,60,95,.5));
+
+    animation:
+        heartFloat 3s ease-in-out infinite;
 }
 
-.lock::after{
-    content:"🔒";
-    position:absolute;
-    font-size:32px;
-    filter:grayscale(1) brightness(1.8);
-    top:39px;
-}
+@keyframes heartFloat{
 
-@keyframes lockPulse{
     0%,100%{
-        transform:scale(1);
-        box-shadow:
-            0 0 25px rgba(132,72,255,.35);
+        transform:translateY(0) rotate(3deg);
     }
 
     50%{
-        transform:scale(1.05);
-        box-shadow:
-            0 0 45px rgba(175,65,255,.55);
+        transform:translateY(-10px) rotate(-4deg);
     }
 }
 
-/* Heading */
+/* =========================
+   ROBOT
+========================= */
+
+.robot{
+    position:absolute;
+
+    width:210px;
+    height:245px;
+
+    left:50%;
+    bottom:15px;
+
+    transform:translateX(-50%);
+}
+
+/* Robot antenna */
+
+.antenna{
+    position:absolute;
+
+    width:6px;
+    height:30px;
+
+    background:#aeb8ca;
+
+    left:50%;
+    top:-25px;
+
+    transform:translateX(-50%);
+
+    border-radius:10px;
+}
+
+.antenna::before{
+    content:"";
+
+    position:absolute;
+
+    width:13px;
+    height:13px;
+
+    border-radius:50%;
+
+    background:#91a5ff;
+
+    left:50%;
+    top:-8px;
+
+    transform:translateX(-50%);
+
+    box-shadow:
+        0 0 15px #718bff;
+
+    animation:
+        antennaPulse 2s infinite;
+}
+
+@keyframes antennaPulse{
+
+    0%,100%{
+        transform:translateX(-50%) scale(1);
+    }
+
+    50%{
+        transform:translateX(-50%) scale(1.3);
+    }
+}
+
+/* Robot head */
+
+.robot-head{
+    position:absolute;
+
+    width:190px;
+    height:135px;
+
+    left:50%;
+    top:0;
+
+    transform:translateX(-50%);
+
+    border-radius:55px 55px 48px 48px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8faff,
+            #b8c2d0
+        );
+
+    border:5px solid #8d99ab;
+
+    box-shadow:
+        inset 0 -8px 15px rgba(0,0,0,.12),
+        0 18px 35px rgba(0,0,0,.35);
+}
+
+/* Robot screen */
+
+.robot-screen{
+    position:absolute;
+
+    width:145px;
+    height:82px;
+
+    left:50%;
+    top:28px;
+
+    transform:translateX(-50%);
+
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111a2c,
+            #050a14
+        );
+
+    border:4px solid #667389;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.8),
+        0 0 15px rgba(90,110,180,.12);
+}
+
+/* Sad eyes */
+
+.eye{
+    position:absolute;
+
+    width:17px;
+    height:24px;
+
+    top:24px;
+
+    border-radius:50%;
+
+    background:#5c8cff;
+
+    box-shadow:
+        0 0 12px rgba(80,130,255,.8);
+
+    animation:
+        eyeBlink 4s infinite;
+}
+
+.eye.left{
+    left:38px;
+}
+
+.eye.right{
+    right:38px;
+}
+
+@keyframes eyeBlink{
+
+    0%,44%,48%,100%{
+        transform:scaleY(1);
+    }
+
+    46%{
+        transform:scaleY(.15);
+    }
+}
+
+/* Sad mouth */
+
+.mouth{
+    position:absolute;
+
+    width:38px;
+    height:20px;
+
+    left:50%;
+    bottom:13px;
+
+    transform:translateX(-50%);
+
+    border-top:4px solid #5c8cff;
+
+    border-radius:50%;
+
+    filter:
+        drop-shadow(0 0 5px rgba(80,130,255,.7));
+}
+
+/* Robot ears */
+
+.ear{
+    position:absolute;
+
+    width:24px;
+    height:50px;
+
+    top:42px;
+
+    background:#aab5c4;
+
+    border:4px solid #7d899c;
+
+    border-radius:12px;
+}
+
+.ear.left{
+    left:-18px;
+}
+
+.ear.right{
+    right:-18px;
+}
+
+/* Robot body */
+
+.robot-body{
+    position:absolute;
+
+    width:145px;
+    height:100px;
+
+    left:50%;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    border-radius:35px 35px 28px 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8edf4,
+            #a7b2c1
+        );
+
+    border:5px solid #7e8b9d;
+
+    box-shadow:
+        inset 0 -8px 15px rgba(0,0,0,.12),
+        0 15px 30px rgba(0,0,0,.35);
+}
+
+/* Body light */
+
+.body-light{
+    position:absolute;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    left:50%;
+    top:28px;
+
+    transform:translateX(-50%);
+
+    background:#7895ff;
+
+    box-shadow:
+        0 0 18px rgba(90,125,255,.8);
+
+    animation:
+        bodyPulse 2.5s infinite;
+}
+
+@keyframes bodyPulse{
+
+    0%,100%{
+        opacity:.55;
+        transform:translateX(-50%) scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateX(-50%) scale(1.2);
+    }
+}
+
+/* Robot arms */
+
+.arm{
+    position:absolute;
+
+    width:30px;
+    height:80px;
+
+    bottom:8px;
+
+    background:#b9c3d0;
+
+    border:4px solid #7f8b9c;
+
+    border-radius:20px;
+
+    transform-origin:top center;
+}
+
+.arm.left{
+    left:7px;
+    transform:rotate(25deg);
+}
+
+.arm.right{
+    right:7px;
+    transform:rotate(-25deg);
+}
+
+/* Hands */
+
+.hand{
+    position:absolute;
+
+    width:32px;
+    height:32px;
+
+    border-radius:50%;
+
+    background:#d8dee7;
+
+    border:4px solid #7d899a;
+
+    bottom:-15px;
+}
+
+.arm.left .hand{
+    left:-5px;
+}
+
+.arm.right .hand{
+    right:-5px;
+}
+
+/* =========================
+   CLOSED MESSAGE
+========================= */
+
+.status{
+    margin-top:15px;
+
+    padding:8px 17px;
+
+    border:1px solid rgba(112,140,255,.35);
+
+    border-radius:50px;
+
+    background:rgba(55,75,130,.12);
+
+    color:#91a8ff;
+
+    font-size:12px;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    animation:
+        statusPulse 3s infinite;
+}
+
+@keyframes statusPulse{
+
+    0%,100%{
+        box-shadow:0 0 10px rgba(100,130,255,.05);
+    }
+
+    50%{
+        box-shadow:0 0 25px rgba(100,130,255,.2);
+    }
+}
+
 h1{
-    margin-top:22px;
-    font-size:clamp(38px,7vw,76px);
-    font-weight:900;
-    letter-spacing:-2px;
+    margin-top:20px;
+
     line-height:1.05;
+
+    font-weight:900;
+
+    letter-spacing:-2px;
 }
 
-.heading-white{
+.site-name{
     display:block;
-    color:#f4f4f7;
+
+    font-size:clamp(38px,7vw,70px);
+
+    color:#f5f7fb;
 }
 
-.heading-gradient{
+.closed{
     display:block;
-    background:linear-gradient(
-        90deg,
-        #7651ff,
-        #b93bd0,
-        #ff405d
-    );
+
+    margin-top:7px;
+
+    font-size:clamp(27px,5vw,50px);
+
+    background:
+        linear-gradient(
+            90deg,
+            #668cff,
+            #9d69ff,
+            #c15cff,
+            #668cff
+        );
+
+    background-size:300% auto;
+
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
-    animation:gradientMove 5s ease-in-out infinite;
-    background-size:200% auto;
+
+    animation:
+        gradientMove 5s linear infinite;
 }
 
 @keyframes gradientMove{
-    0%,100%{
+
+    from{
         background-position:0% center;
     }
 
-    50%{
-        background-position:100% center;
+    to{
+        background-position:300% center;
     }
+}
+
+/* Divider */
+
+.divider{
+    width:min(560px,80%);
+
+    height:1px;
+
+    margin:25px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(100,130,255,.5),
+            transparent
+        );
+
+    position:relative;
+}
+
+.divider::after{
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#7592ff;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+        0 0 15px #7592ff;
 }
 
 /* Description */
+
 .description{
-    max-width:650px;
-    margin:28px auto 0;
-    color:#a9a9bc;
-    font-size:20px;
-    line-height:1.7;
+    margin-top:22px;
+
+    color:#929caf;
+
+    font-size:17px;
+
+    line-height:1.5;
 }
 
-.support{
-    margin-top:32px;
-    color:#aaaabd;
-    font-size:18px;
-}
+/* =========================
+   HOME BUTTON
+========================= */
 
-/* Heart */
-.heart-area{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:25px;
-    margin:28px 0;
-}
-
-.heart-line{
-    width:180px;
-    height:1px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #c9387b
-    );
-}
-
-.heart{
-    font-size:38px;
-    color:#ff4565;
-    animation:heartBeat 1.8s infinite;
-    filter:drop-shadow(0 0 10px rgba(255,55,90,.5));
-}
-
-@keyframes heartBeat{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    15%{
-        transform:scale(1.18);
-    }
-
-    30%{
-        transform:scale(1);
-    }
-
-    45%{
-        transform:scale(1.12);
-    }
-}
-
-/* Home button */
 .home-btn{
-    position:relative;
+    margin-top:27px;
+
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
-    gap:14px;
 
-    margin-top:25px;
-    padding:17px 32px;
+    gap:12px;
 
-    color:#e5e5ee;
+    padding:14px 28px;
+
+    min-width:205px;
+
+    color:#eef2ff;
+
     text-decoration:none;
 
-    font-size:18px;
+    font-size:16px;
     font-weight:800;
-    letter-spacing:.5px;
 
-    border:2px solid transparent;
-    border-radius:18px;
+    border:1px solid #718cff;
+
+    border-radius:14px;
 
     background:
-        linear-gradient(#090d1c,#090d1c) padding-box,
-        linear-gradient(
-            90deg,
-            #7145ff,
-            #d33a91,
-            #ff4d64
-        ) border-box;
+        rgba(65,85,160,.12);
+
+    box-shadow:
+        0 8px 25px rgba(50,80,190,.12);
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+        .3s ease;
 }
 
 .home-btn:hover{
     transform:translateY(-5px);
+
+    background:
+        rgba(80,105,200,.22);
+
     box-shadow:
-        0 12px 35px rgba(113,69,255,.25),
-        0 0 25px rgba(255,60,100,.12);
+        0 15px 35px rgba(70,100,230,.25);
 }
 
 .home-icon{
-    font-size:25px;
+    font-size:22px;
 }
 
 /* Footer */
+
 footer{
-    margin-top:50px;
-    color:#686a80;
-    font-size:16px;
+    margin-top:25px;
+
+    color:#535d72;
+
+    font-size:12px;
 }
 
-/* Responsive */
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
 
+    body{
+        overflow:auto;
+    }
+
     .container{
-        padding:25px 14px 25px;
+        min-height:100vh;
+        padding:25px 12px;
     }
 
-    .illustration{
-        margin-bottom:25px;
+    .robot-area{
+        transform:scale(.82);
+        margin-bottom:-30px;
     }
 
-    .lock{
-        width:80px;
-        height:80px;
-    }
-
-    .lock::before{
-        transform:scale(.8);
-        top:15px;
-    }
-
-    .lock::after{
-        font-size:25px;
-        top:29px;
-    }
-
-    .line{
-        width:70px;
-    }
-
-    h1{
+    .site-name{
         font-size:40px;
-        letter-spacing:-1px;
+    }
+
+    .closed{
+        font-size:27px;
     }
 
     .description{
-        font-size:17px;
-        line-height:1.6;
-    }
-
-    .support{
-        font-size:16px;
-    }
-
-    .heart-line{
-        width:80px;
+        font-size:15px;
     }
 
     .home-btn{
-        width:90%;
-        font-size:16px;
+        width:85%;
+    }
+}
+
+/* Accessibility */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
     }
 }
 </style>
@@ -412,8 +815,10 @@ footer{
 
 <body>
 
-<!-- Floating particles -->
+<!-- Background particles -->
+
 <div class="particles">
+
     <span class="particle"></span>
     <span class="particle"></span>
     <span class="particle"></span>
@@ -421,85 +826,131 @@ footer{
     <span class="particle"></span>
     <span class="particle"></span>
     <span class="particle"></span>
+
 </div>
 
 
 <main class="container">
 
-    <!--
-        अपनी reference image को
-        "closed-page.png" नाम से index.html के साथ रखें।
-    -->
-    <div class="illustration">
-        <img
-            src="closed-page.png"
-            alt="Website permanently closed"
-        >
+
+    <!-- =========================
+         SAD ROBOT
+    ========================== -->
+
+    <div class="robot-area">
+
+        <!-- Broken Heart -->
+
+        <div class="broken-heart">
+            💔
+        </div>
+
+
+        <div class="robot">
+
+            <!-- Antenna -->
+
+            <div class="antenna"></div>
+
+
+            <!-- Head -->
+
+            <div class="robot-head">
+
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+
+
+                <div class="robot-screen">
+
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+
+                    <div class="mouth"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Arms -->
+
+            <div class="arm left">
+                <div class="hand"></div>
+            </div>
+
+            <div class="arm right">
+                <div class="hand"></div>
+            </div>
+
+
+            <!-- Body -->
+
+            <div class="robot-body">
+
+                <div class="body-light"></div>
+
+            </div>
+
+        </div>
+
     </div>
 
 
-    <!-- Lock -->
-    <div class="lock-section">
+    <!-- Status -->
 
-        <span class="line"></span>
-
-        <div class="lock"></div>
-
-        <span class="line"></span>
-
+    <div class="status">
+        ● WEBSITE CLOSED
     </div>
 
 
-    <!-- Main Heading -->
+    <!-- Main message -->
+
     <h1>
-        <span class="heading-white">
-            WEBSITE
+
+        <span class="site-name">
+            SEHRAN MEDIA
         </span>
 
-        <span class="heading-gradient">
-            PERMANENTLY CLOSED
+        <span class="closed">
+            IS PERMANENTLY CLOSED.
         </span>
+
     </h1>
 
 
-    <!-- Description -->
+    <!-- Divider -->
+
+    <div class="divider"></div>
+
+
+    <!-- Short message -->
+
     <p class="description">
-        Thank you for being part of our journey.<br>
-        This website is no longer available and<br>
-        has been permanently closed.
+        This website is no longer available.
     </p>
-
-
-    <p class="support">
-        We appreciate your support and memories.
-    </p>
-
-
-    <!-- Heart -->
-    <div class="heart-area">
-
-        <span class="heart-line"></span>
-
-        <div class="heart">♥</div>
-
-        <span class="heart-line"></span>
-
-    </div>
 
 
     <!-- Home -->
+
     <a href="/" class="home-btn">
+
         <span class="home-icon">⌂</span>
-        <span>GO BACK HOME</span>
+
+        <span>
+            GO BACK HOME
+        </span>
+
     </a>
 
 
-    <!-- Footer -->
     <footer>
-        © 2026 ZeeshanPlayzone- — Thank you!
+        © 2026 SehrAn Media
     </footer>
+
 
 </main>
 
 </body>
 </html>
+```
