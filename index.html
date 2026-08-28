@@ -1,2300 +1,261 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SehrAn Media — Social Media Services</title>
-
-  <meta
-    name="description"
-    content="SehrAn Media — Social media services with simple packages and fast support."
-  >
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(153, 52, 255, .30), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(255, 48, 144, .22), transparent 28%),
-        radial-gradient(circle at 50% 80%, rgba(0, 174, 255, .15), transparent 30%),
-        #07070d;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* BACKGROUND */
-
-    .bg-glow {
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: .18;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .glow-one {
-      background: #8a2be2;
-      top: -180px;
-      left: -150px;
-    }
-
-    .glow-two {
-      background: #ff1493;
-      right: -180px;
-      top: 280px;
-    }
-
-    .glow-three {
-      background: #00bfff;
-      left: 35%;
-      bottom: -250px;
-    }
-
-    /* NAVBAR */
-
-    .navbar {
-      width: min(1180px, 92%);
-      margin: 18px auto 0;
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-
-      background: rgba(15, 13, 28, .76);
-      border: 1px solid rgba(255, 255, 255, .10);
-      border-radius: 20px;
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      position: relative;
-      z-index: 20;
-
-      box-shadow:
-        0 15px 50px rgba(0, 0, 0, .28),
-        inset 0 1px 0 rgba(255, 255, 255, .05);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      text-decoration: none;
-      color: white;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: linear-gradient(
-        135deg,
-        #7b2cff,
-        #ff3cac,
-        #ffb347
-      );
-
-      box-shadow: 0 8px 25px rgba(174, 57, 255, .35);
-    }
-
-    .logo-icon i {
-      font-size: 21px;
-    }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: -.4px;
-    }
-
-    .logo-text span {
-      color: #d78aff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-links a {
-      color: #d7d2e3;
-      text-decoration: none;
-      padding: 9px 13px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .nav-links a:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, .08);
-    }
-
-    /* HERO */
-
-    .hero {
-      width: min(1180px, 92%);
-      margin: 0 auto;
-      min-height: 680px;
-
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 50px;
-
-      padding: 75px 0 50px;
-    }
-
-    .hero-left {
-      position: relative;
-      z-index: 2;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 9px 14px;
-      border-radius: 999px;
-
-      background: rgba(146, 60, 255, .13);
-      border: 1px solid rgba(188, 113, 255, .28);
-
-      color: #e2c7ff;
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 20px;
-
-      box-shadow: 0 8px 30px rgba(136, 52, 255, .12);
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #65ffad;
-      box-shadow: 0 0 12px #65ffad;
-    }
-
-    .hero h1 {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(42px, 6vw, 76px);
-      line-height: 1.02;
-      letter-spacing: -3px;
-      font-weight: 900;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 .gradient {
-      background: linear-gradient(
-        90deg,
-        #b56cff,
-        #ff4fb3,
-        #67d7ff
-      );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 650px;
-      color: #bcb6ca;
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      padding: 14px 21px;
-      border-radius: 14px;
-
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 14px;
-
-      color: #fff;
-
-      background: linear-gradient(
-        135deg,
-        #8637ff,
-        #ff329d
-      );
-
-      box-shadow: 0 14px 35px rgba(161, 52, 255, .28);
-
-      transition: .25s;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 45px rgba(161, 52, 255, .40);
-    }
-
-    /* HERO VISUAL */
-
-    .hero-visual {
-      position: relative;
-      min-height: 470px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-card {
-      width: min(430px, 100%);
-      padding: 25px;
-
-      border-radius: 30px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .11),
-        rgba(255, 255, 255, .035)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .13);
-
-      box-shadow:
-        0 35px 90px rgba(0, 0, 0, .40),
-        inset 0 1px 0 rgba(255, 255, 255, .08);
-
-      backdrop-filter: blur(18px);
-
-      transform: rotate(2deg);
-      animation: heroFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes heroFloat {
-      0%, 100% {
-        transform: translateY(0) rotate(2deg);
-      }
-
-      50% {
-        transform: translateY(-12px) rotate(-1deg);
-      }
-    }
-
-    .profile-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .profile-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: radial-gradient(
-        circle at 30% 30%,
-        #ffd86b,
-        #ff3c9d 48%,
-        #7336ff
-      );
-
-      box-shadow: 0 10px 30px rgba(255, 61, 157, .25);
-    }
-
-    .profile-icon i {
-      font-size: 29px;
-    }
-
-    .profile-name {
-      font-weight: 900;
-      font-size: 16px;
-    }
-
-    .profile-handle {
-      color: #9d96aa;
-      font-size: 12px;
-      margin-top: 3px;
-    }
-
-    .profile-status {
-      margin-left: auto;
-      color: #65ffad;
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .stat {
-      padding: 16px 10px;
-      text-align: center;
-
-      background: rgba(0, 0, 0, .20);
-      border: 1px solid rgba(255, 255, 255, .07);
-      border-radius: 16px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 19px;
-      font-weight: 900;
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 4px;
-      color: #938da0;
-      font-size: 10px;
-    }
-
-    .growth-bar {
-      height: 11px;
-      border-radius: 99px;
-      overflow: hidden;
-      background: #1d1a27;
-      margin: 16px 0 10px;
-    }
-
-    .growth-fill {
-      height: 100%;
-      width: 82%;
-
-      border-radius: 99px;
-
-      background: linear-gradient(
-        90deg,
-        #8136ff,
-        #ff3a9e,
-        #62d8ff
-      );
-
-      animation: barPulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes barPulse {
-      0%, 100% {
-        width: 78%;
-      }
-
-      50% {
-        width: 88%;
-      }
-    }
-
-    .growth-text {
-      display: flex;
-      justify-content: space-between;
-      color: #aaa3b6;
-      font-size: 11px;
-    }
-
-    .floating-mini {
-      position: absolute;
-      padding: 12px 15px;
-
-      border-radius: 14px;
-
-      background: rgba(18, 16, 30, .86);
-      border: 1px solid rgba(255, 255, 255, .10);
-
-      backdrop-filter: blur(12px);
-
-      box-shadow: 0 15px 40px rgba(0, 0, 0, .30);
-
-      font-size: 12px;
-      font-weight: 800;
-
-      animation: miniFloat 3s ease-in-out infinite;
-    }
-
-    .mini-one {
-      top: 35px;
-      left: -20px;
-    }
-
-    .mini-two {
-      right: -20px;
-      bottom: 60px;
-      animation-delay: 1s;
-    }
-
-    @keyframes miniFloat {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .mini-one i {
-      color: #ff4cae;
-    }
-
-    .mini-two i {
-      color: #65ffad;
-    }
-
-    /* SOCIAL STRIP */
-
-    .social-section {
-      width: 100%;
-      padding: 22px 0 40px;
-      overflow: hidden;
-    }
-
-    .social-track {
-      width: max-content;
-      display: flex;
-      gap: 16px;
-      animation: socialMove 28s linear infinite;
-    }
-
-    @keyframes socialMove {
-      from {
-        transform: translateX(-10%);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    .social-card {
-      width: 210px;
-      min-height: 105px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      padding: 18px;
-
-      border-radius: 21px;
-
-      background: rgba(20, 18, 32, .82);
-      border: 1px solid rgba(255, 255, 255, .09);
-
-      box-shadow: 0 15px 45px rgba(0, 0, 0, .24);
-
-      transition: .25s;
-    }
-
-    .social-card:hover {
-      transform: translateY(-6px) scale(1.02);
-    }
-
-    .social-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #fff;
-      font-size: 25px;
-
-      flex-shrink: 0;
-    }
-
-    .instagram {
-      background: linear-gradient(
-        135deg,
-        #833ab4,
-        #fd1d1d,
-        #fcb045
-      );
-    }
-
-    .snapchat {
-      background: #ffdb00;
-      color: #111;
-    }
-
-    .youtube {
-      background: #ff0033;
-    }
-
-    .facebook {
-      background: #1877f2;
-    }
-
-    .twitter {
-      background: #111;
-      border: 1px solid rgba(255, 255, 255, .20);
-    }
-
-    .whatsapp {
-      background: #25d366;
-    }
-
-    .social-info strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .social-info span {
-      display: block;
-      color: #8f899c;
-      font-size: 10px;
-      margin-top: 4px;
-    }
-
-    .available {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-
-      margin-top: 7px;
-
-      color: #69ffad;
-      font-size: 9px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .available i {
-      font-size: 6px;
-    }
-
-    .coming {
-      color: #ffcf72;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      width: min(1180px, 92%);
-      margin: 0 auto;
-      padding: 75px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 42px;
-    }
-
-    .section-heading .small {
-      color: #c07aff;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .section-heading h2 {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 13px;
-    }
-
-    .section-heading p {
-      color: #9d96a9;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    /* SERVICES */
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .service-card {
-      padding: 26px;
-      border-radius: 24px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .075),
-        rgba(255, 255, 255, .025)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .09);
-
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .20);
-
-      transition: .3s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(182, 105, 255, .35);
-      box-shadow: 0 25px 70px rgba(127, 45, 255, .14);
-    }
-
-    .service-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 27px;
-      margin-bottom: 17px;
-    }
-
-    .service-icon.instagram-icon {
-      background: linear-gradient(
-        135deg,
-        #833ab4,
-        #fd1d1d,
-        #fcb045
-      );
-    }
-
-    .service-icon.like-icon {
-      background: linear-gradient(
-        135deg,
-        #ff3b81,
-        #ff6a3d
-      );
-    }
-
-    .service-card h3 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      color: #9e97ab;
-      font-size: 13px;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .service-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 11px 15px;
-      border-radius: 12px;
-
-      text-decoration: none;
-      color: #fff;
-
-      background: rgba(255, 255, 255, .07);
-      border: 1px solid rgba(255, 255, 255, .09);
-
-      font-size: 12px;
-      font-weight: 900;
-
-      transition: .25s;
-    }
-
-    .service-btn:hover {
-      background: linear-gradient(
-        135deg,
-        #8b35ff,
-        #ff3ca6
-      );
-    }
-
-    /* PRICING */
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .price-card {
-      position: relative;
-
-      padding: 24px;
-      border-radius: 23px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .075),
-        rgba(255, 255, 255, .025)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .09);
-
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .20);
-
-      transition: .3s;
-    }
-
-    .price-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(188, 108, 255, .45);
-    }
-
-    .price-card.popular {
-      border: 1px solid rgba(255, 75, 175, .65);
-
-      background: linear-gradient(
-        145deg,
-        rgba(170, 54, 255, .17),
-        rgba(255, 47, 153, .07)
-      );
-
-      box-shadow: 0 25px 70px rgba(177, 43, 255, .18);
-    }
-
-    .popular-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-
-      padding: 6px 9px;
-
-      border-radius: 999px;
-
-      background: linear-gradient(
-        135deg,
-        #ff3b9d,
-        #ff7b47
-      );
-
-      color: #fff;
-
-      font-size: 8px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .price-label {
-      color: #aaa2b5;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .price-card h3 {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .followers-number {
-      color: #c27dff;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 17px;
-    }
-
-    .price {
-      display: flex;
-      align-items: end;
-      gap: 3px;
-      margin-bottom: 18px;
-    }
-
-    .price .currency {
-      font-size: 18px;
-      color: #c8c1d2;
-      margin-bottom: 6px;
-    }
-
-    .price strong {
-      font-size: 34px;
-      line-height: 1;
-      font-weight: 900;
-    }
-
-    .price-btn {
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      padding: 12px;
-
-      border-radius: 13px;
-
-      text-decoration: none;
-
-      color: #fff;
-
-      background: linear-gradient(
-        135deg,
-        #8337ff,
-        #ff3ba5
-      );
-
-      font-size: 12px;
-      font-weight: 900;
-
-      box-shadow: 0 10px 25px rgba(145, 48, 255, .18);
-
-      transition: .25s;
-    }
-
-    .price-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* TRUST */
-
-    .trust-box {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .trust-card {
-      text-align: center;
-      padding: 26px 20px;
-
-      border-radius: 22px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .065),
-        rgba(255, 255, 255, .02)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .08);
-    }
-
-    .trust-icon {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 14px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 16px;
-
-      background: linear-gradient(
-        135deg,
-        #8337ff,
-        #ff3ba5
-      );
-
-      font-size: 21px;
-    }
-
-    .trust-card h3 {
-      font-size: 16px;
-      margin-bottom: 7px;
-    }
-
-    .trust-card p {
-      color: #938c9f;
-      font-size: 11px;
-      line-height: 1.65;
-    }
-
-    /* SUPPORT */
-
-    .support-section {
-      width: min(900px, 92%);
-      margin: 30px auto 80px;
-
-      padding: 35px;
-
-      border-radius: 28px;
-
-      text-align: center;
-
-      background: radial-gradient(
-        circle at top,
-        rgba(150, 57, 255, .20),
-        rgba(255, 255, 255, .025)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .10);
-
-      box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
-    }
-
-    .support-section h2 {
-      font-family: "Montserrat", sans-serif;
-      font-size: 30px;
-      margin-bottom: 9px;
-    }
-
-    .support-section p {
-      color: #a29bad;
-      font-size: 13px;
-      margin-bottom: 22px;
-    }
-
-    .support-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 11px;
-    }
-
-    .support-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      padding: 12px 17px;
-
-      border-radius: 13px;
-
-      color: #fff;
-      text-decoration: none;
-
-      font-size: 12px;
-      font-weight: 900;
-
-      transition: .25s;
-    }
-
-    .support-btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .whatsapp-btn {
-      background: #25d366;
-    }
-
-    .email-btn {
-      background: #7c4dff;
-    }
-
-    .telegram-btn {
-      background: #229ed9;
-    }
-
-    /* FLOATING SUPPORT */
-
-    .floating-support {
-      position: fixed;
-
-      left: 18px;
-      top: 42%;
-
-      z-index: 100;
-
-      display: flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 12px 15px;
-
-      color: #fff;
-      text-decoration: none;
-
-      border-radius: 999px;
-
-      background: linear-gradient(
-        135deg,
-        #25d366,
-        #16b957
-      );
-
-      box-shadow: 0 15px 40px rgba(37, 211, 102, .25);
-
-      font-size: 11px;
-      font-weight: 900;
-
-      animation: supportFloat 3s ease-in-out infinite;
-    }
-
-    @keyframes supportFloat {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-9px);
-      }
-    }
-
-    .floating-support i {
-      font-size: 17px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      width: min(1180px, 92%);
-      margin: 0 auto;
-
-      padding: 28px 0 35px;
-
-      border-top: 1px solid rgba(255, 255, 255, .08);
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .footer-brand {
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .footer-brand span {
-      color: #c778ff;
-    }
-
-    footer p {
-      color: #777181;
-      font-size: 10px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 55px;
-      }
-
-      .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .hero-visual {
-        min-height: 430px;
-      }
-
-      .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 650px) {
-      .navbar {
-        padding: 11px 13px;
-      }
-
-      .nav-links {
-        gap: 3px;
-      }
-
-      .nav-links a {
-        padding: 8px 7px;
-        font-size: 11px;
-      }
-
-      .hero {
-        width: 94%;
-        padding-top: 42px;
-        gap: 20px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-        letter-spacing: -2px;
-      }
-
-      .hero-description {
-        font-size: 13px;
-      }
-
-      .hero-card {
-        width: 94%;
-      }
-
-      .floating-mini {
-        display: none;
-      }
-
-      .service-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-box {
-        grid-template-columns: 1fr;
-      }
-
-      .support-section {
-        padding: 26px 18px;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .floating-support {
-        left: 12px;
-        top: auto;
-        bottom: 18px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .hero h1 {
-        font-size: 38px;
-      }
-
-      .hero-stats {
-        gap: 6px;
-      }
-
-      .stat {
-        padding: 12px 5px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#063d35">
+<title>SehrAn Games</title>
+<style>
+:root{
+  --bg:#032d28;--bg2:#06463c;--panel:#075d50;--panel2:#0a7666;
+  --gold:#ffd84d;--gold2:#f3a900;--cyan:#5ff7df;--text:#fff;
+  --muted:#b8e8df;--shadow:0 10px 30px #001a1680;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:
+ radial-gradient(circle at 50% 15%,#0d6656 0,#063e36 35%,#021f1d 100%);color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer}
+#loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#021e1b}
+.loader-box{text-align:center}
+.logo{width:82px;height:82px;border-radius:24px;margin:auto;display:grid;place-items:center;
+ background:linear-gradient(145deg,#ffe56d,#f5a900);color:#07352e;font-weight:1000;font-size:26px;
+ box-shadow:0 0 35px #f5c33a88}
+.loader-title{font-size:27px;font-weight:1000;margin-top:18px}
+.spinner{width:38px;height:38px;border:4px solid #ffffff33;border-top-color:var(--cyan);
+ border-radius:50%;animation:spin 1s linear infinite;margin:18px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#auth{min-height:100vh;display:none;place-items:center;padding:20px}
+.auth-card{width:min(430px,100%);background:linear-gradient(150deg,#0a6759,#063d36);
+ border:1px solid #55e6cf55;border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:1000;font-size:25px}
+.brand-mark{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+ background:linear-gradient(145deg,#ffe26b,#ed9c00);color:#07352e}
+.auth-card h1{font-size:27px;margin:24px 0 8px}
+.auth-card p{color:var(--muted);line-height:1.5}
+.field{margin:14px 0}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px;color:#d8fff8}
+.field input{width:100%;padding:14px;border-radius:13px;border:1px solid #8af6e033;
+ background:#022f2a;color:white;outline:none}
+.field input:focus{border-color:var(--cyan)}
+.btn{border:0;border-radius:14px;padding:14px 18px;font-weight:1000}
+.btn-gold{width:100%;background:linear-gradient(#ffe66c,#f3a900);color:#163d34}
+.btn-ghost{background:#ffffff14;color:white;border:1px solid #ffffff1c}
+.auth-msg{min-height:20px;color:#ffe47c;font-size:12px;margin-top:10px}
+
+#app{display:none;min-height:100vh;padding-bottom:82px}
+.topbar{position:sticky;top:0;z-index:20;height:76px;background:#032d29ee;backdrop-filter:blur(12px);
+ display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #8cf5dc33}
+.avatar{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#1c4d44;border:2px solid #f4c33b;font-size:22px}
+.user-name{font-weight:900;max-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.balance{margin-left:auto;display:flex;align-items:center;gap:8px;background:linear-gradient(180deg,#087565,#064c42);
+ border:2px solid #d4b735;border-radius:28px;padding:8px 15px;font-size:20px;font-weight:1000}
+.coin{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#ffd52f;color:#725000;font-size:13px}
+.plus{width:28px;height:28px;border-radius:50%;border:0;background:#50e0bc;color:#063d34;font-weight:1000}
+.icon-btn{width:42px;height:42px;border-radius:13px;border:1px solid #ffffff1a;background:#ffffff0d;color:white;font-size:20px}
+
+.container{width:min(650px,100%);margin:auto;padding:10px 12px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:#075b50;border:1px solid #64e8d033;
+ border-radius:24px;padding:4px;margin:6px 0 12px}
+.tab{border:0;background:transparent;color:#c8f3ea;padding:10px 3px;border-radius:19px;font-size:11px;font-weight:900}
+.tab.active{background:linear-gradient(#19a98f,#06725f);color:#fff}
+.banner{border-radius:18px;background:linear-gradient(135deg,#0b745f,#063c34);border:2px solid #d5c040;
+ padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.banner:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-45px;top:-55px;
+ background:#ffd83d33}
+.banner small{color:#80f3db;font-weight:900}
+.banner h2{margin:5px 0;font-size:27px}
+.banner strong{font-size:34px;color:#ffe04b}
+.banner p{margin:4px 0;color:#d6fff7;font-size:12px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:16px 2px 10px}
+.section-title h3{margin:0;font-size:18px}
+.section-title span{font-size:11px;color:#9ee8dc}
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.game{position:relative;min-height:148px;border-radius:17px;overflow:hidden;border:2px solid #f1cb4a;
+ background:linear-gradient(145deg,#173e36,#075c4d);box-shadow:0 7px 16px #001c1877}
+.game-art{height:104px;display:grid;place-items:center;font-size:48px;background:
+ radial-gradient(circle,#28a88d55,#032b2733 65%)}
+.game-name{font-weight:1000;font-size:12px;padding:6px 8px;text-align:center}
+.hot{position:absolute;top:3px;left:4px;background:#ef4d28;color:#fff;font-size:10px;font-weight:1000;
+ padding:4px 7px;border-radius:8px}
+.play{position:absolute;bottom:34px;right:5px;width:28px;height:28px;border:0;border-radius:50%;
+ background:#2ae0ad;color:#06382f;font-weight:1000}
+.card{background:#075448;border:1px solid #73e8d033;border-radius:20px;padding:16px;margin-top:12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.muted{color:#aee8de;font-size:12px}
+.promo-input{display:flex;gap:8px;margin-top:10px}
+.promo-input input{flex:1;min-width:0;background:#043a33;border:1px solid #7cebd244;border-radius:12px;padding:12px;color:white}
+.promo-input button{background:#ffd94d;color:#123d35;border:0;border-radius:12px;padding:0 16px;font-weight:1000}
+#promoMsg{font-size:12px;margin-top:8px;color:#ffe66a}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:30;background:#032d29f5;border-top:1px solid #f2d34c55;
+ display:grid;grid-template-columns:repeat(5,1fr);padding:7px 5px calc(7px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+.nav{border:0;background:none;color:#a8ddd4;font-size:10px;font-weight:900}.nav b{display:block;font-size:21px;margin-bottom:2px}
+.nav.active{color:#ffe15a}
+.modal{position:fixed;inset:0;z-index:100;background:#0009;display:none;place-items:center;padding:18px}
+.modal-box{width:min(520px,100%);max-height:88vh;overflow:auto;background:#06453d;border:1px solid #70ead433;border-radius:24px;padding:20px}
+.modal-box h2{margin-top:0}
+.close{float:right;border:0;background:#ffffff15;color:#fff;border-radius:10px;padding:7px 11px}
+.game-screen{text-align:center}
+.game-screen .big{font-size:80px;margin:20px 0}
+.result{font-size:25px;font-weight:1000;color:#ffe052;min-height:35px}
+@media(max-width:420px){.games{gap:7px}.game{min-height:138px}.game-art{height:96px}.balance{font-size:16px;padding:7px 10px}}
+</style>
 </head>
-
 <body>
+<div id="loader"><div class="loader-box"><div class="logo">SM</div><div class="loader-title">SehrAn Games</div><div class="spinner"></div><div class="muted">Loading your game world…</div></div></div>
 
-  <div class="bg-glow glow-one"></div>
-  <div class="bg-glow glow-two"></div>
-  <div class="bg-glow glow-three"></div>
-
-  <!-- NAVBAR -->
-
-  <nav class="navbar">
-
-    <a href="index.html" class="logo">
-      <div class="logo-icon">
-        <i class="fa-solid fa-bolt"></i>
-      </div>
-
-      <div class="logo-text">
-        SehrAn <span>Media</span>
-      </div>
-    </a>
-
-    <div class="nav-links">
-
-      <a href="#services">
-        Services
-      </a>
-
-      <a href="#pricing">
-        Pricing
-      </a>
-
-      <a href="#trust">
-        Why Us
-      </a>
-
+<section id="auth">
+  <div class="auth-card">
+    <div class="brand"><div class="brand-mark">SM</div> SehrAn Games</div>
+    <h1>Welcome back</h1>
+    <p>Sign in with your mobile number. A real OTP can be sent when an SMS provider is configured on the server.</p>
+    <div class="field"><label>NAME</label><input id="name" maxlength="40" placeholder="Your name"></div>
+    <div class="field"><label>MOBILE</label><input id="mobile" inputmode="tel" maxlength="15" placeholder="+91 9876543210"></div>
+    <div class="field"><label>PASSWORD</label><input id="password" type="password" maxlength="72" placeholder="Create or enter password"></div>
+    <button class="btn btn-gold" id="sendOtp">SEND OTP</button>
+    <div id="otpArea" style="display:none">
+      <div class="field"><label>OTP</label><input id="otp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP"></div>
+      <button class="btn btn-gold" id="verifyOtp">VERIFY & ENTER</button>
     </div>
+    <div class="auth-msg" id="authMsg"></div>
+  </div>
+</section>
 
-  </nav>
+<main id="app">
+<header class="topbar">
+  <div class="avatar">🎮</div><div class="user-name" id="displayName">Player</div>
+  <div class="balance"><span class="coin">★</span><span id="balance">1000</span><button class="plus" id="bonusBtn">+</button></div>
+  <button class="icon-btn" id="profileBtn">⚙</button>
+</header>
 
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" data-filter="all">❤️<br>ALL</button>
+    <button class="tab" data-filter="slots">🎰<br>SLOTS</button>
+    <button class="tab" data-filter="arcade">🚀<br>ARCADE</button>
+    <button class="tab" data-filter="lucky">🎡<br>LUCKY</button>
+    <button class="tab" data-filter="cards">🃏<br>CARDS</button>
+  </div>
 
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="hero-left">
-
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Instagram Services Available Now
-      </div>
-
-      <h1>
-        Build Your
-        <span class="gradient">
-          Social Presence
-        </span>
-        Faster.
-      </h1>
-
-      <p class="hero-description">
-        Simple social media packages designed for creators,
-        pages and businesses. Choose your package, complete
-        your order and get support whenever you need it.
-      </p>
-
-      <div class="hero-buttons">
-
-        <a
-          href="#pricing"
-          class="primary-btn"
-        >
-          <i class="fa-solid fa-rocket"></i>
-          Explore Packages
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- HERO VISUAL -->
-
-    <div class="hero-visual">
-
-      <div class="floating-mini mini-one">
-        <i class="fa-brands fa-instagram"></i>
-        Instagram Available
-      </div>
-
-      <div class="hero-card">
-
-        <div class="profile-head">
-
-          <div class="profile-icon">
-            <i class="fa-brands fa-instagram"></i>
-          </div>
-
-          <div>
-            <div class="profile-name">
-              SehrAn Media
-            </div>
-
-            <div class="profile-handle">
-              @sehranmedia
-            </div>
-          </div>
-
-          <div class="profile-status">
-            ● LIVE
-          </div>
-
-        </div>
-
-        <div class="hero-stats">
-
-          <div class="stat">
-            <strong>10K+</strong>
-            <span>Reach</span>
-          </div>
-
-          <div class="stat">
-            <strong>5K+</strong>
-            <span>Growth</span>
-          </div>
-
-          <div class="stat">
-            <strong>24/7</strong>
-            <span>Support</span>
-          </div>
-
-        </div>
-
-        <div class="growth-text">
-          <span>Profile Growth</span>
-          <span>82%</span>
-        </div>
-
-        <div class="growth-bar">
-          <div class="growth-fill"></div>
-        </div>
-
-        <div class="growth-text">
-          <span>Simple ordering</span>
-          <span>Fast support</span>
-        </div>
-
-      </div>
-
-      <div class="floating-mini mini-two">
-        <i class="fa-solid fa-shield-halved"></i>
-        Secure Ordering
-      </div>
-
-    </div>
-
+  <section class="banner">
+    <small>✦ SEHRAN GAMES LIVE</small>
+    <h2>DAILY GAME CHALLENGE</h2>
+    <strong id="challenge">1,000</strong> <span>FREE COINS</span>
+    <p>Virtual coins only • No cash wagering • Fair random game outcomes</p>
   </section>
 
-
-  <!-- SOCIAL PLATFORMS -->
-
-  <section class="social-section">
-
-    <div class="social-track">
-
-      <!-- SET 1 -->
-
-      <div class="social-card">
-        <div class="social-icon instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Instagram</strong>
-          <span>Followers & more</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Available Now
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon snapchat">
-          <i class="fa-brands fa-snapchat"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Snapchat</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon youtube">
-          <i class="fa-brands fa-youtube"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>YouTube</strong>
-          <span>Channel services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Facebook</strong>
-          <span>Page services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon twitter">
-          <i class="fa-brands fa-x-twitter"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>X / Twitter</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon whatsapp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>WhatsApp</strong>
-          <span>Support</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Support Available
-          </div>
-        </div>
-      </div>
-
-
-      <!-- DUPLICATE SET -->
-
-      <div class="social-card">
-        <div class="social-icon instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Instagram</strong>
-          <span>Followers & more</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Available Now
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon snapchat">
-          <i class="fa-brands fa-snapchat"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Snapchat</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon youtube">
-          <i class="fa-brands fa-youtube"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>YouTube</strong>
-          <span>Channel services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Facebook</strong>
-          <span>Page services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon twitter">
-          <i class="fa-brands fa-x-twitter"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>X / Twitter</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon whatsapp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>WhatsApp</strong>
-          <span>Support</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Support Available
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SERVICES -->
-
-  <section class="section" id="services">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Available Services
-      </div>
-
-      <h2>
-        Choose What You Need
-      </h2>
-
-      <p>
-        Instagram services are available now.
-        Other platforms are being prepared for upcoming launches.
-      </p>
-
-    </div>
-
-
-    <div class="service-grid">
-
-      <div class="service-card">
-
-        <div class="service-icon instagram-icon">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <h3>
-          Instagram Followers
-        </h3>
-
-        <p>
-          Select from different follower packages
-          according to your requirement.
-        </p>
-
-        <a
-          href="#pricing"
-          class="service-btn"
-        >
-          View Packages
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <div class="service-card">
-
-        <div class="service-icon like-icon">
-          <i class="fa-solid fa-heart"></i>
-        </div>
-
-        <h3>
-          Instagram Likes
-        </h3>
-
-        <p>
-          Instagram likes service is currently
-          being prepared and will be available soon.
-        </p>
-
-        <a
-          href="#"
-          class="service-btn"
-          onclick="comingSoon(event)"
-        >
-          Coming Soon
-          <i class="fa-solid fa-clock"></i>
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PRICING -->
-
-  <section class="section" id="pricing">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Instagram Followers
-      </div>
-
-      <h2>
-        Pick Your Package
-      </h2>
-
-      <p>
-        Choose the package that fits your requirement.
-        Promo code
-        <strong style="color:#c67cff;">
-          ZEESHAN10
-        </strong>
-        can be used at checkout.
-      </p>
-
-    </div>
-
-
-    <div class="pricing-grid">
-
-
-      <!-- 200 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Starter
-        </h3>
-
-        <div class="followers-number">
-          200 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>30</strong>
-        </div>
-
-        <a
-          href="order.html?package=200&followers=200&price=30"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 500 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Starter Plus
-        </h3>
-
-        <div class="followers-number">
-          500 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>50</strong>
-        </div>
-
-        <a
-          href="order.html?package=500&followers=500&price=50"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 1000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Most Popular
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Popular
-        </h3>
-
-        <div class="followers-number">
-          1,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>90</strong>
-        </div>
-
-        <a
-          href="order.html?package=1000&followers=1000&price=90"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 1500 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Growth
-        </h3>
-
-        <div class="followers-number">
-          1,500 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>130</strong>
-        </div>
-
-        <a
-          href="order.html?package=1500&followers=1500&price=130"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 2000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Growth Plus
-        </h3>
-
-        <div class="followers-number">
-          2,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>150</strong>
-        </div>
-
-        <a
-          href="order.html?package=2000&followers=2000&price=150"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 3000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Pro
-        </h3>
-
-        <div class="followers-number">
-          3,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>200</strong>
-        </div>
-
-        <a
-          href="order.html?package=3000&followers=3000&price=200"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 4000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Pro Plus
-        </h3>
-
-        <div class="followers-number">
-          4,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>250</strong>
-        </div>
-
-        <a
-          href="order.html?package=4000&followers=4000&price=250"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 5000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Best Value
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Premium
-        </h3>
-
-        <div class="followers-number">
-          5,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>300</strong>
-        </div>
-
-        <a
-          href="order.html?package=5000&followers=5000&price=300"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 6000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Premium Plus
-        </h3>
-
-        <div class="followers-number">
-          6,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>350</strong>
-        </div>
-
-        <a
-          href="order.html?package=6000&followers=6000&price=350"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 7000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Advanced
-        </h3>
-
-        <div class="followers-number">
-          7,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>450</strong>
-        </div>
-
-        <a
-          href="order.html?package=7000&followers=7000&price=450"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 8000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Advanced Plus
-        </h3>
-
-        <div class="followers-number">
-          8,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>500</strong>
-        </div>
-
-        <a
-          href="order.html?package=8000&followers=8000&price=500"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 9000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Elite
-        </h3>
-
-        <div class="followers-number">
-          9,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>550</strong>
-        </div>
-
-        <a
-          href="order.html?package=9000&followers=9000&price=550"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 10000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Maximum
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Elite Plus
-        </h3>
-
-        <div class="followers-number">
-          10,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>600</strong>
-        </div>
-
-        <a
-          href="order.html?package=10000&followers=10000&price=600"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- TRUST -->
-
-  <section class="section" id="trust">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Why Choose Us
-      </div>
-
-      <h2>
-        Simple. Clear. Supportive.
-      </h2>
-
-      <p>
-        We keep the ordering experience simple,
-        transparent and easy to understand.
-      </p>
-
-    </div>
-
-
-    <div class="trust-box">
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-
-        <h3>
-          Secure Checkout
-        </h3>
-
-        <p>
-          Your order information is handled
-          through the website's checkout flow.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          <i class="fa-solid fa-bolt"></i>
-        </div>
-
-        <h3>
-          Simple Ordering
-        </h3>
-
-        <p>
-          Choose a package and follow the
-          straightforward order process.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          <i class="fa-solid fa-headset"></i>
-        </div>
-
-        <h3>
-          Easy Support
-        </h3>
-
-        <p>
-          Need help? Contact SehrAn Media
-          through WhatsApp, Telegram or email.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SUPPORT -->
-
-  <section class="support-section">
-
-    <h2>
-      Need Help?
-    </h2>
-
-    <p>
-      Contact SehrAn Media support directly.
-    </p>
-
-    <div class="support-buttons">
-
-      <a
-        href="https://wa.me/919103874044"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn whatsapp-btn"
-      >
-        <i class="fa-brands fa-whatsapp"></i>
-        WhatsApp Support
-      </a>
-
-
-      <a
-        href="mailto:zpaul5567@gmail.com"
-        class="support-btn email-btn"
-      >
-        <i class="fa-solid fa-envelope"></i>
-        Email Support
-      </a>
-
-
-      <a
-        href="https://t.me/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn telegram-btn"
-      >
-        <i class="fa-brands fa-telegram"></i>
-        Telegram Support
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- FLOATING WHATSAPP -->
-
-  <a
-    href="https://wa.me/919103874044"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="floating-support"
-    aria-label="WhatsApp Support"
-  >
-    <i class="fa-brands fa-whatsapp"></i>
-    Support
-  </a>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="footer-brand">
-      SehrAn <span>Media</span>
-    </div>
-
-    <p>
-      © 2026 SehrAn Media. All rights reserved.
-    </p>
-
-  </footer>
-
-
-  <script>
-    function comingSoon(event) {
-      event.preventDefault();
-
-      alert(
-        "Instagram Likes are coming soon. Stay tuned!"
-      );
-    }
-  </script>
-
+  <div class="section-title"><h3>⭐ FAVORITE</h3><span>SEE ALL ›</span></div>
+  <div class="games" id="games"></div>
+
+  <div class="card">
+    <div class="row"><div><b>🎟️ Promo Code</b><div class="muted">Use your code for virtual bonus coins.</div></div></div>
+    <div class="promo-input"><input id="promo" placeholder="Enter promo code"><button id="claimPromo">CLAIM</button></div>
+    <div id="promoMsg"></div>
+  </div>
+
+  <div class="card">
+    <div class="row"><b>🏆 Leaderboard</b><span class="muted">This week</span></div>
+    <p class="muted">1. Player One — 8,420 coins<br>2. Lucky Star — 7,915 coins<br>3. Game Master — 7,210 coins</p>
+  </div>
+</div>
+
+<nav class="bottom">
+  <button class="nav" data-page="bank"><b>🏦</b>Bank</button>
+  <button class="nav active" data-page="game"><b>🎰</b>Game</button>
+  <button class="nav" data-page="lucky"><b>🎡</b>Lucky Wheel</button>
+  <button class="nav" data-page="refer"><b>🔗</b>Refer & Earn</button>
+  <button class="nav" data-page="events"><b>🎁</b>Events</button>
+</nav>
+</main>
+
+<div class="modal" id="gameModal"><div class="modal-box game-screen">
+<button class="close" data-close="gameModal">✕</button><h2 id="modalTitle">Game</h2>
+<div class="big" id="modalEmoji">🎰</div><div class="result" id="result"></div>
+<p class="muted">This is a virtual-coin game. Outcomes are generated randomly and are not connected to real-money wagering.</p>
+<button class="btn btn-gold" id="playRound">PLAY ROUND</button>
+</div></div>
+
+<div class="modal" id="profileModal"><div class="modal-box">
+<button class="close" data-close="profileModal">✕</button><h2>Profile</h2>
+<p>Player: <b id="profileName">Player</b></p><p class="muted">Virtual balance: <b id="profileBalance">0</b> coins</p>
+<button class="btn btn-ghost" id="logout">LOG OUT</button>
+</div></div>
+
+<script>
+const games=[
+ {name:"Gems Fortune",emoji:"💎",type:"slots",hot:true},
+ {name:"Dragon Kingdom",emoji:"🐉",type:"slots",hot:true},
+ {name:"Ace Super",emoji:"🃏",type:"cards",hot:true},
+ {name:"Super 777",emoji:"7️⃣",type:"slots",hot:true},
+ {name:"Golden Temple",emoji:"🏛️",type:"arcade",hot:true},
+ {name:"Queen Fortune",emoji:"👑",type:"slots",hot:true},
+ {name:"The Crypt",emoji:"💀",type:"arcade",new:true},
+ {name:"Night Hunting",emoji:"🌙",type:"arcade",hot:true},
+ {name:"Jungle Delight",emoji:"🐯",type:"arcade",hot:true},
+ {name:"Jackpot Fishing",emoji:"🦈",type:"lucky"},
+ {name:"Chicken Road",emoji:"🐔",type:"arcade",hot:true},
+ {name:"Very Lucky",emoji:"🍀",type:"lucky",hot:true}
+];
+let currentGame=null, balance=1000, filter="all";
+const $=id=>document.getElementById(id);
+
+function renderGames(){
+  $("games").innerHTML=games.filter(g=>filter==="all"||g.type===filter).map((g,i)=>`
+    <article class="game" data-i="${i}">
+      ${g.hot?'<span class="hot">HOT</span>':''}${g.new?'<span class="hot">NEW</span>':''}
+      <div class="game-art">${g.emoji}</div><div class="game-name">${g.name}</div>
+      <button class="play">▶</button>
+    </article>`).join("");
+  document.querySelectorAll(".game").forEach(el=>el.onclick=()=>openGame(games[+el.dataset.i]));
+}
+function openGame(g){currentGame=g;$("modalTitle").textContent=g.name;$("modalEmoji").textContent=g.emoji;$("result").textContent="";$("gameModal").style.display="grid"}
+function setBalance(v){balance=Math.max(0,v);$("balance").textContent=balance.toLocaleString();$("profileBalance").textContent=balance.toLocaleString()}
+function showApp(){
+  $("auth").style.display="none";$("app").style.display="block";
+  $("displayName").textContent=localStorage.getItem("sm_name")||"Player";$("profileName").textContent=$("displayName").textContent;
+  renderGames();setBalance(Number(localStorage.getItem("sm_balance")||1000));
+}
+function save(){localStorage.setItem("sm_balance",balance);localStorage.setItem("sm_name",$("displayName").textContent)}
+function authMsg(t){$("authMsg").textContent=t}
+window.addEventListener("load",()=>setTimeout(()=>{ $("loader").style.display="none"; if(localStorage.getItem("sm_session"))showApp(); else $("auth").style.display="grid"},700));
+
+$("sendOtp").onclick=async()=>{
+  const name=$("name").value.trim(), mobile=$("mobile").value.trim(), password=$("password").value;
+  if(!name||!mobile||password.length<8)return authMsg("Enter your name, mobile number and a password of at least 8 characters.");
+  authMsg("Sending OTP…");
+  try{
+    const r=await fetch("/api/auth/request-otp",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,mobile,password})});
+    const d=await r.json(); if(!r.ok)throw new Error(d.error||"Unable to send OTP");
+    $("otpArea").style.display="block";authMsg(d.message||"OTP sent.");
+  }catch(e){authMsg(e.message)}
+};
+$("verifyOtp").onclick=async()=>{
+  try{
+    const r=await fetch("/api/auth/verify-otp",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mobile:$("mobile").value.trim(),otp:$("otp").value.trim()})});
+    const d=await r.json();if(!r.ok)throw new Error(d.error||"OTP verification failed");
+    localStorage.setItem("sm_session",d.session);localStorage.setItem("sm_name",d.name);showApp();
+  }catch(e){authMsg(e.message)}
+};
+$("claimPromo").onclick=async()=>{
+  if($("promo").value.trim().toUpperCase()!=="ZEESHAN10")return $("promoMsg").textContent="Invalid promo code.";
+  if(localStorage.getItem("sm_promo"))return $("promoMsg").textContent="Promo already claimed.";
+  balance+=1000;localStorage.setItem("sm_promo","1");setBalance(balance);save();$("promoMsg").textContent="ZEESHAN10 applied: +1,000 virtual coins!";
+};
+$("playRound").onclick=()=>{
+  if(balance<10){$("result").textContent="Not enough virtual coins.";return}
+  balance-=10;
+  const win=Math.random()<0.5; // transparent demo odds; not tied to money
+  if(win){balance+=20;$("result").textContent="🎉 You won 20 virtual coins!";}
+  else $("result").textContent="Try again — 10 virtual coins used.";
+  setBalance(balance);save();
+};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.filter;renderGames()});
+$("bonusBtn").onclick=()=>{balance+=50;setBalance(balance);save();alert("+50 virtual coins added!")};
+$("profileBtn").onclick=()=>{$("profileBalance").textContent=balance.toLocaleString();$("profileModal").style.display="grid"};
+$("logout").onclick=()=>{localStorage.removeItem("sm_session");$("app").style.display="none";$("profileModal").style.display="none";$("auth").style.display="grid"};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).style.display="none");
+document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>alert(b.dataset.page==="bank"?"Bank is virtual-coin only in this version.":"Section: "+b.dataset.page));
+</script>
 </body>
 </html>
