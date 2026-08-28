@@ -1001,7 +1001,7 @@ input:focus{
 
   font-size:11px;
 
-  line-height:1.5;
+  line-line:1.5;
 }
 
 
@@ -2190,10 +2190,6 @@ input:focus{
 <body>
 
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <header class="topbar">
 
   <div class="topbar-inner">
@@ -2239,18 +2235,10 @@ input:focus{
 
 
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
-
 <main>
 
 <div class="checkout">
 
-
-<!-- =========================================================
-     PROGRESS
-========================================================= -->
 
 <div class="progress">
 
@@ -2326,10 +2314,6 @@ input:focus{
 
 
 
-<!-- =========================================================
-     INSTAGRAM SCREEN 1
-========================================================= -->
-
 <section
   class="screen"
   id="instagramScreen1"
@@ -2386,8 +2370,6 @@ input:focus{
         id="instagramError1"
       ></div>
 
-
-      <!-- CONTACT -->
 
       <div class="form-group">
 
@@ -2453,8 +2435,6 @@ input:focus{
       </div>
 
 
-      <!-- INSTAGRAM USERNAME -->
-
       <div class="form-group">
 
         <label>
@@ -2473,8 +2453,6 @@ input:focus{
       </div>
 
 
-      <!-- PROFILE -->
-
       <div class="form-group">
 
         <label>
@@ -2491,8 +2469,6 @@ input:focus{
 
       </div>
 
-
-      <!-- PROMO -->
 
       <div class="promo-box">
 
@@ -2551,8 +2527,6 @@ input:focus{
 
       </div>
 
-
-      <!-- PRICE -->
 
       <div class="price-box">
 
@@ -2663,10 +2637,6 @@ input:focus{
 
 
 
-<!-- =========================================================
-     INSTAGRAM SCREEN 2
-========================================================= -->
-
 <section
   class="screen"
   id="instagramScreen2"
@@ -2699,7 +2669,7 @@ input:focus{
         </div>
 
         <div class="upi-note">
-          Please pay the exact amount shown above.
+          Scan & Pay using GPay, PhonePe, Paytm, or any UPI App
         </div>
 
       </div>
@@ -2717,9 +2687,9 @@ input:focus{
         <button
           type="button"
           class="pay-upi-btn"
-          onclick="instagramPayUPI()"
+          onclick="payViaUPI()"
         >
-          💳 Pay with UPI
+          ⚡ Pay via UPI App
         </button>
 
 
@@ -2736,7 +2706,7 @@ input:focus{
           class="copy-success"
           id="copySuccess"
         >
-          ✓ UPI ID copied successfully
+          ✓ UPI ID Copied to Clipboard
         </div>
 
       </div>
@@ -2744,15 +2714,14 @@ input:focus{
 
       <div class="upi-id-box">
 
-        <strong>
-          UPI ID
-        </strong>
+        <div>UPI ID for Payment</div>
 
-        <br>
-
-        <span class="upi-id">
-          7889777143@fam
-        </span>
+        <div
+          class="upi-id"
+          id="displayUpiId"
+        >
+          sehranmedia@upi
+        </div>
 
       </div>
 
@@ -2763,53 +2732,27 @@ input:focus{
       ></div>
 
 
-      <div class="form-group">
-
-        <label>
-
-          UTR / Transaction ID
-
-          <span class="optional">
-            Optional
-          </span>
-
-        </label>
-
-
-        <input
-          id="instagramUTR"
-          type="text"
-          maxlength="80"
-          placeholder="Enter UTR if available"
-          autocomplete="off"
-        >
-
-      </div>
-
-
       <div class="upload-box">
 
         <label for="instagramScreenshot">
-
-          Payment Screenshot
-
+          Upload Payment Screenshot
           <span class="required">*</span>
-
         </label>
 
 
         <input
           id="instagramScreenshot"
           type="file"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/*"
+          onchange="validateFile(this)"
         >
 
 
         <div
           class="file-name"
-          id="instagramFileName"
+          id="fileNameDisplay"
         >
-          No screenshot selected
+          Upload your payment screenshot after completing payment.
         </div>
 
       </div>
@@ -2820,19 +2763,18 @@ input:focus{
         <button
           type="button"
           class="btn btn-secondary"
-          onclick="instagramShowScreen(1)"
+          onclick="showScreen('instagramScreen1', 1)"
         >
-          ← Back
+          ← Edit Details
         </button>
 
 
         <button
           type="button"
           class="btn btn-primary"
-          id="instagramSubmitBtn"
           onclick="submitInstagramOrder()"
         >
-          Submit Order ✓
+          Submit Order & Verify →
         </button>
 
       </div>
@@ -2840,11 +2782,7 @@ input:focus{
 
       <div class="secure-note">
 
-        🔒 Payment screenshot is securely submitted with your order.
-
-        <br>
-
-        We never ask for your Instagram password.
+        🔒 Uploading payment proof ensures instant manual verification of your order.
 
       </div>
 
@@ -2856,13 +2794,9 @@ input:focus{
 
 
 
-<!-- =========================================================
-     INSTAGRAM SCREEN 3
-========================================================= -->
-
 <section
   class="screen"
-  id="instagramScreen3"
+  id="successScreen"
 >
 
   <div class="checkout-card">
@@ -2873,637 +2807,34 @@ input:focus{
 
         <div class="success-icon"></div>
 
-
         <h1 class="success-title">
-          Order Submitted!
+          Order Submitted Successfully!
         </h1>
 
-
         <p class="success-message">
-
-          Your Instagram order has been received successfully.
-
-          <br>
-
-          Please keep your Order ID for reference.
-
+          Thank you for choosing SehrAn Media. Your order has been received and is currently being processed by our automated delivery system.
         </p>
 
 
         <div class="delivery-message">
-
-          🚀 Your order will be delivered within 10 minutes.
-
+          ⚡ Estimated Delivery: Within 10 to 30 Minutes
         </div>
 
 
         <div class="order-id">
-
-          Order ID:
-
-          <span id="instagramOrderId">
-            ---
-          </span>
-
+          Order Reference ID: <span id="displayOrderId">#SRM-000000</span>
         </div>
 
 
-        <div
-          class="price-box"
-          style="margin-top:20px;text-align:left;"
-        >
-
-          <div class="price-row">
-
-            <span>
-              Status
-            </span>
-
-            <strong style="color:#ffd166;">
-              PROCESSING
-            </strong>
-
-          </div>
-
-
-          <div class="price-row">
-
-            <span>
-              Package
-            </span>
-
-            <strong id="successInstagramPackage">
-              ---
-            </strong>
-
-          </div>
-
-
-          <div class="price-row">
-
-            <span>
-              Amount
-            </span>
-
-            <strong id="successInstagramAmount">
-              ₹0
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="buttons">
+        <div class="buttons" style="margin-top: 25px;">
 
           <button
             type="button"
             class="btn btn-primary"
+            style="grid-column: 1 / -1;"
             onclick="goHome()"
           >
-            Back to Home
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MOVIE SCREEN 1
-========================================================= -->
-
-<section
-  class="screen"
-  id="movieScreen1"
->
-
-  <div class="checkout-card">
-
-    <div class="card-inner">
-
-      <h1 class="title">
-        Digital Product Checkout
-      </h1>
-
-
-      <p class="subtitle">
-        Review your selected digital product and continue to secure payment.
-      </p>
-
-
-      <div class="product-card">
-
-        <div class="product-top">
-
-          <div class="product-label">
-            Selected Product
-          </div>
-
-          <div class="product-badge">
-            Digital
-          </div>
-
-        </div>
-
-
-        <div
-          class="product-name"
-          id="movieName"
-        >
-          Selected Movie
-        </div>
-
-
-        <div
-          class="product-price"
-          id="moviePrice"
-        >
-          ₹0
-        </div>
-
-
-        <div
-          class="movie-meta"
-          id="movieMeta"
-        ></div>
-
-      </div>
-
-
-      <div
-        class="error"
-        id="movieError1"
-      ></div>
-
-
-      <!-- CONTACT -->
-
-      <div class="form-group">
-
-        <label>
-          Contact Details
-          <span class="required">*</span>
-        </label>
-
-
-        <div class="contact-choice">
-
-          <button
-            type="button"
-            class="contact-option active"
-            id="movieMobileOption"
-            onclick="selectMovieContact('mobile')"
-          >
-            📱 Mobile Number
-          </button>
-
-
-          <button
-            type="button"
-            class="contact-option"
-            id="movieEmailOption"
-            onclick="selectMovieContact('email')"
-          >
-            ✉️ Email
-          </button>
-
-        </div>
-
-
-        <div id="movieMobileField">
-
-          <input
-            id="movieMobile"
-            type="tel"
-            inputmode="numeric"
-            maxlength="15"
-            placeholder="Enter mobile number"
-            autocomplete="tel"
-          >
-
-        </div>
-
-
-        <div
-          id="movieEmailField"
-          style="display:none;"
-        >
-
-          <input
-            id="movieEmail"
-            type="email"
-            maxlength="150"
-            placeholder="Enter email address"
-            autocomplete="email"
-          >
-
-        </div>
-
-      </div>
-
-
-      <!-- PRICE -->
-
-      <div class="price-box">
-
-        <div class="price-row">
-
-          <span>
-            Product Price
-          </span>
-
-          <strong id="movieSummaryPrice">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div
-          class="price-row"
-          id="movieOriginalRow"
-          style="display:none;"
-        >
-
-          <span>
-            Original Price
-          </span>
-
-          <strong
-            class="old-price"
-            id="movieOriginalDisplay"
-          >
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div
-          class="price-row discount"
-          id="movieDiscountRow"
-          style="display:none;"
-        >
-
-          <span>
-            Discount
-          </span>
-
-          <strong id="movieDiscountDisplay">
-            -₹0
-          </strong>
-
-        </div>
-
-
-        <div class="price-row total">
-
-          <span>
-            Total to Pay
-          </span>
-
-          <strong id="movieTotal">
-            ₹0
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="buttons">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="goHome()"
-        >
-          ← Back
-        </button>
-
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="movieContinuePayment()"
-        >
-          Continue to Payment →
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MOVIE SCREEN 2
-========================================================= -->
-
-<section
-  class="screen"
-  id="movieScreen2"
->
-
-  <div class="checkout-card">
-
-    <div class="card-inner">
-
-      <h1 class="title">
-        Complete Payment
-      </h1>
-
-
-      <p class="subtitle">
-        Scan the QR code with your UPI app and pay the exact amount shown below.
-      </p>
-
-
-      <div class="payment-summary">
-
-        <div class="payment-small">
-          Exact Amount to Pay
-        </div>
-
-        <div
-          class="payment-amount"
-          id="moviePaymentAmount"
-        >
-          ₹0
-        </div>
-
-        <div class="upi-note">
-          Please pay the exact amount shown above.
-        </div>
-
-      </div>
-
-
-      <div class="qr-wrapper">
-
-        <div id="movieQR"></div>
-
-      </div>
-
-
-      <div class="upi-actions">
-
-        <button
-          type="button"
-          class="pay-upi-btn"
-          onclick="moviePayUPI()"
-        >
-          💳 Pay with UPI
-        </button>
-
-
-        <button
-          type="button"
-          class="copy-upi-btn"
-          onclick="copyUPI()"
-        >
-          📋 Copy UPI ID
-        </button>
-
-
-        <div
-          class="copy-success"
-          id="movieCopySuccess"
-        >
-          ✓ UPI ID copied successfully
-        </div>
-
-      </div>
-
-
-      <div class="upi-id-box">
-
-        <strong>
-          UPI ID
-        </strong>
-
-        <br>
-
-        <span class="upi-id">
-          7889777143@fam
-        </span>
-
-      </div>
-
-
-      <div
-        class="error"
-        id="movieError2"
-      ></div>
-
-
-      <div class="form-group">
-
-        <label>
-
-          UTR / Transaction ID
-
-          <span class="optional">
-            Optional
-          </span>
-
-        </label>
-
-
-        <input
-          id="movieUTR"
-          type="text"
-          maxlength="80"
-          placeholder="Enter UTR if available"
-          autocomplete="off"
-        >
-
-      </div>
-
-
-      <div class="upload-box">
-
-        <label for="movieScreenshot">
-
-          Payment Screenshot
-
-          <span class="required">*</span>
-
-        </label>
-
-
-        <input
-          id="movieScreenshot"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-        >
-
-
-        <div
-          class="file-name"
-          id="movieFileName"
-        >
-          No screenshot selected
-        </div>
-
-      </div>
-
-
-      <div class="buttons">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="movieShowScreen(1)"
-        >
-          ← Back
-        </button>
-
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="movieSubmitBtn"
-          onclick="submitMovieOrder()"
-        >
-          Submit Order ✓
-        </button>
-
-      </div>
-
-
-      <div class="secure-note">
-
-        🔒 Your payment information is submitted securely.
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MOVIE SCREEN 3
-========================================================= -->
-
-<section
-  class="screen"
-  id="movieScreen3"
->
-
-  <div class="checkout-card">
-
-    <div class="card-inner">
-
-      <div class="success-screen">
-
-        <div class="success-icon"></div>
-
-
-        <h1 class="success-title">
-          Order Submitted!
-        </h1>
-
-
-        <p class="success-message">
-
-          Your digital product order has been received successfully.
-
-          <br>
-
-          Please keep your Order ID for reference.
-
-        </p>
-
-
-        <div class="delivery-message">
-
-          🚀 Your order is being processed.
-
-        </div>
-
-
-        <div class="order-id">
-
-          Order ID:
-
-          <span id="movieOrderId">
-            ---
-          </span>
-
-        </div>
-
-
-        <div
-          class="price-box"
-          style="margin-top:20px;text-align:left;"
-        >
-
-          <div class="price-row">
-
-            <span>
-              Status
-            </span>
-
-            <strong style="color:#ffd166;">
-              PROCESSING
-            </strong>
-
-          </div>
-
-
-          <div class="price-row">
-
-            <span>
-              Product
-            </span>
-
-            <strong id="successMovieName">
-              ---
-            </strong>
-
-          </div>
-
-
-          <div class="price-row">
-
-            <span>
-              Amount
-            </span>
-
-            <strong id="successMovieAmount">
-              ₹0
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="buttons">
-
-          <button
-            type="button"
-            class="btn btn-primary"
-            onclick="goHome()"
-          >
-            Back to Home
+            Return to Homepage
           </button>
 
         </div>
@@ -3523,9 +2854,11 @@ input:focus{
 
 
 
-<!-- =========================================================
-     PROCESSING OVERLAY
-========================================================= -->
+<audio id="successSoundEffect" preload="auto">
+  <source src="Screen Recording 2026-08-28 232449.mp4" type="audio/mp4">
+</audio>
+
+
 
 <div
   class="processing-overlay"
@@ -3538,14 +2871,17 @@ input:focus{
 
     <div
       class="loader-number"
-      id="loaderNumber"
+      id="loaderCount"
     >
-      1
+      0%
     </div>
 
 
-    <div class="processing-title">
-      Processing Your Order
+    <div
+      class="processing-title"
+      id="processingTitle"
+    >
+      Verifying Payment
     </div>
 
 
@@ -3553,7 +2889,7 @@ input:focus{
       class="processing-subtitle"
       id="processingSubtitle"
     >
-      Verifying your order details...
+      Connecting to payment gateway and validating details...
     </div>
 
 
@@ -3571,7 +2907,7 @@ input:focus{
       class="processing-percent"
       id="processingPercent"
     >
-      0%
+      Please do not close or refresh this page.
     </div>
 
   </div>
@@ -3580,3056 +2916,234 @@ input:focus{
 
 
 
-<!-- =========================================================
-     CELEBRATION
-========================================================= -->
-
 <div id="celebration"></div>
 
 
 
 <script>
 
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-const UPI_ID =
-  "7889777143@fam";
-
-const UPI_NAME =
-  "SehrAn Media";
-
-const PROMO_CODE =
-  "ZEESHAN10";
-
-const PROMO_PERCENT =
-  10;
+let selectedContactType = 'mobile';
+let currentPrice = 100;
+let finalPrice = 100;
+let isPromoApplied = false;
+const upiId = "sehranmedia@upi";
 
 
-/* =========================================================
-   INSTAGRAM PACKAGES
-========================================================= */
+function selectInstagramContact(type) {
+  selectedContactType = type;
+  const mobileOption = document.getElementById('instagramMobileOption');
+  const emailOption = document.getElementById('instagramEmailOption');
+  const mobileField = document.getElementById('instagramMobileField');
+  const emailField = document.getElementById('instagramEmailField');
 
-const INSTAGRAM_PACKAGES = {
+  if (type === 'mobile') {
+    mobileOption.classList.add('active');
+    emailOption.classList.remove('active');
+    mobileField.style.display = 'block';
+    emailField.style.display = 'none';
+  } else {
+    emailOption.classList.add('active');
+    mobileOption.classList.remove('active');
+    emailField.style.display = 'block';
+    mobileField.style.display = 'none';
+  }
+}
 
-  "200":{
-    name:"Starter — 200 Followers",
-    followers:200,
-    price:30
-  },
 
-  "500":{
-    name:"Starter Plus — 500 Followers",
-    followers:500,
-    price:50
-  },
+function applyInstagramPromo() {
+  const code = document.getElementById('instagramPromoCode').value.trim().toUpperCase();
+  const status = document.getElementById('instagramPromoStatus');
+  const error = document.getElementById('instagramPromoError');
+  const btn = document.getElementById('instagramPromoButton');
 
-  "1000":{
-    name:"Popular — 1,000 Followers",
-    followers:1000,
-    price:90
-  },
+  if (code === 'SEHRAN10' || code === 'WELCOME10') {
+    isPromoApplied = true;
+    finalPrice = Math.round(currentPrice * 0.9);
+    
+    status.classList.add('show');
+    error.classList.remove('show');
+    btn.classList.add('applied');
+    btn.innerText = 'Applied ✓';
+    
+    document.getElementById('instagramOriginalRow').style.display = 'flex';
+    document.getElementById('instagramDiscountRow').style.display = 'flex';
+    document.getElementById('instagramOriginalDisplay').innerText = '₹' + currentPrice;
+    document.getElementById('instagramDiscountDisplay').innerText = '-₹' + (currentPrice - finalPrice);
+    document.getElementById('instagramFinal').innerText = '₹' + finalPrice;
+  } else {
+    error.classList.add('show');
+    status.classList.remove('show');
+  }
+}
 
-  "1500":{
-    name:"Growth — 1,500 Followers",
-    followers:1500,
-    price:130
-  },
 
-  "2000":{
-    name:"Growth Plus — 2,000 Followers",
-    followers:2000,
-    price:150
-  },
+function showScreen(screenId, stepNumber) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
 
-  "3000":{
-    name:"Pro — 3,000 Followers",
-    followers:3000,
-    price:200
-  },
-
-  "4000":{
-    name:"Pro Plus — 4,000 Followers",
-    followers:4000,
-    price:250
-  },
-
-  "5000":{
-    name:"Premium — 5,000 Followers",
-    followers:5000,
-    price:300
-  },
-
-  "6000":{
-    name:"Premium Plus — 6,000 Followers",
-    followers:6000,
-    price:350
-  },
-
-  "7000":{
-    name:"Advanced — 7,000 Followers",
-    followers:7000,
-    price:450
-  },
-
-  "8000":{
-    name:"Advanced Plus — 8,000 Followers",
-    followers:8000,
-    price:500
-  },
-
-  "9000":{
-    name:"Elite — 9,000 Followers",
-    followers:9000,
-    price:550
-  },
-
-  "10000":{
-    name:"Elite Plus — 10,000 Followers",
-    followers:10000,
-    price:600
+  // Update progress bar
+  for (let i = 1; i <= 3; i++) {
+    const step = document.getElementById('progressStep' + i);
+    if (i < stepNumber) {
+      step.className = 'progress-step done';
+    } else if (i === stepNumber) {
+      step.className = 'progress-step active';
+    } else {
+      step.className = 'progress-step';
+    }
   }
 
-};
-
-
-/* =========================================================
-   URL PARAMETERS
-========================================================= */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-const productType =
-  (
-    params.get("product") ||
-    params.get("type") ||
-    ""
-  )
-  .toLowerCase()
-  .trim();
-
-
-const isMovie =
-  productType === "movie";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getNumber(value){
-
-  if(!value){
-    return 0;
+  if (stepNumber >= 2) {
+    document.getElementById('line1').classList.add('active');
+  } else {
+    document.getElementById('line1').classList.remove('active');
   }
 
-
-  const cleaned =
-    String(value)
-      .replace(/,/g,"")
-      .replace(/₹/g,"")
-      .replace(/INR/gi,"")
-      .trim();
-
-
-  const match =
-    cleaned.match(
-      /(\d+(?:\.\d{1,2})?)/
-    );
-
-
-  return match
-    ? Number(match[1])
-    : 0;
-}
-
-
-function money(value){
-
-  const number =
-    Number(value) || 0;
-
-
-  if(
-    Number.isInteger(number)
-  ){
-
-    return "₹" + number;
-
+  if (stepNumber >= 3) {
+    document.getElementById('line2').classList.add('active');
+  } else {
+    document.getElementById('line2').classList.remove('active');
   }
-
-
-  return "₹" +
-    number.toFixed(2);
 }
 
 
-/* =========================================================
-   INSTAGRAM DATA
-========================================================= */
-
-const requestedPackage =
-  params.get("followers") ||
-  params.get("package") ||
-  params.get("pkg") ||
-  params.get("service") ||
-  "";
-
-
-const normalizedPackage =
-  String(requestedPackage)
-    .replace(/,/g,"")
-    .replace(/\s+/g,"")
-    .replace(/followers/gi,"")
-    .replace(/follower/gi,"")
-    .trim();
-
-
-const selectedInstagramPackage =
-  INSTAGRAM_PACKAGES[
-    normalizedPackage
-  ] || null;
-
-
-const instagramPackage =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.name
-    : "Invalid Instagram Package";
-
-
-const instagramPrice =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.price
-    : 0;
-
-
-const instagramFollowers =
-  selectedInstagramPackage
-    ? selectedInstagramPackage.followers
-    : 0;
-
-
-/* =========================================================
-   MOVIE DATA
-========================================================= */
-
-const movieName =
-  params.get("name") ||
-  params.get("movie") ||
-  "Selected Movie";
-
-
-const moviePrice =
-  getNumber(
-    params.get("price") ||
-    params.get("amount") ||
-    "0"
-  );
-
-
-const movieYear =
-  params.get("year") || "";
-
-
-const movieQuality =
-  params.get("quality") ||
-  "Digital";
-
-
-const movieLanguage =
-  params.get("language") ||
-  "";
-
-
-const movieSize =
-  params.get("size") ||
-  "";
-
-
-/* =========================================================
-   PRICE STATE
-========================================================= */
-
-let instagramPromoApplied =
-  false;
-
-
-let instagramFinalPrice =
-  instagramPrice;
-
-
-let movieFinalPrice =
-  moviePrice;
-
-
-/* =========================================================
-   DISCOUNT
-========================================================= */
-
-function calculateDiscount(
-  amount
-){
-
-  const numeric =
-    Number(amount) || 0;
-
-
-  if(numeric <= 0){
-
-    return {
-      discount:0,
-      final:0
-    };
-
-  }
-
-
-  const discount =
-    Math.round(
-      (
-        numeric *
-        PROMO_PERCENT /
-        100
-      ) * 100
-    ) / 100;
-
-
-  const final =
-    Math.round(
-      (
-        numeric -
-        discount
-      ) * 100
-    ) / 100;
-
-
-  return {
-    discount,
-    final
-  };
-
-}
-
-
-/* =========================================================
-   INSTAGRAM PROMO
-========================================================= */
-
-function applyInstagramPromo(){
-
-  const input =
-    document.getElementById(
-      "instagramPromoCode"
-    );
-
-
-  const button =
-    document.getElementById(
-      "instagramPromoButton"
-    );
-
-
-  const status =
-    document.getElementById(
-      "instagramPromoStatus"
-    );
-
-
-  const error =
-    document.getElementById(
-      "instagramPromoError"
-    );
-
-
-  const value =
-    input.value
-      .trim()
-      .toUpperCase();
-
-
-  error.classList.remove(
-    "show"
-  );
-
-
-  if(
-    value === PROMO_CODE
-  ){
-
-    instagramPromoApplied =
-      true;
-
-
-    const result =
-      calculateDiscount(
-        instagramPrice
-      );
-
-
-    instagramFinalPrice =
-      result.final;
-
-
-    button.classList.add(
-      "applied"
-    );
-
-
-    button.textContent =
-      "✓ Applied";
-
-
-    status.classList.add(
-      "show"
-    );
-
-
-    input.value =
-      PROMO_CODE;
-
-
-    updateInstagramPrice();
-
-
-  }else{
-
-    instagramPromoApplied =
-      false;
-
-
-    instagramFinalPrice =
-      instagramPrice;
-
-
-    button.classList.remove(
-      "applied"
-    );
-
-
-    button.textContent =
-      "Apply Code";
-
-
-    status.classList.remove(
-      "show"
-    );
-
-
-    error.textContent =
-      value
-        ? "Invalid promo code. Please check and try again."
-        : "Please enter a promo code.";
-
-
-    error.classList.add(
-      "show"
-    );
-
-
-    updateInstagramPrice();
-
-  }
-
-}
-
-
-/* =========================================================
-   INSTAGRAM PRICE UI
-========================================================= */
-
-function updateInstagramPrice(){
-
-  const original =
-    instagramPrice;
-
-
-  const final =
-    instagramPromoApplied
-      ? instagramFinalPrice
-      : instagramPrice;
-
-
-  const discount =
-    instagramPromoApplied
-      ? calculateDiscount(
-          instagramPrice
-        ).discount
-      : 0;
-
-
-  document.getElementById(
-    "instagramTotal"
-  ).textContent =
-    money(original);
-
-
-  document.getElementById(
-    "instagramFinal"
-  ).textContent =
-    money(final);
-
-
-  document.getElementById(
-    "instagramPaymentAmount"
-  ).textContent =
-    money(final);
-
-
-  document.getElementById(
-    "instagramOriginalDisplay"
-  ).textContent =
-    money(original);
-
-
-  document.getElementById(
-    "instagramDiscountDisplay"
-  ).textContent =
-    "-" + money(discount);
-
-
-  document.getElementById(
-    "instagramOriginalRow"
-  ).style.display =
-    instagramPromoApplied
-      ? "flex"
-      : "none";
-
-
-  document.getElementById(
-    "instagramDiscountRow"
-  ).style.display =
-    instagramPromoApplied
-      ? "flex"
-      : "none";
-
-}
-
-
-/* =========================================================
-   MOVIE PRICE UI
-========================================================= */
-
-function updateMoviePrice(){
-
-  const final =
-    movieFinalPrice;
-
-
-  document.getElementById(
-    "movieSummaryPrice"
-  ).textContent =
-    money(moviePrice);
-
-
-  document.getElementById(
-    "movieTotal"
-  ).textContent =
-    money(final);
-
-
-  document.getElementById(
-    "moviePaymentAmount"
-  ).textContent =
-    money(final);
-
-}
-
-
-/* =========================================================
-   UPI
-========================================================= */
-
-function buildUPI(
-  amount
-){
-
-  return (
-    "upi://pay" +
-    "?pa=" +
-    encodeURIComponent(
-      UPI_ID
-    ) +
-    "&pn=" +
-    encodeURIComponent(
-      UPI_NAME
-    ) +
-    "&am=" +
-    encodeURIComponent(
-      Number(amount).toFixed(2)
-    ) +
-    "&cu=INR"
-  );
-
-}
-
-
-/* =========================================================
-   QR
-========================================================= */
-
-function generateQR(
-  elementId,
-  amount
-){
-
-  const container =
-    document.getElementById(
-      elementId
-    );
-
-
-  if(!container){
+function instagramContinue() {
+  const error = document.getElementById('instagramError1');
+  const username = document.getElementById('instagramUsername').value.trim();
+  const profile = document.getElementById('instagramProfile').value.trim();
+
+  if (!username || !profile) {
+    error.innerText = "Please fill in all required fields marked with *";
+    error.classList.add('show');
     return;
   }
 
-
-  container.innerHTML =
-    "";
-
-
-  if(
-    !amount ||
-    amount <= 0 ||
-    typeof QRCode ===
-      "undefined"
-  ){
-
-    return;
-  }
-
-
-  new QRCode(
-    container,
-    {
-
-      text:
-        buildUPI(amount),
-
-      width:
-        290,
-
-      height:
-        290,
-
-      colorDark:
-        "#000000",
-
-      colorLight:
-        "#ffffff",
-
-      correctLevel:
-        QRCode.CorrectLevel.H
-
-    }
-  );
-
+  error.classList.remove('show');
+  document.getElementById('instagramPaymentAmount').innerText = '₹' + finalPrice;
+  generateQRCode(finalPrice);
+  showScreen('instagramScreen2', 2);
 }
 
 
-/* =========================================================
-   UPI PAYMENT
-========================================================= */
-
-function payUPI(
-  amount,
-  errorId
-){
-
-  if(
-    !amount ||
-    amount <= 0
-  ){
-
-    showError(
-      errorId,
-      "Invalid payment amount."
-    );
-
-    return;
-  }
-
-
-  window.location.href =
-    buildUPI(amount);
-
-}
-
-
-/* =========================================================
-   COPY UPI
-========================================================= */
-
-async function copyUPI(){
-
-  try{
-
-    await navigator
-      .clipboard
-      .writeText(
-        UPI_ID
-      );
-
-
-    document
-      .querySelectorAll(
-        ".copy-success"
-      )
-      .forEach(
-        box => {
-
-          box.classList.add(
-            "show"
-          );
-
-
-          setTimeout(
-            () => {
-
-              box.classList.remove(
-                "show"
-              );
-
-            },
-            2500
-          );
-
-        }
-      );
-
-
-  }catch{
-
-    alert(
-      "UPI ID: " +
-      UPI_ID
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   SCREEN MANAGEMENT
-========================================================= */
-
-function hideAllScreens(){
-
-  document
-    .querySelectorAll(
-      ".screen"
-    )
-    .forEach(
-      screen => {
-
-        screen.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-}
-
-
-function updateProgress(
-  number
-){
-
-  for(
-    let i=1;
-    i<=3;
-    i++
-  ){
-
-    const circle =
-      document.getElementById(
-        "step" + i
-      );
-
-
-    const step =
-      document.getElementById(
-        "progressStep" + i
-      );
-
-
-    if(!circle || !step){
-      continue;
-    }
-
-
-    step.classList.toggle(
-      "active",
-      i === number
-    );
-
-
-    step.classList.toggle(
-      "done",
-      i < number
-    );
-
-
-    if(i < number){
-
-      circle.textContent =
-        "✓";
-
-    }else{
-
-      circle.textContent =
-        i;
-
-    }
-
-  }
-
-
-  document
-    .getElementById(
-      "line1"
-    )
-    .classList.toggle(
-      "active",
-      number >= 2
-    );
-
-
-  document
-    .getElementById(
-      "line2"
-    )
-    .classList.toggle(
-      "active",
-      number >= 3
-    );
-
-}
-
-
-/* =========================================================
-   MOVIE SCREENS
-========================================================= */
-
-function movieShowScreen(
-  number
-){
-
-  hideAllScreens();
-
-
-  const screen =
-    document.getElementById(
-      "movieScreen" + number
-    );
-
-
-  if(screen){
-
-    screen.classList.add(
-      "active"
-    );
-
-  }
-
-
-  updateProgress(
-    number
-  );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+function generateQRCode(amount) {
+  const qrContainer = document.getElementById("instagramQR");
+  qrContainer.innerHTML = "";
+  const upiURI = `upi://pay?pa=${upiId}&pn=SehrAn%20Media&am=${amount}&cu=INR`;
+  
+  new QRCode(qrContainer, {
+    text: upiURI,
+    width: 290,
+    height: 290
   });
-
 }
 
 
-/* =========================================================
-   INSTAGRAM SCREENS
-========================================================= */
-
-function instagramShowScreen(
-  number
-){
-
-  hideAllScreens();
+function payViaUPI() {
+  const upiURI = `upi://pay?pa=${upiId}&pn=SehrAn%20Media&am=${finalPrice}&cu=INR`;
+  window.location.href = upiURI;
+}
 
 
-  const screen =
-    document.getElementById(
-      "instagramScreen" + number
-    );
-
-
-  if(screen){
-
-    screen.classList.add(
-      "active"
-    );
-
-  }
-
-
-  updateProgress(
-    number
-  );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+function copyUPI() {
+  navigator.clipboard.writeText(upiId).then(() => {
+    const msg = document.getElementById('copySuccess');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 3000);
   });
-
 }
 
 
-/* =========================================================
-   MOVIE INITIALIZATION
-========================================================= */
-
-function initializeMovie(){
-
-  document.getElementById(
-    "brandSubtitle"
-  ).textContent =
-    "Digital Products • Secure Checkout";
-
-
-  document.getElementById(
-    "movieName"
-  ).textContent =
-    movieName;
-
-
-  document.getElementById(
-    "moviePrice"
-  ).textContent =
-    money(moviePrice);
-
-
-  const meta =
-    document.getElementById(
-      "movieMeta"
-    );
-
-
-  meta.innerHTML =
-    "";
-
-
-  if(movieYear){
-
-    const span =
-      document.createElement(
-        "span"
-      );
-
-    span.textContent =
-      movieYear;
-
-    meta.appendChild(
-      span
-    );
-
+function validateFile(input) {
+  const display = document.getElementById('fileNameDisplay');
+  if (input.files && input.files[0]) {
+    display.innerText = "File Attached: " + input.files[0].name;
+    display.className = "file-name file-valid";
+  } else {
+    display.innerText = "Upload your payment screenshot after completing payment.";
+    display.className = "file-name";
   }
+}
 
 
-  if(movieQuality){
-
-    const span =
-      document.createElement(
-        "span"
-      );
-
-    span.textContent =
-      movieQuality;
-
-    meta.appendChild(
-      span
-    );
-
+function playSuccessSound() {
+  const audio = document.getElementById("successSoundEffect");
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play().catch(err => {
+      console.log("Audio playback error: ", err);
+    });
   }
+}
 
 
-  if(movieLanguage){
-
-    const span =
-      document.createElement(
-        "span"
-      );
-
-    span.textContent =
-      movieLanguage;
-
-    meta.appendChild(
-      span
-    );
-
+function triggerCelebration() {
+  const container = document.getElementById('celebration');
+  container.innerHTML = '';
+  
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.innerText = '★';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+    star.style.fontSize = (Math.random() * 20 + 12) + 'px';
+    container.appendChild(star);
   }
-
-
-  if(movieSize){
-
-    const span =
-      document.createElement(
-        "span"
-      );
-
-    span.textContent =
-      movieSize;
-
-    meta.appendChild(
-      span
-    );
-
-  }
-
-
-  updateMoviePrice();
-
 }
 
 
-/* =========================================================
-   MOVIE CONTACT
-========================================================= */
+function submitInstagramOrder() {
+  const fileInput = document.getElementById('instagramScreenshot');
+  const error = document.getElementById('instagramError2');
 
-let movieContactMethod =
-  "mobile";
-
-
-function selectMovieContact(
-  method
-){
-
-  movieContactMethod =
-    method;
-
-
-  document
-    .getElementById(
-      "movieMobileOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "mobile"
-    );
-
-
-  document
-    .getElementById(
-      "movieEmailOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "email"
-    );
-
-
-  document
-    .getElementById(
-      "movieMobileField"
-    )
-    .style.display =
-      method === "mobile"
-        ? "block"
-        : "none";
-
-
-  document
-    .getElementById(
-      "movieEmailField"
-    )
-    .style.display =
-      method === "email"
-        ? "block"
-        : "none";
-
-}
-
-
-/* =========================================================
-   INSTAGRAM CONTACT
-========================================================= */
-
-let instagramContactMethod =
-  "mobile";
-
-
-function selectInstagramContact(
-  method
-){
-
-  instagramContactMethod =
-    method;
-
-
-  document
-    .getElementById(
-      "instagramMobileOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "mobile"
-    );
-
-
-  document
-    .getElementById(
-      "instagramEmailOption"
-    )
-    .classList.toggle(
-      "active",
-      method === "email"
-    );
-
-
-  document
-    .getElementById(
-      "instagramMobileField"
-    )
-    .style.display =
-      method === "mobile"
-        ? "block"
-        : "none";
-
-
-  document
-    .getElementById(
-      "instagramEmailField"
-    )
-    .style.display =
-      method === "email"
-        ? "block"
-        : "none";
-
-}
-
-
-/* =========================================================
-   VALIDATION
-========================================================= */
-
-function isValidIndianMobile(
-  value
-){
-
-  const normalized =
-    String(value)
-      .replace(
-        /[^\d+]/g,
-        ""
-      )
-      .replace(
-        /^\+91/,
-        ""
-      )
-      .replace(
-        /^91(?=\d{10}$)/,
-        ""
-      );
-
-
-  return /^[6-9]\d{9}$/.test(
-    normalized
-  );
-
-}
-
-
-function isValidEmail(
-  value
-){
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-    .test(value);
-
-}
-
-
-/* =========================================================
-   MOVIE CONTACT
-========================================================= */
-
-function getMovieContact(){
-
-  return {
-
-    mobile:
-      document
-        .getElementById(
-          "movieMobile"
-        )
-        .value
-        .trim()
-        .replace(
-          /[^\d+]/g,
-          ""
-        ),
-
-    email:
-      document
-        .getElementById(
-          "movieEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase()
-
-  };
-
-}
-
-
-/* =========================================================
-   MOVIE STEP 1
-========================================================= */
-
-function movieContinuePayment(){
-
-  clearErrors();
-
-
-  if(moviePrice <= 0){
-
-    showError(
-      "movieError1",
-      "Movie price could not be detected."
-    );
-
+  if (!fileInput.files || !fileInput.files[0]) {
+    error.innerText = "Please upload a screenshot of your payment to proceed.";
+    error.classList.add('show');
     return;
   }
 
-
-  const contact =
-    getMovieContact();
-
-
-  if(
-    !contact.mobile &&
-    !contact.email
-  ){
-
-    showError(
-      "movieError1",
-      "Please provide your mobile number or email address."
-    );
-
-    return;
-  }
-
-
-  if(
-    movieContactMethod ===
-    "mobile"
-  ){
-
-    if(
-      !isValidIndianMobile(
-        contact.mobile
-      )
-    ){
-
-      showError(
-        "movieError1",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
+  error.classList.remove('show');
+  
+  const overlay = document.getElementById('processingOverlay');
+  const progressBar = document.getElementById('processingProgressBar');
+  const loaderCount = document.getElementById('loaderCount');
+  
+  overlay.classList.add('show');
+  
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 5;
+    progressBar.style.width = progress + '%';
+    loaderCount.innerText = progress + '%';
+    
+    if (progress >= 100) {
+      clearInterval(interval);
+      overlay.classList.remove('show');
+      
+      const randomID = '#SRM-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('displayOrderId').innerText = randomID;
+      
+      showScreen('successScreen', 3);
+      playSuccessSound();
+      triggerCelebration();
     }
-
-  }else{
-
-    if(
-      !isValidEmail(
-        contact.email
-      )
-    ){
-
-      showError(
-        "movieError1",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-
-  }
-
-
-  generateQR(
-    "movieQR",
-    movieFinalPrice
-  );
-
-
-  movieShowScreen(2);
-
+  }, 100);
 }
 
 
-/* =========================================================
-   MOVIE PAY
-========================================================= */
-
-function moviePayUPI(){
-
-  payUPI(
-    movieFinalPrice,
-    "movieError2"
-  );
-
+function goHome() {
+  window.location.href = "/index.html";
 }
 
 
-/* =========================================================
-   INSTAGRAM STEP 1
-========================================================= */
-
-function instagramContinue(){
-
-  clearErrors();
-
-
-  if(
-    !selectedInstagramPackage
-  ){
-
-    showError(
-      "instagramError1",
-      "Invalid Instagram package. Please go back and select a package again."
-    );
-
-    return;
-  }
-
-
-  if(
-    instagramPrice <= 0
-  ){
-
-    showError(
-      "instagramError1",
-      "Invalid package price."
-    );
-
-    return;
-  }
-
-
-  const mobile =
-    document
-      .getElementById(
-        "instagramMobile"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "instagramEmail"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const username =
-    document
-      .getElementById(
-        "instagramUsername"
-      )
-      .value
-      .trim()
-      .replace(
-        /^@+/,
-        ""
-      );
-
-
-  const profile =
-    document
-      .getElementById(
-        "instagramProfile"
-      )
-      .value
-      .trim();
-
-
-  if(
-    instagramContactMethod ===
-    "mobile"
-  ){
-
-    if(
-      !isValidIndianMobile(
-        mobile
-      )
-    ){
-
-      showError(
-        "instagramError1",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-
-  }else{
-
-    if(
-      !isValidEmail(
-        email
-      )
-    ){
-
-      showError(
-        "instagramError1",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-
-  }
-
-
-  if(
-    !/^[A-Za-z0-9._]{1,30}$/
-      .test(username)
-  ){
-
-    showError(
-      "instagramError1",
-      "Please enter a valid Instagram username."
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const url =
-      new URL(profile);
-
-
-    const hostname =
-      url.hostname
-        .toLowerCase()
-        .replace(
-          /^www\./,
-          ""
-        );
-
-
-    if(
-      hostname !==
-        "instagram.com" &&
-      hostname !==
-        "instagr.am"
-    ){
-
-      throw new Error();
-
-    }
-
-  }catch{
-
-    showError(
-      "instagramError1",
-      "Please enter a valid Instagram profile link."
-    );
-
-    return;
-  }
-
-
-  generateQR(
-    "instagramQR",
-    instagramFinalPrice
-  );
-
-
-  instagramShowScreen(2);
-
-}
-
-
-/* =========================================================
-   INSTAGRAM PAY
-========================================================= */
-
-function instagramPayUPI(){
-
-  payUPI(
-    instagramFinalPrice,
-    "instagramError2"
-  );
-
-}
-
-
-/* =========================================================
-   FILE VALIDATION
-========================================================= */
-
-function validateFile(
-  input,
-  id
-){
-
-  const file =
-    input.files &&
-    input.files[0];
-
-
-  const display =
-    document.getElementById(
-      id
-    );
-
-
-  if(!file){
-
-    display.textContent =
-      "No screenshot selected";
-
-
-    display.className =
-      "file-name";
-
-
-    return false;
-
-  }
-
-
-  const allowedTypes = [
-
-    "image/jpeg",
-
-    "image/png",
-
-    "image/webp"
-
-  ];
-
-
-  if(
-    !allowedTypes.includes(
-      file.type
-    )
-  ){
-
-    display.textContent =
-      "✕ Invalid file type";
-
-
-    display.className =
-      "file-name file-warning";
-
-
-    return false;
-
-  }
-
-
-  if(
-    file.size >
-    5 * 1024 * 1024
-  ){
-
-    display.textContent =
-      "✕ File is larger than 5 MB";
-
-
-    display.className =
-      "file-name file-warning";
-
-
-    return false;
-
-  }
-
-
-  const size =
-    (
-      file.size /
-      1024 /
-      1024
-    ).toFixed(2);
-
-
-  display.textContent =
-    "✓ " +
-    file.name +
-    " • " +
-    size +
-    " MB";
-
-
-  display.className =
-    "file-name file-valid";
-
-
-  return true;
-
-}
-
-
-/* =========================================================
-   BASE64
-========================================================= */
-
-function fileToBase64(
-  file
-){
-
-  return new Promise(
-    (resolve,reject)=>{
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        () => {
-
-          resolve(
-            reader.result
-          );
-
-        };
-
-
-      reader.onerror =
-        () => {
-
-          reject(
-            new Error(
-              "Could not read screenshot."
-            )
-          );
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   FILE EVENTS
-========================================================= */
-
-document
-  .getElementById(
-    "movieScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "movieFileName"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "instagramScreenshot"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      validateFile(
-        this,
-        "instagramFileName"
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   PROCESSING
-========================================================= */
-
-function showProcessing(){
-
-  const overlay =
-    document.getElementById(
-      "processingOverlay"
-    );
-
-
-  const bar =
-    document.getElementById(
-      "processingProgressBar"
-    );
-
-
-  const percent =
-    document.getElementById(
-      "processingPercent"
-    );
-
-
-  const number =
-    document.getElementById(
-      "loaderNumber"
-    );
-
-
-  const subtitle =
-    document.getElementById(
-      "processingSubtitle"
-    );
-
-
-  overlay.classList.add(
-    "show"
-  );
-
-
-  let progress =
-    0;
-
-
-  const messages = [
-
-    "Verifying your order details...",
-
-    "Preparing secure payment information...",
-
-    "Uploading your payment screenshot...",
-
-    "Sending your order securely...",
-
-    "Almost done..."
-
-  ];
-
-
-  const interval =
-    setInterval(
-      () => {
-
-        progress +=
-          Math.floor(
-            Math.random() * 7
-          ) + 4;
-
-
-        if(progress > 96){
-          progress = 96;
-        }
-
-
-        bar.style.width =
-          progress + "%";
-
-
-        percent.textContent =
-          progress + "%";
-
-
-        number.textContent =
-          Math.min(
-            10,
-            Math.ceil(
-              progress / 10
-            )
-          );
-
-
-        const index =
-          Math.min(
-            messages.length - 1,
-            Math.floor(
-              progress / 20
-            )
-          );
-
-
-        subtitle.textContent =
-          messages[index];
-
-      },
-      350
-    );
-
-
-  return {
-
-    finish:function(){
-
-      clearInterval(
-        interval
-      );
-
-
-      bar.style.width =
-        "100%";
-
-
-      percent.textContent =
-        "100%";
-
-
-      number.textContent =
-        "10";
-
-
-      subtitle.textContent =
-        "Order submitted successfully!";
-
-
-      return new Promise(
-        resolve => {
-
-          setTimeout(
-            resolve,
-            550
-          );
-
-        }
-      );
-
-    }
-
-  };
-
-}
-
-
-/* =========================================================
-   LOUD PREMIUM SUCCESS SOUND
-========================================================= */
-
-function playSuccessSound(){
-
-  try{
-
-    const AudioContext =
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-
-    if(!AudioContext){
-      return;
-    }
-
-
-    const ctx =
-      new AudioContext();
-
-
-    if(ctx.state === "suspended"){
-
-      ctx.resume()
-        .catch(()=>{});
-
-    }
-
-
-    const master =
-      ctx.createGain();
-
-
-    /*
-      Increased volume.
-      Previous version was much softer.
-    */
-
-    master.gain.setValueAtTime(
-      0.72,
-      ctx.currentTime
-    );
-
-
-    master.connect(
-      ctx.destination
-    );
-
-
-    const now =
-      ctx.currentTime;
-
-
-    function tone(
-      frequency,
-      start,
-      duration,
-      volume,
-      type
-    ){
-
-      const oscillator =
-        ctx.createOscillator();
-
-
-      const gain =
-        ctx.createGain();
-
-
-      oscillator.type =
-        type || "sine";
-
-
-      oscillator.frequency
-        .setValueAtTime(
-          frequency,
-          now + start
-        );
-
-
-      gain.gain
-        .setValueAtTime(
-          0.001,
-          now + start
-        );
-
-
-      gain.gain
-        .exponentialRampToValueAtTime(
-          volume,
-          now + start + .025
-        );
-
-
-      gain.gain
-        .exponentialRampToValueAtTime(
-          0.001,
-          now + start + duration
-        );
-
-
-      oscillator.connect(
-        gain
-      );
-
-
-      gain.connect(
-        master
-      );
-
-
-      oscillator.start(
-        now + start
-      );
-
-
-      oscillator.stop(
-        now + start + duration + .05
-      );
-
-    }
-
-
-    /*
-      Loud premium confirmation chord
-    */
-
-    tone(
-      392.00,
-      0,
-      .20,
-      .95,
-      "sine"
-    );
-
-
-    tone(
-      523.25,
-      .08,
-      .24,
-      1.00,
-      "sine"
-    );
-
-
-    tone(
-      659.25,
-      .17,
-      .28,
-      1.00,
-      "sine"
-    );
-
-
-    tone(
-      783.99,
-      .27,
-      .42,
-      1.00,
-      "sine"
-    );
-
-
-    /*
-      Bright confirmation sparkle
-    */
-
-    tone(
-      1046.50,
-      .38,
-      .30,
-      .70,
-      "triangle"
-    );
-
-
-    tone(
-      1318.51,
-      .43,
-      .25,
-      .48,
-      "triangle"
-    );
-
-
-    /*
-      Small low confirmation hit
-    */
-
-    tone(
-      261.63,
-      0,
-      .32,
-      .42,
-      "sine"
-    );
-
-
-    setTimeout(
-      () => {
-
-        try{
-          ctx.close();
-        }catch{}
-
-      },
-      1700
-    );
-
-
-  }catch(error){
-
-    console.log(
-      "Success sound unavailable:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   MOVIE SUBMIT
-========================================================= */
-
-async function submitMovieOrder(){
-
-  clearErrors();
-
-
-  if(moviePrice <= 0){
-
-    showError(
-      "movieError2",
-      "Invalid movie price."
-    );
-
-    return;
-  }
-
-
-  const contact =
-    getMovieContact();
-
-
-  const utr =
-    document
-      .getElementById(
-        "movieUTR"
-      )
-      .value
-      .trim();
-
-
-  const fileInput =
-    document.getElementById(
-      "movieScreenshot"
-    );
-
-
-  if(
-    movieContactMethod ===
-    "mobile"
-  ){
-
-    if(
-      !isValidIndianMobile(
-        contact.mobile
-      )
-    ){
-
-      showError(
-        "movieError2",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-
-  }else{
-
-    if(
-      !isValidEmail(
-        contact.email
-      )
-    ){
-
-      showError(
-        "movieError2",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-
-  }
-
-
-  if(!fileInput.files[0]){
-
-    showError(
-      "movieError2",
-      "Please upload your payment screenshot."
-    );
-
-    return;
-  }
-
-
-  if(
-    !validateFile(
-      fileInput,
-      "movieFileName"
-    )
-  ){
-
-    showError(
-      "movieError2",
-      "Please select a valid payment screenshot."
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "movieSubmitBtn"
-    );
-
-
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    "Submitting...";
-
-
-  const processing =
-    showProcessing();
-
-
-  try{
-
-    const screenshot =
-      await fileToBase64(
-        fileInput.files[0]
-      );
-
-
-    const payload = {
-
-      type:
-        "movie",
-
-      product:
-        "movie",
-
-      movie:
-        movieName,
-
-      movieName:
-        movieName,
-
-      year:
-        movieYear,
-
-      quality:
-        movieQuality,
-
-      language:
-        movieLanguage,
-
-      size:
-        movieSize,
-
-      package:
-        movieName,
-
-      originalAmount:
-        Number(moviePrice)
-          .toFixed(2),
-
-      discount:
-        "0.00",
-
-      promoCode:
-        "",
-
-      promoApplied:
-        false,
-
-      amount:
-        Number(movieFinalPrice)
-          .toFixed(2),
-
-      mobile:
-        contact.mobile,
-
-      email:
-        contact.email,
-
-      utr:
-        utr,
-
-      screenshot:
-        screenshot
-
-    };
-
-
-    const response =
-      await fetch(
-        "/api/orders",
-        {
-
-          method:
-            "POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    let data = {};
-
-
-    try{
-
-      data =
-        await response.json();
-
-    }catch{}
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Unable to submit movie order."
-      );
-
-    }
-
-
-    await processing.finish();
-
-
-    document.getElementById(
-      "movieOrderId"
-    ).textContent =
-      data.orderId ||
-      "---";
-
-
-    document.getElementById(
-      "successMovieName"
-    ).textContent =
-      movieName;
-
-
-    document.getElementById(
-      "successMovieAmount"
-    ).textContent =
-      money(movieFinalPrice);
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    playSuccessSound();
-
-
-    createStars(
-      180
-    );
-
-
-    movieShowScreen(
-      3
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Movie order error:",
-      error
-    );
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    showError(
-      "movieError2",
-      error.message ||
-      "Unable to submit order. Please try again."
-    );
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      "Submit Order ✓";
-
-  }
-
-}
-
-
-/* =========================================================
-   INSTAGRAM SUBMIT
-========================================================= */
-
-async function submitInstagramOrder(){
-
-  clearErrors();
-
-
-  if(
-    !selectedInstagramPackage
-  ){
-
-    showError(
-      "instagramError2",
-      "Invalid Instagram package."
-    );
-
-    return;
-  }
-
-
-  if(
-    instagramPrice <= 0
-  ){
-
-    showError(
-      "instagramError2",
-      "Invalid package price."
-    );
-
-    return;
-  }
-
-
-  const mobile =
-    document
-      .getElementById(
-        "instagramMobile"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "instagramEmail"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const username =
-    document
-      .getElementById(
-        "instagramUsername"
-      )
-      .value
-      .trim()
-      .replace(
-        /^@+/,
-        ""
-      );
-
-
-  const profile =
-    document
-      .getElementById(
-        "instagramProfile"
-      )
-      .value
-      .trim();
-
-
-  const utr =
-    document
-      .getElementById(
-        "instagramUTR"
-      )
-      .value
-      .trim();
-
-
-  const fileInput =
-    document.getElementById(
-      "instagramScreenshot"
-    );
-
-
-  if(
-    instagramContactMethod ===
-    "mobile"
-  ){
-
-    if(
-      !isValidIndianMobile(
-        mobile
-      )
-    ){
-
-      showError(
-        "instagramError2",
-        "Please enter a valid Indian mobile number."
-      );
-
-      return;
-    }
-
-  }else{
-
-    if(
-      !isValidEmail(
-        email
-      )
-    ){
-
-      showError(
-        "instagramError2",
-        "Please enter a valid email address."
-      );
-
-      return;
-    }
-
-  }
-
-
-  if(
-    !/^[A-Za-z0-9._]{1,30}$/
-      .test(username)
-  ){
-
-    showError(
-      "instagramError2",
-      "Please enter a valid Instagram username."
-    );
-
-    return;
-  }
-
-
-  if(!fileInput.files[0]){
-
-    showError(
-      "instagramError2",
-      "Please upload your payment screenshot."
-    );
-
-    return;
-  }
-
-
-  if(
-    !validateFile(
-      fileInput,
-      "instagramFileName"
-    )
-  ){
-
-    showError(
-      "instagramError2",
-      "Please select a valid screenshot."
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "instagramSubmitBtn"
-    );
-
-
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    "Submitting...";
-
-
-  const processing =
-    showProcessing();
-
-
-  try{
-
-    const screenshot =
-      await fileToBase64(
-        fileInput.files[0]
-      );
-
-
-    const discount =
-      instagramPromoApplied
-        ? calculateDiscount(
-            instagramPrice
-          ).discount
-        : 0;
-
-
-    const finalAmount =
-      instagramPromoApplied
-        ? instagramFinalPrice
-        : instagramPrice;
-
-
-    const payload = {
-
-      type:
-        "instagram",
-
-      product:
-        "instagram",
-
-      package:
-        instagramPackage,
-
-      packageId:
-        String(
-          instagramFollowers
-        ),
-
-      followers:
-        instagramFollowers,
-
-      originalAmount:
-        Number(instagramPrice)
-          .toFixed(2),
-
-      discount:
-        Number(discount)
-          .toFixed(2),
-
-      promoCode:
-        instagramPromoApplied
-          ? PROMO_CODE
-          : "",
-
-      promoApplied:
-        instagramPromoApplied,
-
-      amount:
-        Number(finalAmount)
-          .toFixed(2),
-
-      mobile:
-        mobile,
-
-      email:
-        email,
-
-      username:
-        username,
-
-      profile:
-        profile,
-
-      utr:
-        utr,
-
-      screenshot:
-        screenshot
-
-    };
-
-
-    const response =
-      await fetch(
-        "/api/orders",
-        {
-
-          method:
-            "POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    let data = {};
-
-
-    try{
-
-      data =
-        await response.json();
-
-    }catch{}
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Unable to submit Instagram order."
-      );
-
-    }
-
-
-    await processing.finish();
-
-
-    document.getElementById(
-      "instagramOrderId"
-    ).textContent =
-      data.orderId ||
-      "---";
-
-
-    document.getElementById(
-      "successInstagramPackage"
-    ).textContent =
-      instagramPackage;
-
-
-    document.getElementById(
-      "successInstagramAmount"
-    ).textContent =
-      money(finalAmount);
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    /*
-      LOUD SUCCESS SOUND
-    */
-
-    playSuccessSound();
-
-
-    createStars(
-      180
-    );
-
-
-    instagramShowScreen(
-      3
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Instagram order error:",
-      error
-    );
-
-
-    document
-      .getElementById(
-        "processingOverlay"
-      )
-      .classList.remove(
-        "show"
-      );
-
-
-    showError(
-      "instagramError2",
-      error.message ||
-      "Unable to submit order. Please try again."
-    );
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      "Submit Order ✓";
-
-  }
-
-}
-
-
-/* =========================================================
-   CELEBRATION
-========================================================= */
-
-function createStars(
-  count
-){
-
-  const container =
-    document.getElementById(
-      "celebration"
-    );
-
-
-  const symbols = [
-
-    "★",
-    "✦",
-    "✧",
-    "⭐",
-    "✨",
-    "◆"
-
-  ];
-
-
-  for(
-    let i=0;
-    i<count;
-    i++
-  ){
-
-    const star =
-      document.createElement(
-        "div"
-      );
-
-
-    star.className =
-      "star";
-
-
-    star.textContent =
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ];
-
-
-    star.style.left =
-      Math.random() *
-      100 +
-      "%";
-
-
-    star.style.fontSize =
-      12 +
-      Math.random() *
-      22 +
-      "px";
-
-
-    star.style.animationDuration =
-      2 +
-      Math.random() *
-      3 +
-      "s";
-
-
-    star.style.animationDelay =
-      Math.random() *
-      .8 +
-      "s";
-
-
-    container.appendChild(
-      star
-    );
-
-
-    setTimeout(
-      () => {
-
-        star.remove();
-
-      },
-      6000
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(
-  id,
-  message
-){
-
-  const box =
-    document.getElementById(
-      id
-    );
-
-
-  if(!box){
-    return;
-  }
-
-
-  box.textContent =
-    message;
-
-
-  box.classList.add(
-    "show"
-  );
-
-
-  box.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-}
-
-
-function clearErrors(){
-
-  document
-    .querySelectorAll(
-      ".error"
-    )
-    .forEach(
-      box => {
-
-        box.classList.remove(
-          "show"
-        );
-
-
-        box.textContent =
-          "";
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      ".promo-error"
-    )
-    .forEach(
-      box => {
-
-        box.classList.remove(
-          "show"
-        );
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
-
-function goHome(){
-
-  window.location.href =
-    "/index.html";
-
-}
-
-
-/* =========================================================
-   ENTER KEY
-========================================================= */
-
-document
-  .getElementById(
-    "instagramPromoCode"
-  )
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key ===
-        "Enter"
-      ){
-
-        event.preventDefault();
-
-        applyInstagramPromo();
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-if(isMovie){
-
-  initializeMovie();
-
-  hideAllScreens();
-
-  document
-    .getElementById(
-      "movieScreen1"
-    )
-    .classList.add(
-      "active"
-    );
-
-  updateProgress(1);
-
-}else{
-
-  document
-    .getElementById(
-      "brandSubtitle"
-    )
-    .textContent =
-      "Instagram Services • Secure Checkout";
-
-
-  document
-    .getElementById(
-      "instagramPackage"
-    )
-    .textContent =
-      instagramPackage;
-
-
-  document
-    .getElementById(
-      "instagramPrice"
-    )
-    .textContent =
-      money(instagramPrice);
-
-
-  updateInstagramPrice();
-
-  hideAllScreens();
-
-  document
-    .getElementById(
-      "instagramScreen1"
-    )
-    .classList.add(
-      "active"
-    );
-
-  updateProgress(1);
-
-}
+// Initialize page
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById('instagramPackage').innerText = "Instagram Service Package";
+  document.getElementById('instagramPrice').innerText = "₹" + currentPrice;
+  document.getElementById('instagramTotal').innerText = "₹" + currentPrice;
+  document.getElementById('instagramFinal').innerText = "₹" + currentPrice;
+  showScreen('instagramScreen1', 1);
+});
 
 </script>
 
