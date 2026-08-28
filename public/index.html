@@ -1,48 +1,65 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Zeeshan PlayZone — Play. Compete. Enjoy.</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-<meta
-name="description"
-content="Zeeshan PlayZone — a premium browser gaming experience with playable mini games."
+  <meta
+    name="theme-color"
+    content="#071b16"
+  >
 
->
+  <meta
+    name="description"
+    content="Zeeshan PlayZone - Premium browser gaming lobby with slots, lucky wheel and mini games."
+  >
 
-  <meta name="theme-color" content="#09090f">
+  <title>Zeeshan PlayZone</title>
 
   <style>
+
     /* =========================================================
-       ZEESHAN PLAYZONE — SINGLE FILE GAMING APP
+       ZEESHAN PLAYZONE
+       PREMIUM MOBILE GAMING LOBBY
+       SINGLE FILE INDEX.HTML
        ========================================================= */
 
     :root {
-      --bg: #08080d;
-      --bg-2: #101018;
-      --card: #151520;
-      --card-2: #1b1b28;
-      --text: #ffffff;
-      --muted: #9292a3;
-      --line: rgba(255,255,255,.08);
+      --bg: #061814;
+      --bg-deep: #03100d;
+      --panel: #092a22;
+      --panel-2: #0d382e;
+      --panel-3: #12473a;
 
-      --accent: #8b5cf6;
-      --accent-2: #ec4899;
-      --green: #22c55e;
-      --yellow: #fbbf24;
-      --red: #ef4444;
+      --gold: #ffd84b;
+      --gold-2: #ff9f1c;
+
+      --green: #56e39f;
+      --green-2: #0e9f6e;
+
+      --red: #ff4d5e;
+      --pink: #ff4fba;
+
+      --text: #ffffff;
+      --muted: #9cbab1;
+
+      --line: rgba(255,255,255,.10);
+
+      --shadow:
+        0 18px 45px rgba(0,0,0,.45);
 
       --radius: 22px;
-      --shadow: 0 25px 70px rgba(0,0,0,.45);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -52,13 +69,62 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(139,92,246,.16), transparent 28%),
-        radial-gradient(circle at 90% 15%, rgba(236,72,153,.10), transparent 24%),
-        var(--bg);
+
       color: var(--text);
-      font-family: Inter, Arial, Helvetica, sans-serif;
+
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 20% 0%,
+          rgba(20,140,105,.25),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 90% 30%,
+          rgba(255,193,61,.10),
+          transparent 20%
+        ),
+
+        linear-gradient(
+          180deg,
+          #071d18 0%,
+          #03100d 100%
+        );
+
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: .28;
+
+      background-image:
+        radial-gradient(
+          rgba(255,255,255,.08) 1px,
+          transparent 1px
+        );
+
+      background-size: 18px 18px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 70%
+        );
     }
 
     button,
@@ -70,86 +136,182 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       border: none;
     }
 
-    /* ================= SPLASH ================= */
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .6;
+    }
+
+
+    /* =========================================================
+       SPLASH
+       ========================================================= */
 
     #splash {
       position: fixed;
+
       inset: 0;
+
       z-index: 10000;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      background: #08080d;
-      transition: .7s ease;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #0d392d,
+          #04130f 70%
+        );
+
+      transition:
+        opacity .6s ease,
+        visibility .6s ease;
     }
 
     .splash-box {
+      width: min(90%, 360px);
+
       text-align: center;
     }
 
     .splash-logo {
-      width: 92px;
-      height: 92px;
-      margin: auto auto 24px;
-      border-radius: 30px;
+      width: 105px;
+      height: 105px;
+
+      margin:
+        0 auto 22px;
+
       display: grid;
+
       place-items: center;
+
+      border-radius: 32px;
+
+      color: #18210c;
+
       font-size: 34px;
-      font-weight: 900;
+
+      font-weight: 1000;
+
       background:
-        linear-gradient(135deg, var(--accent), var(--accent-2));
+        linear-gradient(
+          135deg,
+          #fff5a1,
+          var(--gold),
+          var(--gold-2)
+        );
+
+      border:
+        4px solid rgba(255,255,255,.22);
+
       box-shadow:
-        0 0 50px rgba(139,92,246,.35),
-        0 0 100px rgba(236,72,153,.15);
-      animation: pulse 1.6s infinite ease-in-out;
+        0 0 25px rgba(255,216,75,.5),
+        0 0 80px rgba(255,159,28,.2);
+
+      animation:
+        splashPulse 1.8s infinite ease-in-out;
     }
 
     .splash-title {
-      font-size: 28px;
-      font-weight: 900;
+      font-size: 27px;
+
+      font-weight: 1000;
+
       letter-spacing: 1px;
     }
 
     .splash-title span {
-      color: #b998ff;
+      color: var(--gold);
     }
 
-    .loader {
-      width: 190px;
-      height: 5px;
-      margin: 24px auto 0;
-      border-radius: 999px;
+    .splash-subtitle {
+      margin-top: 8px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      letter-spacing: 2px;
+    }
+
+    .splash-loader {
+      height: 6px;
+
+      margin-top: 28px;
+
       overflow: hidden;
-      background: #20202b;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.09);
     }
 
-    .loader div {
+    .splash-loader div {
       width: 45%;
       height: 100%;
+
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      animation: load 1.3s infinite ease-in-out;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          #fff7ae,
+          var(--gold),
+          transparent
+        );
+
+      animation:
+        splashLoad 1.5s infinite linear;
     }
 
-    @keyframes load {
-      from { transform: translateX(-100%); }
-      to { transform: translateX(350%); }
-    }
+    @keyframes splashPulse {
 
-    @keyframes pulse {
       50% {
-        transform: scale(1.06);
+        transform: scale(1.07);
       }
+
     }
 
-    /* ================= AUTH ================= */
+    @keyframes splashLoad {
+
+      from {
+        transform: translateX(-120%);
+      }
+
+      to {
+        transform: translateX(330%);
+      }
+
+    }
+
+
+    /* =========================================================
+       AUTH
+       ========================================================= */
 
     .auth-screen {
       min-height: 100vh;
-      padding: 28px 18px;
+
       display: none;
+
       align-items: center;
+
       justify-content: center;
+
+      padding: 24px 16px;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(25,111,83,.28),
+          transparent 45%
+        );
     }
 
     .auth-screen.active {
@@ -157,854 +319,2300 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     }
 
     .auth-wrap {
-      width: min(100%, 460px);
+      width: min(100%, 440px);
     }
 
-    .brand {
+    .auth-brand {
+      margin-bottom: 22px;
+
       display: flex;
+
       align-items: center;
-      gap: 13px;
-      margin-bottom: 28px;
+
+      gap: 12px;
     }
 
-    .brand-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 17px;
+    .auth-brand-logo {
+      width: 54px;
+      height: 54px;
+
       display: grid;
+
       place-items: center;
-      font-size: 20px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+
+      border-radius: 18px;
+
+      color: #16210b;
+
+      font-size: 19px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff6a4,
+          var(--gold),
+          var(--gold-2)
+        );
     }
 
-    .brand h2 {
+    .auth-brand h2 {
       font-size: 20px;
-      font-weight: 900;
+
+      font-weight: 1000;
     }
 
-    .brand p {
-      margin-top: 4px;
-      font-size: 12px;
+    .auth-brand p {
+      margin-top: 3px;
+
       color: var(--muted);
+
+      font-size: 12px;
     }
 
     .auth-card {
-      padding: 30px;
-      border: 1px solid var(--line);
+      padding: 28px 20px;
+
       border-radius: 30px;
+
+      border:
+        1px solid var(--line);
+
       background:
-        linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)),
-        var(--card);
-      box-shadow: var(--shadow);
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.08),
+          rgba(255,255,255,.02)
+        ),
+
+        rgba(5,30,24,.9);
+
+      box-shadow:
+        var(--shadow);
     }
 
     .auth-card h1 {
       font-size: 30px;
+
       line-height: 1.1;
+
       margin-bottom: 10px;
     }
 
     .auth-card > p {
+      margin-bottom: 24px;
+
       color: var(--muted);
+
       line-height: 1.6;
-      margin-bottom: 28px;
+
       font-size: 14px;
     }
 
     .field {
-      margin-bottom: 17px;
+      margin-bottom: 16px;
     }
 
     .field label {
       display: block;
-      margin-bottom: 9px;
-      color: #d8d8e2;
-      font-size: 13px;
-      font-weight: 700;
+
+      margin-bottom: 8px;
+
+      color: #dcece6;
+
+      font-size: 12px;
+
+      font-weight: 800;
     }
 
-    .input-wrap {
+    .input-box {
       position: relative;
     }
 
-    .input-wrap span {
+    .input-box span {
       position: absolute;
+
       left: 15px;
       top: 50%;
-      transform: translateY(-50%);
-      opacity: .65;
-      font-size: 17px;
+
+      transform:
+        translateY(-50%);
+
+      opacity: .7;
     }
 
-    .input-wrap input {
+    .input-box input {
       width: 100%;
-      height: 55px;
-      border: 1px solid var(--line);
+      height: 56px;
+
+      padding:
+        0 15px 0 45px;
+
       outline: none;
+
       border-radius: 16px;
-      padding: 0 15px 0 46px;
-      background: rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--line);
+
       color: white;
+
+      background:
+        rgba(255,255,255,.05);
+
       transition: .25s;
     }
 
-    .input-wrap input:focus {
-      border-color: rgba(139,92,246,.8);
-      box-shadow: 0 0 0 4px rgba(139,92,246,.12);
+    .input-box input:focus {
+      border-color:
+        rgba(255,216,75,.65);
+
+      box-shadow:
+        0 0 0 4px rgba(255,216,75,.09);
     }
 
-    .primary-btn {
+    .main-btn {
       width: 100%;
-      min-height: 55px;
-      border-radius: 16px;
+      min-height: 56px;
+
       cursor: pointer;
-      font-weight: 900;
-      color: white;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 15px 30px rgba(139,92,246,.22);
+
+      border-radius: 17px;
+
+      color: #1b200c;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          180deg,
+          #fff7a7,
+          var(--gold),
+          var(--gold-2)
+        );
+
+      box-shadow:
+        0 12px 28px rgba(255,166,0,.18);
+
       transition: .25s;
     }
 
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
+    .main-btn:hover {
+      transform:
+        translateY(-2px);
     }
 
     .auth-note {
+      margin-top: 16px;
+
       text-align: center;
-      margin-top: 17px;
-      color: #747484;
-      font-size: 12px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
       line-height: 1.6;
     }
 
-    .otp-box {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin: 22px 0;
+    .otp-demo {
+      padding: 11px;
+
+      margin-bottom: 18px;
+
+      text-align: center;
+
+      border-radius: 14px;
+
+      color: #fff0a4;
+
+      font-size: 13px;
+
+      background:
+        rgba(255,216,75,.08);
+
+      border:
+        1px dashed rgba(255,216,75,.35);
     }
 
-    .otp-box input {
+    .otp-row {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      margin-bottom: 20px;
+    }
+
+    .otp-input {
       width: 52px;
       height: 58px;
-      text-align: center;
-      border: 1px solid var(--line);
+
       outline: none;
+
       border-radius: 15px;
-      background: rgba(255,255,255,.04);
+
+      border:
+        1px solid var(--line);
+
       color: white;
-      font-size: 24px;
-      font-weight: 900;
-    }
 
-    .otp-box input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(139,92,246,.12);
-    }
-
-    .demo-otp {
-      margin: 15px 0 20px;
-      padding: 12px;
-      border: 1px dashed rgba(139,92,246,.45);
-      border-radius: 14px;
-      background: rgba(139,92,246,.08);
       text-align: center;
-      color: #c9b6ff;
-      font-size: 13px;
+
+      font-size: 23px;
+
+      font-weight: 1000;
+
+      background:
+        rgba(255,255,255,.05);
     }
 
-    /* ================= APP ================= */
+    .otp-input:focus {
+      border-color: var(--gold);
+    }
+
+
+    /* =========================================================
+       APP
+       ========================================================= */
 
     #app {
       display: none;
+
       min-height: 100vh;
-      padding-bottom: 95px;
+
+      padding-bottom: 110px;
     }
 
     #app.active {
       display: block;
     }
 
-    .topbar {
+
+    /* =========================================================
+       TOP HEADER
+       ========================================================= */
+
+    .app-header {
       position: sticky;
+
       top: 0;
+
       z-index: 500;
-      padding: 14px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      background: rgba(8,8,13,.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
-    }
 
-    .top-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: max-content;
-    }
+      padding:
+        10px 12px;
 
-    .top-brand .mini-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
       display: grid;
-      place-items: center;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
 
-    .top-brand strong {
-      font-size: 15px;
-    }
+      grid-template-columns:
+        auto 1fr auto;
 
-    .top-brand small {
-      display: block;
-      color: var(--muted);
-      margin-top: 3px;
-      font-size: 10px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      cursor: pointer;
-      color: white;
-      background: var(--card);
-      border: 1px solid var(--line);
-    }
-
-    .profile-pill {
-      padding: 7px 12px 7px 7px;
-      display: flex;
-      align-items: center;
       gap: 9px;
-      border-radius: 999px;
-      cursor: pointer;
-      background: var(--card);
-      border: 1px solid var(--line);
-    }
 
-    .avatar {
-      width: 31px;
-      height: 31px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
+      align-items: center;
 
-    .profile-pill span {
-      max-width: 100px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .container {
-      width: min(1400px, 100%);
-      margin: auto;
-      padding: 26px 5%;
-    }
-
-    /* ================= HERO DASHBOARD ================= */
-
-    .welcome {
-      margin: 12px 0 24px;
-    }
-
-    .welcome small {
-      color: var(--muted);
-    }
-
-    .welcome h1 {
-      margin-top: 7px;
-      font-size: clamp(28px, 5vw, 50px);
-      line-height: 1.1;
-    }
-
-    .welcome h1 span {
-      background: linear-gradient(90deg, #b998ff, #ff9acb);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .featured {
-      position: relative;
-      min-height: 285px;
-      overflow: hidden;
-      padding: 34px;
-      display: flex;
-      align-items: end;
-      border-radius: 30px;
-      border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 75% 30%, rgba(236,72,153,.45), transparent 22%),
-        radial-gradient(circle at 65% 50%, rgba(139,92,246,.65), transparent 35%),
-        linear-gradient(135deg, #141123, #0e0d16);
-      box-shadow: var(--shadow);
+        rgba(4,22,17,.94);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+      backdrop-filter:
+        blur(18px);
     }
 
-    .featured::after {
-      content: "PLAY";
-      position: absolute;
-      right: -15px;
-      top: 15px;
-      font-size: clamp(100px, 22vw, 270px);
-      font-weight: 1000;
-      letter-spacing: -12px;
-      color: rgba(255,255,255,.025);
-      pointer-events: none;
-    }
-
-    .featured-content {
+    .header-profile {
       position: relative;
-      z-index: 2;
-      max-width: 650px;
-    }
 
-    .tag {
-      display: inline-flex;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.1);
-      color: #ded4ff;
-      font-size: 11px;
-      font-weight: 800;
-    }
+      width: 48px;
+      height: 48px;
 
-    .featured h2 {
-      margin: 16px 0 10px;
-      font-size: clamp(28px, 4vw, 48px);
-    }
-
-    .featured p {
-      max-width: 570px;
-      color: #c1bccb;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .featured button {
-      margin-top: 22px;
-      padding: 13px 22px;
-      border-radius: 14px;
       cursor: pointer;
-      color: white;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+
+      border-radius: 50%;
+
+      padding: 3px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold),
+          #ff5f48
+        );
     }
 
-    /* ================= SEARCH ================= */
-
-    .search-wrap {
-      margin: 28px 0 18px;
-      position: relative;
-    }
-
-    .search-wrap input {
+    .header-avatar {
       width: 100%;
-      height: 58px;
-      padding: 0 20px 0 50px;
-      border: 1px solid var(--line);
-      outline: none;
-      border-radius: 18px;
-      background: var(--card);
-      color: white;
+      height: 100%;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: inherit;
+
+      color: #fff;
+
+      font-size: 18px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #17493b,
+          #0a241c
+        );
     }
 
-    .search-wrap span {
+    .profile-dot {
       position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: .55;
+
+      right: -2px;
+      top: -4px;
+
+      width: 19px;
+      height: 19px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      font-size: 9px;
+
+      font-weight: 900;
+
+      background: var(--red);
+
+      border:
+        2px solid #092018;
     }
 
-    /* ================= CATEGORIES ================= */
+    .wallet-pill {
+      height: 48px;
 
-    .categories {
+      min-width: 0;
+
       display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      overflow: hidden;
+
+      border-radius: 18px;
+
+      border:
+        1px solid rgba(86,227,159,.4);
+
+      background:
+        linear-gradient(
+          180deg,
+          #155544,
+          #0b382d
+        );
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 8px 20px rgba(0,0,0,.25);
+    }
+
+    .wallet-balance {
+      min-width: 0;
+
+      padding:
+        0 12px;
+
+      display: flex;
+
+      align-items: center;
+
       gap: 10px;
+    }
+
+    .coin-icon {
+      width: 32px;
+      height: 32px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: #654500;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff8ad,
+          var(--gold),
+          var(--gold-2)
+        );
+
+      box-shadow:
+        0 0 16px rgba(255,216,75,.3);
+    }
+
+    .wallet-value {
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      font-size: 18px;
+
+      font-weight: 1000;
+    }
+
+    .wallet-label {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #9ee7c7;
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+    .wallet-add {
+      height: 100%;
+      width: 50px;
+
+      flex: 0 0 auto;
+
+      cursor: pointer;
+
+      color: #173b29;
+
+      font-size: 29px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          180deg,
+          #7cf4b2,
+          #2ed47d
+        );
+    }
+
+    .header-actions {
+      display: flex;
+
+      gap: 7px;
+    }
+
+    .header-icon {
+      position: relative;
+
+      width: 44px;
+      height: 44px;
+
+      cursor: pointer;
+
+      border-radius: 15px;
+
+      color: white;
+
+      font-size: 18px;
+
+      background:
+        rgba(255,255,255,.05);
+
+      border:
+        1px solid var(--line);
+    }
+
+    .header-icon-badge {
+      position: absolute;
+
+      top: -5px;
+      right: -3px;
+
+      width: 17px;
+      height: 17px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      font-size: 8px;
+
+      font-weight: 900;
+
+      background: var(--red);
+    }
+
+
+    /* =========================================================
+       QUICK CATEGORY BAR
+       ========================================================= */
+
+    .quick-bar {
+      position: sticky;
+
+      top: 69px;
+
+      z-index: 400;
+
+      display: flex;
+
+      gap: 8px;
+
       overflow-x: auto;
-      padding-bottom: 8px;
+
+      padding:
+        9px 12px;
+
+      background:
+        rgba(6,30,24,.96);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
       scrollbar-width: none;
     }
 
-    .categories::-webkit-scrollbar {
+    .quick-bar::-webkit-scrollbar {
       display: none;
     }
 
-    .category-btn {
-      min-width: max-content;
-      padding: 11px 17px;
-      border-radius: 999px;
+    .quick-btn {
+      min-width: 78px;
+
+      padding:
+        8px 10px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 4px;
+
       cursor: pointer;
-      color: #a9a9b7;
-      background: var(--card);
-      border: 1px solid var(--line);
-      transition: .25s;
-    }
 
-    .category-btn.active,
-    .category-btn:hover {
-      color: white;
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
+      border-radius: 15px;
 
-    /* ================= SECTIONS ================= */
+      color: #b8d0c6;
 
-    .section-head {
-      margin: 35px 0 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .section-head h2 {
-      font-size: 23px;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .game-card {
-      overflow: hidden;
-      border-radius: 23px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      cursor: pointer;
-      transition: .28s;
-    }
-
-    .game-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(139,92,246,.55);
-      box-shadow: 0 20px 50px rgba(0,0,0,.3);
-    }
-
-    .game-cover {
-      height: 165px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .game-cover .game-art {
-      position: relative;
-      z-index: 2;
-      font-size: 65px;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,.3));
-    }
-
-    .cover-number {
-      background:
-        radial-gradient(circle at 25% 25%, #ffb0d7, transparent 16%),
-        linear-gradient(135deg, #4c1d95, #ec4899);
-    }
-
-    .cover-memory {
-      background:
-        radial-gradient(circle at 70% 20%, #7dd3fc, transparent 18%),
-        linear-gradient(135deg, #0f766e, #1d4ed8);
-    }
-
-    .cover-tap {
-      background:
-        radial-gradient(circle at 50% 40%, #fde68a, transparent 12%),
-        linear-gradient(135deg, #b45309, #ef4444);
-    }
-
-    .cover-rps {
-      background:
-        linear-gradient(135deg, #312e81, #9333ea);
-    }
-
-    .cover-snake {
-      background:
-        radial-gradient(circle at 70% 35%, #86efac, transparent 15%),
-        linear-gradient(135deg, #14532d, #047857);
-    }
-
-    .cover-tictac {
-      background:
-        linear-gradient(135deg, #0f172a, #334155);
-    }
-
-    .game-meta {
-      padding: 17px;
-    }
-
-    .game-topline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .game-topline h3 {
-      font-size: 17px;
-    }
-
-    .mini-tag {
-      padding: 5px 8px;
-      border-radius: 8px;
-      color: #cdbfff;
-      background: rgba(139,92,246,.13);
       font-size: 9px;
-      font-weight: 900;
-      letter-spacing: .5px;
-    }
 
-    .game-meta p {
-      min-height: 40px;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 12px;
-    }
-
-    .play-card-btn {
-      width: 100%;
-      margin-top: 14px;
-      padding: 11px;
-      border-radius: 13px;
-      cursor: pointer;
-      color: white;
       font-weight: 800;
-      background: #242433;
+
+      background:
+        rgba(255,255,255,.04);
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
       transition: .25s;
     }
 
-    .play-card-btn:hover {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
-
-    /* ================= STATS ================= */
-
-    .stats-grid {
-      margin-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .stat-card {
-      padding: 22px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      text-align: center;
-    }
-
-    .stat-card strong {
-      display: block;
-      color: #cbbaff;
-      font-size: 27px;
-    }
-
-    .stat-card span {
-      margin-top: 6px;
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* ================= BOTTOM NAV ================= */
-
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      bottom: 15px;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: min(92%, 600px);
-      padding: 8px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-radius: 22px;
-      background: rgba(22,22,33,.92);
-      border: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 50px rgba(0,0,0,.5);
-    }
-
-    .nav-item {
-      padding: 10px 5px;
-      border-radius: 16px;
-      cursor: pointer;
-      text-align: center;
-      color: var(--muted);
-      background: transparent;
-      font-size: 11px;
-      transition: .25s;
-    }
-
-    .nav-item b {
-      display: block;
-      margin-bottom: 4px;
+    .quick-btn strong {
       font-size: 18px;
     }
 
-    .nav-item.active,
-    .nav-item:hover {
-      color: white;
-      background: rgba(139,92,246,.16);
+    .quick-btn.active,
+    .quick-btn:hover {
+      color: #18230d;
+
+      background:
+        linear-gradient(
+          180deg,
+          #d8ffd7,
+          #5fe89d
+        );
     }
 
-    /* ================= GAME MODAL ================= */
+
+    /* =========================================================
+       MAIN CONTENT
+       ========================================================= */
+
+    .page {
+      width: min(100%, 700px);
+
+      margin: auto;
+
+      padding:
+        12px 10px 25px;
+    }
+
+
+    /* =========================================================
+       JACKPOT
+       ========================================================= */
+
+    .jackpot-card {
+      position: relative;
+
+      min-height: 178px;
+
+      overflow: hidden;
+
+      padding: 18px;
+
+      border-radius: 24px;
+
+      border:
+        2px solid rgba(255,216,75,.42);
+
+      background:
+        radial-gradient(
+          circle at 75% 40%,
+          rgba(255,188,48,.25),
+          transparent 22%
+        ),
+
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(69,232,145,.15),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #092d24,
+          #0b1715
+        );
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+    }
+
+    .jackpot-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      right: -130px;
+      top: -100px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,216,75,.18),
+          transparent 70%
+        );
+    }
+
+    .jackpot-live {
+      position: relative;
+
+      z-index: 2;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding:
+        6px 10px;
+
+      border-radius: 999px;
+
+      color: #8ff7b9;
+
+      font-size: 10px;
+
+      font-weight: 1000;
+
+      letter-spacing: 1px;
+
+      background:
+        rgba(12,90,58,.6);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: #4dff9b;
+
+      box-shadow:
+        0 0 14px #4dff9b;
+
+      animation:
+        liveBlink 1s infinite;
+    }
+
+    @keyframes liveBlink {
+
+      50% {
+        opacity: .25;
+      }
+
+    }
+
+    .jackpot-title {
+      position: relative;
+
+      z-index: 2;
+
+      margin-top: 10px;
+
+      color: #71f2a6;
+
+      font-size: 22px;
+
+      font-weight: 1000;
+
+      letter-spacing: 1px;
+    }
+
+    .jackpot-title span {
+      color: white;
+    }
+
+    .jackpot-number {
+      position: relative;
+
+      z-index: 2;
+
+      margin-top: 4px;
+
+      color: var(--gold);
+
+      font-size:
+        clamp(35px, 10vw, 58px);
+
+      font-weight: 1000;
+
+      letter-spacing: -2px;
+
+      text-shadow:
+        0 3px 0 #5c3b00,
+        0 0 25px rgba(255,216,75,.25);
+    }
+
+    .jackpot-footer {
+      position: relative;
+
+      z-index: 2;
+
+      margin-top: 8px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .jackpot-info {
+      color: #b6d5c9;
+
+      font-size: 10px;
+    }
+
+    .jackpot-button {
+      padding:
+        10px 14px;
+
+      cursor: pointer;
+
+      border-radius: 12px;
+
+      color: #183016;
+
+      font-size: 11px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          180deg,
+          #fff6a4,
+          var(--gold)
+        );
+    }
+
+
+    /* =========================================================
+       PROMO / REFER
+       ========================================================= */
+
+    .promo-card {
+      position: relative;
+
+      min-height: 125px;
+
+      margin-top: 13px;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 17px;
+
+      border-radius: 23px;
+
+      border:
+        2px solid rgba(255,216,75,.38);
+
+      background:
+        linear-gradient(
+          110deg,
+          #8d6c00,
+          #d69c05 45%,
+          #4c3b05
+        );
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .promo-card::before {
+      content: "♠";
+
+      position: absolute;
+
+      left: -5px;
+
+      font-size: 130px;
+
+      opacity: .15;
+
+      transform:
+        rotate(-15deg);
+    }
+
+    .promo-card::after {
+      content: "♠";
+
+      position: absolute;
+
+      right: -4px;
+
+      bottom: -20px;
+
+      font-size: 150px;
+
+      opacity: .18;
+
+      transform:
+        rotate(15deg);
+    }
+
+    .promo-content {
+      position: relative;
+
+      z-index: 2;
+    }
+
+    .promo-kicker {
+      display: inline-block;
+
+      padding:
+        5px 8px;
+
+      border-radius: 8px;
+
+      color: #fff;
+
+      font-size: 9px;
+
+      font-weight: 1000;
+
+      background:
+        rgba(0,0,0,.25);
+    }
+
+    .promo-card h2 {
+      margin-top: 6px;
+
+      font-size:
+        clamp(23px, 6vw, 34px);
+
+      line-height: 1;
+    }
+
+    .promo-card p {
+      margin-top: 6px;
+
+      color: #fff9d5;
+
+      font-size: 11px;
+    }
+
+    .promo-card button {
+      margin-top: 11px;
+
+      padding:
+        8px 13px;
+
+      cursor: pointer;
+
+      border-radius: 10px;
+
+      color: #5d4300;
+
+      font-size: 10px;
+
+      font-weight: 1000;
+
+      background:
+        #fff4a4;
+    }
+
+
+    /* =========================================================
+       SECTION HEAD
+       ========================================================= */
+
+    .section-head {
+      margin:
+        23px 4px 12px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+
+      font-weight: 1000;
+    }
+
+    .section-head p {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .section-head button {
+      padding:
+        7px 10px;
+
+      cursor: pointer;
+
+      border-radius: 9px;
+
+      color: #8ff5b7;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      background:
+        rgba(86,227,159,.08);
+    }
+
+
+    /* =========================================================
+       GAME GRID
+       ========================================================= */
+
+    .games-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 10px;
+    }
+
+    .game-card {
+      position: relative;
+
+      min-height: 235px;
+
+      overflow: hidden;
+
+      cursor: pointer;
+
+      border-radius: 19px;
+
+      border:
+        2px solid rgba(255,216,75,.22);
+
+      background:
+        linear-gradient(
+          180deg,
+          #174234,
+          #071e18
+        );
+
+      box-shadow:
+        0 12px 24px rgba(0,0,0,.3);
+
+      transition:
+        transform .25s,
+        border-color .25s;
+    }
+
+    .game-card:hover {
+      transform:
+        translateY(-4px);
+
+      border-color:
+        rgba(255,216,75,.7);
+    }
+
+    .game-card:active {
+      transform:
+        scale(.98);
+    }
+
+    .game-card.favourite-card {
+      border-color:
+        rgba(255,75,95,.75);
+    }
+
+    .game-thumb {
+      position: relative;
+
+      height: 158px;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+    .game-thumb::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent 40%,
+          rgba(2,10,8,.85)
+        );
+    }
+
+    .game-symbol {
+      position: relative;
+
+      z-index: 2;
+
+      font-size:
+        clamp(60px, 16vw, 95px);
+
+      filter:
+        drop-shadow(
+          0 10px 12px rgba(0,0,0,.35)
+        );
+    }
+
+    .game-name-art {
+      position: absolute;
+
+      z-index: 3;
+
+      left: 0;
+      right: 0;
+      bottom: 8px;
+
+      padding:
+        0 8px;
+
+      text-align: center;
+
+      color: white;
+
+      font-size: 18px;
+
+      font-weight: 1000;
+
+      line-height: .95;
+
+      text-shadow:
+        0 3px 4px rgba(0,0,0,.7);
+    }
+
+    .hot-badge,
+    .new-badge {
+      position: absolute;
+
+      z-index: 5;
+
+      left: 7px;
+      top: 7px;
+
+      padding:
+        5px 7px;
+
+      border-radius: 8px;
+
+      color: white;
+
+      font-size: 9px;
+
+      font-weight: 1000;
+
+      letter-spacing: .4px;
+    }
+
+    .hot-badge {
+      background:
+        linear-gradient(
+          135deg,
+          #ff3e3e,
+          #ff8a00
+        );
+
+      box-shadow:
+        0 0 15px rgba(255,72,0,.35);
+    }
+
+    .new-badge {
+      color: #15341e;
+
+      background:
+        linear-gradient(
+          135deg,
+          #9dff80,
+          #35d879
+        );
+    }
+
+    .fav-btn {
+      position: absolute;
+
+      z-index: 8;
+
+      right: 7px;
+      top: 7px;
+
+      width: 34px;
+      height: 34px;
+
+      cursor: pointer;
+
+      border-radius: 50%;
+
+      color: white;
+
+      font-size: 16px;
+
+      background:
+        rgba(0,0,0,.35);
+
+      border:
+        1px solid rgba(255,255,255,.16);
+    }
+
+    .fav-btn.active {
+      color: #ff4f65;
+    }
+
+    .game-info {
+      padding:
+        10px;
+    }
+
+    .game-info p {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.45;
+
+      min-height: 30px;
+    }
+
+    .game-play {
+      width: 100%;
+
+      margin-top: 9px;
+
+      padding:
+        9px;
+
+      cursor: pointer;
+
+      border-radius: 10px;
+
+      color: #fff9d7;
+
+      font-size: 10px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          180deg,
+          #246b53,
+          #134737
+        );
+
+      border:
+        1px solid rgba(86,227,159,.2);
+    }
+
+
+    /* =========================================================
+       GAME BACKGROUNDS
+       ========================================================= */
+
+    .slot-gold {
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          #ffe888,
+          transparent 20%
+        ),
+
+        linear-gradient(
+          135deg,
+          #a30000,
+          #4d0000 65%,
+          #1d0a00
+        );
+    }
+
+    .slot-blue {
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          #8bd9ff,
+          transparent 18%
+        ),
+
+        linear-gradient(
+          135deg,
+          #0c64a8,
+          #052d57
+        );
+    }
+
+    .slot-green {
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          #eaff98,
+          transparent 20%
+        ),
+
+        linear-gradient(
+          135deg,
+          #638000,
+          #173b11
+        );
+    }
+
+    .wheel-bg {
+      background:
+        radial-gradient(
+          circle at center,
+          #fff3a1 0 8%,
+          #ffaf00 9% 13%,
+          #c8002f 14% 45%,
+          #5b0040 46% 100%
+        );
+    }
+
+    .fortune-bg {
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          #fff0a0,
+          transparent 18%
+        ),
+
+        linear-gradient(
+          135deg,
+          #9b5b00,
+          #d31f1f,
+          #3f0b0b
+        );
+    }
+
+    .dragon-bg {
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          #ff7b4d,
+          transparent 18%
+        ),
+
+        linear-gradient(
+          135deg,
+          #311100,
+          #0c241b
+        );
+    }
+
+    .mini-purple {
+      background:
+        linear-gradient(
+          135deg,
+          #552d9c,
+          #161038
+        );
+    }
+
+    .mini-blue {
+      background:
+        linear-gradient(
+          135deg,
+          #075a79,
+          #0c2236
+        );
+    }
+
+    .mini-red {
+      background:
+        linear-gradient(
+          135deg,
+          #9d2600,
+          #351005
+        );
+    }
+
+    .mini-green {
+      background:
+        linear-gradient(
+          135deg,
+          #0b6e43,
+          #09261d
+        );
+    }
+
+
+    /* =========================================================
+       SEARCH
+       ========================================================= */
+
+    .search-box {
+      position: relative;
+
+      margin-top: 15px;
+    }
+
+    .search-box span {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      opacity: .6;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 52px;
+
+      padding:
+        0 15px 0 43px;
+
+      outline: none;
+
+      border-radius: 17px;
+
+      border:
+        1px solid var(--line);
+
+      color: white;
+
+      background:
+        rgba(255,255,255,.045);
+    }
+
+    .search-box input:focus {
+      border-color:
+        rgba(86,227,159,.55);
+    }
+
+
+    /* =========================================================
+       BOTTOM NAV
+       ========================================================= */
+
+    .bottom-nav {
+      position: fixed;
+
+      left: 50%;
+      bottom: 0;
+
+      z-index: 1000;
+
+      width:
+        min(100%, 700px);
+
+      transform:
+        translateX(-50%);
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      padding:
+        7px 5px
+        calc(7px + env(safe-area-inset-bottom));
+
+      background:
+        rgba(5,28,22,.97);
+
+      border-top:
+        1px solid rgba(255,255,255,.1);
+
+      backdrop-filter:
+        blur(18px);
+    }
+
+    .nav-btn {
+      position: relative;
+
+      min-height: 61px;
+
+      cursor: pointer;
+
+      border-radius: 15px;
+
+      color: #89a99d;
+
+      font-size: 9px;
+
+      background:
+        transparent;
+
+      transition: .2s;
+    }
+
+    .nav-btn b {
+      display: block;
+
+      margin-bottom: 4px;
+
+      font-size: 21px;
+    }
+
+    .nav-btn.active {
+      color: var(--gold);
+
+      background:
+        rgba(255,216,75,.08);
+    }
+
+    .nav-badge {
+      position: absolute;
+
+      top: 3px;
+      right: 20%;
+
+      width: 16px;
+      height: 16px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      font-size: 8px;
+
+      background: var(--red);
+    }
+
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
 
     .modal {
       position: fixed;
+
       inset: 0;
+
       z-index: 5000;
+
       display: none;
-      align-items: center;
+
+      align-items: flex-end;
+
       justify-content: center;
-      padding: 18px;
-      background: rgba(0,0,0,.78);
-      backdrop-filter: blur(10px);
+
+      background:
+        rgba(0,0,0,.75);
+
+      backdrop-filter:
+        blur(8px);
     }
 
     .modal.active {
       display: flex;
     }
 
-    .game-window {
-      width: min(100%, 650px);
+    .modal-box {
+      width:
+        min(100%, 700px);
+
       max-height: 92vh;
+
       overflow-y: auto;
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      background: #12121b;
-      box-shadow: var(--shadow);
+
+      border-radius:
+        30px 30px 0 0;
+
+      border:
+        1px solid rgba(255,255,255,.12);
+
+      background:
+        linear-gradient(
+          180deg,
+          #0d3027,
+          #061914
+        );
+
+      box-shadow:
+        0 -20px 60px rgba(0,0,0,.5);
+
+      animation:
+        modalUp .28s ease;
     }
 
-    .game-window-head {
-      padding: 17px 20px;
+    @keyframes modalUp {
+
+      from {
+        transform:
+          translateY(100%);
+      }
+
+      to {
+        transform:
+          translateY(0);
+      }
+
+    }
+
+    .modal-head {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 10;
+
+      padding:
+        15px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+      background:
+        rgba(8,33,26,.96);
+
+      backdrop-filter:
+        blur(12px);
     }
 
-    .game-window-head h2 {
+    .modal-head h2 {
       font-size: 18px;
+
+      font-weight: 1000;
     }
 
     .close-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
+      width: 42px;
+      height: 42px;
+
       cursor: pointer;
+
+      border-radius: 14px;
+
       color: white;
-      background: #242433;
+
+      font-size: 19px;
+
+      background:
+        rgba(255,255,255,.08);
     }
 
-    .game-area {
-      min-height: 390px;
-      padding: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .modal-content {
+      padding:
+        20px 15px 30px;
     }
 
-    .game-panel {
+
+    /* =========================================================
+       SLOT GAME
+       ========================================================= */
+
+    .slot-machine {
+      width: min(100%, 470px);
+
+      margin: auto;
+
+      padding: 17px;
+
+      border-radius: 28px;
+
+      border:
+        4px solid #d68c10;
+
+      background:
+        linear-gradient(
+          135deg,
+          #b90018,
+          #4e0010
+        );
+
+      box-shadow:
+        inset 0 0 25px rgba(255,255,255,.1),
+        0 20px 40px rgba(0,0,0,.4);
+    }
+
+    .slot-machine.blue {
+      background:
+        linear-gradient(
+          135deg,
+          #1265b8,
+          #071d56
+        );
+
+      border-color:
+        #7ee6ff;
+    }
+
+    .slot-machine.green {
+      background:
+        linear-gradient(
+          135deg,
+          #488500,
+          #153b11
+        );
+
+      border-color:
+        #e5ff72;
+    }
+
+    .slot-top {
+      text-align: center;
+
+      color: #fff6a1;
+
+      font-size: 26px;
+
+      font-weight: 1000;
+
+      text-shadow:
+        0 3px 0 rgba(0,0,0,.4);
+    }
+
+    .slot-screen {
+      margin-top: 15px;
+
+      padding: 10px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
+      border-radius: 18px;
+
+      background:
+        #111;
+
+      border:
+        3px solid #f2c445;
+    }
+
+    .reel {
+      min-height: 100px;
+
+      display: grid;
+
+      place-items: center;
+
+      overflow: hidden;
+
+      border-radius: 13px;
+
+      color: #19200c;
+
+      font-size:
+        clamp(42px, 12vw, 66px);
+
+      background:
+        linear-gradient(
+          180deg,
+          #fffce5,
+          #ded7b8
+        );
+
+      border:
+        2px solid #8e7a36;
+    }
+
+    .reel.spinning {
+      animation:
+        reelSpin .12s infinite linear;
+    }
+
+    @keyframes reelSpin {
+
+      0% {
+        transform:
+          translateY(-2px);
+      }
+
+      50% {
+        transform:
+          translateY(2px);
+      }
+
+      100% {
+        transform:
+          translateY(-2px);
+      }
+
+    }
+
+    .slot-result {
+      min-height: 48px;
+
+      margin-top: 13px;
+
+      padding: 12px;
+
+      display: grid;
+
+      place-items: center;
+
+      text-align: center;
+
+      border-radius: 14px;
+
+      color: #fff8c5;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      background:
+        rgba(0,0,0,.3);
+    }
+
+    .slot-controls {
+      margin-top: 14px;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1.5fr;
+
+      gap: 10px;
+    }
+
+    .bet-btn,
+    .spin-btn {
+      min-height: 52px;
+
+      cursor: pointer;
+
+      border-radius: 15px;
+
+      font-weight: 1000;
+    }
+
+    .bet-btn {
+      color: white;
+
+      background:
+        rgba(0,0,0,.35);
+
+      border:
+        1px solid rgba(255,255,255,.12);
+    }
+
+    .spin-btn {
+      color: #263300;
+
+      background:
+        linear-gradient(
+          180deg,
+          #fff99b,
+          var(--gold),
+          #f6a40b
+        );
+    }
+
+
+    /* =========================================================
+       LUCKY WHEEL
+       ========================================================= */
+
+    .wheel-wrap {
+      width: min(90vw, 380px);
+
+      margin:
+        10px auto 22px;
+
+      position: relative;
+
+      aspect-ratio: 1;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+
+      z-index: 3;
+
+      left: 50%;
+      top: -5px;
+
+      transform:
+        translateX(-50%);
+
+      width: 0;
+      height: 0;
+
+      border-left:
+        17px solid transparent;
+
+      border-right:
+        17px solid transparent;
+
+      border-top:
+        35px solid #fff2a2;
+
+      filter:
+        drop-shadow(
+          0 3px 4px rgba(0,0,0,.5)
+        );
+    }
+
+    .wheel {
       width: 100%;
+      height: 100%;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      border:
+        10px solid var(--gold);
+
+      background:
+        conic-gradient(
+          #ff455d 0deg 45deg,
+          #ffd83f 45deg 90deg,
+          #34db91 90deg 135deg,
+          #3f87ff 135deg 180deg,
+          #b257ff 180deg 225deg,
+          #ff8a29 225deg 270deg,
+          #2cc4bd 270deg 315deg,
+          #e93577 315deg 360deg
+        );
+
+      box-shadow:
+        0 0 25px rgba(255,216,75,.25),
+        inset 0 0 25px rgba(0,0,0,.3);
+
+      transition:
+        transform 4s cubic-bezier(.15,.75,.15,1);
+    }
+
+    .wheel-center {
+      width: 35%;
+      aspect-ratio: 1;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: #5d4100;
+
+      font-size: 11px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff8ae,
+          var(--gold)
+        );
+
+      border:
+        5px solid #9d6500;
+
+      box-shadow:
+        0 0 20px rgba(255,216,75,.35);
+    }
+
+    .wheel-prizes {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 7px;
+    }
+
+    .prize-chip {
+      padding:
+        8px 4px;
+
+      text-align: center;
+
+      border-radius: 10px;
+
+      color: #cce9dc;
+
+      font-size: 9px;
+
+      background:
+        rgba(255,255,255,.05);
+
+      border:
+        1px solid rgba(255,255,255,.07);
+    }
+
+
+    /* =========================================================
+       MINI GAMES
+       ========================================================= */
+
+    .mini-game-panel {
+      width: 100%;
+
       text-align: center;
     }
 
-    .game-panel h3 {
+    .mini-game-panel h3 {
+      font-size: 25px;
+
       margin-bottom: 8px;
-      font-size: 26px;
     }
 
-    .game-panel > p {
+    .mini-game-panel > p {
       color: var(--muted);
-      line-height: 1.6;
+
       font-size: 13px;
+
+      line-height: 1.6;
     }
 
     .game-action {
-      margin-top: 22px;
-      padding: 13px 21px;
-      border-radius: 14px;
+      margin-top: 18px;
+
+      padding:
+        13px 20px;
+
       cursor: pointer;
-      color: white;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+
+      border-radius: 14px;
+
+      color: #293400;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          180deg,
+          #fff99d,
+          var(--gold)
+        );
     }
 
-    /* NUMBER RUSH */
-
-    .number-target {
-      margin: 25px auto;
+    .number-display {
       width: min(220px, 100%);
+
       aspect-ratio: 1;
+
+      margin:
+        22px auto;
+
       display: grid;
+
       place-items: center;
-      border-radius: 28px;
-      background: linear-gradient(135deg, #312e81, #ec4899);
-      font-size: 90px;
-      font-weight: 900;
-      box-shadow: 0 25px 50px rgba(139,92,246,.2);
-    }
 
-    .number-input {
-      width: min(300px, 100%);
-      height: 56px;
-      padding: 0 15px;
-      border: 1px solid var(--line);
-      outline: none;
-      border-radius: 15px;
-      background: #20202c;
+      border-radius: 30px;
+
       color: white;
-      text-align: center;
-      font-size: 20px;
+
+      font-size: 80px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5732b0,
+          #e83476
+        );
+
+      box-shadow:
+        0 20px 40px rgba(0,0,0,.3);
     }
 
-    /* MEMORY */
+    .game-input {
+      width: min(320px, 100%);
+      height: 54px;
+
+      padding: 0 15px;
+
+      outline: none;
+
+      border-radius: 15px;
+
+      border:
+        1px solid var(--line);
+
+      color: white;
+
+      text-align: center;
+
+      background:
+        rgba(255,255,255,.06);
+    }
+
+    .game-result {
+      min-height: 48px;
+
+      margin:
+        18px auto;
+
+      padding:
+        13px;
+
+      border-radius: 14px;
+
+      color: #cfe9dd;
+
+      font-size: 12px;
+
+      background:
+        rgba(255,255,255,.05);
+    }
 
     .memory-grid {
-      width: min(430px, 100%);
-      margin: 25px auto 0;
+      width: min(100%, 430px);
+
+      margin:
+        22px auto;
+
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 9px;
     }
 
     .memory-card {
       aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
+
       cursor: pointer;
-      background: linear-gradient(135deg, #26263a, #171725);
-      border: 1px solid var(--line);
-      font-size: 28px;
-      transition: .2s;
+
+      border-radius: 14px;
+
+      color: white;
+
+      font-size: 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #163d33,
+          #0a201a
+        );
+
+      border:
+        1px solid rgba(255,255,255,.09);
     }
 
     .memory-card.flipped,
     .memory-card.matched {
-      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      background:
+        linear-gradient(
+          135deg,
+          #ffc400,
+          #ff5e28
+        );
     }
 
-    /* QUICK TAP */
-
     .tap-zone {
-      width: min(360px, 100%);
-      height: 300px;
-      margin: 25px auto;
+      width: min(100%, 380px);
+      height: 310px;
+
       position: relative;
+
       overflow: hidden;
-      border-radius: 25px;
-      border: 1px solid var(--line);
-      background: #0c0c13;
+
+      margin:
+        20px auto;
+
+      border-radius: 22px;
+
+      background:
+        #07130f;
+
+      border:
+        1px solid var(--line);
     }
 
     .tap-target {
       position: absolute;
-      width: 72px;
-      height: 72px;
+
+      width: 70px;
+      height: 70px;
+
       display: none;
+
       place-items: center;
-      border-radius: 50%;
+
       cursor: pointer;
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
-      box-shadow: 0 0 30px rgba(245,158,11,.4);
+
+      border-radius: 50%;
+
+      font-size: 27px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff48c,
+          #ff9f00
+        );
+
+      box-shadow:
+        0 0 25px rgba(255,180,0,.45);
     }
 
-    /* RPS */
+    .rps-grid {
+      margin-top: 22px;
 
-    .rps-choices {
-      margin-top: 25px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 10px;
     }
 
     .rps-choice {
-      min-height: 100px;
-      border-radius: 20px;
+      min-height: 105px;
+
       cursor: pointer;
-      color: white;
-      background: #222231;
-      border: 1px solid var(--line);
-      font-size: 42px;
-      transition: .25s;
+
+      border-radius: 20px;
+
+      font-size: 40px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      border:
+        1px solid var(--line);
+
+      transition: .2s;
     }
 
     .rps-choice:hover {
-      transform: translateY(-5px);
-      background: #302d45;
+      transform:
+        translateY(-4px);
     }
-
-    .rps-result {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 15px;
-      color: #d8d8e4;
-      background: #1b1b27;
-      min-height: 55px;
-    }
-
-    /* SNAKE */
 
     #snakeCanvas {
-      width: min(100%, 400px);
-      max-width: 400px;
+      width: min(100%, 390px);
+
       aspect-ratio: 1;
+
       display: block;
-      margin: 20px auto;
+
+      margin:
+        20px auto;
+
       border-radius: 18px;
-      background: #080f0b;
-      border: 1px solid rgba(34,197,94,.25);
+
+      background: #07120d;
+
+      border:
+        2px solid rgba(86,227,159,.25);
     }
 
     .snake-controls {
-      margin: 12px auto 0;
-      width: 210px;
+      width: 220px;
+
+      margin: auto;
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 8px;
     }
 
     .snake-controls button {
       height: 45px;
-      border-radius: 12px;
+
       cursor: pointer;
+
+      border-radius: 12px;
+
       color: white;
-      background: #242433;
+
+      background:
+        rgba(255,255,255,.08);
     }
 
     .snake-up {
@@ -1026,940 +2634,1717 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       grid-row: 2;
     }
 
-    /* TIC TAC TOE */
-
     .ttt-board {
       width: min(100%, 340px);
-      margin: 25px auto;
+
+      margin:
+        20px auto;
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 8px;
     }
 
     .ttt-cell {
       aspect-ratio: 1;
-      border-radius: 18px;
+
       cursor: pointer;
+
+      border-radius: 17px;
+
       color: white;
-      background: #20202d;
-      border: 1px solid var(--line);
+
       font-size: 38px;
-      font-weight: 900;
+
+      font-weight: 1000;
+
+      background:
+        rgba(255,255,255,.07);
+
+      border:
+        1px solid var(--line);
     }
 
-    /* ================= TOAST ================= */
 
-    #toast {
-      position: fixed;
-      left: 50%;
-      top: 24px;
-      z-index: 15000;
-      transform: translate(-50%, -130px);
-      padding: 13px 18px;
-      border-radius: 14px;
-      color: white;
-      background: #242432;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      transition: .35s;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    #toast.show {
-      transform: translate(-50%, 0);
-    }
-
-    /* ================= PROFILE MODAL ================= */
-
-    .profile-info {
-      width: 100%;
-      text-align: left;
-    }
+    /* =========================================================
+       PROFILE
+       ========================================================= */
 
     .profile-big-avatar {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 20px;
+      width: 90px;
+      height: 90px;
+
+      margin:
+        5px auto 14px;
+
       display: grid;
+
       place-items: center;
+
       border-radius: 28px;
-      font-size: 26px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+
+      color: #253000;
+
+      font-size: 30px;
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff99c,
+          var(--gold)
+        );
     }
 
-    .profile-info p {
-      margin: 12px 0;
-      padding: 13px;
-      border-radius: 13px;
-      color: #d4d4de;
-      background: #1a1a26;
-      font-size: 13px;
+    .profile-name {
+      text-align: center;
+
+      font-size: 24px;
+
+      font-weight: 1000;
+    }
+
+    .profile-row {
+      margin-top: 13px;
+
+      padding: 14px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      border-radius: 15px;
+
+      color: #c8ddd5;
+
+      font-size: 12px;
+
+      background:
+        rgba(255,255,255,.05);
+    }
+
+    .profile-row strong {
+      color: white;
     }
 
     .logout-btn {
       width: 100%;
-      margin-top: 15px;
-      padding: 14px;
-      border-radius: 14px;
+
+      margin-top: 20px;
+
+      padding: 15px;
+
       cursor: pointer;
+
+      border-radius: 15px;
+
       color: white;
-      font-weight: 900;
-      background: #4b1f29;
-      border: 1px solid rgba(239,68,68,.2);
+
+      font-weight: 1000;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7d1827,
+          #bd2638
+        );
     }
 
-    /* ================= RESPONSIVE ================= */
 
-    @media (max-width: 650px) {
+    /* =========================================================
+       TOAST
+       ========================================================= */
 
-      .auth-card {
-        padding: 24px 18px;
-        border-radius: 25px;
-      }
+    #toast {
+      position: fixed;
 
-      .featured {
-        min-height: 310px;
-        padding: 25px;
-      }
+      left: 50%;
+      top: 16px;
 
-      .topbar {
-        padding: 12px 4%;
-      }
+      z-index: 20000;
 
-      .container {
-        padding: 20px 4%;
-      }
+      max-width:
+        calc(100% - 30px);
 
-      .profile-pill span {
-        display: none;
+      transform:
+        translate(-50%, -150px);
+
+      padding:
+        13px 18px;
+
+      border-radius: 14px;
+
+      color: white;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      background:
+        rgba(15,49,39,.97);
+
+      border:
+        1px solid rgba(255,255,255,.1);
+
+      box-shadow:
+        var(--shadow);
+
+      transition: .35s;
+    }
+
+    #toast.show {
+      transform:
+        translate(-50%, 0);
+    }
+
+
+    /* =========================================================
+       EMPTY STATE
+       ========================================================= */
+
+    .empty-state {
+      grid-column: 1 / -1;
+
+      padding: 35px 15px;
+
+      text-align: center;
+
+      border-radius: 20px;
+
+      color: var(--muted);
+
+      background:
+        rgba(255,255,255,.04);
+    }
+
+
+    /* =========================================================
+       DESKTOP
+       ========================================================= */
+
+    @media (min-width: 620px) {
+
+      .page {
+        padding:
+          18px 16px 30px;
       }
 
       .games-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        grid-template-columns:
+          repeat(3, 1fr);
       }
 
-      .game-cover {
-        height: 125px;
+      .game-card {
+        min-height: 250px;
       }
 
-      .game-cover .game-art {
-        font-size: 48px;
-      }
-
-      .game-meta {
-        padding: 13px;
-      }
-
-      .game-topline {
-        display: block;
-      }
-
-      .mini-tag {
-        display: inline-block;
-        margin-top: 6px;
-      }
-
-      .game-meta p {
-        min-height: 54px;
-        font-size: 11px;
-      }
-
-      .stats-grid {
-        gap: 8px;
-      }
-
-      .stat-card {
-        padding: 15px 8px;
-      }
-
-      .stat-card strong {
-        font-size: 20px;
-      }
-
-      .otp-box {
-        gap: 7px;
-      }
-
-      .otp-box input {
-        width: 47px;
-      }
     }
-  </style>
 
+
+    /* =========================================================
+       SMALL MOBILE
+       ========================================================= */
+
+    @media (max-width: 370px) {
+
+      .header-actions {
+        gap: 4px;
+      }
+
+      .header-icon {
+        width: 38px;
+        height: 44px;
+      }
+
+      .wallet-value {
+        font-size: 15px;
+      }
+
+      .quick-btn {
+        min-width: 70px;
+      }
+
+      .game-name-art {
+        font-size: 15px;
+      }
+
+      .otp-input {
+        width: 45px;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        SPLASH
-       ====================================================== -->
+       ===================================================== -->
 
   <div id="splash">
+
     <div class="splash-box">
-      <div class="splash-logo">ZP</div>
 
-```
-  <div class="splash-title">
-    ZEESHAN <span>PLAYZONE</span>
-  </div>
-
-  <div class="loader">
-    <div></div>
-  </div>
-</div>
-```
-
-  </div>
-
-  <!-- ======================================================
-       ONBOARDING
-       ====================================================== -->
-
-  <section class="auth-screen" id="loginScreen">
-
-```
-<div class="auth-wrap">
-
-  <div class="brand">
-    <div class="brand-icon">ZP</div>
-
-    <div>
-      <h2>Zeeshan PlayZone</h2>
-      <p>Play. Compete. Enjoy.</p>
-    </div>
-  </div>
-
-
-  <div class="auth-card">
-
-    <h1>Welcome, Player 👋</h1>
-
-    <p>
-      Create your PlayZone profile and unlock your
-      gaming dashboard.
-    </p>
-
-
-    <form id="loginForm">
-
-      <div class="field">
-        <label>Your Name</label>
-
-        <div class="input-wrap">
-          <span>👤</span>
-
-          <input
-            type="text"
-            id="playerName"
-            placeholder="Enter your name"
-            autocomplete="name"
-            required
-          >
-        </div>
+      <div class="splash-logo">
+        ZP
       </div>
 
-
-      <div class="field">
-        <label>Mobile Number</label>
-
-        <div class="input-wrap">
-          <span>📱</span>
-
-          <input
-            type="tel"
-            id="mobileNumber"
-            placeholder="10-digit mobile number"
-            inputmode="numeric"
-            maxlength="10"
-            required
-          >
-        </div>
+      <div class="splash-title">
+        ZEESHAN <span>PLAYZONE</span>
       </div>
 
+      <div class="splash-subtitle">
+        PLAY • SPIN • WIN DEMO COINS
+      </div>
 
-      <button type="submit" class="primary-btn">
-        Continue →
-      </button>
+      <div class="splash-loader">
+        <div></div>
+      </div>
 
-    </form>
-
-
-    <div class="auth-note">
-      This demo uses browser-based OTP verification.
-      No password is required.
     </div>
 
   </div>
 
-</div>
-```
+
+  <!-- =====================================================
+       LOGIN
+       ===================================================== -->
+
+  <section
+    class="auth-screen"
+    id="loginScreen"
+  >
+
+    <div class="auth-wrap">
+
+      <div class="auth-brand">
+
+        <div class="auth-brand-logo">
+          ZP
+        </div>
+
+        <div>
+          <h2>Zeeshan PlayZone</h2>
+          <p>Play. Spin. Enjoy.</p>
+        </div>
+
+      </div>
+
+
+      <div class="auth-card">
+
+        <h1>
+          Welcome, Player 🎮
+        </h1>
+
+        <p>
+          Create your PlayZone profile and enter the
+          premium gaming lobby.
+        </p>
+
+
+        <form id="loginForm">
+
+          <div class="field">
+
+            <label>
+              Player Name
+            </label>
+
+            <div class="input-box">
+
+              <span>👤</span>
+
+              <input
+                id="playerName"
+                type="text"
+                placeholder="Enter your name"
+                autocomplete="name"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Mobile Number
+            </label>
+
+            <div class="input-box">
+
+              <span>📱</span>
+
+              <input
+                id="mobileNumber"
+                type="tel"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="10-digit mobile number"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="main-btn"
+            type="submit"
+          >
+            Enter PlayZone →
+          </button>
+
+        </form>
+
+
+        <div class="auth-note">
+          Demo login with browser-based OTP verification.
+        </div>
+
+      </div>
+
+    </div>
 
   </section>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        OTP
-       ====================================================== -->
+       ===================================================== -->
 
-  <section class="auth-screen" id="otpScreen">
+  <section
+    class="auth-screen"
+    id="otpScreen"
+  >
 
-```
-<div class="auth-wrap">
+    <div class="auth-wrap">
 
-  <div class="brand">
-    <div class="brand-icon">ZP</div>
+      <div class="auth-brand">
 
-    <div>
-      <h2>Zeeshan PlayZone</h2>
-      <p>Verify your account</p>
+        <div class="auth-brand-logo">
+          ZP
+        </div>
+
+        <div>
+          <h2>Zeeshan PlayZone</h2>
+          <p>Verify your player account</p>
+        </div>
+
+      </div>
+
+
+      <div class="auth-card">
+
+        <h1>
+          Verify OTP 🔐
+        </h1>
+
+        <p id="otpMessage">
+          Enter the verification code.
+        </p>
+
+
+        <div class="otp-demo">
+
+          Demo OTP:
+          <strong id="demoOtp">
+            1234
+          </strong>
+
+        </div>
+
+
+        <div class="otp-row">
+
+          <input
+            class="otp-input"
+            type="text"
+            maxlength="1"
+            inputmode="numeric"
+          >
+
+          <input
+            class="otp-input"
+            type="text"
+            maxlength="1"
+            inputmode="numeric"
+          >
+
+          <input
+            class="otp-input"
+            type="text"
+            maxlength="1"
+            inputmode="numeric"
+          >
+
+          <input
+            class="otp-input"
+            type="text"
+            maxlength="1"
+            inputmode="numeric"
+          >
+
+        </div>
+
+
+        <button
+          class="main-btn"
+          type="button"
+          id="verifyOtpBtn"
+        >
+          Verify & Enter
+        </button>
+
+
+        <div class="auth-note">
+
+          <button
+            type="button"
+            onclick="backToLogin()"
+            style="
+              background:none;
+              color:#ffe17a;
+              cursor:pointer;
+              border:none;
+            "
+          >
+            ← Change mobile number
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
-  </div>
-
-
-  <div class="auth-card">
-
-    <h1>Enter OTP 🔐</h1>
-
-    <p id="otpMessage">
-      We sent a verification code to your mobile number.
-    </p>
-
-
-    <div class="demo-otp">
-      Demo mode — OTP is <strong id="demoOtp">1234</strong>
-    </div>
-
-
-    <div class="otp-box">
-
-      <input
-        type="text"
-        maxlength="1"
-        inputmode="numeric"
-        class="otp-input"
-      >
-
-      <input
-        type="text"
-        maxlength="1"
-        inputmode="numeric"
-        class="otp-input"
-      >
-
-      <input
-        type="text"
-        maxlength="1"
-        inputmode="numeric"
-        class="otp-input"
-      >
-
-      <input
-        type="text"
-        maxlength="1"
-        inputmode="numeric"
-        class="otp-input"
-      >
-
-    </div>
-
-
-    <button class="primary-btn" id="verifyOtpBtn">
-      Verify & Enter PlayZone
-    </button>
-
-
-    <div class="auth-note">
-      <button
-        onclick="backToLogin()"
-        style="
-          background:none;
-          color:#b998ff;
-          cursor:pointer;
-          border:none;
-        "
-      >
-        ← Change mobile number
-      </button>
-    </div>
-
-  </div>
-
-</div>
-```
 
   </section>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        MAIN APP
-       ====================================================== -->
+       ===================================================== -->
 
   <main id="app">
 
-```
-<!-- TOP BAR -->
 
-<header class="topbar">
+    <!-- HEADER -->
 
-  <div class="top-brand">
+    <header class="app-header">
 
-    <div class="mini-logo">ZP</div>
+      <button
+        class="header-profile"
+        onclick="openProfile()"
+        aria-label="Open profile"
+      >
 
-    <div>
-      <strong>Zeeshan PlayZone</strong>
-      <small>Play without limits</small>
-    </div>
+        <div
+          class="header-avatar"
+          id="headerAvatar"
+        >
+          P
+        </div>
 
-  </div>
+        <div class="profile-dot">
+          1
+        </div>
 
-
-  <div class="top-actions">
-
-    <button
-      class="icon-btn"
-      onclick="showToast('Notifications coming soon!')"
-      title="Notifications"
-    >
-      🔔
-    </button>
+      </button>
 
 
-    <button
-      class="profile-pill"
-      onclick="openProfile()"
-    >
-      <div class="avatar" id="topAvatar">P</div>
+      <div class="wallet-pill">
 
-      <span id="topPlayerName">
-        Player
-      </span>
-    </button>
+        <div class="wallet-balance">
 
-  </div>
+          <div class="coin-icon">
+            ●
+          </div>
 
-</header>
+          <div>
 
+            <div
+              class="wallet-value"
+              id="walletBalance"
+            >
+              1,000
+            </div>
 
-<!-- CONTENT -->
+            <span class="wallet-label">
+              DEMO COINS
+            </span>
 
-<div class="container">
+          </div>
 
-
-  <!-- WELCOME -->
-
-  <section class="welcome">
-
-    <small>WELCOME BACK</small>
-
-    <h1>
-      Ready to <span>play?</span>
-    </h1>
-
-  </section>
+        </div>
 
 
-  <!-- FEATURED -->
+        <button
+          class="wallet-add"
+          onclick="addDemoCoins()"
+          aria-label="Add demo coins"
+        >
+          +
+        </button>
 
-  <section class="featured">
+      </div>
 
-    <div class="featured-content">
 
-      <span class="tag">
-        FEATURED GAME
-      </span>
+      <div class="header-actions">
 
-      <h2>
-        Beat the Clock ⚡
-      </h2>
+        <button
+          class="header-icon"
+          onclick="showToast('No new notifications yet.')"
+        >
 
-      <p>
-        Test your speed, reflexes and concentration.
-        Start a quick challenge and beat your best score.
-      </p>
+          🔔
 
-      <button onclick="openGame('quicktap')">
-        Play Featured Game
+          <span class="header-icon-badge">
+            1
+          </span>
+
+        </button>
+
+
+        <button
+          class="header-icon"
+          onclick="showToast('Settings panel coming soon.')"
+        >
+          ⚙️
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- QUICK BAR -->
+
+    <div class="quick-bar">
+
+      <button
+        class="quick-btn active"
+        data-category="all"
+        onclick="selectCategory(this)"
+      >
+        <strong>💛</strong>
+        All Games
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-category="slots"
+        onclick="selectCategory(this)"
+      >
+        <strong>🎰</strong>
+        Slots
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-category="wheel"
+        onclick="selectCategory(this)"
+      >
+        <strong>🎡</strong>
+        Lucky
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-category="mini"
+        onclick="selectCategory(this)"
+      >
+        <strong>🎮</strong>
+        Mini Games
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-category="favourite"
+        onclick="showFavourites()"
+      >
+        <strong>❤️</strong>
+        Favourite
       </button>
 
     </div>
 
-  </section>
+
+    <div class="page">
 
 
-  <!-- SEARCH -->
+      <!-- JACKPOT -->
 
-  <div class="search-wrap">
+      <section class="jackpot-card">
 
-    <span>🔎</span>
+        <div class="jackpot-live">
 
-    <input
-      type="text"
-      id="gameSearch"
-      placeholder="Search your favourite game..."
-      oninput="filterGames()"
-    >
+          <span class="live-dot"></span>
 
-  </div>
+          LIVE JACKPOT
+
+        </div>
 
 
-  <!-- CATEGORIES -->
-
-  <div class="categories">
-
-    <button
-      class="category-btn active"
-      data-category="all"
-      onclick="selectCategory(this)"
-    >
-      All Games
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="arcade"
-      onclick="selectCategory(this)"
-    >
-      Arcade
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="puzzle"
-      onclick="selectCategory(this)"
-    >
-      Puzzle
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="action"
-      onclick="selectCategory(this)"
-    >
-      Action
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="strategy"
-      onclick="selectCategory(this)"
-    >
-      Strategy
-    </button>
-
-  </div>
+        <div class="jackpot-title">
+          JACKPOT <span>LOTTO</span>
+        </div>
 
 
-  <!-- GAMES -->
+        <div
+          class="jackpot-number"
+          id="jackpotNumber"
+        >
+          ₹1,108,208
+        </div>
 
-  <div class="section-head">
 
-    <div>
-      <h2>Popular Games</h2>
-      <p>Choose a game and start playing instantly</p>
+        <div class="jackpot-footer">
+
+          <div class="jackpot-info">
+            ⏱ Draw updates automatically
+          </div>
+
+          <button
+            class="jackpot-button"
+            onclick="openGame('triple777')"
+          >
+            VIEW JACKPOT
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- REFER -->
+
+      <section class="promo-card">
+
+        <div class="promo-content">
+
+          <span class="promo-kicker">
+            🎁 REFER & EARN
+          </span>
+
+          <h2>
+            Get 1% Bonus
+          </h2>
+
+          <p>
+            Invite friends and earn demo bonus rewards.
+          </p>
+
+          <button onclick="openReferModal()">
+            Invite Friends
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+          id="gameSearch"
+          type="text"
+          placeholder="Search games..."
+          oninput="filterGames()"
+        >
+
+      </div>
+
+
+      <!-- SECTION -->
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            🔥 Hot Games
+          </h2>
+
+          <p>
+            Popular games in Zeeshan PlayZone
+          </p>
+
+        </div>
+
+        <button
+          onclick="showToast('You are already viewing all games.')"
+        >
+          VIEW ALL
+        </button>
+
+      </div>
+
+
+      <!-- GAMES GRID -->
+
+      <section
+        class="games-grid"
+        id="gamesGrid"
+      >
+
+
+        <!-- TRIPLE 777 -->
+
+        <article
+          class="game-card"
+          data-name="Triple 777 Triple Seven Slot"
+          data-category="slots hot"
+          data-game-id="triple777"
+        >
+
+          <span class="hot-badge">
+            🔥 HOT
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'triple777', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb slot-gold">
+
+            <div class="game-symbol">
+              🎰
+            </div>
+
+            <div class="game-name-art">
+              TRIPLE<br>777
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Spin three reels and match symbols.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('triple777')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- EMOJI FORTUNE -->
+
+        <article
+          class="game-card"
+          data-name="Emoji Fortune Slot Lucky"
+          data-category="slots hot"
+          data-game-id="emojiFortune"
+        >
+
+          <span class="hot-badge">
+            🔥 HOT
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'emojiFortune', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb fortune-bg">
+
+            <div class="game-symbol">
+              🐯
+            </div>
+
+            <div class="game-name-art">
+              EMOJI<br>FORTUNE
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Match lucky symbols and collect wins.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('emojiFortune')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- LUCKY WHEEL -->
+
+        <article
+          class="game-card"
+          data-name="Lucky Wheel Spin Bonus"
+          data-category="wheel hot"
+          data-game-id="wheel"
+        >
+
+          <span class="hot-badge">
+            🔥 HOT
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'wheel', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb wheel-bg">
+
+            <div class="game-symbol">
+              🎡
+            </div>
+
+            <div class="game-name-art">
+              LUCKY<br>WHEEL
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Spin the wheel for random demo rewards.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('wheel')"
+            >
+              SPIN NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- SUPER 777 -->
+
+        <article
+          class="game-card"
+          data-name="Super 777 Slot"
+          data-category="slots"
+          data-game-id="super777"
+        >
+
+          <span class="hot-badge">
+            🔥 HOT
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'super777', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb slot-blue">
+
+            <div class="game-symbol">
+              💎
+            </div>
+
+            <div class="game-name-art">
+              SUPER<br>777
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Classic slot experience with demo coins.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('super777')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- GEM 777 -->
+
+        <article
+          class="game-card"
+          data-name="Gem 777 Lucky Slot"
+          data-category="slots"
+          data-game-id="gem777"
+        >
+
+          <span class="hot-badge">
+            🔥 HOT
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'gem777', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb slot-green">
+
+            <div class="game-symbol">
+              🍀
+            </div>
+
+            <div class="game-name-art">
+              GEM<br>777
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Lucky symbols, bonus matches and fun spins.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('gem777')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- DRAGON -->
+
+        <article
+          class="game-card"
+          data-name="Dragon Fortune"
+          data-category="slots"
+          data-game-id="dragon"
+        >
+
+          <span class="new-badge">
+            NEW
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'dragon', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb dragon-bg">
+
+            <div class="game-symbol">
+              🐉
+            </div>
+
+            <div class="game-name-art">
+              DRAGON<br>FORTUNE
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Enter the dragon and spin for virtual rewards.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('dragon')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- NUMBER RUSH -->
+
+        <article
+          class="game-card"
+          data-name="Number Rush Guess Number"
+          data-category="mini"
+          data-game-id="number"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'number', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-purple">
+
+            <div class="game-symbol">
+              🔢
+            </div>
+
+            <div class="game-name-art">
+              NUMBER<br>RUSH
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Guess the secret number before attempts end.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('number')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- MEMORY -->
+
+        <article
+          class="game-card"
+          data-name="Memory Match Cards"
+          data-category="mini"
+          data-game-id="memory"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'memory', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-blue">
+
+            <div class="game-symbol">
+              🃏
+            </div>
+
+            <div class="game-name-art">
+              MEMORY<br>MATCH
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Match all pairs and test your memory.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('memory')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- QUICK TAP -->
+
+        <article
+          class="game-card"
+          data-name="Quick Tap Reflex"
+          data-category="mini"
+          data-game-id="quicktap"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'quicktap', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-red">
+
+            <div class="game-symbol">
+              ⚡
+            </div>
+
+            <div class="game-name-art">
+              QUICK<br>TAP
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Test your speed and reflexes in 15 seconds.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('quicktap')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- RPS -->
+
+        <article
+          class="game-card"
+          data-name="Rock Paper Scissors RPS"
+          data-category="mini"
+          data-game-id="rps"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'rps', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-purple">
+
+            <div class="game-symbol">
+              ✊
+            </div>
+
+            <div class="game-name-art">
+              ROCK PAPER<br>SCISSORS
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Challenge the computer in a classic battle.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('rps')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- SNAKE -->
+
+        <article
+          class="game-card"
+          data-name="Snake Classic Arcade"
+          data-category="mini"
+          data-game-id="snake"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'snake', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-green">
+
+            <div class="game-symbol">
+              🐍
+            </div>
+
+            <div class="game-name-art">
+              CLASSIC<br>SNAKE
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Eat, grow and survive as long as possible.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('snake')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- TIC TAC TOE -->
+
+        <article
+          class="game-card"
+          data-name="Tic Tac Toe Strategy XO"
+          data-category="mini"
+          data-game-id="ttt"
+        >
+
+          <span class="new-badge">
+            MINI
+          </span>
+
+          <button
+            class="fav-btn"
+            onclick="toggleFavourite(event, 'ttt', this)"
+          >
+            ♡
+          </button>
+
+          <div class="game-thumb mini-blue">
+
+            <div class="game-symbol">
+              ⭕
+            </div>
+
+            <div class="game-name-art">
+              TIC TAC<br>TOE
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Play the classic X and O strategy game.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="openGame('ttt')"
+            >
+              PLAY NOW
+            </button>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- NEW GAMES -->
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            ✨ New in PlayZone
+          </h2>
+
+          <p>
+            Fresh games and upcoming features
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <section class="games-grid">
+
+
+        <article class="game-card">
+
+          <span class="new-badge">
+            NEW
+          </span>
+
+          <div class="game-thumb mini-green">
+
+            <div class="game-symbol">
+              🚀
+            </div>
+
+            <div class="game-name-art">
+              ROCKET<br>RUSH
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              Coming soon to Zeeshan PlayZone.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="showToast('Rocket Rush is coming soon!')"
+            >
+              COMING SOON
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <article class="game-card">
+
+          <span class="new-badge">
+            NEW
+          </span>
+
+          <div class="game-thumb mini-red">
+
+            <div class="game-symbol">
+              👑
+            </div>
+
+            <div class="game-name-art">
+              KING'S<br>FORTUNE
+            </div>
+
+          </div>
+
+          <div class="game-info">
+
+            <p>
+              New premium slot experience coming soon.
+            </p>
+
+            <button
+              class="game-play"
+              onclick="showToast('King’s Fortune is coming soon!')"
+            >
+              COMING SOON
+            </button>
+
+          </div>
+
+        </article>
+
+      </section>
+
     </div>
 
-  </div>
 
-
-  <section
-    class="games-grid"
-    id="gamesGrid"
-  >
-
-
-    <!-- NUMBER RUSH -->
-
-    <article
-      class="game-card"
-      data-category="puzzle arcade"
-      data-name="Number Rush Guess Number"
-    >
-
-      <div class="game-cover cover-number">
-        <div class="game-art">🔢</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Number Rush</h3>
-          <span class="mini-tag">PUZZLE</span>
-        </div>
-
-        <p>
-          Guess the secret number before your attempts run out.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('number')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <!-- MEMORY -->
-
-    <article
-      class="game-card"
-      data-category="puzzle"
-      data-name="Memory Match Cards"
-    >
-
-      <div class="game-cover cover-memory">
-        <div class="game-art">🃏</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Memory Match</h3>
-          <span class="mini-tag">PUZZLE</span>
-        </div>
-
-        <p>
-          Match every pair and test your memory skills.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('memory')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <!-- QUICK TAP -->
-
-    <article
-      class="game-card"
-      data-category="action arcade"
-      data-name="Quick Tap Beat Clock Reflex"
-    >
-
-      <div class="game-cover cover-tap">
-        <div class="game-art">⚡</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Quick Tap</h3>
-          <span class="mini-tag">ACTION</span>
-        </div>
-
-        <p>
-          Tap as fast as possible before the timer reaches zero.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('quicktap')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <!-- RPS -->
-
-    <article
-      class="game-card"
-      data-category="arcade strategy"
-      data-name="Rock Paper Scissors RPS"
-    >
-
-      <div class="game-cover cover-rps">
-        <div class="game-art">✊</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Rock Paper Scissors</h3>
-          <span class="mini-tag">CLASSIC</span>
-        </div>
-
-        <p>
-          Challenge the computer in the classic battle.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('rps')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <!-- SNAKE -->
-
-    <article
-      class="game-card"
-      data-category="arcade action"
-      data-name="Snake Classic"
-    >
-
-      <div class="game-cover cover-snake">
-        <div class="game-art">🐍</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Snake</h3>
-          <span class="mini-tag">ARCADE</span>
-        </div>
-
-        <p>
-          Eat, grow and survive as long as you can.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('snake')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <!-- TIC TAC TOE -->
-
-    <article
-      class="game-card"
-      data-category="strategy puzzle"
-      data-name="Tic Tac Toe XO Strategy"
-    >
-
-      <div class="game-cover cover-tictac">
-        <div class="game-art">⭕</div>
-      </div>
-
-      <div class="game-meta">
-
-        <div class="game-topline">
-          <h3>Tic Tac Toe</h3>
-          <span class="mini-tag">STRATEGY</span>
-        </div>
-
-        <p>
-          Classic X and O battle against a friend or yourself.
-        </p>
-
-        <button
-          class="play-card-btn"
-          onclick="openGame('ttt')"
-        >
-          Play Now
-        </button>
-
-      </div>
-
-    </article>
-
-  </section>
-
-
-  <!-- STATS -->
-
-  <section class="stats-grid">
-
-    <div class="stat-card">
-      <strong id="gamesPlayed">0</strong>
-      <span>Games Played</span>
-    </div>
-
-    <div class="stat-card">
-      <strong>6</strong>
-      <span>Playable Games</span>
-    </div>
-
-    <div class="stat-card">
-      <strong>24/7</strong>
-      <span>PlayZone Online</span>
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-  <button
-    class="nav-item active"
-    onclick="goHome()"
-  >
-    <b>⌂</b>
-    Home
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="document.getElementById('gamesGrid').scrollIntoView({behavior:'smooth'})"
-  >
-    <b>🎮</b>
-    Games
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="showToast('Leaderboard coming soon!')"
-  >
-    <b>🏆</b>
-    Rank
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="openProfile()"
-  >
-    <b>👤</b>
-    Profile
-  </button>
-
-</nav>
-```
+    <!-- ===================================================
+         BOTTOM NAV
+         =================================================== -->
+
+    <nav class="bottom-nav">
+
+      <button
+        class="nav-btn"
+        onclick="openWallet()"
+      >
+        <b>🏦</b>
+        Wallet
+      </button>
+
+
+      <button
+        class="nav-btn active"
+        onclick="goHome()"
+      >
+        <b>🎮</b>
+        Games
+      </button>
+
+
+      <button
+        class="nav-btn"
+        onclick="openGame('wheel')"
+      >
+        <b>🎡</b>
+        Lucky Wheel
+      </button>
+
+
+      <button
+        class="nav-btn"
+        onclick="openReferModal()"
+      >
+        <b>🎁</b>
+        Refer
+      </button>
+
+
+      <button
+        class="nav-btn"
+        onclick="openEvents()"
+      >
+
+        <span class="nav-badge">
+          1
+        </span>
+
+        <b>🎉</b>
+        Events
+      </button>
+
+    </nav>
 
   </main>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        GAME MODAL
-       ====================================================== -->
+       ===================================================== -->
 
   <div
     class="modal"
     id="gameModal"
   >
 
-```
-<div class="game-window">
+    <div class="modal-box">
 
-  <div class="game-window-head">
+      <div class="modal-head">
 
-    <h2 id="gameModalTitle">
-      Game
-    </h2>
+        <h2 id="gameModalTitle">
+          Game
+        </h2>
 
-    <button
-      class="close-btn"
-      onclick="closeGame()"
-    >
-      ✕
-    </button>
+        <button
+          class="close-btn"
+          onclick="closeGame()"
+        >
+          ✕
+        </button>
 
-  </div>
+      </div>
 
 
-  <div
-    class="game-area"
-    id="gameArea"
-  ></div>
+      <div
+        class="modal-content"
+        id="gameArea"
+      ></div>
 
-</div>
-```
+    </div>
 
   </div>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        PROFILE MODAL
-       ====================================================== -->
+       ===================================================== -->
 
   <div
     class="modal"
     id="profileModal"
   >
 
-```
-<div class="game-window">
+    <div class="modal-box">
 
-  <div class="game-window-head">
+      <div class="modal-head">
 
-    <h2>Your Profile</h2>
+        <h2>
+          Player Profile
+        </h2>
 
-    <button
-      class="close-btn"
-      onclick="closeProfile()"
-    >
-      ✕
-    </button>
+        <button
+          class="close-btn"
+          onclick="closeProfile()"
+        >
+          ✕
+        </button>
 
-  </div>
-
-
-  <div class="game-area">
-
-    <div class="profile-info">
-
-      <div
-        class="profile-big-avatar"
-        id="profileAvatar"
-      >
-        P
       </div>
 
-      <h3
-        id="profileName"
-        style="text-align:center;margin-bottom:20px;"
-      >
-        Player
-      </h3>
 
-      <p>
-        📱 Mobile:
-        <span id="profileMobile"></span>
-      </p>
+      <div class="modal-content">
 
-      <p>
-        🎮 Games played:
-        <span id="profileGames">0</span>
-      </p>
+        <div
+          class="profile-big-avatar"
+          id="profileAvatar"
+        >
+          P
+        </div>
 
-      <button
-        class="logout-btn"
-        onclick="logout()"
-      >
-        Logout
-      </button>
+
+        <h2
+          class="profile-name"
+          id="profileName"
+        >
+          Player
+        </h2>
+
+
+        <div class="profile-row">
+
+          <span>
+            📱 Mobile
+          </span>
+
+          <strong id="profileMobile"></strong>
+
+        </div>
+
+
+        <div class="profile-row">
+
+          <span>
+            🎮 Games Played
+          </span>
+
+          <strong id="profileGames"></strong>
+
+        </div>
+
+
+        <div class="profile-row">
+
+          <span>
+            💰 Demo Coins
+          </span>
+
+          <strong id="profileBalance"></strong>
+
+        </div>
+
+
+        <button
+          class="logout-btn"
+          onclick="logout()"
+        >
+          Logout
+        </button>
+
+      </div>
 
     </div>
 
   </div>
 
-</div>
-```
+
+  <!-- =====================================================
+       SIMPLE MODAL
+       ===================================================== -->
+
+  <div
+    class="modal"
+    id="simpleModal"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h2 id="simpleModalTitle">
+          PlayZone
+        </h2>
+
+        <button
+          class="close-btn"
+          onclick="closeSimpleModal()"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <div
+        class="modal-content"
+        id="simpleModalContent"
+      ></div>
+
+    </div>
 
   </div>
+
 
   <!-- TOAST -->
 
   <div id="toast"></div>
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        JAVASCRIPT
-       ====================================================== -->
+       ===================================================== -->
 
   <script>
 
@@ -1968,40 +4353,68 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
        ===================================================== */
 
     let currentUser = null;
+
     let generatedOtp = "1234";
+
     let activeCategory = "all";
+
+    let currentGameType = null;
+
+    let snakeInterval = null;
+
+    let wheelRotation = 0;
+
+    let slotSpinning = false;
+
 
     let gamesPlayed = Number(
       localStorage.getItem("zp_games_played") || 0
     );
 
-    let snakeInterval = null;
+
+    let demoBalance = Number(
+      localStorage.getItem("zp_demo_balance") || 1000
+    );
+
+
+    let favourites = JSON.parse(
+      localStorage.getItem("zp_favourites") || "[]"
+    );
 
 
     /* =====================================================
        SPLASH
        ===================================================== */
 
-    window.addEventListener("load", () => {
+    window.addEventListener(
+      "load",
+      () => {
 
-      setTimeout(() => {
+        setTimeout(
+          () => {
 
-        const splash =
-          document.getElementById("splash");
+            const splash =
+              document.getElementById("splash");
 
-        splash.style.opacity = "0";
+            splash.style.opacity = "0";
 
-        setTimeout(() => {
+            setTimeout(
+              () => {
 
-          splash.style.display = "none";
+                splash.style.display = "none";
 
-          checkSession();
+                checkSession();
 
-        }, 600);
+              },
+              600
+            );
 
-      }, 1500);
+          },
+          1300
+        );
 
-    });
+      }
+    );
 
 
     /* =====================================================
@@ -2015,10 +4428,20 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       if (savedUser) {
 
-        currentUser =
-          JSON.parse(savedUser);
+        try {
 
-        openApp();
+          currentUser =
+            JSON.parse(savedUser);
+
+          openApp();
+
+        } catch (error) {
+
+          localStorage.removeItem("zp_user");
+
+          showScreen("loginScreen");
+
+        }
 
       } else {
 
@@ -2033,11 +4456,10 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .querySelectorAll(".auth-screen")
-        .forEach(screen => {
-
-          screen.classList.remove("active");
-
-        });
+        .forEach(
+          screen =>
+            screen.classList.remove("active")
+        );
 
       document
         .getElementById(id)
@@ -2055,7 +4477,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       .getElementById("loginForm")
       .addEventListener(
         "submit",
-        function(event) {
+        event => {
 
           event.preventDefault();
 
@@ -2075,7 +4497,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           if (name.length < 2) {
 
             showToast(
-              "Please enter a valid name."
+              "Please enter a valid player name."
             );
 
             return;
@@ -2095,8 +4517,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
           currentUser = {
-            name: name,
-            mobile: mobile
+            name,
+            mobile
           };
 
 
@@ -2107,11 +4529,6 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             ).toString();
 
 
-          /*
-            Demo fallback.
-            Both the generated OTP and 1234 work.
-          */
-
           document
             .getElementById("demoOtp")
             .textContent =
@@ -2121,7 +4538,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           document
             .getElementById("otpMessage")
             .textContent =
-            "Enter the 4-digit code sent to +91 " +
+            "Enter the code sent to +91 " +
             mobile.slice(0, 2) +
             "******" +
             mobile.slice(-2);
@@ -2130,20 +4547,23 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           showScreen("otpScreen");
 
 
-          setTimeout(() => {
+          setTimeout(
+            () => {
 
-            document
-              .querySelector(".otp-input")
-              .focus();
+              document
+                .querySelector(".otp-input")
+                .focus();
 
-          }, 200);
+            },
+            200
+          );
 
         }
       );
 
 
     /* =====================================================
-       OTP INPUT AUTO MOVE
+       OTP
        ===================================================== */
 
     const otpInputs =
@@ -2160,13 +4580,15 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             input.value =
               input.value.replace(/\D/g, "");
 
-
             if (
               input.value &&
-              index < otpInputs.length - 1
+              index <
+              otpInputs.length - 1
             ) {
 
-              otpInputs[index + 1].focus();
+              otpInputs[
+                index + 1
+              ].focus();
 
             }
 
@@ -2184,7 +4606,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               index > 0
             ) {
 
-              otpInputs[index - 1].focus();
+              otpInputs[
+                index - 1
+              ].focus();
 
             }
 
@@ -2207,8 +4631,10 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       const otp =
         [...otpInputs]
-        .map(input => input.value)
-        .join("");
+          .map(
+            input => input.value
+          )
+          .join("");
 
 
       if (
@@ -2223,7 +4649,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
         otpInputs.forEach(
-          input => input.value = ""
+          input =>
+            input.value = ""
         );
 
 
@@ -2236,7 +4663,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       } else {
 
         showToast(
-          "Incorrect OTP. Please try again."
+          "Incorrect OTP. Try again."
         );
 
       }
@@ -2247,7 +4674,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     function backToLogin() {
 
       otpInputs.forEach(
-        input => input.value = ""
+        input =>
+          input.value = ""
       );
 
       showScreen("loginScreen");
@@ -2263,11 +4691,10 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .querySelectorAll(".auth-screen")
-        .forEach(screen => {
-
-          screen.classList.remove("active");
-
-        });
+        .forEach(
+          screen =>
+            screen.classList.remove("active")
+        );
 
 
       document
@@ -2276,25 +4703,487 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
         .add("active");
 
 
-      document
-        .getElementById("topPlayerName")
-        .textContent =
-        currentUser.name;
-
-
       const firstLetter =
         currentUser.name
-        .charAt(0)
-        .toUpperCase();
+          .charAt(0)
+          .toUpperCase();
 
 
       document
-        .getElementById("topAvatar")
+        .getElementById("headerAvatar")
         .textContent =
         firstLetter;
 
 
+      updateBalanceUI();
+
       updateGamesPlayed();
+
+      updateFavouriteButtons();
+
+    }
+
+
+    /* =====================================================
+       WALLET
+       ===================================================== */
+
+    function updateBalanceUI() {
+
+      document
+        .getElementById("walletBalance")
+        .textContent =
+        demoBalance.toLocaleString();
+
+      localStorage.setItem(
+        "zp_demo_balance",
+        demoBalance
+      );
+
+    }
+
+
+    function addDemoCoins() {
+
+      demoBalance += 500;
+
+      updateBalanceUI();
+
+      showToast(
+        "+500 demo coins added! 💰"
+      );
+
+    }
+
+
+    function changeBalance(amount) {
+
+      demoBalance += amount;
+
+      if (demoBalance < 0) {
+        demoBalance = 0;
+      }
+
+      updateBalanceUI();
+
+    }
+
+
+    function openWallet() {
+
+      openSimpleModal(
+        "Demo Wallet",
+        `
+          <div
+            style="
+              text-align:center;
+              padding:15px 0;
+            "
+          >
+
+            <div
+              style="
+                font-size:70px;
+                margin-bottom:12px;
+              "
+            >
+              💰
+            </div>
+
+            <h2
+              style="
+                font-size:36px;
+                color:#ffd84b;
+              "
+            >
+              ${demoBalance.toLocaleString()}
+            </h2>
+
+            <p
+              style="
+                color:#9cbab1;
+                margin-top:5px;
+                font-size:12px;
+              "
+            >
+              Demo Coins
+            </p>
+
+            <button
+              class="main-btn"
+              style="
+                margin-top:24px;
+              "
+              onclick="
+                addDemoCoins();
+                closeSimpleModal();
+              "
+            >
+              + Add 500 Demo Coins
+            </button>
+
+            <p
+              style="
+                color:#7fa59a;
+                font-size:10px;
+                line-height:1.6;
+                margin-top:15px;
+              "
+            >
+              This version uses virtual demo coins for gameplay.
+            </p>
+
+          </div>
+        `
+      );
+
+    }
+
+
+    /* =====================================================
+       JACKPOT
+       ===================================================== */
+
+    function updateJackpot() {
+
+      const current =
+        document
+          .getElementById("jackpotNumber");
+
+      if (!current) return;
+
+
+      const amount =
+        1000000 +
+        Math.floor(
+          Math.random() * 250000
+        );
+
+
+      current.textContent =
+        "₹" +
+        amount.toLocaleString("en-IN");
+
+    }
+
+
+    setInterval(
+      updateJackpot,
+      6000
+    );
+
+
+    /* =====================================================
+       GAMES PLAYED
+       ===================================================== */
+
+    function incrementGamesPlayed() {
+
+      gamesPlayed++;
+
+      localStorage.setItem(
+        "zp_games_played",
+        gamesPlayed
+      );
+
+      updateGamesPlayed();
+
+    }
+
+
+    function updateGamesPlayed() {
+
+      const profileGames =
+        document.getElementById(
+          "profileGames"
+        );
+
+      if (profileGames) {
+
+        profileGames.textContent =
+          gamesPlayed;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       FAVOURITES
+       ===================================================== */
+
+    function toggleFavourite(
+      event,
+      gameId,
+      button
+    ) {
+
+      event.stopPropagation();
+
+
+      if (
+        favourites.includes(gameId)
+      ) {
+
+        favourites =
+          favourites.filter(
+            id => id !== gameId
+          );
+
+      } else {
+
+        favourites.push(gameId);
+
+      }
+
+
+      localStorage.setItem(
+        "zp_favourites",
+        JSON.stringify(favourites)
+      );
+
+
+      updateFavouriteButtons();
+
+      showToast(
+        favourites.includes(gameId)
+          ? "Added to favourites ❤️"
+          : "Removed from favourites"
+      );
+
+    }
+
+
+    function updateFavouriteButtons() {
+
+      document
+        .querySelectorAll(".game-card")
+        .forEach(
+          card => {
+
+            const gameId =
+              card.dataset.gameId;
+
+            const button =
+              card.querySelector(".fav-btn");
+
+            if (!gameId || !button) return;
+
+
+            if (
+              favourites.includes(gameId)
+            ) {
+
+              button.textContent = "♥";
+
+              button.classList.add("active");
+
+              card.classList.add(
+                "favourite-card"
+              );
+
+            } else {
+
+              button.textContent = "♡";
+
+              button.classList.remove("active");
+
+              card.classList.remove(
+                "favourite-card"
+              );
+
+            }
+
+          }
+        );
+
+    }
+
+
+    function showFavourites() {
+
+      const cards =
+        document.querySelectorAll(
+          ".game-card[data-game-id]"
+        );
+
+
+      let count = 0;
+
+
+      cards.forEach(
+        card => {
+
+          const gameId =
+            card.dataset.gameId;
+
+          const show =
+            favourites.includes(gameId);
+
+          card.style.display =
+            show
+              ? ""
+              : "none";
+
+          if (show) count++;
+
+        }
+      );
+
+
+      document
+        .querySelectorAll(".quick-btn")
+        .forEach(
+          btn =>
+            btn.classList.remove("active")
+        );
+
+
+      if (count === 0) {
+
+        showToast(
+          "No favourite games yet. Tap ♡ on any game."
+        );
+
+      }
+
+
+      activeCategory = "favourite";
+
+
+      document
+        .getElementById("gamesGrid")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* =====================================================
+       CATEGORY FILTER
+       ===================================================== */
+
+    function selectCategory(button) {
+
+      document
+        .querySelectorAll(".quick-btn")
+        .forEach(
+          btn =>
+            btn.classList.remove("active")
+        );
+
+
+      button.classList.add("active");
+
+
+      activeCategory =
+        button.dataset.category;
+
+
+      filterGames();
+
+    }
+
+
+    function filterGames() {
+
+      const search =
+        document
+          .getElementById("gameSearch")
+          .value
+          .toLowerCase()
+          .trim();
+
+
+      const cards =
+        document.querySelectorAll(
+          ".game-card[data-name]"
+        );
+
+
+      cards.forEach(
+        card => {
+
+          const name =
+            card.dataset.name
+              .toLowerCase();
+
+          const categories =
+            card.dataset.category || "";
+
+          const gameId =
+            card.dataset.gameId;
+
+
+          const searchMatch =
+            name.includes(search);
+
+
+          let categoryMatch =
+            activeCategory === "all" ||
+            categories.includes(
+              activeCategory
+            );
+
+
+          if (
+            activeCategory === "favourite"
+          ) {
+
+            categoryMatch =
+              favourites.includes(gameId);
+
+          }
+
+
+          card.style.display =
+            searchMatch &&
+            categoryMatch
+              ? ""
+              : "none";
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
+
+    function goHome() {
+
+      document
+        .querySelectorAll(".quick-btn")
+        .forEach(
+          btn => {
+
+            btn.classList.toggle(
+              "active",
+              btn.dataset.category === "all"
+            );
+
+          }
+        );
+
+
+      activeCategory = "all";
+
+
+      document
+        .getElementById("gameSearch")
+        .value = "";
+
+
+      filterGames();
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
     }
 
@@ -2306,6 +5195,14 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     function openProfile() {
 
       document
+        .getElementById("profileAvatar")
+        .textContent =
+        currentUser.name
+          .charAt(0)
+          .toUpperCase();
+
+
+      document
         .getElementById("profileName")
         .textContent =
         currentUser.name;
@@ -2314,7 +5211,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       document
         .getElementById("profileMobile")
         .textContent =
-        "+91 " + currentUser.mobile;
+        "+91 " +
+        currentUser.mobile;
 
 
       document
@@ -2324,11 +5222,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       document
-        .getElementById("profileAvatar")
+        .getElementById("profileBalance")
         .textContent =
-        currentUser.name
-        .charAt(0)
-        .toUpperCase();
+        demoBalance.toLocaleString();
 
 
       document
@@ -2382,129 +5278,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       showToast(
-        "You have been logged out."
+        "Logged out successfully."
       );
-
-    }
-
-
-    /* =====================================================
-       TOAST
-       ===================================================== */
-
-    let toastTimer;
-
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById("toast");
-
-
-      toast.textContent =
-        message;
-
-
-      toast.classList.add("show");
-
-
-      clearTimeout(toastTimer);
-
-
-      toastTimer =
-        setTimeout(() => {
-
-          toast
-            .classList
-            .remove("show");
-
-        }, 2500);
-
-    }
-
-
-    /* =====================================================
-       CATEGORY FILTER
-       ===================================================== */
-
-    function selectCategory(button) {
-
-      document
-        .querySelectorAll(".category-btn")
-        .forEach(btn => {
-
-          btn.classList.remove("active");
-
-        });
-
-
-      button.classList.add("active");
-
-
-      activeCategory =
-        button.dataset.category;
-
-
-      filterGames();
-
-    }
-
-
-    function filterGames() {
-
-      const search =
-        document
-          .getElementById("gameSearch")
-          .value
-          .toLowerCase()
-          .trim();
-
-
-      const cards =
-        document
-          .querySelectorAll(".game-card");
-
-
-      cards.forEach(card => {
-
-        const name =
-          card.dataset.name.toLowerCase();
-
-
-        const categories =
-          card.dataset.category;
-
-
-        const categoryMatch =
-          activeCategory === "all" ||
-          categories.includes(activeCategory);
-
-
-        const searchMatch =
-          name.includes(search);
-
-
-        card.style.display =
-          categoryMatch &&
-          searchMatch
-            ? ""
-            : "none";
-
-      });
-
-    }
-
-
-    /* =====================================================
-       NAVIGATION
-       ===================================================== */
-
-    function goHome() {
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
 
     }
 
@@ -2517,6 +5292,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       stopSnake();
 
+      currentGameType = type;
 
       document
         .getElementById("gameModal")
@@ -2524,38 +5300,75 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
         .add("active");
 
 
-      const area =
-        document.getElementById("gameArea");
-
-
-      area.innerHTML = "";
+      document
+        .getElementById("gameArea")
+        .innerHTML = "";
 
 
       incrementGamesPlayed();
 
 
-      if (type === "number") {
-        renderNumberGame();
+      if (
+        [
+          "triple777",
+          "emojiFortune",
+          "super777",
+          "gem777",
+          "dragon"
+        ].includes(type)
+      ) {
+
+        renderSlotGame(type);
+
       }
+
+
+      if (type === "wheel") {
+
+        renderLuckyWheel();
+
+      }
+
+
+      if (type === "number") {
+
+        renderNumberGame();
+
+      }
+
 
       if (type === "memory") {
+
         renderMemoryGame();
+
       }
+
 
       if (type === "quicktap") {
+
         renderQuickTapGame();
+
       }
+
 
       if (type === "rps") {
+
         renderRpsGame();
+
       }
+
 
       if (type === "snake") {
+
         renderSnakeGame();
+
       }
 
+
       if (type === "ttt") {
+
         renderTttGame();
+
       }
 
     }
@@ -2564,7 +5377,6 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     function closeGame() {
 
       stopSnake();
-
 
       document
         .getElementById("gameModal")
@@ -2576,36 +5388,553 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
         .getElementById("gameArea")
         .innerHTML = "";
 
+
+      currentGameType = null;
+
     }
 
 
-    function incrementGamesPlayed() {
+    /* =====================================================
+       SLOT GAME
+       ===================================================== */
 
-      gamesPlayed++;
+    function renderSlotGame(type) {
+
+      const configs = {
+
+        triple777: {
+          title: "Triple 777",
+          className: "",
+          symbols: [
+            "7️⃣",
+            "💎",
+            "🍒",
+            "⭐",
+            "🔔",
+            "🍀"
+          ]
+        },
+
+        emojiFortune: {
+          title: "Emoji Fortune",
+          className: "",
+          symbols: [
+            "🐯",
+            "💎",
+            "🔥",
+            "🍀",
+            "👑",
+            "🎁"
+          ]
+        },
+
+        super777: {
+          title: "Super 777",
+          className: "blue",
+          symbols: [
+            "7️⃣",
+            "💎",
+            "🔷",
+            "⭐",
+            "🔔",
+            "⚡"
+          ]
+        },
+
+        gem777: {
+          title: "Gem 777",
+          className: "green",
+          symbols: [
+            "7️⃣",
+            "💚",
+            "💎",
+            "🍀",
+            "⭐",
+            "👑"
+          ]
+        },
+
+        dragon: {
+          title: "Dragon Fortune",
+          className: "",
+          symbols: [
+            "🐉",
+            "🔥",
+            "👑",
+            "💎",
+            "🍀",
+            "🎁"
+          ]
+        }
+
+      };
 
 
-      localStorage.setItem(
-        "zp_games_played",
-        gamesPlayed
+      const config =
+        configs[type];
+
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        config.title;
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML =
+        `
+          <div class="slot-machine ${config.className}">
+
+            <div class="slot-top">
+              ${config.title}
+            </div>
+
+            <div class="slot-screen">
+
+              <div
+                class="reel"
+                id="reel1"
+              >
+                7️⃣
+              </div>
+
+              <div
+                class="reel"
+                id="reel2"
+              >
+                💎
+              </div>
+
+              <div
+                class="reel"
+                id="reel3"
+              >
+                🍒
+              </div>
+
+            </div>
+
+            <div
+              class="slot-result"
+              id="slotResult"
+            >
+              Spin for 25 demo coins.
+            </div>
+
+            <div class="slot-controls">
+
+              <button
+                class="bet-btn"
+                onclick="showToast('Bet: 25 demo coins')"
+              >
+                BET 25
+              </button>
+
+              <button
+                class="spin-btn"
+                id="spinBtn"
+                onclick="spinSlot('${type}')"
+              >
+                SPIN 🎰
+              </button>
+
+            </div>
+
+          </div>
+
+          <div
+            style="
+              text-align:center;
+              color:#7fa59a;
+              font-size:10px;
+              margin-top:18px;
+            "
+          >
+            Demo gameplay using virtual coins.
+          </div>
+        `;
+
+
+      window.currentSlotSymbols =
+        config.symbols;
+
+    }
+
+
+    function spinSlot(type) {
+
+      if (slotSpinning) return;
+
+
+      const bet = 25;
+
+
+      if (
+        demoBalance < bet
+      ) {
+
+        showToast(
+          "Not enough demo coins."
+        );
+
+        return;
+
+      }
+
+
+      slotSpinning = true;
+
+
+      changeBalance(-bet);
+
+
+      const reels = [
+        document.getElementById("reel1"),
+        document.getElementById("reel2"),
+        document.getElementById("reel3")
+      ];
+
+
+      const spinBtn =
+        document.getElementById("spinBtn");
+
+
+      const result =
+        document.getElementById("slotResult");
+
+
+      spinBtn.disabled = true;
+
+      spinBtn.textContent =
+        "SPINNING...";
+
+
+      result.textContent =
+        "Reels are spinning...";
+
+
+      reels.forEach(
+        reel =>
+          reel.classList.add("spinning")
       );
 
 
-      updateGamesPlayed();
+      const symbols =
+        window.currentSlotSymbols;
+
+
+      const finalSymbols = [];
+
+
+      setTimeout(
+        () => {
+
+          finalSymbols[0] =
+            symbols[
+              Math.floor(
+                Math.random() *
+                symbols.length
+              )
+            ];
+
+          reels[0].textContent =
+            finalSymbols[0];
+
+          reels[0]
+            .classList
+            .remove("spinning");
+
+        },
+        700
+      );
+
+
+      setTimeout(
+        () => {
+
+          finalSymbols[1] =
+            symbols[
+              Math.floor(
+                Math.random() *
+                symbols.length
+              )
+            ];
+
+          reels[1].textContent =
+            finalSymbols[1];
+
+          reels[1]
+            .classList
+            .remove("spinning");
+
+        },
+        1100
+      );
+
+
+      setTimeout(
+        () => {
+
+          finalSymbols[2] =
+            symbols[
+              Math.floor(
+                Math.random() *
+                symbols.length
+              )
+            ];
+
+          reels[2].textContent =
+            finalSymbols[2];
+
+          reels[2]
+            .classList
+            .remove("spinning");
+
+
+          let win = 0;
+
+
+          if (
+            finalSymbols[0] ===
+            finalSymbols[1] &&
+            finalSymbols[1] ===
+            finalSymbols[2]
+          ) {
+
+            win = 250;
+
+            result.innerHTML =
+              "🎉 JACKPOT MATCH! +250 demo coins!";
+
+          } else if (
+            finalSymbols[0] ===
+            finalSymbols[1] ||
+
+            finalSymbols[1] ===
+            finalSymbols[2] ||
+
+            finalSymbols[0] ===
+            finalSymbols[2]
+          ) {
+
+            win = 60;
+
+            result.innerHTML =
+              "✨ Nice match! +60 demo coins!";
+
+          } else {
+
+            result.textContent =
+              "No match this time. Try again!";
+
+          }
+
+
+          if (win > 0) {
+
+            changeBalance(win);
+
+          }
+
+
+          spinBtn.disabled = false;
+
+          spinBtn.textContent =
+            "SPIN 🎰";
+
+
+          slotSpinning = false;
+
+        },
+        1500
+      );
 
     }
 
 
-    function updateGamesPlayed() {
+    /* =====================================================
+       LUCKY WHEEL
+       ===================================================== */
 
-      const stat =
-        document.getElementById("gamesPlayed");
+    function renderLuckyWheel() {
 
-      if (stat) {
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Lucky Wheel";
 
-        stat.textContent =
-          gamesPlayed;
+
+      document
+        .getElementById("gameArea")
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
+
+            <h3>
+              Lucky Wheel 🎡
+            </h3>
+
+            <p>
+              Spin the wheel and win a random demo reward.
+            </p>
+
+            <div class="wheel-wrap">
+
+              <div class="wheel-pointer"></div>
+
+              <div
+                class="wheel"
+                id="luckyWheel"
+              >
+
+                <div class="wheel-center">
+                  SPIN
+                </div>
+
+              </div>
+
+            </div>
+
+            <button
+              class="game-action"
+              id="wheelSpinBtn"
+              onclick="spinWheel()"
+            >
+              SPIN WHEEL
+            </button>
+
+            <div
+              class="game-result"
+              id="wheelResult"
+            >
+              Cost per spin: 20 demo coins.
+            </div>
+
+            <div class="wheel-prizes">
+
+              <div class="prize-chip">10</div>
+              <div class="prize-chip">20</div>
+              <div class="prize-chip">50</div>
+              <div class="prize-chip">100</div>
+              <div class="prize-chip">200</div>
+              <div class="prize-chip">500</div>
+              <div class="prize-chip">25</div>
+              <div class="prize-chip">75</div>
+
+            </div>
+
+          </div>
+        `;
+
+    }
+
+
+    function spinWheel() {
+
+      const cost = 20;
+
+
+      if (
+        demoBalance < cost
+      ) {
+
+        showToast(
+          "Not enough demo coins."
+        );
+
+        return;
 
       }
+
+
+      const wheel =
+        document.getElementById(
+          "luckyWheel"
+        );
+
+
+      const button =
+        document.getElementById(
+          "wheelSpinBtn"
+        );
+
+
+      const result =
+        document.getElementById(
+          "wheelResult"
+        );
+
+
+      const prizes = [
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        25,
+        75
+      ];
+
+
+      changeBalance(-cost);
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "SPINNING...";
+
+
+      const randomIndex =
+        Math.floor(
+          Math.random() *
+          prizes.length
+        );
+
+
+      const extraSpins =
+        5 + Math.floor(
+          Math.random() * 4
+        );
+
+
+      wheelRotation +=
+        extraSpins * 360 +
+        randomIndex * 45;
+
+
+      wheel.style.transform =
+        `rotate(${wheelRotation}deg)`;
+
+
+      result.textContent =
+        "The wheel is spinning...";
+
+
+      setTimeout(
+        () => {
+
+          const reward =
+            prizes[randomIndex];
+
+
+          changeBalance(reward);
+
+
+          result.innerHTML =
+            `🎉 You won <strong>${reward}</strong> demo coins!`;
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "SPIN AGAIN";
+
+        },
+        4100
+      );
 
     }
 
@@ -2623,7 +5952,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       let target =
-        Math.floor(Math.random() * 100) + 1;
+        Math.floor(
+          Math.random() * 100
+        ) + 1;
 
 
       let attempts = 7;
@@ -2631,27 +5962,29 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Guess the Number</h3>
+            <h3>
+              Guess the Number
+            </h3>
 
             <p>
-              Guess the secret number between 1 and 100.
-              You have 7 attempts.
+              Guess a number between 1 and 100.
             </p>
 
-            <div class="number-target">
+            <div class="number-display">
               ?
             </div>
 
             <input
-              class="number-input"
+              class="game-input"
               id="numberGuess"
               type="number"
               min="1"
               max="100"
-              placeholder="Enter your guess"
+              placeholder="Your guess"
             >
 
             <br>
@@ -2660,11 +5993,11 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               class="game-action"
               id="guessBtn"
             >
-              Submit Guess
+              SUBMIT GUESS
             </button>
 
             <div
-              class="rps-result"
+              class="game-result"
               id="numberResult"
             >
               Attempts left: ${attempts}
@@ -2674,21 +6007,25 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
         `;
 
 
-      const guessInput =
-        document.getElementById("numberGuess");
-
-
       document
         .getElementById("guessBtn")
         .onclick =
         () => {
 
+          const input =
+            document.getElementById(
+              "numberGuess"
+            );
+
+
           const guess =
-            Number(guessInput.value);
+            Number(input.value);
 
 
           const result =
-            document.getElementById("numberResult");
+            document.getElementById(
+              "numberResult"
+            );
 
 
           if (
@@ -2698,7 +6035,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           ) {
 
             result.textContent =
-              "Enter a number between 1 and 100.";
+              "Enter a number from 1 to 100.";
 
             return;
 
@@ -2708,12 +6045,16 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           attempts--;
 
 
-          if (guess === target) {
+          if (
+            guess === target
+          ) {
 
             result.innerHTML =
-              "🎉 Correct! You won with " +
-              (7 - attempts) +
-              " attempts.";
+              `🎉 Correct! You earned <strong>100 demo coins!</strong>`;
+
+
+            changeBalance(100);
+
 
             document
               .getElementById("guessBtn")
@@ -2724,12 +6065,13 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           }
 
 
-          if (attempts <= 0) {
+          if (
+            attempts <= 0
+          ) {
 
             result.innerHTML =
-              "Game over! The number was <strong>" +
-              target +
-              "</strong>.";
+              `Game over. The number was <strong>${target}</strong>.`;
+
 
             document
               .getElementById("guessBtn")
@@ -2742,12 +6084,13 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
           result.textContent =
             guess < target
-              ? "Too low! Attempts left: " + attempts
-              : "Too high! Attempts left: " + attempts;
+              ? `Too low! Attempts left: ${attempts}`
+              : `Too high! Attempts left: ${attempts}`;
 
 
-          guessInput.value = "";
-          guessInput.focus();
+          input.value = "";
+
+          input.focus();
 
         };
 
@@ -2755,7 +6098,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
     /* =====================================================
-       MEMORY MATCH
+       MEMORY GAME
        ===================================================== */
 
     function renderMemoryGame() {
@@ -2779,19 +6122,23 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       icons.sort(
-        () => Math.random() - 0.5
+        () =>
+          Math.random() - .5
       );
 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Memory Match</h3>
+            <h3>
+              Memory Match
+            </h3>
 
             <p>
-              Find all matching pairs.
+              Find every matching pair.
             </p>
 
             <div
@@ -2800,10 +6147,10 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             ></div>
 
             <div
-              class="rps-result"
+              class="game-result"
               id="memoryResult"
             >
-              Find the matching pairs.
+              Find all matching pairs.
             </div>
 
           </div>
@@ -2811,12 +6158,17 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       const grid =
-        document.getElementById("memoryGrid");
+        document.getElementById(
+          "memoryGrid"
+        );
 
 
       let firstCard = null;
+
       let secondCard = null;
+
       let lock = false;
+
       let matched = 0;
 
 
@@ -2824,7 +6176,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
         icon => {
 
           const card =
-            document.createElement("button");
+            document.createElement(
+              "button"
+            );
 
 
           card.className =
@@ -2833,10 +6187,6 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
           card.dataset.icon =
             icon;
-
-
-          card.dataset.flipped =
-            "false";
 
 
           card.textContent =
@@ -2848,15 +6198,11 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
               if (
                 lock ||
-                card.dataset.flipped === "true" ||
+                card.classList.contains("flipped") ||
                 card.classList.contains("matched")
               ) {
                 return;
               }
-
-
-              card.dataset.flipped =
-                "true";
 
 
               card.textContent =
@@ -2868,7 +6214,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               );
 
 
-              if (!firstCard) {
+              if (
+                !firstCard
+              ) {
 
                 firstCard = card;
 
@@ -2887,14 +6235,14 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
                 secondCard.dataset.icon
               ) {
 
-                firstCard
-                  .classList
-                  .add("matched");
+                firstCard.classList.add(
+                  "matched"
+                );
 
 
-                secondCard
-                  .classList
-                  .add("matched");
+                secondCard.classList.add(
+                  "matched"
+                );
 
 
                 matched += 2;
@@ -2903,40 +6251,50 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
                 resetTurn();
 
 
-                if (matched === icons.length) {
+                if (
+                  matched === icons.length
+                ) {
 
                   document
-                    .getElementById("memoryResult")
-                    .textContent =
-                    "🎉 Perfect! You matched all pairs.";
+                    .getElementById(
+                      "memoryResult"
+                    )
+                    .innerHTML =
+                    "🎉 Perfect! +150 demo coins!";
+
+
+                  changeBalance(150);
 
                 }
 
               } else {
 
-                setTimeout(() => {
+                setTimeout(
+                  () => {
 
-                  [firstCard, secondCard]
-                    .forEach(cardItem => {
+                    [
+                      firstCard,
+                      secondCard
+                    ].forEach(
+                      item => {
 
-                      cardItem.textContent =
-                        "?";
-
-
-                      cardItem.dataset.flipped =
-                        "false";
-
-
-                      cardItem
-                        .classList
-                        .remove("flipped");
-
-                    });
+                        item.textContent =
+                          "?";
 
 
-                  resetTurn();
+                        item.classList.remove(
+                          "flipped"
+                        );
 
-                }, 700);
+                      }
+                    );
+
+
+                    resetTurn();
+
+                  },
+                  700
+                );
 
               }
 
@@ -2952,7 +6310,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       function resetTurn() {
 
         firstCard = null;
+
         secondCard = null;
+
         lock = false;
 
       }
@@ -2974,17 +6334,20 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Quick Tap</h3>
+            <h3>
+              Quick Tap ⚡
+            </h3>
 
             <p>
-              Tap the target as many times as possible in 15 seconds.
+              Tap as many targets as possible in 15 seconds.
             </p>
 
             <div
-              class="rps-result"
+              class="game-result"
               id="tapStats"
             >
               Score: 0 · Time: 15
@@ -2994,19 +6357,21 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               class="tap-zone"
               id="tapZone"
             >
+
               <button
                 class="tap-target"
                 id="tapTarget"
               >
                 ⚡
               </button>
+
             </div>
 
             <button
               class="game-action"
               id="startTapBtn"
             >
-              Start Challenge
+              START CHALLENGE
             </button>
 
           </div>
@@ -3014,43 +6379,59 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       const zone =
-        document.getElementById("tapZone");
+        document.getElementById(
+          "tapZone"
+        );
 
 
       const target =
-        document.getElementById("tapTarget");
+        document.getElementById(
+          "tapTarget"
+        );
 
 
       const stats =
-        document.getElementById("tapStats");
+        document.getElementById(
+          "tapStats"
+        );
 
 
       const startBtn =
-        document.getElementById("startTapBtn");
+        document.getElementById(
+          "startTapBtn"
+        );
 
 
       let score = 0;
+
       let time = 15;
+
       let timer = null;
+
       let running = false;
 
 
       function moveTarget() {
 
         const maxX =
-          zone.clientWidth - 72;
-
+          zone.clientWidth - 70;
 
         const maxY =
-          zone.clientHeight - 72;
+          zone.clientHeight - 70;
 
 
         target.style.left =
-          Math.random() * maxX + "px";
+          Math.max(
+            0,
+            Math.random() * maxX
+          ) + "px";
 
 
         target.style.top =
-          Math.random() * maxY + "px";
+          Math.max(
+            0,
+            Math.random() * maxY
+          ) + "px";
 
       }
 
@@ -3065,10 +6446,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
           stats.textContent =
-            "Score: " +
-            score +
-            " · Time: " +
-            time;
+            `Score: ${score} · Time: ${time}`;
 
 
           moveTarget();
@@ -3083,7 +6461,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
           running = true;
+
           score = 0;
+
           time = 15;
 
 
@@ -3094,46 +6474,64 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
           moveTarget();
 
 
+          startBtn.disabled = true;
+
           startBtn.textContent =
-            "Challenge Running...";
+            "RUNNING...";
 
 
           timer =
-            setInterval(() => {
+            setInterval(
+              () => {
 
-              time--;
-
-
-              stats.textContent =
-                "Score: " +
-                score +
-                " · Time: " +
-                time;
-
-
-              if (time <= 0) {
-
-                clearInterval(timer);
-
-
-                running = false;
-
-
-                target.style.display =
-                  "none";
+                time--;
 
 
                 stats.textContent =
-                  "🏆 Final Score: " +
-                  score;
+                  `Score: ${score} · Time: ${time}`;
 
 
-                startBtn.textContent =
-                  "Play Again";
+                if (
+                  time <= 0
+                ) {
 
-              }
+                  clearInterval(timer);
 
-            }, 1000);
+
+                  running = false;
+
+
+                  target.style.display =
+                    "none";
+
+
+                  const reward =
+                    score * 2;
+
+
+                  if (reward > 0) {
+
+                    changeBalance(
+                      reward
+                    );
+
+                  }
+
+
+                  stats.innerHTML =
+                    `🏆 Final Score: ${score} · +${reward} demo coins`;
+
+
+                  startBtn.disabled = false;
+
+                  startBtn.textContent =
+                    "PLAY AGAIN";
+
+                }
+
+              },
+              1000
+            );
 
         };
 
@@ -3154,17 +6552,20 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Choose Your Move</h3>
+            <h3>
+              Choose Your Move
+            </h3>
 
             <p>
               Rock beats Scissors. Scissors beats Paper.
               Paper beats Rock.
             </p>
 
-            <div class="rps-choices">
+            <div class="rps-grid">
 
               <button
                 class="rps-choice"
@@ -3190,7 +6591,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             </div>
 
             <div
-              class="rps-result"
+              class="game-result"
               id="rpsResult"
             >
               Make your move.
@@ -3214,7 +6615,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       const computer =
         choices[
           Math.floor(
-            Math.random() * choices.length
+            Math.random() *
+            choices.length
           )
         ];
 
@@ -3226,31 +6628,48 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       };
 
 
-      let result;
+      let result = "";
+
+      let reward = 0;
 
 
-      if (player === computer) {
+      if (
+        player === computer
+      ) {
 
-        result = "It's a draw!";
+        result =
+          "It's a draw!";
 
       } else if (
 
-        (player === "rock" &&
-          computer === "scissors") ||
+        (
+          player === "rock" &&
+          computer === "scissors"
+        ) ||
 
-        (player === "paper" &&
-          computer === "rock") ||
+        (
+          player === "paper" &&
+          computer === "rock"
+        ) ||
 
-        (player === "scissors" &&
-          computer === "paper")
+        (
+          player === "scissors" &&
+          computer === "paper"
+        )
 
       ) {
 
-        result = "🎉 You win!";
+        result =
+          "🎉 You win!";
+
+        reward = 20;
+
+        changeBalance(reward);
 
       } else {
 
-        result = "Computer wins!";
+        result =
+          "Computer wins!";
 
       }
 
@@ -3258,13 +6677,16 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       document
         .getElementById("rpsResult")
         .innerHTML =
-        "You " +
-        emoji[player] +
-        " vs " +
-        emoji[computer] +
-        " Computer<br><strong>" +
-        result +
-        "</strong>";
+        `
+          You ${emoji[player]}
+          vs
+          ${emoji[computer]} Computer
+          <br>
+          <strong>
+            ${result}
+            ${reward ? ` +${reward} coins` : ""}
+          </strong>
+        `;
 
     }
 
@@ -3273,20 +6695,34 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
        SNAKE
        ===================================================== */
 
+    let snake = [];
+
+    let food = {};
+
+    let direction = "right";
+
+    let nextDirection = "right";
+
+    let snakeScore = 0;
+
+
     function renderSnakeGame() {
 
       document
         .getElementById("gameModalTitle")
         .textContent =
-        "Snake";
+        "Classic Snake";
 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Classic Snake</h3>
+            <h3>
+              Classic Snake 🐍
+            </h3>
 
             <p id="snakeScore">
               Score: 0
@@ -3334,7 +6770,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               class="game-action"
               onclick="startSnake()"
             >
-              Start / Restart
+              START / RESTART
             </button>
 
           </div>
@@ -3351,32 +6787,36 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             event.key.toLowerCase();
 
 
-          if (key === "arrowup") {
+          if (
+            key === "arrowup"
+          ) {
             changeSnakeDirection("up");
           }
 
-          if (key === "arrowdown") {
+
+          if (
+            key === "arrowdown"
+          ) {
             changeSnakeDirection("down");
           }
 
-          if (key === "arrowleft") {
+
+          if (
+            key === "arrowleft"
+          ) {
             changeSnakeDirection("left");
           }
 
-          if (key === "arrowright") {
+
+          if (
+            key === "arrowright"
+          ) {
             changeSnakeDirection("right");
           }
 
         };
 
     }
-
-
-    let snake = [];
-    let food = {};
-    let direction = "right";
-    let nextDirection = "right";
-    let snakeScore = 0;
 
 
     function startSnake() {
@@ -3392,17 +6832,21 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       direction = "right";
+
       nextDirection = "right";
+
       snakeScore = 0;
 
 
       createSnakeFood();
 
+      drawSnake();
+
 
       snakeInterval =
         setInterval(
           updateSnake,
-          110
+          115
         );
 
     }
@@ -3410,7 +6854,14 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
     function stopSnake() {
 
-      clearInterval(snakeInterval);
+      if (snakeInterval) {
+
+        clearInterval(
+          snakeInterval
+        );
+
+      }
+
 
       snakeInterval = null;
 
@@ -3421,10 +6872,30 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
     function createSnakeFood() {
 
-      food = {
-        x: Math.floor(Math.random() * 20),
-        y: Math.floor(Math.random() * 20)
-      };
+      let valid = false;
+
+
+      while (!valid) {
+
+        food = {
+          x: Math.floor(
+            Math.random() * 20
+          ),
+
+          y: Math.floor(
+            Math.random() * 20
+          )
+        };
+
+
+        valid =
+          !snake.some(
+            part =>
+              part.x === food.x &&
+              part.y === food.y
+          );
+
+      }
 
     }
 
@@ -3440,7 +6911,8 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       if (
-        opposite[newDirection] !== direction
+        opposite[newDirection] !==
+        direction
       ) {
 
         nextDirection =
@@ -3454,7 +6926,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     function updateSnake() {
 
       const canvas =
-        document.getElementById("snakeCanvas");
+        document.getElementById(
+          "snakeCanvas"
+        );
 
 
       if (!canvas) {
@@ -3475,19 +6949,30 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       };
 
 
-      if (direction === "up") {
+      if (
+        direction === "up"
+      ) {
         head.y--;
       }
 
-      if (direction === "down") {
+
+      if (
+        direction === "down"
+      ) {
         head.y++;
       }
 
-      if (direction === "left") {
+
+      if (
+        direction === "left"
+      ) {
         head.x--;
       }
 
-      if (direction === "right") {
+
+      if (
+        direction === "right"
+      ) {
         head.x++;
       }
 
@@ -3509,11 +6994,31 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
         stopSnake();
 
-        document
-          .getElementById("snakeScore")
-          .textContent =
-          "Game Over! Score: " +
-          snakeScore;
+
+        const scoreText =
+          document.getElementById(
+            "snakeScore"
+          );
+
+
+        if (scoreText) {
+
+          scoreText.textContent =
+            `Game Over! Score: ${snakeScore}`;
+
+        }
+
+
+        if (
+          snakeScore > 0
+        ) {
+
+          changeBalance(
+            snakeScore * 5
+          );
+
+        }
+
 
         return;
 
@@ -3524,8 +7029,10 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       if (
+
         head.x === food.x &&
         head.y === food.y
+
       ) {
 
         snakeScore++;
@@ -3542,8 +7049,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       document
         .getElementById("snakeScore")
         .textContent =
-        "Score: " +
-        snakeScore;
+        `Score: ${snakeScore}`;
 
 
       drawSnake();
@@ -3554,7 +7060,12 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
     function drawSnake() {
 
       const canvas =
-        document.getElementById("snakeCanvas");
+        document.getElementById(
+          "snakeCanvas"
+        );
+
+
+      if (!canvas) return;
 
 
       const ctx =
@@ -3574,7 +7085,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       ctx.fillStyle =
-        "#0b140d";
+        "#07130d";
 
 
       ctx.fillRect(
@@ -3585,13 +7096,40 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       );
 
 
+      ctx.strokeStyle =
+        "rgba(255,255,255,.04)";
+
+
+      for (
+        let i = 0;
+        i < 20;
+        i++
+      ) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          i * size,
+          0
+        );
+
+        ctx.lineTo(
+          i * size,
+          canvas.height
+        );
+
+        ctx.stroke();
+
+      }
+
+
       snake.forEach(
         (part, index) => {
 
           ctx.fillStyle =
             index === 0
-              ? "#86efac"
-              : "#22c55e";
+              ? "#b5ff91"
+              : "#39d777";
 
 
           ctx.fillRect(
@@ -3606,17 +7144,22 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       ctx.fillStyle =
-        "#ef4444";
+        "#ff4d5e";
 
 
       ctx.beginPath();
 
-
       ctx.arc(
-        food.x * size + size / 2,
-        food.y * size + size / 2,
+        food.x * size +
+        size / 2,
+
+        food.y * size +
+        size / 2,
+
         size / 3,
+
         0,
+
         Math.PI * 2
       );
 
@@ -3640,10 +7183,13 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
       document
         .getElementById("gameArea")
-        .innerHTML = `
-          <div class="game-panel">
+        .innerHTML =
+        `
+          <div class="mini-game-panel">
 
-            <h3>Tic Tac Toe</h3>
+            <h3>
+              Tic Tac Toe
+            </h3>
 
             <p id="tttStatus">
               Player X starts.
@@ -3658,7 +7204,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
               class="game-action"
               onclick="renderTttGame()"
             >
-              Restart Game
+              RESTART GAME
             </button>
 
           </div>
@@ -3666,7 +7212,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
       const board =
-        document.getElementById("tttBoard");
+        document.getElementById(
+          "tttBoard"
+        );
 
 
       const cells =
@@ -3688,7 +7236,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
       ) {
 
         const cell =
-          document.createElement("button");
+          document.createElement(
+            "button"
+          );
 
 
         cell.className =
@@ -3701,9 +7251,7 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
             if (
               cells[i] ||
               finished
-            ) {
-              return;
-            }
+            ) return;
 
 
             cells[i] =
@@ -3724,11 +7272,14 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
               document
-                .getElementById("tttStatus")
+                .getElementById(
+                  "tttStatus"
+                )
                 .textContent =
-                "🎉 Player " +
-                winner +
-                " wins!";
+                `🎉 Player ${winner} wins!`;
+
+
+              changeBalance(30);
 
               return;
 
@@ -3743,7 +7294,9 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
               document
-                .getElementById("tttStatus")
+                .getElementById(
+                  "tttStatus"
+                )
                 .textContent =
                 "It's a draw!";
 
@@ -3759,11 +7312,11 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
             document
-              .getElementById("tttStatus")
+              .getElementById(
+                "tttStatus"
+              )
               .textContent =
-              "Player " +
-              current +
-              "'s turn.";
+              `Player ${current}'s turn.`;
 
           };
 
@@ -3818,43 +7371,328 @@ content="Zeeshan PlayZone — a premium browser gaming experience with playable 
 
 
     /* =====================================================
-       CLOSE MODALS WHEN CLICKING BACKGROUND
+       REFER MODAL
        ===================================================== */
 
-    document
-      .getElementById("gameModal")
-      .addEventListener(
-        "click",
-        event => {
+    function openReferModal() {
 
-          if (
-            event.target.id === "gameModal"
-          ) {
+      openSimpleModal(
+        "Refer & Earn",
+        `
+          <div
+            style="
+              text-align:center;
+            "
+          >
 
-            closeGame();
+            <div
+              style="
+                font-size:70px;
+              "
+            >
+              🎁
+            </div>
 
-          }
+            <h2
+              style="
+                margin-top:10px;
+                color:#ffd84b;
+              "
+            >
+              Invite Friends
+            </h2>
 
-        }
+            <p
+              style="
+                margin-top:10px;
+                color:#9cbab1;
+                font-size:13px;
+                line-height:1.6;
+              "
+            >
+              Share Zeeshan PlayZone with friends.
+              Referral rewards are currently demo features.
+            </p>
+
+            <div
+              style="
+                margin-top:20px;
+                padding:15px;
+                border-radius:14px;
+                background:rgba(255,255,255,.05);
+                font-weight:900;
+                color:#8ff5b7;
+              "
+            >
+              YOUR CODE: ZP${Math.floor(1000 + gamesPlayed)}
+            </div>
+
+            <button
+              class="main-btn"
+              style="
+                margin-top:18px;
+              "
+              onclick="
+                navigator.clipboard &&
+                navigator.clipboard.writeText('Join Zeeshan PlayZone!');
+                showToast('Referral message copied!');
+              "
+            >
+              COPY INVITE
+            </button>
+
+          </div>
+        `
+      );
+
+    }
+
+
+    /* =====================================================
+       EVENTS
+       ===================================================== */
+
+    function openEvents() {
+
+      openSimpleModal(
+        "PlayZone Events",
+        `
+          <div
+            style="
+              display:grid;
+              gap:12px;
+            "
+          >
+
+            <div
+              style="
+                padding:18px;
+                border-radius:18px;
+                background:linear-gradient(135deg,#6a4d00,#b37d00);
+              "
+            >
+              <div
+                style="
+                  font-size:24px;
+                "
+              >
+                🏆 Weekly Challenge
+              </div>
+
+              <p
+                style="
+                  margin-top:8px;
+                  font-size:12px;
+                  color:#fff4c0;
+                  line-height:1.5;
+                "
+              >
+                Play mini-games and build your demo score.
+              </p>
+            </div>
+
+            <div
+              style="
+                padding:18px;
+                border-radius:18px;
+                background:linear-gradient(135deg,#124b3d,#0a261f);
+              "
+            >
+              <div
+                style="
+                  font-size:24px;
+                "
+              >
+                🎰 Jackpot Event
+              </div>
+
+              <p
+                style="
+                  margin-top:8px;
+                  font-size:12px;
+                  color:#b9dbce;
+                  line-height:1.5;
+                "
+              >
+                Spin the slot games and explore the demo jackpot.
+              </p>
+            </div>
+
+          </div>
+        `
+      );
+
+    }
+
+
+    /* =====================================================
+       SIMPLE MODAL
+       ===================================================== */
+
+    function openSimpleModal(
+      title,
+      content
+    ) {
+
+      document
+        .getElementById(
+          "simpleModalTitle"
+        )
+        .textContent =
+        title;
+
+
+      document
+        .getElementById(
+          "simpleModalContent"
+        )
+        .innerHTML =
+        content;
+
+
+      document
+        .getElementById(
+          "simpleModal"
+        )
+        .classList
+        .add("active");
+
+    }
+
+
+    function closeSimpleModal() {
+
+      document
+        .getElementById(
+          "simpleModal"
+        )
+        .classList
+        .remove("active");
+
+    }
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
       );
 
 
-    document
-      .getElementById("profileModal")
-      .addEventListener(
-        "click",
-        event => {
-
-          if (
-            event.target.id === "profileModal"
-          ) {
-
-            closeProfile();
-
-          }
-
-        }
+      clearTimeout(
+        toastTimer
       );
+
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast
+              .classList
+              .remove("show");
+
+          },
+          2500
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODALS ON BACKGROUND CLICK
+       ===================================================== */
+
+    [
+      "gameModal",
+      "profileModal",
+      "simpleModal"
+    ].forEach(
+      modalId => {
+
+        document
+          .getElementById(modalId)
+          .addEventListener(
+            "click",
+            event => {
+
+              if (
+                event.target.id !==
+                modalId
+              ) return;
+
+
+              if (
+                modalId === "gameModal"
+              ) {
+
+                closeGame();
+
+              }
+
+
+              if (
+                modalId === "profileModal"
+              ) {
+
+                closeProfile();
+
+              }
+
+
+              if (
+                modalId === "simpleModal"
+              ) {
+
+                closeSimpleModal();
+
+              }
+
+            }
+          );
+
+      }
+    );
+
+
+    /* =====================================================
+       ESCAPE KEY
+       ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key !== "Escape"
+        ) return;
+
+
+        closeGame();
+
+        closeProfile();
+
+        closeSimpleModal();
+
+      }
+    );
 
   </script>
 
