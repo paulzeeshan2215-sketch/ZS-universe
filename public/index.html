@@ -1,5791 +1,3860 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SehrAn Media — Social, Movies & Games</title>
+  <title>Zeeshan PlayZone — Play. Compete. Enjoy.</title>
 
-  <meta
-    name="description"
-    content="SehrAn Media — Social services, movies and PC games in one premium entertainment hub."
-  >
+<meta
+name="description"
+content="Zeeshan PlayZone — a premium browser gaming experience with playable mini games."
+
+>
 
   <meta name="theme-color" content="#09090f">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-  >
-
   <style>
     /* =========================================================
-       ROOT
-    ========================================================= */
+       ZEESHAN PLAYZONE — SINGLE FILE GAMING APP
+       ========================================================= */
 
     :root {
-      --bg: #07070d;
-      --bg-soft: #0d0d16;
-      --panel: rgba(18, 18, 29, 0.78);
-      --panel-solid: #11111b;
-
+      --bg: #08080d;
+      --bg-2: #101018;
+      --card: #151520;
+      --card-2: #1b1b28;
       --text: #ffffff;
-      --muted: #a7a7ba;
-      --muted-2: #77778b;
+      --muted: #9292a3;
+      --line: rgba(255,255,255,.08);
 
-      --purple: #8b5cf6;
-      --purple-dark: #6d28d9;
+      --accent: #8b5cf6;
+      --accent-2: #ec4899;
+      --green: #22c55e;
+      --yellow: #fbbf24;
+      --red: #ef4444;
 
-      --pink: #ec4899;
-      --pink-dark: #be185d;
-
-      --cyan: #22d3ee;
-      --green: #25d366;
-
-      --border: rgba(255,255,255,0.10);
-      --border-bright: rgba(255,255,255,0.18);
-
-      --shadow: 0 25px 80px rgba(0,0,0,0.42);
-
-      --nav-height: 76px;
+      --radius: 22px;
+      --shadow: 0 25px 70px rgba(0,0,0,.45);
     }
-
-
-    /* =========================================================
-       RESET
-    ========================================================= */
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
-
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 95px;
     }
-
 
     body {
       min-height: 100vh;
-
-      font-family: "Inter", sans-serif;
-
-      color: var(--text);
-
       background:
-        radial-gradient(
-          circle at 8% 8%,
-          rgba(139,92,246,0.18),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          circle at 92% 15%,
-          rgba(236,72,153,0.13),
-          transparent 25%
-        ),
-
-        radial-gradient(
-          circle at 50% 80%,
-          rgba(34,211,238,0.07),
-          transparent 30%
-        ),
-
+        radial-gradient(circle at 10% 0%, rgba(139,92,246,.16), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(236,72,153,.10), transparent 24%),
         var(--bg);
-
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
       overflow-x: hidden;
     }
-
-
-    body::before {
-      content: "";
-
-      position: fixed;
-
-      inset: 0;
-
-      pointer-events: none;
-
-      opacity: 0.035;
-
-      background-image:
-        radial-gradient(
-          rgba(255,255,255,0.9) 0.7px,
-          transparent 0.7px
-        );
-
-      background-size: 5px 5px;
-
-      z-index: -2;
-    }
-
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
 
     button,
     input {
       font: inherit;
     }
 
-
     button {
-      border: 0;
+      border: none;
     }
 
+    /* ================= SPLASH ================= */
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-
-    /* =========================================================
-       BACKGROUND EFFECTS
-    ========================================================= */
-
-    .ambient {
+    #splash {
       position: fixed;
-
-      width: 450px;
-      height: 450px;
-
-      border-radius: 50%;
-
-      filter: blur(120px);
-
-      opacity: 0.13;
-
-      pointer-events: none;
-
-      z-index: -1;
-    }
-
-
-    .ambient.one {
-      left: -220px;
-      top: 180px;
-
-      background: var(--purple);
-    }
-
-
-    .ambient.two {
-      right: -240px;
-      top: 500px;
-
-      background: var(--pink);
-    }
-
-
-    .ambient.three {
-      left: 40%;
-      bottom: -280px;
-
-      background: var(--cyan);
-    }
-
-
-    /* =========================================================
-       HEADER
-    ========================================================= */
-
-    .site-header {
-      position: sticky;
-
-      top: 0;
-
-      z-index: 9999;
-
-      height: var(--nav-height);
-
-      background:
-        rgba(7,7,13,0.76);
-
-      border-bottom:
-        1px solid var(--border);
-
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-    }
-
-
-    .header-inner {
-      width: min(1320px, calc(100% - 32px));
-
-      height: 100%;
-
-      margin: auto;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 20px;
-    }
-
-
-    .brand {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 11px;
-
-      flex-shrink: 0;
-    }
-
-
-    .brand-icon {
-      width: 43px;
-      height: 43px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 14px;
-
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--purple),
-          var(--pink)
-        );
-
-      box-shadow:
-        0 12px 35px rgba(139,92,246,0.30);
-
-      font-size: 18px;
-    }
-
-
-    .brand-text {
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 18px;
-
-      font-weight: 900;
-
-      letter-spacing: -0.4px;
-    }
-
-
-    .brand-text span {
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #c4b5fd,
-          #f9a8d4
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-
-    .desktop-nav {
-      display: flex;
-
-      align-items: center;
-
-      gap: 6px;
-    }
-
-
-    .nav-button {
-      position: relative;
-
-      padding: 10px 16px;
-
-      border-radius: 12px;
-
-      color: var(--muted);
-
-      background: transparent;
-
-      cursor: pointer;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-      transition:
-        color .25s ease,
-        background .25s ease,
-        transform .25s ease;
-    }
-
-
-    .nav-button:hover {
-      color: white;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      transform: translateY(-1px);
-    }
-
-
-    .nav-button.active {
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(139,92,246,0.90),
-          rgba(236,72,153,0.88)
-        );
-
-      box-shadow:
-        0 10px 30px rgba(139,92,246,0.22);
-    }
-
-
-    .header-support {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding: 10px 14px;
-
-      border-radius: 12px;
-
-      background:
-        rgba(37,211,102,0.10);
-
-      border:
-        1px solid rgba(37,211,102,0.20);
-
-      color: #7dffa7;
-
-      font-size: 12px;
-
-      font-weight: 800;
-    }
-
-
-    .header-support i {
-      font-size: 16px;
-    }
-
-
-    /* =========================================================
-       MOBILE NAV
-    ========================================================= */
-
-    .mobile-nav {
-      display: none;
-
-      position: fixed;
-
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-
+      inset: 0;
       z-index: 10000;
-
-      padding: 8px;
-
-      border:
-        1px solid rgba(255,255,255,0.12);
-
-      border-radius: 20px;
-
-      background:
-        rgba(13,13,22,0.90);
-
-      backdrop-filter: blur(22px);
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,0.5);
-    }
-
-
-    .mobile-nav-inner {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 5px;
-    }
-
-
-    .mobile-nav button {
-      padding: 10px 6px;
-
-      border-radius: 14px;
-
-      background: transparent;
-
-      color: var(--muted);
-
-      cursor: pointer;
-
-      font-size: 11px;
-
-      font-weight: 800;
-
-      transition: .25s;
-    }
-
-
-    .mobile-nav button i {
-      display: block;
-
-      margin-bottom: 5px;
-
-      font-size: 16px;
-    }
-
-
-    .mobile-nav button.active {
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--purple),
-          var(--pink)
-        );
-    }
-
-
-    /* =========================================================
-       HERO
-    ========================================================= */
-
-    .hero {
-      position: relative;
-
-      width: min(1320px, calc(100% - 32px));
-
-      margin: auto;
-
-      min-height: 610px;
-
-      padding:
-        95px 20px
-        80px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
+      background: #08080d;
+      transition: .7s ease;
+    }
 
+    .splash-box {
       text-align: center;
     }
 
-
-    .hero::before {
-      content: "";
-
-      position: absolute;
-
-      width: 500px;
-      height: 500px;
-
-      left: 50%;
-      top: 45%;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(139,92,246,0.18),
-          transparent 68%
-        );
-
-      pointer-events: none;
-    }
-
-
-    .hero-content {
-      position: relative;
-
-      z-index: 2;
-
-      max-width: 900px;
-    }
-
-
-    .hero-pill {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 9px;
-
-      padding: 9px 15px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(255,255,255,0.055);
-
-      border:
-        1px solid rgba(255,255,255,0.12);
-
-      color: #ddd6fe;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      box-shadow:
-        0 10px 40px rgba(0,0,0,0.15);
-    }
-
-
-    .live-dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: #4ade80;
-
-      box-shadow:
-        0 0 14px rgba(74,222,128,0.9);
-
-      animation:
-        pulseDot 1.7s infinite;
-    }
-
-
-    @keyframes pulseDot {
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(0.65);
-        opacity: 0.55;
-      }
-    }
-
-
-    .hero h1 {
-      margin-top: 25px;
-
-      font-family: "Montserrat", sans-serif;
-
-      font-size:
-        clamp(44px, 7vw, 88px);
-
-      line-height: 0.99;
-
-      letter-spacing: -4px;
-
-      font-weight: 900;
-    }
-
-
-    .hero h1 .line {
-      display: block;
-    }
-
-
-    .hero-gradient {
-      background:
-        linear-gradient(
-          100deg,
-          #ffffff 5%,
-          #c4b5fd 34%,
-          #f9a8d4 67%,
-          #ffffff 95%
-        );
-
-      background-size: 250%;
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-
-      animation:
-        gradientFlow 7s ease infinite;
-    }
-
-
-    @keyframes gradientFlow {
-      0% {
-        background-position: 0%;
-      }
-
-      50% {
-        background-position: 100%;
-      }
-
-      100% {
-        background-position: 0%;
-      }
-    }
-
-
-    .hero-description {
-      max-width: 680px;
-
-      margin: 25px auto 0;
-
-      color: var(--muted);
-
-      font-size: 16px;
-
-      line-height: 1.85;
-    }
-
-
-    .hero-actions {
-      display: flex;
-
-      justify-content: center;
-
-      flex-wrap: wrap;
-
-      gap: 12px;
-
-      margin-top: 32px;
-    }
-
-
-    .hero-btn {
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 9px;
-
-      min-height: 50px;
-
-      padding:
-        0 21px;
-
-      border-radius: 15px;
-
-      cursor: pointer;
-
-      font-size: 13px;
-
-      font-weight: 900;
-
-      transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-    }
-
-
-    .hero-btn.primary {
-      color: white;
-
-      background:
-        linear-gradient(
-          100deg,
-          var(--purple),
-          var(--pink)
-        );
-
-      box-shadow:
-        0 16px 40px rgba(139,92,246,0.28);
-    }
-
-
-    .hero-btn.primary:hover {
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 22px 50px rgba(236,72,153,0.30);
-    }
-
-
-    .hero-btn.secondary {
-      color: white;
-
-      background:
-        rgba(255,255,255,0.055);
-
-      border:
-        1px solid rgba(255,255,255,0.12);
-    }
-
-
-    .hero-btn.secondary:hover {
-      transform: translateY(-3px);
-
-      background:
-        rgba(255,255,255,0.09);
-    }
-
-
-    .hero-stats {
-      display: flex;
-
-      justify-content: center;
-
-      flex-wrap: wrap;
-
-      gap: 9px;
-
-      margin-top: 42px;
-    }
-
-
-    .stat {
-      min-width: 145px;
-
-      padding:
-        13px 17px;
-
-      border-radius: 15px;
-
-      background:
-        rgba(255,255,255,0.035);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-    }
-
-
-    .stat strong {
-      display: block;
-
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 18px;
-    }
-
-
-    .stat span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--muted-2);
-
-      font-size: 10px;
-
-      font-weight: 700;
-
-      text-transform: uppercase;
-
-      letter-spacing: .7px;
-    }
-
-
-    /* =========================================================
-       QUICK NAV / SECTION SWITCHER
-    ========================================================= */
-
-    .section-switcher {
-      width: min(1120px, calc(100% - 32px));
-
-      margin:
-        0 auto 35px;
-
-      padding: 8px;
-
+    .splash-logo {
+      width: 92px;
+      height: 92px;
+      margin: auto auto 24px;
+      border-radius: 30px;
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 8px;
-
-      border:
-        1px solid rgba(255,255,255,0.10);
-
-      border-radius: 21px;
-
-      background:
-        rgba(255,255,255,0.035);
-
-      backdrop-filter: blur(16px);
-    }
-
-
-    .switch-btn {
-      position: relative;
-
-      min-height: 58px;
-
-      border-radius: 15px;
-
-      background: transparent;
-
-      color: var(--muted);
-
-      cursor: pointer;
-
-      font-size: 13px;
-
-      font-weight: 900;
-
-      transition: .25s;
-    }
-
-
-    .switch-btn i {
-      margin-right: 7px;
-    }
-
-
-    .switch-btn:hover {
-      color: white;
-
-      background:
-        rgba(255,255,255,0.05);
-    }
-
-
-    .switch-btn.active {
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--purple),
-          var(--pink)
-        );
-
-      box-shadow:
-        0 12px 35px rgba(139,92,246,0.22);
-    }
-
-
-    /* =========================================================
-       MAIN CONTENT
-    ========================================================= */
-
-    main {
-      width: 100%;
-    }
-
-
-    .tab-panel {
-      display: none;
-
-      width: 100%;
-
-      min-height: 500px;
-
-      scroll-margin-top: 95px;
-    }
-
-
-    .tab-panel.active {
-      display: block;
-
-      animation:
-        panelEnter .4s ease;
-    }
-
-
-    @keyframes panelEnter {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-
-    .section {
-      width: min(1320px, calc(100% - 32px));
-
-      margin: auto;
-
-      padding:
-        45px 0
-        85px;
-    }
-
-
-    .section-heading {
-      max-width: 800px;
-
-      margin:
-        0 auto 35px;
-
-      text-align: center;
-    }
-
-
-    .eyebrow {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-      margin-bottom: 12px;
-
-      color: #c4b5fd;
-
-      font-size: 11px;
-
-      font-weight: 900;
-
-      letter-spacing: 1.4px;
-
-      text-transform: uppercase;
-    }
-
-
-    .section-heading h2 {
-      font-family: "Montserrat", sans-serif;
-
-      font-size:
-        clamp(30px, 4vw, 50px);
-
-      line-height: 1.05;
-
-      letter-spacing: -1.8px;
-
-      font-weight: 900;
-    }
-
-
-    .section-heading h2 span {
-      background:
-        linear-gradient(
-          90deg,
-          #a78bfa,
-          #f472b6
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-
-    .section-heading p {
-      margin-top: 12px;
-
-      color: var(--muted);
-
-      font-size: 14px;
-
-      line-height: 1.75;
-    }
-
-
-    /* =========================================================
-       SOCIAL PLATFORM MARQUEE
-    ========================================================= */
-
-    .marquee {
-      width: 100%;
-
-      overflow: hidden;
-
-      margin-bottom: 45px;
-
-      padding:
-        12px 0;
-
-      mask-image:
-        linear-gradient(
-          90deg,
-          transparent,
-          black 8%,
-          black 92%,
-          transparent
-        );
-    }
-
-
-    .marquee-track {
-      display: flex;
-
-      width: max-content;
-
-      gap: 15px;
-
-      animation:
-        marqueeMove 30s linear infinite;
-    }
-
-
-    .marquee:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
-
-    @keyframes marqueeMove {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-
-    .platform-card {
-      width: 245px;
-
-      min-height: 95px;
-
-      padding: 16px;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 13px;
-
-      flex-shrink: 0;
-
-      border-radius: 20px;
-
-      border:
-        1px solid rgba(255,255,255,0.11);
-
-      box-shadow:
-        0 15px 40px rgba(0,0,0,0.18);
-
-      transition: .3s;
-    }
-
-
-    .platform-card:hover {
-      transform: translateY(-7px);
-    }
-
-
-    .platform-icon {
-      width: 54px;
-      height: 54px;
-
-      flex-shrink: 0;
-
-      display: grid;
-
       place-items: center;
-
-      border-radius: 17px;
-
-      background:
-        rgba(255,255,255,0.14);
-
-      backdrop-filter: blur(10px);
-
-      font-size: 25px;
-    }
-
-
-    .platform-card strong {
-      display: block;
-
-      font-size: 15px;
-    }
-
-
-    .platform-card small {
-      display: block;
-
-      margin-top: 4px;
-
-      opacity: .72;
-
-      font-size: 10px;
-
-      font-weight: 700;
-    }
-
-
-    .instagram-platform {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(131,58,180,.82),
-          rgba(253,29,29,.75),
-          rgba(252,176,69,.72)
-        );
-    }
-
-
-    .youtube-platform {
-      background:
-        linear-gradient(
-          135deg,
-          #390808,
-          #e50909,
-          #650000
-        );
-    }
-
-
-    .facebook-platform {
-      background:
-        linear-gradient(
-          135deg,
-          #082d70,
-          #1877f2,
-          #073982
-        );
-    }
-
-
-    .snapchat-platform {
-      color: #111;
-
-      background:
-        linear-gradient(
-          135deg,
-          #c8ad00,
-          #fffc00,
-          #c6b300
-        );
-    }
-
-
-    .whatsapp-platform {
-      background:
-        linear-gradient(
-          135deg,
-          #06483f,
-          #25d366,
-          #08786a
-        );
-    }
-
-
-    /* =========================================================
-       SERVICE FEATURE
-    ========================================================= */
-
-    .service-feature {
-      position: relative;
-
-      overflow: hidden;
-
-      margin-bottom: 45px;
-
-      padding: 27px;
-
-      border-radius: 27px;
-
-      border:
-        1px solid rgba(255,255,255,0.11);
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(131,58,180,0.16),
-          rgba(253,29,29,0.08),
-          rgba(252,176,69,0.05)
-        );
-
-      box-shadow: var(--shadow);
-    }
-
-
-    .service-feature::after {
-      content: "";
-
-      position: absolute;
-
-      width: 340px;
-      height: 340px;
-
-      right: -160px;
-      top: -190px;
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          135deg,
-          #833ab4,
-          #fd1d1d,
-          #fcb045
-        );
-
-      filter: blur(50px);
-
-      opacity: .15;
-    }
-
-
-    .service-feature-inner {
-      position: relative;
-
-      z-index: 2;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 25px;
-
-      flex-wrap: wrap;
-    }
-
-
-    .service-title {
-      display: flex;
-
-      align-items: center;
-
-      gap: 17px;
-    }
-
-
-    .service-icon {
-      width: 74px;
-      height: 74px;
-
-      flex-shrink: 0;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 23px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #833ab4,
-          #fd1d1d,
-          #fcb045
-        );
-
-      box-shadow:
-        0 18px 45px rgba(253,29,29,.23);
-
-      font-size: 35px;
-    }
-
-
-    .available {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      margin-bottom: 7px;
-
-      color: #72ffa0;
-
-      font-size: 10px;
-
+      font-size: 34px;
       font-weight: 900;
+      background:
+        linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:
+        0 0 50px rgba(139,92,246,.35),
+        0 0 100px rgba(236,72,153,.15);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
 
+    .splash-title {
+      font-size: 28px;
+      font-weight: 900;
       letter-spacing: 1px;
     }
 
-
-    .service-title h3 {
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 25px;
+    .splash-title span {
+      color: #b998ff;
     }
 
-
-    .service-title p {
-      margin-top: 5px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-
-    /* =========================================================
-       PACKAGES
-    ========================================================= */
-
-    .package-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(235px, 1fr)
-        );
-
-      gap: 16px;
-    }
-
-
-    .package-card {
-      position: relative;
-
-      min-height: 292px;
-
-      padding: 23px;
-
-      overflow: hidden;
-
-      border-radius: 23px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(25,25,38,.96),
-          rgba(11,11,19,.98)
-        );
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      transition:
-        transform .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-    }
-
-
-    .package-card::before {
-      content: "";
-
-      position: absolute;
-
+    .loader {
       width: 190px;
-      height: 190px;
-
-      top: -105px;
-      right: -85px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(139,92,246,.24),
-          transparent 68%
-        );
-    }
-
-
-    .package-card:hover {
-      transform: translateY(-8px);
-
-      border-color:
-        rgba(139,92,246,.40);
-
-      box-shadow:
-        0 25px 60px rgba(0,0,0,.32);
-    }
-
-
-    .package-card.featured {
-      border-color:
-        rgba(236,72,153,.40);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(42,22,45,.98),
-          rgba(17,12,24,.98)
-        );
-    }
-
-
-    .package-top {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-
-      align-items: flex-start;
-
-      justify-content: space-between;
-
-      gap: 10px;
-    }
-
-
-    .package-label {
-      color: var(--muted-2);
-
-      font-size: 10px;
-
-      font-weight: 800;
-
-      text-transform: uppercase;
-
-      letter-spacing: .7px;
-    }
-
-
-    .package-card h3 {
-      margin-top: 8px;
-
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 21px;
-    }
-
-
-    .followers {
-      margin-top: 5px;
-
-      color: #c4b5fd;
-
-      font-size: 12px;
-
-      font-weight: 800;
-    }
-
-
-    .discount {
-      padding: 6px 8px;
-
+      height: 5px;
+      margin: 24px auto 0;
       border-radius: 999px;
-
-      white-space: nowrap;
-
-      color: white;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--pink),
-          #f97316
-        );
-
-      font-size: 8px;
-
-      font-weight: 900;
+      overflow: hidden;
+      background: #20202b;
     }
 
-
-    .package-price {
-      position: relative;
-      z-index: 2;
-
-      margin-top: 28px;
+    .loader div {
+      width: 45%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      animation: load 1.3s infinite ease-in-out;
     }
 
-
-    .old-price {
-      color: #626274;
-
-      text-decoration: line-through;
-
-      font-size: 13px;
-
-      font-weight: 700;
+    @keyframes load {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(350%); }
     }
 
-
-    .current-price {
-      margin-top: 2px;
-
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 39px;
-
-      font-weight: 900;
-
-      letter-spacing: -1.5px;
+    @keyframes pulse {
+      50% {
+        transform: scale(1.06);
+      }
     }
 
+    /* ================= AUTH ================= */
 
-    .package-action {
-      position: absolute;
-
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-
-      z-index: 5;
-
-      display: flex;
-
+    .auth-screen {
+      min-height: 100vh;
+      padding: 28px 18px;
+      display: none;
       align-items: center;
-
       justify-content: center;
-
-      gap: 7px;
-
-      min-height: 44px;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          100deg,
-          var(--purple-dark),
-          var(--pink-dark)
-        );
-
-      font-size: 11px;
-
-      font-weight: 900;
-
-      transition: .25s;
     }
 
-
-    .package-action:hover {
-      transform: scale(1.025);
-
-      box-shadow:
-        0 12px 30px rgba(236,72,153,.22);
-    }
-
-
-    /* =========================================================
-       MEDIA TOOLBAR
-    ========================================================= */
-
-    .media-toolbar {
+    .auth-screen.active {
       display: flex;
+    }
 
+    .auth-wrap {
+      width: min(100%, 460px);
+    }
+
+    .brand {
+      display: flex;
       align-items: center;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 25px;
-
-      flex-wrap: wrap;
-    }
-
-
-    .search {
-      position: relative;
-
-      width: min(100%, 500px);
-    }
-
-
-    .search i {
-      position: absolute;
-
-      left: 17px;
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      color: #88889b;
-
-      pointer-events: none;
-    }
-
-
-    .search input {
-      width: 100%;
-
-      min-height: 48px;
-
-      padding:
-        0 18px 0 47px;
-
-      border-radius: 14px;
-
-      outline: none;
-
-      color: white;
-
-      background:
-        rgba(255,255,255,0.045);
-
-      border:
-        1px solid rgba(255,255,255,0.10);
-
-      transition: .25s;
-    }
-
-
-    .search input::placeholder {
-      color: #707083;
-    }
-
-
-    .search input:focus {
-      border-color:
-        rgba(139,92,246,.65);
-
-      box-shadow:
-        0 0 0 4px
-        rgba(139,92,246,.10);
-    }
-
-
-    .result-count {
-      color: var(--muted-2);
-
-      font-size: 11px;
-
-      font-weight: 700;
-    }
-
-
-    /* =========================================================
-       FILTERS
-    ========================================================= */
-
-    .filters {
-      display: flex;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-
+      gap: 13px;
       margin-bottom: 28px;
     }
 
-
-    .filter {
-      min-height: 37px;
-
-      padding:
-        0 14px;
-
-      border-radius: 999px;
-
-      color: #a9a9bc;
-
-      background:
-        rgba(255,255,255,.035);
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      cursor: pointer;
-
-      font-size: 10px;
-
-      font-weight: 800;
-
-      transition: .25s;
-    }
-
-
-    .filter:hover {
-      color: white;
-
-      background:
-        rgba(255,255,255,.07);
-    }
-
-
-    .filter.active {
-      color: white;
-
-      border-color: transparent;
-
-      background:
-        linear-gradient(
-          100deg,
-          var(--purple),
-          var(--pink)
-        );
-
-      box-shadow:
-        0 8px 25px rgba(139,92,246,.18);
-    }
-
-
-    /* =========================================================
-       MEDIA GRID
-    ========================================================= */
-
-    .media-grid {
+    .brand-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 17px;
       display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(220px, 1fr)
-        );
-
-      gap: 20px;
-    }
-
-
-    .media-card {
-      position: relative;
-
-      min-width: 0;
-
-      overflow: hidden;
-
-      border-radius: 21px;
-
-      background:
-        var(--panel-solid);
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      box-shadow:
-        0 18px 45px rgba(0,0,0,.25);
-
-      isolation: isolate;
-
-      transition:
-        transform .35s ease,
-        border-color .35s ease,
-        box-shadow .35s ease;
-
-      cursor: pointer;
-    }
-
-
-    /*
-      IMPORTANT:
-      Proper poster box.
-      This fixes the old thumbnail/dabba issue.
-    */
-
-    .media-poster {
-      position: relative;
-
-      width: 100%;
-
-      aspect-ratio: 2 / 3;
-
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          135deg,
-          #191923,
-          #09090f
-        );
-    }
-
-
-    .media-poster img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      object-position: center;
-
-      transition:
-        transform .55s ease,
-        filter .4s ease;
-    }
-
-
-    .media-card:hover {
-      transform:
-        translateY(-9px);
-
-      border-color:
-        rgba(255,255,255,.22);
-
-      box-shadow:
-        0 28px 65px rgba(0,0,0,.43);
-    }
-
-
-    .media-card:hover .media-poster img {
-      transform: scale(1.07);
-
-      filter: saturate(1.08);
-    }
-
-
-    .poster-gradient {
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          to top,
-          rgba(5,5,10,.98) 0%,
-          rgba(5,5,10,.80) 25%,
-          rgba(5,5,10,.20) 62%,
-          rgba(5,5,10,.02) 100%
-        );
-    }
-
-
-    .media-type {
-      position: absolute;
-
-      left: 13px;
-      top: 13px;
-
-      z-index: 3;
-
-      padding:
-        6px 9px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(10,10,17,.74);
-
-      border:
-        1px solid rgba(255,255,255,.13);
-
-      backdrop-filter: blur(10px);
-
-      color: white;
-
-      font-size: 8px;
-
-      font-weight: 900;
-
-      letter-spacing: .7px;
-    }
-
-
-    .media-type.game {
-      color: #071217;
-
-      background:
-        rgba(34,211,238,.88);
-
-      border-color:
-        transparent;
-    }
-
-
-    .play-button {
-      position: absolute;
-
-      left: 50%;
-      top: 45%;
-
-      z-index: 4;
-
-      width: 60px;
-      height: 60px;
-
-      display: grid;
-
       place-items: center;
-
-      border-radius: 50%;
-
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--purple),
-          var(--pink)
-        );
-
-      box-shadow:
-        0 15px 40px rgba(0,0,0,.45);
-
-      opacity: 0;
-
-      transform:
-        translate(-50%, -50%)
-        scale(.72);
-
-      transition:
-        opacity .3s ease,
-        transform .3s ease;
+      font-size: 20px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
     }
 
-
-    .media-card:hover .play-button {
-      opacity: 1;
-
-      transform:
-        translate(-50%, -50%)
-        scale(1);
-    }
-
-
-    .media-info {
-      position: absolute;
-
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      z-index: 5;
-
-      padding: 18px 16px 16px;
-    }
-
-
-    .media-info h3 {
-      font-family: "Montserrat", sans-serif;
-
-      font-size: 16px;
-
-      line-height: 1.25;
-
-      font-weight: 800;
-    }
-
-
-    .media-info p {
-      margin-top: 5px;
-
-      color: #b5b5c4;
-
-      font-size: 10px;
-
-      font-weight: 600;
-    }
-
-
-    .open-link {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      margin-top: 11px;
-
-      color: white;
-
-      font-size: 10px;
-
+    .brand h2 {
+      font-size: 20px;
       font-weight: 900;
     }
 
-
-    .open-link i {
-      color: #c4b5fd;
-    }
-
-
-    .media-card.hidden {
-      display: none;
-    }
-
-
-    .no-results {
-      display: none;
-
-      padding: 60px 20px;
-
-      text-align: center;
-
+    .brand p {
+      margin-top: 4px;
+      font-size: 12px;
       color: var(--muted);
     }
 
-
-    .no-results.show {
-      display: block;
-    }
-
-
-    .no-results i {
-      display: block;
-
-      margin-bottom: 14px;
-
-      color: #77778a;
-
-      font-size: 30px;
-    }
-
-
-    /* =========================================================
-       CUSTOMER CARE
-    ========================================================= */
-
-    .whatsapp {
-      position: fixed;
-
-      right: 22px;
-      bottom: 22px;
-
-      z-index: 9998;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      padding: 8px 15px 8px 8px;
-
-      border-radius: 999px;
-
-      color: white;
-
+    .auth-card {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
       background:
-        linear-gradient(
-          135deg,
-          #075e54,
-          #25d366
-        );
+        linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
 
-      border:
-        1px solid rgba(255,255,255,.16);
+    .auth-card h1 {
+      font-size: 30px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
 
-      box-shadow:
-        0 18px 50px rgba(37,211,102,.25);
+    .auth-card > p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
 
-      animation:
-        waFloat 3.2s ease-in-out infinite;
+    .field {
+      margin-bottom: 17px;
+    }
 
+    .field label {
+      display: block;
+      margin-bottom: 9px;
+      color: #d8d8e2;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap span {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .65;
+      font-size: 17px;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 55px;
+      border: 1px solid var(--line);
+      outline: none;
+      border-radius: 16px;
+      padding: 0 15px 0 46px;
+      background: rgba(255,255,255,.035);
+      color: white;
       transition: .25s;
     }
 
-
-    @keyframes waFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-7px);
-      }
+    .input-wrap input:focus {
+      border-color: rgba(139,92,246,.8);
+      box-shadow: 0 0 0 4px rgba(139,92,246,.12);
     }
 
-
-    .whatsapp:hover {
-      transform: scale(1.04);
-    }
-
-
-    .whatsapp-icon {
-      width: 44px;
-      height: 44px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.16);
-
-      font-size: 23px;
-    }
-
-
-    .whatsapp-text small {
-      display: block;
-
-      opacity: .82;
-
-      font-size: 8px;
-
-      font-weight: 800;
-
-      letter-spacing: .7px;
-    }
-
-
-    .whatsapp-text strong {
-      display: block;
-
-      margin-top: 2px;
-
-      font-size: 12px;
-    }
-
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-
-    footer {
-      padding:
-        45px 20px
-        110px;
-
-      border-top:
-        1px solid rgba(255,255,255,.07);
-
-      text-align: center;
-
-      color: var(--muted-2);
-    }
-
-
-    .footer-brand {
-      font-family: "Montserrat", sans-serif;
-
+    .primary-btn {
+      width: 100%;
+      min-height: 55px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 900;
       color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 15px 30px rgba(139,92,246,.22);
+      transition: .25s;
+    }
 
-      font-size: 17px;
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
 
+    .auth-note {
+      text-align: center;
+      margin-top: 17px;
+      color: #747484;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .otp-box {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 22px 0;
+    }
+
+    .otp-box input {
+      width: 52px;
+      height: 58px;
+      text-align: center;
+      border: 1px solid var(--line);
+      outline: none;
+      border-radius: 15px;
+      background: rgba(255,255,255,.04);
+      color: white;
+      font-size: 24px;
       font-weight: 900;
     }
 
-
-    .footer-brand span {
-      color: #a78bfa;
+    .otp-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(139,92,246,.12);
     }
 
+    .demo-otp {
+      margin: 15px 0 20px;
+      padding: 12px;
+      border: 1px dashed rgba(139,92,246,.45);
+      border-radius: 14px;
+      background: rgba(139,92,246,.08);
+      text-align: center;
+      color: #c9b6ff;
+      font-size: 13px;
+    }
 
-    footer p {
-      margin-top: 8px;
+    /* ================= APP ================= */
 
+    #app {
+      display: none;
+      min-height: 100vh;
+      padding-bottom: 95px;
+    }
+
+    #app.active {
+      display: block;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      padding: 14px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: rgba(8,8,13,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+    }
+
+    .top-brand .mini-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .top-brand strong {
+      font-size: 15px;
+    }
+
+    .top-brand small {
+      display: block;
+      color: var(--muted);
+      margin-top: 3px;
+      font-size: 10px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      cursor: pointer;
+      color: white;
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+
+    .profile-pill {
+      padding: 7px 12px 7px 7px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+
+    .avatar {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .profile-pill span {
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .container {
+      width: min(1400px, 100%);
+      margin: auto;
+      padding: 26px 5%;
+    }
+
+    /* ================= HERO DASHBOARD ================= */
+
+    .welcome {
+      margin: 12px 0 24px;
+    }
+
+    .welcome small {
+      color: var(--muted);
+    }
+
+    .welcome h1 {
+      margin-top: 7px;
+      font-size: clamp(28px, 5vw, 50px);
+      line-height: 1.1;
+    }
+
+    .welcome h1 span {
+      background: linear-gradient(90deg, #b998ff, #ff9acb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .featured {
+      position: relative;
+      min-height: 285px;
+      overflow: hidden;
+      padding: 34px;
+      display: flex;
+      align-items: end;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 75% 30%, rgba(236,72,153,.45), transparent 22%),
+        radial-gradient(circle at 65% 50%, rgba(139,92,246,.65), transparent 35%),
+        linear-gradient(135deg, #141123, #0e0d16);
+      box-shadow: var(--shadow);
+    }
+
+    .featured::after {
+      content: "PLAY";
+      position: absolute;
+      right: -15px;
+      top: 15px;
+      font-size: clamp(100px, 22vw, 270px);
+      font-weight: 1000;
+      letter-spacing: -12px;
+      color: rgba(255,255,255,.025);
+      pointer-events: none;
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #ded4ff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .featured h2 {
+      margin: 16px 0 10px;
+      font-size: clamp(28px, 4vw, 48px);
+    }
+
+    .featured p {
+      max-width: 570px;
+      color: #c1bccb;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .featured button {
+      margin-top: 22px;
+      padding: 13px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      color: white;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-wrap {
+      margin: 28px 0 18px;
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      height: 58px;
+      padding: 0 20px 0 50px;
+      border: 1px solid var(--line);
+      outline: none;
+      border-radius: 18px;
+      background: var(--card);
+      color: white;
+    }
+
+    .search-wrap span {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .55;
+    }
+
+    /* ================= CATEGORIES ================= */
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-btn {
+      min-width: max-content;
+      padding: 11px 17px;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #a9a9b7;
+      background: var(--card);
+      border: 1px solid var(--line);
+      transition: .25s;
+    }
+
+    .category-btn.active,
+    .category-btn:hover {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    /* ================= SECTIONS ================= */
+
+    .section-head {
+      margin: 35px 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .section-head h2 {
+      font-size: 23px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .game-card {
+      overflow: hidden;
+      border-radius: 23px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+      transition: .28s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(139,92,246,.55);
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+    }
+
+    .game-cover {
+      height: 165px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .game-cover .game-art {
+      position: relative;
+      z-index: 2;
+      font-size: 65px;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,.3));
+    }
+
+    .cover-number {
+      background:
+        radial-gradient(circle at 25% 25%, #ffb0d7, transparent 16%),
+        linear-gradient(135deg, #4c1d95, #ec4899);
+    }
+
+    .cover-memory {
+      background:
+        radial-gradient(circle at 70% 20%, #7dd3fc, transparent 18%),
+        linear-gradient(135deg, #0f766e, #1d4ed8);
+    }
+
+    .cover-tap {
+      background:
+        radial-gradient(circle at 50% 40%, #fde68a, transparent 12%),
+        linear-gradient(135deg, #b45309, #ef4444);
+    }
+
+    .cover-rps {
+      background:
+        linear-gradient(135deg, #312e81, #9333ea);
+    }
+
+    .cover-snake {
+      background:
+        radial-gradient(circle at 70% 35%, #86efac, transparent 15%),
+        linear-gradient(135deg, #14532d, #047857);
+    }
+
+    .cover-tictac {
+      background:
+        linear-gradient(135deg, #0f172a, #334155);
+    }
+
+    .game-meta {
+      padding: 17px;
+    }
+
+    .game-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .game-topline h3 {
+      font-size: 17px;
+    }
+
+    .mini-tag {
+      padding: 5px 8px;
+      border-radius: 8px;
+      color: #cdbfff;
+      background: rgba(139,92,246,.13);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .5px;
+    }
+
+    .game-meta p {
+      min-height: 40px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 12px;
+    }
+
+    .play-card-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 11px;
+      border-radius: 13px;
+      cursor: pointer;
+      color: white;
+      font-weight: 800;
+      background: #242433;
+      transition: .25s;
+    }
+
+    .play-card-btn:hover {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    /* ================= STATS ================= */
+
+    .stats-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .stat-card {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      text-align: center;
+    }
+
+    .stat-card strong {
+      display: block;
+      color: #cbbaff;
+      font-size: 27px;
+    }
+
+    .stat-card span {
+      margin-top: 6px;
+      display: block;
+      color: var(--muted);
       font-size: 11px;
     }
 
+    /* ================= BOTTOM NAV ================= */
 
-    /* =========================================================
-       RESPONSIVE
-    ========================================================= */
-
-    @media (max-width: 900px) {
-
-      .header-support {
-        display: none;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .mobile-nav {
-        display: block;
-      }
-
-      .hero {
-        min-height: 570px;
-
-        padding-top: 75px;
-      }
-
-      .media-grid {
-        grid-template-columns:
-          repeat(
-            3,
-            minmax(0,1fr)
-          );
-      }
-
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 15px;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: min(92%, 600px);
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-radius: 22px;
+      background: rgba(22,22,33,.92);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
     }
 
-
-    @media (max-width: 700px) {
-
-      :root {
-        --nav-height: 67px;
-      }
-
-
-      .header-inner {
-        width:
-          calc(100% - 22px);
-      }
-
-
-      .brand-icon {
-        width: 39px;
-        height: 39px;
-
-        border-radius: 12px;
-      }
-
-
-      .brand-text {
-        font-size: 15px;
-      }
-
-
-      .hero {
-        width:
-          calc(100% - 22px);
-
-        min-height: 535px;
-
-        padding:
-          65px 7px
-          55px;
-      }
-
-
-      .hero h1 {
-        font-size:
-          clamp(39px, 13vw, 60px);
-
-        letter-spacing: -2.5px;
-      }
-
-
-      .hero-description {
-        font-size: 13px;
-
-        line-height: 1.75;
-      }
-
-
-      .hero-stats {
-        margin-top: 30px;
-      }
-
-
-      .stat {
-        min-width:
-          calc(33.333% - 8px);
-
-        padding:
-          11px 7px;
-      }
-
-
-      .stat strong {
-        font-size: 15px;
-      }
-
-
-      .stat span {
-        font-size: 7px;
-      }
-
-
-      .section-switcher {
-        display: none;
-      }
-
-
-      .section {
-        width:
-          calc(100% - 22px);
-
-        padding:
-          35px 0
-          80px;
-      }
-
-
-      .section-heading h2 {
-        font-size: 31px;
-      }
-
-
-      .section-heading p {
-        font-size: 12px;
-      }
-
-
-      .service-feature {
-        padding: 20px;
-      }
-
-
-      .service-title {
-        align-items: flex-start;
-      }
-
-
-      .service-icon {
-        width: 58px;
-        height: 58px;
-
-        border-radius: 18px;
-
-        font-size: 27px;
-      }
-
-
-      .service-title h3 {
-        font-size: 18px;
-      }
-
-
-      .service-feature .hero-btn {
-        width: 100%;
-      }
-
-
-      .package-grid {
-        grid-template-columns:
-          repeat(2, minmax(0,1fr));
-
-        gap: 10px;
-      }
-
-
-      .package-card {
-        min-height: 260px;
-
-        padding: 16px;
-
-        border-radius: 18px;
-      }
-
-
-      .package-card h3 {
-        font-size: 16px;
-      }
-
-
-      .followers {
-        font-size: 10px;
-      }
-
-
-      .discount {
-        font-size: 6px;
-
-        padding:
-          5px 6px;
-      }
-
-
-      .current-price {
-        font-size: 31px;
-      }
-
-
-      .package-action {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-
-        min-height: 40px;
-
-        font-size: 9px;
-      }
-
-
-      .media-toolbar {
-        align-items: stretch;
-      }
-
-
-      .search {
-        width: 100%;
-      }
-
-
-      .result-count {
-        width: 100%;
-      }
-
-
-      .filters {
-        gap: 6px;
-      }
-
-
-      .filter {
-        min-height: 34px;
-
-        padding:
-          0 11px;
-
-        font-size: 9px;
-      }
-
-
-      .media-grid {
-        grid-template-columns:
-          repeat(2, minmax(0,1fr));
-
-        gap: 11px;
-      }
-
-
-      .media-card {
-        border-radius: 17px;
-      }
-
-
-      .media-info {
-        padding:
-          13px 11px 12px;
-      }
-
-
-      .media-info h3 {
-        font-size: 12px;
-      }
-
-
-      .media-info p {
-        font-size: 8px;
-      }
-
-
-      .open-link {
-        margin-top: 8px;
-
-        font-size: 8px;
-      }
-
-
-      .media-type {
-        left: 9px;
-        top: 9px;
-
-        padding:
-          5px 7px;
-
-        font-size: 6px;
-      }
-
-
-      .play-button {
-        width: 47px;
-        height: 47px;
-
-        font-size: 13px;
-      }
-
-
-      .platform-card {
-        width: 210px;
-      }
-
-
-      .whatsapp {
-        right: 13px;
-        bottom: 78px;
-
-        padding: 7px;
-      }
-
-
-      .whatsapp-text {
-        display: none;
-      }
-
-
-      .whatsapp-icon {
-        width: 45px;
-        height: 45px;
-      }
-
-
-      footer {
-        padding-bottom: 135px;
-      }
-
+    .nav-item {
+      padding: 10px 5px;
+      border-radius: 16px;
+      cursor: pointer;
+      text-align: center;
+      color: var(--muted);
+      background: transparent;
+      font-size: 11px;
+      transition: .25s;
     }
 
+    .nav-item b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 18px;
+    }
 
-    @media (max-width: 390px) {
+    .nav-item.active,
+    .nav-item:hover {
+      color: white;
+      background: rgba(139,92,246,.16);
+    }
 
-      .brand-text {
-        font-size: 14px;
+    /* ================= GAME MODAL ================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .game-window {
+      width: min(100%, 650px);
+      max-height: 92vh;
+      overflow-y: auto;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: #12121b;
+      box-shadow: var(--shadow);
+    }
+
+    .game-window-head {
+      padding: 17px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .game-window-head h2 {
+      font-size: 18px;
+    }
+
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      cursor: pointer;
+      color: white;
+      background: #242433;
+    }
+
+    .game-area {
+      min-height: 390px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-panel {
+      width: 100%;
+      text-align: center;
+    }
+
+    .game-panel h3 {
+      margin-bottom: 8px;
+      font-size: 26px;
+    }
+
+    .game-panel > p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .game-action {
+      margin-top: 22px;
+      padding: 13px 21px;
+      border-radius: 14px;
+      cursor: pointer;
+      color: white;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    /* NUMBER RUSH */
+
+    .number-target {
+      margin: 25px auto;
+      width: min(220px, 100%);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #312e81, #ec4899);
+      font-size: 90px;
+      font-weight: 900;
+      box-shadow: 0 25px 50px rgba(139,92,246,.2);
+    }
+
+    .number-input {
+      width: min(300px, 100%);
+      height: 56px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      outline: none;
+      border-radius: 15px;
+      background: #20202c;
+      color: white;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    /* MEMORY */
+
+    .memory-grid {
+      width: min(430px, 100%);
+      margin: 25px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #26263a, #171725);
+      border: 1px solid var(--line);
+      font-size: 28px;
+      transition: .2s;
+    }
+
+    .memory-card.flipped,
+    .memory-card.matched {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+    }
+
+    /* QUICK TAP */
+
+    .tap-zone {
+      width: min(360px, 100%);
+      height: 300px;
+      margin: 25px auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 25px;
+      border: 1px solid var(--line);
+      background: #0c0c13;
+    }
+
+    .tap-target {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      display: none;
+      place-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      box-shadow: 0 0 30px rgba(245,158,11,.4);
+    }
+
+    /* RPS */
+
+    .rps-choices {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .rps-choice {
+      min-height: 100px;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      background: #222231;
+      border: 1px solid var(--line);
+      font-size: 42px;
+      transition: .25s;
+    }
+
+    .rps-choice:hover {
+      transform: translateY(-5px);
+      background: #302d45;
+    }
+
+    .rps-result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      color: #d8d8e4;
+      background: #1b1b27;
+      min-height: 55px;
+    }
+
+    /* SNAKE */
+
+    #snakeCanvas {
+      width: min(100%, 400px);
+      max-width: 400px;
+      aspect-ratio: 1;
+      display: block;
+      margin: 20px auto;
+      border-radius: 18px;
+      background: #080f0b;
+      border: 1px solid rgba(34,197,94,.25);
+    }
+
+    .snake-controls {
+      margin: 12px auto 0;
+      width: 210px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .snake-controls button {
+      height: 45px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: white;
+      background: #242433;
+    }
+
+    .snake-up {
+      grid-column: 2;
+    }
+
+    .snake-left {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .snake-down {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .snake-right {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    /* TIC TAC TOE */
+
+    .ttt-board {
+      width: min(100%, 340px);
+      margin: 25px auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .ttt-cell {
+      aspect-ratio: 1;
+      border-radius: 18px;
+      cursor: pointer;
+      color: white;
+      background: #20202d;
+      border: 1px solid var(--line);
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    /* ================= TOAST ================= */
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      top: 24px;
+      z-index: 15000;
+      transform: translate(-50%, -130px);
+      padding: 13px 18px;
+      border-radius: 14px;
+      color: white;
+      background: #242432;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      transition: .35s;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #toast.show {
+      transform: translate(-50%, 0);
+    }
+
+    /* ================= PROFILE MODAL ================= */
+
+    .profile-info {
+      width: 100%;
+      text-align: left;
+    }
+
+    .profile-big-avatar {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      font-size: 26px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .profile-info p {
+      margin: 12px 0;
+      padding: 13px;
+      border-radius: 13px;
+      color: #d4d4de;
+      background: #1a1a26;
+      font-size: 13px;
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      color: white;
+      font-weight: 900;
+      background: #4b1f29;
+      border: 1px solid rgba(239,68,68,.2);
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 650px) {
+
+      .auth-card {
+        padding: 24px 18px;
+        border-radius: 25px;
       }
 
-
-      .package-grid {
-        gap: 8px;
+      .featured {
+        min-height: 310px;
+        padding: 25px;
       }
 
+      .topbar {
+        padding: 12px 4%;
+      }
 
-      .package-card {
+      .container {
+        padding: 20px 4%;
+      }
+
+      .profile-pill span {
+        display: none;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .game-cover {
+        height: 125px;
+      }
+
+      .game-cover .game-art {
+        font-size: 48px;
+      }
+
+      .game-meta {
         padding: 13px;
       }
 
-
-      .package-action {
-        left: 9px;
-        right: 9px;
+      .game-topline {
+        display: block;
       }
 
+      .mini-tag {
+        display: inline-block;
+        margin-top: 6px;
+      }
 
-      .media-grid {
+      .game-meta p {
+        min-height: 54px;
+        font-size: 11px;
+      }
+
+      .stats-grid {
         gap: 8px;
       }
 
+      .stat-card {
+        padding: 15px 8px;
+      }
+
+      .stat-card strong {
+        font-size: 20px;
+      }
+
+      .otp-box {
+        gap: 7px;
+      }
+
+      .otp-box input {
+        width: 47px;
+      }
     }
-
   </style>
-</head>
 
+</head>
 
 <body>
 
-  <!-- =========================================================
-       BACKGROUND
-  ========================================================== -->
+  <!-- ======================================================
+       SPLASH
+       ====================================================== -->
 
-  <div class="ambient one"></div>
-  <div class="ambient two"></div>
-  <div class="ambient three"></div>
+  <div id="splash">
+    <div class="splash-box">
+      <div class="splash-logo">ZP</div>
+
+```
+  <div class="splash-title">
+    ZEESHAN <span>PLAYZONE</span>
+  </div>
+
+  <div class="loader">
+    <div></div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- ======================================================
+       ONBOARDING
+       ====================================================== -->
+
+  <section class="auth-screen" id="loginScreen">
+
+```
+<div class="auth-wrap">
+
+  <div class="brand">
+    <div class="brand-icon">ZP</div>
+
+    <div>
+      <h2>Zeeshan PlayZone</h2>
+      <p>Play. Compete. Enjoy.</p>
+    </div>
+  </div>
 
 
-  <!-- =========================================================
-       HEADER
-  ========================================================== -->
+  <div class="auth-card">
 
-  <header class="site-header">
+    <h1>Welcome, Player 👋</h1>
 
-    <div class="header-inner">
+    <p>
+      Create your PlayZone profile and unlock your
+      gaming dashboard.
+    </p>
 
-      <a href="#" class="brand" onclick="goHome(event)">
 
-        <div class="brand-icon">
-          <i class="fa-solid fa-bolt"></i>
+    <form id="loginForm">
+
+      <div class="field">
+        <label>Your Name</label>
+
+        <div class="input-wrap">
+          <span>👤</span>
+
+          <input
+            type="text"
+            id="playerName"
+            placeholder="Enter your name"
+            autocomplete="name"
+            required
+          >
         </div>
+      </div>
 
-        <div class="brand-text">
-          <span>SehrAn Media</span>
+
+      <div class="field">
+        <label>Mobile Number</label>
+
+        <div class="input-wrap">
+          <span>📱</span>
+
+          <input
+            type="tel"
+            id="mobileNumber"
+            placeholder="10-digit mobile number"
+            inputmode="numeric"
+            maxlength="10"
+            required
+          >
         </div>
-
-      </a>
-
-
-      <nav class="desktop-nav">
-
-        <button
-          class="nav-button active"
-          data-target="social"
-          type="button"
-        >
-          <i class="fa-solid fa-layer-group"></i>
-          Social
-        </button>
+      </div>
 
 
-        <button
-          class="nav-button"
-          data-target="movies"
-          type="button"
-        >
-          <i class="fa-solid fa-film"></i>
-          Movies
-        </button>
+      <button type="submit" class="primary-btn">
+        Continue →
+      </button>
+
+    </form>
 
 
-        <button
-          class="nav-button"
-          data-target="games"
-          type="button"
-        >
-          <i class="fa-solid fa-gamepad"></i>
-          Games
-        </button>
+    <div class="auth-note">
+      This demo uses browser-based OTP verification.
+      No password is required.
+    </div>
 
-      </nav>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ======================================================
+       OTP
+       ====================================================== -->
+
+  <section class="auth-screen" id="otpScreen">
+
+```
+<div class="auth-wrap">
+
+  <div class="brand">
+    <div class="brand-icon">ZP</div>
+
+    <div>
+      <h2>Zeeshan PlayZone</h2>
+      <p>Verify your account</p>
+    </div>
+  </div>
 
 
-      <a
-        class="header-support"
-        href="https://wa.me/919103874044"
-        target="_blank"
-        rel="noopener"
+  <div class="auth-card">
+
+    <h1>Enter OTP 🔐</h1>
+
+    <p id="otpMessage">
+      We sent a verification code to your mobile number.
+    </p>
+
+
+    <div class="demo-otp">
+      Demo mode — OTP is <strong id="demoOtp">1234</strong>
+    </div>
+
+
+    <div class="otp-box">
+
+      <input
+        type="text"
+        maxlength="1"
+        inputmode="numeric"
+        class="otp-input"
       >
-        <i class="fa-brands fa-whatsapp"></i>
-        Customer Care
-      </a>
+
+      <input
+        type="text"
+        maxlength="1"
+        inputmode="numeric"
+        class="otp-input"
+      >
+
+      <input
+        type="text"
+        maxlength="1"
+        inputmode="numeric"
+        class="otp-input"
+      >
+
+      <input
+        type="text"
+        maxlength="1"
+        inputmode="numeric"
+        class="otp-input"
+      >
 
     </div>
 
-  </header>
+
+    <button class="primary-btn" id="verifyOtpBtn">
+      Verify & Enter PlayZone
+    </button>
 
 
-  <!-- =========================================================
-       HERO
-  ========================================================== -->
+    <div class="auth-note">
+      <button
+        onclick="backToLogin()"
+        style="
+          background:none;
+          color:#b998ff;
+          cursor:pointer;
+          border:none;
+        "
+      >
+        ← Change mobile number
+      </button>
+    </div>
 
-  <section class="hero" id="home">
+  </div>
 
-    <div class="hero-content">
+</div>
+```
 
-      <div class="hero-pill">
-        <span class="live-dot"></span>
-        SOCIAL • MOVIES • GAMES
-      </div>
+  </section>
+
+  <!-- ======================================================
+       MAIN APP
+       ====================================================== -->
+
+  <main id="app">
+
+```
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+  <div class="top-brand">
+
+    <div class="mini-logo">ZP</div>
+
+    <div>
+      <strong>Zeeshan PlayZone</strong>
+      <small>Play without limits</small>
+    </div>
+
+  </div>
 
 
-      <h1>
+  <div class="top-actions">
 
-        <span class="line">
-          Everything You
-        </span>
-
-        <span class="line hero-gradient">
-          Love. One Place.
-        </span>
-
-      </h1>
+    <button
+      class="icon-btn"
+      onclick="showToast('Notifications coming soon!')"
+      title="Notifications"
+    >
+      🔔
+    </button>
 
 
-      <p class="hero-description">
+    <button
+      class="profile-pill"
+      onclick="openProfile()"
+    >
+      <div class="avatar" id="topAvatar">P</div>
 
-        Welcome to SehrAn Media — explore social media
-        services, discover movies and browse an exciting
-        collection of PC games, all from one modern hub.
+      <span id="topPlayerName">
+        Player
+      </span>
+    </button>
 
+  </div>
+
+</header>
+
+
+<!-- CONTENT -->
+
+<div class="container">
+
+
+  <!-- WELCOME -->
+
+  <section class="welcome">
+
+    <small>WELCOME BACK</small>
+
+    <h1>
+      Ready to <span>play?</span>
+    </h1>
+
+  </section>
+
+
+  <!-- FEATURED -->
+
+  <section class="featured">
+
+    <div class="featured-content">
+
+      <span class="tag">
+        FEATURED GAME
+      </span>
+
+      <h2>
+        Beat the Clock ⚡
+      </h2>
+
+      <p>
+        Test your speed, reflexes and concentration.
+        Start a quick challenge and beat your best score.
       </p>
 
-
-      <div class="hero-actions">
-
-        <button
-          class="hero-btn primary"
-          type="button"
-          onclick="openTab('social')"
-        >
-          <i class="fa-brands fa-instagram"></i>
-          Explore Services
-        </button>
-
-
-        <button
-          class="hero-btn secondary"
-          type="button"
-          onclick="openTab('movies')"
-        >
-          <i class="fa-solid fa-film"></i>
-          Explore Movies
-        </button>
-
-
-        <button
-          class="hero-btn secondary"
-          type="button"
-          onclick="openTab('games')"
-        >
-          <i class="fa-solid fa-gamepad"></i>
-          Explore Games
-        </button>
-
-      </div>
-
-
-      <div class="hero-stats">
-
-        <div class="stat">
-          <strong>12+</strong>
-          <span>Packages</span>
-        </div>
-
-
-        <div class="stat">
-          <strong>10+</strong>
-          <span>Movies</span>
-        </div>
-
-
-        <div class="stat">
-          <strong>12+</strong>
-          <span>Games</span>
-        </div>
-
-      </div>
+      <button onclick="openGame('quicktap')">
+        Play Featured Game
+      </button>
 
     </div>
 
   </section>
 
 
-  <!-- =========================================================
-       DESKTOP SECTION SWITCHER
-  ========================================================== -->
+  <!-- SEARCH -->
 
-  <div class="section-switcher">
+  <div class="search-wrap">
+
+    <span>🔎</span>
+
+    <input
+      type="text"
+      id="gameSearch"
+      placeholder="Search your favourite game..."
+      oninput="filterGames()"
+    >
+
+  </div>
+
+
+  <!-- CATEGORIES -->
+
+  <div class="categories">
 
     <button
-      class="switch-btn active"
-      data-target="social"
-      type="button"
+      class="category-btn active"
+      data-category="all"
+      onclick="selectCategory(this)"
     >
-      <i class="fa-solid fa-share-nodes"></i>
-      Social Apps
+      All Games
     </button>
 
-
     <button
-      class="switch-btn"
-      data-target="movies"
-      type="button"
+      class="category-btn"
+      data-category="arcade"
+      onclick="selectCategory(this)"
     >
-      <i class="fa-solid fa-clapperboard"></i>
-      Movies
+      Arcade
     </button>
 
+    <button
+      class="category-btn"
+      data-category="puzzle"
+      onclick="selectCategory(this)"
+    >
+      Puzzle
+    </button>
 
     <button
-      class="switch-btn"
-      data-target="games"
-      type="button"
+      class="category-btn"
+      data-category="action"
+      onclick="selectCategory(this)"
     >
-      <i class="fa-solid fa-gamepad"></i>
-      Games
+      Action
+    </button>
+
+    <button
+      class="category-btn"
+      data-category="strategy"
+      onclick="selectCategory(this)"
+    >
+      Strategy
     </button>
 
   </div>
 
 
-  <!-- =========================================================
-       MAIN
-  ========================================================== -->
+  <!-- GAMES -->
 
-  <main>
+  <div class="section-head">
+
+    <div>
+      <h2>Popular Games</h2>
+      <p>Choose a game and start playing instantly</p>
+    </div>
+
+  </div>
 
 
-    <!-- =======================================================
-         SOCIAL
-    ======================================================== -->
+  <section
+    class="games-grid"
+    id="gamesGrid"
+  >
 
-    <section
-      id="social"
-      class="tab-panel active"
+
+    <!-- NUMBER RUSH -->
+
+    <article
+      class="game-card"
+      data-category="puzzle arcade"
+      data-name="Number Rush Guess Number"
     >
 
-      <div class="section">
+      <div class="game-cover cover-number">
+        <div class="game-art">🔢</div>
+      </div>
 
-        <div class="section-heading">
+      <div class="game-meta">
 
-          <div class="eyebrow">
-            <i class="fa-solid fa-sparkles"></i>
-            Social Services
-          </div>
-
-          <h2>
-            Grow Your
-            <span>Presence</span>
-          </h2>
-
-          <p>
-            Explore available social media services and
-            choose the package that fits you.
-          </p>
-
+        <div class="game-topline">
+          <h3>Number Rush</h3>
+          <span class="mini-tag">PUZZLE</span>
         </div>
 
-
-        <!-- PLATFORM MARQUEE -->
-
-        <div class="marquee">
-
-          <div class="marquee-track">
-
-
-            <div class="platform-card instagram-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-instagram"></i>
-              </div>
-
-              <div>
-                <strong>Instagram</strong>
-                <small>Services Available</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card youtube-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-youtube"></i>
-              </div>
-
-              <div>
-                <strong>YouTube</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card facebook-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-facebook-f"></i>
-              </div>
-
-              <div>
-                <strong>Facebook</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card snapchat-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-snapchat"></i>
-              </div>
-
-              <div>
-                <strong>Snapchat</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card whatsapp-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-whatsapp"></i>
-              </div>
-
-              <div>
-                <strong>WhatsApp</strong>
-                <small>Customer Support</small>
-              </div>
-
-            </div>
-
-
-            <!-- DUPLICATE SET -->
-
-            <div class="platform-card instagram-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-instagram"></i>
-              </div>
-
-              <div>
-                <strong>Instagram</strong>
-                <small>Services Available</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card youtube-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-youtube"></i>
-              </div>
-
-              <div>
-                <strong>YouTube</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card facebook-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-facebook-f"></i>
-              </div>
-
-              <div>
-                <strong>Facebook</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card snapchat-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-snapchat"></i>
-              </div>
-
-              <div>
-                <strong>Snapchat</strong>
-                <small>Coming Soon</small>
-              </div>
-
-            </div>
-
-
-            <div class="platform-card whatsapp-platform">
-
-              <div class="platform-icon">
-                <i class="fa-brands fa-whatsapp"></i>
-              </div>
-
-              <div>
-                <strong>WhatsApp</strong>
-                <small>Customer Support</small>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- INSTAGRAM FEATURE -->
-
-        <div class="service-feature">
-
-          <div class="service-feature-inner">
-
-            <div class="service-title">
-
-              <div class="service-icon">
-                <i class="fa-brands fa-instagram"></i>
-              </div>
-
-
-              <div>
-
-                <div class="available">
-                  <i class="fa-solid fa-circle"></i>
-                  AVAILABLE NOW
-                </div>
-
-                <h3>
-                  Instagram Growth
-                </h3>
-
-                <p>
-                  Choose your followers package below.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <a
-              class="hero-btn primary"
-              href="#packages"
-              onclick="scrollToPackages(event)"
-            >
-              View Packages
-              <i class="fa-solid fa-arrow-down"></i>
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <!-- PACKAGES HEADING -->
-
-        <div
-          class="section-heading"
-          id="packages"
+        <p>
+          Guess the secret number before your attempts run out.
+        </p>
+
+        <button
+          class="play-card-btn"
+          onclick="openGame('number')"
         >
-
-          <div class="eyebrow">
-            <i class="fa-brands fa-instagram"></i>
-            Instagram
-          </div>
-
-          <h2>
-            Choose Your
-            <span>Package</span>
-          </h2>
-
-          <p>
-            Special prices are available on selected packages.
-          </p>
-
-        </div>
-
-
-        <!-- PACKAGE GRID -->
-
-        <div class="package-grid">
-
-
-          <!-- 200 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Starter</h3>
-
-                <div class="followers">
-                  200 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                70% OFF
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹100
-              </div>
-
-              <div class="current-price">
-                ₹30
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=200&followers=200&price=30"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 500 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Starter Plus</h3>
-
-                <div class="followers">
-                  500 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                67% OFF
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹150
-              </div>
-
-              <div class="current-price">
-                ₹50
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=500&followers=500&price=50"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 1000 -->
-
-          <div class="package-card featured">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Popular</h3>
-
-                <div class="followers">
-                  1,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                POPULAR
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹250
-              </div>
-
-              <div class="current-price">
-                ₹90
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=1000&followers=1000&price=90"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 1500 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Growth</h3>
-
-                <div class="followers">
-                  1,500 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹300
-              </div>
-
-              <div class="current-price">
-                ₹130
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=1500&followers=1500&price=130"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 2000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Growth Plus</h3>
-
-                <div class="followers">
-                  2,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹400
-              </div>
-
-              <div class="current-price">
-                ₹150
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=2000&followers=2000&price=150"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 3000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Pro</h3>
-
-                <div class="followers">
-                  3,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹500
-              </div>
-
-              <div class="current-price">
-                ₹200
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=3000&followers=3000&price=200"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 4000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Pro Plus</h3>
-
-                <div class="followers">
-                  4,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹600
-              </div>
-
-              <div class="current-price">
-                ₹250
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=4000&followers=4000&price=250"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 5000 -->
-
-          <div class="package-card featured">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Premium</h3>
-
-                <div class="followers">
-                  5,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                BEST VALUE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹750
-              </div>
-
-              <div class="current-price">
-                ₹300
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=5000&followers=5000&price=300"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 6000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Premium Plus</h3>
-
-                <div class="followers">
-                  6,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹900
-              </div>
-
-              <div class="current-price">
-                ₹350
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=6000&followers=6000&price=350"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 7000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Advanced</h3>
-
-                <div class="followers">
-                  7,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹1,100
-              </div>
-
-              <div class="current-price">
-                ₹450
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=7000&followers=7000&price=450"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 8000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Advanced Plus</h3>
-
-                <div class="followers">
-                  8,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹1,200
-              </div>
-
-              <div class="current-price">
-                ₹500
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=8000&followers=8000&price=500"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 9000 -->
-
-          <div class="package-card">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Elite</h3>
-
-                <div class="followers">
-                  9,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                SALE
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹1,400
-              </div>
-
-              <div class="current-price">
-                ₹550
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=9000&followers=9000&price=550"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-          <!-- 10000 -->
-
-          <div class="package-card featured">
-
-            <div class="package-top">
-
-              <div>
-
-                <div class="package-label">
-                  Instagram Followers
-                </div>
-
-                <h3>Elite Plus</h3>
-
-                <div class="followers">
-                  10,000 Followers
-                </div>
-
-              </div>
-
-              <span class="discount">
-                MAXIMUM
-              </span>
-
-            </div>
-
-
-            <div class="package-price">
-
-              <div class="old-price">
-                ₹1,500
-              </div>
-
-              <div class="current-price">
-                ₹600
-              </div>
-
-            </div>
-
-
-            <a
-              class="package-action"
-              href="order.html?package=10000&followers=10000&price=600"
-            >
-              Get Package
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-          </div>
-
-
-        </div>
+          Play Now
+        </button>
 
       </div>
 
-    </section>
+    </article>
 
 
-    <!-- =======================================================
-         MOVIES
-    ======================================================== -->
+    <!-- MEMORY -->
 
-    <section
-      id="movies"
-      class="tab-panel"
+    <article
+      class="game-card"
+      data-category="puzzle"
+      data-name="Memory Match Cards"
     >
 
-      <div class="section">
+      <div class="game-cover cover-memory">
+        <div class="game-art">🃏</div>
+      </div>
 
-        <div class="section-heading">
+      <div class="game-meta">
 
-          <div class="eyebrow">
-            <i class="fa-solid fa-film"></i>
-            Entertainment
-          </div>
-
-          <h2>
-            Movie
-            <span>Collection</span>
-          </h2>
-
-          <p>
-            Search your favorite movie or filter the collection
-            by genre.
-          </p>
-
+        <div class="game-topline">
+          <h3>Memory Match</h3>
+          <span class="mini-tag">PUZZLE</span>
         </div>
 
+        <p>
+          Match every pair and test your memory skills.
+        </p>
 
-        <!-- MOVIE SEARCH -->
-
-        <div class="media-toolbar">
-
-          <div class="search">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-              type="search"
-              id="movieSearch"
-              placeholder="Search movies..."
-              autocomplete="off"
-            >
-
-          </div>
-
-
-          <div
-            class="result-count"
-            id="movieCount"
-          >
-            10 Movies
-          </div>
-
-        </div>
-
-
-        <!-- MOVIE FILTERS -->
-
-        <div class="filters">
-
-          <button
-            class="filter active"
-            data-category="all"
-            data-type="movie"
-            type="button"
-          >
-            All
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="drama"
-            data-type="movie"
-            type="button"
-          >
-            Drama
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="action"
-            data-type="movie"
-            type="button"
-          >
-            Action
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="scifi"
-            data-type="movie"
-            type="button"
-          >
-            Sci-Fi
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="crime"
-            data-type="movie"
-            type="button"
-          >
-            Crime
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="comedy"
-            data-type="movie"
-            type="button"
-          >
-            Comedy
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="adventure"
-            data-type="movie"
-            type="button"
-          >
-            Adventure
-          </button>
-
-        </div>
-
-
-        <!-- MOVIE GRID -->
-
-        <div
-          class="media-grid"
-          id="movieGrid"
+        <button
+          class="play-card-btn"
+          onclick="openGame('memory')"
         >
-
-
-          <!-- SHAWshank -->
-
-          <a
-            class="media-card movie-card"
-            data-category="drama crime"
-            data-title="The Shawshank Redemption"
-            href="https://www.moviesbazar.tv/watch/movie/the-shawshank-redemption/0111161"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/Q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
-                alt="The Shawshank Redemption"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-
-              <span class="media-type">
-                DRAMA
-              </span>
-
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-
-              <div class="media-info">
-
-                <h3>
-                  The Shawshank Redemption
-                </h3>
-
-                <p>
-                  Drama • Crime
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- DARK KNIGHT -->
-
-          <a
-            class="media-card movie-card"
-            data-category="action crime"
-            data-title="The Dark Knight"
-            href="https://www.moviesbazar.tv/watch/movie/the-dark-knight/0468569"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
-                alt="The Dark Knight"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                ACTION
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  The Dark Knight
-                </h3>
-
-                <p>
-                  Action • Crime
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- INCEPTION -->
-
-          <a
-            class="media-card movie-card"
-            data-category="scifi action adventure"
-            data-title="Inception"
-            href="https://www.moviesbazar.tv/watch/movie/inception/1375666"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
-                alt="Inception"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                SCI-FI
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Inception
-                </h3>
-
-                <p>
-                  Sci-Fi • Action
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GODFATHER -->
-
-          <a
-            class="media-card movie-card"
-            data-category="crime drama"
-            data-title="The Godfather"
-            href="https://www.moviesbazar.tv/watch/movie/the-godfather/0068646"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
-                alt="The Godfather"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                CRIME
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  The Godfather
-                </h3>
-
-                <p>
-                  Crime • Drama
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GODFATHER II -->
-
-          <a
-            class="media-card movie-card"
-            data-category="crime drama"
-            data-title="The Godfather Part II"
-            href="https://www.moviesbazar.tv/watch/movie/the-godfather-part-ii/0071562"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg"
-                alt="The Godfather Part II"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                CRIME
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  The Godfather Part II
-                </h3>
-
-                <p>
-                  Crime • Drama
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- 3 IDIOTS -->
-
-          <a
-            class="media-card movie-card"
-            data-category="comedy drama"
-            data-title="3 Idiots"
-            href="https://www.moviesbazar.tv/watch/movie/3-idiots/1187043"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/66A9MqXOyVFCssoloscw79z8Tew.jpg"
-                alt="3 Idiots"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                COMEDY
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  3 Idiots
-                </h3>
-
-                <p>
-                  Comedy • Drama
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- INTERSTELLAR -->
-
-          <a
-            class="media-card movie-card"
-            data-category="scifi adventure drama"
-            data-title="Interstellar"
-            href="https://www.moviesbazar.tv/watch/movie/interstellar/0816692"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
-                alt="Interstellar"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                SCI-FI
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Interstellar
-                </h3>
-
-                <p>
-                  Sci-Fi • Adventure
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- SPIDER MAN -->
-
-          <a
-            class="media-card movie-card"
-            data-category="action adventure"
-            data-title="Spider-Man Brand New Day"
-            href="https://www.moviesbazar.tv/watch/movie/spiderman-brand-new-day-hindi-english/22084616"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=900&q=80"
-                alt="Spider-Man Brand New Day"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                ACTION
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Spider-Man: Brand New Day
-                </h3>
-
-                <p>
-                  Action • Adventure
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- MUNNA BHAI -->
-
-          <a
-            class="media-card movie-card"
-            data-category="comedy drama"
-            data-title="Munna Bhai MBBS"
-            href="https://www.moviesbazar.tv/watch/movie/munna-bhai-mbbs/0374887"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/4m3D2z7G2z3Yh8M1zK4j6gVj8lR.jpg"
-                alt="Munna Bhai MBBS"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                COMEDY
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Munna Bhai MBBS
-                </h3>
-
-                <p>
-                  Comedy • Drama
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- OPPENHEIMER -->
-
-          <a
-            class="media-card movie-card"
-            data-category="drama scifi"
-            data-title="Oppenheimer"
-            href="https://www.moviesbazar.tv/watch/movie/oppenheimer/15398776"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://image.tmdb.org/t/p/w780/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
-                alt="Oppenheimer"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type">
-                DRAMA
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Oppenheimer
-                </h3>
-
-                <p>
-                  Drama • Historical
-                </p>
-
-                <span class="open-link">
-                  Open Movie
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-        </div>
-
-
-        <div
-          class="no-results"
-          id="movieNoResults"
-        >
-          <i class="fa-solid fa-film"></i>
-          No movies found.
-        </div>
+          Play Now
+        </button>
 
       </div>
 
-    </section>
+    </article>
 
 
-    <!-- =======================================================
-         GAMES
-    ======================================================== -->
+    <!-- QUICK TAP -->
 
-    <section
-      id="games"
-      class="tab-panel"
+    <article
+      class="game-card"
+      data-category="action arcade"
+      data-name="Quick Tap Beat Clock Reflex"
     >
 
-      <div class="section">
+      <div class="game-cover cover-tap">
+        <div class="game-art">⚡</div>
+      </div>
 
-        <div class="section-heading">
+      <div class="game-meta">
 
-          <div class="eyebrow">
-            <i class="fa-solid fa-gamepad"></i>
-            PC Gaming
-          </div>
-
-          <h2>
-            Game
-            <span>Collection</span>
-          </h2>
-
-          <p>
-            Browse games by category and open any game card.
-          </p>
-
+        <div class="game-topline">
+          <h3>Quick Tap</h3>
+          <span class="mini-tag">ACTION</span>
         </div>
 
+        <p>
+          Tap as fast as possible before the timer reaches zero.
+        </p>
 
-        <!-- GAME SEARCH -->
-
-        <div class="media-toolbar">
-
-          <div class="search">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-              type="search"
-              id="gameSearch"
-              placeholder="Search games..."
-              autocomplete="off"
-            >
-
-          </div>
-
-
-          <div
-            class="result-count"
-            id="gameCount"
-          >
-            12 Games
-          </div>
-
-        </div>
-
-
-        <!-- GAME FILTERS -->
-
-        <div class="filters">
-
-          <button
-            class="filter active"
-            data-category="all"
-            data-type="game"
-            type="button"
-          >
-            All
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="openworld"
-            data-type="game"
-            type="button"
-          >
-            Open World
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="action"
-            data-type="game"
-            type="button"
-          >
-            Action
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="horror"
-            data-type="game"
-            type="button"
-          >
-            Horror
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="shooter"
-            data-type="game"
-            type="button"
-          >
-            Shooter
-          </button>
-
-
-          <button
-            class="filter"
-            data-category="adventure"
-            data-type="game"
-            type="button"
-          >
-            Adventure
-          </button>
-
-        </div>
-
-
-        <!-- GAME GRID -->
-
-        <div
-          class="media-grid"
-          id="gameGrid"
+        <button
+          class="play-card-btn"
+          onclick="openGame('quicktap')"
         >
-
-
-          <!-- GHOST OF TSUSHIMA -->
-
-          <a
-            class="media-card game-card"
-            data-category="action adventure openworld"
-            data-title="Ghost of Tsushima"
-            href="https://ankergames.net/game/ghost-of-tsushima"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg"
-                alt="Ghost of Tsushima"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                ADVENTURE
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Ghost of Tsushima
-                </h3>
-
-                <p>
-                  Action • Adventure
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GTA VICE CITY -->
-
-          <a
-            class="media-card game-card"
-            data-category="openworld action"
-            data-title="GTA Vice City"
-            href="https://ankergames.net/game/grand-theft-auto-vice-city"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/12110/header.jpg"
-                alt="GTA Vice City"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                OPEN WORLD
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  GTA Vice City
-                </h3>
-
-                <p>
-                  Open World • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- RESIDENT EVIL -->
-
-          <a
-            class="media-card game-card"
-            data-category="horror action"
-            data-title="Resident Evil 4 Remake"
-            href="https://ankergames.net/game/resident-evil-4-remake"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg"
-                alt="Resident Evil 4 Remake"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                HORROR
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Resident Evil 4 Remake
-                </h3>
-
-                <p>
-                  Horror • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GRANNY -->
-
-          <a
-            class="media-card game-card"
-            data-category="horror adventure"
-            data-title="Granny Chapter Two"
-            href="https://ankergames.net/game/granny-chapter-two"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
-                alt="Granny Chapter Two"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                HORROR
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Granny Chapter Two
-                </h3>
-
-                <p>
-                  Horror • Survival
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- DEVIL IN ME -->
-
-          <a
-            class="media-card game-card"
-            data-category="horror adventure"
-            data-title="The Devil in Me"
-            href="https://ankergames.net/game/the-dark-pictures-anthology-the-devil-in-me"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80"
-                alt="The Devil in Me"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                HORROR
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  The Devil in Me
-                </h3>
-
-                <p>
-                  Horror • Adventure
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- RDR2 -->
-
-          <a
-            class="media-card game-card"
-            data-category="openworld action adventure"
-            data-title="Red Dead Redemption 2"
-            href="https://ankergames.net/game/red-dead-redemption-2"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg"
-                alt="Red Dead Redemption 2"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                OPEN WORLD
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Red Dead Redemption 2
-                </h3>
-
-                <p>
-                  Open World • Adventure
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GTA V -->
-
-          <a
-            class="media-card game-card"
-            data-category="openworld action"
-            data-title="Grand Theft Auto V"
-            href="https://ankergames.net/game/grand-theft-auto-v"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg"
-                alt="Grand Theft Auto V"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                OPEN WORLD
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Grand Theft Auto V
-                </h3>
-
-                <p>
-                  Open World • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- GTA SAN ANDREAS -->
-
-          <a
-            class="media-card game-card"
-            data-category="openworld action"
-            data-title="GTA San Andreas"
-            href="https://ankergames.net/game/grand-theft-auto-san-andreas-2"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/1547000/header.jpg"
-                alt="GTA San Andreas"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                OPEN WORLD
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  GTA San Andreas
-                </h3>
-
-                <p>
-                  Open World • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- COD MW2 -->
-
-          <a
-            class="media-card game-card"
-            data-category="shooter action"
-            data-title="Call of Duty Modern Warfare 2"
-            href="https://ankergames.net/game/call-of-duty-modern-warfare-2"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/10180/header.jpg"
-                alt="Call of Duty Modern Warfare 2"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                SHOOTER
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  COD: Modern Warfare 2
-                </h3>
-
-                <p>
-                  Shooter • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- COD BO2 -->
-
-          <a
-            class="media-card game-card"
-            data-category="shooter action"
-            data-title="Call of Duty Black Ops II"
-            href="https://ankergames.net/game/call-of-duty-black-ops-ii"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/202970/header.jpg"
-                alt="Call of Duty Black Ops II"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                SHOOTER
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  COD: Black Ops II
-                </h3>
-
-                <p>
-                  Shooter • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- COD BO3 -->
-
-          <a
-            class="media-card game-card"
-            data-category="shooter action"
-            data-title="Call of Duty Black Ops III"
-            href="https://ankergames.net/game/call-of-duty-black-ops-iii"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"
-                alt="Call of Duty Black Ops III"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                SHOOTER
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  COD: Black Ops III
-                </h3>
-
-                <p>
-                  Shooter • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- RDR -->
-
-          <a
-            class="media-card game-card"
-            data-category="openworld action adventure"
-            data-title="Red Dead Redemption"
-            href="https://ankergames.net/game/red-dead-redemption"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <div class="media-poster">
-
-              <img
-                src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=900&q=80"
-                alt="Red Dead Redemption"
-                loading="lazy"
-              >
-
-              <div class="poster-gradient"></div>
-
-              <span class="media-type game">
-                OPEN WORLD
-              </span>
-
-              <div class="play-button">
-                <i class="fa-solid fa-gamepad"></i>
-              </div>
-
-              <div class="media-info">
-
-                <h3>
-                  Red Dead Redemption
-                </h3>
-
-                <p>
-                  Open World • Action
-                </p>
-
-                <span class="open-link">
-                  Open Game
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </span>
-
-              </div>
-
-            </div>
-
-          </a>
-
-
-        </div>
-
-
-        <div
-          class="no-results"
-          id="gameNoResults"
-        >
-          <i class="fa-solid fa-gamepad"></i>
-          No games found.
-        </div>
+          Play Now
+        </button>
 
       </div>
 
-    </section>
+    </article>
+
+
+    <!-- RPS -->
+
+    <article
+      class="game-card"
+      data-category="arcade strategy"
+      data-name="Rock Paper Scissors RPS"
+    >
+
+      <div class="game-cover cover-rps">
+        <div class="game-art">✊</div>
+      </div>
+
+      <div class="game-meta">
+
+        <div class="game-topline">
+          <h3>Rock Paper Scissors</h3>
+          <span class="mini-tag">CLASSIC</span>
+        </div>
+
+        <p>
+          Challenge the computer in the classic battle.
+        </p>
+
+        <button
+          class="play-card-btn"
+          onclick="openGame('rps')"
+        >
+          Play Now
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- SNAKE -->
+
+    <article
+      class="game-card"
+      data-category="arcade action"
+      data-name="Snake Classic"
+    >
+
+      <div class="game-cover cover-snake">
+        <div class="game-art">🐍</div>
+      </div>
+
+      <div class="game-meta">
+
+        <div class="game-topline">
+          <h3>Snake</h3>
+          <span class="mini-tag">ARCADE</span>
+        </div>
+
+        <p>
+          Eat, grow and survive as long as you can.
+        </p>
+
+        <button
+          class="play-card-btn"
+          onclick="openGame('snake')"
+        >
+          Play Now
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- TIC TAC TOE -->
+
+    <article
+      class="game-card"
+      data-category="strategy puzzle"
+      data-name="Tic Tac Toe XO Strategy"
+    >
+
+      <div class="game-cover cover-tictac">
+        <div class="game-art">⭕</div>
+      </div>
+
+      <div class="game-meta">
+
+        <div class="game-topline">
+          <h3>Tic Tac Toe</h3>
+          <span class="mini-tag">STRATEGY</span>
+        </div>
+
+        <p>
+          Classic X and O battle against a friend or yourself.
+        </p>
+
+        <button
+          class="play-card-btn"
+          onclick="openGame('ttt')"
+        >
+          Play Now
+        </button>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats-grid">
+
+    <div class="stat-card">
+      <strong id="gamesPlayed">0</strong>
+      <span>Games Played</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>6</strong>
+      <span>Playable Games</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>24/7</strong>
+      <span>PlayZone Online</span>
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-item active"
+    onclick="goHome()"
+  >
+    <b>⌂</b>
+    Home
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="document.getElementById('gamesGrid').scrollIntoView({behavior:'smooth'})"
+  >
+    <b>🎮</b>
+    Games
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="showToast('Leaderboard coming soon!')"
+  >
+    <b>🏆</b>
+    Rank
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="openProfile()"
+  >
+    <b>👤</b>
+    Profile
+  </button>
+
+</nav>
+```
 
   </main>
 
+  <!-- ======================================================
+       GAME MODAL
+       ====================================================== -->
 
-  <!-- =========================================================
-       WHATSAPP
-  ========================================================== -->
-
-  <a
-    class="whatsapp"
-    href="https://wa.me/919103874044"
-    target="_blank"
-    rel="noopener"
-    aria-label="WhatsApp Customer Care"
+  <div
+    class="modal"
+    id="gameModal"
   >
 
-    <div class="whatsapp-icon">
-      <i class="fa-brands fa-whatsapp"></i>
-    </div>
+```
+<div class="game-window">
+
+  <div class="game-window-head">
+
+    <h2 id="gameModalTitle">
+      Game
+    </h2>
+
+    <button
+      class="close-btn"
+      onclick="closeGame()"
+    >
+      ✕
+    </button>
+
+  </div>
 
 
-    <div class="whatsapp-text">
+  <div
+    class="game-area"
+    id="gameArea"
+  ></div>
 
-      <small>
-        CUSTOMER CARE
-      </small>
+</div>
+```
 
-      <strong>
-        91038 74044
-      </strong>
+  </div>
 
-    </div>
+  <!-- ======================================================
+       PROFILE MODAL
+       ====================================================== -->
 
-  </a>
+  <div
+    class="modal"
+    id="profileModal"
+  >
+
+```
+<div class="game-window">
+
+  <div class="game-window-head">
+
+    <h2>Your Profile</h2>
+
+    <button
+      class="close-btn"
+      onclick="closeProfile()"
+    >
+      ✕
+    </button>
+
+  </div>
 
 
-  <!-- =========================================================
-       MOBILE BOTTOM NAV
-  ========================================================== -->
+  <div class="game-area">
 
-  <div class="mobile-nav">
+    <div class="profile-info">
 
-    <div class="mobile-nav-inner">
+      <div
+        class="profile-big-avatar"
+        id="profileAvatar"
+      >
+        P
+      </div>
+
+      <h3
+        id="profileName"
+        style="text-align:center;margin-bottom:20px;"
+      >
+        Player
+      </h3>
+
+      <p>
+        📱 Mobile:
+        <span id="profileMobile"></span>
+      </p>
+
+      <p>
+        🎮 Games played:
+        <span id="profileGames">0</span>
+      </p>
 
       <button
-        data-target="social"
-        class="active"
-        type="button"
+        class="logout-btn"
+        onclick="logout()"
       >
-        <i class="fa-solid fa-share-nodes"></i>
-        Social
-      </button>
-
-
-      <button
-        data-target="movies"
-        type="button"
-      >
-        <i class="fa-solid fa-film"></i>
-        Movies
-      </button>
-
-
-      <button
-        data-target="games"
-        type="button"
-      >
-        <i class="fa-solid fa-gamepad"></i>
-        Games
+        Logout
       </button>
 
     </div>
 
   </div>
 
+</div>
+```
 
-  <!-- =========================================================
-       FOOTER
-  ========================================================== -->
+  </div>
 
-  <footer>
+  <!-- TOAST -->
 
-    <div class="footer-brand">
-      SehrAn <span>Media</span>
-    </div>
+  <div id="toast"></div>
 
-    <p>
-      © 2026 SehrAn Media — Social, Movies & Games
-    </p>
-
-  </footer>
-
-
-  <!-- =========================================================
+  <!-- ======================================================
        JAVASCRIPT
-  ========================================================== -->
+       ====================================================== -->
 
   <script>
 
-    /* =========================================================
-       ELEMENTS
-    ========================================================= */
+    /* =====================================================
+       APP STATE
+       ===================================================== */
 
-    const panels =
-      document.querySelectorAll(".tab-panel");
+    let currentUser = null;
+    let generatedOtp = "1234";
+    let activeCategory = "all";
 
-    const allTabButtons =
-      document.querySelectorAll(
-        "[data-target]"
-      );
+    let gamesPlayed = Number(
+      localStorage.getItem("zp_games_played") || 0
+    );
 
-
-    /* =========================================================
-       ACTIVE TAB
-    ========================================================= */
-
-    let currentTab = "social";
+    let snakeInterval = null;
 
 
-    /* =========================================================
-       MAIN TAB FUNCTION
-       
-       IMPORTANT:
-       We do NOT use window.scrollTo({ top: 0 }).
-       
-       The selected section is first displayed and then
-       scrollIntoView() moves directly to that section.
-    ========================================================= */
+    /* =====================================================
+       SPLASH
+       ===================================================== */
 
-    function openTab(tabId, updateHistory = true) {
+    window.addEventListener("load", () => {
 
-      const target =
-        document.getElementById(tabId);
+      setTimeout(() => {
 
-      if (!target) return;
+        const splash =
+          document.getElementById("splash");
 
+        splash.style.opacity = "0";
 
-      currentTab = tabId;
+        setTimeout(() => {
 
+          splash.style.display = "none";
 
-      /* Hide every panel */
+          checkSession();
 
-      panels.forEach(panel => {
+        }, 600);
 
-        panel.classList.remove("active");
-
-      });
-
-
-      /* Show selected panel */
-
-      target.classList.add("active");
-
-
-      /* Update every navigation button */
-
-      allTabButtons.forEach(button => {
-
-        if (
-          button.dataset.target === tabId
-        ) {
-
-          button.classList.add("active");
-
-        } else {
-
-          button.classList.remove("active");
-
-        }
-
-      });
-
-
-      /*
-        Wait one frame so display:block has been applied.
-        Then scroll exactly to the requested section.
-      */
-
-      requestAnimationFrame(() => {
-
-        const headerOffset = 84;
-
-        const targetPosition =
-          target.getBoundingClientRect().top
-          + window.scrollY
-          - headerOffset;
-
-
-        window.scrollTo({
-
-          top:
-            Math.max(
-              0,
-              targetPosition
-            ),
-
-          behavior: "smooth"
-
-        });
-
-      });
-
-
-      /* Update browser URL */
-
-      if (updateHistory) {
-
-        history.pushState(
-          {
-            tab: tabId
-          },
-          "",
-          "#" + tabId
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       NAVIGATION BUTTONS
-    ========================================================= */
-
-    allTabButtons.forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const target =
-            button.dataset.target;
-
-          if (target) {
-
-            openTab(target);
-
-          }
-
-        }
-      );
+      }, 1500);
 
     });
 
 
-    /* =========================================================
-       HERO HOME
-    ========================================================= */
+    /* =====================================================
+       SESSION
+       ===================================================== */
 
-    function goHome(event) {
+    function checkSession() {
 
-      event.preventDefault();
+      const savedUser =
+        localStorage.getItem("zp_user");
 
-      window.scrollTo({
+      if (savedUser) {
 
-        top: 0,
+        currentUser =
+          JSON.parse(savedUser);
 
-        behavior: "smooth"
+        openApp();
 
-      });
+      } else {
 
-      history.pushState(
-        {
-          tab: "social"
-        },
-        "",
-        "#social"
+        showScreen("loginScreen");
+
+      }
+
+    }
+
+
+    function showScreen(id) {
+
+      document
+        .querySelectorAll(".auth-screen")
+        .forEach(screen => {
+
+          screen.classList.remove("active");
+
+        });
+
+      document
+        .getElementById(id)
+        .classList
+        .add("active");
+
+    }
+
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
+
+    document
+      .getElementById("loginForm")
+      .addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+          const name =
+            document
+              .getElementById("playerName")
+              .value
+              .trim();
+
+          const mobile =
+            document
+              .getElementById("mobileNumber")
+              .value
+              .replace(/\D/g, "");
+
+
+          if (name.length < 2) {
+
+            showToast(
+              "Please enter a valid name."
+            );
+
+            return;
+
+          }
+
+
+          if (mobile.length !== 10) {
+
+            showToast(
+              "Please enter a valid 10-digit mobile number."
+            );
+
+            return;
+
+          }
+
+
+          currentUser = {
+            name: name,
+            mobile: mobile
+          };
+
+
+          generatedOtp =
+            Math.floor(
+              1000 +
+              Math.random() * 9000
+            ).toString();
+
+
+          /*
+            Demo fallback.
+            Both the generated OTP and 1234 work.
+          */
+
+          document
+            .getElementById("demoOtp")
+            .textContent =
+            generatedOtp;
+
+
+          document
+            .getElementById("otpMessage")
+            .textContent =
+            "Enter the 4-digit code sent to +91 " +
+            mobile.slice(0, 2) +
+            "******" +
+            mobile.slice(-2);
+
+
+          showScreen("otpScreen");
+
+
+          setTimeout(() => {
+
+            document
+              .querySelector(".otp-input")
+              .focus();
+
+          }, 200);
+
+        }
+      );
+
+
+    /* =====================================================
+       OTP INPUT AUTO MOVE
+       ===================================================== */
+
+    const otpInputs =
+      document.querySelectorAll(".otp-input");
+
+
+    otpInputs.forEach(
+      (input, index) => {
+
+        input.addEventListener(
+          "input",
+          () => {
+
+            input.value =
+              input.value.replace(/\D/g, "");
+
+
+            if (
+              input.value &&
+              index < otpInputs.length - 1
+            ) {
+
+              otpInputs[index + 1].focus();
+
+            }
+
+          }
+        );
+
+
+        input.addEventListener(
+          "keydown",
+          event => {
+
+            if (
+              event.key === "Backspace" &&
+              !input.value &&
+              index > 0
+            ) {
+
+              otpInputs[index - 1].focus();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById("verifyOtpBtn")
+      .addEventListener(
+        "click",
+        verifyOtp
+      );
+
+
+    function verifyOtp() {
+
+      const otp =
+        [...otpInputs]
+        .map(input => input.value)
+        .join("");
+
+
+      if (
+        otp === generatedOtp ||
+        otp === "1234"
+      ) {
+
+        localStorage.setItem(
+          "zp_user",
+          JSON.stringify(currentUser)
+        );
+
+
+        otpInputs.forEach(
+          input => input.value = ""
+        );
+
+
+        openApp();
+
+        showToast(
+          "Welcome to Zeeshan PlayZone! 🎮"
+        );
+
+      } else {
+
+        showToast(
+          "Incorrect OTP. Please try again."
+        );
+
+      }
+
+    }
+
+
+    function backToLogin() {
+
+      otpInputs.forEach(
+        input => input.value = ""
+      );
+
+      showScreen("loginScreen");
+
+    }
+
+
+    /* =====================================================
+       OPEN APP
+       ===================================================== */
+
+    function openApp() {
+
+      document
+        .querySelectorAll(".auth-screen")
+        .forEach(screen => {
+
+          screen.classList.remove("active");
+
+        });
+
+
+      document
+        .getElementById("app")
+        .classList
+        .add("active");
+
+
+      document
+        .getElementById("topPlayerName")
+        .textContent =
+        currentUser.name;
+
+
+      const firstLetter =
+        currentUser.name
+        .charAt(0)
+        .toUpperCase();
+
+
+      document
+        .getElementById("topAvatar")
+        .textContent =
+        firstLetter;
+
+
+      updateGamesPlayed();
+
+    }
+
+
+    /* =====================================================
+       PROFILE
+       ===================================================== */
+
+    function openProfile() {
+
+      document
+        .getElementById("profileName")
+        .textContent =
+        currentUser.name;
+
+
+      document
+        .getElementById("profileMobile")
+        .textContent =
+        "+91 " + currentUser.mobile;
+
+
+      document
+        .getElementById("profileGames")
+        .textContent =
+        gamesPlayed;
+
+
+      document
+        .getElementById("profileAvatar")
+        .textContent =
+        currentUser.name
+        .charAt(0)
+        .toUpperCase();
+
+
+      document
+        .getElementById("profileModal")
+        .classList
+        .add("active");
+
+    }
+
+
+    function closeProfile() {
+
+      document
+        .getElementById("profileModal")
+        .classList
+        .remove("active");
+
+    }
+
+
+    function logout() {
+
+      localStorage.removeItem(
+        "zp_user"
+      );
+
+
+      currentUser = null;
+
+
+      closeProfile();
+
+
+      document
+        .getElementById("app")
+        .classList
+        .remove("active");
+
+
+      document
+        .getElementById("playerName")
+        .value = "";
+
+
+      document
+        .getElementById("mobileNumber")
+        .value = "";
+
+
+      showScreen("loginScreen");
+
+
+      showToast(
+        "You have been logged out."
       );
 
     }
 
 
-    /* =========================================================
-       PACKAGE SCROLL
-    ========================================================= */
+    /* =====================================================
+       TOAST
+       ===================================================== */
 
-    function scrollToPackages(event) {
-
-      event.preventDefault();
-
-      const packages =
-        document.getElementById(
-          "packages"
-        );
-
-      if (!packages) return;
+    let toastTimer;
 
 
-      const position =
-        packages.getBoundingClientRect().top
-        + window.scrollY
-        - 90;
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
 
 
-      window.scrollTo({
+      toast.textContent =
+        message;
 
-        top: position,
 
-        behavior: "smooth"
+      toast.classList.add("show");
 
-      });
+
+      clearTimeout(toastTimer);
+
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast
+            .classList
+            .remove("show");
+
+        }, 2500);
 
     }
 
 
-    /* =========================================================
-       SEARCH + FILTER ENGINE
-    ========================================================= */
+    /* =====================================================
+       CATEGORY FILTER
+       ===================================================== */
 
-    const state = {
+    function selectCategory(button) {
 
-      movie: {
-        category: "all",
-        search: ""
-      },
+      document
+        .querySelectorAll(".category-btn")
+        .forEach(btn => {
 
-      game: {
-        category: "all",
-        search: ""
-      }
+          btn.classList.remove("active");
 
-    };
+        });
 
 
-    function filterMedia(type) {
-
-      const isMovie =
-        type === "movie";
+      button.classList.add("active");
 
 
-      const selector =
-        isMovie
-          ? ".movie-card"
-          : ".game-card";
+      activeCategory =
+        button.dataset.category;
 
+
+      filterGames();
+
+    }
+
+
+    function filterGames() {
 
       const search =
-        state[type].search
-        .toLowerCase()
-        .trim();
-
-
-      const category =
-        state[type].category;
+        document
+          .getElementById("gameSearch")
+          .value
+          .toLowerCase()
+          .trim();
 
 
       const cards =
-        document.querySelectorAll(
-          selector
-        );
-
-
-      let visible = 0;
+        document
+          .querySelectorAll(".game-card");
 
 
       cards.forEach(card => {
 
+        const name =
+          card.dataset.name.toLowerCase();
+
+
         const categories =
-          (
-            card.dataset.category || ""
-          )
-          .toLowerCase()
-          .split(/\s+/);
-
-
-        const title =
-          (
-            card.dataset.title ||
-            card.innerText ||
-            ""
-          )
-          .toLowerCase();
+          card.dataset.category;
 
 
         const categoryMatch =
-          category === "all" ||
-          categories.includes(category);
+          activeCategory === "all" ||
+          categories.includes(activeCategory);
 
 
         const searchMatch =
-          !search ||
-          title.includes(search);
+          name.includes(search);
 
 
-        const shouldShow =
+        card.style.display =
           categoryMatch &&
-          searchMatch;
-
-
-        if (shouldShow) {
-
-          card.classList.remove(
-            "hidden"
-          );
-
-          visible++;
-
-        } else {
-
-          card.classList.add(
-            "hidden"
-          );
-
-        }
+          searchMatch
+            ? ""
+            : "none";
 
       });
 
+    }
 
-      updateResultCount(
-        type,
-        visible,
-        cards.length
-      );
+
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
+
+    function goHome() {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
     }
 
 
-    /* =========================================================
-       RESULT COUNTER
-    ========================================================= */
+    /* =====================================================
+       GAME MODAL
+       ===================================================== */
 
-    function updateResultCount(
-      type,
-      visible,
-      total
-    ) {
+    function openGame(type) {
 
-      const countElement =
-        document.getElementById(
-          type === "movie"
-            ? "movieCount"
-            : "gameCount"
-        );
+      stopSnake();
 
 
-      const noResults =
-        document.getElementById(
-          type === "movie"
-            ? "movieNoResults"
-            : "gameNoResults"
-        );
+      document
+        .getElementById("gameModal")
+        .classList
+        .add("active");
 
 
-      if (countElement) {
+      const area =
+        document.getElementById("gameArea");
 
-        countElement.textContent =
-          `${visible} of ${total} ${
-            type === "movie"
-              ? "Movies"
-              : "Games"
-          }`;
+
+      area.innerHTML = "";
+
+
+      incrementGamesPlayed();
+
+
+      if (type === "number") {
+        renderNumberGame();
+      }
+
+      if (type === "memory") {
+        renderMemoryGame();
+      }
+
+      if (type === "quicktap") {
+        renderQuickTapGame();
+      }
+
+      if (type === "rps") {
+        renderRpsGame();
+      }
+
+      if (type === "snake") {
+        renderSnakeGame();
+      }
+
+      if (type === "ttt") {
+        renderTttGame();
+      }
+
+    }
+
+
+    function closeGame() {
+
+      stopSnake();
+
+
+      document
+        .getElementById("gameModal")
+        .classList
+        .remove("active");
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = "";
+
+    }
+
+
+    function incrementGamesPlayed() {
+
+      gamesPlayed++;
+
+
+      localStorage.setItem(
+        "zp_games_played",
+        gamesPlayed
+      );
+
+
+      updateGamesPlayed();
+
+    }
+
+
+    function updateGamesPlayed() {
+
+      const stat =
+        document.getElementById("gamesPlayed");
+
+      if (stat) {
+
+        stat.textContent =
+          gamesPlayed;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       NUMBER RUSH
+       ===================================================== */
+
+    function renderNumberGame() {
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Number Rush";
+
+
+      let target =
+        Math.floor(Math.random() * 100) + 1;
+
+
+      let attempts = 7;
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
+
+            <h3>Guess the Number</h3>
+
+            <p>
+              Guess the secret number between 1 and 100.
+              You have 7 attempts.
+            </p>
+
+            <div class="number-target">
+              ?
+            </div>
+
+            <input
+              class="number-input"
+              id="numberGuess"
+              type="number"
+              min="1"
+              max="100"
+              placeholder="Enter your guess"
+            >
+
+            <br>
+
+            <button
+              class="game-action"
+              id="guessBtn"
+            >
+              Submit Guess
+            </button>
+
+            <div
+              class="rps-result"
+              id="numberResult"
+            >
+              Attempts left: ${attempts}
+            </div>
+
+          </div>
+        `;
+
+
+      const guessInput =
+        document.getElementById("numberGuess");
+
+
+      document
+        .getElementById("guessBtn")
+        .onclick =
+        () => {
+
+          const guess =
+            Number(guessInput.value);
+
+
+          const result =
+            document.getElementById("numberResult");
+
+
+          if (
+            !guess ||
+            guess < 1 ||
+            guess > 100
+          ) {
+
+            result.textContent =
+              "Enter a number between 1 and 100.";
+
+            return;
+
+          }
+
+
+          attempts--;
+
+
+          if (guess === target) {
+
+            result.innerHTML =
+              "🎉 Correct! You won with " +
+              (7 - attempts) +
+              " attempts.";
+
+            document
+              .getElementById("guessBtn")
+              .disabled = true;
+
+            return;
+
+          }
+
+
+          if (attempts <= 0) {
+
+            result.innerHTML =
+              "Game over! The number was <strong>" +
+              target +
+              "</strong>.";
+
+            document
+              .getElementById("guessBtn")
+              .disabled = true;
+
+            return;
+
+          }
+
+
+          result.textContent =
+            guess < target
+              ? "Too low! Attempts left: " + attempts
+              : "Too high! Attempts left: " + attempts;
+
+
+          guessInput.value = "";
+          guessInput.focus();
+
+        };
+
+    }
+
+
+    /* =====================================================
+       MEMORY MATCH
+       ===================================================== */
+
+    function renderMemoryGame() {
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Memory Match";
+
+
+      const icons = [
+        "🎮", "🎮",
+        "⚡", "⚡",
+        "🏆", "🏆",
+        "🎯", "🎯",
+        "🚀", "🚀",
+        "👾", "👾",
+        "🔥", "🔥",
+        "💎", "💎"
+      ];
+
+
+      icons.sort(
+        () => Math.random() - 0.5
+      );
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
+
+            <h3>Memory Match</h3>
+
+            <p>
+              Find all matching pairs.
+            </p>
+
+            <div
+              class="memory-grid"
+              id="memoryGrid"
+            ></div>
+
+            <div
+              class="rps-result"
+              id="memoryResult"
+            >
+              Find the matching pairs.
+            </div>
+
+          </div>
+        `;
+
+
+      const grid =
+        document.getElementById("memoryGrid");
+
+
+      let firstCard = null;
+      let secondCard = null;
+      let lock = false;
+      let matched = 0;
+
+
+      icons.forEach(
+        icon => {
+
+          const card =
+            document.createElement("button");
+
+
+          card.className =
+            "memory-card";
+
+
+          card.dataset.icon =
+            icon;
+
+
+          card.dataset.flipped =
+            "false";
+
+
+          card.textContent =
+            "?";
+
+
+          card.onclick =
+            () => {
+
+              if (
+                lock ||
+                card.dataset.flipped === "true" ||
+                card.classList.contains("matched")
+              ) {
+                return;
+              }
+
+
+              card.dataset.flipped =
+                "true";
+
+
+              card.textContent =
+                icon;
+
+
+              card.classList.add(
+                "flipped"
+              );
+
+
+              if (!firstCard) {
+
+                firstCard = card;
+
+                return;
+
+              }
+
+
+              secondCard = card;
+
+              lock = true;
+
+
+              if (
+                firstCard.dataset.icon ===
+                secondCard.dataset.icon
+              ) {
+
+                firstCard
+                  .classList
+                  .add("matched");
+
+
+                secondCard
+                  .classList
+                  .add("matched");
+
+
+                matched += 2;
+
+
+                resetTurn();
+
+
+                if (matched === icons.length) {
+
+                  document
+                    .getElementById("memoryResult")
+                    .textContent =
+                    "🎉 Perfect! You matched all pairs.";
+
+                }
+
+              } else {
+
+                setTimeout(() => {
+
+                  [firstCard, secondCard]
+                    .forEach(cardItem => {
+
+                      cardItem.textContent =
+                        "?";
+
+
+                      cardItem.dataset.flipped =
+                        "false";
+
+
+                      cardItem
+                        .classList
+                        .remove("flipped");
+
+                    });
+
+
+                  resetTurn();
+
+                }, 700);
+
+              }
+
+            };
+
+
+          grid.appendChild(card);
+
+        }
+      );
+
+
+      function resetTurn() {
+
+        firstCard = null;
+        secondCard = null;
+        lock = false;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       QUICK TAP
+       ===================================================== */
+
+    function renderQuickTapGame() {
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Quick Tap";
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
+
+            <h3>Quick Tap</h3>
+
+            <p>
+              Tap the target as many times as possible in 15 seconds.
+            </p>
+
+            <div
+              class="rps-result"
+              id="tapStats"
+            >
+              Score: 0 · Time: 15
+            </div>
+
+            <div
+              class="tap-zone"
+              id="tapZone"
+            >
+              <button
+                class="tap-target"
+                id="tapTarget"
+              >
+                ⚡
+              </button>
+            </div>
+
+            <button
+              class="game-action"
+              id="startTapBtn"
+            >
+              Start Challenge
+            </button>
+
+          </div>
+        `;
+
+
+      const zone =
+        document.getElementById("tapZone");
+
+
+      const target =
+        document.getElementById("tapTarget");
+
+
+      const stats =
+        document.getElementById("tapStats");
+
+
+      const startBtn =
+        document.getElementById("startTapBtn");
+
+
+      let score = 0;
+      let time = 15;
+      let timer = null;
+      let running = false;
+
+
+      function moveTarget() {
+
+        const maxX =
+          zone.clientWidth - 72;
+
+
+        const maxY =
+          zone.clientHeight - 72;
+
+
+        target.style.left =
+          Math.random() * maxX + "px";
+
+
+        target.style.top =
+          Math.random() * maxY + "px";
 
       }
 
 
-      if (noResults) {
+      target.onclick =
+        () => {
 
-        if (visible === 0) {
+          if (!running) return;
 
-          noResults.classList.add(
-            "show"
-          );
 
-        } else {
+          score++;
 
-          noResults.classList.remove(
-            "show"
+
+          stats.textContent =
+            "Score: " +
+            score +
+            " · Time: " +
+            time;
+
+
+          moveTarget();
+
+        };
+
+
+      startBtn.onclick =
+        () => {
+
+          if (running) return;
+
+
+          running = true;
+          score = 0;
+          time = 15;
+
+
+          target.style.display =
+            "grid";
+
+
+          moveTarget();
+
+
+          startBtn.textContent =
+            "Challenge Running...";
+
+
+          timer =
+            setInterval(() => {
+
+              time--;
+
+
+              stats.textContent =
+                "Score: " +
+                score +
+                " · Time: " +
+                time;
+
+
+              if (time <= 0) {
+
+                clearInterval(timer);
+
+
+                running = false;
+
+
+                target.style.display =
+                  "none";
+
+
+                stats.textContent =
+                  "🏆 Final Score: " +
+                  score;
+
+
+                startBtn.textContent =
+                  "Play Again";
+
+              }
+
+            }, 1000);
+
+        };
+
+    }
+
+
+    /* =====================================================
+       ROCK PAPER SCISSORS
+       ===================================================== */
+
+    function renderRpsGame() {
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Rock Paper Scissors";
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
+
+            <h3>Choose Your Move</h3>
+
+            <p>
+              Rock beats Scissors. Scissors beats Paper.
+              Paper beats Rock.
+            </p>
+
+            <div class="rps-choices">
+
+              <button
+                class="rps-choice"
+                onclick="playRps('rock')"
+              >
+                ✊
+              </button>
+
+              <button
+                class="rps-choice"
+                onclick="playRps('paper')"
+              >
+                ✋
+              </button>
+
+              <button
+                class="rps-choice"
+                onclick="playRps('scissors')"
+              >
+                ✌️
+              </button>
+
+            </div>
+
+            <div
+              class="rps-result"
+              id="rpsResult"
+            >
+              Make your move.
+            </div>
+
+          </div>
+        `;
+
+    }
+
+
+    function playRps(player) {
+
+      const choices = [
+        "rock",
+        "paper",
+        "scissors"
+      ];
+
+
+      const computer =
+        choices[
+          Math.floor(
+            Math.random() * choices.length
+          )
+        ];
+
+
+      const emoji = {
+        rock: "✊",
+        paper: "✋",
+        scissors: "✌️"
+      };
+
+
+      let result;
+
+
+      if (player === computer) {
+
+        result = "It's a draw!";
+
+      } else if (
+
+        (player === "rock" &&
+          computer === "scissors") ||
+
+        (player === "paper" &&
+          computer === "rock") ||
+
+        (player === "scissors" &&
+          computer === "paper")
+
+      ) {
+
+        result = "🎉 You win!";
+
+      } else {
+
+        result = "Computer wins!";
+
+      }
+
+
+      document
+        .getElementById("rpsResult")
+        .innerHTML =
+        "You " +
+        emoji[player] +
+        " vs " +
+        emoji[computer] +
+        " Computer<br><strong>" +
+        result +
+        "</strong>";
+
+    }
+
+
+    /* =====================================================
+       SNAKE
+       ===================================================== */
+
+    function renderSnakeGame() {
+
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Snake";
+
+
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
+
+            <h3>Classic Snake</h3>
+
+            <p id="snakeScore">
+              Score: 0
+            </p>
+
+            <canvas
+              id="snakeCanvas"
+              width="400"
+              height="400"
+            ></canvas>
+
+            <div class="snake-controls">
+
+              <button
+                class="snake-up"
+                onclick="changeSnakeDirection('up')"
+              >
+                ↑
+              </button>
+
+              <button
+                class="snake-left"
+                onclick="changeSnakeDirection('left')"
+              >
+                ←
+              </button>
+
+              <button
+                class="snake-down"
+                onclick="changeSnakeDirection('down')"
+              >
+                ↓
+              </button>
+
+              <button
+                class="snake-right"
+                onclick="changeSnakeDirection('right')"
+              >
+                →
+              </button>
+
+            </div>
+
+            <button
+              class="game-action"
+              onclick="startSnake()"
+            >
+              Start / Restart
+            </button>
+
+          </div>
+        `;
+
+
+      startSnake();
+
+
+      document.onkeydown =
+        event => {
+
+          const key =
+            event.key.toLowerCase();
+
+
+          if (key === "arrowup") {
+            changeSnakeDirection("up");
+          }
+
+          if (key === "arrowdown") {
+            changeSnakeDirection("down");
+          }
+
+          if (key === "arrowleft") {
+            changeSnakeDirection("left");
+          }
+
+          if (key === "arrowright") {
+            changeSnakeDirection("right");
+          }
+
+        };
+
+    }
+
+
+    let snake = [];
+    let food = {};
+    let direction = "right";
+    let nextDirection = "right";
+    let snakeScore = 0;
+
+
+    function startSnake() {
+
+      stopSnake();
+
+
+      snake = [
+        { x: 8, y: 10 },
+        { x: 7, y: 10 },
+        { x: 6, y: 10 }
+      ];
+
+
+      direction = "right";
+      nextDirection = "right";
+      snakeScore = 0;
+
+
+      createSnakeFood();
+
+
+      snakeInterval =
+        setInterval(
+          updateSnake,
+          110
+        );
+
+    }
+
+
+    function stopSnake() {
+
+      clearInterval(snakeInterval);
+
+      snakeInterval = null;
+
+      document.onkeydown = null;
+
+    }
+
+
+    function createSnakeFood() {
+
+      food = {
+        x: Math.floor(Math.random() * 20),
+        y: Math.floor(Math.random() * 20)
+      };
+
+    }
+
+
+    function changeSnakeDirection(newDirection) {
+
+      const opposite = {
+        up: "down",
+        down: "up",
+        left: "right",
+        right: "left"
+      };
+
+
+      if (
+        opposite[newDirection] !== direction
+      ) {
+
+        nextDirection =
+          newDirection;
+
+      }
+
+    }
+
+
+    function updateSnake() {
+
+      const canvas =
+        document.getElementById("snakeCanvas");
+
+
+      if (!canvas) {
+
+        stopSnake();
+
+        return;
+
+      }
+
+
+      direction =
+        nextDirection;
+
+
+      const head = {
+        ...snake[0]
+      };
+
+
+      if (direction === "up") {
+        head.y--;
+      }
+
+      if (direction === "down") {
+        head.y++;
+      }
+
+      if (direction === "left") {
+        head.x--;
+      }
+
+      if (direction === "right") {
+        head.x++;
+      }
+
+
+      if (
+
+        head.x < 0 ||
+        head.x >= 20 ||
+        head.y < 0 ||
+        head.y >= 20 ||
+
+        snake.some(
+          part =>
+            part.x === head.x &&
+            part.y === head.y
+        )
+
+      ) {
+
+        stopSnake();
+
+        document
+          .getElementById("snakeScore")
+          .textContent =
+          "Game Over! Score: " +
+          snakeScore;
+
+        return;
+
+      }
+
+
+      snake.unshift(head);
+
+
+      if (
+        head.x === food.x &&
+        head.y === food.y
+      ) {
+
+        snakeScore++;
+
+        createSnakeFood();
+
+      } else {
+
+        snake.pop();
+
+      }
+
+
+      document
+        .getElementById("snakeScore")
+        .textContent =
+        "Score: " +
+        snakeScore;
+
+
+      drawSnake();
+
+    }
+
+
+    function drawSnake() {
+
+      const canvas =
+        document.getElementById("snakeCanvas");
+
+
+      const ctx =
+        canvas.getContext("2d");
+
+
+      const size =
+        canvas.width / 20;
+
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      ctx.fillStyle =
+        "#0b140d";
+
+
+      ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      snake.forEach(
+        (part, index) => {
+
+          ctx.fillStyle =
+            index === 0
+              ? "#86efac"
+              : "#22c55e";
+
+
+          ctx.fillRect(
+            part.x * size + 2,
+            part.y * size + 2,
+            size - 4,
+            size - 4
           );
 
         }
+      );
 
-      }
+
+      ctx.fillStyle =
+        "#ef4444";
+
+
+      ctx.beginPath();
+
+
+      ctx.arc(
+        food.x * size + size / 2,
+        food.y * size + size / 2,
+        size / 3,
+        0,
+        Math.PI * 2
+      );
+
+
+      ctx.fill();
 
     }
 
 
-    /* =========================================================
-       SEARCH INPUTS
-    ========================================================= */
+    /* =====================================================
+       TIC TAC TOE
+       ===================================================== */
 
-    const movieSearch =
-      document.getElementById(
-        "movieSearch"
-      );
+    function renderTttGame() {
 
-
-    const gameSearch =
-      document.getElementById(
-        "gameSearch"
-      );
+      document
+        .getElementById("gameModalTitle")
+        .textContent =
+        "Tic Tac Toe";
 
 
-    movieSearch.addEventListener(
-      "input",
-      event => {
+      document
+        .getElementById("gameArea")
+        .innerHTML = `
+          <div class="game-panel">
 
-        state.movie.search =
-          event.target.value;
+            <h3>Tic Tac Toe</h3>
 
-        filterMedia("movie");
+            <p id="tttStatus">
+              Player X starts.
+            </p>
 
-      }
-    );
+            <div
+              class="ttt-board"
+              id="tttBoard"
+            ></div>
+
+            <button
+              class="game-action"
+              onclick="renderTttGame()"
+            >
+              Restart Game
+            </button>
+
+          </div>
+        `;
 
 
-    gameSearch.addEventListener(
-      "input",
-      event => {
-
-        state.game.search =
-          event.target.value;
-
-        filterMedia("game");
-
-      }
-    );
+      const board =
+        document.getElementById("tttBoard");
 
 
-    /* =========================================================
-       CATEGORY FILTERS
-    ========================================================= */
+      const cells =
+        Array(9).fill("");
 
-    document
-      .querySelectorAll(".filter")
-      .forEach(button => {
 
-        button.addEventListener(
-          "click",
+      let current =
+        "X";
+
+
+      let finished =
+        false;
+
+
+      for (
+        let i = 0;
+        i < 9;
+        i++
+      ) {
+
+        const cell =
+          document.createElement("button");
+
+
+        cell.className =
+          "ttt-cell";
+
+
+        cell.onclick =
           () => {
 
-            const type =
-              button.dataset.type;
+            if (
+              cells[i] ||
+              finished
+            ) {
+              return;
+            }
 
-            const category =
-              button.dataset.category;
+
+            cells[i] =
+              current;
 
 
-            state[type].category =
-              category;
+            cell.textContent =
+              current;
+
+
+            const winner =
+              checkTttWinner(cells);
+
+
+            if (winner) {
+
+              finished = true;
+
+
+              document
+                .getElementById("tttStatus")
+                .textContent =
+                "🎉 Player " +
+                winner +
+                " wins!";
+
+              return;
+
+            }
+
+
+            if (
+              !cells.includes("")
+            ) {
+
+              finished = true;
+
+
+              document
+                .getElementById("tttStatus")
+                .textContent =
+                "It's a draw!";
+
+              return;
+
+            }
+
+
+            current =
+              current === "X"
+                ? "O"
+                : "X";
 
 
             document
-              .querySelectorAll(
-                `.filter[data-type="${type}"]`
-              )
-              .forEach(item => {
+              .getElementById("tttStatus")
+              .textContent =
+              "Player " +
+              current +
+              "'s turn.";
 
-                item.classList.remove(
-                  "active"
-                );
-
-              });
+          };
 
 
-            button.classList.add(
-              "active"
-            );
+        board.appendChild(cell);
+
+      }
+
+    }
 
 
-            filterMedia(type);
+    function checkTttWinner(cells) {
 
-          }
-        );
+      const wins = [
 
-      });
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+
+        [0,4,8],
+        [2,4,6]
+
+      ];
 
 
-    /* =========================================================
-       INITIAL COUNTS
-    ========================================================= */
-
-    filterMedia("movie");
-    filterMedia("game");
-
-
-    /* =========================================================
-       BROWSER BACK / FORWARD
-    ========================================================= */
-
-    window.addEventListener(
-      "popstate",
-      () => {
-
-        const hash =
-          window.location.hash
-          .replace("#", "");
-
+      for (
+        const [a,b,c] of wins
+      ) {
 
         if (
-          hash === "movies" ||
-          hash === "games" ||
-          hash === "social"
+
+          cells[a] &&
+          cells[a] === cells[b] &&
+          cells[a] === cells[c]
+
         ) {
 
-          openTab(
-            hash,
-            false
-          );
+          return cells[a];
 
         }
 
       }
-    );
 
 
-    /* =========================================================
-       LOAD TAB FROM URL
-    ========================================================= */
+      return null;
 
-    window.addEventListener(
-      "load",
-      () => {
-
-        const hash =
-          window.location.hash
-          .replace("#", "");
+    }
 
 
-        if (
-          hash === "movies" ||
-          hash === "games" ||
-          hash === "social"
-        ) {
-
-          /*
-            Small delay prevents the browser from
-            fighting our custom scroll position.
-          */
-
-          setTimeout(() => {
-
-            openTab(
-              hash,
-              false
-            );
-
-          }, 100);
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       IMAGE FALLBACK
-       
-       If an external poster fails to load, the card still
-       keeps its proper poster box instead of breaking layout.
-    ========================================================= */
+    /* =====================================================
+       CLOSE MODALS WHEN CLICKING BACKGROUND
+       ===================================================== */
 
     document
-      .querySelectorAll(
-        ".media-poster img"
-      )
-      .forEach(img => {
+      .getElementById("gameModal")
+      .addEventListener(
+        "click",
+        event => {
 
-        img.addEventListener(
-          "error",
-          function () {
+          if (
+            event.target.id === "gameModal"
+          ) {
 
-            this.style.display =
-              "none";
+            closeGame();
 
           }
-        );
 
-      });
+        }
+      );
 
+
+    document
+      .getElementById("profileModal")
+      .addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target.id === "profileModal"
+          ) {
+
+            closeProfile();
+
+          }
+
+        }
+      );
 
   </script>
 
