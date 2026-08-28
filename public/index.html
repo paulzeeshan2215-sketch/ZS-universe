@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -29,10 +29,6 @@ body{
     background:
         radial-gradient(circle at 50% 20%,#18264d 0%,#080d20 38%,#02040a 100%);
 }
-
-/* =========================
-   AMBIENT BACKGROUND
-========================= */
 
 body::before{
     content:"";
@@ -93,10 +89,6 @@ body::before{
     pointer-events:none;
 }
 
-/* =========================
-   PARTICLES
-========================= */
-
 .particles-container{
     position:fixed;
     inset:0;
@@ -113,6 +105,7 @@ body::before{
 }
 
 .p1{width:4px;height:4px;left:8%;top:22%}
+
 .p2{
     width:6px;
     height:6px;
@@ -122,26 +115,58 @@ body::before{
     box-shadow:0 0 14px #d26aff;
     animation-delay:2s;
 }
-.p3{width:3px;height:3px;left:18%;top:72%;animation-delay:3s}
-.p4{width:5px;height:5px;left:82%;top:68%;animation-delay:1s}
-.p5{width:4px;height:4px;left:50%;top:9%;animation-delay:4s}
-.p6{width:3px;height:3px;left:30%;top:15%;animation-delay:2.5s}
-.p7{width:4px;height:4px;left:70%;top:80%;animation-delay:5s}
+
+.p3{
+    width:3px;
+    height:3px;
+    left:18%;
+    top:72%;
+    animation-delay:3s;
+}
+
+.p4{
+    width:5px;
+    height:5px;
+    left:82%;
+    top:68%;
+    animation-delay:1s;
+}
+
+.p5{
+    width:4px;
+    height:4px;
+    left:50%;
+    top:9%;
+    animation-delay:4s;
+}
+
+.p6{
+    width:3px;
+    height:3px;
+    left:30%;
+    top:15%;
+    animation-delay:2.5s;
+}
+
+.p7{
+    width:4px;
+    height:4px;
+    left:70%;
+    top:80%;
+    animation-delay:5s;
+}
 
 @keyframes particleFloat{
     0%,100%{
         transform:translateY(0) scale(1);
         opacity:.25;
     }
+
     50%{
         transform:translateY(-45px) scale(1.5);
         opacity:.9;
     }
 }
-
-/* =========================
-   FLOATING HEARTS
-========================= */
 
 .floating-heart{
     position:fixed;
@@ -162,15 +187,12 @@ body::before{
         transform:translateY(0) rotate(0deg);
         opacity:.15;
     }
+
     50%{
         transform:translateY(-25px) rotate(15deg);
         opacity:.55;
     }
 }
-
-/* =========================
-   MAIN CONTAINER
-========================= */
 
 .container{
     position:relative;
@@ -184,10 +206,6 @@ body::before{
     text-align:center;
 }
 
-/* =========================
-   ROBOT STAGE
-========================= */
-
 .robot-stage{
     position:relative;
     width:350px;
@@ -200,20 +218,19 @@ body::before{
     0%,100%{
         transform:translateY(0) rotate(0deg);
     }
+
     25%{
         transform:translateY(-5px) rotate(-1deg);
     }
+
     50%{
         transform:translateY(-16px) rotate(1deg);
     }
+
     75%{
         transform:translateY(-7px) rotate(-1deg);
     }
 }
-
-/* =========================
-   ROBOT SHADOW
-========================= */
 
 .robot-shadow{
     position:absolute;
@@ -236,15 +253,12 @@ body::before{
         transform:translateX(-50%) scale(1);
         opacity:.8;
     }
+
     50%{
         transform:translateX(-50%) scale(.7);
         opacity:.4;
     }
 }
-
-/* =========================
-   ROBOT
-========================= */
 
 .robot-wrapper{
     position:absolute;
@@ -257,13 +271,22 @@ body::before{
 }
 
 @keyframes robotSadShake{
-    0%,85%,100%{transform:translateX(-50%) rotate(0)}
-    88%{transform:translateX(-50%) rotate(-2deg)}
-    91%{transform:translateX(-50%) rotate(2deg)}
-    94%{transform:translateX(-50%) rotate(-1deg)}
-}
+    0%,85%,100%{
+        transform:translateX(-50%) rotate(0);
+    }
 
-/* antenna */
+    88%{
+        transform:translateX(-50%) rotate(-2deg);
+    }
+
+    91%{
+        transform:translateX(-50%) rotate(2deg);
+    }
+
+    94%{
+        transform:translateX(-50%) rotate(-1deg);
+    }
+}
 
 .antenna-wire{
     position:absolute;
@@ -284,7 +307,12 @@ body::before{
     top:-15px;
     transform:translateX(-50%);
     border-radius:50%;
-    background:radial-gradient(circle at 30% 25%,#fff,#7b9cff 55%,#3b4f9a);
+    background:radial-gradient(
+        circle at 30% 25%,
+        #fff,
+        #7b9cff 55%,
+        #3b4f9a
+    );
     box-shadow:
         0 0 12px #6f91ff,
         0 0 30px rgba(90,120,255,.6);
@@ -292,11 +320,16 @@ body::before{
 }
 
 @keyframes antennaSad{
-    0%,100%{transform:translateX(-50%) scale(1);opacity:.75}
-    50%{transform:translateX(-50%) scale(1.25);opacity:1}
-}
+    0%,100%{
+        transform:translateX(-50%) scale(1);
+        opacity:.75;
+    }
 
-/* head */
+    50%{
+        transform:translateX(-50%) scale(1.25);
+        opacity:1;
+    }
+}
 
 .robot-head-shell{
     position:absolute;
@@ -320,8 +353,6 @@ body::before{
         0 22px 38px rgba(0,0,0,.55);
 }
 
-/* ears */
-
 .ear{
     position:absolute;
     width:24px;
@@ -335,8 +366,6 @@ body::before{
 .ear.left{left:-16px}
 .ear.right{right:-16px}
 
-/* face */
-
 .robot-screen-face{
     position:absolute;
     width:153px;
@@ -346,15 +375,17 @@ body::before{
     transform:translateX(-50%);
     border-radius:38px;
     background:
-        radial-gradient(circle at 50% 0%,#101a2d,#02050c 65%);
+        radial-gradient(
+            circle at 50% 0%,
+            #101a2d,
+            #02050c 65%
+        );
     border:3px solid #526078;
     box-shadow:
         inset 0 0 22px rgba(0,0,0,.95),
         0 0 18px rgba(75,110,255,.18);
     overflow:hidden;
 }
-
-/* sad eyes */
 
 .sad-eye{
     position:absolute;
@@ -376,8 +407,6 @@ body::before{
     transform:rotate(14deg);
 }
 
-/* eyelids */
-
 .eyelid{
     position:absolute;
     width:31px;
@@ -387,12 +416,15 @@ body::before{
     border-radius:50%;
 }
 
-.eyelid.left{left:28px;transform:rotate(-12deg)}
-.eyelid.right{right:28px;transform:rotate(12deg)}
+.eyelid.left{
+    left:28px;
+    transform:rotate(-12deg);
+}
 
-/* =========================
-   MANY TEARS
-========================= */
+.eyelid.right{
+    right:28px;
+    transform:rotate(12deg);
+}
 
 .tear{
     position:absolute;
@@ -410,31 +442,51 @@ body::before{
     opacity:0;
 }
 
-.tear.left1{left:38px;top:43px;animation:cry 2.1s infinite}
-.tear.left2{left:48px;top:47px;animation:cry 2.1s infinite .8s}
-.tear.right1{right:38px;top:43px;animation:cry 2.1s infinite .45s}
-.tear.right2{right:48px;top:47px;animation:cry 2.1s infinite 1.2s}
+.tear.left1{
+    left:38px;
+    top:43px;
+    animation:cry 2.1s infinite;
+}
+
+.tear.left2{
+    left:48px;
+    top:47px;
+    animation:cry 2.1s infinite .8s;
+}
+
+.tear.right1{
+    right:38px;
+    top:43px;
+    animation:cry 2.1s infinite .45s;
+}
+
+.tear.right2{
+    right:48px;
+    top:47px;
+    animation:cry 2.1s infinite 1.2s;
+}
 
 @keyframes cry{
     0%{
         opacity:0;
         transform:translateY(0) scale(.5);
     }
+
     15%{
         opacity:1;
         transform:translateY(2px) scale(1);
     }
+
     65%{
         opacity:1;
         transform:translateY(30px) scale(1.1);
     }
+
     100%{
         opacity:0;
         transform:translateY(45px) scale(.4);
     }
 }
-
-/* sad mouth */
 
 .sad-mouth{
     position:absolute;
@@ -447,8 +499,6 @@ body::before{
     border-radius:50%;
     filter:drop-shadow(0 0 6px #5271ff);
 }
-
-/* body */
 
 .robot-body-shell{
     position:absolute;
@@ -464,8 +514,6 @@ body::before{
         inset 0 -9px 13px rgba(0,0,0,.22),
         0 17px 27px rgba(0,0,0,.45);
 }
-
-/* chest */
 
 .chest-light{
     position:absolute;
@@ -487,6 +535,7 @@ body::before{
         opacity:.35;
         transform:translateX(-50%) scale(.85);
     }
+
     50%{
         opacity:1;
         transform:translateX(-50%) scale(1.18);
@@ -495,10 +544,6 @@ body::before{
             0 0 40px rgba(90,120,255,.55);
     }
 }
-
-/* =========================
-   BROKEN HEART
-========================= */
 
 .broken-heart{
     position:absolute;
@@ -516,18 +561,19 @@ body::before{
     0%,100%{
         transform:scale(1) rotate(6deg);
     }
+
     25%{
         transform:scale(1.08) rotate(-5deg);
     }
+
     50%{
         transform:scale(.96) rotate(7deg);
     }
+
     75%{
         transform:scale(1.1) rotate(-4deg);
     }
 }
-
-/* small broken pieces */
 
 .heart-piece{
     position:absolute;
@@ -538,26 +584,34 @@ body::before{
 }
 
 .hp1{right:72px;bottom:105px}
-.hp2{right:18px;bottom:120px;animation-delay:1s}
-.hp3{right:80px;bottom:80px;animation-delay:1.7s}
+
+.hp2{
+    right:18px;
+    bottom:120px;
+    animation-delay:1s;
+}
+
+.hp3{
+    right:80px;
+    bottom:80px;
+    animation-delay:1.7s;
+}
 
 @keyframes heartPiece{
     0%,65%{
         opacity:0;
         transform:translate(0,0) scale(.5);
     }
+
     75%{
         opacity:.9;
     }
+
     100%{
         opacity:0;
         transform:translate(25px,-40px) rotate(30deg) scale(.2);
     }
 }
-
-/* =========================
-   STATUS
-========================= */
 
 .badge-closed{
     display:inline-flex;
@@ -577,8 +631,13 @@ body::before{
 }
 
 @keyframes badgePulse{
-    0%,100%{box-shadow:0 0 18px rgba(70,100,255,.15)}
-    50%{box-shadow:0 0 30px rgba(100,120,255,.35)}
+    0%,100%{
+        box-shadow:0 0 18px rgba(70,100,255,.15);
+    }
+
+    50%{
+        box-shadow:0 0 30px rgba(100,120,255,.35);
+    }
 }
 
 .badge-dot{
@@ -594,10 +653,6 @@ body::before{
     0%,100%{opacity:.4}
     50%{opacity:1}
 }
-
-/* =========================
-   TITLES
-========================= */
 
 .main-title{
     margin-top:22px;
@@ -643,7 +698,9 @@ body::before{
 }
 
 @keyframes gradientMove{
-    to{background-position:300% center}
+    to{
+        background-position:300% center;
+    }
 }
 
 .sub-description{
@@ -651,10 +708,6 @@ body::before{
     color:#91a0bb;
     font-size:18px;
 }
-
-/* =========================
-   CARDS
-========================= */
 
 .cards-grid{
     display:grid;
@@ -734,10 +787,6 @@ body::before{
     line-height:1.5;
 }
 
-/* =========================
-   BUTTON
-========================= */
-
 .home-btn{
     display:inline-flex;
     align-items:center;
@@ -771,10 +820,6 @@ body::before{
         0 0 30px rgba(160,90,255,.35);
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
     margin-top:50px;
     color:#505d73;
@@ -782,10 +827,6 @@ footer{
     letter-spacing:2px;
     font-weight:650;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:900px){
     .cards-grid{
@@ -801,10 +842,6 @@ footer{
     .robot-stage{
         transform:scale(.82);
         margin-bottom:-45px;
-    }
-
-    .robot-stage:hover{
-        transform:scale(.82);
     }
 
     .cards-grid{
@@ -837,6 +874,7 @@ footer{
     }
 }
 </style>
+
 </head>
 
 <body>
@@ -844,7 +882,6 @@ footer{
 <div class="bg-glow"></div>
 <div class="wave-floor"></div>
 
-<!-- Floating particles -->
 <div class="particles-container">
     <div class="particle p1"></div>
     <div class="particle p2"></div>
@@ -855,7 +892,6 @@ footer{
     <div class="particle p7"></div>
 </div>
 
-<!-- Floating hearts -->
 <div class="floating-heart h1">♥</div>
 <div class="floating-heart h2">♥</div>
 <div class="floating-heart h3">♥</div>
@@ -863,124 +899,120 @@ footer{
 
 <main class="container">
 
-    <!-- SAD ROBOT -->
-    <div class="robot-stage">
+```
+<div class="robot-stage">
 
-        <div class="broken-heart">💔</div>
+    <div class="broken-heart">💔</div>
 
-        <div class="heart-piece hp1">♥</div>
-        <div class="heart-piece hp2">♥</div>
-        <div class="heart-piece hp3">♥</div>
+    <div class="heart-piece hp1">♥</div>
+    <div class="heart-piece hp2">♥</div>
+    <div class="heart-piece hp3">♥</div>
 
-        <div class="robot-wrapper">
+    <div class="robot-wrapper">
 
-            <div class="antenna-wire"></div>
-            <div class="antenna-orb"></div>
+        <div class="antenna-wire"></div>
+        <div class="antenna-orb"></div>
 
-            <div class="robot-head-shell">
+        <div class="robot-head-shell">
 
-                <div class="ear left"></div>
-                <div class="ear right"></div>
+            <div class="ear left"></div>
+            <div class="ear right"></div>
 
-                <div class="robot-screen-face">
+            <div class="robot-screen-face">
 
-                    <div class="sad-eye left"></div>
-                    <div class="sad-eye right"></div>
+                <div class="sad-eye left"></div>
+                <div class="sad-eye right"></div>
 
-                    <div class="eyelid left"></div>
-                    <div class="eyelid right"></div>
+                <div class="eyelid left"></div>
+                <div class="eyelid right"></div>
 
-                    <!-- Continuous tears -->
-                    <div class="tear left1"></div>
-                    <div class="tear left2"></div>
-                    <div class="tear right1"></div>
-                    <div class="tear right2"></div>
+                <div class="tear left1"></div>
+                <div class="tear left2"></div>
+                <div class="tear right1"></div>
+                <div class="tear right2"></div>
 
-                    <div class="sad-mouth"></div>
+                <div class="sad-mouth"></div>
 
-                </div>
             </div>
-
-            <div class="robot-body-shell">
-                <div class="chest-light"></div>
-            </div>
-
         </div>
 
-        <div class="robot-shadow"></div>
-
-    </div>
-
-    <!-- STATUS -->
-    <div class="badge-closed">
-        <span class="badge-dot"></span>
-        Website Closed
-    </div>
-
-    <!-- TITLE -->
-    <h1 class="main-title">
-        <span class="brand-name">SEHRAN MEDIA</span>
-        <span class="closed-text">IS PERMANENTLY CLOSED</span>
-    </h1>
-
-    <p class="sub-description">
-        This website is no longer available.
-    </p>
-
-    <!-- CARDS -->
-    <div class="cards-grid">
-
-        <div class="info-card">
-            <div class="card-icon">
-                <i data-lucide="heart"></i>
-            </div>
-            <h3 class="card-title">Thanks For Everything</h3>
-            <p class="card-desc">
-                Your support and love meant the world to us.
-            </p>
-        </div>
-
-        <div class="info-card">
-            <div class="card-icon">
-                <i data-lucide="star"></i>
-            </div>
-            <h3 class="card-title">Memories Remain</h3>
-            <p class="card-desc">
-                The journey was beautiful and unforgettable.
-            </p>
-        </div>
-
-        <div class="info-card">
-            <div class="card-icon">
-                <i data-lucide="cloud-rain"></i>
-            </div>
-            <h3 class="card-title">Time To Say Goodbye</h3>
-            <p class="card-desc">
-                Every ending has a new beginning somewhere.
-            </p>
-        </div>
-
-        <div class="info-card">
-            <div class="card-icon">
-                <i data-lucide="leaf"></i>
-            </div>
-            <h3 class="card-title">Forever Grateful</h3>
-            <p class="card-desc">
-                We are grateful for every moment with you.
-            </p>
+        <div class="robot-body-shell">
+            <div class="chest-light"></div>
         </div>
 
     </div>
 
-    <!-- HOME -->
-    <a href="/" class="home-btn">
-        <i data-lucide="home"></i>
-        <span>GO BACK HOME</span>
-    </a>
+    <div class="robot-shadow"></div>
 
-    <footer>
-        © 2026 SEHRAN MEDIA. ALL RIGHTS RESERVED.
-    </footer>
+</div>
+
+<div class="badge-closed">
+    <span class="badge-dot"></span>
+    Website Closed
+</div>
+
+<h1 class="main-title">
+    <span class="brand-name">SEHRAN MEDIA</span>
+    <span class="closed-text">IS PERMANENTLY CLOSED</span>
+</h1>
+
+<p class="sub-description">
+    This website is no longer available.
+</p>
+
+<div class="cards-grid">
+
+    <div class="info-card">
+        <div class="card-icon">
+            <i data-lucide="heart"></i>
+        </div>
+        <h3 class="card-title">Thanks For Everything</h3>
+        <p class="card-desc">
+            Your support and love meant the world to us.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <div class="card-icon">
+            <i data-lucide="star"></i>
+        </div>
+        <h3 class="card-title">Memories Remain</h3>
+        <p class="card-desc">
+            The journey was beautiful and unforgettable.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <div class="card-icon">
+            <i data-lucide="cloud-rain"></i>
+        </div>
+        <h3 class="card-title">Time To Say Goodbye</h3>
+        <p class="card-desc">
+            Every ending has a new beginning somewhere.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <div class="card-icon">
+            <i data-lucide="leaf"></i>
+        </div>
+        <h3 class="card-title">Forever Grateful</h3>
+        <p class="card-desc">
+            We are grateful for every moment with you.
+        </p>
+    </div>
+
+</div>
+
+<a href="/" class="home-btn">
+    <i data-lucide="home"></i>
+    <span>GO BACK HOME</span>
+</a>
+
+<footer>
+    © 2026 SEHRAN MEDIA. ALL RIGHTS RESERVED.
+</footer>
+```
 
 </main>
 
@@ -990,4 +1022,3 @@ lucide.createIcons();
 
 </body>
 </html>
-```
