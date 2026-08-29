@@ -4,511 +4,1055 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SehrAn Media — Social Media Services</title>
+  <title>SehrAn Media — Social, Movies & Games</title>
 
   <meta
     name="description"
-    content="SehrAn Media — Social media services with simple packages and fast support."
+    content="SehrAn Media — Social services, movies and PC games in one premium entertainment hub."
   >
+
+  <meta name="theme-color" content="#09090f">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap"
     rel="stylesheet"
   >
 
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
   >
 
   <style>
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
+    :root {
+      --bg: #07070d;
+      --bg-soft: #0d0d16;
+      --panel: rgba(18, 18, 29, 0.78);
+      --panel-solid: #11111b;
+
+      --text: #ffffff;
+      --muted: #a7a7ba;
+      --muted-2: #77778b;
+
+      --purple: #8b5cf6;
+      --purple-dark: #6d28d9;
+
+      --pink: #ec4899;
+      --pink-dark: #be185d;
+
+      --cyan: #22d3ee;
+      --green: #25d366;
+
+      --border: rgba(255,255,255,0.10);
+      --border-bright: rgba(255,255,255,0.18);
+
+      --shadow: 0 25px 80px rgba(0,0,0,0.42);
+
+      --nav-height: 76px;
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 95px;
     }
 
+
     body {
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(153, 52, 255, .30), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(255, 48, 144, .22), transparent 28%),
-        radial-gradient(circle at 50% 80%, rgba(0, 174, 255, .15), transparent 30%),
-        #07070d;
       min-height: 100vh;
+
+      font-family: "Inter", sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 8%,
+          rgba(139,92,246,0.18),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 92% 15%,
+          rgba(236,72,153,0.13),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 50% 80%,
+          rgba(34,211,238,0.07),
+          transparent 30%
+        ),
+
+        var(--bg);
+
       overflow-x: hidden;
     }
 
-    /* BACKGROUND */
 
-    .bg-glow {
+    body::before {
+      content: "";
+
       position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: .18;
+
+      inset: 0;
+
       pointer-events: none;
+
+      opacity: 0.035;
+
+      background-image:
+        radial-gradient(
+          rgba(255,255,255,0.9) 0.7px,
+          transparent 0.7px
+        );
+
+      background-size: 5px 5px;
+
+      z-index: -2;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button,
+    input {
+      font: inherit;
+    }
+
+
+    button {
+      border: 0;
+    }
+
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+
+    /* =========================================================
+       BACKGROUND EFFECTS
+    ========================================================= */
+
+    .ambient {
+      position: fixed;
+
+      width: 450px;
+      height: 450px;
+
+      border-radius: 50%;
+
+      filter: blur(120px);
+
+      opacity: 0.13;
+
+      pointer-events: none;
+
       z-index: -1;
     }
 
-    .glow-one {
-      background: #8a2be2;
-      top: -180px;
-      left: -150px;
+
+    .ambient.one {
+      left: -220px;
+      top: 180px;
+
+      background: var(--purple);
     }
 
-    .glow-two {
-      background: #ff1493;
-      right: -180px;
-      top: 280px;
+
+    .ambient.two {
+      right: -240px;
+      top: 500px;
+
+      background: var(--pink);
     }
 
-    .glow-three {
-      background: #00bfff;
-      left: 35%;
-      bottom: -250px;
+
+    .ambient.three {
+      left: 40%;
+      bottom: -280px;
+
+      background: var(--cyan);
     }
 
-    /* NAVBAR */
 
-    .navbar {
-      width: min(1180px, 92%);
-      margin: 18px auto 0;
-      padding: 14px 18px;
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 9999;
+
+      height: var(--nav-height);
+
+      background:
+        rgba(7,7,13,0.76);
+
+      border-bottom:
+        1px solid var(--border);
+
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+
+    .header-inner {
+      width: min(1320px, calc(100% - 32px));
+
+      height: 100%;
+
+      margin: auto;
+
       display: flex;
+
+      align-items: center;
+
       justify-content: space-between;
-      align-items: center;
+
       gap: 20px;
-
-      background: rgba(15, 13, 28, .76);
-      border: 1px solid rgba(255, 255, 255, .10);
-      border-radius: 20px;
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      position: relative;
-      z-index: 20;
-
-      box-shadow:
-        0 15px 50px rgba(0, 0, 0, .28),
-        inset 0 1px 0 rgba(255, 255, 255, .05);
     }
 
-    .logo {
-      display: flex;
+
+    .brand {
+      display: inline-flex;
+
       align-items: center;
+
       gap: 11px;
-      text-decoration: none;
-      color: white;
+
+      flex-shrink: 0;
     }
 
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: linear-gradient(
-        135deg,
-        #7b2cff,
-        #ff3cac,
-        #ffb347
-      );
-
-      box-shadow: 0 8px 25px rgba(174, 57, 255, .35);
-    }
-
-    .logo-icon i {
-      font-size: 21px;
-    }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: -.4px;
-    }
-
-    .logo-text span {
-      color: #d78aff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-links a {
-      color: #d7d2e3;
-      text-decoration: none;
-      padding: 9px 13px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .nav-links a:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, .08);
-    }
-
-    /* HERO */
-
-    .hero {
-      width: min(1180px, 92%);
-      margin: 0 auto;
-      min-height: 680px;
+    .brand-icon {
+      width: 43px;
+      height: 43px;
 
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 50px;
+      place-items: center;
 
-      padding: 75px 0 50px;
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 12px 35px rgba(139,92,246,0.30);
+
+      font-size: 18px;
     }
 
-    .hero-left {
-      position: relative;
-      z-index: 2;
-    }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 9px 14px;
-      border-radius: 999px;
-
-      background: rgba(146, 60, 255, .13);
-      border: 1px solid rgba(188, 113, 255, .28);
-
-      color: #e2c7ff;
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 20px;
-
-      box-shadow: 0 8px 30px rgba(136, 52, 255, .12);
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #65ffad;
-      box-shadow: 0 0 12px #65ffad;
-    }
-
-    .hero h1 {
+    .brand-text {
       font-family: "Montserrat", sans-serif;
-      font-size: clamp(42px, 6vw, 76px);
-      line-height: 1.02;
-      letter-spacing: -3px;
+
+      font-size: 18px;
+
       font-weight: 900;
-      margin-bottom: 22px;
+
+      letter-spacing: -0.4px;
     }
 
-    .hero h1 .gradient {
-      background: linear-gradient(
-        90deg,
-        #b56cff,
-        #ff4fb3,
-        #67d7ff
-      );
+
+    .brand-text span {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #c4b5fd,
+          #f9a8d4
+        );
 
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
     }
 
-    .hero-description {
-      max-width: 650px;
-      color: #bcb6ca;
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
 
-    .hero-buttons {
+    .desktop-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+
+      align-items: center;
+
+      gap: 6px;
     }
 
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
 
-      padding: 14px 21px;
+    .nav-button {
+      position: relative;
+
+      padding: 10px 16px;
+
+      border-radius: 12px;
+
+      color: var(--muted);
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      transition:
+        color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+    }
+
+
+    .nav-button:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      transform: translateY(-1px);
+    }
+
+
+    .nav-button.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139,92,246,0.90),
+          rgba(236,72,153,0.88)
+        );
+
+      box-shadow:
+        0 10px 30px rgba(139,92,246,0.22);
+    }
+
+
+    .header-support {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 10px 14px;
+
+      border-radius: 12px;
+
+      background:
+        rgba(37,211,102,0.10);
+
+      border:
+        1px solid rgba(37,211,102,0.20);
+
+      color: #7dffa7;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+
+    .header-support i {
+      font-size: 16px;
+    }
+
+
+    /* =========================================================
+       MOBILE NAV
+    ========================================================= */
+
+    .mobile-nav {
+      display: none;
+
+      position: fixed;
+
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+
+      z-index: 10000;
+
+      padding: 8px;
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      border-radius: 20px;
+
+      background:
+        rgba(13,13,22,0.90);
+
+      backdrop-filter: blur(22px);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.5);
+    }
+
+
+    .mobile-nav-inner {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 5px;
+    }
+
+
+    .mobile-nav button {
+      padding: 10px 6px;
+
       border-radius: 14px;
 
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 14px;
+      background: transparent;
 
-      color: #fff;
+      color: var(--muted);
 
-      background: linear-gradient(
-        135deg,
-        #8637ff,
-        #ff329d
-      );
+      cursor: pointer;
 
-      box-shadow: 0 14px 35px rgba(161, 52, 255, .28);
+      font-size: 11px;
+
+      font-weight: 800;
 
       transition: .25s;
     }
 
-    .primary-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 45px rgba(161, 52, 255, .40);
-    }
 
-    /* HERO VISUAL */
+    .mobile-nav button i {
+      display: block;
 
-    .hero-visual {
-      position: relative;
-      min-height: 470px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      margin-bottom: 5px;
 
-    .hero-card {
-      width: min(430px, 100%);
-      padding: 25px;
-
-      border-radius: 30px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .11),
-        rgba(255, 255, 255, .035)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .13);
-
-      box-shadow:
-        0 35px 90px rgba(0, 0, 0, .40),
-        inset 0 1px 0 rgba(255, 255, 255, .08);
-
-      backdrop-filter: blur(18px);
-
-      transform: rotate(2deg);
-      animation: heroFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes heroFloat {
-      0%, 100% {
-        transform: translateY(0) rotate(2deg);
-      }
-
-      50% {
-        transform: translateY(-12px) rotate(-1deg);
-      }
-    }
-
-    .profile-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .profile-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: radial-gradient(
-        circle at 30% 30%,
-        #ffd86b,
-        #ff3c9d 48%,
-        #7336ff
-      );
-
-      box-shadow: 0 10px 30px rgba(255, 61, 157, .25);
-    }
-
-    .profile-icon i {
-      font-size: 29px;
-    }
-
-    .profile-name {
-      font-weight: 900;
       font-size: 16px;
     }
 
-    .profile-handle {
-      color: #9d96aa;
-      font-size: 12px;
-      margin-top: 3px;
+
+    .mobile-nav button.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
     }
 
-    .profile-status {
-      margin-left: auto;
-      color: #65ffad;
-      font-size: 11px;
-      font-weight: 800;
-    }
 
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    /* =========================================================
+       HERO
+    ========================================================= */
 
-    .stat {
-      padding: 16px 10px;
+    .hero {
+      position: relative;
+
+      width: min(1320px, calc(100% - 32px));
+
+      margin: auto;
+
+      min-height: 610px;
+
+      padding:
+        95px 20px
+        80px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
       text-align: center;
-
-      background: rgba(0, 0, 0, .20);
-      border: 1px solid rgba(255, 255, 255, .07);
-      border-radius: 16px;
     }
 
-    .stat strong {
-      display: block;
-      font-size: 19px;
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      left: 50%;
+      top: 45%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,0.18),
+          transparent 68%
+        );
+
+      pointer-events: none;
+    }
+
+
+    .hero-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 900px;
+    }
+
+
+    .hero-pill {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding: 9px 15px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,0.055);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      color: #ddd6fe;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 10px 40px rgba(0,0,0,0.15);
+    }
+
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #4ade80;
+
+      box-shadow:
+        0 0 14px rgba(74,222,128,0.9);
+
+      animation:
+        pulseDot 1.7s infinite;
+    }
+
+
+    @keyframes pulseDot {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(0.65);
+        opacity: 0.55;
+      }
+    }
+
+
+    .hero h1 {
+      margin-top: 25px;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size:
+        clamp(44px, 7vw, 88px);
+
+      line-height: 0.99;
+
+      letter-spacing: -4px;
+
       font-weight: 900;
     }
 
+
+    .hero h1 .line {
+      display: block;
+    }
+
+
+    .hero-gradient {
+      background:
+        linear-gradient(
+          100deg,
+          #ffffff 5%,
+          #c4b5fd 34%,
+          #f9a8d4 67%,
+          #ffffff 95%
+        );
+
+      background-size: 250%;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        gradientFlow 7s ease infinite;
+    }
+
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0%;
+      }
+
+      50% {
+        background-position: 100%;
+      }
+
+      100% {
+        background-position: 0%;
+      }
+    }
+
+
+    .hero-description {
+      max-width: 680px;
+
+      margin: 25px auto 0;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.85;
+    }
+
+
+    .hero-actions {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 32px;
+    }
+
+
+    .hero-btn {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      min-height: 50px;
+
+      padding:
+        0 21px;
+
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+
+    .hero-btn.primary {
+      color: white;
+
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 16px 40px rgba(139,92,246,0.28);
+    }
+
+
+    .hero-btn.primary:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 22px 50px rgba(236,72,153,0.30);
+    }
+
+
+    .hero-btn.secondary {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.055);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+    }
+
+
+    .hero-btn.secondary:hover {
+      transform: translateY(-3px);
+
+      background:
+        rgba(255,255,255,0.09);
+    }
+
+
+    .hero-stats {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+      margin-top: 42px;
+    }
+
+
+    .stat {
+      min-width: 145px;
+
+      padding:
+        13px 17px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+    }
+
+
+    .stat strong {
+      display: block;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 18px;
+    }
+
+
     .stat span {
       display: block;
-      margin-top: 4px;
-      color: #938da0;
+
+      margin-top: 3px;
+
+      color: var(--muted-2);
+
       font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .7px;
     }
 
-    .growth-bar {
-      height: 11px;
-      border-radius: 99px;
-      overflow: hidden;
-      background: #1d1a27;
-      margin: 16px 0 10px;
+
+    /* =========================================================
+       QUICK NAV / SECTION SWITCHER
+    ========================================================= */
+
+    .section-switcher {
+      width: min(1120px, calc(100% - 32px));
+
+      margin:
+        0 auto 35px;
+
+      padding: 8px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      border-radius: 21px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      backdrop-filter: blur(16px);
     }
 
-    .growth-fill {
-      height: 100%;
-      width: 82%;
 
-      border-radius: 99px;
+    .switch-btn {
+      position: relative;
 
-      background: linear-gradient(
-        90deg,
-        #8136ff,
-        #ff3a9e,
-        #62d8ff
-      );
+      min-height: 58px;
 
-      animation: barPulse 2.5s ease-in-out infinite;
+      border-radius: 15px;
+
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      transition: .25s;
     }
 
-    @keyframes barPulse {
-      0%, 100% {
-        width: 78%;
+
+    .switch-btn i {
+      margin-right: 7px;
+    }
+
+
+    .switch-btn:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.05);
+    }
+
+
+    .switch-btn.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 12px 35px rgba(139,92,246,0.22);
+    }
+
+
+    /* =========================================================
+       MAIN CONTENT
+    ========================================================= */
+
+    main {
+      width: 100%;
+    }
+
+
+    .tab-panel {
+      display: none;
+
+      width: 100%;
+
+      min-height: 500px;
+
+      scroll-margin-top: 95px;
+    }
+
+
+    .tab-panel.active {
+      display: block;
+
+      animation:
+        panelEnter .4s ease;
+    }
+
+
+    @keyframes panelEnter {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
       }
 
-      50% {
-        width: 88%;
-      }
-    }
-
-    .growth-text {
-      display: flex;
-      justify-content: space-between;
-      color: #aaa3b6;
-      font-size: 11px;
-    }
-
-    .floating-mini {
-      position: absolute;
-      padding: 12px 15px;
-
-      border-radius: 14px;
-
-      background: rgba(18, 16, 30, .86);
-      border: 1px solid rgba(255, 255, 255, .10);
-
-      backdrop-filter: blur(12px);
-
-      box-shadow: 0 15px 40px rgba(0, 0, 0, .30);
-
-      font-size: 12px;
-      font-weight: 800;
-
-      animation: miniFloat 3s ease-in-out infinite;
-    }
-
-    .mini-one {
-      top: 35px;
-      left: -20px;
-    }
-
-    .mini-two {
-      right: -20px;
-      bottom: 60px;
-      animation-delay: 1s;
-    }
-
-    @keyframes miniFloat {
-      0%, 100% {
+      to {
+        opacity: 1;
         transform: translateY(0);
       }
-
-      50% {
-        transform: translateY(-10px);
-      }
     }
 
-    .mini-one i {
-      color: #ff4cae;
+
+    .section {
+      width: min(1320px, calc(100% - 32px));
+
+      margin: auto;
+
+      padding:
+        45px 0
+        85px;
     }
 
-    .mini-two i {
-      color: #65ffad;
+
+    .section-heading {
+      max-width: 800px;
+
+      margin:
+        0 auto 35px;
+
+      text-align: center;
     }
 
-    /* SOCIAL STRIP */
 
-    .social-section {
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin-bottom: 12px;
+
+      color: #c4b5fd;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+
+    .section-heading h2 {
+      font-family: "Montserrat", sans-serif;
+
+      font-size:
+        clamp(30px, 4vw, 50px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.8px;
+
+      font-weight: 900;
+    }
+
+
+    .section-heading h2 span {
+      background:
+        linear-gradient(
+          90deg,
+          #a78bfa,
+          #f472b6
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+
+    .section-heading p {
+      margin-top: 12px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.75;
+    }
+
+
+    /* =========================================================
+       SOCIAL PLATFORM MARQUEE
+    ========================================================= */
+
+    .marquee {
       width: 100%;
-      padding: 22px 0 40px;
+
       overflow: hidden;
+
+      margin-bottom: 45px;
+
+      padding:
+        12px 0;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          transparent,
+          black 8%,
+          black 92%,
+          transparent
+        );
     }
 
-    .social-track {
-      width: max-content;
+
+    .marquee-track {
       display: flex;
-      gap: 16px;
-      animation: socialMove 28s linear infinite;
+
+      width: max-content;
+
+      gap: 15px;
+
+      animation:
+        marqueeMove 30s linear infinite;
     }
 
-    @keyframes socialMove {
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+
+    @keyframes marqueeMove {
       from {
-        transform: translateX(-10%);
+        transform: translateX(0);
       }
 
       to {
@@ -516,2018 +1060,1650 @@
       }
     }
 
-    .social-card {
-      width: 210px;
-      min-height: 105px;
 
-      flex-shrink: 0;
+    .platform-card {
+      width: 245px;
+
+      min-height: 95px;
+
+      padding: 16px;
 
       display: flex;
+
       align-items: center;
+
       gap: 13px;
 
-      padding: 18px;
+      flex-shrink: 0;
 
-      border-radius: 21px;
+      border-radius: 20px;
 
-      background: rgba(20, 18, 32, .82);
-      border: 1px solid rgba(255, 255, 255, .09);
+      border:
+        1px solid rgba(255,255,255,0.11);
 
-      box-shadow: 0 15px 45px rgba(0, 0, 0, .24);
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.18);
 
-      transition: .25s;
+      transition: .3s;
     }
 
-    .social-card:hover {
-      transform: translateY(-6px) scale(1.02);
+
+    .platform-card:hover {
+      transform: translateY(-7px);
     }
 
-    .social-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #fff;
-      font-size: 25px;
+    .platform-icon {
+      width: 54px;
+      height: 54px;
 
       flex-shrink: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 17px;
+
+      background:
+        rgba(255,255,255,0.14);
+
+      backdrop-filter: blur(10px);
+
+      font-size: 25px;
     }
 
-    .instagram {
-      background: linear-gradient(
-        135deg,
-        #833ab4,
-        #fd1d1d,
-        #fcb045
-      );
-    }
 
-    .snapchat {
-      background: #ffdb00;
-      color: #111;
-    }
-
-    .youtube {
-      background: #ff0033;
-    }
-
-    .facebook {
-      background: #1877f2;
-    }
-
-    .twitter {
-      background: #111;
-      border: 1px solid rgba(255, 255, 255, .20);
-    }
-
-    .whatsapp {
-      background: #25d366;
-    }
-
-    .social-info strong {
+    .platform-card strong {
       display: block;
-      font-size: 14px;
-      font-weight: 900;
+
+      font-size: 15px;
     }
 
-    .social-info span {
+
+    .platform-card small {
       display: block;
-      color: #8f899c;
-      font-size: 10px;
+
       margin-top: 4px;
+
+      opacity: .72;
+
+      font-size: 10px;
+
+      font-weight: 700;
     }
+
+
+    .instagram-platform {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(131,58,180,.82),
+          rgba(253,29,29,.75),
+          rgba(252,176,69,.72)
+        );
+    }
+
+
+    .youtube-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #390808,
+          #e50909,
+          #650000
+        );
+    }
+
+
+    .facebook-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #082d70,
+          #1877f2,
+          #073982
+        );
+    }
+
+
+    .snapchat-platform {
+      color: #111;
+
+      background:
+        linear-gradient(
+          135deg,
+          #c8ad00,
+          #fffc00,
+          #c6b300
+        );
+    }
+
+
+    .whatsapp-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #06483f,
+          #25d366,
+          #08786a
+        );
+    }
+
+
+    /* =========================================================
+       SERVICE FEATURE
+    ========================================================= */
+
+    .service-feature {
+      position: relative;
+
+      overflow: hidden;
+
+      margin-bottom: 45px;
+
+      padding: 27px;
+
+      border-radius: 27px;
+
+      border:
+        1px solid rgba(255,255,255,0.11);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(131,58,180,0.16),
+          rgba(253,29,29,0.08),
+          rgba(252,176,69,0.05)
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+
+    .service-feature::after {
+      content: "";
+
+      position: absolute;
+
+      width: 340px;
+      height: 340px;
+
+      right: -160px;
+      top: -190px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+
+      filter: blur(50px);
+
+      opacity: .15;
+    }
+
+
+    .service-feature-inner {
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 25px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .service-title {
+      display: flex;
+
+      align-items: center;
+
+      gap: 17px;
+    }
+
+
+    .service-icon {
+      width: 74px;
+      height: 74px;
+
+      flex-shrink: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+
+      box-shadow:
+        0 18px 45px rgba(253,29,29,.23);
+
+      font-size: 35px;
+    }
+
 
     .available {
       display: inline-flex;
+
       align-items: center;
-      gap: 5px;
 
-      margin-top: 7px;
+      gap: 6px;
 
-      color: #69ffad;
-      font-size: 9px;
+      margin-bottom: 7px;
+
+      color: #72ffa0;
+
+      font-size: 10px;
+
       font-weight: 900;
-      text-transform: uppercase;
+
+      letter-spacing: 1px;
     }
 
-    .available i {
-      font-size: 6px;
-    }
 
-    .coming {
-      color: #ffcf72;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      width: min(1180px, 92%);
-      margin: 0 auto;
-      padding: 75px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 42px;
-    }
-
-    .section-heading .small {
-      color: #c07aff;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .section-heading h2 {
+    .service-title h3 {
       font-family: "Montserrat", sans-serif;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 13px;
+
+      font-size: 25px;
     }
 
-    .section-heading p {
-      color: #9d96a9;
-      font-size: 14px;
-      line-height: 1.7;
-    }
 
-    /* SERVICES */
+    .service-title p {
+      margin-top: 5px;
 
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .service-card {
-      padding: 26px;
-      border-radius: 24px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .075),
-        rgba(255, 255, 255, .025)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .09);
-
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .20);
-
-      transition: .3s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(182, 105, 255, .35);
-      box-shadow: 0 25px 70px rgba(127, 45, 255, .14);
-    }
-
-    .service-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 27px;
-      margin-bottom: 17px;
-    }
-
-    .service-icon.instagram-icon {
-      background: linear-gradient(
-        135deg,
-        #833ab4,
-        #fd1d1d,
-        #fcb045
-      );
-    }
-
-    .service-icon.like-icon {
-      background: linear-gradient(
-        135deg,
-        #ff3b81,
-        #ff6a3d
-      );
-    }
-
-    .service-card h3 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      color: #9e97ab;
-      font-size: 13px;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .service-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 11px 15px;
-      border-radius: 12px;
-
-      text-decoration: none;
-      color: #fff;
-
-      background: rgba(255, 255, 255, .07);
-      border: 1px solid rgba(255, 255, 255, .09);
+      color: var(--muted);
 
       font-size: 12px;
-      font-weight: 900;
-
-      transition: .25s;
     }
 
-    .service-btn:hover {
-      background: linear-gradient(
-        135deg,
-        #8b35ff,
-        #ff3ca6
-      );
-    }
 
-    /* PRICING */
+    /* =========================================================
+       PACKAGES
+    ========================================================= */
 
-    .pricing-grid {
+    .package-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(235px, 1fr)
+        );
+
       gap: 16px;
     }
 
-    .price-card {
+
+    .package-card {
       position: relative;
 
-      padding: 24px;
+      min-height: 292px;
+
+      padding: 23px;
+
+      overflow: hidden;
+
       border-radius: 23px;
 
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .075),
-        rgba(255, 255, 255, .025)
-      );
+      background:
+        linear-gradient(
+          145deg,
+          rgba(25,25,38,.96),
+          rgba(11,11,19,.98)
+        );
 
-      border: 1px solid rgba(255, 255, 255, .09);
+      border:
+        1px solid rgba(255,255,255,.09);
 
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .20);
-
-      transition: .3s;
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
     }
 
-    .price-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(188, 108, 255, .45);
-    }
 
-    .price-card.popular {
-      border: 1px solid rgba(255, 75, 175, .65);
+    .package-card::before {
+      content: "";
 
-      background: linear-gradient(
-        145deg,
-        rgba(170, 54, 255, .17),
-        rgba(255, 47, 153, .07)
-      );
-
-      box-shadow: 0 25px 70px rgba(177, 43, 255, .18);
-    }
-
-    .popular-badge {
       position: absolute;
-      top: 14px;
-      right: 14px;
 
-      padding: 6px 9px;
+      width: 190px;
+      height: 190px;
 
-      border-radius: 999px;
+      top: -105px;
+      right: -85px;
 
-      background: linear-gradient(
-        135deg,
-        #ff3b9d,
-        #ff7b47
-      );
+      border-radius: 50%;
 
-      color: #fff;
-
-      font-size: 8px;
-      font-weight: 900;
-      text-transform: uppercase;
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.24),
+          transparent 68%
+        );
     }
 
-    .price-label {
-      color: #aaa2b5;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 7px;
+
+    .package-card:hover {
+      transform: translateY(-8px);
+
+      border-color:
+        rgba(139,92,246,.40);
+
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.32);
     }
 
-    .price-card h3 {
-      font-size: 20px;
-      margin-bottom: 4px;
+
+    .package-card.featured {
+      border-color:
+        rgba(236,72,153,.40);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(42,22,45,.98),
+          rgba(17,12,24,.98)
+        );
     }
 
-    .followers-number {
-      color: #c27dff;
-      font-size: 12px;
+
+    .package-top {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+
+    .package-label {
+      color: var(--muted-2);
+
+      font-size: 10px;
+
       font-weight: 800;
-      margin-bottom: 17px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .7px;
     }
 
-    .price {
-      display: flex;
-      align-items: end;
-      gap: 3px;
-      margin-bottom: 18px;
-    }
 
-    .price .currency {
-      font-size: 18px;
-      color: #c8c1d2;
-      margin-bottom: 6px;
-    }
+    .package-card h3 {
+      margin-top: 8px;
 
-    .price strong {
-      font-size: 34px;
-      line-height: 1;
-      font-weight: 900;
-    }
-
-    .price-btn {
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      padding: 12px;
-
-      border-radius: 13px;
-
-      text-decoration: none;
-
-      color: #fff;
-
-      background: linear-gradient(
-        135deg,
-        #8337ff,
-        #ff3ba5
-      );
-
-      font-size: 12px;
-      font-weight: 900;
-
-      box-shadow: 0 10px 25px rgba(145, 48, 255, .18);
-
-      transition: .25s;
-    }
-
-    .price-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* TRUST */
-
-    .trust-box {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .trust-card {
-      text-align: center;
-      padding: 26px 20px;
-
-      border-radius: 22px;
-
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .065),
-        rgba(255, 255, 255, .02)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .08);
-    }
-
-    .trust-icon {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 14px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 16px;
-
-      background: linear-gradient(
-        135deg,
-        #8337ff,
-        #ff3ba5
-      );
+      font-family: "Montserrat", sans-serif;
 
       font-size: 21px;
     }
 
-    .trust-card h3 {
-      font-size: 16px;
-      margin-bottom: 7px;
+
+    .followers {
+      margin-top: 5px;
+
+      color: #c4b5fd;
+
+      font-size: 12px;
+
+      font-weight: 800;
     }
 
-    .trust-card p {
-      color: #938c9f;
-      font-size: 11px;
-      line-height: 1.65;
+
+    .discount {
+      padding: 6px 8px;
+
+      border-radius: 999px;
+
+      white-space: nowrap;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--pink),
+          #f97316
+        );
+
+      font-size: 8px;
+
+      font-weight: 900;
     }
 
-    /* SUPPORT */
 
-    .support-section {
-      width: min(900px, 92%);
-      margin: 30px auto 80px;
+    .package-price {
+      position: relative;
+      z-index: 2;
 
-      padding: 35px;
-
-      border-radius: 28px;
-
-      text-align: center;
-
-      background: radial-gradient(
-        circle at top,
-        rgba(150, 57, 255, .20),
-        rgba(255, 255, 255, .025)
-      );
-
-      border: 1px solid rgba(255, 255, 255, .10);
-
-      box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
+      margin-top: 28px;
     }
 
-    .support-section h2 {
-      font-family: "Montserrat", sans-serif;
-      font-size: 30px;
-      margin-bottom: 9px;
-    }
 
-    .support-section p {
-      color: #a29bad;
+    .old-price {
+      color: #626274;
+
+      text-decoration: line-through;
+
       font-size: 13px;
-      margin-bottom: 22px;
+
+      font-weight: 700;
     }
 
-    .support-buttons {
+
+    .current-price {
+      margin-top: 2px;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 39px;
+
+      font-weight: 900;
+
+      letter-spacing: -1.5px;
+    }
+
+
+    .package-action {
+      position: absolute;
+
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 5;
+
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 11px;
-    }
 
-    .support-btn {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 9px;
 
-      padding: 12px 17px;
+      justify-content: center;
+
+      gap: 7px;
+
+      min-height: 44px;
 
       border-radius: 13px;
 
-      color: #fff;
-      text-decoration: none;
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple-dark),
+          var(--pink-dark)
+        );
 
-      font-size: 12px;
+      font-size: 11px;
+
       font-weight: 900;
 
       transition: .25s;
     }
 
-    .support-btn:hover {
-      transform: translateY(-3px);
+
+    .package-action:hover {
+      transform: scale(1.025);
+
+      box-shadow:
+        0 12px 30px rgba(236,72,153,.22);
     }
 
-    .whatsapp-btn {
-      background: #25d366;
-    }
 
-    .email-btn {
-      background: #7c4dff;
-    }
+    /* =========================================================
+       MEDIA TOOLBAR
+    ========================================================= */
 
-    .telegram-btn {
-      background: #229ed9;
-    }
-
-    /* FLOATING SUPPORT */
-
-    .floating-support {
-      position: fixed;
-
-      left: 18px;
-      top: 42%;
-
-      z-index: 100;
-
+    .media-toolbar {
       display: flex;
+
       align-items: center;
-      gap: 9px;
 
-      padding: 12px 15px;
+      justify-content: space-between;
 
-      color: #fff;
-      text-decoration: none;
+      gap: 15px;
+
+      margin-bottom: 25px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .search {
+      position: relative;
+
+      width: min(100%, 500px);
+    }
+
+
+    .search i {
+      position: absolute;
+
+      left: 17px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: #88889b;
+
+      pointer-events: none;
+    }
+
+
+    .search input {
+      width: 100%;
+
+      min-height: 48px;
+
+      padding:
+        0 18px 0 47px;
+
+      border-radius: 14px;
+
+      outline: none;
+
+      color: white;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      transition: .25s;
+    }
+
+
+    .search input::placeholder {
+      color: #707083;
+    }
+
+
+    .search input:focus {
+      border-color:
+        rgba(139,92,246,.65);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(139,92,246,.10);
+    }
+
+
+    .result-count {
+      color: var(--muted-2);
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
+
+    .filters {
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 28px;
+    }
+
+
+    .filter {
+      min-height: 37px;
+
+      padding:
+        0 14px;
 
       border-radius: 999px;
 
-      background: linear-gradient(
-        135deg,
-        #25d366,
-        #16b957
-      );
+      color: #a9a9bc;
 
-      box-shadow: 0 15px 40px rgba(37, 211, 102, .25);
+      background:
+        rgba(255,255,255,.035);
 
-      font-size: 11px;
-      font-weight: 900;
+      border:
+        1px solid rgba(255,255,255,.09);
 
-      animation: supportFloat 3s ease-in-out infinite;
+      cursor: pointer;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      transition: .25s;
     }
 
-    @keyframes supportFloat {
-      0%, 100% {
+
+    .filter:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,.07);
+    }
+
+
+    .filter.active {
+      color: white;
+
+      border-color: transparent;
+
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 8px 25px rgba(139,92,246,.18);
+    }
+
+
+    /* =========================================================
+       MEDIA GRID
+    ========================================================= */
+
+    .media-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(220px, 1fr)
+        );
+
+      gap: 20px;
+    }
+
+
+    .media-card {
+      position: relative;
+
+      min-width: 0;
+
+      overflow: hidden;
+
+      border-radius: 21px;
+
+      background:
+        var(--panel-solid);
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.25);
+
+      isolation: isolate;
+
+      transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+      cursor: pointer;
+    }
+
+
+    /*
+      IMPORTANT:
+      Proper poster box.
+      This fixes the old thumbnail/dabba issue.
+    */
+
+    .media-poster {
+      position: relative;
+
+      width: 100%;
+
+      aspect-ratio: 2 / 3;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #191923,
+          #09090f
+        );
+    }
+
+
+    .media-poster img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      transition:
+        transform .55s ease,
+        filter .4s ease;
+    }
+
+
+    .media-card:hover {
+      transform:
+        translateY(-9px);
+
+      border-color:
+        rgba(255,255,255,.22);
+
+      box-shadow:
+        0 28px 65px rgba(0,0,0,.43);
+    }
+
+
+    .media-card:hover .media-poster img {
+      transform: scale(1.07);
+
+      filter: saturate(1.08);
+    }
+
+
+    .poster-gradient {
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(5,5,10,.98) 0%,
+          rgba(5,5,10,.80) 25%,
+          rgba(5,5,10,.20) 62%,
+          rgba(5,5,10,.02) 100%
+        );
+    }
+
+
+    .media-type {
+      position: absolute;
+
+      left: 13px;
+      top: 13px;
+
+      z-index: 3;
+
+      padding:
+        6px 9px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(10,10,17,.74);
+
+      border:
+        1px solid rgba(255,255,255,.13);
+
+      backdrop-filter: blur(10px);
+
+      color: white;
+
+      font-size: 8px;
+
+      font-weight: 900;
+
+      letter-spacing: .7px;
+    }
+
+
+    .media-type.game {
+      color: #071217;
+
+      background:
+        rgba(34,211,238,.88);
+
+      border-color:
+        transparent;
+    }
+
+
+    .play-button {
+      position: absolute;
+
+      left: 50%;
+      top: 45%;
+
+      z-index: 4;
+
+      width: 60px;
+      height: 60px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
+      opacity: 0;
+
+      transform:
+        translate(-50%, -50%)
+        scale(.72);
+
+      transition:
+        opacity .3s ease,
+        transform .3s ease;
+    }
+
+
+    .media-card:hover .play-button {
+      opacity: 1;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1);
+    }
+
+
+    .media-info {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      z-index: 5;
+
+      padding: 18px 16px 16px;
+    }
+
+
+    .media-info h3 {
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 16px;
+
+      line-height: 1.25;
+
+      font-weight: 800;
+    }
+
+
+    .media-info p {
+      margin-top: 5px;
+
+      color: #b5b5c4;
+
+      font-size: 10px;
+
+      font-weight: 600;
+    }
+
+
+    .open-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-top: 11px;
+
+      color: white;
+
+      font-size: 10px;
+
+      font-weight: 900;
+    }
+
+
+    .open-link i {
+      color: #c4b5fd;
+    }
+
+
+    .media-card.hidden {
+      display: none;
+    }
+
+
+    .no-results {
+      display: none;
+
+      padding: 60px 20px;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+
+    .no-results.show {
+      display: block;
+    }
+
+
+    .no-results i {
+      display: block;
+
+      margin-bottom: 14px;
+
+      color: #77778a;
+
+      font-size: 30px;
+    }
+
+
+    /* =========================================================
+       CUSTOMER CARE
+    ========================================================= */
+
+    .whatsapp {
+      position: fixed;
+
+      right: 22px;
+      bottom: 22px;
+
+      z-index: 9998;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 8px 15px 8px 8px;
+
+      border-radius: 999px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #075e54,
+          #25d366
+        );
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
+      box-shadow:
+        0 18px 50px rgba(37,211,102,.25);
+
+      animation:
+        waFloat 3.2s ease-in-out infinite;
+
+      transition: .25s;
+    }
+
+
+    @keyframes waFloat {
+      0%,
+      100% {
         transform: translateY(0);
       }
 
       50% {
-        transform: translateY(-9px);
+        transform: translateY(-7px);
       }
     }
 
-    .floating-support i {
-      font-size: 17px;
+
+    .whatsapp:hover {
+      transform: scale(1.04);
     }
 
-    /* FOOTER */
+
+    .whatsapp-icon {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.16);
+
+      font-size: 23px;
+    }
+
+
+    .whatsapp-text small {
+      display: block;
+
+      opacity: .82;
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      letter-spacing: .7px;
+    }
+
+
+    .whatsapp-text strong {
+      display: block;
+
+      margin-top: 2px;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     footer {
-      width: min(1180px, 92%);
-      margin: 0 auto;
+      padding:
+        45px 20px
+        110px;
 
-      padding: 28px 0 35px;
+      border-top:
+        1px solid rgba(255,255,255,.07);
 
-      border-top: 1px solid rgba(255, 255, 255, .08);
+      text-align: center;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+      color: var(--muted-2);
     }
+
 
     .footer-brand {
+      font-family: "Montserrat", sans-serif;
+
+      color: white;
+
+      font-size: 17px;
+
       font-weight: 900;
-      font-size: 14px;
     }
+
 
     .footer-brand span {
-      color: #c778ff;
+      color: #a78bfa;
     }
+
 
     footer p {
-      color: #777181;
-      font-size: 10px;
+      margin-top: 8px;
+
+      font-size: 11px;
     }
 
-    /* MOBILE */
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
 
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 55px;
-      }
 
-      .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .hero-visual {
-        min-height: 430px;
-      }
-
-      .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 650px) {
-      .navbar {
-        padding: 11px 13px;
-      }
-
-      .nav-links {
-        gap: 3px;
-      }
-
-      .nav-links a {
-        padding: 8px 7px;
-        font-size: 11px;
-      }
-
-      .hero {
-        width: 94%;
-        padding-top: 42px;
-        gap: 20px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-        letter-spacing: -2px;
-      }
-
-      .hero-description {
-        font-size: 13px;
-      }
-
-      .hero-card {
-        width: 94%;
-      }
-
-      .floating-mini {
+      .header-support {
         display: none;
       }
 
-      .service-grid {
-        grid-template-columns: 1fr;
+      .desktop-nav {
+        display: none;
       }
 
-      .pricing-grid {
-        grid-template-columns: 1fr;
+      .mobile-nav {
+        display: block;
       }
 
-      .trust-box {
-        grid-template-columns: 1fr;
+      .hero {
+        min-height: 570px;
+
+        padding-top: 75px;
       }
 
-      .support-section {
-        padding: 26px 18px;
+      .media-grid {
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0,1fr)
+          );
       }
 
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .floating-support {
-        left: 12px;
-        top: auto;
-        bottom: 18px;
-      }
     }
 
-    @media (max-width: 400px) {
-      .hero h1 {
-        font-size: 38px;
+
+    @media (max-width: 700px) {
+
+      :root {
+        --nav-height: 67px;
       }
 
+
+      .header-inner {
+        width:
+          calc(100% - 22px);
+      }
+
+
+      .brand-icon {
+        width: 39px;
+        height: 39px;
+
+        border-radius: 12px;
+      }
+
+
+      .brand-text {
+        font-size: 15px;
+      }
+
+
+      .hero {
+        width:
+          calc(100% - 22px);
+
+        min-height: 535px;
+
+        padding:
+          65px 7px
+          55px;
+      }
+
+
+      .hero h1 {
+        font-size:
+          clamp(39px, 13vw, 60px);
+
+        letter-spacing: -2.5px;
+      }
+
+
+      .hero-description {
+        font-size: 13px;
+
+        line-height: 1.75;
+      }
+
+
       .hero-stats {
+        margin-top: 30px;
+      }
+
+
+      .stat {
+        min-width:
+          calc(33.333% - 8px);
+
+        padding:
+          11px 7px;
+      }
+
+
+      .stat strong {
+        font-size: 15px;
+      }
+
+
+      .stat span {
+        font-size: 7px;
+      }
+
+
+      .section-switcher {
+        display: none;
+      }
+
+
+      .section {
+        width:
+          calc(100% - 22px);
+
+        padding:
+          35px 0
+          80px;
+      }
+
+
+      .section-heading h2 {
+        font-size: 31px;
+      }
+
+
+      .section-heading p {
+        font-size: 12px;
+      }
+
+
+      .service-feature {
+        padding: 20px;
+      }
+
+
+      .service-title {
+        align-items: flex-start;
+      }
+
+
+      .service-icon {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        font-size: 27px;
+      }
+
+
+      .service-title h3 {
+        font-size: 18px;
+      }
+
+
+      .service-feature .hero-btn {
+        width: 100%;
+      }
+
+
+      .package-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+
+        gap: 10px;
+      }
+
+
+      .package-card {
+        min-height: 260px;
+
+        padding: 16px;
+
+        border-radius: 18px;
+      }
+
+
+      .package-card h3 {
+        font-size: 16px;
+      }
+
+
+      .followers {
+        font-size: 10px;
+      }
+
+
+      .discount {
+        font-size: 6px;
+
+        padding:
+          5px 6px;
+      }
+
+
+      .current-price {
+        font-size: 31px;
+      }
+
+
+      .package-action {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+
+        min-height: 40px;
+
+        font-size: 9px;
+      }
+
+
+      .media-toolbar {
+        align-items: stretch;
+      }
+
+
+      .search {
+        width: 100%;
+      }
+
+
+      .result-count {
+        width: 100%;
+      }
+
+
+      .filters {
         gap: 6px;
       }
 
-      .stat {
-        padding: 12px 5px;
+
+      .filter {
+        min-height: 34px;
+
+        padding:
+          0 11px;
+
+        font-size: 9px;
       }
-    }
-  
 
-    /* =========================================================
-       FIRST-OPEN OFFER POPUP — UP TO 70% OFF
-       Self-contained animation; no external image is required.
-    ========================================================= */
-    .offer-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      background: rgba(3, 3, 10, .78);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .35s ease, visibility .35s ease;
-    }
 
-    .offer-overlay.show {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
+      .media-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
 
-    .offer-card {
-      position: relative;
-      width: min(470px, 100%);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 30px;
-      padding: 22px 22px 24px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,75,180,.22), transparent 45%),
-        linear-gradient(145deg, rgba(28,23,48,.98), rgba(9,9,17,.98));
-      box-shadow:
-        0 35px 100px rgba(0,0,0,.58),
-        0 0 70px rgba(159,65,255,.16),
-        inset 0 1px 0 rgba(255,255,255,.08);
-      transform: translateY(28px) scale(.88);
-      transition: transform .55s cubic-bezier(.2,.85,.2,1);
-    }
+        gap: 11px;
+      }
 
-    .offer-overlay.show .offer-card {
-      transform: translateY(0) scale(1);
-    }
 
-    .offer-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 50%;
-      background: rgba(255,255,255,.07);
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 5;
-      transition: .2s ease;
-    }
+      .media-card {
+        border-radius: 17px;
+      }
 
-    .offer-close:hover {
-      background: rgba(255,255,255,.14);
-      transform: rotate(90deg);
-    }
 
-    .offer-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-top: 2px;
-      padding: 7px 12px;
-      border: 1px solid rgba(101,255,173,.20);
-      border-radius: 999px;
-      background: rgba(101,255,173,.08);
-      color: #8bffbf;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      .media-info {
+        padding:
+          13px 11px 12px;
+      }
+
+
+      .media-info h3 {
+        font-size: 12px;
+      }
+
+
+      .media-info p {
+        font-size: 8px;
+      }
+
+
+      .open-link {
+        margin-top: 8px;
+
+        font-size: 8px;
+      }
+
+
+      .media-type {
+        left: 9px;
+        top: 9px;
+
+        padding:
+          5px 7px;
+
+        font-size: 6px;
+      }
+
+
+      .play-button {
+        width: 47px;
+        height: 47px;
+
+        font-size: 13px;
+      }
+
+
+      .platform-card {
+        width: 210px;
+      }
+
+
+      .whatsapp {
+        right: 13px;
+        bottom: 78px;
+
+        padding: 7px;
+      }
+
+
+      .whatsapp-text {
+        display: none;
+      }
+
+
+      .whatsapp-icon {
+        width: 45px;
+        height: 45px;
+      }
+
+
+      footer {
+        padding-bottom: 135px;
+      }
+
     }
 
-    .offer-eyebrow i {
-      font-size: 8px;
-      animation: offerDot 1.2s ease-in-out infinite;
-    }
 
-    @keyframes offerDot {
-      0%,100% { opacity: .45; transform: scale(.8); }
-      50% { opacity: 1; transform: scale(1.25); }
-    }
+    @media (max-width: 390px) {
 
-    .offer-animation {
-      position: relative;
-      width: min(360px, 100%);
-      height: 205px;
-      margin: 8px auto -2px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-    }
+      .brand-text {
+        font-size: 14px;
+      }
 
-    .offer-animation::before,
-    .offer-animation::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
 
-    .offer-animation::before {
-      width: 170px;
-      height: 170px;
-      background: rgba(94,170,255,.12);
-      filter: blur(28px);
-      animation: offerGlow 2.4s ease-in-out infinite;
-    }
+      .package-grid {
+        gap: 8px;
+      }
 
-    .offer-animation::after {
-      width: 90px;
-      height: 90px;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 0 0 16px rgba(255,255,255,.025), 0 0 0 32px rgba(255,255,255,.018);
-      animation: offerRing 2.2s ease-out infinite;
-    }
 
-    @keyframes offerGlow {
-      0%,100% { transform: scale(.82); opacity: .45; }
-      50% { transform: scale(1.08); opacity: .9; }
-    }
+      .package-card {
+        padding: 13px;
+      }
 
-    @keyframes offerRing {
-      0% { transform: scale(.65); opacity: .75; }
-      100% { transform: scale(1.65); opacity: 0; }
-    }
 
-    .offer-cart {
-      position: relative;
-      width: 275px;
-      max-width: 88%;
-      z-index: 2;
-      filter: drop-shadow(0 18px 24px rgba(0,0,0,.28));
-      animation: cartFloat 2.7s ease-in-out infinite;
-      transform-origin: 50% 70%;
-    }
+      .package-action {
+        left: 9px;
+        right: 9px;
+      }
 
-    .offer-cart img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
 
-    @keyframes cartFloat {
-      0%,100% { transform: translate3d(0, 5px, 0) rotate(-1deg); }
-      50% { transform: translate3d(4px, -7px, 0) rotate(1deg); }
-    }
+      .media-grid {
+        gap: 8px;
+      }
 
-    .offer-spark {
-      position: absolute;
-      z-index: 3;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 15px rgba(255,255,255,.95);
-      animation: sparkPop 1.8s ease-in-out infinite;
-    }
-
-    .offer-spark.s1 { top: 29px; left: 26%; animation-delay: .1s; }
-    .offer-spark.s2 { top: 52px; right: 22%; width: 5px; height: 5px; animation-delay: .55s; }
-    .offer-spark.s3 { bottom: 34px; left: 18%; width: 5px; height: 5px; animation-delay: .9s; }
-    .offer-spark.s4 { bottom: 50px; right: 15%; animation-delay: 1.25s; }
-
-    @keyframes sparkPop {
-      0%,100% { opacity: 0; transform: scale(.3) translateY(5px); }
-      35% { opacity: 1; transform: scale(1) translateY(0); }
-      70% { opacity: .2; transform: scale(.55) translateY(-5px); }
-    }
-
-    .offer-title {
-      position: relative;
-      z-index: 2;
-      margin: 0;
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(28px, 7vw, 42px);
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -1.8px;
-    }
-
-    .offer-title .offer-number {
-      display: inline-block;
-      background: linear-gradient(90deg, #ff4fb3, #ffca5b, #67d7ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: offerTextPulse 2.2s ease-in-out infinite;
-    }
-
-    @keyframes offerTextPulse {
-      0%,100% { filter: brightness(1); transform: scale(1); }
-      50% { filter: brightness(1.22); transform: scale(1.035); }
-    }
-
-    .offer-subtitle {
-      margin: 10px auto 0;
-      max-width: 350px;
-      color: #bcb6ca;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .offer-note {
-      margin-top: 8px;
-      color: #8f899c;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .offer-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 18px;
-    }
-
-    .offer-btn {
-      min-width: 155px;
-      border: 0;
-      border-radius: 14px;
-      padding: 13px 18px;
-      color: #fff;
-      background: linear-gradient(135deg, #8337ff, #ff3ba5);
-      box-shadow: 0 12px 30px rgba(145,48,255,.25);
-      font-family: "Poppins", sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: .25s ease;
-    }
-
-    .offer-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 17px 38px rgba(145,48,255,.34);
-    }
-
-    .offer-btn.secondary {
-      min-width: auto;
-      color: #d9d4e2;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: none;
-    }
-
-    @media (max-width: 520px) {
-      .offer-card { padding: 18px 15px 20px; border-radius: 25px; }
-      .offer-animation { height: 175px; }
-      .offer-cart { width: 245px; }
-      .offer-actions { flex-direction: column; }
-      .offer-btn { width: 100%; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .offer-cart,
-      .offer-spark,
-      .offer-animation::before,
-      .offer-animation::after,
-      .offer-title .offer-number,
-      .offer-eyebrow i { animation: none !important; }
     }
 
   </style>
 </head>
 
+
 <body>
 
-  <!-- FIRST-OPEN OFFER -->
-  <div class="offer-overlay" id="offerOverlay" aria-hidden="true">
-    <div class="offer-card" role="dialog" aria-modal="true" aria-labelledby="offerTitle">
-      <button class="offer-close" id="offerClose" type="button" aria-label="Close offer">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+  <!-- =========================================================
+       BACKGROUND
+  ========================================================== -->
 
-      <div class="offer-eyebrow">
-        <i class="fa-solid fa-circle"></i>
-        SehrAn Media Special Offer
-      </div>
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
+  <div class="ambient three"></div>
 
-      <div class="offer-animation" aria-hidden="true">
-        <span class="offer-spark s1"></span>
-        <span class="offer-spark s2"></span>
-        <span class="offer-spark s3"></span>
-        <span class="offer-spark s4"></span>
-        <div class="offer-cart">
-          <img alt="Shopping cart offer animation" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCAGKAlIDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKQsBxmgBaKRiQMikG8nGaBXHUUhOBkiloGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBHRRRWZmSUUUVoaBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQSB1NABUdSUEgdTQAUUUjYxyaAAghcClpGbb2oL4AOOtABuBOBS1GGOeO1OViTgmiwm7Ow6ignAzTeS2GoGOooGe4ooAKKMjOKMigAooooAKKKKACiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKCQOTRSE5HynGenFGwBvX1oXGODXxT8Sf+Cvfgj4UftI658LtY8JNf8Ah3SrlbN9YsHxKs6jEx2EEOqvleCp+UnnpX0p8Fv2qPgP8frUSfCz4jWGpz7Cz2UbMk6AEgkxuA2OOuMe9cNHMsDiKkqcKi5ouzXU+qzXgjirJsuo5hi8JONCrFTjO142krq7V+V+UrPyPQwQeRRSAg8igEP1HSu4+VFopAzdNv60FgDgmgLigg8iimliGwTxTqACij60m4dc0ALRQCDyKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKTcvrQAtFFFABUdPDAnANI7qF5PXpQApZQcE0MCRgV8l/Fv/AIKtfDvwdr8uh/DjwRc+IlgmeOXUWvFggfacZj+Vi6kggNx9DXTfs4/8FE/h98dPEEfgvWdBl0DWJlJtobi68yK4xn5UcIPm/wBkjscEnivPhmuAqVvZRmrnxsPEHg2pmSwEMZF1G7K17N9lK3K36M+jwQehopqj5uKcSBya9A+yAgHg0EZGKKCQOpqYy5gGhCevFLt+bdmmhyBkjJ9KfVMW7CimFWJyRT6ATCikBJJzTd5OBmgLodg5yT+lLTWTkFfXmnUDCikjBCAGloAKKKKACiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAoooOMc0AFeO/tvftAW/wCzX+zj4h+JMN0iasIRZaAHx895N8qEDvsXfKR6RGvXsZHSvPP2kP2Zfhp+1D4DHw++J9jNJaw3AubK4tZSkttMFKh1IPJwxGDkHPINY4lVnh5qi1zW0vtc9TJJ5XTzfDyzJSeHU4Ooo/E4cy5ktVq43W69T8M7yeXULqa/vJjJLPK0s0jDlnZizHj1JNWdC8Sa/wCGNQi1fw7rNzY3UTBop7WYo6kd8j6n86+uP2gf+CN3xx+HksuufBfWrfxZpaB2e0uHW3vIgOQuD8shIzyCvoAeK+SfEnhnxF4O1eTQvFuhXel3sQzJaXtu0Ui/VXAOPevxrG5dmeArc1WLT79PW6P9L+GuMeDuMcDbLcRCpG2tOyjJaWs6bs0rabW7M+sPgB/wWG+OPw2ih0T4saND4v02PgSl1trsDt+8VCH7n5lJJxzX3d+zp+3T8AP2lbaK28E+LEttYkXLaBqI8q5U8kgZGJOBnKk471+KXzYwO1dj8AfAWqfE34uaJ4OsLue2jnvFa7u7Y4khgX5pGU5GDsDY564r3Mm4hzZYiGHf7y9kl1u9lfe7fe5+aeIPgjwBmGArZlC2CnTjKcpwX7uyV25U7qNkr/Dyv1P3hVtwBHOe9LWF4H1fwpquhwxeEr+OS2tUEaRjO6IY4Bzzn3roCwBwTX6lKNSm+Was1uj+BVKlVXNTd4vZ+X4oZUlIGUcA0tS3caVgopFcE4ozkcN068Uhi0UiKQOfSloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACgkDqaKYXYHBNAA/wB40qYH40MMscnFfO/7RH/BQ34U/AfXLjwPpGlzeI9Ys3KXttaTiGO1cEfI0jAgsAclRnGMcHphXxFHC0+epKyR5ecZ1lWQYF4vMKyp007XfVvolu35JN2u9kz6IZ1PAbn0pVYH8elfGekf8FefCc9wE1r4OX1tGSMyQawsu0d+PKXNdVpv/BVv9nu5bF7o3iC2bnl7NWXj/dbPP0rkhnGW1FpUXz0/M+XwvibwNivhx0F/i5o/+lJH1CXAJbsPWvjP/gpJ+2A2iW1z+z38OdWzc3EOzxPd27KTCjf8uysOjsud/opA6lgI/jz/AMFUdAk8KXGlfArR7z+1J18tNT1CFUS2BByypklmBxjPGeucV8QX1/e6neTalqdy0txcStJPNIdzO7HJYnuSTmvHznO6caLpYeSbfVdD868S/FTBU8ueX5JWU6lS6lUi9Ix6qL/mltf7KvbVpqBNwG0E9MAGprK6u7G7h1LTrp4Lm2kElvNE5V43ByGUjoQe4pqACMHuaax2sGFfEqUlLm6n8we0m3zN69z9J/2Cf2vIvjl4MHg7x1qkTeLNMXbMCMNewjJE3AxkdG9xnAzX0YAGzivxj8DeO/EPw58Zab458KXj29/pl0s1vIjEBiOqt6qwJVh3Ukd6+5/hl/wVa+F2paEkXxL8N6jpupIFE72kaywynuy4wVHsc/U19xlGdUZ0FTxErSXV7Nep/U3hx4sZfiMujgM8rclaCspy2nFbXl/Mut997t3PrcYUYz0pC4zkc18rap/wVf8AgVY/u9K8La9dsX53RJGu3Gc53H8sZrmb3/gr7oH2vy9O+DdyIg4Hmy6uMsMZJCiL6969WWcZfF2dRfK7/I++xPibwJhn72Og/Tml/wCkpo+zwxxyKcDkZrxX9mb9tb4c/tKI2j6fZyaVrsUW+XSbiUOxXuyMBhlHGTweelezRksARXdRr0cRDmpyuj6jKc5yzPMFHF4CqqlOXVfk1umuqaTRJRRQSBya1PUCm7Dng0iyhl3KOD0p9ABRR0wCeaAQehoAKKMjOKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKRiQMilooAaVOABRtJOMYFOooFYaVJUjb+FcD8af2ZPgf+0FpP9lfFXwDaaphCsNw+VmhzjJSRSGToOhFegU1x3A+tTOnCpHlmro6sJjMVgK8a2HqOE46pxbTXzR+cP7S3/BGDWtLM/ib9m7xP9rgLlm8Pas4V0GAcRzE4PfAb8Wqx/wT3/YG+KHhnQtf+Jnj3w5JpOtrd/YNJ06/UBjEm4TSBgSPmbAB5BABB71+i3l8ntSPEjYXGMHII7V5OFyTLsDmcMbRjaUXe26v3t5f8E/R8y8YONs34QrcPY2t7SnVSi5u6qct9Y8yaupbNyTbV020z5g8HeLdb8AeIo7m2kddj7Lu3Y4DKDyCD3619LaTqtnremwarYSBop4w8bDuDXi37Rng1dI8QQeJrK32xX64nKLgecOSfqRz+FdH+zX4nF7oU/hW4kPmWLboQW/5Zn29j/Ov0fN4Usyy2GPpKzWkv68n+DR+EZfUngcwlhJvR7Hp1SVHUlfIH05HGwY5U0o+6aSJAhwKdH3pvcb3G1JUdSVEo8wgoooqgCiiigAooooAKKMg9+tIWAOCaAFopNwNKDmgAooooAKKKKACggnocUUhAbkGh6gc18WNevvDPwt8ReJtLB+16dod3c24HaRIXZT+BAP4V+OV5eXOoXEl/ezNLLcOZZJWJJZmO4k55Jya/Z7xNpQ8R+GL/RQ5jF7ZSwbhzt3qVz+tfi/JHJCQkqMrgkFT2wcY/MGvkOLFKMaL6K/6H84fSBjVcMuT2/e/f+7/AEuNII6ikyfWpKQqCckV8Zyn81AHYjcx6CmEknJp3lntzTaTv1G23uPV8gKeopHIzim0UX0FcUEdxmnb1+ntTKKFJod3axJmmBmAwDT6CcDNU1cR0fwf1jUtB+LHhvUtJvJoZV1u1UeU+MqZVDKfUFSQR6Gv2LgXDHAwSa/H/wCAWiSa98bfCunom4HXrZ3AH8KyBj+g69q/YCL5E9iAeBX2nCcJRpVfVfkf079H6nWjhswl9hunZfKd/wA0P3FTgj8KUsAeVo3DGNv60b8DAGK+u6n9DpMTIHBWg5Y5x1pS/YfnRhQcHtSTC9thBgH736UMCTn86AAe/wClK5ycYpXBXYhQ54p9MJyc4oAJ6ChO42rD6KKKYgooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooACMjFM+ZafRgZzQBznxP8AC48YeC7zRI4Q07JvtSR92ReV/lj8a+fvA3ia58D+MLXWZVZVjl2XaEYOxuGB9Mdfwr6hVc84zjtXyF+0J4r8VeDPidf2X/CgvF01jcStJZX2nizeK4IdlcgtOpUcKwB5w46HivpuHMRCcp4Sp8M1/wAP96/I+ez2jKKhiIbxf9fjY+u4ZY54hNEwKkZBHcVIpyOteBfAj9qG51TwlFpmvfBnxvBNYyi2Mr6bbuChzsJMc7HgcdB/Ouzg/ap+FX2sWN9b+J7WZsbI5vBuotnJPO6OBlHTnJGMj1GfCxmFnhMRKnPo/wCvv3PZwlZYihGa/r+mel0V5zpn7VPwR1e6FjF4nvreUsoCaj4dv7XO4kA5mgUYyp56DvirUH7Sv7P87tG3xp8Kwsi5KXeuwwMck4IWRgSODyK5jpsd5TfL965XTfjh8FNbkEGj/F3wvdSnH7q11+2kY54GAH5yfzrotP1Ww1WA3OmahFcRhipeFwwB9MjvQBaooooEFFJvXG4mgsR1X9aABmCjJqrqV9HpumXGqS8pbwPIw9doJ/pS3F3aKrRz3SpuXGd+CPx7V5L8QPEHiLwLczpD43j1WxuC0MtjdqS6owIK5/i+vtXbg8HLFz5IvXpvr9yOPF4uGFhzSWny0/FHfeGfiNpWqeCbbxdrNxDZJMjbhI+AGDFSB69M/jXRW86XEaTRNlXUFSO4xXzp4M1PS7zVdNtPEc4ntrHIsdOlYpGzli24nBycn8gB2r1uXx7LCFWa3NsDjbwSpyccHv8AhXfmGUvD1nGHVv0SvovPTW/mceCzB1oJz0t9/wDwNzsd+1cdPeoZ7+1h4muEH1NcbL4omu5PJa9YMcbV2spP5j3FIszPGGd+T0Y81yLASXxM7p4umldHVSeItLjzmcH6d6fYa1baszRwEqUPIbrXJIdoyG59cVpeHJVt9S/fMF3KRnHc9KVTCQhBtbkwxLnK1jqQcjNLUMErOu9PmQ9DmpPM9q4GmjrTurjqRt38NCtu7UBgBhaQxpcDGBivxn+J1rZ2XxJ8Q2dhKrW8WvXiQsgwpAmYAgfQCvv39tX9u7Qfg1ZXPw5+GV5DqHiyeEq9xE+6PTQeCzY6yAZwvY4J9K/OmaaSaR5JZSxZyxLHliT1J7n3718ZxRi6NSMKUXdp3Z/MnjlxNlWOeHyuhNSqU5SlNrVR92yj6u7v2t5jAxBzTgwNMor49No/nYkMgIx0qMnJoopbgFFFFABRVvRdB1nxHqcOieH9LuL29uH2QWtrCzu546AD3FTeIPCniTwnqcmieKdBvNOvI1DPbXls0bhSMhsMBx79KtU6jhzJadzpjha0sM6/K+VO17aX9Sgq5Xr1oIKdD1pV+7Q2QQcdKLaHMz1f9hqCzuf2qvCEOpyBYvtNy3zDqwtJyv8A48F/Eiv1YjHmRAFiMDtX4s6NrN/4e1mz8QaW2y6sLqO5t3Izh0YMpx9QK/UH9lD9svwH+0jpa6Z5w0/xHbxA3mlTEZc4+Z4scMn6jv2J+x4ZxdKnTlQbtJu68z+jfAfiLLMHCvlNaSjVnJTg3pz6crj6qyaV7u7tsz2kpgZzTaMtuzmlJB6DFfYrmP6XTbFj70j/AHjTlzk5FNcHOaQAoBOM0rnJximxEsc46U5xg5pSdpWHZJ2EUAnBp9IFIOS2fwpMuO/SjUluwpUE5IpaZvb1p9PUE0xFORnGPY0tA+lFAwooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKKKKACiiigApr9qdSMu7vQA0bicg8964v45eED4p8DzXUYH2iwzcQ4HJA+8v4j9QK7cADgVHLGrIUddysMMpHUVth608NXjVhummZVqUa9Jwl1PnP4NeL5/CPjOJJpitpfYhuU3YHJ+VvqCfyJ9a+igAzbgcivmj4o+FZPBfja5023jK27MJrRgMAKTkAf7pGM+1e4fCHxafGPg6C/mlDXUQEV3zklx3P1HP419LxBQhiaNPHU9pKz/T/AC+48DJa08PXnhKj1Wx009haXa/6RZxyf9dEB/nVCXwh4UnkMs3hjTmY4yXsoyfrnb9PyrTX2bn6UcA8c18qrI+l06nkn7TXwe8Hah8I9S8VaJ4D0qTVfDYg1vT410yMtPJYSrdCDjHEqxvET1AlyOlaGm/s3fsv+LrCz8VWPwo0C7tb20iuLK7W0wJI3XcrDuMqyn8RXpRGT0rzH9lCCfwv8Or74Q3dq0LeAfEN3oFmhRgosI9s2ngEk7sWE9oCf7wbp0AkD2Fv/wBl39nvSsS6b4Gj0zcdyNpNw8G11P3xtYYbnG7FebftEfDrTvhz4ItfHPgTx349s4dH8Q6dPrcNn4yvQs2mNdRxXmQGJ+SGR5cjB/c4yuSa+hPFKFtOR84Cv3NcL418MWHjfwhqvgzWFzZavplxY3gGM+XLG0b498McV24bDQqxuzkq1nB2SMiD4U6hZzy3OgfGHxvYuQcx3niGW8CuQRkCcsOM9OmeeuapzfDX4zoHFh+1T4kjgdvkhm0bTZSnygfeaAsenf1P4S/s9eJtb8U/BPw1e+K2kbXLawGneIXdck6lasba7PU8faIpepz685rrbjUin+j28LyyDoiIf1Paur6tS00MPrNRbni/xEl/aB+H/jHwholr8ejqVp4m1+406+l1bwzaD7K5sbq4gffEIwN0luIgMMSZFxxV2L4W/tMHWft2s+PvB19bQKRa283hq4UqduAzbboZO7k8dMioP2w/iD8OvAPwd1PxR4y+JGh6TqHhW7svEv2a/wBWhhlK2FzFdGMB3B/eRxyRDjnzSO9cl8Tf+CyH/BLn4S3s8Xjb9tjwTam3YRyfYr570A4GQPsySAkZA4P5dumE/YfDoc9SEq/xHUeDfA37Sdlokul+KdK8DakkV3MIZYre5t2ccjI3yvt5HXmpNQ+JHx/sfGWn/DMfAvR5riXSrjULO7HjTZDLFC8UUirutmYSI00PXjDda+Pfid/wdZf8ErvArNZeDtV8aeML+TP2WLQ/DmIpZNwAUvLIpXPUfKc8cc18/fF7/g6H1jxN8QdA8b/s5f8ABOT4iard6Zb3FnFd6nG5ivre9WIvD5UNuXGZLeBlxJglDweKupi51H3FDCwpxskfrHa+PPjlHLJb+IP2c9kandv0vxRHc5G3PyB4488jGOME07/hdXi2zmSwvP2bfHTMCVMlvDYyRdCQNxuVLcd8DmvyK1v/AILS/wDBwt8amMPwM/4Jq2HhtHHmQTz6XK0hDR5Af7ZOEBG0kDaDxgg9K4y/h/4Ou/2gLqaLXfjRZ+DPtVt5by22oWumLBsJ4U2cbbHb+8vUEZPaiFLFVPhpyfyHJYePxTSt5n7M+Gv2rfDevWD6mvws8c28EF9dWd09z4fUmKe3neCVSIpHyBIjDIznqOOa2dI/ay+D8sEWsW1xr8yCTIeHwlqEi4B5+aOFlPXsTjvX4CaD/wAESv8AgrD8ePE+v+Hvjl+32tldxask+uLJrN7febPdJFcG46x79zFgW6s0R9a/cr/gjl+zD4v/AGPP2APCH7M3jj4nJ4uvPCl7qcba0tq8RmW4vprvaVdmb5WnYDJPyhR0ArnxVHFUKXPUg0ttTbD1MLUqclOabPZ7f9qD4G/ZHu7rxqbONEaSWTUdLurVY0BxuYzRLgfWrWnftHfADXLRdR0r42+FJYWUNv8A+Egt1AUnAJy4wCSPzFdbc6XpN5G0F5p0M6uCrrLErcEdOa8x/ZP8JeE5f2b/AAZp934Mt4rnR9Ch0e6W806NZfPsh9klLDHGXhY14fU9HTY7bSfiz8LdfCHRPiNoN35iF0FprEEu5f7w2Mcj3r5E/bS/4KJYfUfhL8C55Y3RxFf+I434b+8kPcYPG/64HevpD47fCX4fN8GfFx0n4daOb7/hH7yS2aPTo0JmETshyBnO7Bz61+S6sAdqg57V83xDmNbBQjTpu3NfU/F/Gbi/NuG8vw+FwEuSWI57z+0lHluovo3zb7q2m+jrmaee5e6nlZ5JGLO7HJJPU00sAMLQSyjBGKQKTyBX5/KTm7yP5KnVdWfPLd7ihD3NIylTSgleCKQktT0sZvcSiu4+AvwE8b/tC+MX8G+CFgWWK2M9zcXL7Y4kzgZPckg4HsaZ8cPgL8RvgF4rPhj4gaSsRlLGyvYGLQXSjBJRsDkZGV6it1hcQ6HtlH3e568MizWplbzFUn7BO3PbS/8AX9Xsji1Xd3ra8AeAvE/xJ8U2ng/wdpT3t/dvtiiQcKO7sf4VHcnitD4OfBzxz8bvGUPgzwNpRnuJMNJIxwkKZ5Zz2HB/Kv0f/Z9/Zp+FP7I3gmfXbu/ga8SAy6v4ivAEbaM5UHoqDsv4nmvQyvKK2YT5npBbv/Lz/A+p4H8P8z4vxXM/3eHg/fqPa27jHvK2vVRTvLonV/ZS/ZK8CfsveFpPEGtzW9xrUkBk1XWJyFWBADlUJOFjA5/DJ9vjr/goF8ffBHx4+LNpd/D2BpNP0WzezGosMfa38wlmUddg6Ank+1aH7an7b+vfHfUJvAXgS4ltPCUMuMZ2yagR/E5HPl55C9OecnFfOnbFdubZhhoUfqeGXurdn1PHvG2T0Mq/1W4fppYaDXPNfbcXe0e+qTc73fSy3eGGOvSmsxY0lFfNt3PxbZiq3Y9KvaJruteG9Rh1jw9qlxZXlu+6C6tZmjkQ+xB/D8aoUo+6aqEpRkrMunUnSmqkXZrVM/Qb9in9vWP4oz2Pwr+KjCLxE8ZW01JUCRXpVScEAcSEAn0O09DgH6sjZZU3ocj1xX41/Da41G3+I/h+40eRvtK63amCNH2ln81cDPv0r9k4d2CCBnPNff8AD2Y4jG05xq/Ztr3uf114N8X5rxJldfD46TnLD8iU3vKMuayfdx5d92muqu5Fc4w3503J6UoyRvAxSV9Fax+zXTHIBnNEfeiPvQhAyTTe43uKEwc5puWzjvTj8wxSbB60iXcbUlAzjmigErBRRRQMKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACmsgOMIKdSP900Aeb/tG+DRrHhVPEVrHmfTHLOQvJiYgMPwOD+dcT+zx4uj0Hxe2iXtwwg1GPbGv8PnDlc+mRuH1I/D3a9tIdQtJLK5UNFKhSRSOCCMEV8weKtEvvA/iy40mTia0n3QuT94feRvxGK+vyKpDHYKpl9R76r+vJ6nzGbwlhcVDGQXqfUiMD8wpwwxzj61i+BvE9v4u8M2utwvkyxjzFIwVcZDA/iDW1H3r5SrTnSqOEt1ofSUqka1NTjswZQBkV5vIF8DftMwMIVjtPHXh10eUQsM6hp7hkUsCQXltriQ8gHbYgZ4Ar0ojIxXmH7Vf2vRfh7Y/FnTLdpLnwF4gtNfKohZvskZaC/wARljp9xegf7RBwcYOZoj0PV7JtQsHtAfmIG0++a+bP8AgoHq/wC2n8N/h/osv7F2n+B5NRvdSmh1vUPGpnKWUflhomhjiIDsWDA78gDGAa+m+AdvOR61xHx9sP7R+G97vRT5EkUq5H+2FP6Mfyruy+XNiadOT92TSfzdjkxkZLDynDdJv7lc/Mj4MfAX/gsv8cPiR4q+Ferf8FGfBXw9TyLbxLc6Z4S+HqtOZL5543aKeQ7sedayu6gnmQH5d2Kz/Gv/AASa+PXjTVJtF+Pn/BWT42+L44XaJ4LPWktLRxhVfCopIzhgeeh9Rmvojxpc6j4N+Pfgb4g6bN9nj1KK+8NX8sb7SPNiN5buxzjAezkjXr811gda7xjkkvgn2r7yjkNGGJcpu8eiPkKubVp00lpLqz4f0L/g30/4J9wwk+N9P8aeKLjc2+fW/G17Ijrg7VaPftYDtkda6L9lT/glN/wT00n4WaVfah+yV4PutbsXudN1G9vtNE8klzaXE1rLJukGfmeN2445GMgA19laNoOr+JZXs9EsZJ5EjLOsY5AHf9a4Twl4e1X4efF7x18Nta097WQ3Vn4hs0L7gbe9hMZwBwP9JtLpj7senFdjoZbTrRoxiuZ9Dn+sY6rSc3J2Og+AH7On7HHw+v7i21D4CeF7KObDQ3EGixDy2By38PfC8/7PvXMftV23hnT/AABrXjzwN4Vg02LQdTstbghs4Vj8uCxuY55OFA4MUbg47MRXak5qn4k8O2Xi7QL7wpff6nU9PntJcHHyyJsJz2+9Wiy6hSryrRb1VrX0t5LzMHja0qcYaaNO9tfvLH7iViUTK4yqEg/L2BrvfF3jzwPqXgOLSNB8KxW19PIhuvkAEYQY4IHORx9Ca8l+Ath4w1b9nrwr4x8QaXcKTpFva388qkbbqNBFKvPORKkgye/1royVHLH86TpUcbGnNvWD6Pquj9HYXtKuGbVvjVtTiLeSbSP2jr9JUYReIPBltJa/MuN1jdzLK23rki/hy3oqivp39l7UPN0DVNNZwfIu0kwT0Drj8vl/Wvij4j/FSw0n9tj4f/D9nKSy6ffWblIwS/2m3kuSjMTwM2EJAA5bHrX0n8BPjN4M8MfHKP4O6vrSwajr2gm906J+FlMcjAqD/exkgd8d68POsXg62XYlKX8OSi/8XutL581vU+jy3I83wmY4O9GX76lKrHS96cXUjKfovZzb8le1tV9MKDjluvHFeb/s0zS6dpPi/wAH3i4l0f4ka6pLPkuLy7fVFPPT5L5QB6KOtdP42+J/gH4c6YNR8d+LbLTYmKgG6mw7EnACqPmYk56DsfQ15Hp/xp+G3wR+L3xIm8Za5FYxeJtZ0DV9MjYnzL6S8so9NTah+YEtpZUjHHlknGefz91ad7c2x9hRwOMrOCp05PnfLGyfvS00Xd6rRHvU0KXUbW9xErowwyMMhh6Gvz3/AGyf+CfniL4dXeofE34RaY1/oTSNPd6ZBzPZZOWKg/fTJJ9R9K/QpG3oVDgkHBwe/Wquq6LZa5p9xpWoxeZb3MTRTxZxuVhgj8jXLj8BRx9Hkmj4zizhLKuL8teGxkdV8Mlo4vun+a1T9bNfizMjBiCMFSQR7g4/pRkZxX1b4n/YTh+In7JvgP43/CnRktPEk/gTTLvxFocDZW6uDZQmYrjpKHD5GBuJPANfKMiNGfnBDdwRX5vmeW18vq2ktHs+5/GvGPBeZ8G4/wBjiVeMvgmvhklb7mrq6euq3TTGuTnFCnB5/OkpU+8K4Euh8cem/ssftBXn7N/xSi8YG0+06fdw/ZtSt15Yxk8Mv+0pJPfvX6Ka54e+C/7anwXjErx6jpN/DvtLyDCz2M2OCDjKSA9Rjv0IPP5RYC7T1xyM16T+zl+1F8SP2cNZlu/Cl6lxYXTZvdKu8mJz/fX+6/bNe9lGaxwS9hXV6b/r7vI/VPD3xAp8NxqZZmUfaYKrfmTV+VvRu32otfFH0ad9H+hHwv8AhT8GP2J/hFd391qEVpDbx+Zq+s3Y/eXLjJGfzwFA/CviL9rj9trxZ+0RfN4d0IyaZ4YgkIisEOGu+eHlPfI/h6D3rnf2nf2uPiF+01rEba4Rp+j2bt9h0e3PyLzxI5/jcgDnoO2K8pJzWmZZxH2f1XB6U1+J6PHXiLSxGDWR8Pr2ODguV2VnOz181HuvilduW9hXLO5BPWkZSpoOVPBoZgTxXzrvc/G23cQgg4NA6iiigQVLbWk97KltZwSSyyOFjiiQszseigDqT2FP0rStT1zUrfRtGsZLm7u5RFbW8S5aRycAD8a/ST9kD9hDwn8BLePxb4suItV8TzxDfK0X7uzHzArFzzkHljzx26V6eWZXXzKb5NIrd9j7Tg3gfNuNca6WG92nH45vaKf5y7Jfetzz39hb9gi/8J3unfGr4sxsmoIhk03RXQH7PuUrvkOeHHUAdM+o4+yTHtJdJCMnJGOtPVcfJ2FIQV4zxX6PhMHRwdFU4H9mcK8LZXwjliweBjo7OUnvKVkrv7tlouggyo+8M45IFHNKqljTwAOBXXsfSvcjoqQ4xzSLt/houK41RjAVsn6U5QOopFQ5z0p2BnNIAGe5ooGe5ooAKKKKACiiigAooooAKKKKACiiigCOiiiszMkooorQ0CiiigAooooAKKKKACiiigAooooAKKKKACiiigApGGRilooAY5I5avJP2lvBpnhtfGlsAWi/0e6AHJU8ox+h3D8R+HrxAPBrJ8YaSdc8L6hoqxoz3VnJHGshwNxHynPbBxz2rty/FywWLhWj0f4dfwOfF0I4nDypy6/0jyv9mfxX9mvrvwldvxOouICe7AYcfiMHHsa9nAJ6Cvh2PxX+054H8ULJH8NNCjvNOusPHJrzAFlYg9E6ED8Qa+jdB+IH7R+vaNBrWlfC3w0yXMYeP/ipH+YH/gH1r2eI8NFVY4un8M/z/wCCeXktaUYOhN6x/r87nq+W/u/rVHW9F07xDplxoms2iXFneW0lvd20oyksbqVZWHcEEj8TXC/8JL+1AeT8LvDX/g/f/wCIpf8AhJP2oP8Aol/hv/wfv/8AEV8xGSZ7qdiX9mXVblvhLZ+CtWleTUfCFxP4cv2kRw8jWL+RHMdxJPmwiGfOTkTCuk+Iulvq3gvVbFY8l7KTYMdSFLD9QK8N8PeKf2kfBH7TPiHw43wv0Ex+NtEh12zhGvybDc2XlWd42fL2qxil00Be+xjk9B6OfE/7SU5EF38JfDzwNgSiPxEwJU8NgmPg4zzzV03KM00KSTWp8sftBafq198LdXvtBVjf6Oses6fGgyZZ7OVLpIxjn5zFsOM8MfpXUaHrOneItEtNe0m7Se1vrWO4tZo/uyRuoZWHsVINcrrPir452V/c6dJ8BtPdIbh42P8AwlyE7QSCMeT/AJxXGfs76z+0BZ+DJ/hzY/A2C+l8HapJo08jeK0GyNds1qnywtz9lmtj6ndnjNfrsa8XFTvo0u//AA2x+ZzpPmce3/Dfme7+HPEup+FdWi1nR5lWWPghhlXXuCK4P4na5qFx+0n4e+IGobmTxHpd7ot0QQA00ey7tVyeoRFviB/tH05pXHir9oG1lMV18C9PRlPzR/8ACVplfbJhrlvivdfHjWvDEXiqL4Kabbt4R1Wy115X8XIcW8U6x3eAIhnNrLODngA5IIGKmssNTTxDSulv1smmOn7eclSi93t8mj2Irg8Zx70KG8wShvuj+oP9K5rxnd/H7wXrR0C6+C2myOkSsZU8YRkcjgf6nrjn8axv+E2+PZkCN8E7AKRyw8Wx4/8ARNbwxFOtBThrF9bETpVKE7SVpLpdfozY8HfGbUtG+HnibwT42kW307wx471Kae9jjkO6O9ZNVEsg5wqfbiuRgLjGMDJ5f46fHHxP8MfCtv4z8GeAl8RaXLHme+t7wMsQzydq8sv+0DxXOQan8bY/jj4j0bVvgLp8ln4o8K2VybWbxGuyaS3luLe4feYdrZjltFwBldoJJ3cfK/iD4q/tGfsqfFTVfBfgjRIm01HydKm19ZoRG/IhfMY5UHHSvh+JM3lw7hFKHu0pNqUo8vNCTbcZJS0krbrfTzP2Twm4NwPHmcToVEp4iilUhSqKfsq9NLlnFzpfvKUk2nCSjKLv7ystczxd8d9S1z9ofQfj/wCJLeOBbPxzo15dGIGUQWQu4YbjaOpxatL+Ir2H/gohrOp6R8bPD0/h/UZbe8s/Dyy2tzbvhkP2iQKwI/iypzXgXxfv7f4+6Jq//CLfC2x8L6xqGk3H2jTX8SKbW6maMjELeX+7JJOBwM9CDW146+MfjX4zn4f/ABH8W/Dq3u7P/hBbA6hbQeIEWe//AH07OqjysKxwM9SAdx6ivx+jiMS8jzTByrKo60qdRTvo5e0gpXTs4uzTa6JaXR/X2Ly/KqXiDwznNPCVMP8AVaVXDTw8qcpSjTWHq+y5XqqkU24ppu7kuZLW3v8A+ztbabGsv7av7bHirUNZsLCZz4W0G/ujJLr14u4bkG7Ajjcg7sAZ57V4x8Sv2pviD+0R+3NofxQ+JuqwWtjcCzNvp6LiKygtL1WAGOSAtySW7kk1g+Ptf/a8+P8A4nXVp/2f7qWGBBbaRp1ldSC3sLcYVIYgY9qKB1bqTknNc/rX7Mn7X/8Awmvg3Ur74BJZNquoXel2gudfjUTtJZzXWxiEJVQtiWzjkgDvXgKGcYq2HwtGUobydruUrWTbv32X6n005cI5VWlm+b4mlQxDUYU6d1GGHpOS5oU421m43dSaWr92Noqz/fzwl4u8OeMdKh13wtrUWoWVwu6C5t2DIw9QR1rSJHIB/Gvxr+DHwU/4KPfBjWYNe+H1rpWjuqZMSeLPMjxjO1ozDtOckHv19a+3Pht+2J+1/pvhVLT4ofAbw9quqIFAvdN8XLDHJxyWQwnBzjgHFfqmXYbO8ZBOthJU2+9rf16n8XcY5bwjw/iH/ZWcUsXC7VoqUZqztqmnFrzUn6Htf7Ja2sXwRt9BgPmRaL4l1/RYywOGSy1m9s/4ucfuB+GBk9T+XfxUTTIvib4jTSv+PVfEF6tmFPCxCdwoHsBgfhX1H8HP2vP2mtGsfGug2XwL0WH+zfG+qzTt/wAJQv8AopujHqJUB4vm/wCPwvngHfxivkG6vLi9uHvLuUvJLI0kkhGNzMSScDpya+e44wVfBUKCqq3M3b5LX8z+RfHjNcFi8BgsPFXk5SlfslFLR+fMn8iCig4zwKK/Oz+bnFocHIXbik3tjGaACegpKLk7MXJoQnOKSihaDSuK2c8mkoooEFAxnk0UoAwTQNK7PT/2L49Ou/2oPCVvqibojeysFYZUusEjJ+IYAj3FfrJGNgyAOK/Hb4EasdC+NfhXVFCnZr1sGDDorSBGP/fLNX7EkHGRj3r7rhRx+qVIre6P6g8Aa8HluOoJaqcXfylFpf8ApLHKxJAp1MRWGN1PAI6nNfVbH9BK4UYGc0UUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACmuARk9qcTgZpofsfzo2FdI8R/aV8HR6brEHjG1T91dr5d3hTgSKOGP1HH/AAGtf9m3xmby0ufCV4+Xtm8203NyIzkMo9gef+BV3vxC8JReNPCd5oBA3yxk27E/dkHKn8xj6E186eCvEVz4F8VW+rIhBt5ClxF3K8hlP6/lX2OXuObZLPCt3nDb9P8AL0Pmcenl+ZRxEfhlv+p9SLgHk9KeCDyKgtbiC6tkuIHDK65Rh3HrUinB618dJNOzPpotSjdHm/7RMKeGofDHxjSBS3hHxLDJfuY3JGn3YNldE7OdkazrctkEf6KDjivRhjOVyMnjpWb4+8I6R8QPA+seAvEAY2GuaZcafeBGwfKnjaJsH1w5rmP2bPF2ueLvghoF54tuFl1zT7d9J8RSqGAbU7KV7O8I3c7TPDIVJ+8pB75prXYb2PHPifYnTfiLrFoy5H253wRxh/m/ka4r4T/EzXfgt+0h4g0Sw09ZdN8beGYdWgjaQgLqFkwtLiTkEAtDPp6jkcRfl6p+0Pam2+JMsxT/AI+bSKUH1wCn/steEfGxINGvfCvxJMK50TxJDFcu74P2a8Bs3BJ6KJJYJT7Q1+m4WFLHZTSUldWjf5aH57Xc8NmlRxdmm7fM9Au9RutWvZtRvJWeWeQySuf4mPU1n+IdEtPE+gX3hXUZpI7bVLKWyumjOD5cqGNsZ/2WNW02qMKa634efC9fHlhNf/8ACQQ2n2WbMiMfmVAM7/pnvXo18Rh8Jh+aekVptt2OenTqYmvaCvJnn/7PVl46+LXwd8P+MdTt5Z9RnsEh1q4mIJbUIf3N2Ce5E8cgJ46dBXb2/gO/0DUobvVNWsbeSGVZBFK+48EHkCqn7H8Z8Oan8Rfhc0isND8dT3enllGZLS/ijvDIOBwbqS9HU/cPPatD4zRJB41eSQAh7ONgB9SP6V5FPF1KuLeHTSj6a2PQq4SnSw3t3rK+3zMD9p/xR4V174k/DzW9J1cWtxMNX0B5bHTw3k/arP7WJSzHATztOhQAjJLD1xXilh+wf+z6+oyal4vvPEPiO5nmeW5ubzUPKaZmJOTs6c+mKp/tYftA/AfwD8On8S+J/jB4Vsr3w5rum6oltdazALgJb3kRuNkZfcW8gzr04315d8Wv+C7X/BMv4SXE9veftB2uvTW4bz4PC9hJdMuP4QflUt7A4965MXkWQVYxo4tKcYapSel35Kyfle57+ScZcZcPzqzyavKhOqlGUopKTjHZc26V3d2au7N6pH0HpP7MH7NOgy+dpnwV0oyHaIWvPMnKkc5G4nBzUX7Onh/QtG+GMXh6z0GzjXSdV1HTE3Wce/ybO+nt4SxA/wCeUaEZ6gj3r88/iF/wdHfs+/aJdI+AH7OHjPxdfuXFmZgtuMDgO0ah2IzkEDp681y3w3/4KDf8Fyf2l/FviPSv2Rf+CfTeH4dT1OTUZLjW9LkU2XnQx26M4uigAEltLJwp3M7ZGBUwjwxl8bYWjBekUXjc645zyTnjsdVnf+apJ/rp8j9d4nliDKsnlqclggwD9cV5t+0druieE9M8L+Mdf1+z06HS/HOksJLy5SFXSe4FlL87EABY7pnY/wB1DXxT4Y/4Jgf8HDP7VFvDN+0n+3Vovw10nUrlZL/TPCzlpPIZEYxlYQuxuWBXJCsoOTmut8T/APBsx8EvCPwf8U/Fj9pL9q74qfEnW9H0G/1Se1OsNb28k8NtI6qoTnkqvPXjrjNXLP6Kg1TpP8EeOsorzlerWu/Vt/ie2/E7/gql/wAE9fg2bm28c/tXeEYpoQymCxvvtbO452r5AcEnt29688g/4LMfDHx7qS6P+y/+zF8W/ideRwiYy6D4Tkt7RSduwC4mwvLEA5xjOeQDX13+zn/wRk/4JnfARF1j4bfsjeDYb+GYTRale2Qu5mIYOo3S5ztIGBjHWvoPR/C/h7wzAbHwz4fsdOtyqhobKzjiU7RtAwgA4HA9q5qmf42q2oJR+RvHJcHFe/r+B+YXwd8Sf8FTfjP8R/H2leE/2JPD3gHTtY1PTtV8RxePfFxk1G1t5tKisykMduAjyN9gXAJAUvyDiuOuYpLe4ks54XSWFykiSJtZWHBBHYgg1+nGl3zWn7UHiPTbi6SMXnw90SeGJRyXhvtTV2/KWAfh7V80/G79k/SvGPjbU/E2g6wLC9ur2WS4Rot0bSFsk4GOpyfxr4ziTJM14loR9hJSnT5nyuyvzWvZ2S0t1PynxY4NxOeYPD1sArzpXTXdSS2vpdcu19b+R8tFSOSKXoR82RXtWv8A7GPizSvCWpeKj4qs7g6fp090bK2iPmMY4y23ntkYzz1rQ8E/si+G/EnhfS/E0vi66J1LTYLyMRxgbVljDgfka+IocC8S15pKjb1cV+p+I0/D/iupC7w/L6uP+Z4O8SqOvPYVHXunxK/ZEn0XRJdY8CavLeS26F3sbkANLj+6wHX69a8QlQjKmIowYgqexBwR+leZnXDmbZDNLGQtfZp3T9H/AE/I8TOuG82yCUVjIct9mndPyT7+W5FRQAScUoGa8M8VtWEpdjDtV7Q9A1PxHqVtoeg2Ml3e3s4htbaLrI56Dnp9TwK+zfhN/wAEnbK80KK9+Lnji5tr2RMtY6SqlYiSRjec7sADtXdhMtxmOf7mN7H03DXB+fcWVJQy6lzcu8m0or1b79ld+R8RkEdRS9F+tfSvjn9h3w1pevX+neG/Ft15UFw8cDXMSk/KxXnH0rpH/wCCTHxFuLGK60n4madIsyA7J7MrtBAPUNyetexi+EM+wVOM6tKyltrH/M9f/iGPG3tpU6eG5nHtKL/U+YvhnpOrax8SNA0zQ4Ge8n1m2W3AP8XmL+Q9T6V+ysSZBIbJz6V89fsp/sCeEf2edUTxnr2snWvECxFILkw7I7YFdreWM9T6nkZxX0OAg4zj04r3siyutl9OTqbyt+B/Q/hJwXmnCeAxFXMFy1azj7qafLGHNa7Wl3zN2TdlbW90nbioweT3pd6+tI6jrTa9/qfrxICDyKKYCR0NLvHpTAdRSBwevFLQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAR0UUVmZklFFFaGgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABgZziiiigBjqRjDfpXz9+0D4O/wCEd8b/ANs28ZFtqi+YmBwJRgOP1B/4FX0G2O5rkfjR4PHi7wPcRW8O+5tAbi2OOSVHKj6jI+uK9TJMa8Dj4yb916P0f+W5wZnhvrWEaW61XyMr9nfxcuu+D20SeXM+mMIyPWM5Kn+Y/CvQgo5UV81/B7xf/wAIl43guJpNsF1+4uctgANwGP0PNfSaMGAXHFdPEGC+qY9yj8Mtfn1/H8zmybFqvhvZveGn+QEJIuwj6V5v8OLeLwV8bvGnw/jlVINceDxRpkJjfrKotrtATx8stvHMQO95k9ePSgADgV5n8eZV8FeM/AXxj8144dN8SDQ9XcSNtNjqoS2VSBx/x/rprEnhVRjXgJ8sj2Ohh/tQWITUdJ1Qqf3sMsXTnKlT/Jj+VcDf/Azwn8bPg74m8N634vFi17o95bSpgZgDQOqTjvlXZWHuBXrf7TuntP4Ls9R8sZg1Fd3qAyMP5gV4bvbpz1/Kv0PInVxeSqnSnySi3rv5/qfF5yqdDMueceZNJ226W/Q5z4QeMT8QPhloPjS6jSO51HTYpL6BDxDchQJo/qkgdT7qa6i3v7yzcmzuXi3Aq2w4yD2rgPgzbw+Hdd8YfDhWIXTfEMmpWUR7W2oE3RYf7P2p7xB/1y9q72azvIIxcSW0ixs2FdlOCfSvo4ezcbS3216tHiNyUny7bnGP4l17wd+0EItJ1oWcfjXwVLZ3FwIh5q3Gn3BkhKMejFNQu24x9w9ccfjNp37An/BzP+33r8178U/F/i7SNPuJZoxL4n8TCwtlgaQllhSPLbQSQqnB4xX7H/G9rfRoPC/xAnmjRfD3jCyllMg4ENzvsJCx7Kq3Zc/9cwe1fVXhG7N94V0+6LZJtlGT6j5T/Kvmc+oR5lOLafl6afke9k2Jly8lk/U/Cv4Hf8GbvxZ8fTJrn7Vn7ZSRux3S2/h2xa5njUM4bMs5ZWLYjIxgD5gecV9Q/sQf8GzH/BLvS/hJ4X+JPjbwTq/jXV9V0S2uNQ/t7W2aCKZo4jNCYYyE3JNHKpI9WXoBX6mWtxJavvhcrnjKnnqK83/ZvZ9K0nxb4Dnt4438PePtWgUCQZEV1MNTgGAAABDfxqB2VRXzMaSVS7PfVWfKVPg3+xR+yJ8ANMGhfBT9nTwf4ctRt2pp+hxqy4wOHI3Yxnv+dTzNc6J+1sLcKDH4o+G0jxL5jZU6VfoWPTAGNYXA6nHouK9Frhvic9ho/wAVPhp4tu7z7OW8QX2izO0oVDDd6dcSBWH8Wbi1tQB61pKCtdERqtvU7nfvzkgjsAc1V8Q6Dpvinw7qPhnVlJtdTsZbW5RTgmN0KNj8CauStvbOMe1JGzxyjywQc5HatN0ZuXv2OK/Zc1/UdZ/Zp8Aavqtv5V7N4M037fFv3GK4+zIJYye5VwwPuDXb+YWUkLya88/Zna2tfh5e+HkaPdo/jLxDZCKF9wgiTVrpoIz6EQPDwa9EiyQVHf2oSRa1PN9eRLT9qnws62gLal4B16Oe4yMgQX2kNGg98Tztjr8vtWB8RNLksvFd7MV/dSTb0OfXHFb/AMWLRbD40/C3xGZWDz63qWkiJR98S6VdXRz7A2Q/HFV/i3Lc6Z4vjlSNWtprQeZC6ghm5Gc9j9K9fJZuGMst2n/meVmkFLD3OGu44pozDKm5JEZJVx1Ujmud/Zw1ez8S/s//AA/uL9447mXwTpTSXKHKMTaRk5HrknsMdO1d3/wjF7rJFxoGlzS9C0BQ5HPUE9RXL/sq/Bv4ga18BfC9lbaEYV07TE08GeRUH+jkwYx148vB46ivoa2MwkHec1FpPr6HhU8NiJwcYRbW/wBxr31pNYSqtxleTsfs3uK+av2tfh7pOkeJ7HXtAtpRPqkM815BBFlcQ7d8p98Oua+6fD37Omvxxm317WIGt2PzxopbH+76VyfjL9m/wDa/tEeBLLWbm5uoLnSNcDRSuApUCzyp9R8x/D0r5niHE5JnWXTwld3utGls1s15nHnXBcuIsunhcRFJNaN7xktpL77Puro/NoOXb5Tx64oOWOGXANfcHxp/4JZaRruvS6v8D/GMFlHOS8uk36+YsTHJO2TJbGex6Vtfs5/8ExNG8A+Jbbxv8WfEEWr3FnMHtNMtoisAYDAdjuyxB+YDp9a/B58PZhHEeycbRvo/Lufgc/B7jd5qsJ7Bcl7e05lyW/m1tL5cvN0sSf8ABOb9kax8G+GrT47eMLaKbWNTtBLo4WTetrayA89cb2GCT2BxX1pK620TOU+VVJ/rXnH7HhRf2TvhYsKAKfh1ohwOn/HhDXaeO7/+zvBuqXiuAY7CUg+h2kA/rX3eAwNPCU40YL/gn9W8M8OZfwnksMDhVpFXk+spP4pPzf4JJbI+ZYTJrfiNFcZe8vQD7l3/APr19WxKyJ5a9F6V8zfCzTf7S+IulW7KfluvMbjpsUv/ADUV9MplQK+34qko1aVJdIv9F+hHDqco1Kj6tL8wycYoIIODStnPIoJJ6mvk7n09xVIHU0oVTyBTKen3RQINi+lBCDqKGBIwKZSSsA8BD0FI5PSm0VS1GtR0fenVHT1BAwaGDFooopCCiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApjZBxnpT6YzE4wP1pMEfNfxi8IL4P8AHV1FbRbLe5P2i3wMKA3VR9CDXsvwS8Xf8JV4HtjPLuubP9xcEnJJXoT7lcfjms79obwn/bvg/wDtm2hDT6W3mHIGTEeGGfbAP4V578AfGD+HvGY0m4l22+orswxwBIMlT/MfjX2TX9sZFf7dL8v+G/I+Xkv7NzfmXwzPoHPb0rmfjJ8P4vit8Lte+Hk9ykLarpksNrcODi3uNuYZuOcpIEcEcgqDXS5HmEZ6nilcqRkD86+PaPqep5Zd+Krr4u/sv23jK4sktru70y2uL20A/wCPS6jZRcw4PIKSJLGf9014xsIJyc17B4GiTTPFfxT+BotZlSGZfEGlK77gbXVY5mfb/wBv9vqDY7bl9q8g3SI5DnGTxkV9vwlNulVh5p/ev+AfH8TwbqU5Jbp/g1/mcRqd5c+Dv2iPDXiNIZTa67pc+l3RAzG1zbN9stgw/wCuYvgD/tV7J8RPievjnR7HTrfSktFhZpLgIchpTxkY7Y/nXi/7RcF9Z/C+68baXavJceE7y215RGmXMVpKstwif7T26zRD/rpXcRXcE8CTwTI8cq7kkRwQw9fp719LVwuHr1oTkryjqvmeHCtVp02o7NWZhfFPwjL49+GPiDwNbSiObV9FubO3lzgxSSRMqODj5WViCG7EZr139lbx7/wsX4C+HfGTxpG+o6dFPJDH0id41dk9tpYrzzxzXAYVmIL496f+xJ4i0DwvoHjP4b6vrNpbDw342vEi8+URhoboi+i27jyqx3SxcdPKwelcOeU1LC8y6NHZlU/9pS/r+tj6CCiSLIb6GvOvCHl+HP2m/GWhfaNsev8AhzSdZihYnLTo9zZ3DKMYwI4bIE9SWHpXZQ/E34OLHKJvit4f82NNzwJrEJdRgkEgMT/Ce3Y1438Qf2hvg1o3xu8B+OLLxtHcR3MOreHNQa2gnlEInhW9R8RoQ2G01l/7aYFfG86b0PqUvdPda4D9pmCKL4TyeKpIJH/4RjWtM19zCPnSGyvobi4IPbNvHMpPo5qK6/ae+GO+FPD6azrAuDmN9O0S4cYw395V/un8x61kePviTD8UPh54j8BQ/CLxsYdf8P3tklxJoQjicSQOmcmTPcdquTbjchb2PXWjCglRgZIHvg4pInIYSoM7TkZHpXlnwv8A2g/ih8S/hDoPjfR/2f72R9U0aG5S4u9Zht1bMYJbDAlQWOQvXk5xitCHxb+0VqWYrL4Q6VpwDAiS78RxzqR3AEag5rNNtBZXF+DNzbWPxM+KPhmMJE0Hi+1v4YVXA8i50myy/TBLXEVyT9Pz9JgljFwm4ZB6Z7187aQ/7VNp+07rdtcX/gezbWfAumTWdoqXUixG0vL1ZZB03vi9hBzxiMYxk13h8GftFX6u+o/GjTNPHPlx6b4cSQAen7z15/8ArdKpe8rF2aZf/aShjjl8C+KrKKJf7J+IOnPLIW/1SXazaaSP9rF7tHrux3rqdc8TeDvCVsNW8S6OLrJxb/ICQ2O2fb+VeFftP/Dv4nJ8F77xN4o+Oup3Uej6rpWpPHY6RBbHba6lbXG5dn8SiPOePu1u/Fn9n538ISXjfFrxtL5Plrcwv4gJhmQnaw27eAep5Oc1eHpxnXjTnez00ZFSTjTcuqVz0G9/aX0uyhY6P4TcIF+UyEew6Ac9fWvJv2ev2q7nTPhhPotx/ZWkpa+K/ENtA004YRiLWb1FB3EZzt68c5rjn/Zo+EOrQyzPZX17JIVDw6nrE7kAbfuYYcfL0OevtXDfAv4FfCO30jXLC4+H9rvsPHeuIGuZHkc77+WX5t5P/PTj2xX00clytP8Ah6+bZ8481zDldqmnkrHvHiL9q/dfNp1z8XNDgndN6R22pwqWXIGQN2T1/OvFfiz+094GufjD4B1WX4ny3Utne6lFcSW8c0oCSWhb7sancN0cfIzjFeh6b8Pvhzp87FPh9oroyqrB9MjYkDAGGIyOB+eK53x/4R0eH4qfDjUPDtjFCg1bUhLbwxqjIzabcMBheuRGSMeld8cHhqEbKnFedjnljK9WWtRv5npX7P37Xfwtv9ZmmsZtX1Oe9t1+XTdIuJGdwyDBVlXafnzngYBz0r2X/hoJZbmO3tfgv49mWTYyzx+Hv3YDYIJJkGPfivMvgNejTfihYiVmUSiWN8r1/dlgOnqBX0YwZ4gGcDjsvFfE8S0FRzBNKycU/wBP0PqshqOphHfdNo+eP2Rvi78Vrn9l/wCHGneH/wBnrU50g8A6PFBc3mrQ26XAWwg+cZB2qRnBPU8Vp/HL4h/tFf8ACrboQfBbTNKuLq4jgdr/AMTRzoEMiEkeWoJ+UNkV2P7IIUfsm/C5QRn/AIVzohyvGf8AQIKr/tO6m0Pg6x0tJApn1HLrkZZVRj/Mjn2rz8qpKrmNKLX2l910d2PqOlg6kv7rPFP2arX9ojU/i5Y3epW/hKOxhBkvIVNw0yxnCMUYHbnaxxkdq+uSGyB9eBXi/wCy9pbSavqWsnaBFCkQ55O4k5+ny17SrEtya9Hiar7TNGv5Ul+pwZFT5cDzPqx1BAPBoor549sayAcim1JSbF9KAGUU/YvpRsX0oAZRT9i+lKAB0FADVUg5NOoooAKKKKACiiigAooooAKKKKACiiigAooooAjooorMzJKKKK0NAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqMryCwqSkKgnmlJjTsQ3trDe272dwgaORdrqT1B618W/EH4h6n4D8cX2h6X8IvG0sthfMLOf+x1ijdAWKuGZ+hCkg4546Zr7WC7uMV5Z+0p4OW/0+28Y2sWXtf3Vxxn5D90/gf5mvf4exn1fG+zk/dno/0/yPIzfD+1wzmt46/5/hqUPA/x4+MnjXwvZax4e/ZuvpS423Laj4gtrdkYZB+U5OTjp2yK2F8W/tM6ku63+Duh6bnlE1DxAJyCP+uQA5rm/wBmzxd9g1ufwldMBFdr51uS3/LRQcgfUZP4V7acnDH8DXLnGDeBx0qdtN16M2yzE/WsIpPdaM+dviRH+1F4d+Lfg/x9fal4Bshqcs3hi8uILe9kWJLkLcW7yK3Bbz7VIFHY3jHOa8f1rwL8dV1K807VvjBp9lPDfSIBp3h1XRFEjAgCQjsAB6Yr66/aA8Fan8QPhFrnhzw+xXVvsou9DcSFCmoWzrcWj55+7cRRN7gYr591TxTpPxAe3+IOhbfsPiPTrXV7TAyVjuYEnVT05AfB9wa9fhSSeLnC+8fya/zZ5/EUb4aMuz/NGDqOm/EDW/hrN4G174x37SXkJtLlLHRreCKWFkZW3Y55DZPqRXlfwF+DbXHw0t9F1j4reMZp9CkudCvrUaztjzaStArbQvG6NI5Bg9JBya9pcqiYxye9cD4SnuvDHx/8W+B7mGTy9a0608RW4cYJlANndKB/siCyb6yk19jSwtDDyco6czu9T5eWJrV4WnqlsWtJ/ZU8A63ZPYv4c1PV45nPmfa9SuJDk5zyGGCQSPoKb8Bvgb8HfD37Veo+F7v4dWLQeIvByX9p9peR9lxYXQhmYBm5JS/txyf4CK9g+HnxQ1H4fwXNpa2cUsUvzIHHzK+PvZ7jHauA1bU5ND+LvgT4mXTF5IvFf9n35jbYHi1JXtFB45H2qS1bH+x3rjxqxVelWhKCUErp9WbYepRozpyT95uzPeofhd8M4rk3Z+HGg+cQMzrpEIfgnByF7Bm/M1yP7QWgaL4e+Htl4m0XwzaW6+HfFujarJLaweUILeO+hS7kwmM4tJLnjBHTPGa9OQEtsz075rD+Jvg21+I3w+1/4d3agRa7ot3p8khXO1ZoXjP/AKF7dOtfHPVH1avdM23hYkShDj1OBikBIcEnA7jFZPwb8f2vxS+B3hT4iLbGKbX/AA5ZahNG3BRprdJCpH8JDMQR2IIrUKMzDJxj071MZNqzRM78yPPf2XV07T/hpf8Ag6xi8keHfF+t6Z9m5Iiij1CZoFBI/wCfaS3OO27A6V6FtXO7aM15z8JGk0D45/FLwjdlwdQ1LS/EdqhkBCwXNhHYABR90GXSpmz3ZmNekKNzYzVxtYqVr6nF+LIdL0r9oXwTrt7aOFvtA1zR45VT5DM5srxFduudtjPt7ctXaOQzllAGfQ155+0A1/pes/Drxfa7nh0f4h2gvEVgB5d7b3OmKScEkCS+jOO5ArurjVLO3k/0m4SPd93e2M+uKUEk2EpJLU4/9pq0vb/9m34g2OmMguZPBGrC2MhwFk+xy7T+DYNbHjG9sPFHwym1rTCstvd2KXUDrghkIDqwxx054pPEfinwTqGkXeiarq1vJbXcDwXEYOdyOpVl/EE151+zp8aPDWrfs2eBrmYyieXwXpv2iKOPiKQ2cQZOcZw2a6qWGxLqKUYPc5amIo+yalIxRuibKEqR0x2rkfhBd2M3in4iaJfS+a1p43GboJhsy6Xp84DeuBKB+Ge9dpezWtyfOitzHk/OobI+orgfhhZ/YPH3xF/0WVBeeJrW7EkiEK+dKsIDtJ+9gwEZFfb1FzKMnpr+jPkoLlcu3/BR6Be6bPpzDdhkb/VupyGFef8AxTnaD4g/DGS3YpJ/wnM/7xev/IC1bj/PrXdw3VxbRNBuxGwO5ABgn1rm/GXgvUfF3iDwprdg8ZPhzxG+oSI8ZzIrade2m1ffddI3/ASO9Vq4NSZDjJVU0egeB9Vs7fxTp+oXh8uWK8jJlUcFQecge1e73XxT8Aac5Evia2YnqkbbiK+eLDwl4n1B82ehXT7skYiPIrYsfgp8RdSXfH4c8rBB/fSBc/rXg5tgstx1WM6tZRsu6/U9vLcVjsKpRhTvzGj+y18fvAui/snfDGAvPdTR/DzRk2xxEZIsoR3/AC/CsX4h+PtS+ImtrqFzbeXFFlbW1TnaCevHVjWt4K/ZK13w14b0zwtYS2lhYabaRWlnbId3kwxqERc98AAV6R4B+A/h/wAJXS6jfz/bruMgxtIvyxnHYV5tKtkOVfvabc5rbW/6I7qsc2zGPs5xtDqWvgf4KuvBnhIjUUC3V7IJph/c4wq/gP512qqFpmABtHQdKkByM18riq88VXlVnvJ3Po6FGOHoxpx6BRRRXOahRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBHRRRWZmSUUUVoaBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSMSBkUtFFkBHVTxFodn4h0e50S/XMN1C0bnGSAR1+oPNXAhzzTigPApxbjJNdBNKSsz5Vli1PwL4saGUFLrTbrqO5U9foR+hr6b8M65a+JdCtdbtZA8dzCHBU9D3H4Hj8K8l/aV8ImG9t/GNjaYSYeReuo/jH3SfTjIz9Kh+BXxW03w3bP4X8QXIgh80NaSnkLn7yn2zzX2ePoyznKKeKpq846Pv5/jqfK4SbyvMp0pu0Zbfp/ke2PGu4OSRhs9M18e3GlzeCviH4r+Fs9wrR6Nrk11pK7j/AMg++dr2HaOyI801uvbFtjnFfWdz4v8ADFnH5k+swKpHXzBXzH+1l4k8K2vx/wDA/i3Q9dSWPxLpl54d1Hy7lQDPEGvrIkdcBE1Fc56yKMc8+PkLrUs0py5XbVP5po9TOFTq5dNJro/uaNH4c+K7Hwfr/wBt1XRo72CaMxSo4+ZQSDlc9xivOv2lvEP274w+D/i/p0Zt7G11x9EvVjjHy2V9H5SA/W8isAen9D1EflEHe+D2rl/jH4Kk+Ifwu17wfYwhr26sGbTHaQII7tP3lu+TwCsyRsDn+Gv0CeDpLEPEK/Na3l9x8ZHEz9gqNtL321+86RCc7SD1zzXPfF/w9qnij4batpmgh/7TS2+06Q0Z5S9gYT2zD1xNHGcd8YrY8O6y+teH7DXZdLks3vLKGd7Sf78JdAxRvcZxV9rlxyu1dp/hHNdfKnHVbo521GaaPbPBXjXRvHfgzSvH+k3A+x63p0OoWpYgZimjWRT1x0YdCfrT7zxDodq++41q3jA6gzCvk7wl8QvBXwW+G9t4X+IPxh0C2s9Je4gsHu9cijSCxjmf7LCd7Lho7fy4zx1T0xXnnjb/AIKjfsE+B4Sup/tMeHbq4aLzEs9GuDeTON23hYlbPPHWvmFklOGk6q/D/M+gWbVZpckD6m/Z0+IPhLwr4I1jwDdXBibw14y1ixS3WIjy7d7yS6tFGTyv2W5t8HvgmurvPjT4ci3G1tZ3boDwP518JaD/AMFA/hjql7qN98Df2e/ip4vutZu4by5fT/Bs0MMvyJaiXzJyoACQRA8cAZ71sWX7Qf7bnjO7D+EP2KLfQLUeYi3vjHxhBG+5Sdp8qDLBWBU5+tXTyzL0/icvT/gJmNXM8TPRWXq0j6Eu/iz4ltP2lI9dsNMjW01jwJLBfOVUlZbG8ja3BbAzkajc4HT5WNdFd/FHxlfZ8m98oc8QxgV842vhr9vfxHb7vFPxO+H/AIU81dvk6Bok9+YQVHzAzldzh93GccDmul0X9n7x/fSPeeLP2gvGF9cm6SdF0ox2ESYXDII0VxsJydueOBXoUsDhYaxp/f8A8E5Z4vF1HZy+46741/238SPBZ0HVPEclqYtZ0u+juri42JHLaX9vdpk5GMvCo/Gp9X+Jvg7TpYX1HxnbM0uxUUT+a0jsPlwq5Jzg8+nNZPhv9iPwi9sijwBquqzOEE13q19cTSTMrMys5ZwpILE5wOvNel6F+ylrVteJqNl4N0mxlSLyo5EhijZUzwgKjOB6ZxVfWsDh96kI/NEexxtV+7GT9DjYPEllqF35VjJJLiaSGWWGFikUiLllLEYz6etHhnw3pXhPRLfw7otuYbS0QrBHv3BBuJwCe2T717Bpv7Mut3bA6nrkUK5yfJUsw/M+vvW5Z/sxeGIhtvtYupvUAbf5GuWrxFlVH7d35I3hk+Y1Ps29TG8O/s4/2hZRaje+IQIp4ldFij7EZ710Nh+zP4It233dxczk9Rnb/Ku90fTYNH0220aAHy7aFY49xycKMCrDAl8kYxXxeIz3Mqs3ao0r9LL8j6rDZTg6dNXhr19Tl7D4QfDnTSGg8NQuRwTNlif1rasvDPh3TlC2WiW0QHTZEBWgQQlNrz54nEVdZzb9Wd0MPQg/dil8hI4IlXZGiqB2AqQrx8opqkA5NOY4HWsOZtmvLFPQRVPelIAywHNCEnOTS0DIwCTgVIBgYoAA6CigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkZQylT0PWloJA5NAFLXdIste0qbR9Tt1kguE2yqwyCK8O8afs+eJ9HvXn0CEX1oWJjZG+dR6Ee1e+Yc8005Y8np1r0MBmuLy2TdJ6PddDhxuXYbHxtUWq6nyN8RbZvhN4K1b4k/Edl0TQNCsnvNZ1W/PlwWlug3PI7HgAAH6nAHJFfB/xI/4L/8A/BLLSL6002Pxxq3im5gvFuLCHQvD09wBPE2UYMAORliDzn0wa/Qn9ujwt8Kv2rvBd1+z58UvDq654Skuo5tV057l0hvpYzlFfYwLorYbbnBZVPauS/Zw/wCCWX7KfhbRjqvg74CeENAi81TbtDoEMs2VTbkPKhZeMDg85NfYrM8asGsRX5aafk2/uPmHgcFLEOjT5pyXZpL7z8/Ln/gvxqnj+3/4xq/4J6/FXxYWljSG8n0/yIHZsfJyMnkgZHFa1p+1b/wXG+LdyJvhp/wT/wDCPgmzcrK0vjHxHsuGQkLh0P8AGACSB24r9cNC/Zb8AaFapYweYtvCoWO3gRYlUegCjAHsBXQaf8GvhvYDcvhuORl6NM7E1xVOIKSjZ1Zy/wAMUvzuz0aWUVOlKK9W2/0R+QUH7OH/AAXI+LTJcfEP9tDwD4Ljw6pZeDvCzSTjkFWLElGJ5B9s9jx0+kf8ES/iP8TYYD8fv24/jb42IneS7Sw1f+yRKeSoH2cfIFZi3HXgcV+uVl4U8L6eALPQ7WPH3SsIyPxq6I4kwE4HoBXn1M+ptaU3L/FJtfcbLKKt/iUf8MUn9+5+aXw5/wCCAX7Huitb6rqX7N76/eQSh4LzxlrU15LGw/iHmSAEnqcjmvoj4cf8E2/hX8PNPh0rwb8KfBuhxQqoRLLRIVYBemWCZJGepNfUx2nqn5GjknJOeKxnxBi/+XcIx9I/53NlktFu9SUn6s8osv2XLFVU6h4ikYjl0ihH8ya2tP8A2dvAFmyveJczuDwHlOP0rv2YZwRSBiOAa5KmcZnU3qP5afkdEMrwVPaCfrqYNn8MvAVic2vhu1X3Mec/nWraaNpdkAtnYwRcc+XEB/KrJJPU05VKnrXDOvWqfFJv1Z1Ro0ofDFL5DRGhPHQdhSYz1p3yngHrTSCDg1jdtm0UkSYwMCkwFJYmmhiKcw3DIp2aG1YFYNS4Gc0iAjORS0rK9xCMCRgUBQDxS0UwEZSxFKQD1FFFAAABwKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkf7ppaawJOPyoAUkgivO/jn8Th4V0w+H9Iuf+Jhdrh2B/1Cev1Paum+Ivjmw8B+HJNXupFMpyttCTzI+OBj09a+c4x4j+IvipEZnuLy9mALHoB/RQK+hyLK44qbxFbSnD8Wv8up4+a494eCpU/jkaXwu+Hd78QfEKxzBhYwENdzj8wgPqf5V9Iadp9tplpHZ6fCscMahY41HCgcYrM8E+DNM8E6FFommx8R8yyHrI56sa2kByDiufOc0lmWI0+BbL9fma5Zl6wVG8tZvdiAZOKXy/em0V4x6YEEHBoopVUsaq+hV9AVCeaMZPyingAcCipJGuDknFNqSk2L6UAMpQpPIFO2L6UtACKgBzQyhqWigBgUk4p4AHAoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKazAjANACucDHrVXVNVstF06bVdSuFigt4y8kjHAAFWHcY3EdK8L+PPxPk8QagfCOh3YNlbsRdOh4mkz0z6D+dd2W5fUx+JVOO3V9kcmNxlPB0HOW/RdzmfiV48v/AIheJHu1ZvsytssoOm1emfqeM16x8DPhp/wiGkjWNWjX+0LxQcFeYo+y9eD0JrlvgL8LP7TkXxtrduDArf6FE65Eh6FyD29PXr6V7UjBRxzk5r3c6x1OjRWAw/wx383/AFv5nk5Zgalaq8VW3eqFcDgZ5FPyM4phyTwc0rjuB9a+Tsj6EbRTwAPmbrSbgOFH40wECk8gU5VC0isScGnUAFFFBIHJoAKKKKACiiigAooooAKKKKACiiigAopCwBxS0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBHRRRWZmSUUUVoaBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFIwJGBQAtI4OKbsb0rL8a+I4fB3ha88SXMW9baMFUH8TFgqj/voiqhCU5qMd3oTKShFyeyON+OvxQ/4RnTD4a0O7UahdL+8cdYI/X6nt+deZfCv4d3XxB8QYn3LZwNvvJh1PcIPc/oPwrNtbTxB8RfFezLT3d5Ll3PQep9lAr6N8D+D9P8F+H4dFsF5T5pZCMGRz1Y/54GBX2eJlT4ewHsYa1Z7vt5/5HylFVM7xvPPSEdjUtbaCytks7aFUjjG1EQcADpipF+8KU7U5PamIyliyivi273Z9aklGyFp+4A4NN3xAFgelBDnrUgPqOl3t60pTuPypgNBIORUlR06PvQ0mN7jqY5OcU+mP9404pXBbiq2ODTqYqgnmn0PcHuFFFFIQUUUUAFFFFABSFwDg0tRscnOKACnq2eDSbQCSelHAbIPHejQNB1FR/ifxpxcnpTsxXVh1FMDnvT6QwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCOiiiszMkooorQ0CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAE3r61yXxw0261X4ZanDaRl3jVJtq9SqOrN+gNddTJ44pozFKoZSMMpGQR6VpRqOlVjNdGn9xnVh7SlKHdNHzT8LvGtn4G8UDW722MkLQNE4RQWGSCCM/SvWl/aK+HYx/pNzz1/wBGbj9KyfGX7Ntjql6+oeF9T+zGRyzWsoygJ64PUD2wawB+zH4vcH/ieWAHbcX5/wDHa+wxFbh7NJKrXm4Stqtf8mfL0aec5evZ0YKUb/11N74hftWfD3wV4C1zxpEl1dNo+kXN6tqsLJ53lRNJsyQduduM9s18nSf8FytDUDy/gVe/MM86qgx/47Xy7/wU/wD+CyHwF/Zl+N4/YD+Gwg8eeMtdvYNA8S3mmXIWy0Frx1t3V5OTJOiy7/LUYBXazITXh6NvUsDkHk/jzX5lx/mNPJZYdZZVbU+bmuk9uW2682f1F9HPgLJuPFmcuIcPz+xdHktKUbc/teb4X15Y/cfoin/BcvR1bJ+BF2fb+1U/+Jrv/wBnL/grLofx1+KFv4Cn+E97pdvJazT3GoNfLKIgi8fKFycsVX/gWe2D+V5kEfzE9K+8P+CTP7PC/EH4ZeIfinoHiPSJJ5tV/s2ZVuN81sIVDNFIq5MZLNuw2CRtNfN8LZvmmb5zSoYirale83yr4Vvqlu9EtOp+o+Lnhj4bcCcDYrM8NhH9YtyUv3k3+8npF2crPlV5tdVFn3Uv7Rnw86faLn6fZm/wpf8Ahov4e/8APzc/+Azf4VxP/DMHi1mwNesP/H/8KX/hl3xf/wBB2w/8f/wr9qeC4X/5/P8AH/5E/hH61xF/z6X3f8E7Rv2jfh390z3P1+zt/hSf8NF/Dv8A5+Ln/wAB2/wrjD+y/wCLc86/Yf8Aj/8AhR/wy/4s/wCg/p//AI//AIURwfCzWtZ/1/26UsTxDbWkv6+Z2f8Aw0X8Ou9xc/8AgO3+FH/DRfw5/wCfm5/8Bm/wrjP+GXvFp6a9YH/vv/Cj/hl3xd/0HrD/AMf/AMKf1PhX/n8/x/8AkQ+tcQ3/AIS/r5naL+0b8OV/5eLn/wABm/wpf+Gj/hz/AM97n/wHb/CuL/4Zd8Xf9B7T/wDx/wDwpD+y94tBx/b1h+T/AOFH1PhX/n9L+v8At0PrXEP/AD6X9fM7X/ho/wCHP/Pe5/8AAdv8KP8Aho/4c/8APe5/8B2/wriv+GXfF3/QesP/AB//AAo/4Zd8XZx/b1h/4/8A4UfU+Ff+f0v6/wC3Q+tcQ/8APpf18ztf+Gj/AIc/897n/wAB2/wo/wCGj/hz/wA97n/wHb/CuK/4Zd8Xf9B6w/8AH/8ACl/4Zd8Xf9B7T/8Ax/8Awo+p8K/8/pf1/wBuh9a4h/59L+vmdp/w0f8ADn/nvc/+A7f4Uf8ADR/w5/573P8A4Dt/hXF/8Mu+Lv8AoPaf/wCP/wCFH/DLvi7/AKD2n/8Aj/8AhR9T4V/5/S/r/t0PrXEP/Ppf18ztD+0f8OscT3P/AIDt/hWL8Qv2svAHgj4f6742ggubt9G0e5vltREV84xRNJs3EYGduM9s1iH9l/xerADXbAn/AIHx+lfmJ/wUy/4LLfs8fs9/GuP9gr4VzQeP/FviK8i8PeJNS0q6H9n6C91N9mkjeTGZJ41ct5agjszIaUsJwvFXjWk3/X90uniM/lNKVJW/rzPqcf8ABdDRmPPwQvT/ANxWP/4ij/h+dov/AEQ+9/8ABrH/APEV+dpEY6g/nQPLzwD+dfzvHinO7fxP/JY/5H+mL8BPC/nX+xy/8GT/AMz9U/2av+Cr2ifHv4iDwZc/Ca90y1jtXnudRe/WQRAA7RtC5bLADt3PbFfQ4/aK+G55Mt4Md/sxr4g/4JS/s2ReMPg1qfxW8L+NtHubjU9Yezv7aOfzJbNrZ2XyZApOxiG37Tg7XQ96+rT+y/4sHH9u2H4K/wDhX7NwrTy7F5NTr5lXftJ3dkrWXRaR6rX5n8L+MNHLso47xOW8NYblw9C1NtuUuapH+I/eenLK8Ld4366dvYfH3wDqeo2+l2Ut00txKI03W5ABJAH867hGL84xXjGh/s4+JNM1q01KbXbMrb3Ucjqkb5IVgSBx7V7PHjGAMfWunNaeW0ZxWDm5Lrf/AIZHw2X1MwqKTxMOXsOoooryz0gooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKQqrfeGaWigAIB4NfAX/AAcff8FFfEX/AATv/wCCcer+IvhhqdxZeOPH2pJ4Y8Jajbj5tPkljeS4uwT90x28cmw9pHjNffpAIwRmv5/f+D4ifXlv/wBmy1fP9l+R4saNUzhrkHSN5btwhXHcbmx3oQH4nfs46lqWuftV+A9V1S9nurm68f6VLcXNzKZJJXa+iJdmPLMSeSeTX7OyAK20DpX4n/ADXrPwv8efBfiXUm2Wun+LdNubhzwFjS6jZj+QNftgzIxJLggd1Oa/PeOLueHf+L/20/rv6K9TlWbpav8A2f8A9zGL488W6Z4B8G6r411hC0Gl6fLdsnQSeWpYJk8ZYgKB6kYr5x/4N5v+CsnjT9mn/gqNaad8QvEEq+CPjrrcWh+KtM83/R7TUrmQLY3yqeFZJ2WJm4AhnkJyUXGT/wAFc/jfYeEvhPp/wZ06/kTUPEc63VyIzgfZIX+43s0m0jt+6P0r88/Al54gsvGukXvhNzHqsOqW76ZIJSpW5EimI5GMEMAc5HTrXfwbl7pYaWJkvelovRb/AI/kjw/pMcWRx+eUMgoy92guef8A18mvdT84ws9/ts/vfTO0ZpQAOgoGMcUV9mfzAFFFFABRRRQAUUUUAFFFFABRRRQAEA8GkCkcBv0paCMjFAH53f8AByv/AMFMPEn/AATl/YCmt/hTrBs/iH8T9Rfw74UvYZwk2mw+S0l3qCDqzRJsjUj7slzE3QYP8rf7M1zc3v7UXw9urq5kmkl8e6U0ssrlmctexEkkk5JOST6mv2g/4PfYvEI+In7PEs8THTToviYWbFmO6YS6cZeMAAhTF05P0HP4p/s7azp3h79oDwN4g1ifybOw8YaZcXUp/gjS6jZm/AAmh66LqNNLc/axkG84XOOtYHxE8a6V8OfA+qePNYfFtpdm9w6bgDIQPlQe7MVA9zX0H+yp8KPgb8RvC/ibVfiv4kNlNZCNbRxfJEsUZRj5uCP3nzADHQc9c8fm1/wWC+NOm+FPhzYfBTQdWlM3iC5a6uRG2C1pBIPL3deGYhsd/LPNfkGH4fxlanharceWu2kk05JR+JtdO5/pZn/idlGTUc3gqc/aYCEJNyi4wnKqr04wm7p3dk30vpezt1//AAbTf8FVvif+zr/wUl0/4NeOfEy3Pgz49eIYNO8SwXtyqpb6sySpZXUOSFV2mkSF8YLo69SiCv6pggxyK/g9/Z3uta0/49+CNT8M27SahB4w0x9PiVCzPOLuMooUEFssAMDrX94QIYZFfrygqSUY7JJL5H+bWJxWIxlaVevLmnJtyb3bbu231bb3FooopnOFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAR0UUVmZklFFFaGgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFfmf/AMHS3/BPfxX+3D/wTx/4TH4V6RNf+L/hNrLeI7HTrS1aae/08wmK9t4woJ3bWinz6WxHfj9L2BYYBx71wvib47+HPDOt3Xh288C+OLt7Vwsk+m+BtQuoJMgH5JYoijjnGVJGQfSmnYD+EcNcW8hUgpIjemCCPr0r6K+HX/BTP9pP4ceALbwBbXmm6gllAYbO/wBStC9xFHghV3BgG2jGMjPHJNfsX/wWA/4N2vgd+1p4/wBY/aU/YZ0nxn4D8Wa3efaNe8Hal8LtYGk31zLKXnu4njt2a2dt2TEEMZJJBTgH8oPE3/BCP/grb4c1mfSP+GB/iTeiGYot1YeGp5opB1DKyrjBz9QeDg1hiMPhcTC1aCkvM9vJeIs74cryr5XiJ0ZyTi3CTTafR23Wifqj5r+KPxQ8cfGPxjdeOvH2ty3+o3khaSSQjCjsijHCjgAdq+yf+DeL/gnN4t/4KD/8FEvCnm6Nu8CfDTU7PxV48vbm3L28lvb3KPDYHI2s9zKgj2HkxrM2CENdj+x9/wAG1P7c/wAatetLz9pHwN4q+FXh0yyfbprzwJqN/qJiXaMw20ERBckvgSPGMRk5wV3f0PfsA/BX9kP/AIJufACx/Z8/Zv8Agb8RrSxhYT6rq1z8N9Te91e6Iw1xcyC3+ZscADAVcAAc52pqFOCjBWR5uLxeIx+JniMRNzqTbcpSd229229W7n1uqkEZ/nTq83X9pzwmB/yTX4j/APhttV/+MUv/AA054T/6Jr8SP/Dbar/8YoOY9Horzj/hpzwn/wBE1+JH/httV/8AjFH/AA054T/6Jr8SP/Dbar/8YoA9Horzj/hpzwn/ANE1+JH/AIbbVf8A4xSf8NO+Fv8AomfxH/8ADb6r/wDI9AHpFFeb/wDDTvhb/omfxH/8Nvqv/wAj0f8ADTvhb/omfxH/APDb6r/8j0AekUV5v/w074W/6Jn8R/8Aw2+q/wDyPR/w074W/wCiZ/Ef/wANvqv/AMj0AekUV5v/AMNO+Fv+iZ/Ef/w2+q//ACPR/wANO+Fv+iZ/Ef8A8Nvqv/yPQB6RRXm//DTvhb/omfxH/wDDb6r/API9H/DTvhb/AKJn8R//AA2+q/8AyPQB8H/8HT3/AATr8Y/tyf8ABPyH4hfCTQbnVPGvwg1Ztd0/TLOz82fUNMmQRX9vHgbtwVYrjAPItSMElcfyizxSwuYpQyurbZEIwVIPIr+6iT9pvwqyEf8ACtfiOD2/4ttqpH/oivxZ/wCCwn/Buv8ACn9qH4i6t+0j+wJ4c8YeDfEWtXBute8C6l8NNWh0m6uGOXntnS2P2Zm5ZoiPLyxKlBhKpO+jBWPyL8Df8FRv2l/BXgeDwStzpV+ba28iDUr2zJuQm3aNzBgHIGMFgTxznJrxL4qfFLxt8ZPGd549+IGtTX+pX8heWaVh8o4wijgKoHAUcCvo/wAQ/wDBC3/grboGs3Wjr+wH8TLsW0zRrd2Hhe4lhlAYjcrBcEHGQfQivcf2Kv8Ag2p/bd+MHjLStV/ar+H/AIt+GHhFLzfrCyeC9QvdUltVKblgit4WVXcM4HmsgARjzlQ3NSwGDo1nUpwSk+tj6DMuLOJM2y6ll+MxdSpQp25YSk2la6Wnkm0uy0KX/Bst/wAE7Nf/AG1/+Cj/AIb+I2vaNMPBHwfvbfxZ4gu3g/dz3lvIr2FmCVKszzhJCh+9FFJ6g1/W1CjKBu/M18rfsM/Cz9kH/gnd8BbL9nf9mP4BfEnStFtZTcXt1d/DvVZbzU7plVXurmX7OPMlYIoJACgABVUcV7Iv7TnhTJJ+G3xHP/dNtV/+MV0uVz59bHpNFecf8NOeE/8AomvxI/8ADbar/wDGKP8Ahpzwn/0TX4kf+G21X/4xUgej0V5x/wANOeE/+ia/Ef8A8Ntqv/xij/hpzwn/ANE1+JH/AIbbVf8A4xQB6PRXnH/DTnhP/omvxI/8Ntqv/wAYo/4ac8J/9E1+JH/httV/+MUAej0Vxng3436B4316Pw9p/gvxlZSyozC41nwXf2UACjJzLNEqA+gJ5PArs6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI6KKKzMySiiitDQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAAgEYIoAAGBRRQAUUUUAFFFFFkAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFBAPBoooAKKKKAAADgUUUUWQBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBHRRRWZmSUVHRVcxXMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVHRRzBzElFR0UcwcxJRUdFHMHMSUVQZmyeT1orTlNOU//2Q==">
-        </div>
-      </div>
 
-      <h2 class="offer-title" id="offerTitle">
-        UP TO <span class="offer-number">70% OFF</span>
-      </h2>
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
 
-      <p class="offer-subtitle">
-        Save more on selected SehrAn Media packages and grow your social presence for less.
-      </p>
+  <header class="site-header">
 
-      <div class="offer-note">
-        Offer applies to eligible packages. Final package price is shown at checkout.
-      </div>
+    <div class="header-inner">
 
-      <div class="offer-actions">
-        <button class="offer-btn" id="offerShop" type="button">
-          <i class="fa-solid fa-bolt"></i>&nbsp; View Packages
-        </button>
-        <button class="offer-btn secondary" id="offerLater" type="button">
-          Maybe Later
-        </button>
-      </div>
-    </div>
-  </div>
+      <a href="#" class="brand" onclick="goHome(event)">
 
-
-  <div class="bg-glow glow-one"></div>
-  <div class="bg-glow glow-two"></div>
-  <div class="bg-glow glow-three"></div>
-
-  <!-- NAVBAR -->
-
-  <nav class="navbar">
-
-    <a href="index.html" class="logo">
-      <div class="logo-icon">
-        <i class="fa-solid fa-bolt"></i>
-      </div>
-
-      <div class="logo-text">
-        SehrAn <span>Media</span>
-      </div>
-    </a>
-
-    <div class="nav-links">
-
-      <a href="#services">
-        Services
-      </a>
-
-      <a href="#pricing">
-        Pricing
-      </a>
-
-      <a href="#trust">
-        Why Us
-      </a>
-
-    </div>
-
-  </nav>
-
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="hero-left">
-
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Instagram Services Available Now
-      </div>
-
-      <h1>
-        Build Your
-        <span class="gradient">
-          Social Presence
-        </span>
-        Faster.
-      </h1>
-
-      <p class="hero-description">
-        Simple social media packages designed for creators,
-        pages and businesses. Choose your package, complete
-        your order and get support whenever you need it.
-      </p>
-
-      <div class="hero-buttons">
-
-        <a
-          href="#pricing"
-          class="primary-btn"
-        >
-          <i class="fa-solid fa-rocket"></i>
-          Explore Packages
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- HERO VISUAL -->
-
-    <div class="hero-visual">
-
-      <div class="floating-mini mini-one">
-        <i class="fa-brands fa-instagram"></i>
-        Instagram Available
-      </div>
-
-      <div class="hero-card">
-
-        <div class="profile-head">
-
-          <div class="profile-icon">
-            <i class="fa-brands fa-instagram"></i>
-          </div>
-
-          <div>
-            <div class="profile-name">
-              SehrAn Media
-            </div>
-
-            <div class="profile-handle">
-              @sehranmedia
-            </div>
-          </div>
-
-          <div class="profile-status">
-            ● LIVE
-          </div>
-
-        </div>
-
-        <div class="hero-stats">
-
-          <div class="stat">
-            <strong>10K+</strong>
-            <span>Reach</span>
-          </div>
-
-          <div class="stat">
-            <strong>5K+</strong>
-            <span>Growth</span>
-          </div>
-
-          <div class="stat">
-            <strong>24/7</strong>
-            <span>Support</span>
-          </div>
-
-        </div>
-
-        <div class="growth-text">
-          <span>Profile Growth</span>
-          <span>82%</span>
-        </div>
-
-        <div class="growth-bar">
-          <div class="growth-fill"></div>
-        </div>
-
-        <div class="growth-text">
-          <span>Simple ordering</span>
-          <span>Fast support</span>
-        </div>
-
-      </div>
-
-      <div class="floating-mini mini-two">
-        <i class="fa-solid fa-shield-halved"></i>
-        Secure Ordering
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SOCIAL PLATFORMS -->
-
-  <section class="social-section">
-
-    <div class="social-track">
-
-      <!-- SET 1 -->
-
-      <div class="social-card">
-        <div class="social-icon instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Instagram</strong>
-          <span>Followers & more</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Available Now
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon snapchat">
-          <i class="fa-brands fa-snapchat"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Snapchat</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon youtube">
-          <i class="fa-brands fa-youtube"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>YouTube</strong>
-          <span>Channel services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Facebook</strong>
-          <span>Page services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon twitter">
-          <i class="fa-brands fa-x-twitter"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>X / Twitter</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon whatsapp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>WhatsApp</strong>
-          <span>Support</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Support Available
-          </div>
-        </div>
-      </div>
-
-
-      <!-- DUPLICATE SET -->
-
-      <div class="social-card">
-        <div class="social-icon instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Instagram</strong>
-          <span>Followers & more</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Available Now
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon snapchat">
-          <i class="fa-brands fa-snapchat"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Snapchat</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon youtube">
-          <i class="fa-brands fa-youtube"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>YouTube</strong>
-          <span>Channel services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>Facebook</strong>
-          <span>Page services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon twitter">
-          <i class="fa-brands fa-x-twitter"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>X / Twitter</strong>
-          <span>Social services</span>
-
-          <div class="available coming">
-            Coming Soon
-          </div>
-        </div>
-      </div>
-
-
-      <div class="social-card">
-        <div class="social-icon whatsapp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-
-        <div class="social-info">
-          <strong>WhatsApp</strong>
-          <span>Support</span>
-
-          <div class="available">
-            <i class="fa-solid fa-circle"></i>
-            Support Available
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SERVICES -->
-
-  <section class="section" id="services">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Available Services
-      </div>
-
-      <h2>
-        Choose What You Need
-      </h2>
-
-      <p>
-        Instagram services are available now.
-        Other platforms are being prepared for upcoming launches.
-      </p>
-
-    </div>
-
-
-    <div class="service-grid">
-
-      <div class="service-card">
-
-        <div class="service-icon instagram-icon">
-          <i class="fa-brands fa-instagram"></i>
-        </div>
-
-        <h3>
-          Instagram Followers
-        </h3>
-
-        <p>
-          Select from different follower packages
-          according to your requirement.
-        </p>
-
-        <a
-          href="#pricing"
-          class="service-btn"
-        >
-          View Packages
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <div class="service-card">
-
-        <div class="service-icon like-icon">
-          <i class="fa-solid fa-heart"></i>
-        </div>
-
-        <h3>
-          Instagram Likes
-        </h3>
-
-        <p>
-          Instagram likes service is currently
-          being prepared and will be available soon.
-        </p>
-
-        <a
-          href="#"
-          class="service-btn"
-          onclick="comingSoon(event)"
-        >
-          Coming Soon
-          <i class="fa-solid fa-clock"></i>
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PRICING -->
-
-  <section class="section" id="pricing">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Instagram Followers
-      </div>
-
-      <h2>
-        Pick Your Package
-      </h2>
-
-      <p>
-        Choose the package that fits your requirement.
-        Promo code
-        <strong style="color:#c67cff;">
-          ZEESHAN10
-        </strong>
-        can be used at checkout.
-      </p>
-
-    </div>
-
-
-    <div class="pricing-grid">
-
-
-      <!-- 200 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Starter
-        </h3>
-
-        <div class="followers-number">
-          200 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>30</strong>
-        </div>
-
-        <a
-          href="order.html?package=200&followers=200&price=30"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 500 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Starter Plus
-        </h3>
-
-        <div class="followers-number">
-          500 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>50</strong>
-        </div>
-
-        <a
-          href="order.html?package=500&followers=500&price=50"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 1000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Most Popular
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Popular
-        </h3>
-
-        <div class="followers-number">
-          1,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>90</strong>
-        </div>
-
-        <a
-          href="order.html?package=1000&followers=1000&price=90"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 1500 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Growth
-        </h3>
-
-        <div class="followers-number">
-          1,500 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>130</strong>
-        </div>
-
-        <a
-          href="order.html?package=1500&followers=1500&price=130"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 2000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Growth Plus
-        </h3>
-
-        <div class="followers-number">
-          2,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>150</strong>
-        </div>
-
-        <a
-          href="order.html?package=2000&followers=2000&price=150"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 3000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Pro
-        </h3>
-
-        <div class="followers-number">
-          3,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>200</strong>
-        </div>
-
-        <a
-          href="order.html?package=3000&followers=3000&price=200"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 4000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Pro Plus
-        </h3>
-
-        <div class="followers-number">
-          4,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>250</strong>
-        </div>
-
-        <a
-          href="order.html?package=4000&followers=4000&price=250"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 5000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Best Value
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Premium
-        </h3>
-
-        <div class="followers-number">
-          5,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>300</strong>
-        </div>
-
-        <a
-          href="order.html?package=5000&followers=5000&price=300"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 6000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Premium Plus
-        </h3>
-
-        <div class="followers-number">
-          6,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>350</strong>
-        </div>
-
-        <a
-          href="order.html?package=6000&followers=6000&price=350"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 7000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Advanced
-        </h3>
-
-        <div class="followers-number">
-          7,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>450</strong>
-        </div>
-
-        <a
-          href="order.html?package=7000&followers=7000&price=450"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 8000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Advanced Plus
-        </h3>
-
-        <div class="followers-number">
-          8,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>500</strong>
-        </div>
-
-        <a
-          href="order.html?package=8000&followers=8000&price=500"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 9000 -->
-
-      <div class="price-card">
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Elite
-        </h3>
-
-        <div class="followers-number">
-          9,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>550</strong>
-        </div>
-
-        <a
-          href="order.html?package=9000&followers=9000&price=550"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <!-- 10000 -->
-
-      <div class="price-card popular">
-
-        <div class="popular-badge">
-          Maximum
-        </div>
-
-        <div class="price-label">
-          Instagram Followers
-        </div>
-
-        <h3>
-          Elite Plus
-        </h3>
-
-        <div class="followers-number">
-          10,000 Followers
-        </div>
-
-        <div class="price">
-          <span class="currency">₹</span>
-          <strong>600</strong>
-        </div>
-
-        <a
-          href="order.html?package=10000&followers=10000&price=600"
-          class="price-btn"
-        >
-          Get the Package
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- TRUST -->
-
-  <section class="section" id="trust">
-
-    <div class="section-heading">
-
-      <div class="small">
-        Why Choose Us
-      </div>
-
-      <h2>
-        Simple. Clear. Supportive.
-      </h2>
-
-      <p>
-        We keep the ordering experience simple,
-        transparent and easy to understand.
-      </p>
-
-    </div>
-
-
-    <div class="trust-box">
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-
-        <h3>
-          Secure Checkout
-        </h3>
-
-        <p>
-          Your order information is handled
-          through the website's checkout flow.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
+        <div class="brand-icon">
           <i class="fa-solid fa-bolt"></i>
         </div>
 
-        <h3>
-          Simple Ordering
-        </h3>
-
-        <p>
-          Choose a package and follow the
-          straightforward order process.
-        </p>
-
-      </div>
-
-
-      <div class="trust-card">
-
-        <div class="trust-icon">
-          <i class="fa-solid fa-headset"></i>
+        <div class="brand-text">
+          <span>SehrAn Media</span>
         </div>
 
-        <h3>
-          Easy Support
-        </h3>
+      </a>
 
-        <p>
-          Need help? Contact SehrAn Media
-          through WhatsApp, Telegram or email.
-        </p>
+
+      <nav class="desktop-nav">
+
+        <button
+          class="nav-button active"
+          data-target="social"
+          type="button"
+        >
+          <i class="fa-solid fa-layer-group"></i>
+          Social
+        </button>
+
+
+        <button
+          class="nav-button"
+          data-target="movies"
+          type="button"
+        >
+          <i class="fa-solid fa-film"></i>
+          Movies
+        </button>
+
+
+        <button
+          class="nav-button"
+          data-target="games"
+          type="button"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          Games
+        </button>
+
+      </nav>
+
+
+      <a
+        class="header-support"
+        href="https://wa.me/919103874044"
+        target="_blank"
+        rel="noopener"
+      >
+        <i class="fa-brands fa-whatsapp"></i>
+        Customer Care
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="hero-pill">
+        <span class="live-dot"></span>
+        SOCIAL • MOVIES • GAMES
+      </div>
+
+
+      <h1>
+
+        <span class="line">
+          Everything You
+        </span>
+
+        <span class="line hero-gradient">
+          Love. One Place.
+        </span>
+
+      </h1>
+
+
+      <p class="hero-description">
+
+        Welcome to SehrAn Media — explore social media
+        services, discover movies and browse an exciting
+        collection of PC games, all from one modern hub.
+
+      </p>
+
+
+      <div class="hero-actions">
+
+        <button
+          class="hero-btn primary"
+          type="button"
+          onclick="openTab('social')"
+        >
+          <i class="fa-brands fa-instagram"></i>
+          Explore Services
+        </button>
+
+
+        <button
+          class="hero-btn secondary"
+          type="button"
+          onclick="openTab('movies')"
+        >
+          <i class="fa-solid fa-film"></i>
+          Explore Movies
+        </button>
+
+
+        <button
+          class="hero-btn secondary"
+          type="button"
+          onclick="openTab('games')"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          Explore Games
+        </button>
+
+      </div>
+
+
+      <div class="hero-stats">
+
+        <div class="stat">
+          <strong>12+</strong>
+          <span>Packages</span>
+        </div>
+
+
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Movies</span>
+        </div>
+
+
+        <div class="stat">
+          <strong>12+</strong>
+          <span>Games</span>
+        </div>
 
       </div>
 
@@ -2536,70 +2712,2490 @@
   </section>
 
 
-  <!-- SUPPORT -->
+  <!-- =========================================================
+       DESKTOP SECTION SWITCHER
+  ========================================================== -->
 
-  <section class="support-section">
+  <div class="section-switcher">
 
-    <h2>
-      Need Help?
-    </h2>
-
-    <p>
-      Contact SehrAn Media support directly.
-    </p>
-
-    <div class="support-buttons">
-
-      <a
-        href="https://wa.me/919103874044"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn whatsapp-btn"
-      >
-        <i class="fa-brands fa-whatsapp"></i>
-        WhatsApp Support
-      </a>
+    <button
+      class="switch-btn active"
+      data-target="social"
+      type="button"
+    >
+      <i class="fa-solid fa-share-nodes"></i>
+      Social Apps
+    </button>
 
 
-      <a
-        href="mailto:zpaul5567@gmail.com"
-        class="support-btn email-btn"
-      >
-        <i class="fa-solid fa-envelope"></i>
-        Email Support
-      </a>
+    <button
+      class="switch-btn"
+      data-target="movies"
+      type="button"
+    >
+      <i class="fa-solid fa-clapperboard"></i>
+      Movies
+    </button>
 
 
-      <a
-        href="https://t.me/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-btn telegram-btn"
-      >
-        <i class="fa-brands fa-telegram"></i>
-        Telegram Support
-      </a>
+    <button
+      class="switch-btn"
+      data-target="games"
+      type="button"
+    >
+      <i class="fa-solid fa-gamepad"></i>
+      Games
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main>
+
+
+    <!-- =======================================================
+         SOCIAL
+    ======================================================== -->
+
+    <section
+      id="social"
+      class="tab-panel active"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            Social Services
+          </div>
+
+          <h2>
+            Grow Your
+            <span>Presence</span>
+          </h2>
+
+          <p>
+            Explore available social media services and
+            choose the package that fits you.
+          </p>
+
+        </div>
+
+
+        <!-- PLATFORM MARQUEE -->
+
+        <div class="marquee">
+
+          <div class="marquee-track">
+
+
+            <div class="platform-card instagram-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+              <div>
+                <strong>Instagram</strong>
+                <small>Services Available</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card youtube-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+
+              <div>
+                <strong>YouTube</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card facebook-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+
+              <div>
+                <strong>Facebook</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card snapchat-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-snapchat"></i>
+              </div>
+
+              <div>
+                <strong>Snapchat</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card whatsapp-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+
+              <div>
+                <strong>WhatsApp</strong>
+                <small>Customer Support</small>
+              </div>
+
+            </div>
+
+
+            <!-- DUPLICATE SET -->
+
+            <div class="platform-card instagram-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+              <div>
+                <strong>Instagram</strong>
+                <small>Services Available</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card youtube-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+
+              <div>
+                <strong>YouTube</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card facebook-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+
+              <div>
+                <strong>Facebook</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card snapchat-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-snapchat"></i>
+              </div>
+
+              <div>
+                <strong>Snapchat</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card whatsapp-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+
+              <div>
+                <strong>WhatsApp</strong>
+                <small>Customer Support</small>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INSTAGRAM FEATURE -->
+
+        <div class="service-feature">
+
+          <div class="service-feature-inner">
+
+            <div class="service-title">
+
+              <div class="service-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+
+              <div>
+
+                <div class="available">
+                  <i class="fa-solid fa-circle"></i>
+                  AVAILABLE NOW
+                </div>
+
+                <h3>
+                  Instagram Growth
+                </h3>
+
+                <p>
+                  Choose your followers package below.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="hero-btn primary"
+              href="#packages"
+              onclick="scrollToPackages(event)"
+            >
+              View Packages
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- PACKAGES HEADING -->
+
+        <div
+          class="section-heading"
+          id="packages"
+        >
+
+          <div class="eyebrow">
+            <i class="fa-brands fa-instagram"></i>
+            Instagram
+          </div>
+
+          <h2>
+            Choose Your
+            <span>Package</span>
+          </h2>
+
+          <p>
+            Special prices are available on selected packages.
+          </p>
+
+        </div>
+
+
+        <!-- PACKAGE GRID -->
+
+        <div class="package-grid">
+
+
+          <!-- 200 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Starter</h3>
+
+                <div class="followers">
+                  200 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                70% OFF
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹100
+              </div>
+
+              <div class="current-price">
+                ₹30
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=200&followers=200&price=30"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 500 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Starter Plus</h3>
+
+                <div class="followers">
+                  500 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                67% OFF
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹150
+              </div>
+
+              <div class="current-price">
+                ₹50
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=500&followers=500&price=50"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 1000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Popular</h3>
+
+                <div class="followers">
+                  1,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                POPULAR
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹250
+              </div>
+
+              <div class="current-price">
+                ₹90
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=1000&followers=1000&price=90"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 1500 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Growth</h3>
+
+                <div class="followers">
+                  1,500 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹300
+              </div>
+
+              <div class="current-price">
+                ₹130
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=1500&followers=1500&price=130"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 2000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Growth Plus</h3>
+
+                <div class="followers">
+                  2,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹400
+              </div>
+
+              <div class="current-price">
+                ₹150
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=2000&followers=2000&price=150"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 3000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Pro</h3>
+
+                <div class="followers">
+                  3,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹500
+              </div>
+
+              <div class="current-price">
+                ₹200
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=3000&followers=3000&price=200"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 4000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Pro Plus</h3>
+
+                <div class="followers">
+                  4,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹600
+              </div>
+
+              <div class="current-price">
+                ₹250
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=4000&followers=4000&price=250"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 5000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Premium</h3>
+
+                <div class="followers">
+                  5,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                BEST VALUE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹750
+              </div>
+
+              <div class="current-price">
+                ₹300
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=5000&followers=5000&price=300"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 6000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Premium Plus</h3>
+
+                <div class="followers">
+                  6,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹900
+              </div>
+
+              <div class="current-price">
+                ₹350
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=6000&followers=6000&price=350"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 7000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Advanced</h3>
+
+                <div class="followers">
+                  7,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,100
+              </div>
+
+              <div class="current-price">
+                ₹450
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=7000&followers=7000&price=450"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 8000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Advanced Plus</h3>
+
+                <div class="followers">
+                  8,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,200
+              </div>
+
+              <div class="current-price">
+                ₹500
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=8000&followers=8000&price=500"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 9000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Elite</h3>
+
+                <div class="followers">
+                  9,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                SALE
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,400
+              </div>
+
+              <div class="current-price">
+                ₹550
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=9000&followers=9000&price=550"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 10000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Elite Plus</h3>
+
+                <div class="followers">
+                  10,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount">
+                MAXIMUM
+              </span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,500
+              </div>
+
+              <div class="current-price">
+                ₹600
+              </div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=10000&followers=10000&price=600"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         MOVIES
+    ======================================================== -->
+
+    <section
+      id="movies"
+      class="tab-panel"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-film"></i>
+            Entertainment
+          </div>
+
+          <h2>
+            Movie
+            <span>Collection</span>
+          </h2>
+
+          <p>
+            Search your favorite movie or filter the collection
+            by genre.
+          </p>
+
+        </div>
+
+
+        <!-- MOVIE SEARCH -->
+
+        <div class="media-toolbar">
+
+          <div class="search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="search"
+              id="movieSearch"
+              placeholder="Search movies..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div
+            class="result-count"
+            id="movieCount"
+          >
+            10 Movies
+          </div>
+
+        </div>
+
+
+        <!-- MOVIE FILTERS -->
+
+        <div class="filters">
+
+          <button
+            class="filter active"
+            data-category="all"
+            data-type="movie"
+            type="button"
+          >
+            All
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="drama"
+            data-type="movie"
+            type="button"
+          >
+            Drama
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="action"
+            data-type="movie"
+            type="button"
+          >
+            Action
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="scifi"
+            data-type="movie"
+            type="button"
+          >
+            Sci-Fi
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="crime"
+            data-type="movie"
+            type="button"
+          >
+            Crime
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="comedy"
+            data-type="movie"
+            type="button"
+          >
+            Comedy
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="adventure"
+            data-type="movie"
+            type="button"
+          >
+            Adventure
+          </button>
+
+        </div>
+
+
+        <!-- MOVIE GRID -->
+
+        <div
+          class="media-grid"
+          id="movieGrid"
+        >
+
+
+          <!-- SHAWshank -->
+
+          <a
+            class="media-card movie-card"
+            data-category="drama crime"
+            data-title="The Shawshank Redemption"
+            href="https://www.moviesbazar.tv/watch/movie/the-shawshank-redemption/0111161"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/Q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+                alt="The Shawshank Redemption"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+
+              <span class="media-type">
+                DRAMA
+              </span>
+
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+
+              <div class="media-info">
+
+                <h3>
+                  The Shawshank Redemption
+                </h3>
+
+                <p>
+                  Drama • Crime
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- DARK KNIGHT -->
+
+          <a
+            class="media-card movie-card"
+            data-category="action crime"
+            data-title="The Dark Knight"
+            href="https://www.moviesbazar.tv/watch/movie/the-dark-knight/0468569"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+                alt="The Dark Knight"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                ACTION
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  The Dark Knight
+                </h3>
+
+                <p>
+                  Action • Crime
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- INCEPTION -->
+
+          <a
+            class="media-card movie-card"
+            data-category="scifi action adventure"
+            data-title="Inception"
+            href="https://www.moviesbazar.tv/watch/movie/inception/1375666"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+                alt="Inception"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                SCI-FI
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Inception
+                </h3>
+
+                <p>
+                  Sci-Fi • Action
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GODFATHER -->
+
+          <a
+            class="media-card movie-card"
+            data-category="crime drama"
+            data-title="The Godfather"
+            href="https://www.moviesbazar.tv/watch/movie/the-godfather/0068646"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+                alt="The Godfather"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                CRIME
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  The Godfather
+                </h3>
+
+                <p>
+                  Crime • Drama
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GODFATHER II -->
+
+          <a
+            class="media-card movie-card"
+            data-category="crime drama"
+            data-title="The Godfather Part II"
+            href="https://www.moviesbazar.tv/watch/movie/the-godfather-part-ii/0071562"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg"
+                alt="The Godfather Part II"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                CRIME
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  The Godfather Part II
+                </h3>
+
+                <p>
+                  Crime • Drama
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- 3 IDIOTS -->
+
+          <a
+            class="media-card movie-card"
+            data-category="comedy drama"
+            data-title="3 Idiots"
+            href="https://www.moviesbazar.tv/watch/movie/3-idiots/1187043"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/66A9MqXOyVFCssoloscw79z8Tew.jpg"
+                alt="3 Idiots"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                COMEDY
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  3 Idiots
+                </h3>
+
+                <p>
+                  Comedy • Drama
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- INTERSTELLAR -->
+
+          <a
+            class="media-card movie-card"
+            data-category="scifi adventure drama"
+            data-title="Interstellar"
+            href="https://www.moviesbazar.tv/watch/movie/interstellar/0816692"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+                alt="Interstellar"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                SCI-FI
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Interstellar
+                </h3>
+
+                <p>
+                  Sci-Fi • Adventure
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- SPIDER MAN -->
+
+          <a
+            class="media-card movie-card"
+            data-category="action adventure"
+            data-title="Spider-Man Brand New Day"
+            href="https://www.moviesbazar.tv/watch/movie/spiderman-brand-new-day-hindi-english/22084616"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=900&q=80"
+                alt="Spider-Man Brand New Day"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                ACTION
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Spider-Man: Brand New Day
+                </h3>
+
+                <p>
+                  Action • Adventure
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- MUNNA BHAI -->
+
+          <a
+            class="media-card movie-card"
+            data-category="comedy drama"
+            data-title="Munna Bhai MBBS"
+            href="https://www.moviesbazar.tv/watch/movie/munna-bhai-mbbs/0374887"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/4m3D2z7G2z3Yh8M1zK4j6gVj8lR.jpg"
+                alt="Munna Bhai MBBS"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                COMEDY
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Munna Bhai MBBS
+                </h3>
+
+                <p>
+                  Comedy • Drama
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- OPPENHEIMER -->
+
+          <a
+            class="media-card movie-card"
+            data-category="drama scifi"
+            data-title="Oppenheimer"
+            href="https://www.moviesbazar.tv/watch/movie/oppenheimer/15398776"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+                alt="Oppenheimer"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                DRAMA
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Oppenheimer
+                </h3>
+
+                <p>
+                  Drama • Historical
+                </p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+
+        <div
+          class="no-results"
+          id="movieNoResults"
+        >
+          <i class="fa-solid fa-film"></i>
+          No movies found.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         GAMES
+    ======================================================== -->
+
+    <section
+      id="games"
+      class="tab-panel"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-gamepad"></i>
+            PC Gaming
+          </div>
+
+          <h2>
+            Game
+            <span>Collection</span>
+          </h2>
+
+          <p>
+            Browse games by category and open any game card.
+          </p>
+
+        </div>
+
+
+        <!-- GAME SEARCH -->
+
+        <div class="media-toolbar">
+
+          <div class="search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="search"
+              id="gameSearch"
+              placeholder="Search games..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div
+            class="result-count"
+            id="gameCount"
+          >
+            12 Games
+          </div>
+
+        </div>
+
+
+        <!-- GAME FILTERS -->
+
+        <div class="filters">
+
+          <button
+            class="filter active"
+            data-category="all"
+            data-type="game"
+            type="button"
+          >
+            All
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="openworld"
+            data-type="game"
+            type="button"
+          >
+            Open World
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="action"
+            data-type="game"
+            type="button"
+          >
+            Action
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="horror"
+            data-type="game"
+            type="button"
+          >
+            Horror
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="shooter"
+            data-type="game"
+            type="button"
+          >
+            Shooter
+          </button>
+
+
+          <button
+            class="filter"
+            data-category="adventure"
+            data-type="game"
+            type="button"
+          >
+            Adventure
+          </button>
+
+        </div>
+
+
+        <!-- GAME GRID -->
+
+        <div
+          class="media-grid"
+          id="gameGrid"
+        >
+
+
+          <!-- GHOST OF TSUSHIMA -->
+
+          <a
+            class="media-card game-card"
+            data-category="action adventure openworld"
+            data-title="Ghost of Tsushima"
+            href="https://ankergames.net/game/ghost-of-tsushima"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg"
+                alt="Ghost of Tsushima"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                ADVENTURE
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Ghost of Tsushima
+                </h3>
+
+                <p>
+                  Action • Adventure
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GTA VICE CITY -->
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="GTA Vice City"
+            href="https://ankergames.net/game/grand-theft-auto-vice-city"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/12110/header.jpg"
+                alt="GTA Vice City"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  GTA Vice City
+                </h3>
+
+                <p>
+                  Open World • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- RESIDENT EVIL -->
+
+          <a
+            class="media-card game-card"
+            data-category="horror action"
+            data-title="Resident Evil 4 Remake"
+            href="https://ankergames.net/game/resident-evil-4-remake"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg"
+                alt="Resident Evil 4 Remake"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Resident Evil 4 Remake
+                </h3>
+
+                <p>
+                  Horror • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GRANNY -->
+
+          <a
+            class="media-card game-card"
+            data-category="horror adventure"
+            data-title="Granny Chapter Two"
+            href="https://ankergames.net/game/granny-chapter-two"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
+                alt="Granny Chapter Two"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Granny Chapter Two
+                </h3>
+
+                <p>
+                  Horror • Survival
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- DEVIL IN ME -->
+
+          <a
+            class="media-card game-card"
+            data-category="horror adventure"
+            data-title="The Devil in Me"
+            href="https://ankergames.net/game/the-dark-pictures-anthology-the-devil-in-me"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80"
+                alt="The Devil in Me"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  The Devil in Me
+                </h3>
+
+                <p>
+                  Horror • Adventure
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- RDR2 -->
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action adventure"
+            data-title="Red Dead Redemption 2"
+            href="https://ankergames.net/game/red-dead-redemption-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg"
+                alt="Red Dead Redemption 2"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Red Dead Redemption 2
+                </h3>
+
+                <p>
+                  Open World • Adventure
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GTA V -->
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="Grand Theft Auto V"
+            href="https://ankergames.net/game/grand-theft-auto-v"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg"
+                alt="Grand Theft Auto V"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Grand Theft Auto V
+                </h3>
+
+                <p>
+                  Open World • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- GTA SAN ANDREAS -->
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="GTA San Andreas"
+            href="https://ankergames.net/game/grand-theft-auto-san-andreas-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/1547000/header.jpg"
+                alt="GTA San Andreas"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  GTA San Andreas
+                </h3>
+
+                <p>
+                  Open World • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- COD MW2 -->
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Modern Warfare 2"
+            href="https://ankergames.net/game/call-of-duty-modern-warfare-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/10180/header.jpg"
+                alt="Call of Duty Modern Warfare 2"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  COD: Modern Warfare 2
+                </h3>
+
+                <p>
+                  Shooter • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- COD BO2 -->
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Black Ops II"
+            href="https://ankergames.net/game/call-of-duty-black-ops-ii"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/202970/header.jpg"
+                alt="Call of Duty Black Ops II"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  COD: Black Ops II
+                </h3>
+
+                <p>
+                  Shooter • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- COD BO3 -->
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Black Ops III"
+            href="https://ankergames.net/game/call-of-duty-black-ops-iii"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"
+                alt="Call of Duty Black Ops III"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  COD: Black Ops III
+                </h3>
+
+                <p>
+                  Shooter • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <!-- RDR -->
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action adventure"
+            data-title="Red Dead Redemption"
+            href="https://ankergames.net/game/red-dead-redemption"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=900&q=80"
+                alt="Red Dead Redemption"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>
+                  Red Dead Redemption
+                </h3>
+
+                <p>
+                  Open World • Action
+                </p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+
+        <div
+          class="no-results"
+          id="gameNoResults"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          No games found.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       WHATSAPP
+  ========================================================== -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/919103874044"
+    target="_blank"
+    rel="noopener"
+    aria-label="WhatsApp Customer Care"
+  >
+
+    <div class="whatsapp-icon">
+      <i class="fa-brands fa-whatsapp"></i>
+    </div>
+
+
+    <div class="whatsapp-text">
+
+      <small>
+        CUSTOMER CARE
+      </small>
+
+      <strong>
+        91038 74044
+      </strong>
 
     </div>
 
-  </section>
-
-
-  <!-- FLOATING WHATSAPP -->
-
-  <a
-    href="https://wa.me/919103874044"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="floating-support"
-    aria-label="WhatsApp Support"
-  >
-    <i class="fa-brands fa-whatsapp"></i>
-    Support
   </a>
 
 
-  <!-- FOOTER -->
+  <!-- =========================================================
+       MOBILE BOTTOM NAV
+  ========================================================== -->
+
+  <div class="mobile-nav">
+
+    <div class="mobile-nav-inner">
+
+      <button
+        data-target="social"
+        class="active"
+        type="button"
+      >
+        <i class="fa-solid fa-share-nodes"></i>
+        Social
+      </button>
+
+
+      <button
+        data-target="movies"
+        type="button"
+      >
+        <i class="fa-solid fa-film"></i>
+        Movies
+      </button>
+
+
+      <button
+        data-target="games"
+        type="button"
+      >
+        <i class="fa-solid fa-gamepad"></i>
+        Games
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
 
   <footer>
 
@@ -2608,82 +5204,588 @@
     </div>
 
     <p>
-      © 2026 SehrAn Media. All rights reserved.
+      © 2026 SehrAn Media — Social, Movies & Games
     </p>
 
   </footer>
 
 
-  <script>
-    function comingSoon(event) {
-      event.preventDefault();
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
 
-      alert(
-        "Instagram Likes are coming soon. Stay tuned!"
+  <script>
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const panels =
+      document.querySelectorAll(".tab-panel");
+
+    const allTabButtons =
+      document.querySelectorAll(
+        "[data-target]"
       );
+
+
+    /* =========================================================
+       ACTIVE TAB
+    ========================================================= */
+
+    let currentTab = "social";
+
+
+    /* =========================================================
+       MAIN TAB FUNCTION
+       
+       IMPORTANT:
+       We do NOT use window.scrollTo({ top: 0 }).
+       
+       The selected section is first displayed and then
+       scrollIntoView() moves directly to that section.
+    ========================================================= */
+
+    function openTab(tabId, updateHistory = true) {
+
+      const target =
+        document.getElementById(tabId);
+
+      if (!target) return;
+
+
+      currentTab = tabId;
+
+
+      /* Hide every panel */
+
+      panels.forEach(panel => {
+
+        panel.classList.remove("active");
+
+      });
+
+
+      /* Show selected panel */
+
+      target.classList.add("active");
+
+
+      /* Update every navigation button */
+
+      allTabButtons.forEach(button => {
+
+        if (
+          button.dataset.target === tabId
+        ) {
+
+          button.classList.add("active");
+
+        } else {
+
+          button.classList.remove("active");
+
+        }
+
+      });
+
+
+      /*
+        Wait one frame so display:block has been applied.
+        Then scroll exactly to the requested section.
+      */
+
+      requestAnimationFrame(() => {
+
+        const headerOffset = 84;
+
+        const targetPosition =
+          target.getBoundingClientRect().top
+          + window.scrollY
+          - headerOffset;
+
+
+        window.scrollTo({
+
+          top:
+            Math.max(
+              0,
+              targetPosition
+            ),
+
+          behavior: "smooth"
+
+        });
+
+      });
+
+
+      /* Update browser URL */
+
+      if (updateHistory) {
+
+        history.pushState(
+          {
+            tab: tabId
+          },
+          "",
+          "#" + tabId
+        );
+
+      }
+
     }
 
 
     /* =========================================================
-       FIRST-OPEN OFFER LOGIC
+       NAVIGATION BUTTONS
     ========================================================= */
-    (function initFirstOpenOffer() {
-      const overlay = document.getElementById("offerOverlay");
-      const close = document.getElementById("offerClose");
-      const later = document.getElementById("offerLater");
-      const shop = document.getElementById("offerShop");
 
-      if (!overlay) return;
+    allTabButtons.forEach(button => {
 
-      const storageKey = "sehran_media_offer_seen_v1";
+      button.addEventListener(
+        "click",
+        () => {
 
-      function hideOffer() {
-        overlay.classList.remove("show");
-        overlay.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
-      }
+          const target =
+            button.dataset.target;
 
-      function showOffer() {
-        overlay.classList.add("show");
-        overlay.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-      }
+          if (target) {
 
-      function rememberAndClose() {
-        try { localStorage.setItem(storageKey, "1"); } catch (e) {}
-        hideOffer();
-      }
+            openTab(target);
 
-      close.addEventListener("click", rememberAndClose);
-      later.addEventListener("click", rememberAndClose);
+          }
 
-      shop.addEventListener("click", function () {
-        rememberAndClose();
-        setTimeout(function () {
-          const pricing = document.getElementById("pricing");
-          if (pricing) pricing.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 80);
-      });
-
-      overlay.addEventListener("click", function (event) {
-        if (event.target === overlay) rememberAndClose();
-      });
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && overlay.classList.contains("show")) {
-          rememberAndClose();
         }
+      );
+
+    });
+
+
+    /* =========================================================
+       HERO HOME
+    ========================================================= */
+
+    function goHome(event) {
+
+      event.preventDefault();
+
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
       });
 
-      let alreadySeen = false;
-      try { alreadySeen = localStorage.getItem(storageKey) === "1"; } catch (e) {}
+      history.pushState(
+        {
+          tab: "social"
+        },
+        "",
+        "#social"
+      );
 
-      if (!alreadySeen) {
-        window.addEventListener("load", function () {
-          setTimeout(showOffer, 450);
-        });
+    }
+
+
+    /* =========================================================
+       PACKAGE SCROLL
+    ========================================================= */
+
+    function scrollToPackages(event) {
+
+      event.preventDefault();
+
+      const packages =
+        document.getElementById(
+          "packages"
+        );
+
+      if (!packages) return;
+
+
+      const position =
+        packages.getBoundingClientRect().top
+        + window.scrollY
+        - 90;
+
+
+      window.scrollTo({
+
+        top: position,
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+
+    /* =========================================================
+       SEARCH + FILTER ENGINE
+    ========================================================= */
+
+    const state = {
+
+      movie: {
+        category: "all",
+        search: ""
+      },
+
+      game: {
+        category: "all",
+        search: ""
       }
-    })();
+
+    };
+
+
+    function filterMedia(type) {
+
+      const isMovie =
+        type === "movie";
+
+
+      const selector =
+        isMovie
+          ? ".movie-card"
+          : ".game-card";
+
+
+      const search =
+        state[type].search
+        .toLowerCase()
+        .trim();
+
+
+      const category =
+        state[type].category;
+
+
+      const cards =
+        document.querySelectorAll(
+          selector
+        );
+
+
+      let visible = 0;
+
+
+      cards.forEach(card => {
+
+        const categories =
+          (
+            card.dataset.category || ""
+          )
+          .toLowerCase()
+          .split(/\s+/);
+
+
+        const title =
+          (
+            card.dataset.title ||
+            card.innerText ||
+            ""
+          )
+          .toLowerCase();
+
+
+        const categoryMatch =
+          category === "all" ||
+          categories.includes(category);
+
+
+        const searchMatch =
+          !search ||
+          title.includes(search);
+
+
+        const shouldShow =
+          categoryMatch &&
+          searchMatch;
+
+
+        if (shouldShow) {
+
+          card.classList.remove(
+            "hidden"
+          );
+
+          visible++;
+
+        } else {
+
+          card.classList.add(
+            "hidden"
+          );
+
+        }
+
+      });
+
+
+      updateResultCount(
+        type,
+        visible,
+        cards.length
+      );
+
+    }
+
+
+    /* =========================================================
+       RESULT COUNTER
+    ========================================================= */
+
+    function updateResultCount(
+      type,
+      visible,
+      total
+    ) {
+
+      const countElement =
+        document.getElementById(
+          type === "movie"
+            ? "movieCount"
+            : "gameCount"
+        );
+
+
+      const noResults =
+        document.getElementById(
+          type === "movie"
+            ? "movieNoResults"
+            : "gameNoResults"
+        );
+
+
+      if (countElement) {
+
+        countElement.textContent =
+          `${visible} of ${total} ${
+            type === "movie"
+              ? "Movies"
+              : "Games"
+          }`;
+
+      }
+
+
+      if (noResults) {
+
+        if (visible === 0) {
+
+          noResults.classList.add(
+            "show"
+          );
+
+        } else {
+
+          noResults.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SEARCH INPUTS
+    ========================================================= */
+
+    const movieSearch =
+      document.getElementById(
+        "movieSearch"
+      );
+
+
+    const gameSearch =
+      document.getElementById(
+        "gameSearch"
+      );
+
+
+    movieSearch.addEventListener(
+      "input",
+      event => {
+
+        state.movie.search =
+          event.target.value;
+
+        filterMedia("movie");
+
+      }
+    );
+
+
+    gameSearch.addEventListener(
+      "input",
+      event => {
+
+        state.game.search =
+          event.target.value;
+
+        filterMedia("game");
+
+      }
+    );
+
+
+    /* =========================================================
+       CATEGORY FILTERS
+    ========================================================= */
+
+    document
+      .querySelectorAll(".filter")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const type =
+              button.dataset.type;
+
+            const category =
+              button.dataset.category;
+
+
+            state[type].category =
+              category;
+
+
+            document
+              .querySelectorAll(
+                `.filter[data-type="${type}"]`
+              )
+              .forEach(item => {
+
+                item.classList.remove(
+                  "active"
+                );
+
+              });
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            filterMedia(type);
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       INITIAL COUNTS
+    ========================================================= */
+
+    filterMedia("movie");
+    filterMedia("game");
+
+
+    /* =========================================================
+       BROWSER BACK / FORWARD
+    ========================================================= */
+
+    window.addEventListener(
+      "popstate",
+      () => {
+
+        const hash =
+          window.location.hash
+          .replace("#", "");
+
+
+        if (
+          hash === "movies" ||
+          hash === "games" ||
+          hash === "social"
+        ) {
+
+          openTab(
+            hash,
+            false
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       LOAD TAB FROM URL
+    ========================================================= */
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        const hash =
+          window.location.hash
+          .replace("#", "");
+
+
+        if (
+          hash === "movies" ||
+          hash === "games" ||
+          hash === "social"
+        ) {
+
+          /*
+            Small delay prevents the browser from
+            fighting our custom scroll position.
+          */
+
+          setTimeout(() => {
+
+            openTab(
+              hash,
+              false
+            );
+
+          }, 100);
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       IMAGE FALLBACK
+       
+       If an external poster fails to load, the card still
+       keeps its proper poster box instead of breaking layout.
+    ========================================================= */
+
+    document
+      .querySelectorAll(
+        ".media-poster img"
+      )
+      .forEach(img => {
+
+        img.addEventListener(
+          "error",
+          function () {
+
+            this.style.display =
+              "none";
+
+          }
+        );
+
+      });
+
 
   </script>
 
