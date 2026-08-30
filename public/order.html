@@ -1937,7 +1937,7 @@ input:focus{
   animation:successTicketIn .7s cubic-bezier(.2,.85,.2,1) both;
 }
 
-.success-stage @keyframes successTicketIn{
+@keyframes successTicketIn{
   0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-12deg)}
   70%{opacity:1;transform:translate(-50%,-50%) scale(1.03) rotate(2deg)}
   100%{opacity:1;transform:translate(-50%,-50%) scale(.92) rotate(0deg)}
@@ -2473,6 +2473,158 @@ input:focus{
 
 /* Old circular tick is intentionally removed; success uses the supplied reward animation. */
 .success-icon{display:none !important;}
+
+/* =========================================================
+   FULL-SCREEN SUCCESS TRAY
+   Stays above the entire checkout until the user leaves
+   through "Back to Home".
+========================================================= */
+
+body.success-lock{
+  overflow:hidden !important;
+  touch-action:none;
+}
+
+.screen.success-fullscreen{
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  z-index:5000 !important;
+  display:flex !important;
+  align-items:stretch !important;
+  justify-content:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:auto !important;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(53,211,154,.12), transparent 34%),
+    radial-gradient(circle at 18% 80%, rgba(124,92,255,.12), transparent 32%),
+    rgba(4,6,12,.96) !important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  animation:successTrayIn .38s cubic-bezier(.2,.8,.2,1);
+}
+
+.screen.success-fullscreen::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size:52px 52px;
+  mask-image:linear-gradient(to bottom, black, transparent 90%);
+  opacity:.25;
+}
+
+.screen.success-fullscreen .checkout-card{
+  width:100% !important;
+  max-width:none !important;
+  min-height:100dvh !important;
+  height:auto !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  position:relative;
+  z-index:1;
+}
+
+.screen.success-fullscreen .card-inner{
+  width:min(760px,100%);
+  min-height:100dvh;
+  margin:0 auto;
+  padding:clamp(28px,7vh,72px) clamp(18px,5vw,42px) 42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.screen.success-fullscreen .success-screen{
+  width:100%;
+  max-width:650px;
+  padding:0;
+}
+
+.screen.success-fullscreen .exact-success-animation{
+  height:clamp(180px,30vh,270px);
+  margin:0 auto 10px;
+}
+
+.screen.success-fullscreen .exact-success-video{
+  width:min(100%,520px);
+  max-height:clamp(180px,30vh,270px);
+}
+
+.screen.success-fullscreen .success-title{
+  font-size:clamp(30px,6vw,46px);
+  margin-top:6px;
+}
+
+.screen.success-fullscreen .success-message{
+  font-size:14px;
+  max-width:560px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.screen.success-fullscreen .delivery-message{
+  margin-bottom:20px;
+}
+
+.screen.success-fullscreen .order-id{
+  max-width:520px;
+  margin:0 auto;
+  background:rgba(255,255,255,.045);
+  border-color:rgba(53,211,154,.15);
+}
+
+.screen.success-fullscreen .buttons{
+  width:100%;
+  max-width:520px;
+  margin:22px auto 0;
+}
+
+.screen.success-fullscreen .btn-primary{
+  min-height:56px;
+  font-size:14px;
+}
+
+@keyframes successTrayIn{
+  from{opacity:0;transform:scale(.985);}
+  to{opacity:1;transform:scale(1);}
+}
+
+@media(max-width:600px){
+  .screen.success-fullscreen .card-inner{
+    padding:24px 15px 30px;
+  }
+
+  .screen.success-fullscreen .exact-success-animation{
+    height:180px;
+  }
+
+  .screen.success-fullscreen .exact-success-video{
+    max-height:180px;
+  }
+
+  .screen.success-fullscreen .success-message{
+    font-size:12px;
+    line-height:1.7;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .screen.success-fullscreen{animation:none;}
+}
+
 </style>
 
 </head>
@@ -4826,38 +4978,40 @@ function updateProgress(
 function movieShowScreen( 
   number 
 ){ 
- 
+
   hideAllScreens(); 
- 
- 
+
+  document 
+    .querySelectorAll(".screen") 
+    .forEach(screen => { 
+      screen.classList.remove("success-fullscreen"); 
+    }); 
+
+  document.body.classList.remove("success-lock"); 
+
   const screen = 
     document.getElementById( 
       "movieScreen" + number 
     ); 
- 
- 
+
   if(screen){ 
- 
-    screen.classList.add( 
-      "active" 
-    ); 
- 
+    screen.classList.add("active"); 
+
+    if(number === 3){ 
+      screen.classList.add("success-fullscreen"); 
+      document.body.classList.add("success-lock"); 
+    } 
   } 
- 
- 
-  updateProgress( 
-    number 
-  ); 
- 
- 
+
+  updateProgress(number); 
+
   window.scrollTo({ 
     top:0, 
     behavior:"smooth" 
   }); 
- 
+
 } 
- 
- 
+
 /* ========================================================= 
    INSTAGRAM SCREENS 
 ========================================================= */ 
@@ -4865,38 +5019,40 @@ function movieShowScreen(
 function instagramShowScreen( 
   number 
 ){ 
- 
+
   hideAllScreens(); 
- 
- 
+
+  document 
+    .querySelectorAll(".screen") 
+    .forEach(screen => { 
+      screen.classList.remove("success-fullscreen"); 
+    }); 
+
+  document.body.classList.remove("success-lock"); 
+
   const screen = 
     document.getElementById( 
       "instagramScreen" + number 
     ); 
- 
- 
+
   if(screen){ 
- 
-    screen.classList.add( 
-      "active" 
-    ); 
- 
+    screen.classList.add("active"); 
+
+    if(number === 3){ 
+      screen.classList.add("success-fullscreen"); 
+      document.body.classList.add("success-lock"); 
+    } 
   } 
- 
- 
-  updateProgress( 
-    number 
-  ); 
- 
- 
+
+  updateProgress(number); 
+
   window.scrollTo({ 
     top:0, 
     behavior:"smooth" 
   }); 
- 
+
 } 
- 
- 
+
 /* ========================================================= 
    MOVIE INITIALIZATION 
 ========================================================= */ 
@@ -6855,11 +7011,17 @@ function clearErrors(){
    HOME 
 ========================================================= */ 
  
-function goHome(){ 
- 
-  window.location.href = 
-    "/index.html"; 
- 
+function goHome(){
+
+  document.body.classList.remove("success-lock");
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
+      screen.classList.remove("success-fullscreen");
+    });
+
+  window.location.href = "/index.html";
 } 
  
  
