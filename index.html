@@ -2,512 +2,494 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#042b25">
-<title>SehrAn Media • Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 FITNESS GYM — Train Hard. Become Unstoppable.</title>
+<meta name="description" content="14 FITNESS GYM — premium unisex fitness club with powerful workouts, modern equipment and flexible memberships.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box}
 :root{
-  --bg:#031d19;--bg2:#062f28;--panel:#075448;--panel2:#0a6c5b;
-  --line:#d8bd35;--gold:#ffd83d;--green:#32e3aa;--white:#f5fff9;
-  --muted:#a9d7cd;--pink:#ff36b8;
+  --bg:#070707; --panel:#101010; --panel2:#151515; --text:#f7f7f7; --muted:#a4a4a4;
+  --accent:#d7ff2f; --accent2:#9fc400; --line:rgba(255,255,255,.09);
+  --danger:#ff5d5d; --success:#7dff9a; --shadow:0 30px 90px rgba(0,0,0,.45);
 }
-html,body{margin:0;min-height:100%;background:#021c18;color:var(--white);
-font-family:Arial,Helvetica,sans-serif}
-body{background:
-radial-gradient(circle at 50% 20%,#07584b 0,#032d27 28%,#011916 70%);
-overflow-x:hidden}
-button{font:inherit;cursor:pointer}
-button:active{transform:scale(.97)}
-#loading{position:fixed;inset:0;z-index:99999;background:#011915;display:flex;align-items:center;justify-content:center}
-.load{text-align:center}.loadLogo{width:92px;height:92px;border-radius:25px;display:grid;place-items:center;
-background:linear-gradient(145deg,#ffe66d,#ed9e00);color:#08382f;font-size:30px;font-weight:1000;
-box-shadow:0 0 45px #f7cb3b55}.load h1{margin:18px 0 4px;font-size:28px}.load p{color:#8bd8c9}
-.loader{width:42px;height:42px;border:4px solid #fff2;border-top-color:#3be4b0;border-radius:50%;
-animation:spin .9s linear infinite;margin:18px auto}@keyframes spin{to{transform:rotate(360deg)}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+::selection{background:var(--accent);color:#000}
 
-#login{min-height:100vh;display:none;align-items:center;justify-content:center;padding:20px}
-.loginCard{width:420px;max-width:100%;background:linear-gradient(150deg,#0a6858,#063a33);
-border:1px solid #70e8d544;border-radius:28px;padding:28px;box-shadow:0 25px 80px #0008}
-.logoRow{display:flex;align-items:center;gap:12px;font-size:24px;font-weight:1000}
-.logoSmall{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
-background:linear-gradient(145deg,#ffe76e,#eea200);color:#06352e}
-.loginCard h2{font-size:28px;margin:26px 0 8px}.loginCard p{color:var(--muted);line-height:1.5}
-label{font-size:11px;font-weight:900;display:block;margin:14px 0 6px}
-input{width:100%;border:1px solid #76e8d333;background:#032f29;color:white;border-radius:12px;padding:14px;outline:0}
-input:focus{border-color:#45e1bc}
-.goldBtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(#ffe96d,#efa900);
-font-weight:1000;color:#123a31;margin-top:14px}.msg{min-height:18px;color:#ffe46b;font-size:12px;margin-top:10px}
+.noise{position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.cursor{position:fixed;width:14px;height:14px;border:2px solid var(--accent);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:difference}
+@media(max-width:900px){.cursor{display:none}}
 
-#app{display:none}
-.shell{width:562px;max-width:100%;min-height:100vh;margin:auto;position:relative;
-background:
-linear-gradient(#001f1b55,#001f1b55),
-radial-gradient(circle at 20% 40%,#075b4b,#032b25 65%,#021d1a)}
-.top{height:72px;display:flex;align-items:center;gap:8px;padding:8px 10px;
-background:#02251fee;position:sticky;top:0;z-index:50;border-bottom:1px solid #73e4ca33}
-.avatar{width:51px;height:51px;border:2px solid #f0ca3d;border-radius:50%;display:grid;place-items:center;
-background:#173c35;font-size:23px;position:relative}.badge{position:absolute;right:-3px;top:-4px;
-background:#e83d50;color:#fff;border-radius:12px;padding:2px 6px;font-size:10px;font-weight:1000}
-.vip{font-size:9px;font-weight:1000;color:#fff;border:1px solid #bbb;background:#4b4b4b66;padding:5px;border-radius:7px}
-.balance{height:50px;flex:1;display:flex;align-items:center;justify-content:center;gap:10px;
-background:linear-gradient(180deg,#08735f,#06483e);border:2px solid #bcae3c;border-radius:27px;
-font-size:21px;font-weight:1000}.coin{width:29px;height:29px;border-radius:50%;background:#ffd62d;
-color:#725000;display:grid;place-items:center}.add{border:0;width:30px;height:30px;border-radius:50%;
-background:#4ce1b6;color:#06382f;font-weight:1000;font-size:22px}.topIcon{width:43px;height:43px;
-border-radius:14px;background:#ffffff0d;border:1px solid #ffffff1a;color:white;font-size:19px}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 4%;display:flex;align-items:center;justify-content:space-between;transition:.35s}
+header.scrolled{background:rgba(7,7,7,.84);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Barlow Condensed";font-size:30px;font-weight:900;letter-spacing:1px}
+.logoMark{width:36px;height:36px;display:grid;place-items:center;background:var(--accent);color:#000;clip-path:polygon(50% 0,100% 100%,0 100%);font-weight:900}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:28px;color:#ddd;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+nav a{position:relative;padding:8px 0}
+nav a:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:.3s}
+nav a:hover:after{width:100%}
+.headerJoin,.heroBtn,.planBtn{border:0;background:var(--accent);color:#050505;font-weight:900;padding:13px 20px;border-radius:5px;text-transform:uppercase;letter-spacing:.7px;transition:.25s;box-shadow:0 0 0 rgba(215,255,47,0)}
+.headerJoin:hover,.heroBtn:hover,.planBtn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(215,255,47,.18)}
+.menuBtn{display:none;background:none;color:#fff;border:0;font-size:28px}
 
-.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:12px 10px 9px;
-background:#03251f}.cat{height:60px;border:1px solid #ffffff0d;border-radius:15px;background:#082f29;
-color:#b7ded6;font-size:10px;font-weight:1000}.cat.active{background:linear-gradient(#116b59,#075143);
-color:#fff;border-color:#37d5ae44}.cat span{display:block;font-size:20px;margin-bottom:4px}
+.hero{min-height:100vh;position:relative;display:grid;align-items:center;overflow:hidden;background:
+linear-gradient(90deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.72) 45%,rgba(0,0,0,.18) 100%),
+url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=2200&q=90") center/cover}
+.hero:before{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
+.heroContent{position:relative;z-index:2;width:min(760px,92%);margin-left:8%;padding-top:90px}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:"Barlow Condensed";font-size:clamp(70px,10vw,145px);line-height:.8;text-transform:uppercase;font-weight:900;letter-spacing:-2px}
+.hero h1 span{color:var(--accent)}
+.hero p{margin:30px 0;color:#d2d2d2;max-width:580px;line-height:1.75;font-size:16px}
+.heroActions{display:flex;gap:12px;flex-wrap:wrap}
+.heroBtn{display:inline-flex;align-items:center;justify-content:center;min-width:155px}
+.heroBtn.alt{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line);box-shadow:none}
+.heroStats{display:flex;gap:35px;margin-top:55px;flex-wrap:wrap}
+.stat strong{display:block;font-family:"Barlow Condensed";font-size:42px;color:#fff}
+.stat small{color:#999;text-transform:uppercase;font-size:10px;letter-spacing:1.5px}
+.scrollHint{position:absolute;bottom:25px;right:5%;writing-mode:vertical-rl;color:#777;font-size:10px;letter-spacing:3px}
 
-.content{padding:10px 10px 90px}
-.hero{border:2px solid #bda72e;border-radius:24px;overflow:hidden;background:
-radial-gradient(circle at 80% 30%,#d9bf3929,transparent 30%),linear-gradient(140deg,#073c32,#06261f);
-min-height:235px;position:relative;padding:20px 17px;margin-bottom:12px;box-shadow:0 12px 35px #0005}
-.hero:after{content:"";position:absolute;right:-35px;bottom:-45px;width:190px;height:190px;border-radius:50%;
-background:radial-gradient(circle,#22b38a44,transparent 68%)}
-.live{display:inline-block;background:#0a6b50;color:#58efba;border-radius:15px;padding:6px 11px;
-font-size:10px;font-weight:1000}.hero h2{font-size:27px;margin:12px 0 0}.hero .jack{font-size:42px;
-font-weight:1000;color:#ffd846;text-shadow:0 3px #9b6800;margin-top:9px}.hero p{font-size:10px;color:#b6d8d0}
-.hero button{position:absolute;right:18px;bottom:17px;border:0;border-radius:14px;background:#ffe268;
-padding:12px 19px;font-weight:1000;color:#21483e;z-index:2}
+.ticker{background:var(--accent);color:#000;overflow:hidden;white-space:nowrap;border-block:1px solid #000}
+.tickerTrack{display:inline-block;animation:ticker 20s linear infinite;padding:13px 0;font-family:"Barlow Condensed";font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:2px}
+.tickerTrack span{margin:0 28px}
+@keyframes ticker{to{transform:translateX(-50%)}}
 
-.promo{border:2px solid #b99a20;border-radius:22px;background:linear-gradient(135deg,#d49b00,#edbf10,#8b5c00);
-min-height:130px;padding:16px;position:relative;overflow:hidden;margin-bottom:13px}
-.promo:after{content:"♠";position:absolute;right:25px;bottom:-35px;font-size:130px;color:#fff4}
-.pill{background:#805a00cc;border-radius:10px;padding:5px 8px;font-size:9px;font-weight:1000}
-.promo h2{font-size:27px;margin:9px 0 3px}.promo p{font-size:10px;font-weight:800}
-.promo button{border:0;background:#fff2a7;border-radius:11px;padding:9px 14px;font-size:10px;font-weight:1000}
+.section{padding:110px 6%}
+.sectionHead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:55px}
+.kicker{color:var(--accent);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:900;margin-bottom:10px}
+.section h2{font-family:"Barlow Condensed";font-size:clamp(52px,7vw,90px);line-height:.85;text-transform:uppercase}
+.sectionIntro{max-width:430px;color:#999;line-height:1.7;font-size:14px}
 
-.section{display:flex;justify-content:space-between;align-items:center;padding:8px 5px;color:#dffef5}
-.section h3{margin:0;font-size:17px}.section span{font-size:10px;color:#87d8c9}
-.games{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.game{height:173px;border-radius:18px;position:relative;overflow:hidden;border:2px solid #d4b43a;
-background:linear-gradient(145deg,#126a59,#042c26);box-shadow:0 7px 17px #0008}
-.game .art{height:124px;display:grid;place-items:center;font-size:60px;
-background:radial-gradient(circle at 50% 30%,#2bd0a755,#042822 72%)}
-.game .name{text-align:center;font-size:12px;font-weight:1000;padding:7px 3px;white-space:nowrap;overflow:hidden}
-.hot{position:absolute;left:2px;top:2px;background:#ff552f;color:white;font-size:10px;font-weight:1000;
-padding:5px 8px;border-radius:7px;z-index:3}.new{background:#54d32f}.heart{position:absolute;left:5px;bottom:34px;
-width:26px;height:26px;border-radius:50%;background:#fa315a;color:#fff;display:grid;place-items:center;
-font-size:13px;border:2px solid #ffd83d}.download{position:absolute;right:5px;bottom:34px;width:26px;height:26px;
-border-radius:50%;border:0;background:#43e1ad;color:#06382f;font-weight:1000}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan{position:relative;background:linear-gradient(145deg,#141414,#0c0c0c);border:1px solid var(--line);padding:34px;overflow:hidden;transition:.4s}
+.plan:hover{transform:translateY(-9px);border-color:rgba(215,255,47,.45);box-shadow:var(--shadow)}
+.plan.featured{border-color:var(--accent);box-shadow:0 0 0 1px rgba(215,255,47,.08),0 25px 70px rgba(215,255,47,.07)}
+.ribbon{position:absolute;top:17px;right:-42px;background:var(--accent);color:#000;padding:6px 48px;font-size:10px;font-weight:900;transform:rotate(45deg);letter-spacing:1px}
+.planTag{color:#888;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:2px}
+.old{color:#666;text-decoration:line-through;font-size:18px;margin-top:25px}
+.price{font-family:"Barlow Condensed";font-size:72px;line-height:.9;font-weight:900;margin:3px 0}
+.price small{font-family:Inter;font-size:13px;color:#999;font-weight:500}
+.saving{display:inline-block;background:rgba(215,255,47,.1);color:var(--accent);padding:5px 8px;font-size:10px;font-weight:900;text-transform:uppercase;margin:8px 0 25px}
+.plan ul{list-style:none;border-top:1px solid var(--line);padding-top:20px;display:grid;gap:13px;color:#bbb;font-size:13px}
+.plan li:before{content:"✓";color:var(--accent);font-weight:900;margin-right:10px}
+.planBtn{width:100%;margin-top:28px;padding:15px}
+.planBtn.dark{background:#fff}
 
-.float{position:fixed;right:max(12px,calc((100vw - 562px)/2 - 45px));top:53%;z-index:40;width:47px;height:55px;
-border:0;border-radius:22px 0 0 22px;background:linear-gradient(#ff48c7,#9d2fff);color:white;font-size:24px;
-box-shadow:0 5px 18px #0008}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.feature{background:var(--panel);padding:34px;min-height:210px;transition:.35s}
+.feature:hover{background:#151515;transform:translateY(-4px)}
+.icon{font-size:31px;margin-bottom:25px}
+.feature h3{font-family:"Barlow Condensed";font-size:28px;text-transform:uppercase;margin-bottom:10px}
+.feature p{color:#888;font-size:13px;line-height:1.7}
 
-.sideMenu{position:fixed;right:max(62px,calc((100vw - 562px)/2 + 5px));top:46%;z-index:60;
-width:235px;background:#063c35ee;border:1px solid #6ce1cc55;border-radius:20px;padding:12px;
-display:none;box-shadow:0 15px 40px #0009}.sideGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.sideItem{border:0;border-radius:13px;background:#0a5a4c;color:#d9fff7;padding:12px 5px;font-size:10px;font-weight:900}
-.sideItem b{display:block;font-size:24px;margin-bottom:5px}
+.schedule{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:stretch}
+.scheduleVisual{min-height:530px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.7)),url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1300&q=85") center/cover;display:flex;align-items:end;padding:35px}
+.scheduleVisual h3{font-family:"Barlow Condensed";font-size:65px;line-height:.85;text-transform:uppercase}
+.scheduleList{display:grid;gap:10px}
+.slot{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);padding:22px 24px}
+.slot strong{font-family:"Barlow Condensed";font-size:27px;text-transform:uppercase}
+.slot span{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1px}
+.slot.boys strong{color:#eee}.slot.girls strong{color:var(--accent)}
 
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:562px;max-width:100%;
-height:76px;background:#032820f7;border-top:1px solid #cdb53d55;display:grid;grid-template-columns:repeat(5,1fr);
-z-index:70;padding:6px 5px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(10px)}
-.nav{border:0;background:transparent;color:#8bcfc2;font-size:10px;font-weight:900}.nav b{display:block;font-size:25px;
-height:30px}.nav.active{color:#ffe057}.nav.active b{filter:drop-shadow(0 0 5px #ffd83d)}
+.gallery{display:grid;grid-template-columns:1.1fr .9fr .9fr;grid-auto-rows:240px;gap:12px}
+.gallery div{background-size:cover;background-position:center;position:relative;overflow:hidden}
+.gallery div:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.gallery .big{grid-row:span 2}
+.g1{background-image:url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=85")}
+.g2{background-image:url("https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=1000&q=85")}
+.g3{background-image:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=85")}
+.g4{background-image:url("https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=85")}
+.gallery label{position:absolute;z-index:2;bottom:18px;left:20px;font-family:"Barlow Condensed";font-size:25px;text-transform:uppercase}
 
-.modal{position:fixed;inset:0;background:#000b;z-index:100;display:none;align-items:center;justify-content:center;padding:15px}
-.modalBox{width:500px;max-width:100%;background:#06443a;border:1px solid #72e2cc55;border-radius:23px;padding:20px;
-box-shadow:0 20px 60px #000}.close{float:right;border:0;background:#ffffff14;color:white;border-radius:9px;padding:8px}
-.gameBig{text-align:center;font-size:85px;margin:15px}.modal h2{margin-top:0}.result{text-align:center;min-height:28px;
-color:#ffe057;font-weight:1000;font-size:21px}.modalInfo{font-size:11px;color:#a9d9d0;text-align:center;line-height:1.5}
-.promoInput{display:flex;gap:8px}.promoInput input{flex:1}.promoInput button{border:0;border-radius:12px;padding:0 15px;
-background:#ffe05a;color:#183e35;font-weight:1000}
+.members{background:linear-gradient(120deg,#141414,#090909);border-block:1px solid var(--line)}
+.memberGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.memberCard{background:#0b0b0b;border:1px solid var(--line);padding:25px}
+.memberCard h3{font-family:"Barlow Condensed";font-size:34px;text-transform:uppercase}
+.memberCard p{color:#888;font-size:12px;margin-top:5px}
+.memberRows{margin-top:20px;display:grid;gap:8px;max-height:300px;overflow:auto}
+.memberRow{display:flex;justify-content:space-between;align-items:center;padding:13px;background:#121212;font-size:12px}
+.status{font-size:9px;text-transform:uppercase;font-weight:900;padding:5px 8px;border-radius:2px}
+.active{color:#001b08;background:var(--success)}.expired{color:#fff;background:#551d1d}
 
-@media(max-width:562px){
- .shell{width:100%}.float{right:0}.sideMenu{right:58px}
- .game{height:160px}.game .art{height:111px}.hero .jack{font-size:35px}
+.cta{padding:120px 6%;text-align:center;background:
+radial-gradient(circle at center,rgba(215,255,47,.13),transparent 35%),#080808}
+.cta h2{font-family:"Barlow Condensed";font-size:clamp(65px,10vw,135px);line-height:.78;text-transform:uppercase}
+.cta h2 span{color:var(--accent)}
+.cta p{max-width:570px;margin:28px auto;color:#999;line-height:1.7}
+
+footer{border-top:1px solid var(--line);padding:30px 6%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#777;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(15px);z-index:2000;display:none;place-items:center;padding:20px}
+.modal.show{display:grid}
+.modalBox{width:min(600px,100%);background:#111;border:1px solid rgba(215,255,47,.35);box-shadow:var(--shadow);padding:34px;position:relative;max-height:92vh;overflow:auto}
+.close{position:absolute;right:18px;top:15px;background:none;border:0;color:#aaa;font-size:25px}
+.modalBox h2{font-family:"Barlow Condensed";font-size:48px;text-transform:uppercase}
+.modalBox>p{color:#888;font-size:12px;line-height:1.6;margin:5px 0 25px}
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:7px;margin-bottom:12px}
+.field.full{grid-column:1/-1}
+.field label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#999;font-weight:800}
+.field input,.field select{width:100%;background:#080808;color:#fff;border:1px solid var(--line);padding:13px;border-radius:3px;outline:none}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.consent{font-size:10px;color:#777;line-height:1.5;margin:8px 0 18px}
+.submit{width:100%;padding:15px;border:0;background:var(--accent);font-weight:900;text-transform:uppercase}
+.planSummary{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#080808;border:1px solid var(--line);margin-bottom:18px}
+.planSummary strong{font-family:"Barlow Condensed";font-size:25px;text-transform:uppercase}
+.planSummary b{color:var(--accent);font-size:18px}
+.successBox{text-align:center;padding:35px 10px}
+.successIcon{width:70px;height:70px;border:2px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:35px;margin:0 auto 20px}
+.successBox h2{font-size:43px}
+.successBox p{color:#999;line-height:1.7;margin:15px 0 25px}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px)}}
+
+.toast{position:fixed;right:20px;bottom:20px;z-index:5000;background:#151515;border:1px solid var(--accent);padding:14px 18px;max-width:330px;font-size:12px;transform:translateY(150%);transition:.4s}
+.toast.show{transform:none}
+
+@media(max-width:1000px){
+  nav{display:none}.menuBtn{display:block}
+  .headerJoin{display:none}
+  .plans{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr 1fr}
+  .schedule{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .gallery .big{grid-row:span 1}
+  .memberGrid{grid-template-columns:1fr}
 }
-@media(min-width:563px){
- body{padding-bottom:0}
+@media(max-width:650px){
+  .section{padding:80px 5%}
+  .heroContent{margin-left:5%;padding-top:110px}
+  .heroStats{gap:20px}
+  .features{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr;grid-auto-rows:220px}
+  .formGrid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .scheduleVisual{min-height:360px}
+  .scheduleVisual h3{font-size:48px}
+  footer{flex-direction:column}
 }
 </style>
 </head>
+
 <body>
+<div class="noise"></div>
+<div class="cursor" id="cursor"></div>
 
-<div id="loading">
-  <div class="load">
-    <div class="loadLogo">SM</div>
-    <h1>SehrAn Games</h1>
-    <div class="loader"></div>
-    <p>Loading game lobby…</p>
-  </div>
-</div>
-
-<section id="login">
-  <div class="loginCard">
-    <div class="logoRow"><div class="logoSmall">SM</div> SehrAn Games</div>
-    <h2>Login / Register</h2>
-    <p>Enter your mobile number, name and password. OTP verification is required.</p>
-
-    <label>YOUR NAME</label>
-    <input id="name" maxlength="40" placeholder="Enter your name">
-
-    <label>MOBILE NUMBER</label>
-    <input id="mobile" inputmode="tel" maxlength="15" placeholder="+91 9876543210">
-
-    <label>PASSWORD</label>
-    <input id="password" type="password" maxlength="72" placeholder="Minimum 8 characters">
-
-    <button class="goldBtn" id="sendOtp">SEND OTP</button>
-
-    <div id="otpBox" style="display:none">
-      <label>OTP</label>
-      <input id="otp" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit OTP">
-      <button class="goldBtn" id="verifyOtp">VERIFY & LOGIN</button>
-    </div>
-
-    <div class="msg" id="authMsg"></div>
-  </div>
-</section>
-
-<div id="app">
-<div class="shell">
-
-<header class="top">
-  <div class="avatar">P<span class="badge">1</span></div>
-  <div class="vip">VIP<br>1</div>
-  <div class="balance"><span class="coin">●</span><span id="balance">1,000</span><button class="add" id="addCoins">+</button></div>
-  <button class="topIcon" id="bell">🔔</button>
-  <button class="topIcon" id="settings">⚙</button>
+<header id="header">
+  <a href="#home" class="logo"><div class="logoMark">14</div>FITNESS <span>GYM</span></a>
+  <nav>
+    <a href="#plans">Membership</a><a href="#why">Why Us</a><a href="#timings">Timings</a><a href="#gallery">Gym</a><a href="#members">Members</a>
+  </nav>
+  <button class="headerJoin" onclick="openJoin()">Join Us</button>
+  <button class="menuBtn" onclick="document.querySelector('nav').classList.toggle('mobileNav')">☰</button>
 </header>
 
-<div class="categories">
-  <button class="cat active" data-filter="all"><span>❤️</span>All Games</button>
-  <button class="cat" data-filter="slots"><span>🎰</span>Slots</button>
-  <button class="cat" data-filter="lucky"><span>🎡</span>Lucky</button>
-  <button class="cat" data-filter="mini"><span>🎮</span>Mini Games</button>
-  <button class="cat" data-filter="favourite"><span>💗</span>Favourite</button>
-</div>
-
-<main class="content">
-
+<main id="home">
 <section class="hero">
-  <span class="live">● LIVE JACKPOT</span>
-  <h2>JACKPOT LOTTO</h2>
-  <div class="jack">1,091,608</div>
-  <p>◷ Virtual jackpot • updates automatically</p>
-  <button id="jackpotBtn">VIEW JACKPOT</button>
-</section>
-
-<section class="promo">
-  <span class="pill">🎁 REFER & EARN</span>
-  <h2>Get 1% Bonus</h2>
-  <p>Invite friends and earn virtual bonus rewards.</p>
-  <button id="referBtn">Invite Friends</button>
-</section>
-
-<div class="section"><h3>▼ FAVORITE</h3><span>SEE ALL ›</span></div>
-<div class="games" id="games"></div>
-
-<section class="promo" style="margin-top:13px;background:linear-gradient(135deg,#074f9a,#1c45c0)">
-  <span class="pill">🎟️ PROMO CODE</span>
-  <h2>Bonus Rewards</h2>
-  <p>Enter your promo code to receive virtual coins.</p>
-  <div class="promoInput">
-    <input id="promoCode" placeholder="Enter promo code">
-    <button id="claimPromo">CLAIM</button>
+  <div class="heroContent reveal">
+    <div class="eyebrow">Premium Unisex Fitness Club</div>
+    <h1>Build<br><span>Your</span><br>Legacy.</h1>
+    <p>Not just a gym. A place where discipline becomes confidence. Train with purpose, push your limits and become the strongest version of yourself.</p>
+    <div class="heroActions">
+      <button class="heroBtn" onclick="scrollToPlans()">View Memberships →</button>
+      <button class="heroBtn alt" onclick="openJoin()">Join 14 Fitness</button>
+    </div>
+    <div class="heroStats">
+      <div class="stat"><strong>6 AM</strong><small>Opening</small></div>
+      <div class="stat"><strong>18 HRS</strong><small>Fitness Access Window</small></div>
+      <div class="stat"><strong>100%</strong><small>Energy</small></div>
+    </div>
   </div>
-  <div id="promoMsg" style="font-size:11px;font-weight:900;margin-top:8px"></div>
+  <div class="scrollHint">SCROLL TO TRANSFORM</div>
 </section>
 
-<div class="section"><h3>🏆 LEADERBOARD</h3><span>THIS WEEK ›</span></div>
-<section class="promo" style="min-height:110px;background:linear-gradient(135deg,#075548,#06372f)">
-  <p>🥇 Player One — 8,420 virtual coins</p>
-  <p>🥈 Lucky Star — 7,915 virtual coins</p>
-  <p>🥉 Game Master — 7,210 virtual coins</p>
+<div class="ticker"><div class="tickerTrack">
+  <span>NO EXCUSES</span>✦<span>TRAIN HARD</span>✦<span>STAY CONSISTENT</span>✦<span>GET STRONGER</span>✦<span>NO EXCUSES</span>✦<span>TRAIN HARD</span>✦<span>STAY CONSISTENT</span>✦<span>GET STRONGER</span>✦
+</div></div>
+
+<section class="section" id="plans">
+  <div class="sectionHead reveal">
+    <div><div class="kicker">Memberships</div><h2>Choose Your<br>Commitment.</h2></div>
+    <p class="sectionIntro">Start today. Stay consistent. Your body, confidence and discipline are built one workout at a time.</p>
+  </div>
+  <div class="plans">
+    <article class="plan featured reveal">
+      <div class="ribbon">BEST VALUE</div>
+      <div class="planTag">01 / Starter</div>
+      <div class="old">₹2,000</div>
+      <div class="price">₹1,400 <small>/ month</small></div>
+      <div class="saving">🔥 Special launch offer + 1 month FREE</div>
+      <ul><li>1 month paid + 1 month FREE</li><li>Full gym access</li><li>Modern strength & cardio zone</li><li>Basic fitness guidance</li><li>Member progress profile</li></ul>
+      <button class="planBtn" onclick="openJoin('1 Month + 1 Month FREE','₹1,400')">Join Now</button>
+    </article>
+
+    <article class="plan reveal">
+      <div class="planTag">02 / Transformation</div>
+      <div class="old">₹8,400</div>
+      <div class="price">₹7,560 <small>/ 6 months</small></div>
+      <div class="saving">Save 10% • ₹840 OFF</div>
+      <ul><li>6 months membership</li><li>10% long-term discount</li><li>Full gym access</li><li>Priority member support</li><li>Progress tracking</li></ul>
+      <button class="planBtn dark" onclick="openJoin('6 Months','₹7,560')">Join Now</button>
+    </article>
+
+    <article class="plan reveal">
+      <div class="planTag">03 / Elite</div>
+      <div class="old">₹16,800</div>
+      <div class="price">₹14,280 <small>/ year</small></div>
+      <div class="saving">Save 15% • ₹2,520 OFF</div>
+      <ul><li>12 months membership</li><li>15% annual discount</li><li>Full gym access</li><li>Long-term progress profile</li><li>Priority support</li></ul>
+      <button class="planBtn dark" onclick="openJoin('12 Months','₹14,280')">Join Now</button>
+    </article>
+  </div>
 </section>
 
+<section class="section" id="why">
+  <div class="sectionHead reveal">
+    <div><div class="kicker">The 14 Standard</div><h2>Why Train<br>With Us?</h2></div>
+    <p class="sectionIntro">Everything you need to make showing up easier and getting results harder to ignore.</p>
+  </div>
+  <div class="features">
+    <div class="feature reveal"><div class="icon">🏋️</div><h3>Serious Equipment</h3><p>Strength machines, free weights and cardio equipment designed for complete workouts.</p></div>
+    <div class="feature reveal"><div class="icon">⚡</div><h3>High Energy</h3><p>A motivating training environment built to keep your intensity high and your excuses low.</p></div>
+    <div class="feature reveal"><div class="icon">🎯</div><h3>Goal Focused</h3><p>Whether your target is strength, fat loss, muscle or confidence, train with a clear purpose.</p></div>
+    <div class="feature reveal"><div class="icon">🤝</div><h3>Supportive Community</h3><p>Train around people who are working on themselves and want to see you win too.</p></div>
+  </div>
+</section>
+
+<section class="section" id="timings">
+  <div class="sectionHead reveal">
+    <div><div class="kicker">Open Hours</div><h2>Train At<br>Your Time.</h2></div>
+    <p class="sectionIntro">Dedicated time windows for boys and girls. Please follow the assigned timing for a smooth and comfortable gym experience.</p>
+  </div>
+  <div class="schedule">
+    <div class="scheduleVisual reveal"><h3>DISCIPLINE<br>HAS NO<br>OFF DAY.</h3></div>
+    <div class="scheduleList">
+      <div class="slot boys reveal"><div><span>06:00 AM — 10:00 AM</span><strong>BOYS</strong></div><b>01</b></div>
+      <div class="slot girls reveal"><div><span>10:00 AM — 04:30 PM</span><strong>GIRLS</strong></div><b>02</b></div>
+      <div class="slot boys reveal"><div><span>04:30 PM — 12:00 AM</span><strong>BOYS</strong></div><b>03</b></div>
+      <div class="slot reveal"><div><span>Every Day</span><strong>Consistency</strong></div><b>∞</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="sectionHead reveal"><div><div class="kicker">Inside 14 Fitness</div><h2>Train.<br>Transform.</h2></div><p class="sectionIntro">A visual preview of the kind of atmosphere we are building. Replace these images with your friend's actual gym photos before launch.</p></div>
+  <div class="gallery">
+    <div class="g1 big reveal"><label>Strength Zone</label></div>
+    <div class="g2 reveal"><label>Cardio</label></div>
+    <div class="g3 reveal"><label>Energy</label></div>
+    <div class="g4 reveal"><label>Community</label></div>
+    <div class="g2 reveal"><label>Every Rep Counts</label></div>
+  </div>
+</section>
+
+<section class="section members" id="members">
+  <div class="sectionHead reveal">
+    <div><div class="kicker">Member Area</div><h2>Our<br>Members.</h2></div>
+    <p class="sectionIntro">New admissions can appear here after registration. This first version stores member data locally in the browser; a real shared database will be connected in the backend phase.</p>
+  </div>
+  <div class="memberGrid">
+    <div class="memberCard reveal"><h3>Active Members</h3><p>Currently active plans</p><div class="memberRows" id="activeMembers"></div></div>
+    <div class="memberCard reveal"><h3>Plan Status</h3><p>Local demo dashboard</p><div class="memberRows" id="statusMembers"></div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="kicker">Your Next Version Starts Here</div>
+  <h2>Stop Waiting.<br><span>Start Training.</span></h2>
+  <p>One decision can change the way you feel about your body, your confidence and your discipline. Take the first step today.</p>
+  <button class="heroBtn" onclick="openJoin()">Become A Member →</button>
+</section>
 </main>
 
-<button class="float" id="floatBtn">‹</button>
+<footer>
+  <div>© 2026 14 FITNESS GYM</div>
+  <div>Train Hard • Stay Consistent • Become Unstoppable</div>
+  <div>Membership • Support • Fitness</div>
+</footer>
 
-<div class="sideMenu" id="sideMenu">
-  <div class="sideGrid">
-    <button class="sideItem"><b>🎁</b>Rewards</button>
-    <button class="sideItem"><b>📣</b>Notice</button>
-    <button class="sideItem"><b>🎟️</b>Promo Code</button>
-    <button class="sideItem"><b>📜</b>Records</button>
-    <button class="sideItem"><b>🏆</b>Leaderboard</button>
-    <button class="sideItem"><b>❓</b>Help</button>
+<div class="modal" id="joinModal">
+  <div class="modalBox" id="formBox">
+    <button class="close" onclick="closeJoin()">×</button>
+    <div class="kicker">14 Fitness Membership</div>
+    <h2>Start Your Journey.</h2>
+    <p>Fill in your details. These details will be used for your member profile and future membership reminders.</p>
+    <div class="planSummary"><div><small>Selected plan</small><br><strong id="selectedPlan">1 Month + 1 Month FREE</strong></div><b id="selectedPrice">₹1,400</b></div>
+    <form id="joinForm">
+      <div class="formGrid">
+        <div class="field"><label>Full Name *</label><input id="name" required placeholder="Enter your name"></div>
+        <div class="field"><label>Mobile Number *</label><input id="phone" required inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
+        <div class="field"><label>Email</label><input id="email" type="email" placeholder="Optional"></div>
+        <div class="field"><label>Age *</label><input id="age" type="number" min="12" max="90" required placeholder="Your age"></div>
+        <div class="field"><label>Gender *</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
+        <div class="field"><label>Fitness Goal *</label><select id="goal" required><option value="">Select goal</option><option>Muscle Gain</option><option>Fat Loss</option><option>Strength</option><option>General Fitness</option><option>Bodybuilding</option></select></div>
+        <div class="field full"><label>Emergency Contact (optional)</label><input id="emergency" placeholder="Name + mobile number"></div>
+      </div>
+      <div class="consent">By continuing, you confirm that the information provided is accurate. Membership, payment and health/fitness instructions will be handled according to the gym's policies. Do not enter passwords or banking PINs.</div>
+      <button class="submit" type="submit">Continue To Secure Payment →</button>
+    </form>
   </div>
 </div>
 
-<nav class="bottom">
-  <button class="nav" data-page="wallet"><b>🏦</b>Wallet</button>
-  <button class="nav active" data-page="games"><b>🎰</b>Games</button>
-  <button class="nav" data-page="wheel"><b>🎡</b>Lucky Wheel</button>
-  <button class="nav" data-page="refer"><b>🔗</b>Refer</button>
-  <button class="nav" data-page="events"><b>🎁</b>Events</button>
-</nav>
-
-</div>
-</div>
-
-<div class="modal" id="gameModal">
+<div class="modal" id="paymentModal">
   <div class="modalBox">
-    <button class="close" data-close="gameModal">✕</button>
-    <h2 id="gameTitle">Game</h2>
-    <div class="gameBig" id="gameEmoji">🎰</div>
-    <div class="result" id="gameResult"></div>
-    <p class="modalInfo">Virtual-coin entertainment game. No real-money wagering, deposits or cash withdrawals are enabled.</p>
-    <button class="goldBtn" id="playGame">PLAY ROUND</button>
+    <button class="close" onclick="closePayment()">×</button>
+    <div class="kicker">Payment</div>
+    <h2>Complete Your Join.</h2>
+    <p>Your membership details are saved on this device. Use the UPI button on a mobile device to open a compatible UPI app, or scan the QR after adding your real UPI ID in the code.</p>
+    <div class="planSummary"><div><small>Payable amount</small><br><strong id="payPlan">1 Month + 1 Month FREE</strong></div><b id="payPrice">₹1,400</b></div>
+    <div style="background:#080808;border:1px dashed #444;padding:25px;text-align:center;margin-bottom:15px">
+      <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:2px">UPI ID</div>
+      <div id="upiDisplay" style="font-size:24px;font-weight:900;margin:8px 0;color:var(--accent)">YOURUPIID@upi</div>
+      <div style="font-size:11px;color:#666">Replace YOURUPIID@upi in the script with the gym's real UPI ID.</div>
+    </div>
+    <button class="submit" onclick="payUPI()">Pay with UPI App →</button>
+    <button class="heroBtn alt" style="width:100%;margin-top:10px" onclick="markPaidDemo()">I Have Paid / Continue</button>
   </div>
 </div>
 
-<div class="modal" id="profileModal">
-  <div class="modalBox">
-    <button class="close" data-close="profileModal">✕</button>
-    <h2>Settings</h2>
-    <p>Player: <b id="profileName">Player</b></p>
-    <p class="modalInfo" style="text-align:left">Virtual balance: <b id="profileBalance">0</b> coins</p>
-    <button class="goldBtn" id="logout">LOG OUT</button>
+<div class="modal" id="successModal">
+  <div class="modalBox successBox">
+    <div class="successIcon">✓</div>
+    <div class="kicker">Registration Received</div>
+    <h2>You're In.</h2>
+    <p id="successText">Your member registration has been saved. The final backend/payment verification can be connected next.</p>
+    <button class="heroBtn" onclick="closeSuccess()">Back To 14 Fitness</button>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-const gameData=[
- {name:"Gems Fortune",emoji:"💎",type:"slots",hot:true},
- {name:"Dragon Kingdom",emoji:"🐉",type:"slots",hot:true},
- {name:"Ace Super",emoji:"🃏",type:"slots",hot:true},
- {name:"Super 777",emoji:"7️⃣",type:"slots",hot:true},
- {name:"Gems II Fortune",emoji:"💰",type:"slots",hot:true},
- {name:"Queen Fortune",emoji:"👑",type:"slots",hot:true},
- {name:"The Crypt",emoji:"💀",type:"mini",new:true},
- {name:"Night Hunting",emoji:"🌙",type:"mini",hot:true},
- {name:"Jungle Delight",emoji:"🐯",type:"mini",hot:true},
- {name:"Jackpot Fishing",emoji:"🦈",type:"lucky"},
- {name:"Chicken Road",emoji:"🐔",type:"mini",hot:true},
- {name:"Very Lucky",emoji:"🍀",type:"lucky",hot:true},
- {name:"Aviator",emoji:"✈️",type:"lucky",hot:true},
- {name:"Crash X",emoji:"🚀",type:"lucky"},
- {name:"Jet X",emoji:"🛩️",type:"lucky"},
- {name:"Zeppelin",emoji:"🎈",type:"lucky",hot:true}
-];
-
-let filter="all";
-let currentGame=null;
-let balance=1000;
-
-const $=id=>document.getElementById(id);
-
-function setBalance(value){
-  balance=Math.max(0,value);
-  $("balance").textContent=balance.toLocaleString();
-  $("profileBalance").textContent=balance.toLocaleString();
-  localStorage.setItem("sm_balance",String(balance));
-}
-
-function renderGames(){
-  const list=gameData.filter(g=>{
-    if(filter==="all")return true;
-    if(filter==="favourite")return g.hot;
-    return g.type===filter;
-  });
-
-  $("games").innerHTML=list.map((g)=>{
-    const index=gameData.indexOf(g);
-    return `
-      <article class="game" data-index="${index}">
-        ${g.hot?'<span class="hot">HOT</span>':''}
-        ${g.new?'<span class="hot new">NEW</span>':''}
-        <div class="art">${g.emoji}</div>
-        <div class="name">${g.name}</div>
-        <span class="heart">♥</span>
-        <button class="download" title="Open game">↓</button>
-      </article>`;
-  }).join("");
-
-  document.querySelectorAll(".game").forEach(card=>{
-    card.onclick=()=>openGame(gameData[Number(card.dataset.index)]);
-  });
-}
-
-function openGame(game){
-  currentGame=game;
-  $("gameTitle").textContent=game.name;
-  $("gameEmoji").textContent=game.emoji;
-  $("gameResult").textContent="";
-  $("gameModal").style.display="flex";
-}
-
-function showApp(){
-  $("login").style.display="none";
-  $("app").style.display="block";
-  const name=localStorage.getItem("sm_name")||"Player";
-  $("profileName").textContent=name;
-  setBalance(Number(localStorage.getItem("sm_balance")||1000));
-  renderGames();
-}
-
-function authMessage(text){$("authMsg").textContent=text}
-
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    $("loading").style.display="none";
-    if(localStorage.getItem("sm_session")) showApp();
-    else $("login").style.display="flex";
-  },900);
-});
-
-$("sendOtp").onclick=async()=>{
-  const name=$("name").value.trim();
-  const mobile=$("mobile").value.trim();
-  const password=$("password").value;
-
-  if(!name||!mobile||password.length<8){
-    authMessage("Enter your name, mobile number and an 8+ character password.");
-    return;
-  }
-
-  authMessage("Sending real OTP…");
-
-  try{
-    const response=await fetch("/api/auth/request-otp",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name,mobile,password})
-    });
-
-    const data=await response.json();
-
-    if(!response.ok) throw new Error(data.error||"Unable to send OTP.");
-
-    $("otpBox").style.display="block";
-    authMessage(data.message||"OTP sent.");
-  }catch(error){
-    authMessage(error.message);
-  }
+const CONFIG = {
+  gymName: "14 FITNESS GYM",
+  // IMPORTANT: replace this with the real UPI ID before launch.
+  upiId: "YOURUPIID@upi",
+  upiName: "14 FITNESS GYM",
+  currency: "INR"
 };
 
-$("verifyOtp").onclick=async()=>{
-  const mobile=$("mobile").value.trim();
-  const otp=$("otp").value.trim();
+let selected = {plan:"1 Month + 1 Month FREE", price:"₹1,400"};
+let pendingMember = null;
 
-  if(!otp){
-    authMessage("Enter the OTP.");
-    return;
-  }
+const $ = id => document.getElementById(id);
 
-  try{
-    const response=await fetch("/api/auth/verify-otp",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({mobile,otp})
-    });
+function scrollToPlans(){ document.querySelector("#plans").scrollIntoView({behavior:"smooth"}); }
 
-    const data=await response.json();
+function openJoin(plan="1 Month + 1 Month FREE", price="₹1,400"){
+  selected={plan,price};
+  $("selectedPlan").textContent=plan;
+  $("selectedPrice").textContent=price;
+  $("joinModal").classList.add("show");
+}
+function closeJoin(){ $("joinModal").classList.remove("show"); }
+function closePayment(){ $("paymentModal").classList.remove("show"); }
+function closeSuccess(){ $("successModal").classList.remove("show"); }
 
-    if(!response.ok) throw new Error(data.error||"OTP verification failed.");
+$("joinForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const phone=$("phone").value.replace(/\D/g,"");
+  if(phone.length!==10){ showToast("Please enter a valid 10-digit mobile number."); return; }
 
-    localStorage.setItem("sm_session",data.session);
-    localStorage.setItem("sm_name",data.name);
-    showApp();
-  }catch(error){
-    authMessage(error.message);
-  }
-};
-
-$("claimPromo").onclick=()=>{
-  const code=$("promoCode").value.trim().toUpperCase();
-
-  if(code!=="ZEESHAN10"){
-    $("promoMsg").textContent="Invalid promo code.";
-    return;
-  }
-
-  if(localStorage.getItem("sm_promo")){
-    $("promoMsg").textContent="This promo code has already been used.";
-    return;
-  }
-
-  setBalance(balance+1000);
-  localStorage.setItem("sm_promo","1");
-  $("promoMsg").textContent="ZEESHAN10 applied! +1,000 virtual coins.";
-};
-
-$("playGame").onclick=()=>{
-  if(balance<10){
-    $("gameResult").textContent="Not enough virtual coins.";
-    return;
-  }
-
-  setBalance(balance-10);
-
-  const won=Math.random()<0.5;
-
-  if(won){
-    setBalance(balance+20);
-    $("gameResult").textContent="🎉 You won 20 virtual coins!";
-  }else{
-    $("gameResult").textContent="Better luck next round!";
-  }
-};
-
-document.querySelectorAll(".cat").forEach(button=>{
-  button.onclick=()=>{
-    document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
-    button.classList.add("active");
-    filter=button.dataset.filter;
-    renderGames();
+  pendingMember={
+    id:"14F-"+Date.now().toString().slice(-7),
+    name:$("name").value.trim(),
+    phone,
+    email:$("email").value.trim(),
+    age:$("age").value,
+    gender:$("gender").value,
+    goal:$("goal").value,
+    emergency:$("emergency").value.trim(),
+    plan:selected.plan,
+    amount:selected.price,
+    joinedAt:new Date().toISOString(),
+    status:"Active"
   };
+
+  localStorage.setItem("14fitness_pending",JSON.stringify(pendingMember));
+  closeJoin();
+  $("payPlan").textContent=selected.plan;
+  $("payPrice").textContent=selected.price;
+  $("upiDisplay").textContent=CONFIG.upiId;
+  $("paymentModal").classList.add("show");
 });
 
-$("floatBtn").onclick=()=>{
-  const menu=$("sideMenu");
-  menu.style.display=menu.style.display==="block"?"none":"block";
-};
+function rupees(v){
+  return Number(String(v).replace(/[^\d.]/g,"")) || 0;
+}
 
-$("settings").onclick=()=>{
-  $("profileBalance").textContent=balance.toLocaleString();
-  $("profileModal").style.display="flex";
-};
+function payUPI(){
+  if(CONFIG.upiId==="YOURUPIID@upi"){
+    showToast("First replace YOURUPIID@upi in the CONFIG section with the gym's real UPI ID.");
+    return;
+  }
+  const amount=rupees(selected.price);
+  const url=`upi://pay?pa=${encodeURIComponent(CONFIG.upiId)}&pn=${encodeURIComponent(CONFIG.upiName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(selected.plan+" - 14 Fitness")}`;
+  window.location.href=url;
+}
 
-$("addCoins").onclick=()=>{
-  setBalance(balance+50);
-};
+function markPaidDemo(){
+  if(!pendingMember) return;
+  const members=JSON.parse(localStorage.getItem("14fitness_members")||"[]");
+  members.push(pendingMember);
+  localStorage.setItem("14fitness_members",JSON.stringify(members));
+  localStorage.removeItem("14fitness_pending");
+  closePayment();
+  $("successText").innerHTML=`Welcome, <b>${escapeHtml(pendingMember.name)}</b>! Your ${escapeHtml(pendingMember.plan)} registration has been recorded on this device. Member ID: <b>${pendingMember.id}</b>. Payment verification and SMS/Telegram notifications can be connected in the backend.`;
+  $("successModal").classList.add("show");
+  renderMembers();
+  $("joinForm").reset();
+}
 
-$("jackpotBtn").onclick=()=>{
-  alert("Jackpot section is for virtual coins only.");
-};
+function renderMembers(){
+  const members=JSON.parse(localStorage.getItem("14fitness_members")||"[]");
+  const active=members.filter(m=>m.status==="Active");
+  $("activeMembers").innerHTML=active.length ? active.slice(-20).reverse().map(m=>`
+    <div class="memberRow"><div><b>${escapeHtml(m.name)}</b><br><span style="color:#666">${escapeHtml(m.plan)}</span></div><span class="status active">ACTIVE</span></div>`).join("") :
+    `<div style="padding:20px;color:#666;font-size:12px">No registrations on this device yet.</div>`;
+  $("statusMembers").innerHTML=members.length ? members.slice(-20).reverse().map(m=>`
+    <div class="memberRow"><div><b>${escapeHtml(m.name)}</b><br><span style="color:#666">${escapeHtml(m.id)} • ${new Date(m.joinedAt).toLocaleDateString()}</span></div><span class="status ${m.status==="Active"?"active":"expired"}">${escapeHtml(m.status)}</span></div>`).join("") :
+    `<div style="padding:20px;color:#666;font-size:12px">Member status will appear here.</div>`;
+}
 
-$("referBtn").onclick=()=>{
-  alert("Referral rewards are virtual coins only.");
-};
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function showToast(msg){
+  $("toast").textContent=msg;
+  $("toast").classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>$("toast").classList.remove("show"),3500);
+}
 
-$("logout").onclick=async()=>{
-  const session=localStorage.getItem("sm_session");
+window.addEventListener("scroll",()=> $("header").classList.toggle("scrolled",scrollY>40));
 
-  try{
-    await fetch("/api/auth/logout",{
-      method:"POST",
-      headers:{"x-session-token":session||""}
-    });
-  }catch{}
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-  localStorage.removeItem("sm_session");
-  $("profileModal").style.display="none";
-  $("app").style.display="none";
-  $("login").style.display="flex";
-};
-
-document.querySelectorAll("[data-close]").forEach(button=>{
-  button.onclick=()=>{
-    $(button.dataset.close).style.display="none";
-  };
+document.addEventListener("mousemove",e=>{
+  $("cursor").style.left=e.clientX+"px"; $("cursor").style.top=e.clientY+"px";
+});
+document.querySelectorAll("button,a").forEach(el=>{
+  el.addEventListener("mouseenter",()=>{$("cursor").style.width="28px";$("cursor").style.height="28px"});
+  el.addEventListener("mouseleave",()=>{$("cursor").style.width="14px";$("cursor").style.height="14px"});
 });
 
-document.querySelectorAll(".nav").forEach(button=>{
-  button.onclick=()=>{
-    if(button.dataset.page==="games")return;
-    alert(button.dataset.page.toUpperCase()+" section");
-  };
-});
+renderMembers();
 </script>
 </body>
 </html>
