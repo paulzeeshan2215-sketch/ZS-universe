@@ -2290,6 +2290,49 @@ input:focus{
 }
 
 
+
+/* =========================================================
+   FREE INSTAGRAM ORDER EXPERIENCE
+========================================================= */
+.free-order-highlight{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  margin:0 0 18px;
+  padding:25px 20px 23px;
+  text-align:center;
+  border:1px solid rgba(75,255,155,.22);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(70,255,160,.16), transparent 55%),
+    linear-gradient(145deg, rgba(24,50,42,.78), rgba(10,15,22,.92));
+  box-shadow:0 20px 60px rgba(0,0,0,.28), 0 0 45px rgba(53,211,154,.08);
+}
+.free-order-highlight::before{
+  content:"";position:absolute;inset:-2px;border-radius:24px;
+  background:conic-gradient(from 0deg,transparent 0 25%,rgba(83,255,164,.55),transparent 40% 100%);
+  animation:freeBorderSpin 4s linear infinite;z-index:-2;
+}
+.free-order-highlight::after{
+  content:"";position:absolute;inset:1px;border-radius:21px;background:#0b1213;z-index:-1;
+}
+.free-order-orbit{position:absolute;width:180px;height:180px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(90,255,169,.12);box-shadow:0 0 50px rgba(53,211,154,.08);animation:freeOrbit 7s linear infinite;}
+.free-order-label{font-size:10px;letter-spacing:2px;font-weight:900;color:#86eab0;margin-bottom:8px;}
+.free-order-main{font-family:Poppins,sans-serif;font-size:clamp(34px,7vw,52px);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(90deg,#fff,#79ffad,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:freeTextShine 2.8s linear infinite,freePop 2.2s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(83,255,164,.25));}
+.free-order-sub{margin-top:11px;color:#a6b6b1;font-size:11px;font-weight:600;}
+.free-price-box{border-color:rgba(53,211,154,.15);background:rgba(5,15,12,.38);}
+.free-price-box .price-row.discount strong{color:#58f3a5;text-shadow:0 0 14px rgba(88,243,165,.25);}
+.free-order-note{display:flex;justify-content:center;align-items:center;gap:8px;margin:-8px 0 20px;color:#83d9ad;font-size:11px;font-weight:700;}
+.free-order-note span{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:rgba(53,211,154,.12);border:1px solid rgba(53,211,154,.25);}
+.free-get-button{position:relative;overflow:hidden;background:linear-gradient(135deg,#20bd86,#35d39a 55%,#6cffb0);color:#06140d;box-shadow:0 14px 35px rgba(53,211,154,.25),inset 0 1px rgba(255,255,255,.35);}
+.free-get-button::before{content:"";position:absolute;top:0;bottom:0;width:80px;left:-100px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:freeButtonSweep 2.2s ease-in-out infinite;}
+@keyframes freeBorderSpin{to{transform:rotate(360deg)}}
+@keyframes freeOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes freeTextShine{to{background-position:220% center}}
+@keyframes freePop{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes freeButtonSweep{0%{left:-100px}55%,100%{left:115%}}
+@media(prefers-reduced-motion:reduce){.free-order-highlight::before,.free-order-orbit,.free-order-main,.free-get-button::before{animation:none;}}
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -2844,7 +2887,7 @@ body.success-lock{
       </h1>
 
       <p class="subtitle">
-        Review your service details, provide your contact information and continue securely to payment.
+        Choose your contact details, add your Instagram profile link, and claim your followers for FREE.
       </p>
 
 
@@ -2966,7 +3009,7 @@ body.success-lock{
           id="instagramUsername"
           type="text"
           maxlength="30"
-          placeholder="@yourusername"
+          placeholder="@yourusername (optional)"
           autocomplete="off"
         >
 
@@ -2992,135 +3035,40 @@ body.success-lock{
       </div> 
  
  
-      <!-- PROMO --> 
- 
-      <div class="promo-box"> 
- 
-        <div class="promo-heading"> 
- 
-          <div class="promo-icon"> 
-            🎟️ 
-          </div> 
- 
-          <span> 
-            Have a Promo Code? 
-          </span> 
- 
-        </div> 
- 
- 
-        <div class="promo-row"> 
- 
-          <input 
-            class="promo-input" 
-            id="instagramPromoCode" 
-            type="text" 
-            maxlength="30" 
-            placeholder="Enter promo code" 
-            autocomplete="off" 
-          > 
- 
- 
-          <button 
-            type="button" 
-            class="promo-btn" 
-            id="instagramPromoButton" 
-            onclick="applyInstagramPromo()" 
-          > 
-            Apply Code 
-          </button> 
- 
-        </div> 
- 
- 
-        <div 
-          class="promo-status" 
-          id="instagramPromoStatus" 
-        > 
-          ✓ <strong>PROMO CODE APPLIED</strong> 
-          — You saved 10% on this order. 
-        </div> 
- 
- 
-        <div 
-          class="promo-error" 
-          id="instagramPromoError" 
-        > 
-          Invalid promo code. 
-        </div> 
- 
-      </div> 
- 
- 
-      <!-- PRICE --> 
- 
-      <div class="price-box"> 
- 
-        <div class="price-row"> 
- 
-          <span> 
-            Package Price 
-          </span> 
- 
-          <strong id="instagramTotal"> 
-            ₹0 
-          </strong> 
- 
-        </div> 
- 
- 
-        <div 
-          class="price-row" 
-          id="instagramOriginalRow" 
-          style="display:none;" 
-        > 
- 
-          <span> 
-            Original Price 
-          </span> 
- 
-          <strong 
-            class="old-price" 
-            id="instagramOriginalDisplay" 
-          > 
-            ₹0 
-          </strong> 
- 
-        </div> 
- 
- 
-        <div 
-          class="price-row discount" 
-          id="instagramDiscountRow" 
-          style="display:none;" 
-        > 
- 
-          <span> 
-            Promo Discount 
-          </span> 
- 
-          <strong id="instagramDiscountDisplay"> 
-            -₹0 
-          </strong> 
- 
-        </div> 
- 
- 
-        <div class="price-row total"> 
- 
-          <span> 
-            Total to Pay 
-          </span> 
- 
-          <strong id="instagramFinal"> 
-            ₹0 
-          </strong> 
- 
-        </div> 
- 
-      </div> 
- 
- 
+      <!-- FREE PRICE -->
+
+      <div class="free-order-highlight">
+        <div class="free-order-orbit"></div>
+        <div class="free-order-label">SPECIAL INSTAGRAM DROP</div>
+        <div class="free-order-main">100% FREE</div>
+        <div class="free-order-sub">No payment required • No payment screenshot</div>
+      </div>
+
+      <div class="price-box free-price-box">
+
+        <div class="price-row">
+          <span>Actual Price</span>
+          <strong class="old-price" id="instagramOriginalDisplay">₹0</strong>
+        </div>
+
+        <div class="price-row discount">
+          <span>Special Offer</span>
+          <strong id="instagramDiscountDisplay">100% FREE</strong>
+        </div>
+
+        <div class="price-row total">
+          <span>Total to Pay</span>
+          <strong id="instagramFinal">₹0</strong>
+        </div>
+
+      </div>
+
+      <div class="free-order-note">
+        <span>✓</span> Your selected followers are currently available for ₹0.
+      </div>
+
+      
+
       <div class="buttons"> 
  
         <button 
@@ -3134,10 +3082,11 @@ body.success-lock{
  
         <button 
           type="button" 
-          class="btn btn-primary" 
+          class="btn btn-primary free-get-button" 
+          id="instagramGetOrderBtn"
           onclick="instagramContinue()" 
         > 
-          Continue to Payment → 
+          ✨ GET FREE ORDER NOW 
         </button> 
  
       </div> 
@@ -3145,13 +3094,11 @@ body.success-lock{
  
       <div class="secure-note"> 
  
-        🔒 Your information is used only for processing your order. 
- 
-        <br> 
- 
-        <strong> 
-          Never share your Instagram password. 
-        </strong> 
+        🔒 Your contact details are used only for processing your order.
+
+        <br>
+
+        <strong>Never share your Instagram password.</strong> 
  
       </div> 
  
@@ -4134,79 +4081,92 @@ const INSTAGRAM_PACKAGES = {
   "200":{ 
     name:"Starter — 200 Followers", 
     followers:200, 
-    price:30 
+    price:0,
+    originalPrice:100 
   }, 
  
   "500":{ 
     name:"Starter Plus — 500 Followers", 
     followers:500, 
-    price:50 
+    price:0,
+    originalPrice:150 
   }, 
  
   "1000":{ 
     name:"Popular — 1,000 Followers", 
     followers:1000, 
-    price:90 
+    price:0,
+    originalPrice:250 
   }, 
  
   "1500":{ 
     name:"Growth — 1,500 Followers", 
     followers:1500, 
-    price:130 
+    price:0,
+    originalPrice:300 
   }, 
  
   "2000":{ 
     name:"Growth Plus — 2,000 Followers", 
     followers:2000, 
-    price:150 
+    price:0,
+    originalPrice:400 
   }, 
  
   "3000":{ 
     name:"Pro — 3,000 Followers", 
     followers:3000, 
-    price:200 
+    price:0,
+    originalPrice:500 
   }, 
  
   "4000":{ 
     name:"Pro Plus — 4,000 Followers", 
     followers:4000, 
-    price:250 
+    price:0,
+    originalPrice:600 
   }, 
  
   "5000":{ 
     name:"Premium — 5,000 Followers", 
     followers:5000, 
-    price:300 
+    price:0,
+    originalPrice:750 
   }, 
  
   "6000":{ 
     name:"Premium Plus — 6,000 Followers", 
     followers:6000, 
-    price:350 
+    price:0,
+    originalPrice:900 
   }, 
  
   "7000":{ 
     name:"Advanced — 7,000 Followers", 
     followers:7000, 
-    price:450 
+    price:0,
+    originalPrice:1100 
   }, 
  
   "8000":{ 
     name:"Advanced Plus — 8,000 Followers", 
     followers:8000, 
-    price:500 
+    price:0,
+    originalPrice:1200 
   }, 
  
   "9000":{ 
     name:"Elite — 9,000 Followers", 
     followers:9000, 
-    price:550 
+    price:0,
+    originalPrice:1400 
   }, 
  
   "10000":{ 
     name:"Elite Plus — 10,000 Followers", 
     followers:10000, 
-    price:600 
+    price:0,
+    originalPrice:1500 
   } 
  
 }; 
@@ -4329,6 +4289,11 @@ const instagramPrice =
 const instagramFollowers = 
   selectedInstagramPackage 
     ? selectedInstagramPackage.followers 
+    : 0; 
+ 
+const instagramOriginalPrice = 
+  selectedInstagramPackage 
+    ? selectedInstagramPackage.originalPrice 
     : 0; 
  
  
@@ -4612,74 +4577,24 @@ function applyInstagramPromo(){
    INSTAGRAM PRICE UI 
 ========================================================= */ 
  
-function updateInstagramPrice(){ 
- 
-  const original = 
-    instagramPrice; 
- 
- 
-  const final = 
-    instagramPromoApplied 
-      ? instagramFinalPrice 
-      : instagramPrice; 
- 
- 
-  const discount = 
-    instagramPromoApplied 
-      ? calculateDiscount( 
-          instagramPrice 
-        ).discount 
-      : 0; 
- 
- 
-  document.getElementById( 
-    "instagramTotal" 
-  ).textContent = 
-    money(original); 
- 
- 
-  document.getElementById( 
-    "instagramFinal" 
-  ).textContent = 
-    money(final); 
- 
- 
-  document.getElementById( 
-    "instagramPaymentAmount" 
-  ).textContent = 
-    money(final); 
- 
- 
-  document.getElementById( 
-    "instagramOriginalDisplay" 
-  ).textContent = 
-    money(original); 
- 
- 
-  document.getElementById( 
-    "instagramDiscountDisplay" 
-  ).textContent = 
-    "-" + money(discount); 
- 
- 
-  document.getElementById( 
-    "instagramOriginalRow" 
-  ).style.display = 
-    instagramPromoApplied 
-      ? "flex" 
-      : "none"; 
- 
- 
-  document.getElementById( 
-    "instagramDiscountRow" 
-  ).style.display = 
-    instagramPromoApplied 
-      ? "flex" 
-      : "none"; 
- 
-} 
- 
- 
+function updateInstagramPrice(){
+
+  const final = 0;
+
+  const total = document.getElementById("instagramTotal");
+  const finalEl = document.getElementById("instagramFinal");
+  const payment = document.getElementById("instagramPaymentAmount");
+  const originalEl = document.getElementById("instagramOriginalDisplay");
+  const discountEl = document.getElementById("instagramDiscountDisplay");
+
+  if(total) total.textContent = "₹0";
+  if(finalEl) finalEl.textContent = "₹0";
+  if(payment) payment.textContent = "₹0";
+  if(originalEl) originalEl.textContent = money(instagramOriginalPrice);
+  if(discountEl) discountEl.textContent = "100% FREE";
+}
+
+
 /* ========================================================= 
    MOVIE PRICE UI 
 ========================================================= */ 
@@ -5468,178 +5383,50 @@ function moviePayUPI(){
    INSTAGRAM STEP 1 
 ========================================================= */ 
  
-function instagramContinue(){ 
- 
-  clearErrors(); 
- 
- 
-  if( 
-    !selectedInstagramPackage 
-  ){ 
- 
-    showError( 
-      "instagramError1", 
-      "Invalid Instagram package. Please go back and select a package again." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  if( 
-    instagramPrice <= 0 
-  ){ 
- 
-    showError( 
-      "instagramError1", 
-      "Invalid package price." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  const mobile = 
-    document 
-      .getElementById( 
-        "instagramMobile" 
-      ) 
-      .value 
-      .trim(); 
- 
- 
-  const email = 
-    document 
-      .getElementById( 
-        "instagramEmail" 
-      ) 
-      .value 
-      .trim() 
-      .toLowerCase(); 
- 
- 
-  const username = 
-    document 
-      .getElementById( 
-        "instagramUsername" 
-      ) 
-      .value 
-      .trim() 
-      .replace( 
-        /^@+/, 
-        "" 
-      ); 
- 
- 
-  const profile = 
-    document 
-      .getElementById( 
-        "instagramProfile" 
-      ) 
-      .value 
-      .trim(); 
- 
- 
-  if( 
-    instagramContactMethod === 
-    "mobile" 
-  ){ 
- 
-    if( 
-      !isValidIndianMobile( 
-        mobile 
-      ) 
-    ){ 
- 
-      showError( 
-        "instagramError1", 
-        "Please enter a valid Indian mobile number." 
-      ); 
- 
-      return; 
-    } 
- 
-  }else{ 
- 
-    if( 
-      !isValidEmail( 
-        email 
-      ) 
-    ){ 
- 
-      showError( 
-        "instagramError1", 
-        "Please enter a valid email address." 
-      ); 
- 
-      return; 
-    } 
- 
-  } 
- 
- 
-  if( 
-    !/^[A-Za-z0-9._]{1,30}$/ 
-      .test(username) 
-  ){ 
- 
-    showError( 
-      "instagramError1", 
-      "Please enter a valid Instagram username." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  try{ 
- 
-    const url = 
-      new URL(profile); 
- 
- 
-    const hostname = 
-      url.hostname 
-        .toLowerCase() 
-        .replace( 
-          /^www\./, 
-          "" 
-        ); 
- 
- 
-    if( 
-      hostname !== 
-        "instagram.com" && 
-      hostname !== 
-        "instagr.am" 
-    ){ 
- 
-      throw new Error(); 
- 
-    } 
- 
-  }catch{ 
- 
-    showError( 
-      "instagramError1", 
-      "Please enter a valid Instagram profile link." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  generateQR( 
-    "instagramQR", 
-    instagramFinalPrice 
-  ); 
- 
- 
-  instagramShowScreen(2); 
- 
-} 
- 
- 
+function instagramContinue(){
+
+  clearErrors();
+
+  if(!selectedInstagramPackage){
+    showError("instagramError1","Invalid Instagram package. Please go back and select a package again.");
+    return;
+  }
+
+  const mobile = document.getElementById("instagramMobile").value.trim();
+  const email = document.getElementById("instagramEmail").value.trim().toLowerCase();
+  const username = document.getElementById("instagramUsername").value.trim().replace(/^@+/,"");
+  const profile = document.getElementById("instagramProfile").value.trim();
+
+  if(instagramContactMethod === "mobile"){
+    if(!isValidIndianMobile(mobile)){
+      showError("instagramError1","Please enter a valid Indian mobile number.");
+      return;
+    }
+  }else{
+    if(!isValidEmail(email)){
+      showError("instagramError1","Please enter a valid email address.");
+      return;
+    }
+  }
+
+  if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
+    showError("instagramError1","Please enter a valid Instagram username, or leave it blank.");
+    return;
+  }
+
+  try{
+    const url = new URL(profile);
+    const hostname = url.hostname.toLowerCase().replace(/^www\\./,"");
+    if(hostname !== "instagram.com" && hostname !== "instagr.am") throw new Error();
+  }catch{
+    showError("instagramError1","Please enter a valid Instagram profile link.");
+    return;
+  }
+
+  submitInstagramOrder();
+}
+
+
 /* ========================================================= 
    INSTAGRAM PAY 
 ========================================================= */ 
@@ -5896,9 +5683,9 @@ function showProcessing(){
  
     "Verifying your order details...", 
  
-    "Preparing secure payment information...", 
+    "Preparing your order securely...", 
  
-    "Uploading your payment screenshot...", 
+    "Verifying your order information...", 
  
     "Sending your order securely...", 
  
@@ -6469,403 +6256,116 @@ async function submitMovieOrder(){
    INSTAGRAM SUBMIT 
 ========================================================= */ 
  
-async function submitInstagramOrder(){ 
- 
-  clearErrors(); 
- 
- 
-  if( 
-    !selectedInstagramPackage 
-  ){ 
- 
-    showError( 
-      "instagramError2", 
-      "Invalid Instagram package." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  if( 
-    instagramPrice <= 0 
-  ){ 
- 
-    showError( 
-      "instagramError2", 
-      "Invalid package price." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  const mobile = 
-    document 
-      .getElementById( 
-        "instagramMobile" 
-      ) 
-      .value 
-      .trim(); 
- 
- 
-  const email = 
-    document 
-      .getElementById( 
-        "instagramEmail" 
-      ) 
-      .value 
-      .trim() 
-      .toLowerCase(); 
- 
- 
-  const username = 
-    document 
-      .getElementById( 
-        "instagramUsername" 
-      ) 
-      .value 
-      .trim() 
-      .replace( 
-        /^@+/, 
-        "" 
-      ); 
- 
- 
-  const profile = 
-    document 
-      .getElementById( 
-        "instagramProfile" 
-      ) 
-      .value 
-      .trim(); 
- 
- 
-  const utr = 
-    document 
-      .getElementById( 
-        "instagramUTR" 
-      ) 
-      .value 
-      .trim(); 
- 
- 
-  const fileInput = 
-    document.getElementById( 
-      "instagramScreenshot" 
-    ); 
- 
- 
-  if( 
-    instagramContactMethod === 
-    "mobile" 
-  ){ 
- 
-    if( 
-      !isValidIndianMobile( 
-        mobile 
-      ) 
-    ){ 
- 
-      showError( 
-        "instagramError2", 
-        "Please enter a valid Indian mobile number." 
-      ); 
- 
-      return; 
-    } 
- 
-  }else{ 
- 
-    if( 
-      !isValidEmail( 
-        email 
-      ) 
-    ){ 
- 
-      showError( 
-        "instagramError2", 
-        "Please enter a valid email address." 
-      ); 
- 
-      return; 
-    } 
- 
-  } 
- 
- 
-  if( 
-    !/^[A-Za-z0-9._]{1,30}$/ 
-      .test(username) 
-  ){ 
- 
-    showError( 
-      "instagramError2", 
-      "Please enter a valid Instagram username." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  if(!fileInput.files[0]){ 
- 
-    showError( 
-      "instagramError2", 
-      "Please upload your payment screenshot." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  if( 
-    !validateFile( 
-      fileInput, 
-      "instagramFileName" 
-    ) 
-  ){ 
- 
-    showError( 
-      "instagramError2", 
-      "Please select a valid screenshot." 
-    ); 
- 
-    return; 
-  } 
- 
- 
-  const button = 
-    document.getElementById( 
-      "instagramSubmitBtn" 
-    ); 
- 
- 
-  button.disabled = 
-    true; 
- 
- 
-  button.textContent = 
-    "Submitting..."; 
- 
- 
-  const processing = 
-    showProcessing(); 
- 
- 
-  
+async function submitInstagramOrder(){
 
+  clearErrors();
+
+  if(!selectedInstagramPackage){
+    showError("instagramError1","Invalid Instagram package.");
+    return;
+  }
+
+  const mobile = document.getElementById("instagramMobile").value.trim();
+  const email = document.getElementById("instagramEmail").value.trim().toLowerCase();
+  const username = document.getElementById("instagramUsername").value.trim().replace(/^@+/,"");
+  const profile = document.getElementById("instagramProfile").value.trim();
+
+  if(instagramContactMethod === "mobile"){
+    if(!isValidIndianMobile(mobile)){
+      showError("instagramError1","Please enter a valid Indian mobile number.");
+      return;
+    }
+  }else{
+    if(!isValidEmail(email)){
+      showError("instagramError1","Please enter a valid email address.");
+      return;
+    }
+  }
+
+  if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
+    showError("instagramError1","Please enter a valid Instagram username, or leave it blank.");
+    return;
+  }
+
+  try{
+    const url = new URL(profile);
+    const hostname = url.hostname.toLowerCase().replace(/^www\\./,"");
+    if(hostname !== "instagram.com" && hostname !== "instagr.am") throw new Error();
+  }catch{
+    showError("instagramError1","Please enter a valid Instagram profile link.");
+    return;
+  }
+
+  const button = document.getElementById("instagramGetOrderBtn");
+  if(button){
+    button.disabled = true;
+    button.textContent = "Preparing your FREE order...";
+  }
+
+  const processing = showProcessing();
   prepareSuccessSound();
 
-  try{ 
- 
-    const screenshot = 
-      await fileToBase64( 
-        fileInput.files[0] 
-      ); 
- 
- 
-    const discount = 
-      instagramPromoApplied 
-        ? calculateDiscount( 
-            instagramPrice 
-          ).discount 
-        : 0; 
- 
- 
-    const finalAmount = 
-      instagramPromoApplied 
-        ? instagramFinalPrice 
-        : instagramPrice; 
- 
- 
-    const payload = { 
- 
-      type: 
-        "instagram", 
- 
-      product: 
-        "instagram", 
- 
-      package: 
-        instagramPackage, 
- 
-      packageId: 
-        String( 
-          instagramFollowers 
-        ), 
- 
-      followers: 
-        instagramFollowers, 
- 
-      originalAmount: 
-        Number(instagramPrice) 
-          .toFixed(2), 
- 
-      discount: 
-        Number(discount) 
-          .toFixed(2), 
- 
-      promoCode: 
-        instagramPromoApplied 
-          ? PROMO_CODE 
-          : "", 
- 
-      promoApplied: 
-        instagramPromoApplied, 
- 
-      amount: 
-        Number(finalAmount) 
-          .toFixed(2), 
- 
-      mobile: 
-        mobile, 
- 
-      email: 
-        email, 
- 
-      username: 
-        username, 
- 
-      profile: 
-        profile, 
- 
-      utr: 
-        utr, 
- 
-      screenshot: 
-        screenshot 
- 
-    }; 
- 
- 
-    const response = 
-      await fetch( 
-        "/api/orders", 
-        { 
- 
-          method: 
-            "POST", 
- 
-          headers:{ 
-            "Content-Type": 
-              "application/json" 
-          }, 
- 
-          body: 
-            JSON.stringify( 
-              payload 
-            ) 
- 
-        } 
-      ); 
- 
- 
-    let data = {}; 
- 
- 
-    try{ 
- 
-      data = 
-        await response.json(); 
- 
-    }catch{} 
- 
- 
-    if(!response.ok){ 
- 
-      throw new Error( 
-        data.error || 
-        "Unable to submit Instagram order." 
-      ); 
- 
-    } 
- 
- 
-    await processing.finish(); 
- 
- 
-    document.getElementById( 
-      "instagramOrderId" 
-    ).textContent = 
-      data.orderId || 
-      "---"; 
- 
- 
-    document.getElementById( 
-      "successInstagramPackage" 
-    ).textContent = 
-      instagramPackage; 
- 
- 
-    document.getElementById( 
-      "successInstagramAmount" 
-    ).textContent = 
-      money(finalAmount); 
- 
- 
-    document 
-      .getElementById( 
-        "processingOverlay" 
-      ) 
-      .classList.remove( 
-        "show" 
-      ); 
+  try{
+    const payload = {
+      type:"instagram",
+      product:"instagram",
+      package:instagramPackage,
+      packageId:String(instagramFollowers),
+      followers:instagramFollowers,
+      originalAmount:Number(instagramOriginalPrice).toFixed(2),
+      discount:Number(instagramOriginalPrice).toFixed(2),
+      promoCode:"FREE",
+      promoApplied:true,
+      amount:"0.00",
+      mobile:mobile,
+      email:email,
+      username:username,
+      profile:profile,
+      utr:"",
+      screenshot:""
+    };
 
-    instagramShowScreen(
-      3
-    );
+    const response = await fetch("/api/orders",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+
+    let data = {};
+    try{ data = await response.json(); }catch{}
+
+    if(!response.ok){
+      throw new Error(data.error || "The server did not accept the FREE order. Your order was not marked as submitted.");
+    }
+
+    await processing.finish();
+
+    document.getElementById("instagramOrderId").textContent = data.orderId || "---";
+    document.getElementById("successInstagramPackage").textContent = instagramPackage;
+    document.getElementById("successInstagramAmount").textContent = "₹0";
+
+    document.getElementById("processingOverlay").classList.remove("show");
+    instagramShowScreen(3);
+
+    requestAnimationFrame(function(){
+      playSuccessAnimation();
+      playSuccessSound();
+    });
+
+    createStars(180);
+
+  }catch(error){
+    console.error("Instagram FREE order error:",error);
+    document.getElementById("processingOverlay").classList.remove("show");
+    showError("instagramError1",error.message || "Unable to submit FREE order. Please try again.");
+    if(button){
+      button.disabled = false;
+      button.textContent = "✨ GET FREE ORDER NOW";
+    }
+  }
+}
 
 
-    requestAnimationFrame(
-      function(){
-        playSuccessAnimation();
-        playSuccessSound();
-      }
-    );
-
-
-    createStars(
-      180
-    ); 
- 
- 
-  }catch(error){ 
- 
-    console.error( 
-      "Instagram order error:", 
-      error 
-    ); 
- 
- 
-    document 
-      .getElementById( 
-        "processingOverlay" 
-      ) 
-      .classList.remove( 
-        "show" 
-      ); 
- 
- 
-    showError( 
-      "instagramError2", 
-      error.message || 
-      "Unable to submit order. Please try again." 
-    ); 
- 
- 
-    button.disabled = 
-      false; 
- 
- 
-    button.textContent = 
-      "Submit Order ✓"; 
- 
-  } 
- 
-} 
- 
- 
 /* ========================================================= 
    CELEBRATION 
 ========================================================= */ 
@@ -7061,29 +6561,6 @@ function goHome(){
    ENTER KEY 
 ========================================================= */ 
  
-document 
-  .getElementById( 
-    "instagramPromoCode" 
-  ) 
-  .addEventListener( 
-    "keydown", 
-    function(event){ 
- 
-      if( 
-        event.key === 
-        "Enter" 
-      ){ 
- 
-        event.preventDefault(); 
- 
-        applyInstagramPromo(); 
- 
-      } 
- 
-    } 
-  ); 
- 
- 
 /* ========================================================= 
    INITIALIZATION 
 ========================================================= */ 
@@ -7122,12 +6599,9 @@ if(isMovie){
       instagramPackage; 
  
  
-  document 
-    .getElementById( 
-      "instagramPrice" 
-    ) 
-    .textContent = 
-      money(instagramPrice); 
+  document
+    .getElementById("instagramPrice")
+    .textContent = "₹0 • FREE"; 
  
  
   updateInstagramPrice(); 
