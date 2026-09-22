@@ -1,1278 +1,959 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>ZS Universe — System Recovery</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&display=swap');
+>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  <meta name="theme-color" content="#05070b">
 
-:root{
-    --cyan:#00eaff;
-    --blue:#1677ff;
-    --purple:#8b5cf6;
-    --green:#00ffb3;
-    --bg:#020611;
-    --panel:rgba(3,13,30,.72);
-}
+<meta
+name="description"
+content="Temporary server maintenance — We'll be back shortly."
 
-html,body{
-    width:100%;
-    min-height:100%;
-}
+>
 
-body{
-    overflow-x:hidden;
-    background:
-        radial-gradient(circle at 50% 45%,rgba(0,100,255,.16),transparent 35%),
-        radial-gradient(circle at 15% 80%,rgba(139,92,246,.11),transparent 30%),
-        #020611;
-    color:white;
-    font-family:Inter,sans-serif;
-}
+  <title>Temporarily Unavailable — We'll Be Back Soon</title>
 
-/* =========================
-   BACKGROUND GRID
-========================= */
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:.17;
-    background-image:
-        linear-gradient(rgba(0,234,255,.18) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,234,255,.18) 1px,transparent 1px);
-    background-size:55px 55px;
-    mask-image:linear-gradient(to bottom,black,transparent 95%);
-}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 3px,
-            rgba(255,255,255,.012) 4px
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #05070b;
+      --card: rgba(13, 17, 25, 0.78);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f7f9fc;
+      --muted: #9aa4b2;
+      --accent: #7c5cff;
+      --accent2: #00d9ff;
+      --green: #43f58a;
+      --danger: #ff5277;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 50% 15%,
+          rgba(124, 92, 255, 0.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 90%,
+          rgba(0, 217, 255, 0.08),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(67, 245, 138, 0.06),
+          transparent 25%
+        ),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* =========================
+       BACKGROUND GRID
+    ========================== */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.25;
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
         );
-}
+      background-size: 55px 55px;
+      mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+      );
+    }
 
-/* =========================
-   PARTICLES
-========================= */
+    /* =========================
+       FLOATING PARTICLES
+    ========================== */
 
-.particles{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-}
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.particle{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:var(--cyan);
-    border-radius:50%;
-    box-shadow:0 0 12px var(--cyan);
-    animation:particleFloat linear infinite;
-}
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.7),
+        0 0 20px rgba(124, 92, 255, 0.5);
+      animation: floatParticle linear infinite;
+    }
 
-.p1{left:8%;top:80%;animation-duration:8s}
-.p2{left:18%;top:50%;animation-duration:11s}
-.p3{left:31%;top:90%;animation-duration:9s}
-.p4{left:47%;top:75%;animation-duration:13s}
-.p5{left:61%;top:40%;animation-duration:10s}
-.p6{left:73%;top:85%;animation-duration:12s}
-.p7{left:87%;top:55%;animation-duration:9s}
-.p8{left:94%;top:25%;animation-duration:14s}
-.p9{left:39%;top:20%;animation-duration:15s}
-.p10{left:55%;top:15%;animation-duration:8s}
+    .particle:nth-child(1) {
+      left: 7%;
+      top: 80%;
+      animation-duration: 12s;
+    }
 
-@keyframes particleFloat{
-    0%{transform:translateY(80px);opacity:0}
-    20%{opacity:1}
-    80%{opacity:.8}
-    100%{transform:translateY(-700px);opacity:0}
-}
+    .particle:nth-child(2) {
+      left: 17%;
+      top: 35%;
+      animation-duration: 17s;
+      animation-delay: -5s;
+    }
 
-/* =========================
-   MAIN
-========================= */
+    .particle:nth-child(3) {
+      left: 28%;
+      top: 90%;
+      animation-duration: 14s;
+      animation-delay: -2s;
+    }
 
-.wrapper{
-    position:relative;
-    z-index:2;
-    width:min(1450px,94%);
-    margin:auto;
-    padding:28px 0 40px;
-}
+    .particle:nth-child(4) {
+      left: 39%;
+      top: 22%;
+      animation-duration: 19s;
+      animation-delay: -9s;
+    }
 
-/* =========================
-   HEADER
-========================= */
+    .particle:nth-child(5) {
+      left: 51%;
+      top: 75%;
+      animation-duration: 13s;
+      animation-delay: -4s;
+    }
 
-.header{
-    height:76px;
-    border:1px solid rgba(0,234,255,.4);
-    background:rgba(2,9,24,.78);
-    backdrop-filter:blur(18px);
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 25px;
-    box-shadow:
-        0 0 35px rgba(0,119,255,.08),
-        inset 0 0 25px rgba(0,234,255,.025);
-    position:relative;
-    overflow:hidden;
-}
+    .particle:nth-child(6) {
+      left: 62%;
+      top: 42%;
+      animation-duration: 18s;
+      animation-delay: -7s;
+    }
 
-.header::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-20%;
-    width:20%;
-    height:1px;
-    background:var(--cyan);
-    box-shadow:0 0 20px var(--cyan);
-    animation:scanHeader 4s linear infinite;
-}
+    .particle:nth-child(7) {
+      left: 74%;
+      top: 88%;
+      animation-duration: 15s;
+      animation-delay: -3s;
+    }
 
-@keyframes scanHeader{
-    0%{left:-20%}
-    100%{left:120%}
-}
+    .particle:nth-child(8) {
+      left: 84%;
+      top: 27%;
+      animation-duration: 20s;
+      animation-delay: -10s;
+    }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
+    .particle:nth-child(9) {
+      left: 92%;
+      top: 66%;
+      animation-duration: 16s;
+      animation-delay: -6s;
+    }
 
-.logo-mark{
-    font-family:Orbitron,sans-serif;
-    font-size:29px;
-    font-weight:900;
-    font-style:italic;
-    color:white;
-    text-shadow:
-        0 0 12px var(--cyan),
-        0 0 28px rgba(0,234,255,.35);
-}
+    .particle:nth-child(10) {
+      left: 46%;
+      top: 94%;
+      animation-duration: 11s;
+      animation-delay: -1s;
+    }
 
-.logo-text{
-    font-family:Orbitron,sans-serif;
-    font-size:20px;
-    font-weight:800;
-    letter-spacing:4px;
-}
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+      }
 
-.logo-sub{
-    font-size:8px;
-    color:#7ddcff;
-    letter-spacing:2px;
-    margin-top:2px;
-}
+      15% {
+        opacity: 1;
+      }
 
-.status-pill{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    padding:11px 18px;
-    border:1px solid rgba(0,234,255,.35);
-    border-radius:50px;
-    background:rgba(0,234,255,.04);
-    color:#9cefff;
-    font-family:Orbitron,sans-serif;
-    font-size:11px;
-    letter-spacing:1px;
-}
+      70% {
+        opacity: 0.8;
+      }
 
-.status-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#ffb300;
-    box-shadow:0 0 15px #ffb300;
-    animation:pulse 1.4s infinite;
-}
+      100% {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
 
-@keyframes pulse{
-    50%{transform:scale(1.7);opacity:.4}
-}
+    /* =========================
+       MAIN
+    ========================== */
 
-/* =========================
-   DASHBOARD GRID
-========================= */
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 28px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
 
-.dashboard{
-    display:grid;
-    grid-template-columns:310px 1fr 310px;
-    gap:18px;
-    margin-top:18px;
-}
+    .maintenance-card {
+      width: min(920px, 100%);
+      position: relative;
+      padding: 58px 55px 45px;
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.018)
+        ),
+        var(--card);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      text-align: center;
+      overflow: hidden;
+      animation: cardEnter 1s cubic-bezier(.2,.8,.2,1);
+    }
 
-/* =========================
-   GLASS PANEL
-========================= */
+    .maintenance-card::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      top: -230px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: rgba(124, 92, 255, 0.13);
+      filter: blur(70px);
+      pointer-events: none;
+    }
 
-.panel{
-    position:relative;
-    border:1px solid rgba(0,234,255,.32);
-    background:linear-gradient(
-        145deg,
-        rgba(7,22,48,.82),
-        rgba(2,9,23,.72)
-    );
-    backdrop-filter:blur(18px);
-    border-radius:18px;
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.3),
-        inset 0 0 35px rgba(0,234,255,.025);
-    overflow:hidden;
-}
+    .maintenance-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(124, 92, 255, 0.35),
+        rgba(0, 217, 255, 0.2),
+        transparent 80%
+      );
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      opacity: 0.55;
+    }
 
-.panel::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:10%;
-    right:10%;
-    height:1px;
-    background:linear-gradient(
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* =========================
+       TOP STATUS
+    ========================== */
+
+    .status {
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(255, 82, 119, 0.08);
+      border: 1px solid rgba(255, 82, 119, 0.2);
+      color: #ff8ca6;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--danger);
+      box-shadow:
+        0 0 0 5px rgba(255, 82, 119, 0.08),
+        0 0 15px rgba(255, 82, 119, 0.9);
+      animation: statusPulse 1.6s infinite;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(0.65);
+        opacity: 0.55;
+      }
+    }
+
+    /* =========================
+       SERVER ICON
+    ========================== */
+
+    .server-wrapper {
+      width: 190px;
+      height: 190px;
+      margin: 0 auto 32px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(124, 92, 255, 0.3);
+    }
+
+    .orbit.one {
+      width: 170px;
+      height: 170px;
+      animation: rotate 12s linear infinite;
+    }
+
+    .orbit.two {
+      width: 145px;
+      height: 145px;
+      border-color: rgba(0, 217, 255, 0.22);
+      animation: rotateReverse 9s linear infinite;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    .orbit::before {
+      top: -4px;
+      left: 50%;
+    }
+
+    .orbit::after {
+      bottom: -4px;
+      right: 22%;
+      background: var(--accent2);
+      box-shadow: 0 0 18px var(--accent2);
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes rotateReverse {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    .server {
+      width: 92px;
+      height: 110px;
+      position: relative;
+      padding: 12px 10px;
+      border-radius: 15px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(38, 44, 57, 0.95),
+          rgba(12, 15, 21, 0.95)
+        );
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 45px rgba(124, 92, 255, 0.12);
+      animation: serverFloat 3.5s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    @keyframes serverFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .server-row {
+      height: 23px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      padding: 0 7px;
+      gap: 5px;
+    }
+
+    .server-light {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .server-light.red {
+      background: var(--danger);
+      box-shadow: 0 0 8px var(--danger);
+      animation: blink 1s infinite;
+    }
+
+    .server-line {
+      height: 3px;
+      width: 28px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    @keyframes blink {
+      0%, 45% {
+        opacity: 1;
+      }
+
+      50%, 100% {
+        opacity: 0.25;
+      }
+    }
+
+    /* =========================
+       HEADING
+    ========================== */
+
+    .headline {
+      position: relative;
+      z-index: 3;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(35px, 6vw, 65px);
+      line-height: 1.02;
+      letter-spacing: -2.8px;
+      font-weight: 700;
+      margin-bottom: 19px;
+    }
+
+    .headline span {
+      background: linear-gradient(
         90deg,
-        transparent,
-        var(--cyan),
-        transparent
-    );
-    box-shadow:0 0 15px var(--cyan);
-}
+        #ffffff,
+        #b9b0ff,
+        #79edff,
+        #ffffff
+      );
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientText 5s linear infinite;
+    }
 
-/* =========================
-   LEFT PANEL
-========================= */
+    @keyframes gradientText {
+      to {
+        background-position: 300% center;
+      }
+    }
 
-.left-panel{
-    padding:28px 24px;
-    min-height:690px;
-}
+    .description {
+      position: relative;
+      z-index: 3;
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
 
-.warning{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 14px;
-    border:1px solid rgba(255,75,100,.5);
-    background:rgba(255,50,80,.07);
-    color:#ff7187;
-    border-radius:8px;
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:1.5px;
-    margin-bottom:25px;
-}
+    .description strong {
+      color: #e8ecf2;
+      font-weight: 700;
+    }
 
-.left-panel h1{
-    font-family:Orbitron,sans-serif;
-    font-size:43px;
-    line-height:1.02;
-    letter-spacing:-2px;
-    margin-bottom:18px;
-}
+    /* =========================
+       NOTICE
+    ========================== */
 
-.left-panel h1 span{
-    color:var(--cyan);
-    text-shadow:0 0 25px rgba(0,234,255,.45);
-}
+    .notice {
+      position: relative;
+      z-index: 3;
+      margin: 32px auto 0;
+      max-width: 680px;
+      padding: 18px 20px;
+      border-radius: 17px;
+      background: rgba(67, 245, 138, 0.045);
+      border: 1px solid rgba(67, 245, 138, 0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      color: #b8c4c0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
 
-.description{
-    color:#9fb5d1;
-    font-size:14px;
-    line-height:1.75;
-}
+    .notice-icon {
+      flex: 0 0 auto;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(67, 245, 138, 0.1);
+      color: var(--green);
+      font-weight: 900;
+    }
 
-.description strong{
-    color:var(--cyan);
-}
+    /* =========================
+       TIME BOX
+    ========================== */
 
-.estimate{
-    margin-top:30px;
-    padding:18px;
-    border:1px solid rgba(0,234,255,.28);
-    border-radius:14px;
-    background:rgba(0,234,255,.035);
-}
+    .time-box {
+      position: relative;
+      z-index: 3;
+      margin: 32px auto 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 19px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+    }
 
-.estimate-label{
-    color:#7895b6;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-}
+    .time-icon {
+      font-size: 18px;
+      animation: clockPulse 2s infinite;
+    }
 
-.estimate-time{
-    margin-top:7px;
-    font-family:Orbitron,sans-serif;
-    font-size:20px;
-    font-weight:800;
-    color:white;
-}
+    .time-text {
+      font-size: 12px;
+      color: #aeb6c2;
+    }
 
-.estimate-time span{
-    color:var(--cyan);
-}
+    .time-text strong {
+      display: block;
+      color: #ffffff;
+      font-size: 14px;
+      margin-top: 2px;
+    }
 
-.message{
-    margin-top:28px;
-    color:#7895b6;
-    font-size:13px;
-    line-height:1.8;
-}
+    @keyframes clockPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
 
-.signature{
-    margin-top:35px;
-    color:#00eaff;
-    font-family:cursive;
-    font-size:22px;
-    transform:rotate(-4deg);
-    text-shadow:0 0 15px rgba(0,234,255,.4);
-}
+      50% {
+        transform: scale(1.12);
+      }
+    }
 
-/* =========================
-   CENTER
-========================= */
+    /* =========================
+       PROGRESS
+    ========================== */
 
-.center-panel{
-    min-height:690px;
-    padding:25px;
-}
+    .progress-area {
+      position: relative;
+      z-index: 3;
+      max-width: 600px;
+      margin: 34px auto 0;
+    }
 
-.center-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:#7edfff;
-    font-family:Orbitron,sans-serif;
-    font-size:11px;
-    letter-spacing:2px;
-}
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 9px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #737d8c;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
 
-/* =========================
-   3D SERVER
-========================= */
+    .progress-head span:last-child {
+      color: #b0a8ff;
+    }
 
-.server-stage{
-    height:365px;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    perspective:900px;
-}
+    .progress {
+      height: 7px;
+      width: 100%;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+      overflow: hidden;
+      position: relative;
+    }
 
-.holo-ring{
-    position:absolute;
-    width:360px;
-    height:360px;
-    border:2px solid rgba(0,234,255,.18);
-    border-radius:50%;
-    transform:rotateX(70deg);
-    box-shadow:
-        0 0 30px rgba(0,234,255,.1),
-        inset 0 0 30px rgba(0,234,255,.05);
-    animation:ringRotate 7s linear infinite;
-}
-
-.holo-ring::before,
-.holo-ring::after{
-    content:"";
-    position:absolute;
-    inset:28px;
-    border:1px solid rgba(139,92,246,.35);
-    border-radius:50%;
-}
-
-.holo-ring::after{
-    inset:-35px;
-    border-color:rgba(0,119,255,.18);
-}
-
-.ring2{
-    width:285px;
-    height:285px;
-    animation-duration:5s;
-    animation-direction:reverse;
-}
-
-.ring3{
-    width:430px;
-    height:430px;
-    opacity:.35;
-    animation-duration:11s;
-}
-
-@keyframes ringRotate{
-    to{transform:rotateX(70deg) rotateZ(360deg)}
-}
-
-.server{
-    position:relative;
-    width:210px;
-    height:270px;
-    transform-style:preserve-3d;
-    transform:rotateY(-12deg) rotateX(2deg);
-    animation:serverFloat 4s ease-in-out infinite;
-}
-
-@keyframes serverFloat{
-    50%{transform:rotateY(-12deg) rotateX(2deg) translateY(-9px)}
-}
-
-.server-body{
-    position:absolute;
-    inset:0;
-    border:2px solid #168cff;
-    border-radius:10px;
-    background:
-        linear-gradient(90deg,
-        #071b36,
-        #0b2c55 50%,
-        #06152b);
-    box-shadow:
-        0 0 25px rgba(0,140,255,.35),
-        inset 0 0 35px rgba(0,234,255,.08);
-}
-
-.server-body::before{
-    content:"";
-    position:absolute;
-    top:0;
-    right:-18px;
-    width:17px;
-    height:100%;
-    background:linear-gradient(
-        180deg,
-        #06203c,
-        #0b4a76,
-        #06182c
-    );
-    transform:skewY(-25deg);
-    transform-origin:left;
-    border-right:1px solid #00eaff;
-}
-
-.server-top{
-    position:absolute;
-    left:10px;
-    right:10px;
-    top:-12px;
-    height:12px;
-    background:#0c3158;
-    transform:skewX(-35deg);
-    border:1px solid #00eaff;
-}
-
-.server-logo{
-    position:absolute;
-    top:18px;
-    left:50%;
-    transform:translateX(-50%);
-    font-family:Orbitron,sans-serif;
-    font-size:28px;
-    font-weight:900;
-    color:#fff;
-    text-shadow:
-        0 0 10px var(--cyan),
-        0 0 25px var(--blue);
-}
-
-.server-slot{
-    position:relative;
-    height:28px;
-    margin:60px 13px 0;
-    border:1px solid rgba(0,234,255,.28);
-    background:#020b18;
-    border-radius:4px;
-    overflow:hidden;
-}
-
-.server-slot + .server-slot{
-    margin-top:8px;
-}
-
-.server-slot::before{
-    content:"";
-    position:absolute;
-    left:10px;
-    right:35px;
-    top:7px;
-    height:3px;
-    background:linear-gradient(
+    .progress::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 72%;
+      border-radius: inherit;
+      background: linear-gradient(
         90deg,
-        #00eaff,
-        #1677ff,
-        transparent
-    );
-    box-shadow:0 0 9px var(--cyan);
-}
-
-.server-light{
-    position:absolute;
-    right:9px;
-    top:9px;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#00ffb3;
-    box-shadow:0 0 12px #00ffb3;
-    animation:pulse 1s infinite;
-}
-
-.server-base{
-    position:absolute;
-    bottom:-25px;
-    left:-20px;
-    width:250px;
-    height:25px;
-    border:1px solid var(--cyan);
-    background:#06152c;
-    transform:skewX(-35deg);
-    box-shadow:0 0 25px rgba(0,234,255,.3);
-}
-
-/* =========================
-   RECOVERY HUD
-========================= */
-
-.recovery{
-    border:1px solid rgba(0,234,255,.28);
-    border-radius:16px;
-    padding:20px;
-    background:rgba(0,234,255,.025);
-}
-
-.recovery-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-}
-
-.recovery-label{
-    font-family:Orbitron,sans-serif;
-    color:#7edfff;
-    font-size:11px;
-    letter-spacing:1.5px;
-}
-
-.percentage{
-    font-family:Orbitron,sans-serif;
-    font-size:42px;
-    font-weight:900;
-    color:var(--cyan);
-    text-shadow:0 0 20px rgba(0,234,255,.4);
-}
-
-.progress{
-    height:13px;
-    margin-top:13px;
-    border-radius:30px;
-    background:#061225;
-    border:1px solid rgba(0,234,255,.28);
-    padding:2px;
-    overflow:hidden;
-}
-
-.progress-bar{
-    width:78%;
-    height:100%;
-    border-radius:30px;
-    background:linear-gradient(
-        90deg,
-        #0077ff,
-        #00eaff,
-        #8b5cf6
-    );
-    box-shadow:
-        0 0 15px #00eaff,
-        0 0 30px rgba(0,234,255,.3);
-    position:relative;
-    overflow:hidden;
-}
-
-.progress-bar::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.6),
-        transparent
-    );
-    animation:progressShine 1.8s linear infinite;
-}
-
-@keyframes progressShine{
-    from{transform:translateX(-100%)}
-    to{transform:translateX(100%)}
-}
-
-.recovery-status{
-    margin-top:12px;
-    color:#00ffb3;
-    font-size:12px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.live-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#00ffb3;
-    box-shadow:0 0 10px #00ffb3;
-}
-
-/* =========================
-   RIGHT PANEL
-========================= */
-
-.right-panel{
-    min-height:690px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.status-panel{
-    padding:24px;
-    flex:1;
-}
-
-.panel-heading{
-    font-family:Orbitron,sans-serif;
-    color:#7edfff;
-    font-size:11px;
-    letter-spacing:1.7px;
-    margin-bottom:20px;
-}
-
-.check{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 0;
-    border-bottom:1px solid rgba(255,255,255,.06);
-    font-size:12px;
-}
-
-.check-name{
-    color:#bdd0e7;
-}
-
-.check-state{
-    color:#00ffb3;
-}
-
-.check-state.progressing{
-    color:var(--cyan);
-}
-
-.recovery-log{
-    padding:24px;
-    flex:1;
-}
-
-.log{
-    font-family:monospace;
-    font-size:11px;
-    line-height:2;
-    color:#6f91b5;
-}
-
-.log span{
-    color:#00ffb3;
-}
-
-.log .working{
-    color:var(--cyan);
-}
-
-.info-card{
-    padding:22px;
-    border:1px solid rgba(0,234,255,.28);
-    border-radius:16px;
-    background:rgba(0,234,255,.025);
-}
-
-.info-card h3{
-    font-family:Orbitron,sans-serif;
-    font-size:14px;
-    color:white;
-    margin-bottom:8px;
-}
-
-.info-card p{
-    font-size:12px;
-    color:#7e9aba;
-    line-height:1.7;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-    margin-top:18px;
-    border:1px solid rgba(0,234,255,.3);
-    border-radius:18px;
-    background:rgba(2,9,23,.8);
-    padding:22px 25px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.footer-item{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    color:#9bb3d0;
-    font-size:12px;
-}
-
-.footer-icon{
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid rgba(0,234,255,.3);
-    border-radius:12px;
-    color:var(--cyan);
-    font-size:18px;
-    box-shadow:0 0 18px rgba(0,234,255,.07);
-}
-
-.footer strong{
-    display:block;
-    color:white;
-    margin-bottom:3px;
-}
-
-.brand-footer{
-    justify-content:flex-end;
-    color:var(--cyan);
-    font-family:Orbitron,sans-serif;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1100px){
-
-    .dashboard{
-        grid-template-columns:1fr;
+        var(--accent),
+        var(--accent2)
+      );
+      box-shadow:
+        0 0 16px rgba(124, 92, 255, 0.65),
+        0 0 25px rgba(0, 217, 255, 0.25);
+      animation: progressMove 3s ease-in-out infinite alternate;
     }
 
-    .left-panel,
-    .center-panel,
-    .right-panel{
-        min-height:auto;
+    @keyframes progressMove {
+      from {
+        width: 64%;
+      }
+
+      to {
+        width: 78%;
+      }
     }
 
-    .left-panel{
-        min-height:500px;
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .footer {
+      position: relative;
+      z-index: 3;
+      margin-top: 38px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: #66707e;
+      font-size: 11px;
+      line-height: 1.7;
     }
 
-    .right-panel{
-        display:grid;
-        grid-template-columns:1fr 1fr;
+    .footer strong {
+      color: #9da6b3;
     }
 
-    .server-stage{
-        height:390px;
+    .heartbeat {
+      display: inline-block;
+      color: #ff5277;
+      animation: heartBeat 1.2s infinite;
     }
 
-    .footer{
-        grid-template-columns:1fr 1fr;
-    }
-}
+    @keyframes heartBeat {
+      0%, 100% {
+        transform: scale(1);
+      }
 
-@media(max-width:650px){
+      15% {
+        transform: scale(1.25);
+      }
 
-    .wrapper{
-        width:94%;
-        padding-top:14px;
-    }
+      30% {
+        transform: scale(1);
+      }
 
-    .header{
-        height:auto;
-        padding:16px;
-    }
+      45% {
+        transform: scale(1.18);
+      }
 
-    .logo-text{
-        font-size:15px;
-        letter-spacing:2px;
-    }
-
-    .logo-sub{
-        display:none;
+      60% {
+        transform: scale(1);
+      }
     }
 
-    .status-pill{
-        padding:8px 10px;
-        font-size:8px;
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 650px) {
+      .page {
+        padding: 18px 12px;
+      }
+
+      .maintenance-card {
+        padding: 42px 20px 30px;
+        border-radius: 25px;
+      }
+
+      .status {
+        margin-bottom: 23px;
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+
+      .server-wrapper {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 25px;
+      }
+
+      .orbit.one {
+        width: 150px;
+        height: 150px;
+      }
+
+      .orbit.two {
+        width: 128px;
+        height: 128px;
+      }
+
+      .server {
+        transform: scale(0.88);
+      }
+
+      .headline {
+        font-size: clamp(34px, 11vw, 50px);
+        letter-spacing: -2px;
+      }
+
+      .description {
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .notice {
+        margin-top: 25px;
+        padding: 15px;
+        font-size: 12px;
+      }
+
+      .time-box {
+        margin-top: 24px;
+      }
+
+      .progress-area {
+        margin-top: 27px;
+      }
+
+      .footer {
+        margin-top: 30px;
+      }
     }
 
-    .left-panel h1{
-        font-size:34px;
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
     }
+  </style>
 
-    .center-panel{
-        padding:17px;
-    }
-
-    .server-stage{
-        height:310px;
-        transform:scale(.85);
-        margin:-20px 0;
-    }
-
-    .holo-ring{
-        width:300px;
-        height:300px;
-    }
-
-    .right-panel{
-        display:flex;
-    }
-
-    .footer{
-        grid-template-columns:1fr;
-    }
-
-    .brand-footer{
-        justify-content:flex-start;
-    }
-}
-</style>
 </head>
 
 <body>
 
-<div class="particles">
-    <span class="particle p1"></span>
-    <span class="particle p2"></span>
-    <span class="particle p3"></span>
-    <span class="particle p4"></span>
-    <span class="particle p5"></span>
-    <span class="particle p6"></span>
-    <span class="particle p7"></span>
-    <span class="particle p8"></span>
-    <span class="particle p9"></span>
-    <span class="particle p10"></span>
-</div>
+  <!-- =========================
+       BACKGROUND PARTICLES
+  ========================== -->
 
-<div class="wrapper">
+  <div class="particles" aria-hidden="true">
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+  </div>
 
-    <!-- HEADER -->
-    <header class="header">
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
 
-        <div class="logo">
-            <div class="logo-mark">ZS</div>
+  <main class="page">
 
-            <div>
-                <div class="logo-text">UNIVERSE</div>
-                <div class="logo-sub">
-                    SOCIAL • MOVIES • GAMES • MORE
-                </div>
-            </div>
-        </div>
 
-        <div class="status-pill">
-            <span class="status-dot"></span>
-            SYSTEM RECOVERY IN PROGRESS
-        </div>
+<section class="maintenance-card">
 
-    </header>
+  <div class="status">
+    <span class="status-dot"></span>
+    Temporary Server Issue
+  </div>
 
 
-    <!-- DASHBOARD -->
-    <section class="dashboard">
+  <!-- Animated Server -->
+  <div class="server-wrapper">
 
-        <!-- LEFT -->
-        <div class="panel left-panel">
+    <div class="orbit one"></div>
+    <div class="orbit two"></div>
 
-            <div class="warning">
-                ⚠ SERVER MAINTENANCE
-            </div>
+    <div class="server">
 
-            <h1>
-                System<br>
-                <span>Recovery: 78%</span>
-            </h1>
+      <div class="server-row">
+        <span class="server-light red"></span>
+        <span class="server-line"></span>
+      </div>
 
-            <p class="description">
-                Our server is currently experiencing a temporary issue.
-                Don't worry —
-                <strong>we're already working on it.</strong>
-            </p>
+      <div class="server-row">
+        <span class="server-light"></span>
+        <span class="server-line"></span>
+      </div>
 
-            <div class="estimate">
+      <div class="server-row">
+        <span class="server-light"></span>
+        <span class="server-line"></span>
+      </div>
 
-                <div class="estimate-label">
-                    Estimated Recovery
-                </div>
+    </div>
 
-                <div class="estimate-time">
-                    Within <span>5 Hours</span>
-                </div>
+  </div>
 
-            </div>
 
-            <p class="message">
-                We sincerely appreciate your patience and support.
-                Please wait a little while and try again later.
-                Our team is working continuously to bring everything
-                back online.
-            </p>
+  <!-- Heading -->
+  <h1 class="headline">
+    <span>We're Fixing Things Up.</span>
+  </h1>
 
-            <div class="signature">
-                Thank you for<br>
-                staying with us! ♥
-            </div>
 
-        </div>
+  <p class="description">
+    Our ordering system is temporarily unavailable due to a
+    <strong>server issue</strong>.
+    Don't worry — your experience matters to us, and we're already
+    working behind the scenes to get everything back online.
+  </p>
 
 
-        <!-- CENTER -->
-        <div class="panel center-panel">
+  <!-- Main Notice -->
+  <div class="notice">
 
-            <div class="center-title">
-                <span>// SYSTEM_RECOVERY</span>
-                <span id="clock">LIVE</span>
-            </div>
+    <div class="notice-icon">
+      ✓
+    </div>
 
+    <div>
+      <strong>We're on it.</strong>
+      Please wait patiently while our team works on the issue.
+      We expect everything to be back within
+      <strong>5 hours.</strong>
+    </div>
 
-            <!-- CSS 3D SERVER -->
-            <div class="server-stage">
+  </div>
 
-                <div class="holo-ring"></div>
-                <div class="holo-ring ring2"></div>
-                <div class="holo-ring ring3"></div>
 
-                <div class="server">
+  <!-- Estimated Time -->
+  <div class="time-box">
 
-                    <div class="server-body">
+    <div class="time-icon">
+      ⏱
+    </div>
 
-                        <div class="server-top"></div>
+    <div class="time-text">
+      Expected restoration
+      <strong>Within the next 5 hours</strong>
+    </div>
 
-                        <div class="server-logo">
-                            ZS
-                        </div>
+  </div>
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
+  <!-- Progress -->
+  <div class="progress-area">
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
+    <div class="progress-head">
+      <span>System Recovery</span>
+      <span>In Progress</span>
+    </div>
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
+    <div class="progress"></div>
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
+  </div>
 
-                        <div class="server-slot">
-                            <span class="server-light"></span>
-                        </div>
 
-                    </div>
+  <!-- Footer -->
+  <footer class="footer">
 
-                    <div class="server-base"></div>
+    <strong>Thank you for your patience.</strong><br>
 
-                </div>
+    We truly appreciate you waiting while we make things better.
+    Please check back soon.
 
-            </div>
+    <br><br>
 
+    Made with
+    <span class="heartbeat">♥</span>
+    &nbsp;and a lot of code.
 
-            <!-- RECOVERY -->
-            <div class="recovery">
+  </footer>
 
-                <div class="recovery-top">
+</section>
 
-                    <div class="recovery-label">
-                        SYSTEM RECOVERY
-                    </div>
 
-                    <div class="percentage" id="percentage">
-                        78%
-                    </div>
-
-                </div>
-
-                <div class="progress">
-                    <div class="progress-bar"></div>
-                </div>
-
-                <div class="recovery-status">
-                    <span class="live-dot"></span>
-                    Restoring Services...
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- RIGHT -->
-        <div class="right-panel">
-
-            <div class="panel status-panel">
-
-                <div class="panel-heading">
-                    ◉ LIVE SYSTEM STATUS
-                </div>
-
-                <div class="check">
-                    <span class="check-name">
-                        Database Connection
-                    </span>
-
-                    <span class="check-state">
-                        ✓ Completed
-                    </span>
-                </div>
-
-                <div class="check">
-                    <span class="check-name">
-                        Server Optimization
-                    </span>
-
-                    <span class="check-state">
-                        ✓ Completed
-                    </span>
-                </div>
-
-                <div class="check">
-                    <span class="check-name">
-                        Security Scan
-                    </span>
-
-                    <span class="check-state">
-                        ✓ Completed
-                    </span>
-                </div>
-
-                <div class="check">
-                    <span class="check-name">
-                        Application Services
-                    </span>
-
-                    <span class="check-state progressing">
-                        ◌ In Progress
-                    </span>
-                </div>
-
-                <div class="check">
-                    <span class="check-name">
-                        Finalizing
-                    </span>
-
-                    <span style="color:#6684a6">
-                        ○ Waiting
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="panel recovery-log">
-
-                <div class="panel-heading">
-                    ▣ RECOVERY LOGS
-                </div>
-
-                <div class="log">
-
-                    [22:41:03] Checking database...
-                    <span>OK</span><br>
-
-                    [22:41:12] Optimizing servers...
-                    <span>OK</span><br>
-
-                    [22:41:28] Security scan...
-                    <span>OK</span><br>
-
-                    [22:42:17] Reinitializing...
-                    <span>OK</span><br>
-
-                    [22:43:56] Installing updates...
-                    <span>OK</span><br>
-
-                    [22:46:32] Restoring application...
-                    <span class="working">78%</span><br>
-
-                    [22:46:42] Final checks...
-                    <span class="working">RUNNING</span>
-
-                </div>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <h3>
-                    ⚡ Better. Faster. Stronger.
-                </h3>
-
-                <p>
-                    We're not just fixing a server —
-                    we're upgrading your experience.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="footer-item">
-
-            <div class="footer-icon">
-                ♢
-            </div>
-
-            <div>
-                <strong>Your Data</strong>
-                Is Safe
-            </div>
-
-        </div>
-
-
-        <div class="footer-item">
-
-            <div class="footer-icon">
-                ⚡
-            </div>
-
-            <div>
-                <strong>Our Team</strong>
-                Is Working Hard
-            </div>
-
-        </div>
-
-
-        <div class="footer-item">
-
-            <div class="footer-icon">
-                ◷
-            </div>
-
-            <div>
-                <strong>Expected Back</strong>
-                Within 5 Hours
-            </div>
-
-        </div>
-
-
-        <div class="footer-item brand-footer">
-
-            <div>
-                <strong>ZS UNIVERSE</strong>
-                BIGGER. BETTER. TOGETHER.
-            </div>
-
-        </div>
-
-    </footer>
-
-</div>
-
-
-<script>
-
-/* =========================
-   LIVE CLOCK
-========================= */
-
-function updateClock(){
-
-    const now = new Date();
-
-    const h = String(now.getHours()).padStart(2,"0");
-    const m = String(now.getMinutes()).padStart(2,"0");
-    const s = String(now.getSeconds()).padStart(2,"0");
-
-    document.getElementById("clock").textContent =
-        `${h}:${m}:${s} • LIVE`;
-}
-
-setInterval(updateClock,1000);
-updateClock();
-
-
-/* =========================
-   LIVE-LOOKING RECOVERY
-========================= */
-
-let progress = 78;
-
-setInterval(() => {
-
-    /*
-       Keeps the interface alive without
-       actually claiming the server is fixed.
-    */
-
-    const tinyPulse =
-        Math.floor(Math.random() * 3);
-
-    document.getElementById("percentage").textContent =
-        `${progress + tinyPulse}%`;
-
-},2500);
-
-</script>
+  </main>
 
 </body>
 </html>
-```
