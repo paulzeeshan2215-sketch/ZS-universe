@@ -9,11 +9,11 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>ZS Universe — Secure Checkout</title>
+<title>SehrAn Media — Secure Checkout</title>
 
 <meta
   name="description"
-  content="ZS Universe secure checkout for Instagram services and digital products."
+  content="SehrAn Media secure checkout for Instagram services and digital products."
 >
 
 <meta
@@ -2292,46 +2292,37 @@ input:focus{
 
 
 /* =========================================================
-   FREE INSTAGRAM ORDER EXPERIENCE
+   FREE INSTAGRAM OFFER EXPERIENCE
 ========================================================= */
-.free-order-highlight{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  margin:0 0 18px;
-  padding:25px 20px 23px;
-  text-align:center;
-  border:1px solid rgba(75,255,155,.22);
-  border-radius:22px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(70,255,160,.16), transparent 55%),
-    linear-gradient(145deg, rgba(24,50,42,.78), rgba(10,15,22,.92));
-  box-shadow:0 20px 60px rgba(0,0,0,.28), 0 0 45px rgba(53,211,154,.08);
-}
-.free-order-highlight::before{
-  content:"";position:absolute;inset:-2px;border-radius:24px;
-  background:conic-gradient(from 0deg,transparent 0 25%,rgba(83,255,164,.55),transparent 40% 100%);
-  animation:freeBorderSpin 4s linear infinite;z-index:-2;
-}
-.free-order-highlight::after{
-  content:"";position:absolute;inset:1px;border-radius:21px;background:#0b1213;z-index:-1;
-}
-.free-order-orbit{position:absolute;width:180px;height:180px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(90,255,169,.12);box-shadow:0 0 50px rgba(53,211,154,.08);animation:freeOrbit 7s linear infinite;}
-.free-order-label{font-size:10px;letter-spacing:2px;font-weight:900;color:#86eab0;margin-bottom:8px;}
-.free-order-main{font-family:Poppins,sans-serif;font-size:clamp(34px,7vw,52px);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(90deg,#fff,#79ffad,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:freeTextShine 2.8s linear infinite,freePop 2.2s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(83,255,164,.25));}
-.free-order-sub{margin-top:11px;color:#a6b6b1;font-size:11px;font-weight:600;}
-.free-price-box{border-color:rgba(53,211,154,.15);background:rgba(5,15,12,.38);}
-.free-price-box .price-row.discount strong{color:#58f3a5;text-shadow:0 0 14px rgba(88,243,165,.25);}
-.free-order-note{display:flex;justify-content:center;align-items:center;gap:8px;margin:-8px 0 20px;color:#83d9ad;font-size:11px;font-weight:700;}
-.free-order-note span{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:rgba(53,211,154,.12);border:1px solid rgba(53,211,154,.25);}
-.free-get-button{position:relative;overflow:hidden;background:linear-gradient(135deg,#20bd86,#35d39a 55%,#6cffb0);color:#06140d;box-shadow:0 14px 35px rgba(53,211,154,.25),inset 0 1px rgba(255,255,255,.35);}
-.free-get-button::before{content:"";position:absolute;top:0;bottom:0;width:80px;left:-100px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:freeButtonSweep 2.2s ease-in-out infinite;}
-@keyframes freeBorderSpin{to{transform:rotate(360deg)}}
-@keyframes freeOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@keyframes freeTextShine{to{background-position:220% center}}
-@keyframes freePop{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
-@keyframes freeButtonSweep{0%{left:-100px}55%,100%{left:115%}}
-@media(prefers-reduced-motion:reduce){.free-order-highlight::before,.free-order-orbit,.free-order-main,.free-get-button::before{animation:none;}}
+.free-offer-strip{position:relative;overflow:hidden;margin:-4px 0 22px;padding:17px 18px;border-radius:18px;border:1px solid rgba(53,211,154,.24);background:radial-gradient(circle at 10% 50%,rgba(53,211,154,.18),transparent 28%),radial-gradient(circle at 90% 50%,rgba(124,92,255,.18),transparent 30%),linear-gradient(135deg,rgba(53,211,154,.08),rgba(124,92,255,.07));box-shadow:0 16px 45px rgba(0,0,0,.22),inset 0 0 35px rgba(53,211,154,.035)}
+.free-offer-strip:before{content:"";position:absolute;inset:-80%;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.16) 76%,transparent 80%);animation:freeSweep 5s linear infinite;pointer-events:none}
+.free-offer-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.free-offer-kicker{color:#72eab9;font-size:10px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
+.free-offer-title{margin-top:3px;font-family:Poppins,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.4px}
+.free-offer-title span{background:linear-gradient(90deg,#fff,#72eab9,#bba9ff,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:freeText 3s linear infinite}
+.free-offer-copy{margin-top:3px;color:#929aaf;font-size:11px}
+.free-offer-pill{flex:0 0 auto;min-width:86px;padding:11px 13px;border-radius:13px;text-align:center;color:#06150e;background:linear-gradient(135deg,#35d39a,#8cffc7);box-shadow:0 0 25px rgba(53,211,154,.25);animation:freePulse 1.8s ease-in-out infinite}
+.free-offer-pill strong{display:block;font-size:17px;line-height:1;font-weight:900}
+.free-offer-pill small{display:block;margin-top:4px;font-size:8px;font-weight:900;letter-spacing:1px}
+.free-product-price{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.free-product-price .free-now{color:#6ff0b9;font-size:26px;font-weight:900;text-shadow:0 0 24px rgba(53,211,154,.25);animation:freePriceGlow 1.8s ease-in-out infinite}
+.free-product-price .payable{padding:5px 8px;border-radius:999px;color:#6ff0b9;background:rgba(53,211,154,.08);border:1px solid rgba(53,211,154,.16);font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
+.free-price-row{border-color:rgba(53,211,154,.12)!important}
+.free-price-row strong{color:#6ff0b9!important}
+.free-final{position:relative;overflow:hidden}
+.free-order-button{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,#18b879,#35d39a 52%,#75f0bb)!important;color:#03120b!important;box-shadow:0 14px 34px rgba(53,211,154,.22),0 0 0 1px rgba(255,255,255,.08) inset!important;animation:freeButtonPulse 1.9s ease-in-out infinite}
+.free-order-button:before{content:"";position:absolute;inset:-40% auto -40% -20%;width:32%;transform:skewX(-20deg);background:rgba(255,255,255,.5);filter:blur(8px);animation:freeButtonShine 2.6s ease-in-out infinite;z-index:-1}
+.no-payment-note{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;color:#6fdcae;font-size:10px;font-weight:800;letter-spacing:.2px}
+.no-payment-note span{width:7px;height:7px;border-radius:50%;background:#35d39a;box-shadow:0 0 12px rgba(53,211,154,.8)}
+#instagramScreen2{display:none!important}
+@keyframes freeSweep{to{transform:rotate(360deg)}}
+@keyframes freeText{to{background-position:220% center}}
+@keyframes freePulse{0%,100%{transform:scale(1);box-shadow:0 0 22px rgba(53,211,154,.20)}50%{transform:scale(1.045);box-shadow:0 0 35px rgba(53,211,154,.34)}}
+@keyframes freePriceGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
+@keyframes freeButtonPulse{0%,100%{transform:translateY(0);box-shadow:0 14px 34px rgba(53,211,154,.22),0 0 0 1px rgba(255,255,255,.08) inset}50%{transform:translateY(-1px);box-shadow:0 18px 42px rgba(53,211,154,.34),0 0 0 1px rgba(255,255,255,.12) inset}}
+@keyframes freeButtonShine{0%{left:-30%;opacity:0}20%{opacity:.8}55%,100%{left:125%;opacity:0}}
+@media(max-width:600px){.free-offer-content{align-items:flex-start}.free-offer-title{font-size:16px}.free-offer-copy{font-size:10px}.free-offer-pill{min-width:76px;padding:10px 9px}.free-offer-pill strong{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.free-offer-strip:before,.free-offer-title span,.free-offer-pill,.free-product-price .free-now,.free-order-button,.free-order-button:before{animation:none}}
 
 /* =========================================================
    RESPONSIVE
@@ -2753,7 +2744,7 @@ body.success-lock{
       <div>
 
         <div class="brand-text">
-          ZS Universe
+          SehrAn Media
         </div>
 
         <div
@@ -2887,7 +2878,7 @@ body.success-lock{
       </h1>
 
       <p class="subtitle">
-        Choose your contact details, add your Instagram profile link, and claim your followers for FREE.
+        Your selected Instagram follower package is currently <strong style="color:#6ff0b9;">100% FREE</strong>. Enter your details and submit your free order — no payment is required.
       </p>
 
 
@@ -2914,15 +2905,27 @@ body.success-lock{
         </div>
 
 
-        <div
-          class="product-price"
-          id="instagramPrice"
-        >
-          ₹0
+        <div class="free-product-price">
+          <div class="free-now" id="instagramPrice">FREE</div>
+          <div class="payable">₹0 PAYABLE</div>
         </div>
 
       </div>
 
+
+      <div class="free-offer-strip">
+        <div class="free-offer-content">
+          <div>
+            <div class="free-offer-kicker">LIMITED-TIME OFFER</div>
+            <div class="free-offer-title"><span>100% FREE INSTAGRAM FOLLOWERS</span></div>
+            <div class="free-offer-copy">No UPI • No screenshot • No hidden payment</div>
+          </div>
+          <div class="free-offer-pill">
+            <strong>FREE</strong>
+            <small>GET IT NOW</small>
+          </div>
+        </div>
+      </div>
 
       <div
         class="error"
@@ -3002,14 +3005,14 @@ body.success-lock{
 
         <label>
           Instagram Username
-          <span class="required">*</span>
+          <span class="optional">Optional</span>
         </label>
 
         <input
           id="instagramUsername"
           type="text"
           maxlength="30"
-          placeholder="@yourusername (optional)"
+          placeholder="@yourusername"
           autocomplete="off"
         >
 
@@ -3035,70 +3038,68 @@ body.success-lock{
       </div> 
  
  
+      <!-- FREE OFFER -->
+
+      <div class="promo-box" style="border-color:rgba(53,211,154,.20);background:linear-gradient(135deg,rgba(53,211,154,.08),rgba(124,92,255,.05));">
+        <div class="promo-heading">
+          <div class="promo-icon">🎁</div>
+          <span>FREE ORDER — No Promo Code Needed</span>
+        </div>
+        <div style="color:#8fe9c2;font-size:11px;line-height:1.6;">
+          This Instagram package is already free. Just submit your details and your order will be sent directly to our order system.
+        </div>
+      </div>
+
       <!-- FREE PRICE -->
 
-      <div class="free-order-highlight">
-        <div class="free-order-orbit"></div>
-        <div class="free-order-label">SPECIAL INSTAGRAM DROP</div>
-        <div class="free-order-main">100% FREE</div>
-        <div class="free-order-sub">No payment required • No payment screenshot</div>
-      </div>
-
-      <div class="price-box free-price-box">
-
+      <div class="price-box free-price-row">
         <div class="price-row">
-          <span>Actual Price</span>
-          <strong class="old-price" id="instagramOriginalDisplay">₹0</strong>
+          <span>Package Price</span>
+          <strong id="instagramTotal">FREE</strong>
         </div>
-
-        <div class="price-row discount">
-          <span>Special Offer</span>
-          <strong id="instagramDiscountDisplay">100% FREE</strong>
+        <div class="price-row">
+          <span>Payment Required</span>
+          <strong>₹0</strong>
         </div>
-
-        <div class="price-row total">
+        <div class="price-row total free-final">
           <span>Total to Pay</span>
-          <strong id="instagramFinal">₹0</strong>
+          <strong id="instagramFinal">FREE</strong>
         </div>
-
       </div>
 
-      <div class="free-order-note">
-        <span>✓</span> Your selected followers are currently available for ₹0.
-      </div>
+      <div class="buttons">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="goHome()"
+        >
+          ← Back
+        </button>
 
-      
-
-      <div class="buttons"> 
- 
-        <button 
-          type="button" 
-          class="btn btn-secondary" 
-          onclick="goHome()" 
-        > 
-          ← Back 
-        </button> 
- 
- 
-        <button 
-          type="button" 
-          class="btn btn-primary free-get-button" 
+        <button
+          type="button"
+          class="btn btn-primary free-order-button"
           id="instagramGetOrderBtn"
-          onclick="instagramContinue()" 
-        > 
-          ✨ GET FREE ORDER NOW 
-        </button> 
- 
-      </div> 
- 
- 
+          onclick="submitInstagramOrder()"
+        >
+          🎁 GET FREE ORDER
+        </button>
+      </div>
+
+      <div class="no-payment-note">
+        <span></span>
+        No payment required • Submit directly
+      </div>
+
       <div class="secure-note"> 
  
-        🔒 Your contact details are used only for processing your order.
-
-        <br>
-
-        <strong>Never share your Instagram password.</strong> 
+        🔒 Your information is used only for processing your free order. 
+ 
+        <br> 
+ 
+        <strong> 
+          Never share your Instagram password. 
+        </strong> 
  
       </div> 
  
@@ -4063,7 +4064,7 @@ const UPI_ID =
   "7889777143@fam"; 
  
 const UPI_NAME = 
-  "ZS Universe"; 
+  "SehrAn Media"; 
  
 const PROMO_CODE = 
   "ZEESHAN10"; 
@@ -4081,92 +4082,79 @@ const INSTAGRAM_PACKAGES = {
   "200":{ 
     name:"Starter — 200 Followers", 
     followers:200, 
-    price:0,
-    originalPrice:100 
+    price:0 
   }, 
  
   "500":{ 
     name:"Starter Plus — 500 Followers", 
     followers:500, 
-    price:0,
-    originalPrice:150 
+    price:0 
   }, 
  
   "1000":{ 
     name:"Popular — 1,000 Followers", 
     followers:1000, 
-    price:0,
-    originalPrice:250 
+    price:0 
   }, 
  
   "1500":{ 
     name:"Growth — 1,500 Followers", 
     followers:1500, 
-    price:0,
-    originalPrice:300 
+    price:0 
   }, 
  
   "2000":{ 
     name:"Growth Plus — 2,000 Followers", 
     followers:2000, 
-    price:0,
-    originalPrice:400 
+    price:0 
   }, 
  
   "3000":{ 
     name:"Pro — 3,000 Followers", 
     followers:3000, 
-    price:0,
-    originalPrice:500 
+    price:0 
   }, 
  
   "4000":{ 
     name:"Pro Plus — 4,000 Followers", 
     followers:4000, 
-    price:0,
-    originalPrice:600 
+    price:0 
   }, 
  
   "5000":{ 
     name:"Premium — 5,000 Followers", 
     followers:5000, 
-    price:0,
-    originalPrice:750 
+    price:0 
   }, 
  
   "6000":{ 
     name:"Premium Plus — 6,000 Followers", 
     followers:6000, 
-    price:0,
-    originalPrice:900 
+    price:0 
   }, 
  
   "7000":{ 
     name:"Advanced — 7,000 Followers", 
     followers:7000, 
-    price:0,
-    originalPrice:1100 
+    price:0 
   }, 
  
   "8000":{ 
     name:"Advanced Plus — 8,000 Followers", 
     followers:8000, 
-    price:0,
-    originalPrice:1200 
+    price:0 
   }, 
  
   "9000":{ 
     name:"Elite — 9,000 Followers", 
     followers:9000, 
-    price:0,
-    originalPrice:1400 
+    price:0 
   }, 
  
   "10000":{ 
     name:"Elite Plus — 10,000 Followers", 
     followers:10000, 
-    price:0,
-    originalPrice:1500 
+    price:0 
   } 
  
 }; 
@@ -4289,11 +4277,6 @@ const instagramPrice =
 const instagramFollowers = 
   selectedInstagramPackage 
     ? selectedInstagramPackage.followers 
-    : 0; 
- 
-const instagramOriginalPrice = 
-  selectedInstagramPackage 
-    ? selectedInstagramPackage.originalPrice 
     : 0; 
  
  
@@ -4579,19 +4562,20 @@ function applyInstagramPromo(){
  
 function updateInstagramPrice(){
 
-  const final = 0;
-
   const total = document.getElementById("instagramTotal");
-  const finalEl = document.getElementById("instagramFinal");
+  const final = document.getElementById("instagramFinal");
   const payment = document.getElementById("instagramPaymentAmount");
-  const originalEl = document.getElementById("instagramOriginalDisplay");
-  const discountEl = document.getElementById("instagramDiscountDisplay");
+  const topPrice = document.getElementById("instagramPrice");
 
-  if(total) total.textContent = "₹0";
-  if(finalEl) finalEl.textContent = "₹0";
+  if(topPrice) topPrice.textContent = "FREE";
+  if(total) total.textContent = "FREE";
+  if(final) final.textContent = "FREE";
   if(payment) payment.textContent = "₹0";
-  if(originalEl) originalEl.textContent = money(instagramOriginalPrice);
-  if(discountEl) discountEl.textContent = "100% FREE";
+
+  const originalRow = document.getElementById("instagramOriginalRow");
+  const discountRow = document.getElementById("instagramDiscountRow");
+  if(originalRow) originalRow.style.display = "none";
+  if(discountRow) discountRow.style.display = "none";
 }
 
 
@@ -5380,49 +5364,10 @@ function moviePayUPI(){
  
  
 /* ========================================================= 
-   INSTAGRAM STEP 1 
-========================================================= */ 
- 
+   INSTAGRAM STEP 1 — FREE DIRECT ORDER
+========================================================= */
+
 function instagramContinue(){
-
-  clearErrors();
-
-  if(!selectedInstagramPackage){
-    showError("instagramError1","Invalid Instagram package. Please go back and select a package again.");
-    return;
-  }
-
-  const mobile = document.getElementById("instagramMobile").value.trim();
-  const email = document.getElementById("instagramEmail").value.trim().toLowerCase();
-  const username = document.getElementById("instagramUsername").value.trim().replace(/^@+/,"");
-  const profile = document.getElementById("instagramProfile").value.trim();
-
-  if(instagramContactMethod === "mobile"){
-    if(!isValidIndianMobile(mobile)){
-      showError("instagramError1","Please enter a valid Indian mobile number.");
-      return;
-    }
-  }else{
-    if(!isValidEmail(email)){
-      showError("instagramError1","Please enter a valid email address.");
-      return;
-    }
-  }
-
-  if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
-    showError("instagramError1","Please enter a valid Instagram username, or leave it blank.");
-    return;
-  }
-
-  try{
-    const url = new URL(profile);
-    const hostname = url.hostname.toLowerCase().replace(/^www\\./,"");
-    if(hostname !== "instagram.com" && hostname !== "instagr.am") throw new Error();
-  }catch{
-    showError("instagramError1","Please enter a valid Instagram profile link.");
-    return;
-  }
-
   submitInstagramOrder();
 }
 
@@ -5683,9 +5628,9 @@ function showProcessing(){
  
     "Verifying your order details...", 
  
-    "Preparing your order securely...", 
+    "Preparing secure payment information...", 
  
-    "Verifying your order information...", 
+    "Uploading your payment screenshot...", 
  
     "Sending your order securely...", 
  
@@ -6253,15 +6198,15 @@ async function submitMovieOrder(){
  
  
 /* ========================================================= 
-   INSTAGRAM SUBMIT 
-========================================================= */ 
- 
+   INSTAGRAM SUBMIT — FREE ORDER
+========================================================= */
+
 async function submitInstagramOrder(){
 
   clearErrors();
 
   if(!selectedInstagramPackage){
-    showError("instagramError1","Invalid Instagram package.");
+    showError("instagramError1","Invalid Instagram package. Please go back and select a package again.");
     return;
   }
 
@@ -6282,40 +6227,42 @@ async function submitInstagramOrder(){
     }
   }
 
-  if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
-    showError("instagramError1","Please enter a valid Instagram username, or leave it blank.");
-    return;
-  }
+  /* Instagram username is optional for the FREE offer. */
 
   try{
     const url = new URL(profile);
-    const hostname = url.hostname.toLowerCase().replace(/^www\\./,"");
-    if(hostname !== "instagram.com" && hostname !== "instagr.am") throw new Error();
+    const hostname = url.hostname.toLowerCase().replace(/^www\./,"");
+
+    if(hostname !== "instagram.com" && hostname !== "instagr.am"){
+      throw new Error();
+    }
   }catch{
     showError("instagramError1","Please enter a valid Instagram profile link.");
     return;
   }
 
   const button = document.getElementById("instagramGetOrderBtn");
+
   if(button){
     button.disabled = true;
-    button.textContent = "Preparing your FREE order...";
+    button.textContent = "Submitting FREE Order...";
   }
 
-  const processing = showProcessing();
   prepareSuccessSound();
+  const processing = showProcessing();
 
   try{
+
     const payload = {
       type:"instagram",
       product:"instagram",
       package:instagramPackage,
       packageId:String(instagramFollowers),
       followers:instagramFollowers,
-      originalAmount:Number(instagramOriginalPrice).toFixed(2),
-      discount:Number(instagramOriginalPrice).toFixed(2),
-      promoCode:"FREE",
-      promoApplied:true,
+      originalAmount:"0.00",
+      discount:"0.00",
+      promoCode:"",
+      promoApplied:false,
       amount:"0.00",
       mobile:mobile,
       email:email,
@@ -6335,16 +6282,36 @@ async function submitInstagramOrder(){
     try{ data = await response.json(); }catch{}
 
     if(!response.ok){
-      throw new Error(data.error || "The server did not accept the FREE order. Your order was not marked as submitted.");
+      throw new Error(data.error || "Unable to submit your FREE Instagram order.");
     }
 
     await processing.finish();
 
-    document.getElementById("instagramOrderId").textContent = data.orderId || "---";
-    document.getElementById("successInstagramPackage").textContent = instagramPackage;
-    document.getElementById("successInstagramAmount").textContent = "₹0";
+    document.getElementById("instagramOrderId").textContent =
+      data.orderId || "---";
+
+    document.getElementById("successInstagramPackage").textContent =
+      instagramPackage;
+
+    document.getElementById("successInstagramAmount").textContent =
+      "FREE";
+
+    const successAmountLabel =
+      document.querySelector("#instagramScreen3 .delivery-message");
+    if(successAmountLabel){
+      successAmountLabel.textContent =
+        "🎁 FREE ORDER • NO PAYMENT REQUIRED";
+    }
+
+    const successMessage =
+      document.querySelector("#instagramScreen3 .success-message");
+    if(successMessage){
+      successMessage.innerHTML =
+        "Your free Instagram follower order has been submitted successfully.<br>We have received your profile details and will process the request.";
+    }
 
     document.getElementById("processingOverlay").classList.remove("show");
+
     instagramShowScreen(3);
 
     requestAnimationFrame(function(){
@@ -6355,12 +6322,19 @@ async function submitInstagramOrder(){
     createStars(180);
 
   }catch(error){
-    console.error("Instagram FREE order error:",error);
+
+    console.error("FREE Instagram order error:",error);
+
     document.getElementById("processingOverlay").classList.remove("show");
-    showError("instagramError1",error.message || "Unable to submit FREE order. Please try again.");
+
+    showError(
+      "instagramError1",
+      error.message || "Unable to submit your FREE order. Please try again."
+    );
+
     if(button){
       button.disabled = false;
-      button.textContent = "✨ GET FREE ORDER NOW";
+      button.textContent = "🎁 GET FREE ORDER";
     }
   }
 }
@@ -6561,6 +6535,29 @@ function goHome(){
    ENTER KEY 
 ========================================================= */ 
  
+document 
+  .getElementById( 
+    "instagramPromoCode" 
+  ) 
+  .addEventListener( 
+    "keydown", 
+    function(event){ 
+ 
+      if( 
+        event.key === 
+        "Enter" 
+      ){ 
+ 
+        event.preventDefault(); 
+ 
+        applyInstagramPromo(); 
+ 
+      } 
+ 
+    } 
+  ); 
+ 
+ 
 /* ========================================================= 
    INITIALIZATION 
 ========================================================= */ 
@@ -6599,9 +6596,12 @@ if(isMovie){
       instagramPackage; 
  
  
-  document
-    .getElementById("instagramPrice")
-    .textContent = "₹0 • FREE"; 
+  document 
+    .getElementById( 
+      "instagramPrice" 
+    ) 
+    .textContent = 
+      money(instagramPrice); 
  
  
   updateInstagramPrice(); 
