@@ -1,495 +1,7398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>14 FITNESS GYM — Train Hard. Become Unstoppable.</title>
-<meta name="description" content="14 FITNESS GYM — premium unisex fitness club with powerful workouts, modern equipment and flexible memberships.">
-<meta name="theme-color" content="#080808">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root{
-  --bg:#070707; --panel:#101010; --panel2:#151515; --text:#f7f7f7; --muted:#a4a4a4;
-  --accent:#d7ff2f; --accent2:#9fc400; --line:rgba(255,255,255,.09);
-  --danger:#ff5d5d; --success:#7dff9a; --shadow:0 30px 90px rgba(0,0,0,.45);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-button,input,select{font:inherit}
-button{cursor:pointer}
-::selection{background:var(--accent);color:#000}
+  <title>ZS-universe — Social, Movies & Games</title>
 
-.noise{position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
-.cursor{position:fixed;width:14px;height:14px;border:2px solid var(--accent);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:difference}
-@media(max-width:900px){.cursor{display:none}}
+  <meta
+    name="description"
+    content="ZS-universe — Social services, movies and PC games in one premium entertainment hub."
+  >
 
-header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 4%;display:flex;align-items:center;justify-content:space-between;transition:.35s}
-header.scrolled{background:rgba(7,7,7,.84);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding-block:12px}
-.logo{display:flex;align-items:center;gap:10px;font-family:"Barlow Condensed";font-size:30px;font-weight:900;letter-spacing:1px}
-.logoMark{width:36px;height:36px;display:grid;place-items:center;background:var(--accent);color:#000;clip-path:polygon(50% 0,100% 100%,0 100%);font-weight:900}
-.logo span{color:var(--accent)}
-nav{display:flex;gap:28px;color:#ddd;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
-nav a{position:relative;padding:8px 0}
-nav a:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:.3s}
-nav a:hover:after{width:100%}
-.headerJoin,.heroBtn,.planBtn{border:0;background:var(--accent);color:#050505;font-weight:900;padding:13px 20px;border-radius:5px;text-transform:uppercase;letter-spacing:.7px;transition:.25s;box-shadow:0 0 0 rgba(215,255,47,0)}
-.headerJoin:hover,.heroBtn:hover,.planBtn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(215,255,47,.18)}
-.menuBtn{display:none;background:none;color:#fff;border:0;font-size:28px}
+  <meta name="theme-color" content="#09090f">
 
-.hero{min-height:100vh;position:relative;display:grid;align-items:center;overflow:hidden;background:
-linear-gradient(90deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.72) 45%,rgba(0,0,0,.18) 100%),
-url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=2200&q=90") center/cover}
-.hero:before{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(transparent,var(--bg))}
-.heroContent{position:relative;z-index:2;width:min(760px,92%);margin-left:8%;padding-top:90px}
-.eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px}
-.hero h1{font-family:"Barlow Condensed";font-size:clamp(70px,10vw,145px);line-height:.8;text-transform:uppercase;font-weight:900;letter-spacing:-2px}
-.hero h1 span{color:var(--accent)}
-.hero p{margin:30px 0;color:#d2d2d2;max-width:580px;line-height:1.75;font-size:16px}
-.heroActions{display:flex;gap:12px;flex-wrap:wrap}
-.heroBtn{display:inline-flex;align-items:center;justify-content:center;min-width:155px}
-.heroBtn.alt{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line);box-shadow:none}
-.heroStats{display:flex;gap:35px;margin-top:55px;flex-wrap:wrap}
-.stat strong{display:block;font-family:"Barlow Condensed";font-size:42px;color:#fff}
-.stat small{color:#999;text-transform:uppercase;font-size:10px;letter-spacing:1.5px}
-.scrollHint{position:absolute;bottom:25px;right:5%;writing-mode:vertical-rl;color:#777;font-size:10px;letter-spacing:3px}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-.ticker{background:var(--accent);color:#000;overflow:hidden;white-space:nowrap;border-block:1px solid #000}
-.tickerTrack{display:inline-block;animation:ticker 20s linear infinite;padding:13px 0;font-family:"Barlow Condensed";font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:2px}
-.tickerTrack span{margin:0 28px}
-@keyframes ticker{to{transform:translateX(-50%)}}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
-.section{padding:110px 6%}
-.sectionHead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:55px}
-.kicker{color:var(--accent);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:900;margin-bottom:10px}
-.section h2{font-family:"Barlow Condensed";font-size:clamp(52px,7vw,90px);line-height:.85;text-transform:uppercase}
-.sectionIntro{max-width:430px;color:#999;line-height:1.7;font-size:14px}
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  >
 
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.plan{position:relative;background:linear-gradient(145deg,#141414,#0c0c0c);border:1px solid var(--line);padding:34px;overflow:hidden;transition:.4s}
-.plan:hover{transform:translateY(-9px);border-color:rgba(215,255,47,.45);box-shadow:var(--shadow)}
-.plan.featured{border-color:var(--accent);box-shadow:0 0 0 1px rgba(215,255,47,.08),0 25px 70px rgba(215,255,47,.07)}
-.ribbon{position:absolute;top:17px;right:-42px;background:var(--accent);color:#000;padding:6px 48px;font-size:10px;font-weight:900;transform:rotate(45deg);letter-spacing:1px}
-.planTag{color:#888;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:2px}
-.old{color:#666;text-decoration:line-through;font-size:18px;margin-top:25px}
-.price{font-family:"Barlow Condensed";font-size:72px;line-height:.9;font-weight:900;margin:3px 0}
-.price small{font-family:Inter;font-size:13px;color:#999;font-weight:500}
-.saving{display:inline-block;background:rgba(215,255,47,.1);color:var(--accent);padding:5px 8px;font-size:10px;font-weight:900;text-transform:uppercase;margin:8px 0 25px}
-.plan ul{list-style:none;border-top:1px solid var(--line);padding-top:20px;display:grid;gap:13px;color:#bbb;font-size:13px}
-.plan li:before{content:"✓";color:var(--accent);font-weight:900;margin-right:10px}
-.planBtn{width:100%;margin-top:28px;padding:15px}
-.planBtn.dark{background:#fff}
+  <style>
 
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.feature{background:var(--panel);padding:34px;min-height:210px;transition:.35s}
-.feature:hover{background:#151515;transform:translateY(-4px)}
-.icon{font-size:31px;margin-bottom:25px}
-.feature h3{font-family:"Barlow Condensed";font-size:28px;text-transform:uppercase;margin-bottom:10px}
-.feature p{color:#888;font-size:13px;line-height:1.7}
+    /* =========================================================
+       ROOT
+    ========================================================= */
 
-.schedule{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:stretch}
-.scheduleVisual{min-height:530px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.7)),url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1300&q=85") center/cover;display:flex;align-items:end;padding:35px}
-.scheduleVisual h3{font-family:"Barlow Condensed";font-size:65px;line-height:.85;text-transform:uppercase}
-.scheduleList{display:grid;gap:10px}
-.slot{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);padding:22px 24px}
-.slot strong{font-family:"Barlow Condensed";font-size:27px;text-transform:uppercase}
-.slot span{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1px}
-.slot.boys strong{color:#eee}.slot.girls strong{color:var(--accent)}
+    :root {
+      --bg: #07070d;
+      --bg-soft: #0d0d16;
+      --panel: rgba(18, 18, 29, 0.78);
+      --panel-solid: #11111b;
 
-.gallery{display:grid;grid-template-columns:1.1fr .9fr .9fr;grid-auto-rows:240px;gap:12px}
-.gallery div{background-size:cover;background-position:center;position:relative;overflow:hidden}
-.gallery div:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.65))}
-.gallery .big{grid-row:span 2}
-.g1{background-image:url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=85")}
-.g2{background-image:url("https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=1000&q=85")}
-.g3{background-image:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=85")}
-.g4{background-image:url("https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=85")}
-.gallery label{position:absolute;z-index:2;bottom:18px;left:20px;font-family:"Barlow Condensed";font-size:25px;text-transform:uppercase}
+      --text: #ffffff;
+      --muted: #a7a7ba;
+      --muted-2: #77778b;
 
-.members{background:linear-gradient(120deg,#141414,#090909);border-block:1px solid var(--line)}
-.memberGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.memberCard{background:#0b0b0b;border:1px solid var(--line);padding:25px}
-.memberCard h3{font-family:"Barlow Condensed";font-size:34px;text-transform:uppercase}
-.memberCard p{color:#888;font-size:12px;margin-top:5px}
-.memberRows{margin-top:20px;display:grid;gap:8px;max-height:300px;overflow:auto}
-.memberRow{display:flex;justify-content:space-between;align-items:center;padding:13px;background:#121212;font-size:12px}
-.status{font-size:9px;text-transform:uppercase;font-weight:900;padding:5px 8px;border-radius:2px}
-.active{color:#001b08;background:var(--success)}.expired{color:#fff;background:#551d1d}
+      --purple: #8b5cf6;
+      --purple-dark: #6d28d9;
 
-.cta{padding:120px 6%;text-align:center;background:
-radial-gradient(circle at center,rgba(215,255,47,.13),transparent 35%),#080808}
-.cta h2{font-family:"Barlow Condensed";font-size:clamp(65px,10vw,135px);line-height:.78;text-transform:uppercase}
-.cta h2 span{color:var(--accent)}
-.cta p{max-width:570px;margin:28px auto;color:#999;line-height:1.7}
+      --pink: #ec4899;
+      --pink-dark: #be185d;
 
-footer{border-top:1px solid var(--line);padding:30px 6%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#777;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+      --cyan: #22d3ee;
+      --green: #25d366;
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(15px);z-index:2000;display:none;place-items:center;padding:20px}
-.modal.show{display:grid}
-.modalBox{width:min(600px,100%);background:#111;border:1px solid rgba(215,255,47,.35);box-shadow:var(--shadow);padding:34px;position:relative;max-height:92vh;overflow:auto}
-.close{position:absolute;right:18px;top:15px;background:none;border:0;color:#aaa;font-size:25px}
-.modalBox h2{font-family:"Barlow Condensed";font-size:48px;text-transform:uppercase}
-.modalBox>p{color:#888;font-size:12px;line-height:1.6;margin:5px 0 25px}
-.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{display:grid;gap:7px;margin-bottom:12px}
-.field.full{grid-column:1/-1}
-.field label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#999;font-weight:800}
-.field input,.field select{width:100%;background:#080808;color:#fff;border:1px solid var(--line);padding:13px;border-radius:3px;outline:none}
-.field input:focus,.field select:focus{border-color:var(--accent)}
-.consent{font-size:10px;color:#777;line-height:1.5;margin:8px 0 18px}
-.submit{width:100%;padding:15px;border:0;background:var(--accent);font-weight:900;text-transform:uppercase}
-.planSummary{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#080808;border:1px solid var(--line);margin-bottom:18px}
-.planSummary strong{font-family:"Barlow Condensed";font-size:25px;text-transform:uppercase}
-.planSummary b{color:var(--accent);font-size:18px}
-.successBox{text-align:center;padding:35px 10px}
-.successIcon{width:70px;height:70px;border:2px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:35px;margin:0 auto 20px}
-.successBox h2{font-size:43px}
-.successBox p{color:#999;line-height:1.7;margin:15px 0 25px}
+      --border: rgba(255,255,255,0.10);
+      --border-bright: rgba(255,255,255,0.18);
 
-.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:none}
-.float{animation:float 4s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-9px)}}
+      --shadow: 0 25px 80px rgba(0,0,0,0.42);
 
-.toast{position:fixed;right:20px;bottom:20px;z-index:5000;background:#151515;border:1px solid var(--accent);padding:14px 18px;max-width:330px;font-size:12px;transform:translateY(150%);transition:.4s}
-.toast.show{transform:none}
+      --nav-height: 76px;
+    }
 
-@media(max-width:1000px){
-  nav{display:none}.menuBtn{display:block}
-  .headerJoin{display:none}
-  .plans{grid-template-columns:1fr}
-  .features{grid-template-columns:1fr 1fr}
-  .schedule{grid-template-columns:1fr}
-  .gallery{grid-template-columns:1fr 1fr}
-  .gallery .big{grid-row:span 1}
-  .memberGrid{grid-template-columns:1fr}
-}
-@media(max-width:650px){
-  .section{padding:80px 5%}
-  .heroContent{margin-left:5%;padding-top:110px}
-  .heroStats{gap:20px}
-  .features{grid-template-columns:1fr}
-  .gallery{grid-template-columns:1fr;grid-auto-rows:220px}
-  .formGrid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  .scheduleVisual{min-height:360px}
-  .scheduleVisual h3{font-size:48px}
-  footer{flex-direction:column}
-}
-</style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      font-family: "Inter", sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 8%,
+          rgba(139,92,246,0.18),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 92% 15%,
+          rgba(236,72,153,0.13),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 50% 80%,
+          rgba(34,211,238,0.07),
+          transparent 30%
+        ),
+
+        var(--bg);
+
+      overflow-x: hidden;
+    }
+
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.035;
+
+      background-image:
+        radial-gradient(
+          rgba(255,255,255,0.9) 0.7px,
+          transparent 0.7px
+        );
+
+      background-size: 5px 5px;
+
+      z-index: -2;
+    }
+
+
+    body.popup-open {
+      overflow: hidden;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button,
+    input {
+      font: inherit;
+    }
+
+
+    button {
+      border: 0;
+    }
+
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+
+    /* =========================================================
+       BACKGROUND EFFECTS
+    ========================================================= */
+
+    .ambient {
+      position: fixed;
+
+      width: 450px;
+      height: 450px;
+
+      border-radius: 50%;
+
+      filter: blur(120px);
+
+      opacity: 0.13;
+
+      pointer-events: none;
+
+      z-index: -1;
+    }
+
+
+    .ambient.one {
+      left: -220px;
+      top: 180px;
+
+      background: var(--purple);
+    }
+
+
+    .ambient.two {
+      right: -240px;
+      top: 500px;
+
+      background: var(--pink);
+    }
+
+
+    .ambient.three {
+      left: 40%;
+      bottom: -280px;
+
+      background: var(--cyan);
+    }
+
+
+    /* =========================================================
+       =========================================================
+       FIRST VISIT OFFER POPUP
+       Inspired by the supplied screen recording
+       =========================================================
+       ========================================================= */
+
+    /* =========================================================
+       FULL-SCREEN FREE INSTAGRAM EXPERIENCE
+       ========================================================= */
+
+    .offer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(124,58,237,.22), transparent 34%),
+        radial-gradient(circle at 15% 80%, rgba(34,211,238,.12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(236,72,153,.14), transparent 28%),
+        rgba(2,3,10,.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .45s ease, visibility .45s ease;
+      isolation: isolate;
+    }
+
+    .offer-overlay.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .offer-overlay::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        conic-gradient(
+          from 0deg,
+          transparent 0deg,
+          rgba(139,92,246,.10) 55deg,
+          transparent 105deg,
+          rgba(34,211,238,.08) 175deg,
+          transparent 235deg,
+          rgba(236,72,153,.10) 310deg,
+          transparent 360deg
+        );
+      filter: blur(35px);
+      animation: universeSpin 18s linear infinite;
+      pointer-events: none;
+      z-index: -3;
+    }
+
+    .offer-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.5px);
+      background-size: 92px 92px;
+      opacity: .12;
+      animation: starDrift 14s linear infinite;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    @keyframes universeSpin {
+      to { transform: rotate(360deg) scale(1.08); }
+    }
+
+    @keyframes starDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(92px); }
+    }
+
+    .offer-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(.94);
+      opacity: 0;
+      transition:
+        transform .7s cubic-bezier(.16,1,.3,1),
+        opacity .5s ease;
+    }
+
+    .offer-overlay.show .offer-scene {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* TOP CONTROLS */
+
+    .offer-topbar {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      right: 24px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .offer-top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.055);
+      box-shadow: 0 12px 35px rgba(0,0,0,.20);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .offer-top-label .live-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+    }
+
+    .offer-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .offer-top-get {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 43px;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #06110a;
+      background: linear-gradient(135deg, #86efac, #22d3ee);
+      box-shadow:
+        0 0 25px rgba(34,211,238,.20),
+        0 12px 35px rgba(0,0,0,.25);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 1000;
+      letter-spacing: .7px;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .offer-top-get::before,
+    .offer-main-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -70%;
+      width: 45%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.72),
+        transparent
+      );
+      transform: skewX(-18deg);
+      animation: ctaSweep 2.2s ease-in-out infinite;
+    }
+
+    .offer-top-get:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 0 35px rgba(34,211,238,.32),
+        0 15px 40px rgba(0,0,0,.30);
+    }
+
+    .offer-close {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.065);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: 0 12px 35px rgba(0,0,0,.24);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .offer-close:hover {
+      color: white;
+      background: rgba(255,255,255,.13);
+      transform: rotate(90deg) scale(1.08);
+    }
+
+    /* FALLING STARS */
+
+    .star-field {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .star-field span {
+      position: absolute;
+      top: -80px;
+      left: var(--x);
+      width: var(--size);
+      height: var(--trail);
+      border-radius: 999px;
+      opacity: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0),
+        var(--glow),
+        #fff
+      );
+      box-shadow: 0 0 12px var(--glow), 0 0 28px var(--glow);
+      transform: rotate(28deg);
+    }
+
+    .offer-overlay.show .star-field span {
+      animation: shootingStar var(--duration) linear var(--delay) infinite;
+    }
+
+    @keyframes shootingStar {
+      0% {
+        opacity: 0;
+        transform: translate3d(0,0,0) rotate(28deg) scale(.6);
+      }
+      8% { opacity: .95; }
+      55% { opacity: .72; }
+      100% {
+        opacity: 0;
+        transform: translate3d(-360px,760px,0) rotate(28deg) scale(1);
+      }
+    }
+
+    /* FLOATING PARTICLES */
+
+    .offer-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .offer-particles i {
+      position: absolute;
+      left: var(--px);
+      top: var(--py);
+      width: var(--ps);
+      height: var(--ps);
+      border-radius: 50%;
+      background: var(--pc);
+      box-shadow: 0 0 14px var(--pc), 0 0 30px var(--pc);
+      opacity: .35;
+      animation: floatParticle var(--pd) ease-in-out var(--pdelay) infinite;
+    }
+
+    @keyframes floatParticle {
+      0%,100% { transform: translate3d(0,0,0) scale(.7); opacity: .2; }
+      50% { transform: translate3d(var(--dx),-45px,0) scale(1.35); opacity: .9; }
+    }
+
+    /* MAIN CONTENT */
+
+    .offer-content {
+      position: relative;
+      z-index: 10;
+      width: min(760px, calc(100% - 34px));
+      padding: 45px 30px 38px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 34px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.095),
+          rgba(255,255,255,.035)
+        );
+      box-shadow:
+        0 40px 120px rgba(0,0,0,.55),
+        0 0 100px rgba(139,92,246,.13),
+        inset 0 1px 0 rgba(255,255,255,.10);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      overflow: hidden;
+    }
+
+    .offer-content::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      left: 50%;
+      top: -260px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(139,92,246,.30),
+        rgba(236,72,153,.10) 42%,
+        transparent 70%
+      );
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .offer-content::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,.20),
+        transparent 30%,
+        rgba(34,211,238,.15),
+        transparent 72%,
+        rgba(236,72,153,.16)
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .offer-icon {
+      position: relative;
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 25px;
+      color: white;
+      background:
+        linear-gradient(135deg, #833ab4, #fd1d1d 52%, #fcb045);
+      box-shadow:
+        0 18px 55px rgba(253,29,29,.25),
+        0 0 45px rgba(139,92,246,.20);
+      font-size: 36px;
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    .offer-icon::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      animation: iconRing 2.4s ease-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    @keyframes iconRing {
+      0% { transform: scale(.92); opacity: .8; }
+      100% { transform: scale(1.16); opacity: 0; }
+    }
+
+    .offer-kicker {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: #bbf7d0;
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(74,222,128,.20);
+      font-size: 9px;
+      font-weight: 1000;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .offer-content h2 {
+      position: relative;
+      margin-top: 18px;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(38px, 7vw, 72px);
+      line-height: .95;
+      letter-spacing: -3px;
+      font-weight: 900;
+    }
+
+    .offer-free-word {
+      display: block;
+      background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #86efac 30%,
+        #22d3ee 58%,
+        #c4b5fd 82%,
+        #ffffff 100%
+      );
+      background-size: 260% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: freeGradient 4s linear infinite;
+      text-shadow: none;
+    }
+
+    @keyframes freeGradient {
+      to { background-position: 260% center; }
+    }
+
+    .offer-content p {
+      position: relative;
+      max-width: 540px;
+      margin: 18px auto 0;
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .offer-benefits {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .offer-benefit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.84);
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .offer-benefit i {
+      color: #86efac;
+    }
+
+    .offer-main-button {
+      position: relative;
+      z-index: 2;
+      width: min(430px, 100%);
+      min-height: 62px;
+      margin: 27px auto 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      border-radius: 18px;
+      color: #06110a;
+      background: linear-gradient(
+        100deg,
+        #86efac 0%,
+        #22d3ee 48%,
+        #a7f3d0 100%
+      );
+      box-shadow:
+        0 18px 50px rgba(34,211,238,.20),
+        0 0 40px rgba(134,239,172,.12);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: .8px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .offer-main-button:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow:
+        0 25px 65px rgba(34,211,238,.28),
+        0 0 55px rgba(134,239,172,.18);
+    }
+
+    .offer-main-button:active {
+      transform: scale(.98);
+    }
+
+    .offer-main-button span,
+    .offer-main-button i {
+      position: relative;
+      z-index: 2;
+    }
+
+    .offer-footnote {
+      position: relative;
+      margin-top: 14px;
+      color: rgba(255,255,255,.38);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    @keyframes ctaSweep {
+      0% { left: -70%; }
+      45%,100% { left: 130%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .offer-overlay::before,
+      .offer-overlay::after,
+      .offer-icon,
+      .offer-icon::after,
+      .offer-free-word,
+      .offer-top-get::before,
+      .offer-main-button::before,
+      .star-field span,
+      .offer-particles i {
+        animation: none !important;
+      }
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 9999;
+
+      height: var(--nav-height);
+
+      background:
+        rgba(7,7,13,0.76);
+
+      border-bottom:
+        1px solid var(--border);
+
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+
+    .header-inner {
+      width: min(1320px, calc(100% - 32px));
+
+      height: 100%;
+
+      margin: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+
+    .brand {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      flex-shrink: 0;
+    }
+
+
+    .brand-icon {
+      width: 43px;
+      height: 43px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 12px 35px rgba(139,92,246,0.30);
+
+      font-size: 18px;
+    }
+
+
+    .brand-text {
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 18px;
+
+      font-weight: 900;
+
+      letter-spacing: -0.4px;
+    }
+
+
+    .brand-text span {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #c4b5fd,
+          #f9a8d4
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+
+    .desktop-nav {
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+    }
+
+
+    .nav-button {
+      position: relative;
+
+      padding: 10px 16px;
+
+      border-radius: 12px;
+
+      color: var(--muted);
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      transition:
+        color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+    }
+
+
+    .nav-button:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      transform: translateY(-1px);
+    }
+
+
+    .nav-button.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139,92,246,0.90),
+          rgba(236,72,153,0.88)
+        );
+
+      box-shadow:
+        0 10px 30px rgba(139,92,246,0.22);
+    }
+
+
+    .header-support {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 10px 14px;
+
+      border-radius: 12px;
+
+      background:
+        rgba(37,211,102,0.10);
+
+      border:
+        1px solid rgba(37,211,102,0.20);
+
+      color: #7dffa7;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+
+    .header-support i {
+      font-size: 16px;
+    }
+
+
+    /* =========================================================
+       MOBILE NAV
+    ========================================================= */
+
+    .mobile-nav {
+      display: none;
+
+      position: fixed;
+
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+
+      z-index: 10000;
+
+      padding: 8px;
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      border-radius: 20px;
+
+      background:
+        rgba(13,13,22,0.90);
+
+      backdrop-filter: blur(22px);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.5);
+    }
+
+
+    .mobile-nav-inner {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 5px;
+    }
+
+
+    .mobile-nav button {
+      padding: 10px 6px;
+
+      border-radius: 14px;
+
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      transition: .25s;
+    }
+
+
+    .mobile-nav button i {
+      display: block;
+
+      margin-bottom: 5px;
+
+      font-size: 16px;
+    }
+
+
+    .mobile-nav button.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+
+      width: min(1320px, calc(100% - 32px));
+
+      margin: auto;
+
+      min-height: 610px;
+
+      padding:
+        95px 20px
+        80px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+    }
+
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      left: 50%;
+      top: 45%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,0.18),
+          transparent 68%
+        );
+
+      pointer-events: none;
+    }
+
+
+    .hero-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 900px;
+    }
+
+
+    .hero-pill {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding: 9px 15px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,0.055);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      color: #ddd6fe;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 10px 40px rgba(0,0,0,0.15);
+    }
+
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #4ade80;
+
+      box-shadow:
+        0 0 14px rgba(74,222,128,0.9);
+
+      animation:
+        pulseDot 1.7s infinite;
+    }
+
+
+    @keyframes pulseDot {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(0.65);
+        opacity: 0.55;
+      }
+    }
+
+
+    .hero h1 {
+      margin-top: 25px;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size:
+        clamp(44px, 7vw, 88px);
+
+      line-height: 0.99;
+
+      letter-spacing: -4px;
+
+      font-weight: 900;
+    }
+
+
+    .hero h1 .line {
+      display: block;
+    }
+
+
+    .hero-gradient {
+      background:
+        linear-gradient(
+          100deg,
+          #ffffff 5%,
+          #c4b5fd 34%,
+          #f9a8d4 67%,
+          #ffffff 95%
+        );
+
+      background-size: 250%;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        gradientFlow 7s ease infinite;
+    }
+
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0%;
+      }
+
+      50% {
+        background-position: 100%;
+      }
+
+      100% {
+        background-position: 0%;
+      }
+    }
+
+
+    .hero-description {
+      max-width: 680px;
+
+      margin: 25px auto 0;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.85;
+    }
+
+
+    .hero-actions {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 32px;
+    }
+
+
+    .hero-btn {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      min-height: 50px;
+
+      padding:
+        0 21px;
+
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+
+    .hero-btn.primary {
+      color: white;
+
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 16px 40px rgba(139,92,246,0.28);
+    }
+
+
+    .hero-btn.primary:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 22px 50px rgba(236,72,153,0.30);
+    }
+
+
+    .hero-btn.secondary {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.055);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+    }
+
+
+    .hero-btn.secondary:hover {
+      transform: translateY(-3px);
+
+      background:
+        rgba(255,255,255,0.09);
+    }
+
+
+    .hero-stats {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+      margin-top: 42px;
+    }
+
+
+    .stat {
+      min-width: 145px;
+
+      padding:
+        13px 17px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+    }
+
+
+    .stat strong {
+      display: block;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 18px;
+    }
+
+
+    .stat span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted-2);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .7px;
+    }
+
+
+    /* =========================================================
+       QUICK NAV
+    ========================================================= */
+
+    .section-switcher {
+      width: min(1120px, calc(100% - 32px));
+
+      margin:
+        0 auto 35px;
+
+      padding: 8px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      border-radius: 21px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      backdrop-filter: blur(16px);
+    }
+
+
+    .switch-btn {
+      position: relative;
+
+      min-height: 58px;
+
+      border-radius: 15px;
+
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      transition: .25s;
+    }
+
+
+    .switch-btn i {
+      margin-right: 7px;
+    }
+
+
+    .switch-btn:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,0.05);
+    }
+
+
+    .switch-btn.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 12px 35px rgba(139,92,246,0.22);
+    }
+
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    main {
+      width: 100%;
+    }
+
+
+    .tab-panel {
+      display: none;
+
+      width: 100%;
+
+      min-height: 500px;
+
+      scroll-margin-top: 95px;
+    }
+
+
+    .tab-panel.active {
+      display: block;
+
+      animation:
+        panelEnter .4s ease;
+    }
+
+
+    @keyframes panelEnter {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .section {
+      width: min(1320px, calc(100% - 32px));
+
+      margin: auto;
+
+      padding:
+        45px 0
+        85px;
+    }
+
+
+    .section-heading {
+      max-width: 800px;
+
+      margin:
+        0 auto 35px;
+
+      text-align: center;
+    }
+
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin-bottom: 12px;
+
+      color: #c4b5fd;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+
+    .section-heading h2 {
+      font-family: "Montserrat", sans-serif;
+
+      font-size:
+        clamp(30px, 4vw, 50px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.8px;
+
+      font-weight: 900;
+    }
+
+
+    .section-heading h2 span {
+      background:
+        linear-gradient(
+          90deg,
+          #a78bfa,
+          #f472b6
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+
+    .section-heading p {
+      margin-top: 12px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.75;
+    }
+
+
+    /* =========================================================
+       SOCIAL PLATFORM MARQUEE
+    ========================================================= */
+
+    .marquee {
+      width: 100%;
+
+      overflow: hidden;
+
+      margin-bottom: 45px;
+
+      padding:
+        12px 0;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          transparent,
+          black 8%,
+          black 92%,
+          transparent
+        );
+    }
+
+
+    .marquee-track {
+      display: flex;
+
+      width: max-content;
+
+      gap: 15px;
+
+      animation:
+        marqueeMove 30s linear infinite;
+    }
+
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+
+    @keyframes marqueeMove {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    .platform-card {
+      width: 245px;
+
+      min-height: 95px;
+
+      padding: 16px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      flex-shrink: 0;
+
+      border-radius: 20px;
+
+      border:
+        1px solid rgba(255,255,255,0.11);
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.18);
+
+      transition: .3s;
+    }
+
+
+    .platform-card:hover {
+      transform: translateY(-7px);
+    }
+
+
+    .platform-icon {
+      width: 54px;
+      height: 54px;
+
+      flex-shrink: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 17px;
+
+      background:
+        rgba(255,255,255,0.14);
+
+      backdrop-filter: blur(10px);
+
+      font-size: 25px;
+    }
+
+
+    .platform-card strong {
+      display: block;
+
+      font-size: 15px;
+    }
+
+
+    .platform-card small {
+      display: block;
+
+      margin-top: 4px;
+
+      opacity: .72;
+
+      font-size: 10px;
+
+      font-weight: 700;
+    }
+
+
+    .instagram-platform {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(131,58,180,.82),
+          rgba(253,29,29,.75),
+          rgba(252,176,69,.72)
+        );
+    }
+
+
+    .youtube-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #390808,
+          #e50909,
+          #650000
+        );
+    }
+
+
+    .facebook-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #082d70,
+          #1877f2,
+          #073982
+        );
+    }
+
+
+    .snapchat-platform {
+      color: #111;
+
+      background:
+        linear-gradient(
+          135deg,
+          #c8ad00,
+          #fffc00,
+          #c6b300
+        );
+    }
+
+
+    .whatsapp-platform {
+      background:
+        linear-gradient(
+          135deg,
+          #06483f,
+          #25d366,
+          #08786a
+        );
+    }
+
+
+    /* =========================================================
+       SERVICE FEATURE
+    ========================================================= */
+
+    .service-feature {
+      position: relative;
+
+      overflow: hidden;
+
+      margin-bottom: 45px;
+
+      padding: 27px;
+
+      border-radius: 27px;
+
+      border:
+        1px solid rgba(255,255,255,0.11);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(131,58,180,0.16),
+          rgba(253,29,29,0.08),
+          rgba(252,176,69,0.05)
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+
+    .service-feature::after {
+      content: "";
+
+      position: absolute;
+
+      width: 340px;
+      height: 340px;
+
+      right: -160px;
+      top: -190px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+
+      filter: blur(50px);
+
+      opacity: .15;
+    }
+
+
+    .service-feature-inner {
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 25px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .service-title {
+      display: flex;
+
+      align-items: center;
+
+      gap: 17px;
+    }
+
+
+    .service-icon {
+      width: 74px;
+      height: 74px;
+
+      flex-shrink: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+
+      box-shadow:
+        0 18px 45px rgba(253,29,29,.23);
+
+      font-size: 35px;
+    }
+
+
+    .available {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-bottom: 7px;
+
+      color: #72ffa0;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      letter-spacing: 1px;
+    }
+
+
+
+    .inline-free {
+      color: #86efac;
+      text-shadow: 0 0 12px rgba(74,222,128,.45);
+      animation: freeInlinePulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes freeInlinePulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: .55; }
+    }
+
+    .service-title h3 {
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 25px;
+    }
+
+
+    .service-title p {
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       PACKAGES
+    ========================================================= */
+
+    .package-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(235px, 1fr)
+        );
+
+      gap: 16px;
+    }
+
+
+    .package-card {
+      position: relative;
+
+      min-height: 292px;
+
+      padding: 23px;
+
+      overflow: hidden;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(25,25,38,.96),
+          rgba(11,11,19,.98)
+        );
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+
+    .package-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 190px;
+      height: 190px;
+
+      top: -105px;
+      right: -85px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.24),
+          transparent 68%
+        );
+    }
+
+
+    .package-card:hover {
+      transform: translateY(-8px);
+
+      border-color:
+        rgba(139,92,246,.40);
+
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.32);
+    }
+
+
+    .package-card.featured {
+      border-color:
+        rgba(236,72,153,.40);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(42,22,45,.98),
+          rgba(17,12,24,.98)
+        );
+    }
+
+
+    .package-top {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+
+    .package-label {
+      color: var(--muted-2);
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: .7px;
+    }
+
+
+    .package-card h3 {
+      margin-top: 8px;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 21px;
+    }
+
+
+    .followers {
+      margin-top: 5px;
+
+      color: #c4b5fd;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+
+    .discount {
+      padding: 6px 8px;
+
+      border-radius: 999px;
+
+      white-space: nowrap;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--pink),
+          #f97316
+        );
+
+      font-size: 8px;
+
+      font-weight: 900;
+    }
+
+
+    .package-price {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 28px;
+    }
+
+
+    .old-price {
+      color: #626274;
+
+      text-decoration: line-through;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+
+    .current-price {
+      margin-top: 2px;
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 39px;
+
+      font-weight: 900;
+
+      letter-spacing: -1.5px;
+    }
+
+
+
+    /* =========================================================
+       FREE INSTAGRAM OFFER
+       ========================================================= */
+
+    .free-price {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1.8px;
+      color: #ffffff;
+      text-shadow:
+        0 0 12px rgba(74, 222, 128, .65),
+        0 0 32px rgba(34, 211, 238, .30);
+      animation: freePricePulse 1.9s ease-in-out infinite;
+    }
+
+    .free-price::after {
+      content: "100% OFF";
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      color: #07120b;
+      background: linear-gradient(135deg, #86efac, #22d3ee);
+      font-family: "Inter", sans-serif;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .5px;
+      box-shadow: 0 0 18px rgba(74, 222, 128, .25);
+    }
+
+    .free-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #07120b !important;
+      background: linear-gradient(135deg, #86efac, #22d3ee) !important;
+      box-shadow:
+        0 0 18px rgba(74, 222, 128, .28),
+        inset 0 1px 0 rgba(255,255,255,.55);
+      animation: freeBadgePulse 1.8s ease-in-out infinite;
+    }
+
+    .free-badge i {
+      font-size: 7px;
+      animation: freeBolt 1s ease-in-out infinite;
+    }
+
+    .package-card:has(.free-price) {
+      border-color: rgba(74, 222, 128, .20);
+    }
+
+    .package-card:has(.free-price)::before {
+      background:
+        radial-gradient(
+          circle,
+          rgba(74, 222, 128, .22),
+          transparent 68%
+        );
+    }
+
+    .package-card:has(.free-price):hover {
+      border-color: rgba(74, 222, 128, .48);
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.32),
+        0 0 32px rgba(74,222,128,.10);
+    }
+
+    .package-action {
+      background:
+        linear-gradient(
+          100deg,
+          #16a34a,
+          #22c55e 45%,
+          #06b6d4
+        );
+      box-shadow:
+        0 12px 30px rgba(34,197,94,.20);
+    }
+
+    .package-action:hover {
+      box-shadow:
+        0 15px 35px rgba(34,197,94,.30);
+    }
+
+    @keyframes freePricePulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+      }
+      50% {
+        transform: scale(1.045);
+        filter: brightness(1.14);
+      }
+    }
+
+    @keyframes freeBadgePulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-2px) scale(1.04);
+      }
+    }
+
+    @keyframes freeBolt {
+      0%, 100% { transform: rotate(0) scale(1); }
+      50% { transform: rotate(-12deg) scale(1.18); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .free-price,
+      .free-badge,
+      .free-badge i {
+        animation: none;
+      }
+    }
+
+    .package-action {
+      position: absolute;
+
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 5;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      min-height: 44px;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple-dark),
+          var(--pink-dark)
+        );
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      transition: .25s;
+    }
+
+
+    .package-action:hover {
+      transform: scale(1.025);
+
+      box-shadow:
+        0 12px 30px rgba(236,72,153,.22);
+    }
+
+
+    /* =========================================================
+       MEDIA TOOLBAR
+    ========================================================= */
+
+    .media-toolbar {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 25px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .search {
+      position: relative;
+
+      width: min(100%, 500px);
+    }
+
+
+    .search i {
+      position: absolute;
+
+      left: 17px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: #88889b;
+
+      pointer-events: none;
+    }
+
+
+    .search input {
+      width: 100%;
+
+      min-height: 48px;
+
+      padding:
+        0 18px 0 47px;
+
+      border-radius: 14px;
+
+      outline: none;
+
+      color: white;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      transition: .25s;
+    }
+
+
+    .search input::placeholder {
+      color: #707083;
+    }
+
+
+    .search input:focus {
+      border-color:
+        rgba(139,92,246,.65);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(139,92,246,.10);
+    }
+
+
+    .result-count {
+      color: var(--muted-2);
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
+
+    .filters {
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 28px;
+    }
+
+
+    .filter {
+      min-height: 37px;
+
+      padding:
+        0 14px;
+
+      border-radius: 999px;
+
+      color: #a9a9bc;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      cursor: pointer;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      transition: .25s;
+    }
+
+
+    .filter:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,.07);
+    }
+
+
+    .filter.active {
+      color: white;
+
+      border-color: transparent;
+
+      background:
+        linear-gradient(
+          100deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 8px 25px rgba(139,92,246,.18);
+    }
+
+
+    /* =========================================================
+       MEDIA GRID
+    ========================================================= */
+
+    .media-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(220px, 1fr)
+        );
+
+      gap: 20px;
+    }
+
+
+    .media-card {
+      position: relative;
+
+      min-width: 0;
+
+      overflow: hidden;
+
+      border-radius: 21px;
+
+      background:
+        var(--panel-solid);
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.25);
+
+      isolation: isolate;
+
+      transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+      cursor: pointer;
+    }
+
+
+    .media-poster {
+      position: relative;
+
+      width: 100%;
+
+      aspect-ratio: 2 / 3;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #191923,
+          #09090f
+        );
+    }
+
+
+    .media-poster img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      transition:
+        transform .55s ease,
+        filter .4s ease;
+    }
+
+
+    .media-card:hover {
+      transform:
+        translateY(-9px);
+
+      border-color:
+        rgba(255,255,255,.22);
+
+      box-shadow:
+        0 28px 65px rgba(0,0,0,.43);
+    }
+
+
+    .media-card:hover .media-poster img {
+      transform: scale(1.07);
+
+      filter: saturate(1.08);
+    }
+
+
+    .poster-gradient {
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(5,5,10,.98) 0%,
+          rgba(5,5,10,.80) 25%,
+          rgba(5,5,10,.20) 62%,
+          rgba(5,5,10,.02) 100%
+        );
+    }
+
+
+    .media-type {
+      position: absolute;
+
+      left: 13px;
+      top: 13px;
+
+      z-index: 3;
+
+      padding:
+        6px 9px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(10,10,17,.74);
+
+      border:
+        1px solid rgba(255,255,255,.13);
+
+      backdrop-filter: blur(10px);
+
+      color: white;
+
+      font-size: 8px;
+
+      font-weight: 900;
+
+      letter-spacing: .7px;
+    }
+
+
+    .media-type.game {
+      color: #071217;
+
+      background:
+        rgba(34,211,238,.88);
+
+      border-color:
+        transparent;
+    }
+
+
+    .play-button {
+      position: absolute;
+
+      left: 50%;
+      top: 45%;
+
+      z-index: 4;
+
+      width: 60px;
+      height: 60px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
+      opacity: 0;
+
+      transform:
+        translate(-50%, -50%)
+        scale(.72);
+
+      transition:
+        opacity .3s ease,
+        transform .3s ease;
+    }
+
+
+    .media-card:hover .play-button {
+      opacity: 1;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1);
+    }
+
+
+    .media-info {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      z-index: 5;
+
+      padding: 18px 16px 16px;
+    }
+
+
+    .media-info h3 {
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 16px;
+
+      line-height: 1.25;
+
+      font-weight: 800;
+    }
+
+
+    .media-info p {
+      margin-top: 5px;
+
+      color: #b5b5c4;
+
+      font-size: 10px;
+
+      font-weight: 600;
+    }
+
+
+    .open-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-top: 11px;
+
+      color: white;
+
+      font-size: 10px;
+
+      font-weight: 900;
+    }
+
+
+    .open-link i {
+      color: #c4b5fd;
+    }
+
+
+    .media-card.hidden {
+      display: none;
+    }
+
+
+    .no-results {
+      display: none;
+
+      padding: 60px 20px;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+
+    .no-results.show {
+      display: block;
+    }
+
+
+    .no-results i {
+      display: block;
+
+      margin-bottom: 14px;
+
+      color: #77778a;
+
+      font-size: 30px;
+    }
+
+
+    /* =========================================================
+       CUSTOMER CARE
+    ========================================================= */
+
+    .whatsapp {
+      position: fixed;
+
+      right: 22px;
+      bottom: 22px;
+
+      z-index: 9998;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 8px 15px 8px 8px;
+
+      border-radius: 999px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #075e54,
+          #25d366
+        );
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
+      box-shadow:
+        0 18px 50px rgba(37,211,102,.25);
+
+      animation:
+        waFloat 3.2s ease-in-out infinite;
+
+      transition: .25s;
+    }
+
+
+    @keyframes waFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+
+    .whatsapp:hover {
+      transform: scale(1.04);
+    }
+
+
+    .whatsapp-icon {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.16);
+
+      font-size: 23px;
+    }
+
+
+    .whatsapp-text small {
+      display: block;
+
+      opacity: .82;
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      letter-spacing: .7px;
+    }
+
+
+    .whatsapp-text strong {
+      display: block;
+
+      margin-top: 2px;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding:
+        45px 20px
+        110px;
+
+      border-top:
+        1px solid rgba(255,255,255,.07);
+
+      text-align: center;
+
+      color: var(--muted-2);
+    }
+
+
+    .footer-brand {
+      font-family: "Montserrat", sans-serif;
+
+      color: white;
+
+      font-size: 17px;
+
+      font-weight: 900;
+    }
+
+
+    .footer-brand span {
+      color: #a78bfa;
+    }
+
+
+    footer p {
+      margin-top: 8px;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .header-support {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .hero {
+        min-height: 570px;
+
+        padding-top: 75px;
+      }
+
+      .media-grid {
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0,1fr)
+          );
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      :root {
+        --nav-height: 67px;
+      }
+
+
+      .header-inner {
+        width:
+          calc(100% - 22px);
+      }
+
+
+      .brand-icon {
+        width: 39px;
+        height: 39px;
+
+        border-radius: 12px;
+      }
+
+
+      .brand-text {
+        font-size: 15px;
+      }
+
+
+      .hero {
+        width:
+          calc(100% - 22px);
+
+        min-height: 535px;
+
+        padding:
+          65px 7px
+          55px;
+      }
+
+
+      .hero h1 {
+        font-size:
+          clamp(39px, 13vw, 60px);
+
+        letter-spacing: -2.5px;
+      }
+
+
+      .hero-description {
+        font-size: 13px;
+
+        line-height: 1.75;
+      }
+
+
+      .hero-stats {
+        margin-top: 30px;
+      }
+
+
+      .stat {
+        min-width:
+          calc(33.333% - 8px);
+
+        padding:
+          11px 7px;
+      }
+
+
+      .stat strong {
+        font-size: 15px;
+      }
+
+
+      .stat span {
+        font-size: 7px;
+      }
+
+
+      .section-switcher {
+        display: none;
+      }
+
+
+      .section {
+        width:
+          calc(100% - 22px);
+
+        padding:
+          35px 0
+          80px;
+      }
+
+
+      .section-heading h2 {
+        font-size: 31px;
+      }
+
+
+      .section-heading p {
+        font-size: 12px;
+      }
+
+
+      .service-feature {
+        padding: 20px;
+      }
+
+
+      .service-title {
+        align-items: flex-start;
+      }
+
+
+      .service-icon {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        font-size: 27px;
+      }
+
+
+      .service-title h3 {
+        font-size: 18px;
+      }
+
+
+      .service-feature .hero-btn {
+        width: 100%;
+      }
+
+
+      .package-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+
+        gap: 10px;
+      }
+
+
+      .package-card {
+        min-height: 260px;
+
+        padding: 16px;
+
+        border-radius: 18px;
+      }
+
+
+      .package-card h3 {
+        font-size: 16px;
+      }
+
+
+      .followers {
+        font-size: 10px;
+      }
+
+
+      .discount {
+        font-size: 6px;
+
+        padding:
+          5px 6px;
+      }
+
+
+      .current-price {
+        font-size: 31px;
+      }
+
+
+      .package-action {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+
+        min-height: 40px;
+
+        font-size: 9px;
+      }
+
+
+      .media-toolbar {
+        align-items: stretch;
+      }
+
+
+      .search {
+        width: 100%;
+      }
+
+
+      .result-count {
+        width: 100%;
+      }
+
+
+      .filters {
+        gap: 6px;
+      }
+
+
+      .filter {
+        min-height: 34px;
+
+        padding:
+          0 11px;
+
+        font-size: 9px;
+      }
+
+
+      .media-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+
+        gap: 11px;
+      }
+
+
+      .media-card {
+        border-radius: 17px;
+      }
+
+
+      .media-info {
+        padding:
+          13px 11px 12px;
+      }
+
+
+      .media-info h3 {
+        font-size: 12px;
+      }
+
+
+      .media-info p {
+        font-size: 8px;
+      }
+
+
+      .open-link {
+        margin-top: 8px;
+
+        font-size: 8px;
+      }
+
+
+      .media-type {
+        left: 9px;
+        top: 9px;
+
+        padding:
+          5px 7px;
+
+        font-size: 6px;
+      }
+
+
+      .play-button {
+        width: 47px;
+        height: 47px;
+
+        font-size: 13px;
+      }
+
+
+      .platform-card {
+        width: 210px;
+      }
+
+
+      .whatsapp {
+        right: 13px;
+        bottom: 78px;
+
+        padding: 7px;
+      }
+
+
+      .whatsapp-text {
+        display: none;
+      }
+
+
+      .whatsapp-icon {
+        width: 45px;
+        height: 45px;
+      }
+
+
+      footer {
+        padding-bottom: 135px;
+      }
+
+
+      /* OFFER MOBILE */
+
+      .offer-topbar {
+        top: 13px;
+        left: 12px;
+        right: 12px;
+      }
+
+      .offer-top-label {
+        min-height: 38px;
+        padding: 0 11px;
+        font-size: 8px;
+      }
+
+      .offer-top-get {
+        min-height: 38px;
+        padding: 0 13px;
+        font-size: 9px;
+      }
+
+      .offer-close {
+        width: 38px;
+        height: 38px;
+        font-size: 12px;
+      }
+
+      .offer-content {
+        width: calc(100% - 22px);
+        padding: 34px 17px 25px;
+        border-radius: 27px;
+      }
+
+      .offer-icon {
+        width: 66px;
+        height: 66px;
+        border-radius: 20px;
+        font-size: 28px;
+        margin-bottom: 17px;
+      }
+
+      .offer-content h2 {
+        font-size: clamp(35px, 12vw, 55px);
+        letter-spacing: -2px;
+      }
+
+      .offer-content p {
+        font-size: 11px;
+        margin-top: 14px;
+      }
+
+      .offer-benefits {
+        margin-top: 15px;
+      }
+
+      .offer-benefit {
+        min-height: 29px;
+        padding: 0 9px;
+        font-size: 8px;
+      }
+
+      .offer-main-button {
+        min-height: 56px;
+        margin-top: 22px;
+        border-radius: 16px;
+        font-size: 10px;
+      }
+
+      .offer-footnote {
+        font-size: 7px;
+      }
+
+    }
+
+
+    @media (max-width: 390px) {
+
+      .brand-text {
+        font-size: 14px;
+      }
+
+
+      .package-grid {
+        gap: 8px;
+      }
+
+
+      .package-card {
+        padding: 13px;
+      }
+
+
+      .package-action {
+        left: 9px;
+        right: 9px;
+      }
+
+
+      .media-grid {
+        gap: 8px;
+      }
+
+
+      .offer-top-label {
+        display: none;
+      }
+
+      .offer-top-actions {
+        margin-left: auto;
+      }
+
+      .offer-content h2 {
+        font-size: 34px;
+      }
+
+      .offer-content p {
+        font-size: 10px;
+      }
+
+      .offer-benefit {
+        font-size: 7px;
+      }
+
+    }
+
+
+    /* =========================================================
+       ZS-UNIVERSE 2026 REDESIGN OVERRIDES
+       Mobile-first / storefront-style / high-contrast
+    ========================================================= */
+
+    :root {
+      --bg: #050914;
+      --bg-soft: #09111f;
+      --panel: rgba(12, 23, 40, .82);
+      --panel-solid: #0b1422;
+      --text: #f8fbff;
+      --muted: #a8b5c8;
+      --muted-2: #708198;
+      --purple: #7c3aed;
+      --pink: #ec4899;
+      --cyan: #38bdf8;
+      --green: #22c55e;
+      --store-blue: #1d4ed8;
+      --store-sky: #38bdf8;
+      --store-orange: #f59e0b;
+      --store-yellow: #facc15;
+      --border: rgba(148,163,184,.16);
+      --border-bright: rgba(255,255,255,.24);
+      --shadow: 0 30px 90px rgba(0,0,0,.48);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 5%, rgba(56,189,248,.12), transparent 25%),
+        radial-gradient(circle at 92% 12%, rgba(124,58,237,.13), transparent 28%),
+        radial-gradient(circle at 50% 72%, rgba(245,158,11,.055), transparent 25%),
+        #050914;
+    }
+
+    .ambient.one { background:#38bdf8; opacity:.09; }
+    .ambient.two { background:#7c3aed; opacity:.09; }
+    .ambient.three { background:#f59e0b; opacity:.045; }
+
+    /* Store announcement strip */
+    .store-announcement {
+      position: relative;
+      z-index: 10000;
+      height: 31px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg,#071326,#0b2b52,#071326);
+      border-bottom: 1px solid rgba(56,189,248,.18);
+      color: #dbeafe;
+      white-space: nowrap;
+    }
+
+    .store-announcement-track {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: max-content;
+      padding-left: 100%;
+      animation: storeMarquee 22s linear infinite;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+    }
+
+    .store-announcement-track span:first-child { color:#86efac; }
+    .store-announcement-track i { color:#facc15; margin-right:5px; }
+    .store-announcement-track b { color:#38bdf8; }
+
+    @keyframes storeMarquee {
+      from { transform:translateX(0); }
+      to { transform:translateX(-100%); }
+    }
+
+    .site-header {
+      height: 72px;
+      background: rgba(4,9,18,.84);
+      border-bottom: 1px solid rgba(148,163,184,.13);
+      box-shadow: 0 8px 30px rgba(0,0,0,.18);
+    }
+
+    .header-inner {
+      width:min(1380px,calc(100% - 28px));
+    }
+
+    .brand-icon {
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      background:linear-gradient(135deg,#1d4ed8,#38bdf8 55%,#7c3aed);
+      box-shadow:0 10px 28px rgba(56,189,248,.2);
+    }
+
+    .brand-text {
+      font-size:17px;
+      letter-spacing:-.7px;
+    }
+
+    .brand-text span {
+      background:linear-gradient(90deg,#fff,#bae6fd,#c4b5fd);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+
+    .nav-button.active {
+      background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#38bdf8);
+      box-shadow:0 9px 26px rgba(37,99,235,.22);
+    }
+
+    .header-support {
+      background:rgba(34,197,94,.08);
+      border-color:rgba(34,197,94,.22);
+    }
+
+    /* Hero: more storefront / product-launch feel */
+    .hero {
+      position:relative;
+      min-height:clamp(620px,78vh,780px);
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(3,8,18,.96),rgba(3,8,18,.72) 48%,rgba(3,8,18,.9)),
+        radial-gradient(circle at 76% 42%,rgba(37,99,235,.22),transparent 28%),
+        radial-gradient(circle at 86% 70%,rgba(245,158,11,.10),transparent 22%);
+      border-bottom:1px solid rgba(148,163,184,.12);
+    }
+
+    .hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(56,189,248,.06) 1px,transparent 1px),
+        linear-gradient(rgba(56,189,248,.045) 1px,transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(to bottom,black,transparent 92%);
+      pointer-events:none;
+    }
+
+    .hero::after {
+      content:"ZS";
+      position:absolute;
+      right:-2vw;
+      bottom:-11vw;
+      font-family:"Montserrat",sans-serif;
+      font-size:min(31vw,430px);
+      line-height:1;
+      font-weight:900;
+      letter-spacing:-.08em;
+      color:rgba(255,255,255,.018);
+      pointer-events:none;
+    }
+
+    .hero-content {
+      position:relative;
+      z-index:2;
+      width:min(1380px,calc(100% - 28px));
+      margin:auto;
+      padding:70px 0 82px;
+    }
+
+    .hero-pill {
+      border-color:rgba(56,189,248,.22);
+      background:rgba(15,23,42,.72);
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      color:#bae6fd;
+    }
+
+    .hero h1 {
+      max-width:900px;
+      font-size:clamp(50px,8vw,108px);
+      line-height:.91;
+      letter-spacing:-5px;
+      text-wrap:balance;
+    }
+
+    .hero h1 .hero-gradient,
+    .hero-gradient {
+      background:linear-gradient(90deg,#fff 0%,#7dd3fc 35%,#c4b5fd 67%,#fcd34d 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      animation:heroGradient 6s linear infinite;
+    }
+
+    @keyframes heroGradient { to { background-position:200% center; } }
+
+    .hero-description {
+      max-width:660px;
+      color:#9fb0c5;
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    .hero-actions {
+      gap:10px;
+    }
+
+    .hero-btn.primary {
+      background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#38bdf8);
+      box-shadow:0 14px 36px rgba(37,99,235,.22);
+    }
+
+    .hero-btn.secondary {
+      background:rgba(15,23,42,.78);
+      border-color:rgba(148,163,184,.18);
+    }
+
+    .hero-stats .stat {
+      border-color:rgba(148,163,184,.15);
+      background:rgba(8,17,31,.7);
+    }
+
+    .ticker {
+      background:linear-gradient(90deg,#0b1930,#071120,#0b1930);
+      border-top:1px solid rgba(56,189,248,.1);
+      border-bottom:1px solid rgba(56,189,248,.1);
+    }
+
+    .tickerTrack span { color:#93c5fd; }
+
+    /* Sections */
+    .section {
+      width:min(1380px,calc(100% - 28px));
+      padding-top:90px;
+      padding-bottom:20px;
+    }
+
+    .section-heading h2 {
+      letter-spacing:-2px;
+    }
+
+    .section-heading h2 span {
+      background:linear-gradient(90deg,#38bdf8,#c4b5fd,#facc15);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .section-heading .eyebrow,
+    .eyebrow {
+      color:#93c5fd;
+    }
+
+    .service-feature {
+      border-color:rgba(56,189,248,.15);
+      background:
+        linear-gradient(135deg,rgba(11,29,52,.95),rgba(8,15,27,.98));
+      box-shadow:0 25px 70px rgba(0,0,0,.26);
+    }
+
+    .service-icon {
+      background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);
+      box-shadow:0 14px 35px rgba(253,29,29,.18);
+    }
+
+    .platform-card {
+      border-color:rgba(148,163,184,.13);
+      background:linear-gradient(145deg,rgba(14,28,47,.95),rgba(7,13,24,.98));
+    }
+
+    /* Package area becomes a true storefront */
+    #packages {
+      scroll-margin-top:100px;
+    }
+
+    .package-grid {
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .package-card {
+      min-height:335px;
+      padding:24px;
+      border-radius:22px;
+      background:
+        linear-gradient(155deg,rgba(15,30,50,.98),rgba(7,14,25,.99));
+      border:1px solid rgba(148,163,184,.14);
+      box-shadow:0 18px 50px rgba(0,0,0,.2);
+    }
+
+    .package-card::before {
+      width:260px;
+      height:260px;
+      top:-150px;
+      right:-110px;
+      background:radial-gradient(circle,rgba(56,189,248,.16),transparent 68%);
+    }
+
+    .package-card:hover {
+      transform:translateY(-9px);
+      border-color:rgba(56,189,248,.38);
+      box-shadow:0 30px 70px rgba(0,0,0,.35),0 0 28px rgba(56,189,248,.06);
+    }
+
+    .package-card.featured {
+      border-color:rgba(250,204,21,.26);
+      background:linear-gradient(155deg,rgba(40,31,10,.94),rgba(10,18,29,.99));
+    }
+
+    .package-label {
+      color:#7f93aa;
+      letter-spacing:1px;
+    }
+
+    .package-card h3 {
+      font-size:22px;
+      letter-spacing:-.5px;
+    }
+
+    .followers {
+      color:#7dd3fc;
+      font-size:13px;
+    }
+
+    .discount {
+      background:linear-gradient(90deg,#f59e0b,#facc15);
+      color:#211300;
+      box-shadow:0 8px 24px rgba(245,158,11,.15);
+    }
+
+    .package-price {
+      margin-top:30px;
+    }
+
+    .old-price { color:#607086; }
+
+    .current-price {
+      font-size:43px;
+      background:linear-gradient(90deg,#fff,#bae6fd);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .free-price {
+      font-size:clamp(39px,4vw,55px);
+      color:#fff;
+      background:linear-gradient(90deg,#86efac,#38bdf8,#fff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      text-shadow:0 0 18px rgba(134,239,172,.25);
+    }
+
+    .free-badge {
+      color:#07120b !important;
+      background:linear-gradient(135deg,#86efac,#38bdf8) !important;
+    }
+
+    .package-action {
+      left:24px;
+      right:24px;
+      bottom:24px;
+      min-height:48px;
+      border-radius:14px;
+      background:linear-gradient(100deg,#1d4ed8,#2563eb 52%,#38bdf8);
+      box-shadow:0 13px 32px rgba(37,99,235,.20);
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.55px;
+    }
+
+    .package-action:hover {
+      background:linear-gradient(100deg,#2563eb,#38bdf8 65%,#7dd3fc);
+      box-shadow:0 17px 40px rgba(37,99,235,.3);
+    }
+
+    /* First 200 Followers card = hero product */
+    .package-card-hero-free {
+      grid-column:span 2;
+      min-height:390px;
+      padding:30px;
+      border:1px solid rgba(134,239,172,.38) !important;
+      background:
+        radial-gradient(circle at 82% 15%,rgba(56,189,248,.18),transparent 25%),
+        linear-gradient(145deg,rgba(8,46,35,.96),rgba(7,18,31,.99)) !important;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.34),
+        0 0 50px rgba(34,197,94,.07),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .package-card-hero-free::after {
+      content:"START HERE • 200 FOLLOWERS";
+      position:absolute;
+      left:30px;
+      top:20px;
+      padding:5px 9px;
+      border-radius:999px;
+      color:#06200f;
+      background:#86efac;
+      font-size:7px;
+      font-weight:1000;
+      letter-spacing:1px;
+      box-shadow:0 0 22px rgba(134,239,172,.18);
+    }
+
+    .package-card-hero-free .package-top {
+      padding-top:22px;
+    }
+
+    .package-card-hero-free .package-label {
+      color:#a7f3d0;
+    }
+
+    .package-card-hero-free h3 {
+      font-size:clamp(25px,3vw,34px);
+      margin-top:7px;
+    }
+
+    .package-card-hero-free .followers {
+      margin-top:8px;
+      font-size:clamp(25px,3vw,42px);
+      line-height:1;
+      font-weight:1000;
+      letter-spacing:-1.7px;
+      color:#fff;
+      text-shadow:0 0 22px rgba(125,211,252,.20);
+    }
+
+    .package-card-hero-free .package-price {
+      margin-top:26px;
+    }
+
+    .package-card-hero-free .free-price {
+      font-size:clamp(56px,6vw,82px);
+      line-height:.9;
+      letter-spacing:-3px;
+    }
+
+    .package-card-hero-free .free-badge {
+      padding:9px 12px;
+      font-size:8px;
+    }
+
+    .package-card-hero-free .package-action {
+      min-height:58px;
+      font-size:11px;
+      border-radius:17px;
+      background:linear-gradient(100deg,#16a34a,#22c55e 45%,#38bdf8);
+      box-shadow:0 18px 45px rgba(34,197,94,.25);
+    }
+
+    .package-card-hero-free .package-action:hover {
+      background:linear-gradient(100deg,#22c55e,#38bdf8);
+      box-shadow:0 20px 50px rgba(34,197,94,.34);
+    }
+
+    /* Movie/game cards */
+    .media-card {
+      border-color:rgba(148,163,184,.13);
+      background:linear-gradient(145deg,rgba(12,26,44,.95),rgba(7,13,24,.99));
+    }
+
+    .media-card:hover {
+      border-color:rgba(56,189,248,.28);
+    }
+
+    .filter.active {
+      background:linear-gradient(135deg,#1d4ed8,#38bdf8);
+    }
+
+    .search {
+      background:#091321;
+      border-color:rgba(148,163,184,.14);
+    }
+
+    footer {
+      border-top-color:rgba(148,163,184,.13);
+      background:#030710;
+    }
+
+    /* =========================================================
+       MOBILE-FIRST LAYOUT
+    ========================================================= */
+
+    @media (max-width: 900px) {
+      .desktop-nav,
+      .header-support { display:none; }
+
+      .header-inner { width:calc(100% - 20px); }
+
+      .hero {
+        min-height:auto;
+      }
+
+      .hero-content {
+        width:calc(100% - 28px);
+        padding:58px 0 70px;
+      }
+
+      .hero h1 {
+        max-width:100%;
+        font-size:clamp(46px,13vw,76px);
+        letter-spacing:-3.5px;
+      }
+
+      .hero-description {
+        font-size:13px;
+        max-width:100%;
+      }
+
+      .hero-actions {
+        display:grid;
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .hero-actions .hero-btn { width:100%; }
+
+      .hero-stats {
+        grid-template-columns:repeat(3,1fr);
+        gap:7px;
+      }
+
+      .hero-stats .stat {
+        padding:12px 7px;
+      }
+
+      .hero-stats .stat strong { font-size:15px; }
+      .hero-stats .stat small { font-size:7px; }
+
+      .section {
+        width:calc(100% - 24px);
+        padding-top:64px;
+      }
+
+      .section-heading h2 {
+        font-size:clamp(31px,9vw,48px);
+      }
+
+      .package-grid {
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .package-card,
+      .package-card-hero-free {
+        grid-column:auto;
+        min-height:325px;
+        padding:20px;
+        border-radius:20px;
+      }
+
+      .package-card-hero-free {
+        min-height:410px;
+        padding:23px;
+      }
+
+      .package-card-hero-free::after {
+        left:23px;
+        top:16px;
+      }
+
+      .package-card-hero-free .package-top {
+        padding-top:26px;
+      }
+
+      .package-card-hero-free .followers {
+        font-size:clamp(31px,10vw,50px);
+      }
+
+      .package-card-hero-free .free-price {
+        font-size:clamp(64px,19vw,90px);
+      }
+
+      .package-card-hero-free .package-action {
+        left:23px;
+        right:23px;
+        bottom:23px;
+        min-height:62px;
+        font-size:11px;
+      }
+
+      .package-card .package-action {
+        left:20px;
+        right:20px;
+        bottom:20px;
+      }
+
+      .offer-content {
+        width:calc(100% - 18px);
+        min-height:auto;
+        padding:28px 14px 22px;
+        border-radius:24px;
+      }
+
+      .offer-icon {
+        width:62px;
+        height:62px;
+        margin-bottom:14px;
+      }
+
+      .offer-content h2 {
+        font-size:clamp(35px,12.5vw,57px);
+        letter-spacing:-2.2px;
+      }
+
+      .offer-content p {
+        max-width:330px;
+        font-size:10.5px;
+        line-height:1.6;
+      }
+
+      .offer-benefits {
+        gap:6px;
+      }
+
+      .offer-benefit {
+        min-height:28px;
+        padding:0 8px;
+        font-size:7.5px;
+      }
+
+      .offer-main-button {
+        width:100%;
+        min-height:58px;
+        margin-top:19px;
+        border-radius:15px;
+        font-size:10px;
+      }
+
+      .offer-topbar {
+        top:9px;
+        left:9px;
+        right:9px;
+      }
+
+      .offer-top-label {
+        min-height:34px;
+        padding:0 9px;
+        font-size:7px;
+      }
+
+      .offer-top-get {
+        min-height:34px;
+        padding:0 11px;
+        font-size:8px;
+      }
+
+      .offer-close {
+        width:34px;
+        height:34px;
+      }
+
+      .mobile-nav {
+        display:block;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .store-announcement { height:28px; }
+      .store-announcement-track { font-size:7px; gap:16px; }
+
+      .site-header { height:64px; }
+      .brand-icon { width:38px; height:38px; border-radius:11px; }
+      .brand-text { font-size:15px; }
+
+      .hero-content { padding-top:45px; }
+
+      .hero h1 {
+        font-size:clamp(43px,14.5vw,68px);
+        letter-spacing:-3px;
+      }
+
+      .hero-description { font-size:12px; }
+
+      .hero-stats .stat strong { font-size:13px; }
+      .hero-stats .stat small { font-size:6.5px; }
+
+      .package-card-hero-free {
+        min-height:430px;
+      }
+
+      .package-card-hero-free .followers {
+        font-size:clamp(34px,11vw,50px);
+      }
+
+      .package-card-hero-free .free-price {
+        font-size:clamp(70px,21vw,92px);
+      }
+
+      .package-card-hero-free .package-action {
+        min-height:64px;
+        font-size:10.5px;
+      }
+
+      .offer-top-label { display:none; }
+      .offer-top-actions { margin-left:auto; }
+
+      .offer-content {
+        width:calc(100% - 14px);
+        padding:25px 12px 20px;
+      }
+
+      .offer-content h2 {
+        font-size:clamp(34px,13vw,52px);
+      }
+
+      .offer-content p { font-size:10px; }
+
+      .offer-benefit { font-size:7px; }
+    }
+
+    @media (max-width: 370px) {
+      .hero h1 { font-size:42px; }
+      .package-card-hero-free .free-price { font-size:65px; }
+      .offer-benefits .offer-benefit:nth-child(2) { display:none; }
+    }
+
+  </style>
 </head>
 
-<body>
-<div class="noise"></div>
-<div class="cursor" id="cursor"></div>
 
-<header id="header">
-  <a href="#home" class="logo"><div class="logoMark">14</div>FITNESS <span>GYM</span></a>
-  <nav>
-    <a href="#plans">Membership</a><a href="#why">Why Us</a><a href="#timings">Timings</a><a href="#gallery">Gym</a><a href="#members">Members</a>
-  </nav>
-  <button class="headerJoin" onclick="openJoin()">Join Us</button>
-  <button class="menuBtn" onclick="document.querySelector('nav').classList.toggle('mobileNav')">☰</button>
-</header>
+<body class="popup-open">
 
-<main id="home">
-<section class="hero">
-  <div class="heroContent reveal">
-    <div class="eyebrow">Premium Unisex Fitness Club</div>
-    <h1>Build<br><span>Your</span><br>Legacy.</h1>
-    <p>Not just a gym. A place where discipline becomes confidence. Train with purpose, push your limits and become the strongest version of yourself.</p>
-    <div class="heroActions">
-      <button class="heroBtn" onclick="scrollToPlans()">View Memberships →</button>
-      <button class="heroBtn alt" onclick="openJoin()">Join 14 Fitness</button>
-    </div>
-    <div class="heroStats">
-      <div class="stat"><strong>6 AM</strong><small>Opening</small></div>
-      <div class="stat"><strong>18 HRS</strong><small>Fitness Access Window</small></div>
-      <div class="stat"><strong>100%</strong><small>Energy</small></div>
-    </div>
-  </div>
-  <div class="scrollHint">SCROLL TO TRANSFORM</div>
-</section>
 
-<div class="ticker"><div class="tickerTrack">
-  <span>NO EXCUSES</span>✦<span>TRAIN HARD</span>✦<span>STAY CONSISTENT</span>✦<span>GET STRONGER</span>✦<span>NO EXCUSES</span>✦<span>TRAIN HARD</span>✦<span>STAY CONSISTENT</span>✦<span>GET STRONGER</span>✦
-</div></div>
+  <!-- =========================================================
+       BACKGROUND
+  ========================================================== -->
 
-<section class="section" id="plans">
-  <div class="sectionHead reveal">
-    <div><div class="kicker">Memberships</div><h2>Choose Your<br>Commitment.</h2></div>
-    <p class="sectionIntro">Start today. Stay consistent. Your body, confidence and discipline are built one workout at a time.</p>
-  </div>
-  <div class="plans">
-    <article class="plan featured reveal">
-      <div class="ribbon">BEST VALUE</div>
-      <div class="planTag">01 / Starter</div>
-      <div class="old">₹2,000</div>
-      <div class="price">₹1,400 <small>/ month</small></div>
-      <div class="saving">🔥 Special launch offer + 1 month FREE</div>
-      <ul><li>1 month paid + 1 month FREE</li><li>Full gym access</li><li>Modern strength & cardio zone</li><li>Basic fitness guidance</li><li>Member progress profile</li></ul>
-      <button class="planBtn" onclick="openJoin('1 Month + 1 Month FREE','₹1,400')">Join Now</button>
-    </article>
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
+  <div class="ambient three"></div>
 
-    <article class="plan reveal">
-      <div class="planTag">02 / Transformation</div>
-      <div class="old">₹8,400</div>
-      <div class="price">₹7,560 <small>/ 6 months</small></div>
-      <div class="saving">Save 10% • ₹840 OFF</div>
-      <ul><li>6 months membership</li><li>10% long-term discount</li><li>Full gym access</li><li>Priority member support</li><li>Progress tracking</li></ul>
-      <button class="planBtn dark" onclick="openJoin('6 Months','₹7,560')">Join Now</button>
-    </article>
 
-    <article class="plan reveal">
-      <div class="planTag">03 / Elite</div>
-      <div class="old">₹16,800</div>
-      <div class="price">₹14,280 <small>/ year</small></div>
-      <div class="saving">Save 15% • ₹2,520 OFF</div>
-      <ul><li>12 months membership</li><li>15% annual discount</li><li>Full gym access</li><li>Long-term progress profile</li><li>Priority support</li></ul>
-      <button class="planBtn dark" onclick="openJoin('12 Months','₹14,280')">Join Now</button>
-    </article>
-  </div>
-</section>
+  <!-- =========================================================
+       FULL-SCREEN FREE INSTAGRAM OFFER
+  ========================================================== -->
 
-<section class="section" id="why">
-  <div class="sectionHead reveal">
-    <div><div class="kicker">The 14 Standard</div><h2>Why Train<br>With Us?</h2></div>
-    <p class="sectionIntro">Everything you need to make showing up easier and getting results harder to ignore.</p>
-  </div>
-  <div class="features">
-    <div class="feature reveal"><div class="icon">🏋️</div><h3>Serious Equipment</h3><p>Strength machines, free weights and cardio equipment designed for complete workouts.</p></div>
-    <div class="feature reveal"><div class="icon">⚡</div><h3>High Energy</h3><p>A motivating training environment built to keep your intensity high and your excuses low.</p></div>
-    <div class="feature reveal"><div class="icon">🎯</div><h3>Goal Focused</h3><p>Whether your target is strength, fat loss, muscle or confidence, train with a clear purpose.</p></div>
-    <div class="feature reveal"><div class="icon">🤝</div><h3>Supportive Community</h3><p>Train around people who are working on themselves and want to see you win too.</p></div>
-  </div>
-</section>
+  <div
+    class="offer-overlay"
+    id="offerOverlay"
+    aria-hidden="true"
+  >
 
-<section class="section" id="timings">
-  <div class="sectionHead reveal">
-    <div><div class="kicker">Open Hours</div><h2>Train At<br>Your Time.</h2></div>
-    <p class="sectionIntro">Dedicated time windows for boys and girls. Please follow the assigned timing for a smooth and comfortable gym experience.</p>
-  </div>
-  <div class="schedule">
-    <div class="scheduleVisual reveal"><h3>DISCIPLINE<br>HAS NO<br>OFF DAY.</h3></div>
-    <div class="scheduleList">
-      <div class="slot boys reveal"><div><span>06:00 AM — 10:00 AM</span><strong>BOYS</strong></div><b>01</b></div>
-      <div class="slot girls reveal"><div><span>10:00 AM — 04:30 PM</span><strong>GIRLS</strong></div><b>02</b></div>
-      <div class="slot boys reveal"><div><span>04:30 PM — 12:00 AM</span><strong>BOYS</strong></div><b>03</b></div>
-      <div class="slot reveal"><div><span>Every Day</span><strong>Consistency</strong></div><b>∞</b></div>
-    </div>
-  </div>
-</section>
+    <div class="offer-scene">
 
-<section class="section" id="gallery">
-  <div class="sectionHead reveal"><div><div class="kicker">Inside 14 Fitness</div><h2>Train.<br>Transform.</h2></div><p class="sectionIntro">A visual preview of the kind of atmosphere we are building. Replace these images with your friend's actual gym photos before launch.</p></div>
-  <div class="gallery">
-    <div class="g1 big reveal"><label>Strength Zone</label></div>
-    <div class="g2 reveal"><label>Cardio</label></div>
-    <div class="g3 reveal"><label>Energy</label></div>
-    <div class="g4 reveal"><label>Community</label></div>
-    <div class="g2 reveal"><label>Every Rep Counts</label></div>
-  </div>
-</section>
+      <!-- TOP CONTROLS -->
 
-<section class="section members" id="members">
-  <div class="sectionHead reveal">
-    <div><div class="kicker">Member Area</div><h2>Our<br>Members.</h2></div>
-    <p class="sectionIntro">New admissions can appear here after registration. This first version stores member data locally in the browser; a real shared database will be connected in the backend phase.</p>
-  </div>
-  <div class="memberGrid">
-    <div class="memberCard reveal"><h3>Active Members</h3><p>Currently active plans</p><div class="memberRows" id="activeMembers"></div></div>
-    <div class="memberCard reveal"><h3>Plan Status</h3><p>Local demo dashboard</p><div class="memberRows" id="statusMembers"></div></div>
-  </div>
-</section>
+      <div class="offer-topbar">
 
-<section class="cta">
-  <div class="kicker">Your Next Version Starts Here</div>
-  <h2>Stop Waiting.<br><span>Start Training.</span></h2>
-  <p>One decision can change the way you feel about your body, your confidence and your discipline. Take the first step today.</p>
-  <button class="heroBtn" onclick="openJoin()">Become A Member →</button>
-</section>
-</main>
+        <div class="offer-top-label">
+          <span class="live-dot"></span>
+          ZS-UNIVERSE • FREE DROP
+        </div>
 
-<footer>
-  <div>© 2026 14 FITNESS GYM</div>
-  <div>Train Hard • Stay Consistent • Become Unstoppable</div>
-  <div>Membership • Support • Fitness</div>
-</footer>
+        <div class="offer-top-actions">
 
-<div class="modal" id="joinModal">
-  <div class="modalBox" id="formBox">
-    <button class="close" onclick="closeJoin()">×</button>
-    <div class="kicker">14 Fitness Membership</div>
-    <h2>Start Your Journey.</h2>
-    <p>Fill in your details. These details will be used for your member profile and future membership reminders.</p>
-    <div class="planSummary"><div><small>Selected plan</small><br><strong id="selectedPlan">1 Month + 1 Month FREE</strong></div><b id="selectedPrice">₹1,400</b></div>
-    <form id="joinForm">
-      <div class="formGrid">
-        <div class="field"><label>Full Name *</label><input id="name" required placeholder="Enter your name"></div>
-        <div class="field"><label>Mobile Number *</label><input id="phone" required inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
-        <div class="field"><label>Email</label><input id="email" type="email" placeholder="Optional"></div>
-        <div class="field"><label>Age *</label><input id="age" type="number" min="12" max="90" required placeholder="Your age"></div>
-        <div class="field"><label>Gender *</label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
-        <div class="field"><label>Fitness Goal *</label><select id="goal" required><option value="">Select goal</option><option>Muscle Gain</option><option>Fat Loss</option><option>Strength</option><option>General Fitness</option><option>Bodybuilding</option></select></div>
-        <div class="field full"><label>Emergency Contact (optional)</label><input id="emergency" placeholder="Name + mobile number"></div>
+          <button
+            class="offer-top-get"
+            id="offerTopGet"
+            type="button"
+          >
+            <i class="fa-solid fa-bolt"></i>
+            GET NOW
+          </button>
+
+          <button
+            class="offer-close"
+            id="offerClose"
+            type="button"
+            aria-label="Close offer"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+        </div>
+
       </div>
-      <div class="consent">By continuing, you confirm that the information provided is accurate. Membership, payment and health/fitness instructions will be handled according to the gym's policies. Do not enter passwords or banking PINs.</div>
-      <button class="submit" type="submit">Continue To Secure Payment →</button>
-    </form>
-  </div>
-</div>
 
-<div class="modal" id="paymentModal">
-  <div class="modalBox">
-    <button class="close" onclick="closePayment()">×</button>
-    <div class="kicker">Payment</div>
-    <h2>Complete Your Join.</h2>
-    <p>Your membership details are saved on this device. Use the UPI button on a mobile device to open a compatible UPI app, or scan the QR after adding your real UPI ID in the code.</p>
-    <div class="planSummary"><div><small>Payable amount</small><br><strong id="payPlan">1 Month + 1 Month FREE</strong></div><b id="payPrice">₹1,400</b></div>
-    <div style="background:#080808;border:1px dashed #444;padding:25px;text-align:center;margin-bottom:15px">
-      <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:2px">UPI ID</div>
-      <div id="upiDisplay" style="font-size:24px;font-weight:900;margin:8px 0;color:var(--accent)">YOURUPIID@upi</div>
-      <div style="font-size:11px;color:#666">Replace YOURUPIID@upi in the script with the gym's real UPI ID.</div>
+
+      <!-- FALLING SHOOTING STARS -->
+
+      <div class="star-field" aria-hidden="true">
+        <span style="--x:4%;--size:2px;--trail:95px;--glow:#86efac;--duration:3.8s;--delay:.2s"></span>
+        <span style="--x:12%;--size:1px;--trail:72px;--glow:#22d3ee;--duration:4.7s;--delay:1.3s"></span>
+        <span style="--x:21%;--size:2px;--trail:115px;--glow:#c4b5fd;--duration:3.2s;--delay:2.1s"></span>
+        <span style="--x:30%;--size:1px;--trail:80px;--glow:#ffffff;--duration:4.1s;--delay:.8s"></span>
+        <span style="--x:39%;--size:2px;--trail:120px;--glow:#f9a8d4;--duration:5.2s;--delay:1.7s"></span>
+        <span style="--x:48%;--size:1px;--trail:76px;--glow:#22d3ee;--duration:3.6s;--delay:2.8s"></span>
+        <span style="--x:57%;--size:2px;--trail:110px;--glow:#86efac;--duration:4.4s;--delay:1.1s"></span>
+        <span style="--x:66%;--size:1px;--trail:90px;--glow:#ffffff;--duration:3.9s;--delay:2.5s"></span>
+        <span style="--x:74%;--size:2px;--trail:125px;--glow:#a78bfa;--duration:5.1s;--delay:.5s"></span>
+        <span style="--x:83%;--size:1px;--trail:78px;--glow:#22d3ee;--duration:4.0s;--delay:1.9s"></span>
+        <span style="--x:91%;--size:2px;--trail:105px;--glow:#86efac;--duration:3.5s;--delay:3s"></span>
+        <span style="--x:97%;--size:1px;--trail:72px;--glow:#f9a8d4;--duration:4.8s;--delay:1.5s"></span>
+      </div>
+
+
+      <!-- FLOATING GLOW PARTICLES -->
+
+      <div class="offer-particles" aria-hidden="true">
+        <i style="--px:8%;--py:24%;--ps:4px;--pc:#22d3ee;--pd:4s;--pdelay:.2s;--dx:18px"></i>
+        <i style="--px:17%;--py:68%;--ps:3px;--pc:#86efac;--pd:5s;--pdelay:1s;--dx:-15px"></i>
+        <i style="--px:29%;--py:20%;--ps:3px;--pc:#c4b5fd;--pd:4.5s;--pdelay:1.7s;--dx:12px"></i>
+        <i style="--px:72%;--py:25%;--ps:4px;--pc:#f9a8d4;--pd:5.2s;--pdelay:.7s;--dx:-20px"></i>
+        <i style="--px:88%;--py:62%;--ps:3px;--pc:#22d3ee;--pd:4.3s;--pdelay:1.4s;--dx:16px"></i>
+        <i style="--px:93%;--py:35%;--ps:4px;--pc:#86efac;--pd:5.5s;--pdelay:2.2s;--dx:-12px"></i>
+        <i style="--px:6%;--py:52%;--ps:3px;--pc:#c4b5fd;--pd:4.8s;--pdelay:2.8s;--dx:20px"></i>
+      </div>
+
+
+      <!-- MAIN OFFER -->
+
+      <div class="offer-content">
+
+        <div class="offer-icon">
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+
+        <div class="offer-kicker">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          SPECIAL INSTAGRAM OFFER
+        </div>
+
+        <h2>
+          <span>GET</span>
+          <span class="offer-free-word">FREE INSTAGRAM</span>
+        </h2>
+
+        <p>
+          Selected Instagram follower packages are currently
+          available for <strong style="color:#86efac;">₹0</strong>.
+          Choose your package and continue to the free claim page.
+        </p>
+
+        <div class="offer-benefits">
+
+          <span class="offer-benefit">
+            <i class="fa-solid fa-check"></i>
+            No payment
+          </span>
+
+          <span class="offer-benefit">
+            <i class="fa-solid fa-bolt"></i>
+            Instant selection
+          </span>
+
+          <span class="offer-benefit">
+            <i class="fa-solid fa-gift"></i>
+            100% FREE
+          </span>
+
+        </div>
+
+        <button
+          class="offer-main-button"
+          id="offerClaimButton"
+          type="button"
+        >
+          <span>GET FREE INSTAGRAM NOW</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="offer-footnote">
+          Promotional offer • Select a package on the next screen
+        </div>
+
+      </div>
+
     </div>
-    <button class="submit" onclick="payUPI()">Pay with UPI App →</button>
-    <button class="heroBtn alt" style="width:100%;margin-top:10px" onclick="markPaidDemo()">I Have Paid / Continue</button>
+
   </div>
-</div>
 
-<div class="modal" id="successModal">
-  <div class="modalBox successBox">
-    <div class="successIcon">✓</div>
-    <div class="kicker">Registration Received</div>
-    <h2>You're In.</h2>
-    <p id="successText">Your member registration has been saved. The final backend/payment verification can be connected next.</p>
-    <button class="heroBtn" onclick="closeSuccess()">Back To 14 Fitness</button>
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+
+  <div class="store-announcement" aria-label="ZS-universe promotion">
+    <div class="store-announcement-track">
+      <span><i class="fa-solid fa-bolt"></i> FREE INSTAGRAM OFFERS</span>
+      <b>•</b>
+      <span>FAST PACKAGE SELECTION</span>
+      <b>•</b>
+      <span>ZS-UNIVERSE SHOP</span>
+      <b>•</b>
+      <span>FREE INSTAGRAM OFFERS</span>
+    </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <header class="site-header">
 
-<script>
-const CONFIG = {
-  gymName: "14 FITNESS GYM",
-  // IMPORTANT: replace this with the real UPI ID before launch.
-  upiId: "YOURUPIID@upi",
-  upiName: "14 FITNESS GYM",
-  currency: "INR"
-};
+    <div class="header-inner">
 
-let selected = {plan:"1 Month + 1 Month FREE", price:"₹1,400"};
-let pendingMember = null;
+      <a
+        href="#"
+        class="brand"
+        onclick="goHome(event)"
+      >
 
-const $ = id => document.getElementById(id);
+        <div class="brand-icon">
+          <i class="fa-solid fa-atom"></i>
+        </div>
 
-function scrollToPlans(){ document.querySelector("#plans").scrollIntoView({behavior:"smooth"}); }
+        <div class="brand-text">
+          <span>ZS-universe</span>
+        </div>
 
-function openJoin(plan="1 Month + 1 Month FREE", price="₹1,400"){
-  selected={plan,price};
-  $("selectedPlan").textContent=plan;
-  $("selectedPrice").textContent=price;
-  $("joinModal").classList.add("show");
-}
-function closeJoin(){ $("joinModal").classList.remove("show"); }
-function closePayment(){ $("paymentModal").classList.remove("show"); }
-function closeSuccess(){ $("successModal").classList.remove("show"); }
+      </a>
 
-$("joinForm").addEventListener("submit", e=>{
-  e.preventDefault();
-  const phone=$("phone").value.replace(/\D/g,"");
-  if(phone.length!==10){ showToast("Please enter a valid 10-digit mobile number."); return; }
 
-  pendingMember={
-    id:"14F-"+Date.now().toString().slice(-7),
-    name:$("name").value.trim(),
-    phone,
-    email:$("email").value.trim(),
-    age:$("age").value,
-    gender:$("gender").value,
-    goal:$("goal").value,
-    emergency:$("emergency").value.trim(),
-    plan:selected.plan,
-    amount:selected.price,
-    joinedAt:new Date().toISOString(),
-    status:"Active"
-  };
+      <nav class="desktop-nav">
 
-  localStorage.setItem("14fitness_pending",JSON.stringify(pendingMember));
-  closeJoin();
-  $("payPlan").textContent=selected.plan;
-  $("payPrice").textContent=selected.price;
-  $("upiDisplay").textContent=CONFIG.upiId;
-  $("paymentModal").classList.add("show");
-});
+        <button
+          class="nav-button active"
+          data-target="social"
+          type="button"
+        >
+          <i class="fa-solid fa-layer-group"></i>
+          Social
+        </button>
 
-function rupees(v){
-  return Number(String(v).replace(/[^\d.]/g,"")) || 0;
-}
 
-function payUPI(){
-  if(CONFIG.upiId==="YOURUPIID@upi"){
-    showToast("First replace YOURUPIID@upi in the CONFIG section with the gym's real UPI ID.");
-    return;
-  }
-  const amount=rupees(selected.price);
-  const url=`upi://pay?pa=${encodeURIComponent(CONFIG.upiId)}&pn=${encodeURIComponent(CONFIG.upiName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(selected.plan+" - 14 Fitness")}`;
-  window.location.href=url;
-}
+        <button
+          class="nav-button"
+          data-target="movies"
+          type="button"
+        >
+          <i class="fa-solid fa-film"></i>
+          Movies
+        </button>
 
-function markPaidDemo(){
-  if(!pendingMember) return;
-  const members=JSON.parse(localStorage.getItem("14fitness_members")||"[]");
-  members.push(pendingMember);
-  localStorage.setItem("14fitness_members",JSON.stringify(members));
-  localStorage.removeItem("14fitness_pending");
-  closePayment();
-  $("successText").innerHTML=`Welcome, <b>${escapeHtml(pendingMember.name)}</b>! Your ${escapeHtml(pendingMember.plan)} registration has been recorded on this device. Member ID: <b>${pendingMember.id}</b>. Payment verification and SMS/Telegram notifications can be connected in the backend.`;
-  $("successModal").classList.add("show");
-  renderMembers();
-  $("joinForm").reset();
-}
 
-function renderMembers(){
-  const members=JSON.parse(localStorage.getItem("14fitness_members")||"[]");
-  const active=members.filter(m=>m.status==="Active");
-  $("activeMembers").innerHTML=active.length ? active.slice(-20).reverse().map(m=>`
-    <div class="memberRow"><div><b>${escapeHtml(m.name)}</b><br><span style="color:#666">${escapeHtml(m.plan)}</span></div><span class="status active">ACTIVE</span></div>`).join("") :
-    `<div style="padding:20px;color:#666;font-size:12px">No registrations on this device yet.</div>`;
-  $("statusMembers").innerHTML=members.length ? members.slice(-20).reverse().map(m=>`
-    <div class="memberRow"><div><b>${escapeHtml(m.name)}</b><br><span style="color:#666">${escapeHtml(m.id)} • ${new Date(m.joinedAt).toLocaleDateString()}</span></div><span class="status ${m.status==="Active"?"active":"expired"}">${escapeHtml(m.status)}</span></div>`).join("") :
-    `<div style="padding:20px;color:#666;font-size:12px">Member status will appear here.</div>`;
-}
+        <button
+          class="nav-button"
+          data-target="games"
+          type="button"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          Games
+        </button>
 
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
-function showToast(msg){
-  $("toast").textContent=msg;
-  $("toast").classList.add("show");
-  clearTimeout(window.__toast);
-  window.__toast=setTimeout(()=>$("toast").classList.remove("show"),3500);
-}
+      </nav>
 
-window.addEventListener("scroll",()=> $("header").classList.toggle("scrolled",scrollY>40));
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")});
-},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+      <a
+        class="header-support"
+        href="https://wa.me/919103874044"
+        target="_blank"
+        rel="noopener"
+      >
+        <i class="fa-brands fa-whatsapp"></i>
+        Customer Care
+      </a>
 
-document.addEventListener("mousemove",e=>{
-  $("cursor").style.left=e.clientX+"px"; $("cursor").style.top=e.clientY+"px";
-});
-document.querySelectorAll("button,a").forEach(el=>{
-  el.addEventListener("mouseenter",()=>{$("cursor").style.width="28px";$("cursor").style.height="28px"});
-  el.addEventListener("mouseleave",()=>{$("cursor").style.width="14px";$("cursor").style.height="14px"});
-});
+    </div>
 
-renderMembers();
-</script>
+  </header>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+
+  <section
+    class="hero"
+    id="home"
+  >
+
+    <div class="hero-content">
+
+      <div class="hero-pill">
+        <span class="live-dot"></span>
+        SOCIAL • MOVIES • GAMES
+      </div>
+
+
+      <h1>
+
+        <span class="line">
+          Everything You
+        </span>
+
+        <span class="line hero-gradient">
+          Love. One Place.
+        </span>
+
+      </h1>
+
+
+      <p class="hero-description">
+
+        Welcome to ZS-universe — explore social media
+        services, discover movies and browse an exciting
+        collection of PC games, all from one modern hub.
+
+      </p>
+
+
+      <div class="hero-actions">
+
+        <button
+          class="hero-btn primary"
+          type="button"
+          onclick="openTab('social')"
+        >
+          <i class="fa-brands fa-instagram"></i>
+          Explore Services
+        </button>
+
+
+        <button
+          class="hero-btn secondary"
+          type="button"
+          onclick="openTab('movies')"
+        >
+          <i class="fa-solid fa-film"></i>
+          Explore Movies
+        </button>
+
+
+        <button
+          class="hero-btn secondary"
+          type="button"
+          onclick="openTab('games')"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          Explore Games
+        </button>
+
+      </div>
+
+
+      <div class="hero-stats">
+
+        <div class="stat">
+          <strong>12+</strong>
+          <span>Packages</span>
+        </div>
+
+
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Movies</span>
+        </div>
+
+
+        <div class="stat">
+          <strong>12+</strong>
+          <span>Games</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       DESKTOP SECTION SWITCHER
+  ========================================================== -->
+
+  <div class="section-switcher">
+
+    <button
+      class="switch-btn active"
+      data-target="social"
+      type="button"
+    >
+      <i class="fa-solid fa-share-nodes"></i>
+      Social Apps
+    </button>
+
+
+    <button
+      class="switch-btn"
+      data-target="movies"
+      type="button"
+    >
+      <i class="fa-solid fa-clapperboard"></i>
+      Movies
+    </button>
+
+
+    <button
+      class="switch-btn"
+      data-target="games"
+      type="button"
+    >
+      <i class="fa-solid fa-gamepad"></i>
+      Games
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main>
+
+
+    <!-- =======================================================
+         SOCIAL
+    ======================================================== -->
+
+    <section
+      id="social"
+      class="tab-panel active"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            Social Services
+          </div>
+
+          <h2>
+            Grow Your
+            <span>Presence</span>
+          </h2>
+
+          <p>
+            Explore available social media services and
+            choose the package that fits you.
+          </p>
+
+        </div>
+
+
+        <!-- PLATFORM MARQUEE -->
+
+        <div class="marquee">
+
+          <div class="marquee-track">
+
+
+            <div class="platform-card instagram-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+              <div>
+                <strong>Instagram</strong>
+                <small>Services Available</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card youtube-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+
+              <div>
+                <strong>YouTube</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card facebook-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+
+              <div>
+                <strong>Facebook</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card snapchat-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-snapchat"></i>
+              </div>
+
+              <div>
+                <strong>Snapchat</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card whatsapp-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+
+              <div>
+                <strong>WhatsApp</strong>
+                <small>Customer Support</small>
+              </div>
+
+            </div>
+
+
+            <!-- DUPLICATE SET -->
+
+            <div class="platform-card instagram-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+              <div>
+                <strong>Instagram</strong>
+                <small>Services Available</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card youtube-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+
+              <div>
+                <strong>YouTube</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card facebook-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+
+              <div>
+                <strong>Facebook</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card snapchat-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-snapchat"></i>
+              </div>
+
+              <div>
+                <strong>Snapchat</strong>
+                <small>Coming Soon</small>
+              </div>
+
+            </div>
+
+
+            <div class="platform-card whatsapp-platform">
+
+              <div class="platform-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+
+              <div>
+                <strong>WhatsApp</strong>
+                <small>Customer Support</small>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INSTAGRAM FEATURE -->
+
+        <div class="service-feature">
+
+          <div class="service-feature-inner">
+
+            <div class="service-title">
+
+              <div class="service-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+
+
+              <div>
+
+                <div class="available">
+                  <i class="fa-solid fa-circle"></i>
+                  AVAILABLE NOW
+                </div>
+
+                <h3>
+                  Instagram Growth
+                </h3>
+
+                <p>
+                  Choose your followers package below.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="hero-btn primary"
+              href="#packages"
+              onclick="scrollToPackages(event)"
+            >
+              View Packages
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- PACKAGES HEADING -->
+
+        <div
+          class="section-heading"
+          id="packages"
+        >
+
+          <div class="eyebrow">
+            <i class="fa-brands fa-instagram"></i>
+            Instagram
+          </div>
+
+          <h2>
+            Choose Your
+            <span>Package</span>
+          </h2>
+
+          <p>
+            LIMITED-TIME OFFER — All Instagram follower packages are currently FREE.
+          </p>
+
+        </div>
+
+
+        <!-- PACKAGE GRID -->
+
+        <div class="package-grid">
+
+
+          <!-- 200 -->
+
+          <div class="package-card package-card-hero-free">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Starter</h3>
+
+                <div class="followers">
+                  200 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹100
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=200&followers=200&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 500 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Starter Plus</h3>
+
+                <div class="followers">
+                  500 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹150
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=500&followers=500&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 1000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Popular</h3>
+
+                <div class="followers">
+                  1,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹250
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=1000&followers=1000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 1500 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Growth</h3>
+
+                <div class="followers">
+                  1,500 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹300
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=1500&followers=1500&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 2000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Growth Plus</h3>
+
+                <div class="followers">
+                  2,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹400
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=2000&followers=2000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 3000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Pro</h3>
+
+                <div class="followers">
+                  3,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹500
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=3000&followers=3000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 4000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Pro Plus</h3>
+
+                <div class="followers">
+                  4,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹600
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=4000&followers=4000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 5000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Premium</h3>
+
+                <div class="followers">
+                  5,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹750
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=5000&followers=5000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 6000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Premium Plus</h3>
+
+                <div class="followers">
+                  6,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹900
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=6000&followers=6000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 7000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Advanced</h3>
+
+                <div class="followers">
+                  7,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,100
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=7000&followers=7000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 8000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Advanced Plus</h3>
+
+                <div class="followers">
+                  8,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,200
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=8000&followers=8000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 9000 -->
+
+          <div class="package-card">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Elite</h3>
+
+                <div class="followers">
+                  9,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,400
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=9000&followers=9000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- 10000 -->
+
+          <div class="package-card featured">
+
+            <div class="package-top">
+
+              <div>
+
+                <div class="package-label">
+                  Instagram Followers
+                </div>
+
+                <h3>Elite Plus</h3>
+
+                <div class="followers">
+                  10,000 Followers
+                </div>
+
+              </div>
+
+              <span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span>
+
+            </div>
+
+
+            <div class="package-price">
+
+              <div class="old-price">
+                ₹1,500
+              </div>
+
+              <div class="current-price free-price">FREE</div>
+
+            </div>
+
+
+            <a
+              class="package-action"
+              href="order.html?package=10000&followers=10000&price=0"
+            >
+              Get Package
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         MOVIES
+    ======================================================== -->
+
+    <section
+      id="movies"
+      class="tab-panel"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-film"></i>
+            Entertainment
+          </div>
+
+          <h2>
+            Movie
+            <span>Collection</span>
+          </h2>
+
+          <p>
+            Search your favorite movie or filter the collection
+            by genre.
+          </p>
+
+        </div>
+
+
+        <div class="media-toolbar">
+
+          <div class="search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="search"
+              id="movieSearch"
+              placeholder="Search movies..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div
+            class="result-count"
+            id="movieCount"
+          >
+            10 Movies
+          </div>
+
+        </div>
+
+
+        <div class="filters">
+
+          <button
+            class="filter active"
+            data-category="all"
+            data-type="movie"
+            type="button"
+          >
+            All
+          </button>
+
+          <button
+            class="filter"
+            data-category="drama"
+            data-type="movie"
+            type="button"
+          >
+            Drama
+          </button>
+
+          <button
+            class="filter"
+            data-category="action"
+            data-type="movie"
+            type="button"
+          >
+            Action
+          </button>
+
+          <button
+            class="filter"
+            data-category="scifi"
+            data-type="movie"
+            type="button"
+          >
+            Sci-Fi
+          </button>
+
+          <button
+            class="filter"
+            data-category="crime"
+            data-type="movie"
+            type="button"
+          >
+            Crime
+          </button>
+
+          <button
+            class="filter"
+            data-category="comedy"
+            data-type="movie"
+            type="button"
+          >
+            Comedy
+          </button>
+
+          <button
+            class="filter"
+            data-category="adventure"
+            data-type="movie"
+            type="button"
+          >
+            Adventure
+          </button>
+
+        </div>
+
+
+        <div
+          class="media-grid"
+          id="movieGrid"
+        >
+
+
+          <a
+            class="media-card movie-card"
+            data-category="drama crime"
+            data-title="The Shawshank Redemption"
+            href="https://www.moviesbazar.tv/watch/movie/the-shawshank-redemption/0111161"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/Q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+                alt="The Shawshank Redemption"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                DRAMA
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>The Shawshank Redemption</h3>
+
+                <p>Drama • Crime</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="action crime"
+            data-title="The Dark Knight"
+            href="https://www.moviesbazar.tv/watch/movie/the-dark-knight/0468569"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+                alt="The Dark Knight"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                ACTION
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>The Dark Knight</h3>
+
+                <p>Action • Crime</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="scifi action adventure"
+            data-title="Inception"
+            href="https://www.moviesbazar.tv/watch/movie/inception/1375666"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+                alt="Inception"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                SCI-FI
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Inception</h3>
+
+                <p>Sci-Fi • Action</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="crime drama"
+            data-title="The Godfather"
+            href="https://www.moviesbazar.tv/watch/movie/the-godfather/0068646"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+                alt="The Godfather"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                CRIME
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>The Godfather</h3>
+
+                <p>Crime • Drama</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="crime drama"
+            data-title="The Godfather Part II"
+            href="https://www.moviesbazar.tv/watch/movie/the-godfather-part-ii/0071562"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg"
+                alt="The Godfather Part II"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                CRIME
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>The Godfather Part II</h3>
+
+                <p>Crime • Drama</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="comedy drama"
+            data-title="3 Idiots"
+            href="https://www.moviesbazar.tv/watch/movie/3-idiots/1187043"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/66A9MqXOyVFCssoloscw79z8Tew.jpg"
+                alt="3 Idiots"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                COMEDY
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>3 Idiots</h3>
+
+                <p>Comedy • Drama</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="scifi adventure drama"
+            data-title="Interstellar"
+            href="https://www.moviesbazar.tv/watch/movie/interstellar/0816692"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+                alt="Interstellar"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                SCI-FI
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Interstellar</h3>
+
+                <p>Sci-Fi • Adventure</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="action adventure"
+            data-title="Spider-Man Brand New Day"
+            href="https://www.moviesbazar.tv/watch/movie/spiderman-brand-new-day-hindi-english/22084616"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=900&q=80"
+                alt="Spider-Man Brand New Day"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                ACTION
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Spider-Man: Brand New Day</h3>
+
+                <p>Action • Adventure</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="comedy drama"
+            data-title="Munna Bhai MBBS"
+            href="https://www.moviesbazar.tv/watch/movie/munna-bhai-mbbs/0374887"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/4m3D2z7G2z3Yh8M1zK4j6gVj8lR.jpg"
+                alt="Munna Bhai MBBS"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                COMEDY
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Munna Bhai MBBS</h3>
+
+                <p>Comedy • Drama</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card movie-card"
+            data-category="drama scifi"
+            data-title="Oppenheimer"
+            href="https://www.moviesbazar.tv/watch/movie/oppenheimer/15398776"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://image.tmdb.org/t/p/w780/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+                alt="Oppenheimer"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type">
+                DRAMA
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-play"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Oppenheimer</h3>
+
+                <p>Drama • Historical</p>
+
+                <span class="open-link">
+                  Open Movie
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+
+        <div
+          class="no-results"
+          id="movieNoResults"
+        >
+          <i class="fa-solid fa-film"></i>
+          No movies found.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         GAMES
+    ======================================================== -->
+
+    <section
+      id="games"
+      class="tab-panel"
+    >
+
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            <i class="fa-solid fa-gamepad"></i>
+            PC Gaming
+          </div>
+
+          <h2>
+            Game
+            <span>Collection</span>
+          </h2>
+
+          <p>
+            Browse games by category and open any game card.
+          </p>
+
+        </div>
+
+
+        <div class="media-toolbar">
+
+          <div class="search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="search"
+              id="gameSearch"
+              placeholder="Search games..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div
+            class="result-count"
+            id="gameCount"
+          >
+            12 Games
+          </div>
+
+        </div>
+
+
+        <div class="filters">
+
+          <button
+            class="filter active"
+            data-category="all"
+            data-type="game"
+            type="button"
+          >
+            All
+          </button>
+
+          <button
+            class="filter"
+            data-category="openworld"
+            data-type="game"
+            type="button"
+          >
+            Open World
+          </button>
+
+          <button
+            class="filter"
+            data-category="action"
+            data-type="game"
+            type="button"
+          >
+            Action
+          </button>
+
+          <button
+            class="filter"
+            data-category="horror"
+            data-type="game"
+            type="button"
+          >
+            Horror
+          </button>
+
+          <button
+            class="filter"
+            data-category="shooter"
+            data-type="game"
+            type="button"
+          >
+            Shooter
+          </button>
+
+          <button
+            class="filter"
+            data-category="adventure"
+            data-type="game"
+            type="button"
+          >
+            Adventure
+          </button>
+
+        </div>
+
+
+        <div
+          class="media-grid"
+          id="gameGrid"
+        >
+
+
+          <a
+            class="media-card game-card"
+            data-category="action adventure openworld"
+            data-title="Ghost of Tsushima"
+            href="https://ankergames.net/game/ghost-of-tsushima"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg"
+                alt="Ghost of Tsushima"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                ADVENTURE
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Ghost of Tsushima</h3>
+
+                <p>Action • Adventure</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="GTA Vice City"
+            href="https://ankergames.net/game/grand-theft-auto-vice-city"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/12110/header.jpg"
+                alt="GTA Vice City"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>GTA Vice City</h3>
+
+                <p>Open World • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="horror action"
+            data-title="Resident Evil 4 Remake"
+            href="https://ankergames.net/game/resident-evil-4-remake"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg"
+                alt="Resident Evil 4 Remake"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Resident Evil 4 Remake</h3>
+
+                <p>Horror • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="horror adventure"
+            data-title="Granny Chapter Two"
+            href="https://ankergames.net/game/granny-chapter-two"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
+                alt="Granny Chapter Two"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Granny Chapter Two</h3>
+
+                <p>Horror • Survival</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="horror adventure"
+            data-title="The Devil in Me"
+            href="https://ankergames.net/game/the-dark-pictures-anthology-the-devil-in-me"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80"
+                alt="The Devil in Me"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                HORROR
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>The Devil in Me</h3>
+
+                <p>Horror • Adventure</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action adventure"
+            data-title="Red Dead Redemption 2"
+            href="https://ankergames.net/game/red-dead-redemption-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg"
+                alt="Red Dead Redemption 2"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Red Dead Redemption 2</h3>
+
+                <p>Open World • Adventure</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="Grand Theft Auto V"
+            href="https://ankergames.net/game/grand-theft-auto-v"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg"
+                alt="Grand Theft Auto V"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Grand Theft Auto V</h3>
+
+                <p>Open World • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action"
+            data-title="GTA San Andreas"
+            href="https://ankergames.net/game/grand-theft-auto-san-andreas-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/1547000/header.jpg"
+                alt="GTA San Andreas"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>GTA San Andreas</h3>
+
+                <p>Open World • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Modern Warfare 2"
+            href="https://ankergames.net/game/call-of-duty-modern-warfare-2"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/10180/header.jpg"
+                alt="Call of Duty Modern Warfare 2"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>COD: Modern Warfare 2</h3>
+
+                <p>Shooter • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Black Ops II"
+            href="https://ankergames.net/game/call-of-duty-black-ops-ii"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/202970/header.jpg"
+                alt="Call of Duty Black Ops II"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>COD: Black Ops II</h3>
+
+                <p>Shooter • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="shooter action"
+            data-title="Call of Duty Black Ops III"
+            href="https://ankergames.net/game/call-of-duty-black-ops-iii"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"
+                alt="Call of Duty Black Ops III"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                SHOOTER
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>COD: Black Ops III</h3>
+
+                <p>Shooter • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+          <a
+            class="media-card game-card"
+            data-category="openworld action adventure"
+            data-title="Red Dead Redemption"
+            href="https://ankergames.net/game/red-dead-redemption"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="media-poster">
+
+              <img
+                src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=900&q=80"
+                alt="Red Dead Redemption"
+                loading="lazy"
+              >
+
+              <div class="poster-gradient"></div>
+
+              <span class="media-type game">
+                OPEN WORLD
+              </span>
+
+              <div class="play-button">
+                <i class="fa-solid fa-gamepad"></i>
+              </div>
+
+              <div class="media-info">
+
+                <h3>Red Dead Redemption</h3>
+
+                <p>Open World • Action</p>
+
+                <span class="open-link">
+                  Open Game
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+
+        <div
+          class="no-results"
+          id="gameNoResults"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+          No games found.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       WHATSAPP
+  ========================================================== -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/919103874044"
+    target="_blank"
+    rel="noopener"
+    aria-label="WhatsApp Customer Care"
+  >
+
+    <div class="whatsapp-icon">
+      <i class="fa-brands fa-whatsapp"></i>
+    </div>
+
+
+    <div class="whatsapp-text">
+
+      <small>
+        CUSTOMER CARE
+      </small>
+
+      <strong>
+        91038 74044
+      </strong>
+
+    </div>
+
+  </a>
+
+
+  <!-- =========================================================
+       MOBILE BOTTOM NAV
+  ========================================================== -->
+
+  <div class="mobile-nav">
+
+    <div class="mobile-nav-inner">
+
+      <button
+        data-target="social"
+        class="active"
+        type="button"
+      >
+        <i class="fa-solid fa-share-nodes"></i>
+        Social
+      </button>
+
+
+      <button
+        data-target="movies"
+        type="button"
+      >
+        <i class="fa-solid fa-film"></i>
+        Movies
+      </button>
+
+
+      <button
+        data-target="games"
+        type="button"
+      >
+        <i class="fa-solid fa-gamepad"></i>
+        Games
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
+  <footer>
+
+    <div class="footer-brand">
+      ZS-<span>universe</span>
+    </div>
+
+    <p>
+      © 2026 ZS-universe — Social, Movies & Games
+    </p>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script>
+
+
+    /* =========================================================
+       FIRST VISIT OFFER POPUP
+    ========================================================= */
+
+    const offerOverlay =
+      document.getElementById("offerOverlay");
+
+    const offerClaimButton =
+      document.getElementById("offerClaimButton");
+
+    const offerTopGet =
+      document.getElementById("offerTopGet");
+
+    const offerClose =
+      document.getElementById("offerClose");
+
+    let offerClosed = false;
+
+
+    function goToInstagramPackages() {
+
+      closeOffer();
+
+      setTimeout(() => {
+
+        const packages =
+          document.getElementById("packages");
+
+        if (!packages) return;
+
+        const position =
+          packages.getBoundingClientRect().top
+          + window.scrollY
+          - 90;
+
+        window.scrollTo({
+          top: position,
+          behavior: "smooth"
+        });
+
+      }, 250);
+
+    }
+
+
+    function closeOffer() {
+
+      if (offerClosed) return;
+
+      offerClosed = true;
+
+      offerOverlay.classList.remove("show");
+
+      offerOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      document.body.classList.remove(
+        "popup-open"
+      );
+
+      try {
+        localStorage.setItem(
+          "zsUniverseFreeInstagramOfferSeen",
+          "1"
+        );
+      } catch (error) {}
+
+    }
+
+
+    function showOffer() {
+
+      let alreadySeen = false;
+
+      try {
+
+        alreadySeen =
+          localStorage.getItem(
+            "zsUniverseFreeInstagramOfferSeen"
+          ) === "1";
+
+      } catch (error) {
+
+        alreadySeen = false;
+
+      }
+
+
+      if (alreadySeen) {
+
+        document.body.classList.remove(
+          "popup-open"
+        );
+
+        return;
+
+      }
+
+
+      setTimeout(() => {
+
+        offerOverlay.classList.add("show");
+
+        offerOverlay.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+        document.body.classList.add(
+          "popup-open"
+        );
+
+      }, 350);
+
+    }
+
+
+    offerClose.addEventListener(
+      "click",
+      closeOffer
+    );
+
+
+    offerTopGet.addEventListener(
+      "click",
+      goToInstagramPackages
+    );
+
+
+    offerClaimButton.addEventListener(
+      "click",
+      goToInstagramPackages
+    );
+
+
+    offerOverlay.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === offerOverlay
+        ) {
+
+          closeOffer();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape" &&
+          offerOverlay.classList.contains("show")
+        ) {
+
+          closeOffer();
+
+        }
+
+      }
+    );
+
+
+    showOffer();
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const panels =
+      document.querySelectorAll(".tab-panel");
+
+
+    const allTabButtons =
+      document.querySelectorAll(
+        "[data-target]"
+      );
+
+
+    /* =========================================================
+       ACTIVE TAB
+    ========================================================= */
+
+    let currentTab = "social";
+
+
+    /* =========================================================
+       MAIN TAB FUNCTION
+    ========================================================= */
+
+    function openTab(
+      tabId,
+      updateHistory = true
+    ) {
+
+      const target =
+        document.getElementById(tabId);
+
+      if (!target) return;
+
+
+      currentTab = tabId;
+
+
+      panels.forEach(panel => {
+
+        panel.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      target.classList.add(
+        "active"
+      );
+
+
+      allTabButtons.forEach(button => {
+
+        if (
+          button.dataset.target === tabId
+        ) {
+
+          button.classList.add(
+            "active"
+          );
+
+        } else {
+
+          button.classList.remove(
+            "active"
+          );
+
+        }
+
+      });
+
+
+      requestAnimationFrame(() => {
+
+        const headerOffset = 84;
+
+        const targetPosition =
+          target.getBoundingClientRect().top
+          + window.scrollY
+          - headerOffset;
+
+
+        window.scrollTo({
+
+          top:
+            Math.max(
+              0,
+              targetPosition
+            ),
+
+          behavior: "smooth"
+
+        });
+
+      });
+
+
+      if (updateHistory) {
+
+        history.pushState(
+          {
+            tab: tabId
+          },
+          "",
+          "#" + tabId
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       NAVIGATION BUTTONS
+    ========================================================= */
+
+    allTabButtons.forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const target =
+            button.dataset.target;
+
+          if (target) {
+
+            openTab(target);
+
+          }
+
+        }
+      );
+
+    });
+
+
+    /* =========================================================
+       HERO HOME
+    ========================================================= */
+
+    function goHome(event) {
+
+      event.preventDefault();
+
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+      });
+
+
+      history.pushState(
+        {
+          tab: "social"
+        },
+        "",
+        "#social"
+      );
+
+    }
+
+
+    /* =========================================================
+       PACKAGE SCROLL
+    ========================================================= */
+
+    function scrollToPackages(event) {
+
+      event.preventDefault();
+
+      const packages =
+        document.getElementById(
+          "packages"
+        );
+
+      if (!packages) return;
+
+
+      const position =
+        packages.getBoundingClientRect().top
+        + window.scrollY
+        - 90;
+
+
+      window.scrollTo({
+
+        top: position,
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+
+    /* =========================================================
+       SEARCH + FILTER ENGINE
+    ========================================================= */
+
+    const state = {
+
+      movie: {
+        category: "all",
+        search: ""
+      },
+
+      game: {
+        category: "all",
+        search: ""
+      }
+
+    };
+
+
+    function filterMedia(type) {
+
+      const isMovie =
+        type === "movie";
+
+
+      const selector =
+        isMovie
+          ? ".movie-card"
+          : ".game-card";
+
+
+      const search =
+        state[type].search
+        .toLowerCase()
+        .trim();
+
+
+      const category =
+        state[type].category;
+
+
+      const cards =
+        document.querySelectorAll(
+          selector
+        );
+
+
+      let visible = 0;
+
+
+      cards.forEach(card => {
+
+        const categories =
+          (
+            card.dataset.category || ""
+          )
+          .toLowerCase()
+          .split(/\s+/);
+
+
+        const title =
+          (
+            card.dataset.title ||
+            card.innerText ||
+            ""
+          )
+          .toLowerCase();
+
+
+        const categoryMatch =
+          category === "all" ||
+          categories.includes(category);
+
+
+        const searchMatch =
+          !search ||
+          title.includes(search);
+
+
+        const shouldShow =
+          categoryMatch &&
+          searchMatch;
+
+
+        if (shouldShow) {
+
+          card.classList.remove(
+            "hidden"
+          );
+
+          visible++;
+
+        } else {
+
+          card.classList.add(
+            "hidden"
+          );
+
+        }
+
+      });
+
+
+      updateResultCount(
+        type,
+        visible,
+        cards.length
+      );
+
+    }
+
+
+    /* =========================================================
+       RESULT COUNTER
+    ========================================================= */
+
+    function updateResultCount(
+      type,
+      visible,
+      total
+    ) {
+
+      const countElement =
+        document.getElementById(
+          type === "movie"
+            ? "movieCount"
+            : "gameCount"
+        );
+
+
+      const noResults =
+        document.getElementById(
+          type === "movie"
+            ? "movieNoResults"
+            : "gameNoResults"
+        );
+
+
+      if (countElement) {
+
+        countElement.textContent =
+          `${visible} of ${total} ${
+            type === "movie"
+              ? "Movies"
+              : "Games"
+          }`;
+
+      }
+
+
+      if (noResults) {
+
+        if (visible === 0) {
+
+          noResults.classList.add(
+            "show"
+          );
+
+        } else {
+
+          noResults.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SEARCH INPUTS
+    ========================================================= */
+
+    const movieSearch =
+      document.getElementById(
+        "movieSearch"
+      );
+
+
+    const gameSearch =
+      document.getElementById(
+        "gameSearch"
+      );
+
+
+    movieSearch.addEventListener(
+      "input",
+      event => {
+
+        state.movie.search =
+          event.target.value;
+
+        filterMedia("movie");
+
+      }
+    );
+
+
+    gameSearch.addEventListener(
+      "input",
+      event => {
+
+        state.game.search =
+          event.target.value;
+
+        filterMedia("game");
+
+      }
+    );
+
+
+    /* =========================================================
+       CATEGORY FILTERS
+    ========================================================= */
+
+    document
+      .querySelectorAll(".filter")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const type =
+              button.dataset.type;
+
+
+            const category =
+              button.dataset.category;
+
+
+            state[type].category =
+              category;
+
+
+            document
+              .querySelectorAll(
+                `.filter[data-type="${type}"]`
+              )
+              .forEach(item => {
+
+                item.classList.remove(
+                  "active"
+                );
+
+              });
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            filterMedia(type);
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       INITIAL COUNTS
+    ========================================================= */
+
+    filterMedia("movie");
+    filterMedia("game");
+
+
+    /* =========================================================
+       BROWSER BACK / FORWARD
+    ========================================================= */
+
+    window.addEventListener(
+      "popstate",
+      () => {
+
+        const hash =
+          window.location.hash
+          .replace("#", "");
+
+
+        if (
+          hash === "movies" ||
+          hash === "games" ||
+          hash === "social"
+        ) {
+
+          openTab(
+            hash,
+            false
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       LOAD TAB FROM URL
+    ========================================================= */
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        const hash =
+          window.location.hash
+          .replace("#", "");
+
+
+        if (
+          hash === "movies" ||
+          hash === "games" ||
+          hash === "social"
+        ) {
+
+          setTimeout(() => {
+
+            openTab(
+              hash,
+              false
+            );
+
+          }, 100);
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       IMAGE FALLBACK
+    ========================================================= */
+
+    document
+      .querySelectorAll(
+        ".media-poster img"
+      )
+      .forEach(img => {
+
+        img.addEventListener(
+          "error",
+          function () {
+
+            this.style.display =
+              "none";
+
+          }
+        );
+
+      });
+
+
+  </script>
+
 </body>
 </html>
