@@ -25,19 +25,19 @@ const VALID_PROMO_CODE="ZEESHAN10";
 const PROMO_DISCOUNT=.10;
 
 const INSTAGRAM_PACKAGES={
-"200 Followers":100,
-"500 Followers":150,
-"1,000 Followers":250,
-"1,500 Followers":300,
-"2,000 Followers":400,
-"3,000 Followers":500,
-"4,000 Followers":600,
-"5,000 Followers":750,
-"6,000 Followers":900,
-"7,000 Followers":1100,
-"8,000 Followers":1200,
-"9,000 Followers":1400,
-"10,000 Followers":1500
+ "200 Followers":100,
+ "500 Followers":150,
+ "1,000 Followers":250,
+ "1,500 Followers":300,
+ "2,000 Followers":400,
+ "3,000 Followers":500,
+ "4,000 Followers":600,
+ "5,000 Followers":750,
+ "6,000 Followers":900,
+ "7,000 Followers":1100,
+ "8,000 Followers":1200,
+ "9,000 Followers":1400,
+ "10,000 Followers":1500
 };
 
 function ensureDir(dir){
@@ -105,26 +105,28 @@ function normalizePackage(value){
   const key=Object.keys(INSTAGRAM_PACKAGES).find(k=>Number(k.replace(/,/g,"").match(/\d+/)[0])===num);
   if(key)return key;
  }
+
  return"";
 }
 
 function instagramDisplayName(followers){
  const n=Number(String(followers||"").replace(/,/g,""));
  const names={
- 200:"Starter",
- 500:"Starter Plus",
- 1000:"Popular",
- 1500:"Growth",
- 2000:"Growth Plus",
- 3000:"Pro",
- 4000:"Pro Plus",
- 5000:"Premium",
- 6000:"Premium Plus",
- 7000:"Advanced",
- 8000:"Advanced Plus",
- 9000:"Elite",
- 10000:"Elite Plus"
+  200:"Starter",
+  500:"Starter Plus",
+  1000:"Popular",
+  1500:"Growth",
+  2000:"Growth Plus",
+  3000:"Pro",
+  4000:"Pro Plus",
+  5000:"Premium",
+  6000:"Premium Plus",
+  7000:"Advanced",
+  8000:"Advanced Plus",
+  9000:"Elite",
+  10000:"Elite Plus"
  };
+
  return names[n]||"Instagram Package";
 }
 
@@ -184,6 +186,7 @@ function findMovieForOrder(body){
    const p=Number(m.price||m.amount||0);
    return Math.abs(p-wanted)<.01;
   });
+
   if(priced)return priced;
  }
 
@@ -211,6 +214,7 @@ function requireAdmin(req,res,next){
    error:"Unauthorized"
   });
  }
+
  next();
 }
 
@@ -235,10 +239,13 @@ function validUtr(value){
 
 function sanitizeOrder(order){
  if(!order)return null;
+
  const copy={...order};
+
  delete copy.adminKey;
  delete copy.password;
  delete copy.passcode;
+
  return copy;
 }
 
@@ -250,6 +257,7 @@ async function telegramRequest(method,body){
 
  try{
   const url=`https://api.telegram.org/bot${TG_BOT_TOKEN}/${method}`;
+
   const response=await fetch(url,{
    method:"POST",
    headers:{"Content-Type":"application/json"},
@@ -257,7 +265,11 @@ async function telegramRequest(method,body){
   });
 
   const data=await response.json().catch(()=>null);
-  if(!response.ok)console.error("[Telegram]",response.status,data);
+
+  if(!response.ok){
+   console.error("[Telegram]",response.status,data);
+  }
+
   return data;
  }catch(error){
   console.error("[Telegram]",error.message);
@@ -279,9 +291,11 @@ async function sendTelegramPhoto(filePath,caption){
 
  try{
   const form=new FormData();
+
   form.append("chat_id",TG_CHAT_ID);
   form.append("caption",caption||"");
   form.append("parse_mode","HTML");
+
   form.append(
    "photo",
    new Blob([fs.readFileSync(filePath)]),
@@ -290,7 +304,10 @@ async function sendTelegramPhoto(filePath,caption){
 
   const response=await fetch(
    `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendPhoto`,
-   {method:"POST",body:form}
+   {
+    method:"POST",
+    body:form
+   }
   );
 
   return await response.json().catch(()=>null);
@@ -306,7 +323,7 @@ function orderTelegramText(order){
   "",
   `🆔 <b>Order ID:</b> ${clean(order.orderId,100)}`,
   `📦 <b>Type:</b> ${clean(order.type,50)}`,
-  `📌 <b>Product:</b> ${clean(order.product,100)}`,
+  `📌 <b>Product:</b> ${clean(order.product,100)}`
  ];
 
  if(order.type==="INSTAGRAM"){
@@ -454,6 +471,7 @@ app.get("/api/movies/:id",(req,res)=>{
 
 app.post("/api/admin/movies/:id/disable",requireAdmin,(req,res)=>{
  const movies=getMovies();
+
  const movie=movies.find(
   m=>String(m.id)===String(req.params.id)
  );
@@ -479,6 +497,7 @@ app.post("/api/admin/movies/:id/disable",requireAdmin,(req,res)=>{
 
 app.post("/api/admin/movies/:id/enable",requireAdmin,(req,res)=>{
  const movies=getMovies();
+
  const movie=movies.find(
   m=>String(m.id)===String(req.params.id)
  );
@@ -612,6 +631,7 @@ app.post("/api/orders",async(req,res)=>{
    };
 
    const orders=getOrders();
+
    orders.push(order);
    saveOrders(orders);
 
@@ -679,9 +699,11 @@ app.post("/api/orders",async(req,res)=>{
     });
    }
 
-   if(movie.disabled===true||
-      movie.active===false||
-      movie.enabled===false){
+   if(
+    movie.disabled===true||
+    movie.active===false||
+    movie.enabled===false
+   ){
     return res.status(400).json({
      ok:false,
      error:"This movie is currently unavailable."
@@ -755,6 +777,7 @@ app.post("/api/orders",async(req,res)=>{
    };
 
    const orders=getOrders();
+
    orders.push(order);
    saveOrders(orders);
 
@@ -803,7 +826,8 @@ app.post("/api/movie-orders",(req,res)=>{
  req.body=req.body||{};
  req.body.type="movie";
  req.body.product="movie";
- return app._router.handle(req,res,()=>{});
+
+ return app.handle(req,res);
 });
 
 app.get("/api/orders",requireAdmin,(req,res)=>{
@@ -1108,7 +1132,16 @@ app.use((req,res,next)=>{
  next();
 });
 
-app.get("*",(req,res)=>{
+/*
+ * EXPRESS 5 FIX
+ *
+ * Old:
+ * app.get("*", ...)
+ *
+ * Express 5 does not accept the old "*" wildcard.
+ * The following route catches all non-API frontend routes.
+ */
+app.get("/{*splat}",(req,res)=>{
  const indexFile=path.join(PUBLIC_DIR,"index.html");
 
  if(fs.existsSync(indexFile)){
