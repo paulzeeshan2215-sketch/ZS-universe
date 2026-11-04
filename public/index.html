@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ZS-universe — Social, Movies & Games</title>
+  <title>ZS-universe 2.0 — Social Studio, Movies & Games</title>
 
   <meta
     name="description"
-    content="ZS-universe — Social services, movies and PC games in one premium entertainment hub."
+    content="ZS-universe 2.0 — Instagram services, movies and PC games in one modern digital hub."
   >
 
   <meta name="theme-color" content="#09090f">
@@ -3311,7 +3311,808 @@
 
     }
 
-  </style>
+
+    /* =========================================================
+       ZS-UNIVERSE 2026 REDESIGN OVERRIDES
+       Mobile-first / storefront-style / high-contrast
+    ========================================================= */
+
+    :root {
+      --bg: #050914;
+      --bg-soft: #09111f;
+      --panel: rgba(12, 23, 40, .82);
+      --panel-solid: #0b1422;
+      --text: #f8fbff;
+      --muted: #a8b5c8;
+      --muted-2: #708198;
+      --purple: #7c3aed;
+      --pink: #ec4899;
+      --cyan: #38bdf8;
+      --green: #22c55e;
+      --store-blue: #1d4ed8;
+      --store-sky: #38bdf8;
+      --store-orange: #f59e0b;
+      --store-yellow: #facc15;
+      --border: rgba(148,163,184,.16);
+      --border-bright: rgba(255,255,255,.24);
+      --shadow: 0 30px 90px rgba(0,0,0,.48);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 5%, rgba(56,189,248,.12), transparent 25%),
+        radial-gradient(circle at 92% 12%, rgba(124,58,237,.13), transparent 28%),
+        radial-gradient(circle at 50% 72%, rgba(245,158,11,.055), transparent 25%),
+        #050914;
+    }
+
+    .ambient.one { background:#38bdf8; opacity:.09; }
+    .ambient.two { background:#7c3aed; opacity:.09; }
+    .ambient.three { background:#f59e0b; opacity:.045; }
+
+    /* Store announcement strip */
+    .store-announcement {
+      position: relative;
+      z-index: 10000;
+      height: 31px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg,#071326,#0b2b52,#071326);
+      border-bottom: 1px solid rgba(56,189,248,.18);
+      color: #dbeafe;
+      white-space: nowrap;
+    }
+
+    .store-announcement-track {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: max-content;
+      padding-left: 100%;
+      animation: storeMarquee 22s linear infinite;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+    }
+
+    .store-announcement-track span:first-child { color:#86efac; }
+    .store-announcement-track i { color:#facc15; margin-right:5px; }
+    .store-announcement-track b { color:#38bdf8; }
+
+    @keyframes storeMarquee {
+      from { transform:translateX(0); }
+      to { transform:translateX(-100%); }
+    }
+
+    .site-header {
+      height: 72px;
+      background: rgba(4,9,18,.84);
+      border-bottom: 1px solid rgba(148,163,184,.13);
+      box-shadow: 0 8px 30px rgba(0,0,0,.18);
+    }
+
+    .header-inner {
+      width:min(1380px,calc(100% - 28px));
+    }
+
+    .brand-icon {
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      background:linear-gradient(135deg,#1d4ed8,#38bdf8 55%,#7c3aed);
+      box-shadow:0 10px 28px rgba(56,189,248,.2);
+    }
+
+    .brand-text {
+      font-size:17px;
+      letter-spacing:-.7px;
+    }
+
+    .brand-text span {
+      background:linear-gradient(90deg,#fff,#bae6fd,#c4b5fd);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+
+    .nav-button.active {
+      background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#38bdf8);
+      box-shadow:0 9px 26px rgba(37,99,235,.22);
+    }
+
+    .header-support {
+      background:rgba(34,197,94,.08);
+      border-color:rgba(34,197,94,.22);
+    }
+
+    /* Hero: more storefront / product-launch feel */
+    .hero {
+      position:relative;
+      min-height:clamp(620px,78vh,780px);
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(3,8,18,.96),rgba(3,8,18,.72) 48%,rgba(3,8,18,.9)),
+        radial-gradient(circle at 76% 42%,rgba(37,99,235,.22),transparent 28%),
+        radial-gradient(circle at 86% 70%,rgba(245,158,11,.10),transparent 22%);
+      border-bottom:1px solid rgba(148,163,184,.12);
+    }
+
+    .hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(56,189,248,.06) 1px,transparent 1px),
+        linear-gradient(rgba(56,189,248,.045) 1px,transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(to bottom,black,transparent 92%);
+      pointer-events:none;
+    }
+
+    .hero::after {
+      content:"ZS";
+      position:absolute;
+      right:-2vw;
+      bottom:-11vw;
+      font-family:"Montserrat",sans-serif;
+      font-size:min(31vw,430px);
+      line-height:1;
+      font-weight:900;
+      letter-spacing:-.08em;
+      color:rgba(255,255,255,.018);
+      pointer-events:none;
+    }
+
+    .hero-content {
+      position:relative;
+      z-index:2;
+      width:min(1380px,calc(100% - 28px));
+      margin:auto;
+      padding:70px 0 82px;
+    }
+
+    .hero-pill {
+      border-color:rgba(56,189,248,.22);
+      background:rgba(15,23,42,.72);
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      color:#bae6fd;
+    }
+
+    .hero h1 {
+      max-width:900px;
+      font-size:clamp(50px,8vw,108px);
+      line-height:.91;
+      letter-spacing:-5px;
+      text-wrap:balance;
+    }
+
+    .hero h1 .hero-gradient,
+    .hero-gradient {
+      background:linear-gradient(90deg,#fff 0%,#7dd3fc 35%,#c4b5fd 67%,#fcd34d 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      animation:heroGradient 6s linear infinite;
+    }
+
+    @keyframes heroGradient { to { background-position:200% center; } }
+
+    .hero-description {
+      max-width:660px;
+      color:#9fb0c5;
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    .hero-actions {
+      gap:10px;
+    }
+
+    .hero-btn.primary {
+      background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#38bdf8);
+      box-shadow:0 14px 36px rgba(37,99,235,.22);
+    }
+
+    .hero-btn.secondary {
+      background:rgba(15,23,42,.78);
+      border-color:rgba(148,163,184,.18);
+    }
+
+    .hero-stats .stat {
+      border-color:rgba(148,163,184,.15);
+      background:rgba(8,17,31,.7);
+    }
+
+    .ticker {
+      background:linear-gradient(90deg,#0b1930,#071120,#0b1930);
+      border-top:1px solid rgba(56,189,248,.1);
+      border-bottom:1px solid rgba(56,189,248,.1);
+    }
+
+    .tickerTrack span { color:#93c5fd; }
+
+    /* Sections */
+    .section {
+      width:min(1380px,calc(100% - 28px));
+      padding-top:90px;
+      padding-bottom:20px;
+    }
+
+    .section-heading h2 {
+      letter-spacing:-2px;
+    }
+
+    .section-heading h2 span {
+      background:linear-gradient(90deg,#38bdf8,#c4b5fd,#facc15);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .section-heading .eyebrow,
+    .eyebrow {
+      color:#93c5fd;
+    }
+
+    .service-feature {
+      border-color:rgba(56,189,248,.15);
+      background:
+        linear-gradient(135deg,rgba(11,29,52,.95),rgba(8,15,27,.98));
+      box-shadow:0 25px 70px rgba(0,0,0,.26);
+    }
+
+    .service-icon {
+      background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);
+      box-shadow:0 14px 35px rgba(253,29,29,.18);
+    }
+
+    .platform-card {
+      border-color:rgba(148,163,184,.13);
+      background:linear-gradient(145deg,rgba(14,28,47,.95),rgba(7,13,24,.98));
+    }
+
+    /* Package area becomes a true storefront */
+    #packages {
+      scroll-margin-top:100px;
+    }
+
+    .package-grid {
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .package-card {
+      min-height:335px;
+      padding:24px;
+      border-radius:22px;
+      background:
+        linear-gradient(155deg,rgba(15,30,50,.98),rgba(7,14,25,.99));
+      border:1px solid rgba(148,163,184,.14);
+      box-shadow:0 18px 50px rgba(0,0,0,.2);
+    }
+
+    .package-card::before {
+      width:260px;
+      height:260px;
+      top:-150px;
+      right:-110px;
+      background:radial-gradient(circle,rgba(56,189,248,.16),transparent 68%);
+    }
+
+    .package-card:hover {
+      transform:translateY(-9px);
+      border-color:rgba(56,189,248,.38);
+      box-shadow:0 30px 70px rgba(0,0,0,.35),0 0 28px rgba(56,189,248,.06);
+    }
+
+    .package-card.featured {
+      border-color:rgba(250,204,21,.26);
+      background:linear-gradient(155deg,rgba(40,31,10,.94),rgba(10,18,29,.99));
+    }
+
+    .package-label {
+      color:#7f93aa;
+      letter-spacing:1px;
+    }
+
+    .package-card h3 {
+      font-size:22px;
+      letter-spacing:-.5px;
+    }
+
+    .followers {
+      color:#7dd3fc;
+      font-size:13px;
+    }
+
+    .discount {
+      background:linear-gradient(90deg,#f59e0b,#facc15);
+      color:#211300;
+      box-shadow:0 8px 24px rgba(245,158,11,.15);
+    }
+
+    .package-price {
+      margin-top:30px;
+    }
+
+    .old-price { color:#607086; }
+
+    .current-price {
+      font-size:43px;
+      background:linear-gradient(90deg,#fff,#bae6fd);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .free-price {
+      font-size:clamp(39px,4vw,55px);
+      color:#fff;
+      background:linear-gradient(90deg,#86efac,#38bdf8,#fff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      text-shadow:0 0 18px rgba(134,239,172,.25);
+    }
+
+    .free-badge {
+      color:#07120b !important;
+      background:linear-gradient(135deg,#86efac,#38bdf8) !important;
+    }
+
+    .package-action {
+      left:24px;
+      right:24px;
+      bottom:24px;
+      min-height:48px;
+      border-radius:14px;
+      background:linear-gradient(100deg,#1d4ed8,#2563eb 52%,#38bdf8);
+      box-shadow:0 13px 32px rgba(37,99,235,.20);
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.55px;
+    }
+
+    .package-action:hover {
+      background:linear-gradient(100deg,#2563eb,#38bdf8 65%,#7dd3fc);
+      box-shadow:0 17px 40px rgba(37,99,235,.3);
+    }
+
+    /* First 200 Followers card = hero product */
+    .package-card-hero-free {
+      grid-column:span 2;
+      min-height:390px;
+      padding:30px;
+      border:1px solid rgba(134,239,172,.38) !important;
+      background:
+        radial-gradient(circle at 82% 15%,rgba(56,189,248,.18),transparent 25%),
+        linear-gradient(145deg,rgba(8,46,35,.96),rgba(7,18,31,.99)) !important;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.34),
+        0 0 50px rgba(34,197,94,.07),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .package-card-hero-free::after {
+      content:"START HERE • 200 FOLLOWERS";
+      position:absolute;
+      left:30px;
+      top:20px;
+      padding:5px 9px;
+      border-radius:999px;
+      color:#06200f;
+      background:#86efac;
+      font-size:7px;
+      font-weight:1000;
+      letter-spacing:1px;
+      box-shadow:0 0 22px rgba(134,239,172,.18);
+    }
+
+    .package-card-hero-free .package-top {
+      padding-top:22px;
+    }
+
+    .package-card-hero-free .package-label {
+      color:#a7f3d0;
+    }
+
+    .package-card-hero-free h3 {
+      font-size:clamp(25px,3vw,34px);
+      margin-top:7px;
+    }
+
+    .package-card-hero-free .followers {
+      margin-top:8px;
+      font-size:clamp(25px,3vw,42px);
+      line-height:1;
+      font-weight:1000;
+      letter-spacing:-1.7px;
+      color:#fff;
+      text-shadow:0 0 22px rgba(125,211,252,.20);
+    }
+
+    .package-card-hero-free .package-price {
+      margin-top:26px;
+    }
+
+    .package-card-hero-free .free-price {
+      font-size:clamp(56px,6vw,82px);
+      line-height:.9;
+      letter-spacing:-3px;
+    }
+
+    .package-card-hero-free .free-badge {
+      padding:9px 12px;
+      font-size:8px;
+    }
+
+    .package-card-hero-free .package-action {
+      min-height:58px;
+      font-size:11px;
+      border-radius:17px;
+      background:linear-gradient(100deg,#16a34a,#22c55e 45%,#38bdf8);
+      box-shadow:0 18px 45px rgba(34,197,94,.25);
+    }
+
+    .package-card-hero-free .package-action:hover {
+      background:linear-gradient(100deg,#22c55e,#38bdf8);
+      box-shadow:0 20px 50px rgba(34,197,94,.34);
+    }
+
+    /* Movie/game cards */
+    .media-card {
+      border-color:rgba(148,163,184,.13);
+      background:linear-gradient(145deg,rgba(12,26,44,.95),rgba(7,13,24,.99));
+    }
+
+    .media-card:hover {
+      border-color:rgba(56,189,248,.28);
+    }
+
+    .filter.active {
+      background:linear-gradient(135deg,#1d4ed8,#38bdf8);
+    }
+
+    .search {
+      background:#091321;
+      border-color:rgba(148,163,184,.14);
+    }
+
+    footer {
+      border-top-color:rgba(148,163,184,.13);
+      background:#030710;
+    }
+
+    /* =========================================================
+       MOBILE-FIRST LAYOUT
+    ========================================================= */
+
+    @media (max-width: 900px) {
+      .desktop-nav,
+      .header-support { display:none; }
+
+      .header-inner { width:calc(100% - 20px); }
+
+      .hero {
+        min-height:auto;
+      }
+
+      .hero-content {
+        width:calc(100% - 28px);
+        padding:58px 0 70px;
+      }
+
+      .hero h1 {
+        max-width:100%;
+        font-size:clamp(46px,13vw,76px);
+        letter-spacing:-3.5px;
+      }
+
+      .hero-description {
+        font-size:13px;
+        max-width:100%;
+      }
+
+      .hero-actions {
+        display:grid;
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .hero-actions .hero-btn { width:100%; }
+
+      .hero-stats {
+        grid-template-columns:repeat(3,1fr);
+        gap:7px;
+      }
+
+      .hero-stats .stat {
+        padding:12px 7px;
+      }
+
+      .hero-stats .stat strong { font-size:15px; }
+      .hero-stats .stat small { font-size:7px; }
+
+      .section {
+        width:calc(100% - 24px);
+        padding-top:64px;
+      }
+
+      .section-heading h2 {
+        font-size:clamp(31px,9vw,48px);
+      }
+
+      .package-grid {
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .package-card,
+      .package-card-hero-free {
+        grid-column:auto;
+        min-height:325px;
+        padding:20px;
+        border-radius:20px;
+      }
+
+      .package-card-hero-free {
+        min-height:410px;
+        padding:23px;
+      }
+
+      .package-card-hero-free::after {
+        left:23px;
+        top:16px;
+      }
+
+      .package-card-hero-free .package-top {
+        padding-top:26px;
+      }
+
+      .package-card-hero-free .followers {
+        font-size:clamp(31px,10vw,50px);
+      }
+
+      .package-card-hero-free .free-price {
+        font-size:clamp(64px,19vw,90px);
+      }
+
+      .package-card-hero-free .package-action {
+        left:23px;
+        right:23px;
+        bottom:23px;
+        min-height:62px;
+        font-size:11px;
+      }
+
+      .package-card .package-action {
+        left:20px;
+        right:20px;
+        bottom:20px;
+      }
+
+      .offer-content {
+        width:calc(100% - 18px);
+        min-height:auto;
+        padding:28px 14px 22px;
+        border-radius:24px;
+      }
+
+      .offer-icon {
+        width:62px;
+        height:62px;
+        margin-bottom:14px;
+      }
+
+      .offer-content h2 {
+        font-size:clamp(35px,12.5vw,57px);
+        letter-spacing:-2.2px;
+      }
+
+      .offer-content p {
+        max-width:330px;
+        font-size:10.5px;
+        line-height:1.6;
+      }
+
+      .offer-benefits {
+        gap:6px;
+      }
+
+      .offer-benefit {
+        min-height:28px;
+        padding:0 8px;
+        font-size:7.5px;
+      }
+
+      .offer-main-button {
+        width:100%;
+        min-height:58px;
+        margin-top:19px;
+        border-radius:15px;
+        font-size:10px;
+      }
+
+      .offer-topbar {
+        top:9px;
+        left:9px;
+        right:9px;
+      }
+
+      .offer-top-label {
+        min-height:34px;
+        padding:0 9px;
+        font-size:7px;
+      }
+
+      .offer-top-get {
+        min-height:34px;
+        padding:0 11px;
+        font-size:8px;
+      }
+
+      .offer-close {
+        width:34px;
+        height:34px;
+      }
+
+      .mobile-nav {
+        display:block;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .store-announcement { height:28px; }
+      .store-announcement-track { font-size:7px; gap:16px; }
+
+      .site-header { height:64px; }
+      .brand-icon { width:38px; height:38px; border-radius:11px; }
+      .brand-text { font-size:15px; }
+
+      .hero-content { padding-top:45px; }
+
+      .hero h1 {
+        font-size:clamp(43px,14.5vw,68px);
+        letter-spacing:-3px;
+      }
+
+      .hero-description { font-size:12px; }
+
+      .hero-stats .stat strong { font-size:13px; }
+      .hero-stats .stat small { font-size:6.5px; }
+
+      .package-card-hero-free {
+        min-height:430px;
+      }
+
+      .package-card-hero-free .followers {
+        font-size:clamp(34px,11vw,50px);
+      }
+
+      .package-card-hero-free .free-price {
+        font-size:clamp(70px,21vw,92px);
+      }
+
+      .package-card-hero-free .package-action {
+        min-height:64px;
+        font-size:10.5px;
+      }
+
+      .offer-top-label { display:none; }
+      .offer-top-actions { margin-left:auto; }
+
+      .offer-content {
+        width:calc(100% - 14px);
+        padding:25px 12px 20px;
+      }
+
+      .offer-content h2 {
+        font-size:clamp(34px,13vw,52px);
+      }
+
+      .offer-content p { font-size:10px; }
+
+      .offer-benefit { font-size:7px; }
+    }
+
+    @media (max-width: 370px) {
+      .hero h1 { font-size:42px; }
+      .package-card-hero-free .free-price { font-size:65px; }
+      .offer-benefits .offer-benefit:nth-child(2) { display:none; }
+    }
+
+  
+
+    /* =========================================================
+       ZS UNIVERSE 2.0 — PREMIUM VISUAL UPDATE
+    ========================================================= */
+    .hero {
+      width:min(1320px,calc(100% - 40px)); margin:0 auto; min-height:690px;
+      display:grid; grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr);
+      align-items:center; gap:42px; padding:85px 0 90px; position:relative; isolation:isolate;
+    }
+    .hero-content { max-width:680px; position:relative; z-index:3; }
+    .hero h1 { font-size:clamp(48px,6.1vw,84px); line-height:.99; letter-spacing:-4px; }
+    .hero h1 .line { display:block; }
+    .hero h1 .hero-gradient { background:linear-gradient(95deg,#c4b5fd 0%,#f0abfc 42%,#67e8f9 90%); -webkit-background-clip:text;background-clip:text;color:transparent; }
+    .hero-description { max-width:560px; font-size:15px; line-height:1.85; color:#b8b8cb; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .hero-btn { min-height:50px; padding:0 19px; border-radius:15px; font-weight:850; letter-spacing:.1px; }
+    .hero-btn.primary { background:linear-gradient(115deg,#9333ea,#db2777 55%,#f97316); box-shadow:0 12px 30px #a21caf44,inset 0 1px 0 #ffffff55; }
+    .hero-btn.secondary { border:1px solid #ffffff1c; background:#ffffff09; }
+    .hero-showcase { position:relative; min-height:470px; display:grid; place-items:center; isolation:isolate; }
+    .showcase-glow { position:absolute; width:390px;height:390px;border-radius:50%;background:conic-gradient(from 120deg,#9333ea55,#ec489955,#22d3ee55,#9333ea55);filter:blur(55px);opacity:.65;z-index:-2;animation:glowPulse 6s ease-in-out infinite alternate; }
+    .showcase-orbit { position:absolute;border:1px solid #ffffff16;border-radius:50%;transform:rotate(-24deg); }
+    .orbit-one { width:490px;height:250px;animation:orbitFloat 13s linear infinite; }
+    .orbit-two { width:420px;height:330px;transform:rotate(48deg);border-color:#c084fc30;animation:orbitFloat 17s linear infinite reverse; }
+    .main-social-card { width:min(430px,90%);position:relative;z-index:2;padding:25px;border:1px solid #ffffff24;border-radius:30px;background:linear-gradient(145deg,#1b1830ed,#10101bef 65%,#101b2aee);box-shadow:0 35px 100px #0009,inset 0 1px 0 #ffffff20;backdrop-filter:blur(22px);transform:rotate(-3deg);animation:cardHover 6s ease-in-out infinite; }
+    .showcase-top,.showcase-profile,.showcase-bottom { display:flex;align-items:center;justify-content:space-between;gap:12px; }
+    .insta-mark { width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:21px;background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);box-shadow:0 8px 25px #fd1d1d40; }
+    .live-chip { margin-right:auto;padding:7px 10px;border:1px solid #34d39935;border-radius:30px;color:#a7f3d0;background:#10b98113;font-size:8px;font-weight:900;letter-spacing:1px; }
+    .live-chip i { display:inline-block;width:6px;height:6px;border-radius:50%;background:#4ade80;margin-right:5px;box-shadow:0 0 12px #4ade80; }
+    .showcase-dots { color:#aaa;font-weight:900;letter-spacing:2px; }
+    .showcase-profile { justify-content:flex-start;margin:27px 0 22px; }
+    .profile-ring { width:76px;height:76px;border-radius:50%;padding:4px;background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7); }
+    .profile-avatar { width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:#171629;border:3px solid #171629;color:#e9d5ff;font-size:28px; }
+    .showcase-profile strong,.showcase-profile small { display:block; }
+    .showcase-profile strong { font-size:12px;letter-spacing:1px; }
+    .showcase-profile small { color:#9999ad;font-size:10px;margin-top:6px; }
+    .showcase-metrics { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .showcase-metrics div { padding:15px;border-radius:17px;background:#ffffff08;border:1px solid #ffffff12; }
+    .showcase-metrics strong,.showcase-metrics span { display:block; }
+    .showcase-metrics strong { font-size:16px; }
+    .showcase-metrics span { margin-top:8px;color:#aaaabe;font-size:10px; }
+    .showcase-metrics span i { margin-right:5px;color:#f472b6; }
+    .showcase-bars { height:78px;display:flex;align-items:end;gap:7px;padding:13px 4px 7px;margin-top:13px;border-bottom:1px solid #ffffff12; }
+    .showcase-bars span { flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#f0abfc,#8b5cf6 75%,#22d3ee);height:var(--h,50%);box-shadow:0 0 16px #a855f733;animation:barBreathe 2.8s ease-in-out infinite alternate; }
+    .showcase-bars span:nth-child(1){--h:28%}.showcase-bars span:nth-child(2){--h:45%}.showcase-bars span:nth-child(3){--h:38%}.showcase-bars span:nth-child(4){--h:60%}.showcase-bars span:nth-child(5){--h:49%}.showcase-bars span:nth-child(6){--h:75%}.showcase-bars span:nth-child(7){--h:63%}.showcase-bars span:nth-child(8){--h:86%}.showcase-bars span:nth-child(9){--h:69%}.showcase-bars span:nth-child(10){--h:95%}.showcase-bars span:nth-child(11){--h:78%}.showcase-bars span:nth-child(12){--h:100%}
+    .showcase-bottom { margin-top:16px;color:#9ca3af;font-size:8px;font-weight:900;letter-spacing:1px; }.showcase-bottom b { color:#d8b4fe; }
+    .float-tag { position:absolute;z-index:4;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:16px;background:#171629eF;border:1px solid #ffffff22;box-shadow:0 15px 45px #0008;backdrop-filter:blur(15px);animation:tagBob 4s ease-in-out infinite; }
+    .float-tag>i { width:36px;height:36px;display:grid;place-items:center;border-radius:12px;font-size:15px; }
+    .float-tag b,.float-tag small { display:block; }.float-tag b{font-size:11px}.float-tag small{font-size:9px;color:#9ca3af;margin-top:4px}
+    .float-followers { top:70px;left:-5px; }.float-followers>i{background:#8b5cf633;color:#c4b5fd}
+    .float-likes { bottom:75px;right:-3px;animation-delay:-2s; }.float-likes>i{background:#ec489933;color:#f9a8d4}
+    .hero-stats { display:flex;gap:28px;margin-top:32px; }.hero-stats .stat strong{font-size:23px}.hero-stats .stat span{font-size:10px;color:#9292a8}
+    @keyframes cardHover{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
+    @keyframes tagBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    @keyframes orbitFloat{to{rotate:360deg}}
+    @keyframes glowPulse{to{transform:scale(1.13);opacity:.9}}
+    @keyframes barBreathe{to{filter:brightness(1.5);transform:scaleY(.82);transform-origin:bottom}}
+    .service-tabs-wrap { margin:35px 0 34px;padding:20px;border:1px solid #ffffff14;border-radius:24px;background:linear-gradient(135deg,#ffffff09,#ffffff03); }
+    .service-tabs-heading { display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px; }.service-tabs-heading span{font-size:10px;font-weight:1000;letter-spacing:1.4px;color:#c4b5fd}.service-tabs-heading small{font-size:10px;color:#85859b}
+    .service-tabs { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .service-tab { position:relative;min-height:88px;display:grid;grid-template-columns:44px 1fr auto;grid-template-rows:1fr 1fr;align-items:center;text-align:left;column-gap:12px;padding:15px 18px;border:1px solid #ffffff16;border-radius:18px;color:#fff;background:#ffffff06;cursor:pointer;transition:.25s ease; }
+    .service-tab>i { grid-row:1/3;width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#8b5cf633;color:#d8b4fe;font-size:19px; }
+    .service-tab span { align-self:end;font-size:15px;font-weight:900; }.service-tab small{align-self:start;color:#9292a8;font-size:10px;margin-top:4px}.service-tab.active{border-color:#c084fc80;background:linear-gradient(120deg,#8b5cf626,#ec489914);box-shadow:0 12px 35px #8b5cf51a, inset 0 1px 0 #ffffff12;transform:translateY(-2px)}
+    .service-tab[data-package-view="likes"]>i{background:#ec489933;color:#f9a8d4}.service-tab[data-package-view="likes"].active{border-color:#f472b680;background:linear-gradient(120deg,#ec489926,#f9731614)}
+    .tab-free-pill { grid-column:3;grid-row:1/3;padding:7px 9px;border-radius:9px;color:#052012;background:linear-gradient(135deg,#86efac,#22d3ee);font-size:9px;box-shadow:0 7px 18px #22d3ee35; }
+    .package-section-title { scroll-margin-top:100px; }
+    .likes-intro { display:flex;align-items:center;gap:18px;margin:20px 0 20px;padding:22px;border:1px solid #f472b64a;border-radius:22px;background:radial-gradient(circle at 95% 0,#ec48992b,transparent 35%),linear-gradient(110deg,#32132c,#151326 70%); }
+    .likes-intro-icon { width:56px;height:56px;flex:0 0 56px;display:grid;place-items:center;border-radius:18px;color:white;background:linear-gradient(135deg,#f43f5e,#c026d3);font-size:23px;box-shadow:0 12px 30px #ec489944; }
+    .likes-kicker { color:#f9a8d4;font-size:8px;font-weight:1000;letter-spacing:1.5px; }.likes-intro h3{margin-top:5px;font-size:22px}.likes-intro h3 em{font-style:normal;color:#86efac;font-size:10px;vertical-align:middle;margin-left:7px;letter-spacing:1px}.likes-intro p{margin-top:6px;color:#b8a9bf;font-size:11px;line-height:1.6}.likes-intro-side{margin-left:auto;text-align:right;white-space:nowrap}.likes-intro-side strong,.likes-intro-side small{display:block}.likes-intro-side strong{font-size:22px;color:#fbcfe8}.likes-intro-side small{margin-top:3px;color:#9f8ca1;font-size:8px;letter-spacing:1px}
+    .likes-grid[hidden],.followers-grid[hidden],.likes-intro[hidden]{display:none!important}.likes-card{border-color:#f472b62b;background:linear-gradient(155deg,#28142b,#101321 78%)}.likes-card::before{background:radial-gradient(circle,#ec48992b,transparent 68%)}.likes-card .package-label{color:#f9a8d4}.likes-card .likes-quantity{color:#fbcfe8}.likes-card .package-action{background:linear-gradient(110deg,#be185d,#db2777 55%,#f97316);box-shadow:0 12px 30px #db277733}.likes-card .package-action:hover{background:linear-gradient(110deg,#db2777,#f97316)}.likes-card-featured{border-color:#f472b66b;box-shadow:0 20px 55px #ec489914,inset 0 1px 0 #ffffff10}
+    .package-action { position:relative;display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden;transform:translateY(0);transition:transform .2s,box-shadow .2s,filter .2s;box-shadow:0 10px 0 #09101e,0 15px 28px #0006,inset 0 1px 0 #ffffff55!important; }
+    .package-action::before { content:"";position:absolute;inset:1px 1px auto;height:45%;border-radius:inherit;background:linear-gradient(#ffffff35,transparent);pointer-events:none; }
+    .package-action:hover { transform:translateY(-4px);filter:brightness(1.1); }.package-action:active{transform:translateY(3px);box-shadow:0 3px 0 #09101e,0 7px 14px #0006!important}
+    .free-badge { display:inline-flex;align-items:center;gap:5px;padding:8px 11px!important;border-radius:10px!important;box-shadow:0 5px 0 #24734c,0 10px 22px #22c55e28!important;transform:translateY(-2px); }
+    .platform-card { border:1px solid var(--platform-border, #ffffff18);background:linear-gradient(135deg,var(--platform-bg,#ffffff09),#ffffff04); }
+    .instagram-platform{--platform-bg:#e1306c20;--platform-border:#e1306c45}.instagram-platform .platform-icon{color:#ff8bb7;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}
+    .youtube-platform{--platform-bg:#ff000018;--platform-border:#ff000044}.youtube-platform .platform-icon{color:#fff;background:#ff0033}
+    .facebook-platform{--platform-bg:#1877f220;--platform-border:#1877f255}.facebook-platform .platform-icon{color:#fff;background:#1877f2}
+    .snapchat-platform{--platform-bg:#fffc0018;--platform-border:#fffc0050}.snapchat-platform .platform-icon{color:#111;background:#fffc00}
+    .whatsapp-platform{--platform-bg:#25d36618;--platform-border:#25d36650}.whatsapp-platform .platform-icon{color:#062b17;background:#25d366}
+    footer { position:relative;overflow:hidden;border-top:1px solid #ffffff16;background:radial-gradient(circle at 50% 0,#8b5cf51a,transparent 55%),#080811;padding:48px 20px 38px;text-align:center; }
+    footer::before{content:"ZS";position:absolute;left:50%;top:-60px;transform:translateX(-50%);font-size:190px;font-weight:1000;letter-spacing:-15px;color:#ffffff04;pointer-events:none}
+    .footer-brand{position:relative;font-size:30px;letter-spacing:-1px}.footer-brand span{background:linear-gradient(90deg,#c4b5fd,#f9a8d4,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}footer p{position:relative;color:#77778b;font-size:11px;margin-top:13px}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:12px;padding-top:62px;text-align:center}.hero-content{margin:auto}.hero-description{margin-left:auto;margin-right:auto}.hero-actions,.hero-stats{justify-content:center}.hero-showcase{min-height:430px;width:min(100%,620px);margin:auto}.float-followers{left:0}.float-likes{right:0}}
+    @media(max-width:600px){.hero{width:calc(100% - 28px);padding:50px 0 55px;min-height:auto}.hero h1{font-size:clamp(43px,12vw,62px);letter-spacing:-2.5px}.hero-description{font-size:13px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .primary{grid-column:1/-1}.hero-btn{padding:0 10px;font-size:11px}.hero-stats{gap:17px}.hero-stats .stat strong{font-size:18px}.hero-stats .stat span{font-size:8px}.hero-showcase{min-height:365px;transform:scale(.94);margin:-5px auto}.main-social-card{padding:18px;border-radius:23px}.float-tag{padding:9px 11px}.float-tag b{font-size:9px}.float-tag small{font-size:8px}.float-followers{top:15px;left:-2px}.float-likes{bottom:15px;right:-2px}.orbit-one{width:340px;height:190px}.orbit-two{width:310px;height:250px}.service-tabs-wrap{padding:13px;margin:24px 0}.service-tabs-heading{display:block;text-align:center}.service-tabs-heading small{display:block;margin-top:6px}.service-tab{grid-template-columns:34px 1fr auto;min-height:76px;padding:11px 10px;gap:8px}.service-tab>i{width:33px;height:33px;font-size:15px}.service-tab span{font-size:12px}.service-tab small{font-size:8px}.tab-free-pill{font-size:7px;padding:6px}.likes-intro{padding:15px;gap:11px}.likes-intro-icon{width:42px;height:42px;flex-basis:42px;font-size:17px;border-radius:13px}.likes-intro h3{font-size:16px}.likes-intro h3 em{display:block;margin:5px 0 0}.likes-intro p{font-size:9px}.likes-intro-side strong{font-size:16px}.likes-intro-side small{font-size:7px}.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.package-card{padding:14px;min-height:290px;border-radius:17px}.package-card h3{font-size:16px}.package-card .followers{font-size:11px}.package-card .discount{font-size:7px;padding:5px 6px}.package-card .package-price{margin-top:22px}.package-card .current-price{font-size:34px}.package-card .package-action{left:14px;right:14px;bottom:14px;min-height:42px;font-size:8px}.package-card-hero-free{grid-column:span 2;min-height:310px}.package-card-hero-free .followers{font-size:28px}.package-card-hero-free .free-price{font-size:58px}.package-card-hero-free::after{left:14px;top:13px}.package-card-hero-free .package-top{padding-top:20px}}
+    @media(prefers-reduced-motion:reduce){.main-social-card,.showcase-glow,.showcase-orbit,.float-tag,.showcase-bars span{animation:none!important}}
+
+</style>
 </head>
 
 
@@ -3471,6 +4272,18 @@
        HEADER
   ========================================================== -->
 
+  <div class="store-announcement" aria-label="ZS-universe promotion">
+    <div class="store-announcement-track">
+      <span><i class="fa-solid fa-bolt"></i> FREE INSTAGRAM OFFERS</span>
+      <b>•</b>
+      <span>FAST PACKAGE SELECTION</span>
+      <b>•</b>
+      <span>ZS-UNIVERSE SHOP</span>
+      <b>•</b>
+      <span>FREE INSTAGRAM OFFERS</span>
+    </div>
+  </div>
+
   <header class="site-header">
 
     <div class="header-inner">
@@ -3551,92 +4364,40 @@
   >
 
     <div class="hero-content">
-
-      <div class="hero-pill">
-        <span class="live-dot"></span>
-        SOCIAL • MOVIES • GAMES
-      </div>
-
-
+      <div class="hero-pill"><span class="live-dot"></span> THE NEW DIGITAL EXPERIENCE</div>
       <h1>
-
-        <span class="line">
-          Everything You
-        </span>
-
-        <span class="line hero-gradient">
-          Love. One Place.
-        </span>
-
+        <span class="line">Your World.</span>
+        <span class="line hero-gradient">Your Universe.</span>
       </h1>
-
-
       <p class="hero-description">
-
-        Welcome to ZS-universe — explore social media
-        services, discover movies and browse an exciting
-        collection of PC games, all from one modern hub.
-
+        Discover a smarter way to explore social services, entertainment and gaming.
+        Everything at ZS-universe is designed to feel simple, modern and effortless.
       </p>
-
-
       <div class="hero-actions">
-
-        <button
-          class="hero-btn primary"
-          type="button"
-          onclick="openTab('social')"
-        >
-          <i class="fa-brands fa-instagram"></i>
-          Explore Services
-        </button>
-
-
-        <button
-          class="hero-btn secondary"
-          type="button"
-          onclick="openTab('movies')"
-        >
-          <i class="fa-solid fa-film"></i>
-          Explore Movies
-        </button>
-
-
-        <button
-          class="hero-btn secondary"
-          type="button"
-          onclick="openTab('games')"
-        >
-          <i class="fa-solid fa-gamepad"></i>
-          Explore Games
-        </button>
-
+        <button class="hero-btn primary" type="button" onclick="openTab('social')"><i class="fa-brands fa-instagram"></i> Explore Instagram</button>
+        <button class="hero-btn secondary" type="button" onclick="openTab('movies')"><i class="fa-solid fa-clapperboard"></i> Discover Movies</button>
+        <button class="hero-btn secondary" type="button" onclick="openTab('games')"><i class="fa-solid fa-gamepad"></i> Enter Games</button>
       </div>
-
-
       <div class="hero-stats">
-
-        <div class="stat">
-          <strong>12+</strong>
-          <span>Packages</span>
-        </div>
-
-
-        <div class="stat">
-          <strong>10+</strong>
-          <span>Movies</span>
-        </div>
-
-
-        <div class="stat">
-          <strong>12+</strong>
-          <span>Games</span>
-        </div>
-
+        <div class="stat"><strong>13</strong><span>Social Packages</span></div>
+        <div class="stat"><strong>2</strong><span>Instagram Services</span></div>
+        <div class="stat"><strong>24/7</strong><span>Explore Anytime</span></div>
       </div>
-
     </div>
 
+    <div class="hero-showcase" aria-label="Animated Instagram service preview">
+      <div class="showcase-orbit orbit-one"></div><div class="showcase-orbit orbit-two"></div>
+      <div class="showcase-card main-social-card">
+        <div class="showcase-top"><span class="insta-mark"><i class="fa-brands fa-instagram"></i></span><span class="live-chip"><i></i> LIVE EXPERIENCE</span><span class="showcase-dots">•••</span></div>
+        <div class="showcase-profile"><div class="profile-ring"><div class="profile-avatar"><i class="fa-solid fa-user-astronaut"></i></div></div><div><strong>YOUR SOCIAL SPACE</strong><small>Make your profile stand out</small></div></div>
+        <div class="showcase-metrics"><div><strong>Followers</strong><span><i class="fa-solid fa-users"></i> Grow your reach</span></div><div><strong>Likes</strong><span><i class="fa-solid fa-heart"></i> Show your love</span></div></div>
+        <div class="showcase-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="showcase-bottom"><span><i class="fa-solid fa-sparkles"></i> ZS SOCIAL STUDIO</span><b>EXPLORE <i class="fa-solid fa-arrow-up-right-from-square"></i></b></div>
+      </div>
+      <div class="float-tag float-followers"><i class="fa-solid fa-users"></i><span><b>Followers</b><small>Choose your package</small></span></div>
+      <div class="float-tag float-likes"><i class="fa-solid fa-heart"></i><span><b>Likes</b><small>FREE NOW</small></span></div>
+      <div class="showcase-glow"></div>
+    </div>
   </section>
 
 
@@ -3889,13 +4650,8 @@
                   AVAILABLE NOW
                 </div>
 
-                <h3>
-                  Instagram Growth
-                </h3>
-
-                <p>
-                  Choose your followers package below.
-                </p>
+                <h3>Instagram Social Studio</h3>
+                <p>Two ways to build your social experience: Followers and Likes. Pick a service below.</p>
 
               </div>
 
@@ -3916,10 +4672,19 @@
         </div>
 
 
+        <!-- INSTAGRAM SERVICE SWITCHER -->
+        <div class="service-tabs-wrap" id="instagramServices">
+          <div class="service-tabs-heading"><span>CHOOSE YOUR SERVICE</span><small>Switch between the available Instagram packages</small></div>
+          <div class="service-tabs" role="tablist" aria-label="Instagram services">
+            <button class="service-tab active" type="button" data-package-view="followers" role="tab" aria-selected="true"><i class="fa-solid fa-users"></i><span>Followers</span><small>Growth packages</small></button>
+            <button class="service-tab" type="button" data-package-view="likes" role="tab" aria-selected="false"><i class="fa-solid fa-heart"></i><span>Likes</span><small>FREE NOW · Limited offer</small><b class="tab-free-pill">FREE</b></button>
+          </div>
+        </div>
+
         <!-- PACKAGES HEADING -->
 
         <div
-          class="section-heading"
+          class="section-heading package-section-title"
           id="packages"
         >
 
@@ -3930,11 +4695,11 @@
 
           <h2>
             Choose Your
-            <span>Package</span>
+            <span>Followers Package</span>
           </h2>
 
           <p>
-            LIMITED-TIME OFFER — All Instagram follower packages are currently FREE.
+            Explore all follower packages, then switch to Likes for our FREE NOW launch offer.
           </p>
 
         </div>
@@ -3942,12 +4707,12 @@
 
         <!-- PACKAGE GRID -->
 
-        <div class="package-grid">
+        <div class="package-grid followers-grid" id="followersGrid">
 
 
           <!-- 200 -->
 
-          <div class="package-card">
+          <div class="package-card package-card-hero-free">
 
             <div class="package-top">
 
@@ -4556,6 +5321,80 @@
           </div>
 
 
+        </div>
+
+        <!-- INSTAGRAM LIKES PACKAGES -->
+        <div class="likes-intro" id="likesPackages" hidden>
+          <div class="likes-intro-icon"><i class="fa-solid fa-heart"></i></div>
+          <div><span class="likes-kicker">ZS SOCIAL STUDIO · LAUNCH OFFER</span><h3>Instagram Likes <em>FREE NOW</em></h3><p>Choose the quantity you want. Every listed Likes package is marked free during this launch offer.</p></div>
+          <div class="likes-intro-side"><strong>200 – 10K</strong><small>LIKE PACKAGES</small></div>
+        </div>
+        <div class="package-grid likes-grid" id="likesGrid" hidden>
+          <article class="package-card likes-card likes-card-featured">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Starter</h3><div class="followers likes-quantity">200 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">₹30</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%20200%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Starter Plus</h3><div class="followers likes-quantity">500 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%20500%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card likes-card-featured">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Popular</h3><div class="followers likes-quantity">1,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%201000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Growth</h3><div class="followers likes-quantity">1,500 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%201500%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Growth Plus</h3><div class="followers likes-quantity">2,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%202000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Pro</h3><div class="followers likes-quantity">3,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%203000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Pro Plus</h3><div class="followers likes-quantity">4,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%204000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card likes-card-featured">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Premium</h3><div class="followers likes-quantity">5,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%205000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Premium Plus</h3><div class="followers likes-quantity">6,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%206000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Advanced</h3><div class="followers likes-quantity">7,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%207000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Advanced Plus</h3><div class="followers likes-quantity">8,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%208000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card ">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Elite</h3><div class="followers likes-quantity">9,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%209000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="package-card likes-card likes-card-featured">
+            <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Elite Plus</h3><div class="followers likes-quantity">10,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
+            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%2010000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
+          </article>
         </div>
 
       </div>
@@ -5922,7 +6761,7 @@
     </div>
 
     <p>
-      © 2026 ZS-universe — Social, Movies & Games
+      © 2026 ZS-universe — Your digital world, beautifully connected.
     </p>
 
   </footer>
@@ -6666,7 +7505,32 @@
       });
 
 
-  </script>
+  
+    /* ZS UNIVERSE 2.0 — Instagram package switcher */
+    const packageViewButtons = document.querySelectorAll("[data-package-view]");
+    const followersGrid = document.getElementById("followersGrid");
+    const likesGrid = document.getElementById("likesGrid");
+    const likesIntro = document.getElementById("likesPackages");
+    const packageHeading = document.querySelector(".package-section-title");
+    packageViewButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const showLikes = button.dataset.packageView === "likes";
+        packageViewButtons.forEach(item => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        followersGrid.hidden = showLikes;
+        likesGrid.hidden = !showLikes;
+        likesIntro.hidden = !showLikes;
+        packageHeading.querySelector("h2").innerHTML = showLikes ? 'Choose Your <span>Likes Package</span>' : 'Choose Your <span>Followers Package</span>';
+        packageHeading.querySelector("p").textContent = showLikes ? 'All Instagram Likes quantities are included in the FREE NOW launch offer.' : 'Choose the follower package that fits your requirements.';
+        const target = document.getElementById("instagramServices");
+        if (target) target.scrollIntoView({behavior:"smooth",block:"start"});
+      });
+    });
+
+</script>
 
 </body>
 </html>
