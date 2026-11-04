@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ZS-universe 2.0 — Social Studio, Movies & Games</title>
+  <title>ZS-universe 2.2 — Social Studio, Movies & Games</title>
 
   <meta
     name="description"
-    content="ZS-universe 2.0 — Instagram services, movies and PC games in one modern digital hub."
+    content="ZS-universe 2.1 — Social studio, movies and games in one modern digital hub."
   >
 
   <meta name="theme-color" content="#09090f">
@@ -4112,6 +4112,196 @@
     @media(max-width:600px){.hero{width:calc(100% - 28px);padding:50px 0 55px;min-height:auto}.hero h1{font-size:clamp(43px,12vw,62px);letter-spacing:-2.5px}.hero-description{font-size:13px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .primary{grid-column:1/-1}.hero-btn{padding:0 10px;font-size:11px}.hero-stats{gap:17px}.hero-stats .stat strong{font-size:18px}.hero-stats .stat span{font-size:8px}.hero-showcase{min-height:365px;transform:scale(.94);margin:-5px auto}.main-social-card{padding:18px;border-radius:23px}.float-tag{padding:9px 11px}.float-tag b{font-size:9px}.float-tag small{font-size:8px}.float-followers{top:15px;left:-2px}.float-likes{bottom:15px;right:-2px}.orbit-one{width:340px;height:190px}.orbit-two{width:310px;height:250px}.service-tabs-wrap{padding:13px;margin:24px 0}.service-tabs-heading{display:block;text-align:center}.service-tabs-heading small{display:block;margin-top:6px}.service-tab{grid-template-columns:34px 1fr auto;min-height:76px;padding:11px 10px;gap:8px}.service-tab>i{width:33px;height:33px;font-size:15px}.service-tab span{font-size:12px}.service-tab small{font-size:8px}.tab-free-pill{font-size:7px;padding:6px}.likes-intro{padding:15px;gap:11px}.likes-intro-icon{width:42px;height:42px;flex-basis:42px;font-size:17px;border-radius:13px}.likes-intro h3{font-size:16px}.likes-intro h3 em{display:block;margin:5px 0 0}.likes-intro p{font-size:9px}.likes-intro-side strong{font-size:16px}.likes-intro-side small{font-size:7px}.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.package-card{padding:14px;min-height:290px;border-radius:17px}.package-card h3{font-size:16px}.package-card .followers{font-size:11px}.package-card .discount{font-size:7px;padding:5px 6px}.package-card .package-price{margin-top:22px}.package-card .current-price{font-size:34px}.package-card .package-action{left:14px;right:14px;bottom:14px;min-height:42px;font-size:8px}.package-card-hero-free{grid-column:span 2;min-height:310px}.package-card-hero-free .followers{font-size:28px}.package-card-hero-free .free-price{font-size:58px}.package-card-hero-free::after{left:14px;top:13px}.package-card-hero-free .package-top{padding-top:20px}}
     @media(prefers-reduced-motion:reduce){.main-social-card,.showcase-glow,.showcase-orbit,.float-tag,.showcase-bars span{animation:none!important}}
 
+
+/* =========================================================
+   ZS UNIVERSE 2.2 — PACKAGE CARD LAYOUT REPAIR
+   Fix: FREE price / FREE NOW badge / CTA overlap
+========================================================= */
+.package-grid,
+.followers-grid,
+.likes-grid {
+  align-items: stretch !important;
+  grid-auto-rows: 1fr;
+}
+.package-card {
+  box-sizing: border-box !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  min-height: 330px !important;
+  height: 100% !important;
+  padding: 22px !important;
+  overflow: hidden !important;
+}
+.package-card .package-top {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+.package-card .package-top > div {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+.package-card .package-label {
+  line-height: 1.35 !important;
+  margin-bottom: 8px !important;
+}
+.package-card h3 {
+  line-height: 1.15 !important;
+  margin: 0 0 7px !important;
+  overflow-wrap: anywhere;
+}
+.package-card .followers,
+.package-card .likes-quantity {
+  display: block !important;
+  line-height: 1.35 !important;
+  overflow-wrap: anywhere;
+}
+.package-card .free-badge {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  max-width: 46% !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  transform: none !important;
+  align-self: flex-start !important;
+  z-index: 2 !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+  padding: 9px 11px !important;
+}
+.package-card .package-price {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  margin: auto 0 18px !important;
+  padding: 0 !important;
+  min-height: 94px !important;
+}
+.package-card .old-price {
+  display: block !important;
+  position: static !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  font-size: 12px !important;
+  opacity: .72 !important;
+}
+.package-card.likes-card .old-price {
+  text-decoration: none !important;
+  letter-spacing: .7px !important;
+}
+.package-card .current-price,
+.package-card .free-price {
+  display: block !important;
+  position: relative !important;
+  inset: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  font-size: clamp(42px, 4.2vw, 58px) !important;
+  line-height: .98 !important;
+  letter-spacing: -2px !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+.package-card .free-price::after {
+  display: none !important;
+}
+.package-card .package-action {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  border-radius: 14px !important;
+  line-height: 1.2 !important;
+  font-size: 11px !important;
+  white-space: normal !important;
+  z-index: 3 !important;
+  transform: none;
+}
+.package-card .package-action span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.package-card .package-action i {
+  flex: 0 0 auto;
+}
+.package-card .package-action:hover {
+  transform: translateY(-2px) !important;
+}
+.package-card .package-action:active {
+  transform: translateY(1px) !important;
+}
+.likes-card .package-price {
+  min-height: 94px !important;
+}
+.likes-card .free-price {
+  color: #fff !important;
+  text-shadow: 0 4px 22px #ffffff25 !important;
+}
+@media (max-width: 900px) {
+  .package-card {
+    min-height: 315px !important;
+    padding: 19px !important;
+  }
+  .package-card .current-price,
+  .package-card .free-price {
+    font-size: clamp(39px, 6vw, 52px) !important;
+  }
+}
+@media (max-width: 600px) {
+  .package-card {
+    min-height: 285px !important;
+    padding: 14px !important;
+  }
+  .package-card .package-top {
+    gap: 7px !important;
+  }
+  .package-card .free-badge {
+    max-width: 48% !important;
+    font-size: 7px !important;
+    padding: 7px 7px !important;
+  }
+  .package-card .package-price {
+    min-height: 82px !important;
+    margin-bottom: 13px !important;
+  }
+  .package-card .current-price,
+  .package-card .free-price {
+    font-size: clamp(34px, 9vw, 44px) !important;
+    letter-spacing: -1.5px !important;
+  }
+  .package-card .package-action {
+    min-height: 42px !important;
+    padding: 10px 8px !important;
+    font-size: 9px !important;
+    border-radius: 11px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .package-card,
+  .package-card * {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 </style>
 </head>
 
@@ -4738,7 +4928,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹100
+                ₹30
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4748,9 +4938,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=200&followers=200&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%20200%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -4785,7 +4975,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹150
+                ₹50
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4795,9 +4985,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=500&followers=500&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%20500%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -4832,7 +5022,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹250
+                ₹90
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4842,9 +5032,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=1000&followers=1000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%201000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -4879,7 +5069,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹300
+                ₹130
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4889,9 +5079,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=1500&followers=1500&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%201500%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -4926,7 +5116,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹400
+                ₹150
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4936,9 +5126,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=2000&followers=2000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%202000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -4973,7 +5163,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹500
+                ₹200
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -4983,9 +5173,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=3000&followers=3000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%203000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5020,7 +5210,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹600
+                ₹250
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5030,9 +5220,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=4000&followers=4000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%204000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5067,7 +5257,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹750
+                ₹300
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5077,9 +5267,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=5000&followers=5000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%205000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5114,7 +5304,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹900
+                ₹350
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5124,9 +5314,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=6000&followers=6000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%206000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5161,7 +5351,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹1,100
+                ₹450
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5171,9 +5361,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=7000&followers=7000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%207000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5208,7 +5398,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹1,200
+                ₹500
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5218,9 +5408,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=8000&followers=8000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%208000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5255,7 +5445,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹1,400
+                ₹550
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5265,9 +5455,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=9000&followers=9000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%209000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5302,7 +5492,7 @@
             <div class="package-price">
 
               <div class="old-price">
-                ₹1,500
+                ₹600
               </div>
 
               <div class="current-price free-price">FREE</div>
@@ -5312,9 +5502,9 @@
 
             <a
               class="package-action"
-              href="order.html?package=10000&followers=10000&price=0"
+              href="https://wa.me/919103874044?text=Hello%20ZS-universe,%20I%20want%20the%2010000%20Instagram%20Followers%20FREE%20NOW%20offer." target="_blank" rel="noopener noreferrer"
             >
-              Get Package
+              Claim Free Package
               <i class="fa-solid fa-arrow-right"></i>
             </a>
 
@@ -5337,62 +5527,62 @@
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Starter Plus</h3><div class="followers likes-quantity">500 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%20500%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card likes-card-featured">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Popular</h3><div class="followers likes-quantity">1,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%201000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Growth</h3><div class="followers likes-quantity">1,500 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%201500%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Growth Plus</h3><div class="followers likes-quantity">2,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%202000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Pro</h3><div class="followers likes-quantity">3,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%203000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Pro Plus</h3><div class="followers likes-quantity">4,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%204000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card likes-card-featured">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Premium</h3><div class="followers likes-quantity">5,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%205000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Premium Plus</h3><div class="followers likes-quantity">6,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%206000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Advanced</h3><div class="followers likes-quantity">7,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%207000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Advanced Plus</h3><div class="followers likes-quantity">8,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%208000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card ">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Elite</h3><div class="followers likes-quantity">9,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%209000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
           <article class="package-card likes-card likes-card-featured">
             <div class="package-top"><div><div class="package-label">INSTAGRAM LIKES</div><h3>Elite Plus</h3><div class="followers likes-quantity">10,000 Likes</div></div><span class="discount free-badge"><i class="fa-solid fa-bolt"></i> FREE NOW</span></div>
-            <div class="package-price"><div class="old-price">LAUNCH OFFER</div><div class="current-price free-price">FREE</div></div>
+            <div class="package-price"><div class="old-price">FREE LAUNCH</div><div class="current-price free-price">FREE</div></div>
             <a class="package-action likes-order-link" href="https://wa.me/919103874044?text=Hello%20ZS-universe%2C%20I%20want%20the%2010000%20Instagram%20Likes%20FREE%20NOW%20offer."><span>Claim Free Likes</span><i class="fa-solid fa-arrow-right"></i></a>
           </article>
         </div>
