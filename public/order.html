@@ -32,6 +32,12 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
 ></script>
 
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+>
 
 <style>
 
@@ -56,10 +62,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;op
 button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
 .topbar{position:sticky;top:0;z-index:100;background:rgba(5,9,20,.82);border-bottom:1px solid var(--line);backdrop-filter:blur(22px)}
 .topbar-inner{width:min(1080px,calc(100% - 32px));min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:12px;color:#fff}
-.brand-logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;font-weight:1000;font-size:18px;background:linear-gradient(135deg,var(--blue),var(--purple) 60%,var(--pink));box-shadow:0 10px 28px #6d5df044}
-.brand-text{font-weight:900;letter-spacing:-.4px;font-size:17px}
-.brand-subtitle{margin-top:3px;color:var(--muted);font-size:10px}
+.brand{display:flex;align-items:center;gap:14px;color:#fff}
+.brand-logo-wrap{position:relative;width:48px;height:48px;flex-shrink:0}
+.brand-logo-img{width:48px;height:48px;border-radius:14px;object-fit:cover;box-shadow:0 8px 28px rgba(56,189,248,.35),0 0 0 1px rgba(56,189,248,.25);transition:transform .3s ease,box-shadow .3s ease}
+.brand:hover .brand-logo-img{transform:scale(1.05);box-shadow:0 12px 32px rgba(56,189,248,.45),0 0 0 1px rgba(56,189,248,.4)}
+.brand-text-wrap{display:flex;flex-direction:column;gap:2px}
+.brand-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#7dd3fc;opacity:.9}
+.brand-text{font-weight:900;letter-spacing:-.5px;font-size:18px;line-height:1.1;background:linear-gradient(90deg,#fff 40%,#a5f3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-subtitle{margin-top:1px;color:var(--muted);font-size:10px;font-weight:600}
 .secure-header{display:flex;align-items:center;gap:8px;color:#c7d4e7;font-size:11px;font-weight:800}
 .secure-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 13px #4ade80}
 main{width:100%;padding:34px 16px 90px}
@@ -89,8 +99,23 @@ main{width:100%;padding:34px 16px 90px}
 .product-badge{padding:7px 11px;border-radius:99px;background:#38bdf81a;border:1px solid #38bdf83d;color:#8de0ff;font-size:9px;font-weight:900;text-transform:uppercase}
 .product-name{font-size:clamp(18px,4vw,23px);font-weight:900;letter-spacing:-.5px}
 .product-price{margin-top:7px;color:#86efac;font-size:13px;font-weight:900}
-.form-section-title{display:flex;align-items:center;gap:10px;margin:25px 0 15px;font-size:13px;font-weight:900;color:#e9f4ff}
-.form-section-title span{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#38bdf81a;color:#7dd3fc}
+.form-section-title{display:flex;align-items:center;gap:12px;margin:28px 0 12px;font-size:14px;font-weight:900;color:#e9f4ff;letter-spacing:-.2px}
+.form-section-title span,.section-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#38bdf822,#8b5cf622);color:#7dd3fc;border:1px solid rgba(56,189,248,.25);box-shadow:0 4px 14px rgba(56,189,248,.12)}
+.form-section-title--animated .section-icon--pulse{animation:iconPulse 2.4s ease-in-out infinite}
+.section-icon--ig{background:linear-gradient(135deg,#f9731622,#ec489922)!important;color:#f9a8d4!important;border-color:rgba(236,72,153,.3)!important}
+@keyframes iconPulse{0%,100%{transform:scale(1);box-shadow:0 4px 14px rgba(56,189,248,.12)}50%{transform:scale(1.08);box-shadow:0 6px 20px rgba(56,189,248,.28)}}
+.section-hint{margin:-4px 0 16px;font-size:11px;color:#8b9cb3;line-height:1.5}
+.section-hint strong{color:#c7d4e7}
+.checkout-kicker{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px;font-size:10px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;color:#7dd3fc}
+.kicker-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px #4ade80;animation:securePulse 1.8s ease-in-out infinite}
+.kicker-sep{opacity:.5;font-weight:400}
+@keyframes securePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.15)}}
+.contact-choice--visible{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.contact-option{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 12px;border-radius:14px;border:1px solid rgba(148,163,184,.22);background:#0a1422;color:#9eb2cc;font-size:12px;font-weight:800;transition:all .22s ease}
+.contact-option i{font-size:15px;opacity:.85}
+.contact-option:hover{border-color:rgba(56,189,248,.4);color:#e2e8f0;background:#0d1c2e}
+.contact-option.active{border-color:#38bdf8;background:linear-gradient(135deg,#0c2a4a,#1a1040);color:#fff;box-shadow:0 0 0 3px rgba(56,189,248,.15),0 8px 22px rgba(37,99,235,.25)}
+.contact-option.active i{color:#7dd3fc}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-group{margin-bottom:16px;min-width:0}
 label{display:block;margin-bottom:8px;color:#e6eef9;font-size:11px;font-weight:850}
@@ -139,12 +164,23 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
 .processing-overlay{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,7,16,.88);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.25s}
 .processing-overlay.show{opacity:1;visibility:visible}
 .processing-card{width:min(390px,100%);padding:30px 24px;text-align:center;border:1px solid #38bdf844;border-radius:25px;background:linear-gradient(145deg,#10243d,#0a1221);box-shadow:var(--shadow)}
-.loader-ring{width:76px;height:76px;margin:0 auto 16px;border:4px solid #ffffff16;border-top-color:#38bdf8;border-right-color:#8b5cf6;border-radius:50%;animation:spin 1s linear infinite}
+.loader-visual{position:relative;width:88px;height:88px;margin:0 auto 14px}
+.loader-ring{position:absolute;inset:0;border:4px solid #ffffff16;border-top-color:#38bdf8;border-right-color:#8b5cf6;border-radius:50%;animation:spin 1s linear infinite}
+.loader-check{position:absolute;inset:0;display:none;align-items:center;justify-content:center;opacity:0;transform:scale(.6)}
+.loader-check.show{display:flex;animation:checkPop .55s cubic-bezier(.2,.9,.3,1.2) forwards}
+.checkmark-svg{width:72px;height:72px}
+.checkmark-circle{stroke:#4ade80;stroke-width:3;stroke-dasharray:150;stroke-dashoffset:150;animation:circleDraw .5s ease forwards}
+.checkmark-check{stroke:#4ade80;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .4s ease .35s forwards}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loader-number{font-size:22px;font-weight:950}.processing-title{margin-top:10px;font-size:18px;font-weight:900}.processing-subtitle{margin-top:8px;color:#9eacc1;font-size:11px}
-.processing-progress{height:6px;margin:20px 0 9px;border-radius:99px;background:#ffffff12;overflow:hidden}
-.processing-progress-bar{height:100%;width:0;background:linear-gradient(90deg,#38bdf8,#8b5cf6,#4ade80);border-radius:99px}
-.processing-percent{font-size:11px;color:#86efac;font-weight:900}
+@keyframes checkPop{to{opacity:1;transform:scale(1)}}
+@keyframes circleDraw{to{stroke-dashoffset:0}}
+@keyframes checkDraw{to{stroke-dashoffset:0}}
+.loader-number{font-size:26px;font-weight:950;letter-spacing:-1px;transition:color .25s}
+.loader-number.done{color:#4ade80}
+.processing-title{margin-top:10px;font-size:19px;font-weight:900}.processing-subtitle{margin-top:8px;color:#9eacc1;font-size:12px;min-height:18px}
+.processing-progress{height:7px;margin:22px 0 10px;border-radius:99px;background:#ffffff12;overflow:hidden}
+.processing-progress-bar{height:100%;width:0;background:linear-gradient(90deg,#38bdf8,#8b5cf6,#4ade80);border-radius:99px;transition:width .2s ease}
+.processing-percent{font-size:12px;color:#86efac;font-weight:900;letter-spacing:.3px}
 .promo-overlay{position:fixed;inset:0;z-index:6000;display:grid;place-items:center;background:#020713dd;opacity:0;visibility:hidden;pointer-events:none}
 .promo-overlay.show{opacity:1;visibility:visible}
 .promo-animation-stage{position:relative;width:300px;height:220px}.promo-gift,.promo-ticket{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0}
@@ -157,12 +193,18 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
 @keyframes starFall{from{transform:translateY(-30px) rotate(0);opacity:1}to{transform:translateY(100vh) rotate(540deg);opacity:0}}
 .success-fullscreen{min-height:60vh}
 @media(max-width:600px){
-  .topbar-inner{min-height:64px}.brand-logo{width:38px;height:38px}.brand-text{font-size:15px}.secure-header{font-size:9px}
+  .topbar-inner{min-height:64px}
+  .brand-logo-wrap,.brand-logo-img{width:40px;height:40px}
+  .brand-eyebrow{font-size:8px}
+  .brand-text{font-size:15px}
+  .secure-header{font-size:9px}
   main{padding:22px 11px 70px}.progress{margin-bottom:21px}.progress-line{width:48px}.progress-step{min-width:68px}
   .card-inner{padding:20px 16px}.checkout-card{border-radius:22px}.subtitle{font-size:11px;margin-bottom:19px}
   .product-card{padding:16px}.form-grid{grid-template-columns:1fr;gap:0}
   .buttons{grid-template-columns:1fr}.buttons .btn{min-height:50px}
   .free-order-highlight{padding:18px 12px}
+  .contact-choice--visible{grid-template-columns:1fr 1fr;gap:8px}
+  .contact-option{min-height:46px;font-size:11px;padding:8px 10px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
@@ -230,21 +272,25 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
       class="brand"
     >
 
-      <div class="brand-logo">ZS</div>
+      <div class="brand-logo-wrap">
+        <img
+          src="zs-universe-logo.png"
+          alt="ZS Universe"
+          class="brand-logo-img"
+          width="48"
+          height="48"
+        >
+      </div>
 
-      <div>
-
-        <div class="brand-text">
-          ZS Universe
-        </div>
-
+      <div class="brand-text-wrap">
+        <div class="brand-eyebrow">Premium Digital Studio</div>
+        <div class="brand-text">ZS Universe</div>
         <div
           class="brand-subtitle"
           id="brandSubtitle"
         >
           Secure Checkout
         </div>
-
       </div>
 
     </a>
@@ -358,9 +404,14 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
 <section class="screen" id="instagramScreen1">
   <div class="checkout-card">
     <div class="card-inner">
-      <div class="checkout-kicker" style="text-align:center;color:#7dd3fc;font-size:9px;font-weight:950;letter-spacing:2px;margin-bottom:12px">ZS SOCIAL STUDIO · SECURE CLAIM</div>
-      <h1 class="title" id="instagramHeading">Claim Your Instagram Package</h1>
-      <p class="subtitle" id="instagramSubheading">Add your contact information and Instagram profile. Your selected package is reserved for this order.</p>
+      <div class="checkout-kicker">
+        <span class="kicker-dot"></span>
+        ZS SOCIAL STUDIO
+        <span class="kicker-sep">·</span>
+        SECURE CLAIM
+      </div>
+      <h1 class="title" id="instagramHeading">Claim Your Instagram Followers</h1>
+      <p class="subtitle" id="instagramSubheading">Fill in your preferred contact method and Instagram profile details. Your selected free package is reserved exclusively for this order.</p>
 
       <div class="product-card">
         <div class="product-top">
@@ -373,30 +424,64 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
 
       <div class="error" id="instagramError1" role="alert"></div>
 
-      <div class="form-section-title"><span><i class="fa-solid fa-address-card"></i></span> Contact information</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="instagramMobile">Phone number <span class="required">*</span></label>
-          <div class="field-icon"><i class="fa-solid fa-phone"></i><input id="instagramMobile" type="tel" inputmode="tel" maxlength="15" placeholder="+91 98765 43210" autocomplete="tel" required></div>
-          <div class="input-hint">Required for order updates and important notifications.</div>
-        </div>
-        <div class="form-group">
-          <label for="instagramEmail">Email address <span class="required">*</span></label>
-          <div class="field-icon"><i class="fa-solid fa-envelope"></i><input id="instagramEmail" type="email" maxlength="150" placeholder="you@example.com" autocomplete="email" required></div>
-          <div class="input-hint">We may use this email to send order information.</div>
-        </div>
+      <!-- CONTACT — either phone OR email -->
+      <div class="form-section-title form-section-title--animated">
+        <span class="section-icon section-icon--pulse"><i class="fa-solid fa-address-card"></i></span>
+        Contact information
+      </div>
+      <p class="section-hint">Choose only one — Mobile number <strong>or</strong> Email address</p>
+
+      <div class="contact-choice contact-choice--visible">
+        <button type="button" class="contact-option active" id="instagramMobileOption" onclick="selectInstagramContact('mobile')">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <span>Mobile Number</span>
+        </button>
+        <button type="button" class="contact-option" id="instagramEmailOption" onclick="selectInstagramContact('email')">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Email Address</span>
+        </button>
       </div>
 
-      <div class="form-section-title"><span><i class="fa-brands fa-instagram"></i></span> Instagram profile details</div>
+      <div class="form-group" id="instagramMobileField">
+        <label for="instagramMobile">Phone number <span class="required">*</span></label>
+        <div class="field-icon">
+          <i class="fa-solid fa-phone"></i>
+          <input id="instagramMobile" type="tel" inputmode="tel" maxlength="15" placeholder="+91 98765 43210" autocomplete="tel">
+        </div>
+        <div class="input-hint">We’ll use this number only for order updates.</div>
+      </div>
+
+      <div class="form-group" id="instagramEmailField" style="display:none;">
+        <label for="instagramEmail">Email address <span class="required">*</span></label>
+        <div class="field-icon">
+          <i class="fa-solid fa-envelope"></i>
+          <input id="instagramEmail" type="email" maxlength="150" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="input-hint">Order confirmation will be sent to this email.</div>
+      </div>
+
+      <!-- INSTAGRAM PROFILE -->
+      <div class="form-section-title form-section-title--animated">
+        <span class="section-icon section-icon--ig"><i class="fa-brands fa-instagram"></i></span>
+        Instagram profile details
+      </div>
+
       <div class="form-group">
         <label for="instagramUsername">Instagram username <span class="optional">OPTIONAL</span></label>
-        <div class="field-icon"><i class="fa-solid fa-at"></i><input id="instagramUsername" type="text" maxlength="30" placeholder="@yourusername (optional)" autocomplete="off"></div>
-        <div class="input-hint">You can leave this blank if you prefer.</div>
+        <div class="field-icon">
+          <i class="fa-solid fa-at"></i>
+          <input id="instagramUsername" type="text" maxlength="30" placeholder="@yourusername (optional)" autocomplete="off">
+        </div>
+        <div class="input-hint">Optional — helps us verify the correct account faster.</div>
       </div>
+
       <div class="form-group">
         <label for="instagramProfile">Instagram profile link <span class="required">*</span></label>
-        <div class="field-icon"><i class="fa-solid fa-link"></i><input id="instagramProfile" type="url" maxlength="300" placeholder="https://www.instagram.com/yourusername/" autocomplete="url" required></div>
-        <div class="input-hint">Paste the public profile URL. Never share your Instagram password.</div>
+        <div class="field-icon">
+          <i class="fa-solid fa-link"></i>
+          <input id="instagramProfile" type="url" maxlength="300" placeholder="https://www.instagram.com/yourusername/" autocomplete="url" required>
+        </div>
+        <div class="input-hint">Paste the full public profile URL. We never ask for your Instagram password.</div>
       </div>
 
       <div class="free-order-highlight">
@@ -410,13 +495,18 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
         <div class="price-row"><span>Offer discount</span><strong>100% FREE</strong></div>
         <div class="price-row total"><span>Total to pay</span><strong id="instagramFinal">₹0</strong></div>
       </div>
-      <div class="free-order-note"><span>✓</span> Check that your profile link and contact details are correct before continuing.</div>
+      <div class="free-order-note"><span>✓</span> Double-check your profile link and chosen contact before continuing.</div>
 
       <div class="buttons">
         <button type="button" class="btn btn-secondary" onclick="goHome()">← Back</button>
-        <button type="button" class="btn btn-primary free-get-button" id="instagramGetOrderBtn" onclick="instagramContinue()">CONTINUE TO CLAIM <i class="fa-solid fa-arrow-right"></i></button>
+        <button type="button" class="btn btn-primary free-get-button" id="instagramGetOrderBtn" onclick="instagramContinue()">
+          CONTINUE TO CLAIM <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
-      <div class="secure-note">🔒 Your phone number and email are required for order communication.<br><strong>ZS Universe will never ask for your Instagram password.</strong></div>
+      <div class="secure-note">
+        🔒 Only one contact method is required for order communication.<br>
+        <strong>ZS Universe will never ask for your Instagram password.</strong>
+      </div>
     </div>
   </div>
 </section>
@@ -1310,7 +1400,15 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
  
   <div class="processing-card"> 
  
-    <div class="loader-ring"></div> 
+    <div class="loader-visual" id="loaderVisual">
+      <div class="loader-ring" id="loaderRing"></div>
+      <div class="loader-check" id="loaderCheck">
+        <svg viewBox="0 0 52 52" class="checkmark-svg">
+          <circle class="checkmark-circle" cx="26" cy="26" r="24" fill="none"/>
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+    </div>
  
     <div 
       class="loader-number" 
@@ -1320,7 +1418,7 @@ input:focus{border-color:#38bdf8a8;box-shadow:0 0 0 4px #38bdf817;background:#09
     </div> 
  
  
-    <div class="processing-title"> 
+    <div class="processing-title" id="processingTitle"> 
       Processing Your Order 
     </div> 
  
@@ -2725,13 +2823,17 @@ function instagramContinue(){
   const username = document.getElementById("instagramUsername").value.trim().replace(/^@+/,"");
   const profile = document.getElementById("instagramProfile").value.trim();
 
-  if(!isValidIndianMobile(mobile)){
-    showError("instagramError1","Please enter a valid Indian phone number.");
-    return;
-  }
-  if(!isValidEmail(email)){
-    showError("instagramError1","Please enter a valid email address.");
-    return;
+  // Only one contact method is required
+  if(instagramContactMethod === "mobile"){
+    if(!isValidIndianMobile(mobile)){
+      showError("instagramError1","Please enter a valid Indian phone number.");
+      return;
+    }
+  }else{
+    if(!isValidEmail(email)){
+      showError("instagramError1","Please enter a valid email address.");
+      return;
+    }
   }
 
   if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
@@ -2965,150 +3067,78 @@ document
  
 function showProcessing(){ 
  
-  const overlay = 
-    document.getElementById( 
-      "processingOverlay" 
-    ); 
- 
- 
-  const bar = 
-    document.getElementById( 
-      "processingProgressBar" 
-    ); 
- 
- 
-  const percent = 
-    document.getElementById( 
-      "processingPercent" 
-    ); 
- 
- 
-  const number = 
-    document.getElementById( 
-      "loaderNumber" 
-    ); 
- 
- 
-  const subtitle = 
-    document.getElementById( 
-      "processingSubtitle" 
-    ); 
- 
- 
-  overlay.classList.add( 
-    "show" 
-  ); 
- 
- 
-  let progress = 
-    0; 
- 
- 
-  const messages = [ 
- 
-    "Verifying your order details...", 
- 
-    "Preparing your order securely...", 
- 
-    "Verifying your order information...", 
- 
-    "Sending your order securely...", 
- 
-    "Almost done..." 
- 
-  ]; 
- 
- 
-  const interval = 
-    setInterval( 
-      () => { 
- 
-        progress += 
-          Math.floor(
-            Math.random() * 8
-          ) + 8; 
- 
- 
-        if(progress > 96){ 
-          progress = 96; 
-        } 
- 
- 
-        bar.style.width = 
-          progress + "%"; 
- 
- 
-        percent.textContent = 
-          progress + "%"; 
- 
- 
-        number.textContent = 
-          Math.min( 
-            10, 
-            Math.ceil( 
-              progress / 10 
-            ) 
-          ); 
- 
- 
-        const index = 
-          Math.min( 
-            messages.length - 1, 
-            Math.floor( 
-              progress / 20 
-            ) 
-          ); 
- 
- 
-        subtitle.textContent = 
-          messages[index]; 
- 
-      }, 
-      240
-    ); 
- 
- 
-  return { 
- 
-    finish:function(){ 
- 
-      clearInterval( 
-        interval 
-      ); 
- 
- 
-      bar.style.width = 
-        "100%"; 
- 
- 
-      percent.textContent = 
-        "100%"; 
- 
- 
-      number.textContent = 
-        "10"; 
- 
- 
-      subtitle.textContent = 
-        "Order submitted successfully!"; 
- 
- 
-      return new Promise( 
-        resolve => { 
- 
-          setTimeout( 
-            resolve, 
-            220
-          ); 
- 
-        } 
-      ); 
- 
-    } 
- 
-  }; 
- 
-} 
+  const overlay = document.getElementById("processingOverlay");
+  const bar = document.getElementById("processingProgressBar");
+  const percent = document.getElementById("processingPercent");
+  const number = document.getElementById("loaderNumber");
+  const subtitle = document.getElementById("processingSubtitle");
+  const title = document.getElementById("processingTitle");
+  const ring = document.getElementById("loaderRing");
+  const check = document.getElementById("loaderCheck");
+
+  // Reset state
+  if(ring) ring.style.display = "block";
+  if(check){
+    check.classList.remove("show");
+    check.style.display = "none";
+  }
+  if(number){
+    number.classList.remove("done");
+    number.style.display = "block";
+  }
+  if(title) title.textContent = "Processing Your Order";
+
+  overlay.classList.add("show");
+
+  let progress = 0;
+
+  const messages = [
+    "Verifying your order details...",
+    "Preparing your order securely...",
+    "Checking package availability...",
+    "Sending your order securely...",
+    "Almost done..."
+  ];
+
+  const interval = setInterval(() => {
+    progress += Math.floor(Math.random() * 7) + 7;
+    if(progress > 96) progress = 96;
+
+    bar.style.width = progress + "%";
+    percent.textContent = progress + "%";
+    number.textContent = Math.min(10, Math.ceil(progress / 10));
+
+    const index = Math.min(messages.length - 1, Math.floor(progress / 20));
+    subtitle.textContent = messages[index];
+  }, 220);
+
+  return {
+    finish: function(){
+      clearInterval(interval);
+
+      bar.style.width = "100%";
+      percent.textContent = "100%";
+      number.textContent = "10";
+      number.classList.add("done");
+      subtitle.textContent = "Order submitted successfully!";
+      if(title) title.textContent = "All Done!";
+
+      // Show full animated checkmark
+      if(ring) ring.style.display = "none";
+      if(number) number.style.display = "none";
+      if(check){
+        check.style.display = "flex";
+        // force reflow then animate
+        void check.offsetWidth;
+        check.classList.add("show");
+      }
+
+      return new Promise(resolve => {
+        setTimeout(resolve, 780);
+      });
+    }
+  };
+}
  
  
 /* =========================================================
@@ -3595,13 +3625,17 @@ async function submitInstagramOrder(){
   const username = document.getElementById("instagramUsername").value.trim().replace(/^@+/,"");
   const profile = document.getElementById("instagramProfile").value.trim();
 
-  if(!isValidIndianMobile(mobile)){
-    showError("instagramError1","Please enter a valid Indian phone number.");
-    return;
-  }
-  if(!isValidEmail(email)){
-    showError("instagramError1","Please enter a valid email address.");
-    return;
+  // Only the selected contact method is required
+  if(instagramContactMethod === "mobile"){
+    if(!isValidIndianMobile(mobile)){
+      showError("instagramError1","Please enter a valid Indian phone number.");
+      return;
+    }
+  }else{
+    if(!isValidEmail(email)){
+      showError("instagramError1","Please enter a valid email address.");
+      return;
+    }
   }
 
   if(username && !/^[A-Za-z0-9._]{1,30}$/.test(username)){
