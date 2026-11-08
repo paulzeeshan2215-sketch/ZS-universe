@@ -7722,5 +7722,41 @@
 
 </script>
 
+
+<script>
+/* ZS UNIVERSE — SOCIAL PACKAGE ROUTING */
+document.addEventListener("DOMContentLoaded", function () {
+  const followersGrid = document.getElementById("followersGrid");
+  const likesGrid = document.getElementById("likesGrid");
+
+  function routePackages(grid, service, selector) {
+    if (!grid) return;
+    grid.querySelectorAll(selector).forEach(function (card) {
+      const quantityNode = card.querySelector(".followers, .likes-quantity");
+      const link = card.querySelector("a.package-action");
+      if (!quantityNode || !link) return;
+      const match = quantityNode.textContent.replace(/,/g, "").match(/\\d+/);
+      if (!match) return;
+      const quantity = match[0];
+      const query = new URLSearchParams({
+        product: "instagram",
+        service: service,
+        quantity: quantity
+      });
+      link.href = "order.html?" + query.toString();
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = link.href;
+      });
+    });
+  }
+
+  routePackages(followersGrid, "followers", ".package-card");
+  routePackages(likesGrid, "likes", ".likes-card");
+});
+</script>
+
 </body>
 </html>
